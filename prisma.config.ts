@@ -10,7 +10,6 @@ export default defineConfig({
     seed: "npx tsx prisma/seed.ts",
   },
   datasource: {
-    // Use TURSO_DATABASE_URL for production (Turso), DATABASE_URL for local SQLite
-    url: process.env["TURSO_DATABASE_URL"] || process.env["DATABASE_URL"],
+    url: process.env["DATABASE_URL"],
   },
 });
