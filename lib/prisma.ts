@@ -1,31 +1,26 @@
-// Prisma Client with Turso support
 import { PrismaClient } from '@prisma/client'
-import { PrismaLibSQL } from '@prisma/adapter-libsql'
-import { createClient } from '@libsql/client'
+import { PrismaLibSql } from '@prisma/adapter-libsql'
 
-const prismaClientSingleton = () => {
-    // Check if we're using Turso (production)
-    if (process.env.TURSO_DATABASE_URL) {
-        const libsql = createClient({
+const globalForPrisma = globalThis as unknown as {
+    prisma: PrismaClient | undefined
+}
+
+function createPrismaClient() {
+    // Check if we have Turso environment variables
+    if (process.env.TURSO_DATABASE_URL && process.env.TURSO_AUTH_TOKEN) {
+        const adapter = new PrismaLibSql({
             url: process.env.TURSO_DATABASE_URL,
             authToken: process.env.TURSO_AUTH_TOKEN,
         })
-        const adapter = new PrismaLibSQL(libsql)
         return new PrismaClient({ adapter })
     }
     
-    // Local development - use regular connection
+    // Fallback for local development
     return new PrismaClient()
 }
 
-declare global {
-    var prismaGlobal: undefined | ReturnType<typeof prismaClientSingleton>
-}
+const prisma = globalForPrisma.prisma ?? createPrismaClient()
 
-const prisma = globalThis.prismaGlobal ?? prismaClientSingleton()
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
 
 export default prisma
-
-if (process.env.NODE_ENV !== 'production') {
-    globalThis.prismaGlobal = prisma
-}

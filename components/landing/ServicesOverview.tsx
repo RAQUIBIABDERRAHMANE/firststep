@@ -7,6 +7,7 @@ import Link from 'next/link'
 type Service = {
     id: string
     name: string
+    slug: string
     description: string | null
     status: string
     category: string | null
