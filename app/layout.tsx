@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "FirstStep - Modular SaaS Platform",
   description: "All your business systems in one platform.",
+  icons: {
+    icon: "/logo.ico",
+  },
 };
 
 export default function RootLayout({
