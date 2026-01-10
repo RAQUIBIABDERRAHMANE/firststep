@@ -159,20 +159,20 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    /* Primary: Electric Violet-Blue Gradient */
-    --primary: 262 83% 58%;
+    /* Primary: Electric Blue */
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
-    --primary-rgb: 139, 92, 246;
+    --primary-rgb: 59, 130, 246;
 
-    /* Secondary: Soft Lavender */
-    --secondary: 270 60% 98%;
-    --secondary-foreground: 262 83% 58%;
+    /* Secondary: Soft Sky Blue */
+    --secondary: 214 95% 93%;
+    --secondary-foreground: 217 91% 60%;
 
     /* Muted: Warm Neutrals */
     --muted: 220 14% 96%;
     --muted-foreground: 220 9% 46%;
 
-    --accent: 262 83% 58%;
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
 
     /* Destructive: Vibrant Red */
@@ -190,7 +190,7 @@
     /* Borders: Subtle with gradient hints */
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 262 83% 58%;
+    --ring: 217 91% 60%;
 
     --radius: 0.75rem;
   }
@@ -205,17 +205,17 @@
     --popover: 224 47% 13%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 263 70% 60%;
+    --primary: 217 91% 60%;
     --primary-foreground: 210 40% 98%;
-    --primary-rgb: 139, 92, 246;
+    --primary-rgb: 59, 130, 246;
 
-    --secondary: 262 30% 25%;
+    --secondary: 217 30% 25%;
     --secondary-foreground: 210 40% 98%;
 
     --muted: 223 47% 18%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 263 70% 60%;
+    --accent: 217 91% 60%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 63% 41%;
@@ -229,7 +229,7 @@
 
     --border: 223 47% 20%;
     --input: 223 47% 20%;
-    --ring: 263 70% 60%;
+    --ring: 217 91% 60%;
   }
 }
 

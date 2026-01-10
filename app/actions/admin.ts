@@ -38,7 +38,7 @@ export async function toggleServiceStatus(serviceId: string) {
 
             if (interestedUsers.length > 0) {
                 // Create notifications
-                const notifications = interestedUsers.map(us => ({
+                const notifications = interestedUsers.map((us: { userId: string }) => ({
                     userId: us.userId,
                     title: 'Service Available',
                     message: `The service "${service.name}" is now available!`,

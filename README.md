@@ -360,8 +360,8 @@ npx tsc --noEmit         # Check TypeScript errors
 
 ### Color Palette
 
-- **Primary**: `#8B5CF6` (Violet)
-- **Accent**: Gradient from primary to blue
+- **Primary**: `#3B82F6` (Blue)
+- **Accent**: Gradient from primary to lighter blue
 - **Background**: Dynamic light/dark mode support
 - **Success**: Emerald green for active services
 - **Muted**: Subtle grays for secondary content
