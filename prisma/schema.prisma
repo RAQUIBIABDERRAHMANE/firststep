@@ -92,6 +92,7 @@ model TenantWebsite {
   // Restaurant Commerce
   categories RestaurantCategory[]
   tables     RestaurantTable[]
+  waiters    RestaurantWaiter[]
 
   // Relations
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -133,10 +134,27 @@ model RestaurantTable {
   number    String            // Table number/name (e.g., "1", "A-5")
   capacity  Int?
   isActive  Boolean           @default(true)
+  waiterId  String?
   orders    RestaurantOrder[]
   tenant    TenantWebsite     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  waiter    RestaurantWaiter? @relation(fields: [waiterId], references: [id])
 
   @@unique([tenantId, number])
+  @@index([tenantId])
+  @@index([waiterId])
+}
+
+model RestaurantWaiter {
+  id        String            @id @default(cuid())
+  tenantId  String
+  name      String
+  pin       String            // 4-digit PIN
+  isActive  Boolean           @default(true)
+  createdAt DateTime          @default(now())
+  
+  tables    RestaurantTable[]
+  tenant    TenantWebsite     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
   @@index([tenantId])
 }
 

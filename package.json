@@ -24,6 +24,7 @@
     "clsx": "^2.1.1",
     "effect": "^3.19.14",
     "fast-check": "^4.5.3",
+    "groq-sdk": "^0.37.0",
     "html5-qrcode": "^2.3.8",
     "lucide-react": "^0.562.0",
     "next": "16.1.1",
@@ -32,6 +33,7 @@
     "qrcode": "^1.5.4",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-markdown": "^10.1.0",
     "remeda": "^2.33.1",
     "tailwind-merge": "^3.4.0",
     "tailwindcss-animate": "^1.0.7"

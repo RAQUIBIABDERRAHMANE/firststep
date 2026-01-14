@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { verifyTableTokenBrowser } from '@/lib/crypto'
 import { useCart } from '@/lib/contexts/CartContext'
-import { createOrder } from '@/app/actions/restaurant'
+import { createOrder, callWaiter } from '@/app/actions/restaurant'
 import {
     ShoppingCart,
     QrCode,
@@ -21,7 +21,8 @@ import {
     ChevronRight,
     Utensils,
     CheckCircle2,
-    LayoutDashboard
+    LayoutDashboard,
+    Bell
 } from 'lucide-react'
 import dynamic from 'next/dynamic'
 
@@ -119,12 +120,34 @@ function RestaurantContent({ siteName, description, coverImage, logo, config, ca
         }))
     )
 
+    const handleCallWaiter = async () => {
+        if (!tableId) return
+        if (!confirm("Call the waiter to your table?")) return
+
+        const res = await callWaiter(tableId)
+        if (res.success) {
+            alert("Waiter has been notified! 🔔")
+        } else {
+            alert("Failed: " + res.error)
+        }
+    }
+
     const filteredItems = activeCategory === 'All'
         ? menuItems
         : menuItems.filter((item: any) => item.category === activeCategory)
 
     return (
         <div className="flex flex-col min-h-screen bg-white">
+            {/* Call Waiter Button */}
+            {tableId && !isOwner && (
+                <Button
+                    onClick={handleCallWaiter}
+                    className="fixed bottom-6 left-6 h-14 w-14 rounded-full shadow-xl bg-orange-500 hover:bg-orange-600 text-white z-50 flex items-center justify-center animate-in slide-in-from-bottom-5 active:scale-95 transition-all"
+                >
+                    <Bell className="h-6 w-6" />
+                </Button>
+            )}
+
             {/* Dynamic Header */}
             <header className="sticky top-0 z-40 w-full border-b bg-white/90 backdrop-blur-xl">
                 <div className="container mx-auto flex h-20 items-center justify-between px-4 lg:px-8">

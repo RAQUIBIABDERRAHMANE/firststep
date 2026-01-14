@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { getCurrentUser, signOut } from '@/app/actions/auth'
 import { redirect } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
-import { LayoutDashboard, Layers, Bell, Settings, LogOut, ChevronRight } from 'lucide-react'
+import { LayoutDashboard, Layers, Bell, Settings, LogOut, ChevronRight, Bot, Users } from 'lucide-react'
 
 export default async function DashboardLayout({
     children,
@@ -17,7 +17,9 @@ export default async function DashboardLayout({
 
     const navItems = [
         { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+        { label: 'Waiters', href: '/dashboard/restaurant/waiters', icon: Users },
         { label: 'My Services', href: '/dashboard/services', icon: Layers },
+        { label: 'AI Assistant', href: '/dashboard/ai', icon: Bot },
         { label: 'Notifications', href: '/dashboard/notifications', icon: Bell },
         { label: 'Settings', href: '/dashboard/settings', icon: Settings },
     ]

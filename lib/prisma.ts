@@ -31,7 +31,7 @@ function createPrismaClient() {
 }
 
 // Hard-reset the global prisma instance to ensure new models are picked up
-const PRISMA_DEV_KEY = 'prisma_v6_turso_fixed'
+const PRISMA_DEV_KEY = 'prisma_v8_waiter_update'
 
 const g = globalThis as any
 
@@ -47,16 +47,15 @@ if (process.env.NODE_ENV === 'production') {
         g[PRISMA_DEV_KEY] = createPrismaClient();
     }
 
-    // EXTREME RESET: If we still have issues, we can uncomment the line below 
-    // to force a NEW client on EVERY file reload (slower but 100% fresh)
-    // g[PRISMA_DEV_KEY] = createPrismaClient(); 
-
     prisma = g[PRISMA_DEV_KEY]
 }
 
 // Diagnostic check
-if (process.env.NODE_ENV !== 'production' && !prisma.restaurantTable) {
-    console.error('[Prisma] FATAL: restaurantTable still missing even in fresh client!');
+const models = Object.keys(prisma).filter(k => !k.startsWith('_'));
+console.log('[Prisma] Available models:', models);
+
+if (process.env.NODE_ENV !== 'production' && !('restaurantWaiter' in prisma)) {
+    console.error('[Prisma] FATAL: restaurantWaiter missing from client! Keys:', models);
 }
 
 export default prisma

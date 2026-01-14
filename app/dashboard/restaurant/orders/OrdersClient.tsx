@@ -31,7 +31,13 @@ export default function OrdersClient({ initialOrders }: { initialOrders: any[] }
         return () => clearInterval(interval)
     }, [router])
 
+    const [dismissedOrders, setDismissedOrders] = useState<Set<string>>(new Set())
+
     const handleUpdateStatus = async (orderId: string, status: string) => {
+        if (status === 'COMPLETED') {
+            setDismissedOrders(prev => new Set(prev).add(orderId))
+        }
+
         setLoading(orderId)
         await updateOrderStatus(orderId, status)
         setLoading(null)
@@ -69,87 +75,117 @@ export default function OrdersClient({ initialOrders }: { initialOrders: any[] }
                 </div>
             ) : (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {initialOrders.map((order) => (
-                        <Card key={order.id} className={cn(
-                            "overflow-hidden border-slate-200 shadow-xl shadow-slate-200/20 rounded-[2.5rem] bg-white transition-all duration-300",
-                            order.status === 'PENDING' ? 'ring-4 ring-amber-400/10 border-amber-200' : ''
-                        )}>
-                            <CardHeader className="bg-slate-50/50 py-6 px-8 flex flex-row items-center justify-between border-b border-slate-100">
-                                <div className="flex items-center gap-4">
-                                    <div className="h-12 w-12 bg-white rounded-2xl flex items-center justify-center text-slate-900 font-black shadow-sm ring-1 ring-slate-100">
-                                        {order.table.number}
+                    {initialOrders.map((order) => {
+                        const isCallWaiter = order.items.some((i: any) => i.name === '🔔 CALL WAITER')
+
+                        if (isCallWaiter) {
+                            if (order.status === 'COMPLETED' || dismissedOrders.has(order.id)) return null
+
+                            return (
+                                <div key={order.id} className="col-span-1 lg:col-span-2 bg-orange-50 border border-orange-200 rounded-2xl p-4 flex items-center justify-between shadow-sm animate-in slide-in-from-top-2">
+                                    <div className="flex items-center gap-4">
+                                        <div className="h-10 w-10 bg-orange-500 rounded-full flex items-center justify-center text-white animate-pulse">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-bell"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" /></svg>
+                                        </div>
+                                        <div>
+                                            <h3 className="font-bold text-orange-950 text-sm">Table {order.table.number} Needs Assistance</h3>
+                                            <p className="text-orange-700 text-xs">Requested at {new Date(order.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <CardTitle className="text-lg font-black tracking-tight">Table {order.table.number}</CardTitle>
-                                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest flex items-center gap-1">
-                                            <Clock size={10} /> {new Date(order.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} • Order #{order.id.substring(order.id.length - 4)}
-                                        </p>
-                                    </div>
+                                    <Button
+                                        size="sm"
+                                        onClick={() => handleUpdateStatus(order.id, 'COMPLETED')}
+                                        disabled={loading === order.id}
+                                        className="bg-white text-orange-600 border border-orange-200 hover:bg-orange-100 hover:text-orange-700 h-8 text-xs font-bold px-4 rounded-lg shadow-sm"
+                                    >
+                                        Dismiss
+                                    </Button>
                                 </div>
-                                <Badge variant="outline" className={cn("rounded-full px-4 py-1.5 font-black text-[10px] uppercase tracking-widest gap-2", getStatusColor(order.status))}>
-                                    {getStatusIcon(order.status)}
-                                    {order.status}
-                                </Badge>
-                            </CardHeader>
-                            <CardContent className="p-8">
-                                <div className="space-y-6">
-                                    <div className="divide-y divide-slate-100">
-                                        {order.items.map((item: any) => (
-                                            <div key={item.id} className="py-4 flex justify-between items-center">
-                                                <div className="flex items-center gap-4">
-                                                    <span className="h-8 w-8 bg-slate-100 rounded-lg flex items-center justify-center font-black text-xs text-slate-600">
-                                                        {item.quantity}x
-                                                    </span>
-                                                    <span className="font-bold text-slate-900">{item.name}</span>
+                            )
+                        }
+
+                        return (
+                            <Card key={order.id} className={cn(
+                                "overflow-hidden border-slate-200 shadow-xl shadow-slate-200/20 rounded-[2.5rem] bg-white transition-all duration-300",
+                                order.status === 'PENDING' ? 'ring-4 ring-amber-400/10 border-amber-200' : ''
+                            )}>
+                                <CardHeader className="bg-slate-50/50 py-6 px-8 flex flex-row items-center justify-between border-b border-slate-100">
+                                    <div className="flex items-center gap-4">
+                                        <div className="h-12 w-12 bg-white rounded-2xl flex items-center justify-center text-slate-900 font-black shadow-sm ring-1 ring-slate-100">
+                                            {order.table.number}
+                                        </div>
+                                        <div>
+                                            <CardTitle className="text-lg font-black tracking-tight">Table {order.table.number}</CardTitle>
+                                            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest flex items-center gap-1">
+                                                <Clock size={10} /> {new Date(order.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} • Order #{order.id.substring(order.id.length - 4)}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <Badge variant="outline" className={cn("rounded-full px-4 py-1.5 font-black text-[10px] uppercase tracking-widest gap-2", getStatusColor(order.status))}>
+                                        {getStatusIcon(order.status)}
+                                        {order.status}
+                                    </Badge>
+                                </CardHeader>
+                                <CardContent className="p-8">
+                                    <div className="space-y-6">
+                                        <div className="divide-y divide-slate-100">
+                                            {order.items.map((item: any) => (
+                                                <div key={item.id} className="py-4 flex justify-between items-center">
+                                                    <div className="flex items-center gap-4">
+                                                        <span className="h-8 w-8 bg-slate-100 rounded-lg flex items-center justify-center font-black text-xs text-slate-600">
+                                                            {item.quantity}x
+                                                        </span>
+                                                        <span className="font-bold text-slate-900">{item.name}</span>
+                                                    </div>
+                                                    <span className="text-sm font-black text-slate-400">${(item.price * item.quantity).toFixed(2)}</span>
                                                 </div>
-                                                <span className="text-sm font-black text-slate-400">${(item.price * item.quantity).toFixed(2)}</span>
-                                            </div>
-                                        ))}
-                                    </div>
+                                            ))}
+                                        </div>
 
-                                    <div className="pt-6 border-t border-slate-100 flex justify-between items-center">
-                                        <span className="text-slate-400 font-bold text-sm uppercase tracking-widest">Total Amount</span>
-                                        <span className="text-3xl font-black tracking-tighter text-blue-600">${order.totalAmount.toFixed(2)}</span>
-                                    </div>
+                                        <div className="pt-6 border-t border-slate-100 flex justify-between items-center">
+                                            <span className="text-slate-400 font-bold text-sm uppercase tracking-widest">Total Amount</span>
+                                            <span className="text-3xl font-black tracking-tighter text-blue-600">${order.totalAmount.toFixed(2)}</span>
+                                        </div>
 
-                                    <div className="pt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
-                                        <Button
-                                            variant={order.status === 'PREPARING' ? 'default' : 'outline'}
-                                            className="rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-none"
-                                            disabled={loading === order.id}
-                                            onClick={() => handleUpdateStatus(order.id, 'PREPARING')}
-                                        >
-                                            Cook
-                                        </Button>
-                                        <Button
-                                            variant={order.status === 'READY' ? 'default' : 'outline'}
-                                            className="rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-none"
-                                            disabled={loading === order.id}
-                                            onClick={() => handleUpdateStatus(order.id, 'READY')}
-                                        >
-                                            Ready
-                                        </Button>
-                                        <Button
-                                            variant={order.status === 'SERVED' ? 'default' : 'outline'}
-                                            className="rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-none"
-                                            disabled={loading === order.id}
-                                            onClick={() => handleUpdateStatus(order.id, 'SERVED')}
-                                        >
-                                            Served
-                                        </Button>
-                                        <Button
-                                            variant={order.status === 'PAID' ? 'default' : 'outline'}
-                                            className="rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-none"
-                                            disabled={loading === order.id}
-                                            onClick={() => handleUpdateStatus(order.id, 'PAID')}
-                                        >
-                                            Paid
-                                        </Button>
+                                        <div className="pt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
+                                            <Button
+                                                variant={order.status === 'PREPARING' ? 'default' : 'outline'}
+                                                className="rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-none"
+                                                disabled={loading === order.id}
+                                                onClick={() => handleUpdateStatus(order.id, 'PREPARING')}
+                                            >
+                                                Cook
+                                            </Button>
+                                            <Button
+                                                variant={order.status === 'READY' ? 'default' : 'outline'}
+                                                className="rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-none"
+                                                disabled={loading === order.id}
+                                                onClick={() => handleUpdateStatus(order.id, 'READY')}
+                                            >
+                                                Ready
+                                            </Button>
+                                            <Button
+                                                variant={order.status === 'SERVED' ? 'default' : 'outline'}
+                                                className="rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-none"
+                                                disabled={loading === order.id}
+                                                onClick={() => handleUpdateStatus(order.id, 'SERVED')}
+                                            >
+                                                Served
+                                            </Button>
+                                            <Button
+                                                variant={order.status === 'PAID' ? 'default' : 'outline'}
+                                                className="rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-none"
+                                                disabled={loading === order.id}
+                                                onClick={() => handleUpdateStatus(order.id, 'PAID')}
+                                            >
+                                                Paid
+                                            </Button>
+                                        </div>
                                     </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    ))}
+                                </CardContent>
+                            </Card>
+                        )
+                    })}
                 </div>
             )}
         </div>

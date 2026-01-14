@@ -4,7 +4,7 @@ import prisma from '@/lib/prisma'
 import { getCurrentUser } from '@/app/actions/auth'
 import { revalidatePath } from 'next/cache'
 
-async function getTenant() {
+export async function getTenant() {
     const user = await getCurrentUser()
     if (!user) return null
 
@@ -266,6 +266,39 @@ export async function createOrder(tableNumber: string, items: { id: string, name
     } catch (e) {
         console.error(e)
         return { error: 'Failed to place order' }
+    }
+}
+
+export async function callWaiter(tableNumber: string) {
+    try {
+        const table = await prisma.restaurantTable.findFirst({
+            where: { number: tableNumber }
+        })
+
+        if (!table) return { error: 'Invalid table' }
+
+        // Create a special 0-amount order
+        await prisma.restaurantOrder.create({
+            data: {
+                tableId: table.id,
+                totalAmount: 0,
+                status: 'PENDING',
+                items: {
+                    create: [{
+                        dishId: 'call-waiter', // Dummy ID
+                        name: '🔔 CALL WAITER',
+                        price: 0,
+                        quantity: 1
+                    }]
+                }
+            }
+        })
+
+        revalidatePath('/dashboard/restaurant/orders')
+        return { success: true }
+    } catch (e) {
+        console.error('[Restaurant Action] callWaiter Error:', e)
+        return { error: 'Failed to call waiter' }
     }
 }
 
