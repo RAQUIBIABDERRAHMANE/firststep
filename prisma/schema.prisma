@@ -10,14 +10,15 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(cuid())
-  email         String         @unique
+  id            String          @id @default(cuid())
+  email         String          @unique
   password      String
   companyName   String
-  role          String         @default("CLIENT") // "ADMIN" | "CLIENT"
-  createdAt     DateTime       @default(now())
+  role          String          @default("CLIENT") // "ADMIN" | "CLIENT"
+  createdAt     DateTime        @default(now())
   services      UserService[]
   notifications Notification[]
+  websites      TenantWebsite[]
 }
 
 model Notification {
@@ -31,14 +32,15 @@ model Notification {
 }
 
 model Service {
-  id          String        @id @default(cuid())
+  id          String          @id @default(cuid())
   name        String
-  slug        String        @unique
+  slug        String          @unique
   description String?
-  status      String        @default("COMING_SOON") // "AVAILABLE" | "COMING_SOON"
+  status      String          @default("COMING_SOON") // "AVAILABLE" | "COMING_SOON"
   category    String?
-  createdAt   DateTime      @default(now())
+  createdAt   DateTime        @default(now())
   users       UserService[]
+  websites    TenantWebsite[]
 }
 
 model UserService {
@@ -62,4 +64,103 @@ model PasswordReset {
   createdAt DateTime @default(now())
 
   @@index([email])
+}
+
+// Multi-tenant website configuration
+model TenantWebsite {
+  id       String @id @default(cuid())
+  slug     String @unique // URL path: "delicious-cafe" -> firststepco.com/delicious-cafe
+  userId   String
+  serviceId String
+
+  // Website branding & info
+  siteName     String           // Display name
+  description  String?          // Short description / tagline
+  logo         String?          // Logo URL
+  coverImage   String?          // Hero/cover image URL
+  primaryColor String @default("#3B82F6")
+  
+  // Restaurant-specific config (stored as JSON string for flexibility)
+  // Contains: menu items, categories, hours, contact info, address, socials, etc.
+  config String @default("{}")
+  
+  // Status
+  isActive  Boolean  @default(false) // Website is published
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Restaurant Commerce
+  categories RestaurantCategory[]
+  tables     RestaurantTable[]
+
+  // Relations
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  service Service @relation(fields: [serviceId], references: [id])
+
+  @@index([slug])
+  @@index([userId])
+}
+
+model RestaurantCategory {
+  id        String           @id @default(cuid())
+  tenantId  String
+  name      String
+  order     Int              @default(0)
+  isActive  Boolean            @default(true)
+  dishes    RestaurantDish[]
+  tenant    TenantWebsite    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+}
+
+model RestaurantDish {
+  id          String             @id @default(cuid())
+  categoryId  String
+  name        String
+  description String?
+  price       Float
+  image       String?
+  isActive    Boolean            @default(true)
+  order       Int                @default(0)
+  category    RestaurantCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([categoryId])
+}
+
+model RestaurantTable {
+  id        String            @id @default(cuid())
+  tenantId  String
+  number    String            // Table number/name (e.g., "1", "A-5")
+  capacity  Int?
+  isActive  Boolean           @default(true)
+  orders    RestaurantOrder[]
+  tenant    TenantWebsite     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, number])
+  @@index([tenantId])
+}
+
+model RestaurantOrder {
+  id          String                @id @default(cuid())
+  tableId     String
+  status      String                @default("PENDING") // PENDING, PREPARING, READY, SERVED, PAID, CANCELLED
+  totalAmount Float
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+  items       RestaurantOrderItem[]
+  table       RestaurantTable       @relation(fields: [tableId], references: [id])
+
+  @@index([tableId])
+}
+
+model RestaurantOrderItem {
+  id        String          @id @default(cuid())
+  orderId   String
+  dishId    String
+  name      String          // Snapshot of name at time of order
+  price     Float           // Snapshot of price
+  quantity  Int
+  order     RestaurantOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
 }

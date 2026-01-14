@@ -99,7 +99,15 @@ export default async function DashboardPage() {
                                     </div>
                                 </CardHeader>
                                 <CardFooter className="pt-0">
-                                    <Button variant="outline" size="sm" className="w-full">Manage</Button>
+                                    {s.service.slug === 'restaurant-website' ? (
+                                        <Link href="/dashboard/restaurant" className="w-full">
+                                            <Button variant="default" size="sm" className="w-full bg-blue-600 hover:bg-blue-700">
+                                                Restaurant Admin
+                                            </Button>
+                                        </Link>
+                                    ) : (
+                                        <Button variant="outline" size="sm" className="w-full">Manage</Button>
+                                    )}
                                 </CardFooter>
                             </Card>
                         ))}

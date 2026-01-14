@@ -7,7 +7,7 @@ const transporter = nodemailer.createTransport({
     secure: process.env.EMAIL_SECURE === 'true' || Number(process.env.EMAIL_PORT) === 465,
     auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        pass: process.env.EMAIL_PASSWORD || process.env.EMAIL_PASS,
     },
     tls: {
         // Do not fail on invalid certs
@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
 
 export async function sendWelcomeEmail(email: string, companyName: string) {
     // Basic verification of environment setup
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
         console.warn('[MAILER] WARNING: Email credentials missing in environment variables.');
         return { success: false, error: 'Configuration missing' };
     }
@@ -40,7 +40,7 @@ export async function sendWelcomeEmail(email: string, companyName: string) {
 }
 
 export async function sendResetCodeEmail(email: string, code: string) {
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
         console.log('--------------------------------------------------');
         console.log(`[MAILER] PASSWORD RESET CODE: ${code}`);
         console.log(`[MAILER] TO: ${email}`);
