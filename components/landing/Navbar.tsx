@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { useEffect, useState } from 'react'
 import { Sparkles } from 'lucide-react'
@@ -26,8 +27,13 @@ export default function Navbar({ user }: { user?: any }) {
             <div className="container mx-auto px-4 h-20 flex items-center justify-between">
                 {/* Logo: Modern and recognizable */}
                 <Link href="/" className="flex items-center gap-3 font-bold text-2xl tracking-tight text-foreground hover:opacity-80 transition-all duration-300 group">
-                    <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-primary via-accent to-primary flex items-center justify-center text-primary-foreground font-black shadow-lg shadow-primary/30 group-hover:shadow-xl group-hover:shadow-primary/40 group-hover:scale-110 transition-all duration-300">
-                        F
+                    <div className="relative h-11 w-11 rounded-2xl overflow-hidden shadow-lg shadow-primary/30 group-hover:shadow-xl group-hover:shadow-primary/40 group-hover:scale-110 transition-all duration-300">
+                        <Image
+                            src="/og-image.png"
+                            alt="FirstStep Logo"
+                            fill
+                            className="object-cover"
+                        />
                     </div>
                     <span className="gradient-text">FirstStep</span>
                 </Link>

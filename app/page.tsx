@@ -1,4 +1,5 @@
 import Navbar from '@/components/landing/Navbar'
+import Image from 'next/image'
 import HeroSection from '@/components/landing/HeroSection'
 import ServicesOverview from '@/components/landing/ServicesOverview'
 import HowItWorks from '@/components/landing/HowItWorks'
@@ -44,7 +45,14 @@ export default async function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(139,92,246,0.1),transparent_50%)]" />
         <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8 relative z-10">
           <div className="flex items-center gap-3 font-bold text-2xl">
-            <div className="h-12 w-12 rounded-2xl bg-gradient-to-br from-primary via-accent to-primary flex items-center justify-center text-white font-black shadow-lg shadow-primary/30">F</div>
+            <div className="relative h-12 w-12 rounded-2xl overflow-hidden shadow-lg shadow-primary/30">
+              <Image
+                src="/og-image.png"
+                alt="FirstStep Logo"
+                fill
+                className="object-cover"
+              />
+            </div>
             <span className="gradient-text">FirstStep</span>
           </div>
           <p className="text-sm text-muted-foreground font-medium">

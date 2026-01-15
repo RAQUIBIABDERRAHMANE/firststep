@@ -11,6 +11,28 @@ export const metadata: Metadata = {
   icons: {
     icon: "/logo.ico",
   },
+  openGraph: {
+    title: "FirstStep - Modular SaaS Platform",
+    description: "All your business systems in one platform.",
+    url: "https://firststep.com", // Keeping it generic as requested or based on project inference
+    siteName: "FirstStep",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "FirstStep Logo",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FirstStep - Modular SaaS Platform",
+    description: "All your business systems in one platform.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
