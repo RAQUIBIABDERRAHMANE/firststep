@@ -18,7 +18,7 @@ import {
     Users
 } from 'lucide-react'
 import { createTable, updateTable, deleteTable } from '@/app/actions/restaurant'
-import { signTableIdBrowser } from '@/lib/crypto'
+import { signTableIdBrowser } from '@/lib/crypto-client'
 import { useRouter } from 'next/navigation'
 import QRCode from 'qrcode'
 import { cn } from '@/lib/utils'

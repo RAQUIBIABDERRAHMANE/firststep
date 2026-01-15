@@ -1,61 +1,30 @@
 import 'dotenv/config'
 import { PrismaClient } from '@prisma/client'
 import { PrismaLibSql } from '@prisma/adapter-libsql'
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
-import Database from 'better-sqlite3'
 
-/**
- * Creates a new PrismaClient with the appropriate adapter based on the environment.
- */
 function createPrismaClient() {
-    const tursoUrl = process.env.TURSO_DATABASE_URL;
-    const tursoToken = process.env.TURSO_AUTH_TOKEN;
+    const url = process.env.TURSO_DATABASE_URL;
+    const authToken = process.env.TURSO_AUTH_TOKEN;
 
-    // 1. Check for Turso (Remote LibSQL)
-    if (tursoUrl && tursoToken && tursoUrl.startsWith('libsql:')) {
-        console.info('[Prisma] Initializing with Turso adapter');
-        const adapter = new PrismaLibSql({
-            url: tursoUrl,
-            authToken: tursoToken,
-        })
-        return new PrismaClient({ adapter })
+    if (!url || !authToken) {
+        throw new Error('TURSO_DATABASE_URL and TURSO_AUTH_TOKEN must be set');
     }
 
-    // 2. Fallback to Better-SQLite3 (Local SQLite)
-    console.info('[Prisma] Initializing with local SQLite adapter');
-    const dbPath = process.env.DATABASE_URL?.replace('file:', '') || 'dev.db';
-    const db = new Database(dbPath);
-    const adapter = new PrismaBetterSqlite3(db as any);
-
-    return new PrismaClient({ adapter })
+    const adapter = new PrismaLibSql({ url, authToken });
+    return new PrismaClient({ adapter });
 }
 
-// Hard-reset the global prisma instance to ensure new models are picked up
-const PRISMA_DEV_KEY = 'prisma_v8_waiter_update'
-
+const PRISMA_DEV_KEY = 'prisma_v14_turso'
 const g = globalThis as any
-
 let prisma: PrismaClient;
 
 if (process.env.NODE_ENV === 'production') {
     prisma = createPrismaClient()
 } else {
-    // In dev, we force a specific key but we also want to be able to "BUMP" it
-    // to force a true restart of the client if schema changes
     if (!g[PRISMA_DEV_KEY]) {
-        console.info('[Prisma] Initializing persistent development client:', PRISMA_DEV_KEY);
         g[PRISMA_DEV_KEY] = createPrismaClient();
     }
-
     prisma = g[PRISMA_DEV_KEY]
-}
-
-// Diagnostic check
-const models = Object.keys(prisma).filter(k => !k.startsWith('_'));
-console.log('[Prisma] Available models:', models);
-
-if (process.env.NODE_ENV !== 'production' && !('restaurantWaiter' in prisma)) {
-    console.error('[Prisma] FATAL: restaurantWaiter missing from client! Keys:', models);
 }
 
 export default prisma

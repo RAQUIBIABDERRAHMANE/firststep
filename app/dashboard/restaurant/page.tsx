@@ -11,7 +11,8 @@ import {
     ChevronRight,
     TrendingUp,
     Users,
-    LayoutDashboard
+    LayoutDashboard,
+    Paintbrush
 } from 'lucide-react'
 
 export default async function RestaurantDashboardPage() {
@@ -135,6 +136,24 @@ export default async function RestaurantDashboardPage() {
                                 </h3>
                                 <p className="text-slate-500 text-sm leading-relaxed">
                                     Assign QR codes to your physical tables so customers can scan and order directly from their phone.
+                                </p>
+                            </div>
+                        </div>
+                    </Card>
+                </Link>
+
+                <Link href="/dashboard/restaurant/design">
+                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-purple-500/50 hover:bg-purple-50/10 transition-all group p-6 h-full">
+                        <div className="flex gap-6 items-start">
+                            <div className="h-14 w-14 rounded-2xl bg-purple-100 flex items-center justify-center text-purple-600 shadow-sm transition-transform duration-500 group-hover:scale-110">
+                                <Paintbrush size={28} />
+                            </div>
+                            <div className="flex-1">
+                                <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
+                                    Design Studio <ChevronRight size={18} className="text-slate-300 group-hover:text-purple-500 transition-colors" />
+                                </h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">
+                                    Customize your restaurant's look and feel. Choose from premium templates.
                                 </p>
                             </div>
                         </div>

@@ -84,6 +84,10 @@ model TenantWebsite {
   // Contains: menu items, categories, hours, contact info, address, socials, etc.
   config String @default("{}")
   
+  // Design Choice
+  designTemplate String @default("classic") // "classic" | "modern" | "minimal"
+  
+  
   // Status
   isActive  Boolean  @default(false) // Website is published
   createdAt DateTime @default(now())

@@ -333,3 +333,25 @@ export async function updateOrderStatus(id: string, status: string) {
         return { error: 'Failed to update order' }
     }
 }
+
+export async function updateRestaurantDesign(designTemplate: string) {
+    const tenant = await getTenant()
+    if (!tenant) return { error: 'Not authenticated' }
+
+    if (!['classic', 'modern', 'minimal'].includes(designTemplate)) {
+        return { error: 'Invalid design template' }
+    }
+
+    try {
+        await prisma.tenantWebsite.update({
+            where: { id: tenant.id },
+            data: { designTemplate }
+        })
+        revalidatePath(`/${tenant.slug}`)
+        revalidatePath('/dashboard/restaurant/design')
+        return { success: true }
+    } catch (e) {
+        console.error('[Restaurant Action] updateRestaurantDesign Error:', e)
+        return { error: 'Failed to update design' }
+    }
+}
