@@ -11,6 +11,8 @@ import {
     ChevronLeft, ChevronRight, LayoutDashboard, Bell, Check
 } from 'lucide-react'
 
+import { translations, Language, CURRENCY } from '@/lib/translations'
+
 const QRScanner = dynamic(() => import('./QRScanner'), { ssr: false })
 
 export default function RestaurantTemplateModern({ siteName, description, coverImage, logo, config, categories, isOwner, primaryColor }: RestaurantTemplateProps) {
@@ -20,6 +22,9 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
         isPlacingOrder, orderComplete, setOrderComplete, items, addItem, updateQuantity,
         totalPrice, totalItems, tableId, categoryNames, filteredItems, handleScan, handlePlaceOrder, handleCallWaiter
     } = defaultData
+
+    const [lang, setLang] = useState<Language>('fr')
+    const t = translations[lang].restaurant
 
     const [currentItemIndex, setCurrentItemIndex] = useState(0)
     const currentItem = filteredItems[currentItemIndex] || null
@@ -74,8 +79,8 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
                             className={`w-full text-left px-4 md:px-6 py-4 transition-all border-l-2 ${activeCategory === cat
-                                    ? 'border-[var(--primary)] bg-[var(--primary)]/10 text-white'
-                                    : 'border-transparent text-zinc-500 hover:text-white hover:bg-white/5'
+                                ? 'border-[var(--primary)] bg-[var(--primary)]/10 text-white'
+                                : 'border-transparent text-zinc-500 hover:text-white hover:bg-white/5'
                                 }`}
                         >
                             <span className="hidden md:block font-medium">{cat}</span>
@@ -121,7 +126,7 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                     onClick={() => setShowCart(true)}
                     className="absolute top-4 right-4 z-20 flex items-center gap-3 bg-white/10 backdrop-blur-xl border border-white/10 rounded-full pl-4 pr-2 py-2 hover:bg-white/20 transition-all"
                 >
-                    <span className="text-sm font-medium">${totalPrice.toFixed(2)}</span>
+                    <span className="text-sm font-medium">{totalPrice.toFixed(2)} {CURRENCY}</span>
                     <div className="bg-[var(--primary)] text-white h-8 w-8 rounded-full flex items-center justify-center text-sm font-bold">
                         {totalItems}
                     </div>
@@ -152,13 +157,13 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                                 {currentItem.description || 'A carefully crafted dish made with the finest ingredients.'}
                             </p>
                             <div className="flex items-center gap-6 mb-10">
-                                <span className="text-4xl font-light text-[var(--primary)]">${currentItem.price}</span>
+                                <span className="text-4xl font-light text-[var(--primary)]">{currentItem.price} {CURRENCY}</span>
                             </div>
                             <Button
                                 onClick={() => addItem({ id: currentItem.id, name: currentItem.name, price: currentItem.price, image: currentItem.image })}
                                 className="w-fit h-14 px-10 rounded-full bg-gradient-to-r from-[var(--primary)] to-orange-600 hover:brightness-110 text-white font-bold text-lg shadow-2xl shadow-rose-900/30"
                             >
-                                Add to Order
+                                {t.add_to_order}
                             </Button>
                         </div>
                     </div>

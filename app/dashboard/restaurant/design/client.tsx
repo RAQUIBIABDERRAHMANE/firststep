@@ -49,7 +49,8 @@ export default function DesignSelectionClient({ initialData }: Props) {
                 coverImage: config.coverImage,
                 address: config.address,
                 phone: config.phone,
-                hours: config.hours
+                hours: config.hours,
+                pageTitle: config.pageTitle
             })
 
             if (res.success) {
@@ -185,6 +186,18 @@ export default function DesignSelectionClient({ initialData }: Props) {
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-6">
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium">Page Title (Browser Tab)</label>
+                                <input
+                                    type="text"
+                                    value={config.pageTitle || ''}
+                                    onChange={(e) => setConfig({ ...config, pageTitle: e.target.value })}
+                                    placeholder="e.g. Best Restaurant in Town"
+                                    className="w-full p-3 rounded-xl border bg-background"
+                                />
+                                <p className="text-xs text-muted-foreground">The text shown in the browser tab and search results.</p>
+                            </div>
+
                             <div className="space-y-2">
                                 <label className="text-sm font-medium">Hero Title</label>
                                 <input

@@ -79,6 +79,7 @@ export async function signUp(prevState: any, formData: FormData) {
 export async function signIn(prevState: any, formData: FormData) {
     const email = formData.get('email') as string
     const password = formData.get('password') as string
+    const redirectTo = formData.get('redirectTo') as string
 
     if (!email || !password) {
         return { error: 'Please fill in all fields' }
@@ -103,6 +104,11 @@ export async function signIn(prevState: any, formData: FormData) {
 
     if (user.role === 'ADMIN') {
         redirect('/admin')
+    }
+
+    // Validate redirectTo to prevent open redirect vulnerabilities
+    if (redirectTo && redirectTo.startsWith('/')) {
+        redirect(redirectTo)
     }
 
     redirect('/dashboard')

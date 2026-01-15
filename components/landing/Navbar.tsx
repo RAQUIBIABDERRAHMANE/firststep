@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button'
 import { useEffect, useState } from 'react'
 import { Sparkles } from 'lucide-react'
 
-export default function Navbar() {
+export default function Navbar({ user }: { user?: any }) {
     const [scrolled, setScrolled] = useState(false)
 
     useEffect(() => {
@@ -19,8 +19,8 @@ export default function Navbar() {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-                    ? 'bg-background/80 backdrop-blur-2xl border-b border-border/50 shadow-lg shadow-primary/5'
-                    : 'bg-transparent border-transparent'
+                ? 'bg-background/80 backdrop-blur-2xl border-b border-border/50 shadow-lg shadow-primary/5'
+                : 'bg-transparent border-transparent'
                 }`}
         >
             <div className="container mx-auto px-4 h-20 flex items-center justify-between">
@@ -44,17 +44,28 @@ export default function Navbar() {
                     </nav>
 
                     <div className="flex items-center gap-4">
-                        <Link href="/login">
-                            <Button variant="ghost" className="font-semibold">
-                                Log in
-                            </Button>
-                        </Link>
-                        <Link href="#signup">
-                            <Button size="default" className="font-bold gap-2">
-                                <Sparkles className="h-4 w-4" />
-                                Get Started
-                            </Button>
-                        </Link>
+                        {user ? (
+                            <Link href="/dashboard">
+                                <Button size="default" className="font-bold gap-2">
+                                    <Sparkles className="h-4 w-4" />
+                                    Dashboard
+                                </Button>
+                            </Link>
+                        ) : (
+                            <>
+                                <Link href="/login">
+                                    <Button variant="ghost" className="font-semibold">
+                                        Log in
+                                    </Button>
+                                </Link>
+                                <Link href="#signup">
+                                    <Button size="default" className="font-bold gap-2">
+                                        <Sparkles className="h-4 w-4" />
+                                        Get Started
+                                    </Button>
+                                </Link>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

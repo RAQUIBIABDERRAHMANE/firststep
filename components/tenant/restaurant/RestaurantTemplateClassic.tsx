@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
@@ -11,6 +11,8 @@ import {
     ChevronRight, Utensils, CheckCircle2, LayoutDashboard, Bell
 } from 'lucide-react'
 
+import { translations, Language, CURRENCY } from '@/lib/translations'
+
 const QRScanner = dynamic(() => import('./QRScanner'), { ssr: false })
 
 export default function RestaurantTemplateClassic({ siteName, description, coverImage, logo, config, categories, isOwner, primaryColor }: RestaurantTemplateProps) {
@@ -20,6 +22,9 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
         isPlacingOrder, orderComplete, setOrderComplete, items, addItem, updateQuantity,
         totalPrice, totalItems, tableId, categoryNames, filteredItems, handleScan, handlePlaceOrder, handleCallWaiter
     } = defaultData
+
+    const [lang, setLang] = useState<Language>('fr')
+    const t = translations[lang as Language].restaurant
 
     // Use CSS variable for the primary color
     const containerStyle = {
@@ -99,13 +104,13 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                             <div key={item.id} className="group bg-white rounded-[2.5rem] border border-slate-100 overflow-hidden hover:shadow-2xl hover:shadow-slate-200 transition-all duration-500 flex flex-col">
                                 <div className="relative aspect-square overflow-hidden bg-slate-50">
                                     <img src={item.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=1000'} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={item.name} />
-                                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl font-black text-slate-900 shadow-xl border border-white">${item.price}</div>
+                                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl font-black text-slate-900 shadow-xl border border-white">{item.price} {CURRENCY}</div>
                                 </div>
                                 <div className="p-8 flex-1 flex flex-col">
                                     <h3 className="text-xl font-bold mb-3 group-hover:text-[var(--primary)] transition-colors">{item.name}</h3>
                                     <p className="text-slate-500 text-sm leading-relaxed mb-8 flex-1">{item.description || "Freshly prepared with hand-picked seasonal ingredients."}</p>
                                     <Button onClick={() => addItem({ id: item.id, name: item.name, price: item.price, image: item.image })} className="w-full h-14 rounded-2xl text-lg font-bold shadow-lg shadow-blue-600/20 bg-[var(--primary)] hover:brightness-110 text-white">
-                                        Add to order
+                                        {t.add_to_order}
                                     </Button>
                                 </div>
                             </div>

@@ -14,8 +14,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     if (!tenant) return {}
 
+    let pageTitle = tenant.siteName
+    try {
+        if (tenant.config) {
+            const config = JSON.parse(tenant.config)
+            if (config.pageTitle) {
+                pageTitle = config.pageTitle
+            }
+        }
+    } catch (e) {
+        // ignore JSON parse error
+    }
+
     return {
-        title: tenant.siteName,
+        title: pageTitle,
         description: tenant.description || `${tenant.siteName} - Powered by FirstStep`,
         icons: {
             icon: tenant.logo || '/logo.ico',

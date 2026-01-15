@@ -3,6 +3,7 @@ import { getCurrentUser, signOut } from '@/app/actions/auth'
 import { redirect } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { LayoutDashboard, Layers, Bell, Settings, LogOut, ChevronRight, Bot, Users } from 'lucide-react'
+import { translations } from '@/lib/translations'
 
 export default async function DashboardLayout({
     children,
@@ -12,16 +13,18 @@ export default async function DashboardLayout({
     const user = await getCurrentUser()
 
     if (!user) {
-        redirect('/login')
+        redirect('/login?redirect=/dashboard')
     }
 
+    const t = translations['fr'].admin
+
     const navItems = [
-        { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-        { label: 'Waiters', href: '/dashboard/restaurant/waiters', icon: Users },
-        { label: 'My Services', href: '/dashboard/services', icon: Layers },
-        { label: 'AI Assistant', href: '/dashboard/ai', icon: Bot },
-        { label: 'Notifications', href: '/dashboard/notifications', icon: Bell },
-        { label: 'Settings', href: '/dashboard/settings', icon: Settings },
+        { label: t.dashboard, href: '/dashboard', icon: LayoutDashboard },
+        { label: t.restaurant, href: '/dashboard/restaurant', icon: Users },
+        { label: t.services, href: '/dashboard/services', icon: Layers },
+        { label: t.ai_assistant, href: '/dashboard/ai', icon: Bot },
+        { label: t.notifications, href: '/dashboard/notifications', icon: Bell },
+        { label: t.settings, href: '/dashboard/settings', icon: Settings },
     ]
 
     return (

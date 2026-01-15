@@ -302,6 +302,20 @@ export async function callWaiter(tableNumber: string) {
     }
 }
 
+export async function getOrderStatus(orderId: string) {
+    try {
+        const order = await prisma.restaurantOrder.findUnique({
+            where: { id: orderId },
+            select: { status: true }
+        })
+
+        if (!order) return { error: 'Order not found' }
+        return { success: true, status: order.status }
+    } catch (e) {
+        return { error: 'Failed to fetch status' }
+    }
+}
+
 export async function getOrders() {
     const tenant = await getTenant()
     if (!tenant) return []
@@ -365,6 +379,7 @@ export async function updateRestaurantConfig(data: {
     address?: string;
     phone?: string;
     hours?: string;
+    pageTitle?: string;
 }) {
     const tenant = await getTenant()
     if (!tenant) return { error: 'Not authenticated' }
@@ -378,6 +393,7 @@ export async function updateRestaurantConfig(data: {
             ...(data.address !== undefined && { address: data.address }),
             ...(data.phone !== undefined && { phone: data.phone }),
             ...(data.hours !== undefined && { hours: data.hours }),
+            ...(data.pageTitle !== undefined && { pageTitle: data.pageTitle }),
         }
 
         await prisma.tenantWebsite.update({

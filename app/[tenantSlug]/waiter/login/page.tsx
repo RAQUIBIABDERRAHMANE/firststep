@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter, useParams, useSearchParams } from 'next/navigation'
 import { loginWaiter } from '@/app/actions/waiter'
 import { Button } from '@/components/ui/Button'
 import { Loader2 } from 'lucide-react'
@@ -9,7 +9,10 @@ import { Loader2 } from 'lucide-react'
 export default function WaiterLoginPage() {
     const router = useRouter()
     const params = useParams()
+    const searchParams = useSearchParams()
     const tenantSlug = params?.tenantSlug as string
+    const redirectTo = searchParams.get('redirect')
+
     const [pin, setPin] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('')
@@ -28,7 +31,12 @@ export default function WaiterLoginPage() {
             // In a real app, use HTTP-only cookies
             localStorage.setItem('waiter_id', res.waiter.id)
             localStorage.setItem('waiter_name', res.waiter.name)
-            router.push(`/${tenantSlug}/waiter/dashboard`)
+
+            if (redirectTo && redirectTo.startsWith(`/${tenantSlug}`)) {
+                router.push(redirectTo)
+            } else {
+                router.push(`/${tenantSlug}/waiter/dashboard`)
+            }
         } else {
             setError(res.error || 'Login failed')
             setIsLoading(false)

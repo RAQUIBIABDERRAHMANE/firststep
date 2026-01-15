@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Card, CardContent } from '@/components/ui/Card'
@@ -11,6 +12,8 @@ import { Loader2, Mail, Lock, ArrowLeft, Sparkles } from 'lucide-react'
 export default function LoginPage() {
     const [isPending, startTransition] = useTransition()
     const [error, setError] = useState<string | null>(null)
+    const searchParams = useSearchParams()
+    const redirectTo = searchParams.get('redirect') || '/dashboard'
 
     async function handleSubmit(formData: FormData) {
         setError(null)
@@ -28,7 +31,7 @@ export default function LoginPage() {
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-background" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(139,92,246,0.15),transparent_40%)]" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(139,92,246,0.1),transparent_40%)]" />
-            
+
             {/* Floating Elements */}
             <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-float" />
             <div className="absolute bottom-20 right-10 w-80 h-80 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
@@ -51,6 +54,7 @@ export default function LoginPage() {
                 <Card className="glass-card shadow-2xl border-border/50 backdrop-blur-2xl">
                     <CardContent className="pt-8 pb-8 px-8">
                         <form action={handleSubmit} className="space-y-6">
+                            <input type="hidden" name="redirectTo" value={redirectTo} />
                             <div className="space-y-2">
                                 <label htmlFor="email" className="text-sm font-bold leading-none text-foreground flex items-center gap-2">
                                     <Mail className="h-4 w-4 text-primary" />
@@ -65,7 +69,7 @@ export default function LoginPage() {
                                     className="h-14 text-base"
                                 />
                             </div>
-                            
+
                             <div className="space-y-2">
                                 <div className="flex items-center justify-between">
                                     <label htmlFor="password" className="text-sm font-bold leading-none text-foreground flex items-center gap-2">

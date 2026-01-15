@@ -6,20 +6,23 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useRestaurantLogic } from './useRestaurantLogic'
 import { RestaurantTemplateProps } from './RestaurantTemplate'
-import {
-    ShoppingCart, QrCode, Plus, Minus, X,
-    LayoutDashboard, Bell, Check, Star, ArrowRight
-} from 'lucide-react'
+import { ArrowRight, Bell, ChevronLeft, Minus, Plus, QrCode, ShoppingCart, X, Check, Loader2, Sparkles } from 'lucide-react'
 
 const QRScanner = dynamic(() => import('./QRScanner'), { ssr: false })
+
+import { translations, Language, CURRENCY } from '@/lib/translations'
 
 export default function RestaurantTemplateMinimal({ siteName, description, coverImage, logo, config, categories, isOwner, primaryColor }: RestaurantTemplateProps) {
     const defaultData = useRestaurantLogic(categories, isOwner)
     const {
         showScanner, setShowScanner, showCart, setShowCart,
         isPlacingOrder, orderComplete, setOrderComplete, items, addItem, updateQuantity, removeItem,
-        totalPrice, totalItems, tableId, filteredItems, categoryNames, handleScan, handlePlaceOrder, handleCallWaiter
+        totalPrice, totalItems, tableId, filteredItems, categoryNames, handleScan, handlePlaceOrder, handleCallWaiter,
+        activeOrderId, orderStatus
     } = defaultData
+
+    const [lang, setLang] = useState<Language>('fr')
+    const t = translations[lang].restaurant
 
     const [activeSection, setActiveSection] = useState(categoryNames[0])
 
@@ -71,10 +74,16 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                             <QrCode size={20} />
                         </button>
                         <button
+                            onClick={() => setLang(l => l === 'en' ? 'fr' : 'en')}
+                            className="text-sm font-bold text-slate-500 hover:text-[var(--primary)] uppercase border border-slate-200 rounded-lg px-2 py-1"
+                        >
+                            {lang === 'fr' ? 'Français' : 'English'}
+                        </button>
+                        <button
                             onClick={() => setShowCart(true)}
                             className="flex items-center gap-3 bg-slate-50 hover:bg-slate-100 px-4 py-2 rounded-full transition-colors border border-slate-200"
                         >
-                            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Cart</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">{t.cart}</span>
                             <div className="bg-[var(--primary)] text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
                                 {totalItems}
                             </div>
@@ -160,7 +169,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                         <div className="flex-1 min-w-0 pt-2">
                                             <div className="flex justify-between items-start mb-2">
                                                 <h4 className="font-serif text-xl font-medium text-slate-900 truncate pr-4">{item.name}</h4>
-                                                <span className="font-bold text-[var(--primary)]">${item.price}</span>
+                                                <span className="font-bold text-[var(--primary)]">{item.price} {CURRENCY}</span>
                                             </div>
                                             <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-2">
                                                 {item.description || "A masterfully prepared dish with subtle notes and textures."}
@@ -169,7 +178,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                                 onClick={() => addItem({ id: item.id, name: item.name, price: item.price, image: item.image })}
                                                 className="text-xs font-bold uppercase tracking-wider text-slate-900 border-b border-slate-200 hover:border-[var(--primary)] hover:text-[var(--primary)] pb-0.5 transition-all flex items-center gap-2 w-fit"
                                             >
-                                                Add to Order <ArrowRight size={12} />
+                                                {t.add_to_order} <ArrowRight size={12} />
                                             </button>
                                         </div>
                                     </div>
@@ -188,11 +197,11 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                         <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
                     </div>
                     <div>
-                        <h5 className="font-bold text-slate-900 mb-4 uppercase tracking-wider text-xs">Hours</h5>
+                        <h5 className="font-bold text-slate-900 mb-4 uppercase tracking-wider text-xs">{t.hours}</h5>
                         <p className="whitespace-pre-line">{config.hours || "Mon-Sun\n5:00 PM - 10:00 PM"}</p>
                     </div>
                     <div>
-                        <h5 className="font-bold text-slate-900 mb-4 uppercase tracking-wider text-xs">Contact</h5>
+                        <h5 className="font-bold text-slate-900 mb-4 uppercase tracking-wider text-xs">{t.contact}</h5>
                         <p>{config.address}</p>
                         <p>{config.phone}</p>
                     </div>
@@ -240,7 +249,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                         <div className="flex-1">
                                             <div className="flex justify-between items-start mb-1">
                                                 <h4 className="font-serif text-lg text-slate-900">{item.name}</h4>
-                                                <span className="font-medium text-slate-600">${item.price}</span>
+                                                <span className="font-medium text-slate-600">{item.price} {CURRENCY}</span>
                                             </div>
                                             <div className="flex items-center gap-4 mt-2">
                                                 <button onClick={() => updateQuantity(item.id, -1)} className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors"><Minus size={14} /></button>
@@ -256,15 +265,15 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                         {items.length > 0 && (
                             <div className="p-8 border-t border-slate-100 bg-slate-50">
                                 <div className="flex justify-between items-end mb-6">
-                                    <span className="text-sm font-bold uppercase tracking-wider text-slate-500">Total</span>
-                                    <span className="font-serif text-3xl text-slate-900">${totalPrice.toFixed(2)}</span>
+                                    <span className="text-sm font-bold uppercase tracking-wider text-slate-500">{t.total}</span>
+                                    <span className="font-serif text-3xl text-slate-900">{totalPrice.toFixed(2)} {CURRENCY}</span>
                                 </div>
                                 <Button
                                     onClick={handlePlaceOrder}
                                     disabled={!tableId || isPlacingOrder}
                                     className="w-full h-14 rounded-xl bg-[var(--primary)] text-white hover:brightness-110 font-bold text-lg shadow-xl shadow-[var(--primary)]/20"
                                 >
-                                    {isPlacingOrder ? 'Confirming...' : 'Place Order'}
+                                    {isPlacingOrder ? `${t.status.PENDING}...` : t.place_order}
                                 </Button>
                                 {!tableId && (
                                     <p className="text-center text-xs text-red-500 mt-4 font-medium px-4 py-2 bg-red-50 rounded-lg">
@@ -273,19 +282,55 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                 )}
                             </div>
                         )}
-                        {orderComplete && (
+                        {orderComplete || activeOrderId ? (
                             <div className="absolute inset-0 bg-white/95 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center animate-in fade-in z-50">
-                                <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mb-6 text-green-600">
-                                    <Check size={40} />
+                                <div className={`w-24 h-24 rounded-full flex items-center justify-center mb-6 ${orderStatus === 'READY' || orderStatus === 'SERVED' ? 'bg-green-100 text-green-600' :
+                                    orderStatus === 'PREPARING' || orderStatus === 'COOKING' ? 'bg-orange-100 text-orange-600 animate-pulse' :
+                                        'bg-slate-100 text-slate-600'
+                                    }`}>
+                                    {orderStatus === 'READY' || orderStatus === 'SERVED' ? <Check size={48} /> :
+                                        orderStatus === 'PREPARING' || orderStatus === 'COOKING' ? <Loader2 size={48} className="animate-spin" /> :
+                                            <Sparkles size={48} />}
                                 </div>
-                                <h2 className="text-3xl font-serif text-slate-900 mb-2">Order Confirmed</h2>
-                                <p className="text-slate-500 mb-8 max-w-xs mx-auto">Your order has been sent to the kitchen. Sit back and relax.</p>
+                                <h2 className="text-3xl font-serif text-slate-900 mb-2">
+                                    {orderStatus === 'PENDING' && 'Order Sent!'}
+                                    {orderStatus === 'PREPARING' && 'Preparing...'}
+                                    {orderStatus === 'COOKING' && 'Cooking...'}
+                                    {orderStatus === 'READY' && 'Ready to Serve!'}
+                                    {orderStatus === 'SERVED' && 'Bon Appétit!'}
+                                    {!orderStatus && 'Order Confirmed'}
+                                </h2>
+                                <p className="text-slate-500 mb-8 max-w-xs mx-auto">
+                                    {orderStatus === 'PENDING' && 'Your order has been sent to the kitchen.'}
+                                    {orderStatus === 'PREPARING' && 'The chef looks excited about this one.'}
+                                    {orderStatus === 'COOKING' && 'Good things take time. Sit tight!'}
+                                    {orderStatus === 'READY' && 'Your food is on its way to your table.'}
+                                    {orderStatus === 'SERVED' && 'Enjoy your meal!'}
+                                    {!orderStatus && 'Your order has been received.'}
+                                </p>
+                                <div className="inline-block px-4 py-2 bg-slate-100 rounded-full text-xs font-bold uppercase tracking-widest text-slate-500 mb-8">
+                                    Status: {orderStatus || 'PENDING'}
+                                </div>
                                 <Button onClick={() => setOrderComplete(false)} variant="outline" className="border-slate-200 text-slate-900">
                                     Continue Browsing
                                 </Button>
                             </div>
-                        )}
+                        ) : null}
                     </div>
+                </div>
+            )}
+
+            {activeOrderId && !showCart && !showScanner && !orderComplete && (
+                <div className="fixed bottom-24 right-6 z-40 animate-in slide-in-from-bottom duration-500">
+                    <button
+                        onClick={() => setShowCart(true)}
+                        className="bg-white/90 backdrop-blur border border-slate-200 shadow-xl px-4 py-3 rounded-full flex items-center gap-3 transition-transform hover:scale-105"
+                    >
+                        <div className={`w-2 h-2 rounded-full ${orderStatus === 'READY' ? 'bg-green-500' : 'bg-[var(--primary)] animate-pulse'}`}></div>
+                        <div className="text-xs font-bold uppercase tracking-wider text-slate-600">
+                            {orderStatus || 'TRACKING'}
+                        </div>
+                    </button>
                 </div>
             )}
 

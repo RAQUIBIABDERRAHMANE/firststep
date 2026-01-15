@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter, useParams, usePathname } from 'next/navigation'
 import { getWaiterOrders } from '@/app/actions/waiter'
 import { Button } from '@/components/ui/Button'
 import { Loader2, LogOut, RefreshCw } from 'lucide-react'
@@ -10,6 +10,7 @@ import OrdersClient from '@/app/dashboard/restaurant/orders/OrdersClient'
 export default function WaiterDashboard() {
     const router = useRouter()
     const params = useParams()
+    const pathname = usePathname()
     const tenantSlug = params.tenantSlug as string
 
     const [waiterName, setWaiterName] = useState('')
@@ -22,19 +23,16 @@ export default function WaiterDashboard() {
         const id = localStorage.getItem('waiter_id')
         const name = localStorage.getItem('waiter_name')
 
-        if (!id) {
-            router.push(`/${params.tenantSlug}/waiter/login`)
-            return
+        if (id) {
+            setWaiterId(id)
+            setWaiterName(name || 'Staff')
+            fetchOrders(id)
+
+            // Set up polling
+            const interval = setInterval(() => fetchOrders(id), 10000)
+            return () => clearInterval(interval)
         }
-
-        setWaiterId(id)
-        setWaiterName(name || 'Staff')
-        fetchOrders(id)
-
-        // Set up polling
-        const interval = setInterval(() => fetchOrders(id), 10000)
-        return () => clearInterval(interval)
-    }, [params.tenantSlug, router])
+    }, [params.tenantSlug])
 
     const fetchOrders = async (id: string) => {
         try {
