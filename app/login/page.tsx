@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useTransition } from 'react'
+import { Suspense, useState, useTransition } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
@@ -9,7 +9,9 @@ import { Card, CardContent } from '@/components/ui/Card'
 import { signIn } from '@/app/actions/auth'
 import { Loader2, Mail, Lock, ArrowLeft, Sparkles } from 'lucide-react'
 
-export default function LoginPage() {
+
+
+function LoginForm() {
     const [isPending, startTransition] = useTransition()
     const [error, setError] = useState<string | null>(null)
     const searchParams = useSearchParams()
@@ -128,5 +130,13 @@ export default function LoginPage() {
                 </p>
             </div>
         </div>
+    )
+}
+
+export default function LoginPage() {
+    return (
+        <Suspense fallback={<div className="flex min-h-screen items-center justify-center"><Loader2 className="h-10 w-10 animate-spin text-primary" /></div>}>
+            <LoginForm />
+        </Suspense>
     )
 }
