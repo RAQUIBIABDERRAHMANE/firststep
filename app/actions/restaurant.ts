@@ -345,7 +345,7 @@ export async function updateRestaurantDesign(designTemplate: string) {
     try {
         await prisma.tenantWebsite.update({
             where: { id: tenant.id },
-            data: { designTemplate }
+            data: { designTemplate } as any
         })
         revalidatePath(`/${tenant.slug}`)
         revalidatePath('/dashboard/restaurant/design')
@@ -353,5 +353,49 @@ export async function updateRestaurantDesign(designTemplate: string) {
     } catch (e) {
         console.error('[Restaurant Action] updateRestaurantDesign Error:', e)
         return { error: 'Failed to update design' }
+    }
+}
+
+export async function updateRestaurantConfig(data: {
+    primaryColor?: string;
+    description?: string;
+    logo?: string;
+    coverImage?: string;
+    heroTitle?: string;
+    address?: string;
+    phone?: string;
+    hours?: string;
+}) {
+    const tenant = await getTenant()
+    if (!tenant) return { error: 'Not authenticated' }
+
+    try {
+        const currentConfig = tenant.config ? JSON.parse(tenant.config) : {}
+
+        const newConfig = {
+            ...currentConfig,
+            ...(data.heroTitle !== undefined && { heroTitle: data.heroTitle }),
+            ...(data.address !== undefined && { address: data.address }),
+            ...(data.phone !== undefined && { phone: data.phone }),
+            ...(data.hours !== undefined && { hours: data.hours }),
+        }
+
+        await prisma.tenantWebsite.update({
+            where: { id: tenant.id },
+            data: {
+                ...(data.primaryColor && { primaryColor: data.primaryColor }),
+                ...(data.description !== undefined && { description: data.description }),
+                ...(data.logo !== undefined && { logo: data.logo }),
+                ...(data.coverImage !== undefined && { coverImage: data.coverImage }),
+                config: JSON.stringify(newConfig)
+            }
+        })
+
+        revalidatePath(`/${tenant.slug}`)
+        revalidatePath('/dashboard/restaurant/design')
+        return { success: true }
+    } catch (e) {
+        console.error('[Restaurant Action] updateRestaurantConfig Error:', e)
+        return { error: 'Failed to update configuration' }
     }
 }

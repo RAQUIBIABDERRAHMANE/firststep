@@ -13,7 +13,7 @@ import {
 
 const QRScanner = dynamic(() => import('./QRScanner'), { ssr: false })
 
-export default function RestaurantTemplateClassic({ siteName, description, coverImage, logo, config, categories, isOwner }: RestaurantTemplateProps) {
+export default function RestaurantTemplateClassic({ siteName, description, coverImage, logo, config, categories, isOwner, primaryColor }: RestaurantTemplateProps) {
     const defaultData = useRestaurantLogic(categories, isOwner)
     const {
         showScanner, setShowScanner, showCart, setShowCart, activeCategory, setActiveCategory,
@@ -21,11 +21,16 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
         totalPrice, totalItems, tableId, categoryNames, filteredItems, handleScan, handlePlaceOrder, handleCallWaiter
     } = defaultData
 
+    // Use CSS variable for the primary color
+    const containerStyle = {
+        '--primary': primaryColor || '#2563eb'
+    } as React.CSSProperties
+
     return (
-        <div className="flex flex-col min-h-screen bg-white font-sans text-slate-900">
+        <div style={containerStyle} className="flex flex-col min-h-screen bg-white font-sans text-slate-900">
             {/* Call Waiter Button */}
             {tableId && !isOwner && (
-                <Button onClick={handleCallWaiter} className="fixed bottom-6 left-6 h-14 w-14 rounded-full shadow-xl bg-orange-500 hover:bg-orange-600 text-white z-50 flex items-center justify-center animate-in slide-in-from-bottom-5 active:scale-95 transition-all">
+                <Button onClick={handleCallWaiter} className="fixed bottom-6 left-6 h-14 w-14 rounded-full shadow-xl bg-[var(--primary)] hover:brightness-110 text-white z-50 flex items-center justify-center animate-in slide-in-from-bottom-5 active:scale-95 transition-all">
                     <Bell className="h-6 w-6" />
                 </Button>
             )}
@@ -37,7 +42,7 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                         {logo ? (
                             <img src={logo} alt={siteName} className="h-10 w-10 md:h-12 md:w-12 object-contain" />
                         ) : (
-                            <div className="h-10 w-10 md:h-12 md:w-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg ring-4 ring-blue-600/10">
+                            <div className="h-10 w-10 md:h-12 md:w-12 bg-[var(--primary)] rounded-2xl flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg ring-4 ring-slate-100">
                                 {siteName[0]}
                             </div>
                         )}
@@ -49,7 +54,7 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                     <div className="flex items-center gap-2 md:gap-4">
                         {isOwner && (
                             <Link href="/dashboard/restaurant">
-                                <Button variant="outline" size="sm" className="hidden md:flex gap-2 rounded-xl border-blue-200 text-blue-600 hover:bg-blue-50">
+                                <Button variant="outline" size="sm" className="hidden md:flex gap-2 rounded-xl border-slate-200 text-[var(--primary)] hover:bg-slate-50">
                                     <LayoutDashboard size={14} /> Manage
                                 </Button>
                             </Link>
@@ -57,9 +62,9 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                         <button onClick={() => setShowScanner(true)} className="p-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all active:scale-95">
                             <QrCode size={24} />
                         </button>
-                        <button onClick={() => setShowCart(true)} className="relative p-3 rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/20 hover:brightness-110 transition-all active:scale-95">
+                        <button onClick={() => setShowCart(true)} className="relative p-3 rounded-2xl bg-[var(--primary)] text-white shadow-lg shadow-blue-600/20 hover:brightness-110 transition-all active:scale-95">
                             <ShoppingCart size={24} />
-                            {totalItems > 0 && <span className="absolute -top-2 -right-2 bg-white text-blue-600 text-[10px] h-6 w-6 rounded-full flex items-center justify-center font-bold border-2 border-blue-600 shadow-md">{totalItems}</span>}
+                            {totalItems > 0 && <span className="absolute -top-2 -right-2 bg-white text-[var(--primary)] text-[10px] h-6 w-6 rounded-full flex items-center justify-center font-bold border-2 border-[var(--primary)] shadow-md">{totalItems}</span>}
                         </button>
                     </div>
                 </div>
@@ -97,9 +102,9 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                     <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl font-black text-slate-900 shadow-xl border border-white">${item.price}</div>
                                 </div>
                                 <div className="p-8 flex-1 flex flex-col">
-                                    <h3 className="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors">{item.name}</h3>
+                                    <h3 className="text-xl font-bold mb-3 group-hover:text-[var(--primary)] transition-colors">{item.name}</h3>
                                     <p className="text-slate-500 text-sm leading-relaxed mb-8 flex-1">{item.description || "Freshly prepared with hand-picked seasonal ingredients."}</p>
-                                    <Button onClick={() => addItem({ id: item.id, name: item.name, price: item.price, image: item.image })} className="w-full h-14 rounded-2xl text-lg font-bold shadow-lg shadow-blue-600/20 bg-blue-600 hover:bg-blue-700 text-white">
+                                    <Button onClick={() => addItem({ id: item.id, name: item.name, price: item.price, image: item.image })} className="w-full h-14 rounded-2xl text-lg font-bold shadow-lg shadow-blue-600/20 bg-[var(--primary)] hover:brightness-110 text-white">
                                         Add to order
                                     </Button>
                                 </div>
@@ -114,7 +119,7 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                 </section>
             </main>
 
-            {/* Cart Drawer & QR Scanner (Same logic, slightly reused styles) */}
+            {/* Cart Drawer & QR Scanner */}
             {showCart && (
                 <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm animate-in fade-in transition-all">
                     <div className="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl animate-in slide-in-from-right duration-500 outline-none flex flex-col">
@@ -139,12 +144,12 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                         </div>
                                         <div className="flex-1">
                                             <h4 className="font-bold text-lg mb-1">{item.name}</h4>
-                                            <span className="text-blue-600 font-bold text-sm">${item.price}</span>
+                                            <span className="text-[var(--primary)] font-bold text-sm">${item.price}</span>
                                         </div>
                                         <div className="flex items-center gap-4 bg-slate-50 p-2 rounded-2xl">
-                                            <button onClick={() => updateQuantity(item.id, -1)} className="p-1 hover:text-blue-600"><Minus size={16} /></button>
+                                            <button onClick={() => updateQuantity(item.id, -1)} className="p-1 hover:text-[var(--primary)]"><Minus size={16} /></button>
                                             <span className="font-black text-sm w-4 text-center">{item.quantity}</span>
-                                            <button onClick={() => updateQuantity(item.id, 1)} className="p-1 hover:text-blue-600"><Plus size={16} /></button>
+                                            <button onClick={() => updateQuantity(item.id, 1)} className="p-1 hover:text-[var(--primary)]"><Plus size={16} /></button>
                                         </div>
                                     </div>
                                 ))
@@ -156,7 +161,7 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                     <span className="text-slate-500 font-bold">Estimated Total</span>
                                     <span className="text-3xl font-black tracking-tighter">${totalPrice.toFixed(2)}</span>
                                 </div>
-                                <Button onClick={handlePlaceOrder} disabled={!tableId || isPlacingOrder} className="w-full h-16 rounded-[1.5rem] text-xl font-black shadow-xl shadow-blue-600/30 bg-blue-600 hover:bg-blue-700 text-white">
+                                <Button onClick={handlePlaceOrder} disabled={!tableId || isPlacingOrder} className="w-full h-16 rounded-[1.5rem] text-xl font-black shadow-xl shadow-blue-600/30 bg-[var(--primary)] hover:brightness-110 text-white">
                                     {isPlacingOrder ? 'Sending...' : 'Place Order'} <ChevronRight className="ml-2" />
                                 </Button>
                                 {!tableId && <p className="mt-4 text-center text-xs text-rose-500 font-bold p-2 bg-rose-50 rounded-xl">Scan table QR code to checkout</p>}
@@ -185,12 +190,12 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                         </div>
                         <div>
                             <h4 className="font-bold text-lg mb-6">Contact</h4>
-                            <p className="text-slate-400">{config.address}</p>
-                            <p className="text-slate-400">{config.phone}</p>
+                            <p className="text-slate-400">{config?.address}</p>
+                            <p className="text-slate-400">{config?.phone}</p>
                         </div>
                         <div>
                             <h4 className="font-bold text-lg mb-6">Hours</h4>
-                            <p className="text-slate-400 whitespace-pre-line">{config.hours}</p>
+                            <p className="text-slate-400 whitespace-pre-line">{config?.hours}</p>
                         </div>
                     </div>
                 </div>

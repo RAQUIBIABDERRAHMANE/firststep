@@ -1,13 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import { loginWaiter } from '@/app/actions/waiter'
 import { Button } from '@/components/ui/Button'
 import { Loader2 } from 'lucide-react'
 
-export default function WaiterLoginPage({ params }: { params: { tenantSlug: string } }) {
+export default function WaiterLoginPage() {
     const router = useRouter()
+    const params = useParams()
+    const tenantSlug = params?.tenantSlug as string
     const [pin, setPin] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState('')
@@ -19,14 +21,14 @@ export default function WaiterLoginPage({ params }: { params: { tenantSlug: stri
         setIsLoading(true)
         setError('')
 
-        const res = await loginWaiter(pin, params.tenantSlug)
+        const res = await loginWaiter(pin, tenantSlug)
 
         if (res.success && res.waiter) {
             // Save waiter session to localStorage for simplicity
             // In a real app, use HTTP-only cookies
             localStorage.setItem('waiter_id', res.waiter.id)
             localStorage.setItem('waiter_name', res.waiter.name)
-            router.push(`/${params.tenantSlug}/waiter/dashboard`)
+            router.push(`/${tenantSlug}/waiter/dashboard`)
         } else {
             setError(res.error || 'Login failed')
             setIsLoading(false)
@@ -55,8 +57,8 @@ export default function WaiterLoginPage({ params }: { params: { tenantSlug: stri
                             <div
                                 key={i}
                                 className={`w-4 h-4 rounded-full border-2 ${i < pin.length
-                                        ? 'bg-slate-900 border-slate-900'
-                                        : 'border-slate-300'
+                                    ? 'bg-slate-900 border-slate-900'
+                                    : 'border-slate-300'
                                     }`}
                             />
                         ))}

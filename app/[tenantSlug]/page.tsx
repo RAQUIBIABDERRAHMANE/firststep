@@ -42,6 +42,7 @@ export default async function TenantPage({ params }: Props) {
             categories={(tenant as any).categories || []}
             isOwner={isOwner}
             designTemplate={(tenant as any).designTemplate || 'classic'}
+            primaryColor={(tenant as any).primaryColor}
         />
     )
 }

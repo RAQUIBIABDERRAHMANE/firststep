@@ -9,5 +9,5 @@ export default async function DesignPage() {
         redirect('/dashboard/restaurant')
     }
 
-    return <DesignSelectionClient initialDesign={tenant.designTemplate || 'classic'} />
+    return <DesignSelectionClient initialData={tenant} />
 }

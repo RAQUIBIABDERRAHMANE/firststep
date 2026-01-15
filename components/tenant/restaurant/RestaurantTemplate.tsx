@@ -14,6 +14,7 @@ export interface RestaurantTemplateProps {
     categories: any[]
     isOwner?: boolean
     designTemplate?: string
+    primaryColor?: string
 }
 
 function RestaurantTemplateSwitcher(props: RestaurantTemplateProps) {
