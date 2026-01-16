@@ -3,7 +3,7 @@ import prisma from '@/lib/prisma'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Bell, CheckCircle2 } from 'lucide-react'
 import { Badge } from '@/components/ui/Badge'
-import { Notification } from '@prisma/client'
+import { Notification } from '../../../src/generated/client'
 
 export default async function NotificationsPage() {
     const user = await getCurrentUser()

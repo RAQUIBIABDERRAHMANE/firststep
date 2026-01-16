@@ -1,6 +1,7 @@
 import { getTenantBySlug } from '@/lib/tenant'
 import { notFound } from 'next/navigation'
 import RestaurantTemplate from '@/components/tenant/restaurant/RestaurantTemplate'
+import CabinetTemplate from '@/components/tenant/cabinet/CabinetTemplate'
 import { getCurrentUser } from '@/app/actions/auth'
 
 interface Props {
@@ -23,15 +24,30 @@ export default async function TenantPage({ params }: Props) {
         console.error('Failed to parse tenant config', e)
     }
 
-    // Determine template based on service type
-    // For now we assume Restaurant Website if service slug matches
-    // or default to restaurant template as it's the only one
-
-    // You might want to check tenant.service.slug here
-
     const user = await getCurrentUser()
     const isOwner = user?.id === tenant.userId
 
+    // Route based on service type
+    const serviceSlug = tenant.service?.slug || ''
+
+    if (serviceSlug.includes('cabinet') || serviceSlug.includes('professional-services')) {
+        return (
+            <CabinetTemplate
+                siteName={tenant.siteName}
+                description={tenant.description}
+                coverImage={tenant.coverImage}
+                logo={tenant.logo}
+                config={config}
+                services={(tenant as any).cabinetServices || []}
+                isOwner={isOwner}
+                primaryColor={(tenant as any).primaryColor}
+                designTemplate={(tenant as any).designTemplate}
+                tenantSlug={tenantSlug}
+            />
+        )
+    }
+
+    // Default to Restaurant template
     return (
         <RestaurantTemplate
             siteName={tenant.siteName}
@@ -46,3 +62,4 @@ export default async function TenantPage({ params }: Props) {
         />
     )
 }
+

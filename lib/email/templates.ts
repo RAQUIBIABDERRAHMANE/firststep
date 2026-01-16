@@ -84,7 +84,7 @@ export const getWelcomeEmailTemplate = (companyName: string) => {
             <h1>Welcome, ${companyName}!</h1>
             <p>Your business profile has been successfully created. You now have access to the FirstStep platform, where you can manage your operations with clarity and control.</p>
             <p>Ready to get started? Access your dashboard to configure your services and monitor your system status.</p>
-            <a href="http://localhost:3000/dashboard" class="cta-button">Go to Dashboard</a>
+            <a href="https://firststepco.com/dashboard" class="cta-button">Go to Dashboard</a>
             <div class="footer">
                 &copy; 2025 FirstStep SaaS. All rights reserved.<br>
                 Empowering businesses with authoritative systems.

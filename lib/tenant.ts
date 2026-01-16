@@ -23,6 +23,10 @@ export const getTenantBySlug = cache(async (slug: string) => {
                         orderBy: { order: 'asc' }
                     }
                 }
+            },
+            cabinetServices: {
+                where: { isActive: true },
+                orderBy: { createdAt: 'asc' }
             }
         },
     })

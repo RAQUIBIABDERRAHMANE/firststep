@@ -5,7 +5,7 @@ import { getCurrentUser } from './auth'
 import { validateSlug } from '@/lib/tenant'
 import { revalidatePath } from 'next/cache'
 
-// Get current user's website
+// Get current user's website (first one, for backwards compatibility)
 export async function getMyWebsite() {
     const user = await getCurrentUser()
     if (!user) return null
@@ -18,6 +18,58 @@ export async function getMyWebsite() {
         return website
     } catch (error) {
         console.error('Failed to fetch website:', error)
+        return null
+    }
+}
+
+// Get current user's Cabinet website
+export async function getMyCabinetWebsite() {
+    const user = await getCurrentUser()
+    if (!user) return null
+
+    try {
+        const cabinetService = await prisma.service.findUnique({
+            where: { slug: 'cabinet-system' }
+        })
+
+        if (!cabinetService) return null
+
+        const website = await prisma.tenantWebsite.findFirst({
+            where: {
+                userId: user.id,
+                serviceId: cabinetService.id
+            },
+            include: { service: true }
+        })
+        return website
+    } catch (error) {
+        console.error('Failed to fetch cabinet website:', error)
+        return null
+    }
+}
+
+// Get current user's Restaurant website
+export async function getMyRestaurantWebsite() {
+    const user = await getCurrentUser()
+    if (!user) return null
+
+    try {
+        const restaurantService = await prisma.service.findUnique({
+            where: { slug: 'restaurant-website' }
+        })
+
+        if (!restaurantService) return null
+
+        const website = await prisma.tenantWebsite.findFirst({
+            where: {
+                userId: user.id,
+                serviceId: restaurantService.id
+            },
+            include: { service: true }
+        })
+        return website
+    } catch (error) {
+        console.error('Failed to fetch restaurant website:', error)
         return null
     }
 }
@@ -46,12 +98,16 @@ export async function upsertWebsite(formData: FormData) {
 
     // Check if slug is taken (if changed)
     const existingSite = await prisma.tenantWebsite.findFirst({
-        where: { userId: user.id }
+        where: { userId: user.id, serviceId }
     })
 
-    // If creating new or changing slug, validate it
-    if (!existingSite || existingSite.slug !== slug) {
-        const isValid = await validateSlug(slug)
+    // Slug is immutable after first save
+    const finalSlug = existingSite?.slug || slug
+    const designTemplate = (formData.get('designTemplate') as string) || existingSite?.designTemplate || 'classic'
+
+    // If creating new or changing slug (only allowed if new), validate it
+    if (!existingSite || existingSite.slug !== finalSlug) {
+        const isValid = await validateSlug(finalSlug)
         if (!isValid) {
             return { error: 'Slug is invalid or already taken' }
         }
@@ -78,8 +134,9 @@ export async function upsertWebsite(formData: FormData) {
             update: {
                 siteName,
                 description,
-                slug,
+                slug: finalSlug,
                 primaryColor,
+                designTemplate,
                 logo,
                 coverImage,
                 config: JSON.stringify(newConfig),
@@ -90,8 +147,9 @@ export async function upsertWebsite(formData: FormData) {
                 serviceId,
                 siteName,
                 description,
-                slug,
+                slug: finalSlug,
                 primaryColor,
+                designTemplate,
                 logo,
                 coverImage,
                 isActive: true,
@@ -107,3 +165,4 @@ export async function upsertWebsite(formData: FormData) {
         return { error: 'Failed to save website' }
     }
 }
+

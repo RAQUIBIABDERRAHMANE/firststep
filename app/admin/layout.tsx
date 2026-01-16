@@ -28,8 +28,8 @@ export default async function AdminLayout({
                 <div className="flex h-full flex-col gap-4">
                     <div className="flex h-20 items-center border-b px-8">
                         <Link className="flex items-center gap-3 font-semibold text-xl tracking-tight" href="/admin">
-                            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground shadow-sm">
-                                <ShieldCheck className="h-5 w-5" />
+                            <div className="h-8 w-8 rounded-lg overflow-hidden flex items-center justify-center bg-white shadow-sm border border-slate-100 p-0.5">
+                                <img src="/logo.ico" alt="FirstStep" className="h-full w-full object-contain" />
                             </div>
                             <span className="text-foreground">FS Admin</span>
                         </Link>
@@ -75,7 +75,9 @@ export default async function AdminLayout({
                 {/* Mobile Header */}
                 <header className="flex h-16 items-center gap-4 border-b bg-background/50 backdrop-blur-md px-6 lg:hidden">
                     <Link className="flex items-center gap-3 font-semibold text-lg" href="/admin">
-                        <ShieldCheck className="h-6 w-6 text-primary" />
+                        <div className="h-7 w-7 rounded-lg overflow-hidden flex items-center justify-center bg-white shadow-sm border border-slate-100 p-0.5">
+                            <img src="/logo.ico" alt="FirstStep" className="h-full w-full object-contain" />
+                        </div>
                         <span>FS Admin</span>
                     </Link>
                     <div className="ml-auto">

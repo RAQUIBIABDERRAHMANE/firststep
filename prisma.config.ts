@@ -4,11 +4,8 @@ import "dotenv/config";
 import { defineConfig } from "prisma/config";
 
 function resolveDatabaseUrl() {
-  const url = process.env["TURSO_DATABASE_URL"] || process.env["DATABASE_URL"] || "file:./dev.db";
-  if (url.startsWith('libsql:') || url.startsWith('file:') || url.startsWith('postgresql:') || url.startsWith('mysql:')) {
-    return url;
-  }
-  return `file:${url}`;
+  const url = process.env["DATABASE_URL"] || "file:./dev.db";
+  return url;
 }
 
 const databaseUrl = resolveDatabaseUrl();

@@ -105,6 +105,12 @@ export default async function DashboardPage() {
                                                 Restaurant Admin
                                             </Button>
                                         </Link>
+                                    ) : (s.service.slug.includes('cabinet') || s.service.slug.includes('professional-services')) ? (
+                                        <Link href="/dashboard/cabinet" className="w-full">
+                                            <Button variant="default" size="sm" className="w-full">
+                                                Cabinet Admin
+                                            </Button>
+                                        </Link>
                                     ) : (
                                         <Button variant="outline" size="sm" className="w-full">Manage</Button>
                                     )}

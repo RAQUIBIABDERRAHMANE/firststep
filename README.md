@@ -160,7 +160,7 @@
    EMAIL_FROM=contact@firststepco.com
    
    # App Configuration
-   NEXT_PUBLIC_APP_URL=http://localhost:3000
+   NEXT_PUBLIC_APP_URL=https://firststepco
    ```
 
 4. **Initialize the database**
@@ -186,7 +186,7 @@
 
 6. **Open the application**
    
-   Navigate to [http://localhost:3000](http://localhost:3000)
+   Navigate to [https://firststepco](https://firststepco)
 
 ### Default Admin Credentials
 
@@ -331,7 +331,7 @@ npx tsx prisma/seed.ts
 | `EMAIL_USER` | SMTP username | `contact@firststepco.com` |
 | `EMAIL_PASSWORD` | SMTP password | `your_password` |
 | `EMAIL_FROM` | Sender email address | `contact@firststepco.com` |
-| `NEXT_PUBLIC_APP_URL` | Application URL | `http://localhost:3000` |
+| `NEXT_PUBLIC_APP_URL` | Application URL | `https://firststepco` |
 
 ---
 

@@ -2,8 +2,9 @@ import Link from 'next/link'
 import { getCurrentUser, signOut } from '@/app/actions/auth'
 import { redirect } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
-import { LayoutDashboard, Layers, Bell, Settings, LogOut, ChevronRight, Bot, Users } from 'lucide-react'
+import { LayoutDashboard, Layers, Bell, Settings, LogOut, ChevronRight, Bot, Users, Briefcase } from 'lucide-react'
 import { translations } from '@/lib/translations'
+import { getUserServices } from '@/app/actions/services'
 
 export default async function DashboardLayout({
     children,
@@ -18,14 +19,39 @@ export default async function DashboardLayout({
 
     const t = translations['fr'].admin
 
-    const navItems = [
+    // Get user's subscribed services
+    const userServices = await getUserServices()
+    const subscribedServiceSlugs = userServices.map((us: any) => us.service.slug)
+
+    // Base nav items (always shown)
+    const baseNavItems = [
         { label: t.dashboard, href: '/dashboard', icon: LayoutDashboard },
-        { label: t.restaurant, href: '/dashboard/restaurant', icon: Users },
+    ]
+
+    // Service-specific nav items (only shown if user has that service)
+    const serviceNavItems: { label: string; href: string; icon: any }[] = []
+
+    if (subscribedServiceSlugs.includes('restaurant-website') || subscribedServiceSlugs.includes('restaurant-pos')) {
+        serviceNavItems.push({ label: t.restaurant, href: '/dashboard/restaurant', icon: Users })
+    }
+
+    // Check for any cabinet-related service (cabinet-system, cabinet-management, etc.)
+    const hasCabinetService = subscribedServiceSlugs.some((slug: string) =>
+        slug.includes('cabinet') || slug.includes('professional-services')
+    )
+    if (hasCabinetService) {
+        serviceNavItems.push({ label: t.cabinet, href: '/dashboard/cabinet', icon: Briefcase })
+    }
+
+    // Common nav items (always shown)
+    const commonNavItems = [
         { label: t.services, href: '/dashboard/services', icon: Layers },
         { label: t.ai_assistant, href: '/dashboard/ai', icon: Bot },
         { label: t.notifications, href: '/dashboard/notifications', icon: Bell },
         { label: t.settings, href: '/dashboard/settings', icon: Settings },
     ]
+
+    const navItems = [...baseNavItems, ...serviceNavItems, ...commonNavItems]
 
     return (
         <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr] bg-muted/40">
@@ -34,8 +60,8 @@ export default async function DashboardLayout({
                 <div className="flex h-full flex-col gap-4">
                     <div className="flex h-20 items-center border-b px-8">
                         <Link className="flex items-center gap-3 font-bold text-xl tracking-tight" href="/">
-                            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/20">
-                                <span className="text-lg">F</span>
+                            <div className="h-8 w-8 rounded-lg overflow-hidden flex items-center justify-center bg-white shadow-sm border border-slate-100">
+                                <img src="/logo.ico" alt="FirstStep" className="h-full w-full object-contain" />
                             </div>
                             <span className="text-foreground">FirstStep</span>
                         </Link>
@@ -81,7 +107,9 @@ export default async function DashboardLayout({
                 {/* Mobile Header */}
                 <header className="flex h-16 items-center gap-4 border-b bg-background/50 backdrop-blur-md px-6 lg:hidden">
                     <Link className="flex items-center gap-3 font-semibold text-lg" href="/">
-                        <div className="h-7 w-7 rounded-lg bg-primary flex items-center justify-center text-primary-foreground shadow-sm text-xs">F</div>
+                        <div className="h-7 w-7 rounded-lg overflow-hidden flex items-center justify-center bg-white shadow-sm border border-slate-100">
+                            <img src="/logo.ico" alt="FirstStep" className="h-full w-full object-contain" />
+                        </div>
                         <span>FirstStep</span>
                     </Link>
                     <div className="ml-auto">
@@ -101,3 +129,4 @@ export default async function DashboardLayout({
         </div>
     )
 }
+

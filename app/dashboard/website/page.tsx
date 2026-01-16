@@ -53,8 +53,10 @@ export default async function WebsiteManagementPage() {
                 </CardHeader>
                 <CardContent>
                     <WebsiteForm
+                        key={`${website?.id || 'new'}-${website?.updatedAt || '0'}`}
                         initialData={website}
                         serviceId={service.id}
+                        serviceName={service.name}
                         userEmail={user.email}
                     />
                 </CardContent>
