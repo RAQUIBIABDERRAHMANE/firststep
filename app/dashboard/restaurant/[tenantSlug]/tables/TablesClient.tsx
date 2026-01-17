@@ -63,7 +63,7 @@ export default function TablesClient({ initialTables, tenantSlug }: { initialTab
         if (!newTableName.trim()) return
         setLoading(true)
         try {
-            const res = await createTable(newTableName)
+            const res = await createTable(newTableName, undefined, tenantSlug)
             if (res?.error) alert(res.error)
             else setNewTableName('')
         } catch (e) {
@@ -80,7 +80,7 @@ export default function TablesClient({ initialTables, tenantSlug }: { initialTab
             const res = await updateTable(id, {
                 number: tempName,
                 capacity: tempCapacity ? parseInt(tempCapacity) : undefined
-            })
+            }, tenantSlug)
             if (res?.error) alert(res.error)
             else setEditingTable(null)
         } catch (e) {
@@ -93,7 +93,7 @@ export default function TablesClient({ initialTables, tenantSlug }: { initialTab
 
     const handleToggleTable = async (id: string, currentStatus: boolean) => {
         try {
-            const res = await updateTable(id, { isActive: !currentStatus })
+            const res = await updateTable(id, { isActive: !currentStatus }, tenantSlug)
             if (res?.error) alert(res.error)
         } catch (e) {
             alert('Failed to toggle visibility')
@@ -105,7 +105,7 @@ export default function TablesClient({ initialTables, tenantSlug }: { initialTab
     const handleDeleteTable = async (id: string) => {
         if (!confirm('Delete this table mapping? Customers using this QR will no longer be able to order.')) return
         try {
-            const res = await deleteTable(id)
+            const res = await deleteTable(id, tenantSlug)
             if (res?.error) alert(res.error)
         } catch (e) {
             alert('Failed to delete table')

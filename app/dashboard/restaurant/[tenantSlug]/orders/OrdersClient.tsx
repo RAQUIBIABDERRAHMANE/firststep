@@ -19,14 +19,16 @@ import { updateOrderStatus } from '@/app/actions/restaurant'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
-export default function OrdersClient({ initialOrders }: { initialOrders: any[] }) {
+export default function OrdersClient({ initialOrders, tenantSlug }: { initialOrders: any[], tenantSlug: string }) {
     const router = useRouter()
     const [loading, setLoading] = useState<string | null>(null)
+    const [lastUpdated, setLastUpdated] = useState<Date>(new Date())
 
     // Polling for new orders (simplified real-time)
     useEffect(() => {
         const interval = setInterval(() => {
             router.refresh()
+            setLastUpdated(new Date())
         }, 10000) // Poll every 10s
         return () => clearInterval(interval)
     }, [router])
@@ -39,7 +41,7 @@ export default function OrdersClient({ initialOrders }: { initialOrders: any[] }
         }
 
         setLoading(orderId)
-        await updateOrderStatus(orderId, status)
+        await updateOrderStatus(orderId, status, tenantSlug)
         setLoading(null)
         router.refresh()
     }
@@ -65,6 +67,13 @@ export default function OrdersClient({ initialOrders }: { initialOrders: any[] }
 
     return (
         <div className="space-y-8">
+            <div className="flex items-center gap-3 px-4 py-2 bg-slate-900 rounded-full w-fit">
+                <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                    Live Monitor Active — Last Sync: {lastUpdated.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                </span>
+            </div>
+
             {initialOrders.length === 0 ? (
                 <div className="text-center py-32 bg-slate-50/50 rounded-[3rem] border-4 border-dashed border-slate-200 flex flex-col items-center">
                     <div className="h-24 w-24 bg-white rounded-full flex items-center justify-center text-slate-200 shadow-sm mb-8">

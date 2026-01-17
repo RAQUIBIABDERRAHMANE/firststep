@@ -13,9 +13,10 @@ import { cn } from '@/lib/utils'
 interface WaitersClientProps {
     initialWaiters: any[]
     initialTables: any[]
+    tenantSlug: string
 }
 
-export default function WaitersClient({ initialWaiters, initialTables }: WaitersClientProps) {
+export default function WaitersClient({ initialWaiters, initialTables, tenantSlug }: WaitersClientProps) {
     const router = useRouter()
     const [isCreating, setIsCreating] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -29,7 +30,7 @@ export default function WaitersClient({ initialWaiters, initialTables }: Waiters
         if (!newName || newPin.length !== 4) return
 
         setIsLoading(true)
-        const res = await createWaiter(newName, newPin, selectedTables)
+        const res = await createWaiter(newName, newPin, selectedTables, tenantSlug)
         setIsLoading(false)
 
         if (res.success) {
@@ -45,7 +46,7 @@ export default function WaitersClient({ initialWaiters, initialTables }: Waiters
 
     const handleDelete = async (id: string) => {
         if (!confirm('Are you sure you want to delete this waiter?')) return
-        await deleteWaiter(id)
+        await deleteWaiter(id, tenantSlug)
         router.refresh()
     }
 

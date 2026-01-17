@@ -1,15 +1,16 @@
-import { getMyCabinetWebsite } from '@/app/actions/tenant'
+import { getWebsiteBySlug } from '@/app/actions/tenant'
 import { getCurrentUser } from '@/app/actions/auth'
 import WebsiteForm from '@/components/dashboard/WebsiteForm'
 import prisma from '@/lib/prisma'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card'
 import { redirect } from 'next/navigation'
 
-export default async function CabinetSettingsPage() {
+export default async function CabinetSettingsPage({ params }: { params: Promise<{ tenantSlug: string }> }) {
+    const { tenantSlug } = await params
     const user = await getCurrentUser()
     if (!user) redirect('/login')
 
-    const website = await getMyCabinetWebsite()
+    const website = await getWebsiteBySlug(tenantSlug)
 
     // Get service ID for cabinet system (flexible lookup)
     const service = await prisma.service.findFirst({

@@ -26,7 +26,7 @@ export async function saveCabinetService(data: {
     price: number
     duration: number
     isActive?: boolean
-}) {
+}, slug?: string) {
     try {
         if (data.id) {
             // Update existing service
@@ -40,7 +40,8 @@ export async function saveCabinetService(data: {
                     isActive: data.isActive ?? true,
                 },
             })
-            revalidatePath('/dashboard/cabinet')
+            if (slug) revalidatePath(`/dashboard/cabinet/${slug}/services`)
+            else revalidatePath('/dashboard/cabinet')
             return { success: true, service }
         } else {
             // Create new service
@@ -54,7 +55,8 @@ export async function saveCabinetService(data: {
                     isActive: data.isActive ?? true,
                 },
             })
-            revalidatePath('/dashboard/cabinet')
+            if (slug) revalidatePath(`/dashboard/cabinet/${slug}/services`)
+            else revalidatePath('/dashboard/cabinet')
             return { success: true, service }
         }
     } catch (error) {
@@ -63,12 +65,13 @@ export async function saveCabinetService(data: {
     }
 }
 
-export async function deleteCabinetService(id: string) {
+export async function deleteCabinetService(id: string, slug?: string) {
     try {
         await prisma.cabinetService.delete({
             where: { id },
         })
-        revalidatePath('/dashboard/cabinet')
+        if (slug) revalidatePath(`/dashboard/cabinet/${slug}/services`)
+        else revalidatePath('/dashboard/cabinet')
         return { success: true }
     } catch (error) {
         console.error('Error deleting cabinet service:', error)
@@ -104,7 +107,7 @@ export async function saveCabinetClient(data: {
     email?: string
     phone?: string
     notes?: string
-}) {
+}, slug?: string) {
     try {
         if (data.id) {
             // Update existing client
@@ -117,7 +120,8 @@ export async function saveCabinetClient(data: {
                     notes: data.notes,
                 },
             })
-            revalidatePath('/dashboard/cabinet')
+            if (slug) revalidatePath(`/dashboard/cabinet/${slug}/clients`)
+            else revalidatePath('/dashboard/cabinet')
             return { success: true, client }
         } else {
             // Create new client
@@ -130,7 +134,8 @@ export async function saveCabinetClient(data: {
                     notes: data.notes,
                 },
             })
-            revalidatePath('/dashboard/cabinet')
+            if (slug) revalidatePath(`/dashboard/cabinet/${slug}/clients`)
+            else revalidatePath('/dashboard/cabinet')
             return { success: true, client }
         }
     } catch (error) {
@@ -190,7 +195,7 @@ export async function createCabinetAppointment(data: {
     clientPhone?: string
     appointmentDate: Date
     notes?: string
-}) {
+}, slug?: string) {
     try {
         let clientId = data.clientId
 
@@ -238,17 +243,18 @@ export async function createCabinetAppointment(data: {
             },
         })
 
-        revalidatePath('/dashboard/cabinet')
+        if (slug) revalidatePath(`/dashboard/cabinet/${slug}/calendar`)
+        else revalidatePath('/dashboard/cabinet')
         return { success: true, appointment }
     } catch (error) {
         console.error('Error creating cabinet appointment:', error)
         return { success: false, error: 'Failed to create appointment' }
     }
 }
-
 export async function updateCabinetAppointmentStatus(
     id: string,
-    status: string
+    status: string,
+    slug?: string
 ) {
     try {
         const appointment = await prisma.cabinetAppointment.update({
@@ -259,7 +265,8 @@ export async function updateCabinetAppointmentStatus(
                 client: true,
             },
         })
-        revalidatePath('/dashboard/cabinet')
+        if (slug) revalidatePath(`/dashboard/cabinet/${slug}/calendar`)
+        else revalidatePath('/dashboard/cabinet')
         return { success: true, appointment }
     } catch (error) {
         console.error('Error updating appointment status:', error)

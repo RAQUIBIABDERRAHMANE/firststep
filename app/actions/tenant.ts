@@ -22,6 +22,25 @@ export async function getMyWebsite() {
     }
 }
 
+// Get specific website by slug (restricted to current user)
+export async function getWebsiteBySlug(slug: string) {
+    const user = await getCurrentUser()
+    if (!user) return null
+
+    try {
+        return await prisma.tenantWebsite.findFirst({
+            where: {
+                slug,
+                userId: user.id
+            },
+            include: { service: true }
+        })
+    } catch (error) {
+        console.error('Failed to fetch website by slug:', error)
+        return null
+    }
+}
+
 // Get current user's Cabinet website
 export async function getMyCabinetWebsite() {
     const user = await getCurrentUser()
@@ -154,6 +173,9 @@ export async function upsertWebsite(formData: FormData) {
                 coverImage,
                 isActive: true,
                 config: JSON.stringify(newConfig)
+            },
+            include: {
+                service: true
             }
         })
 

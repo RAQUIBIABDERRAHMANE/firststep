@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
@@ -16,7 +17,8 @@ type CabinetService = {
     isActive: boolean
 }
 
-export default function CabinetServicesClient({ services, tenantId }: { services: CabinetService[], tenantId: string }) {
+export default function CabinetServicesClient({ services, tenantId, tenantSlug }: { services: CabinetService[], tenantId: string, tenantSlug: string }) {
+    const router = useRouter()
     const [isDialogOpen, setIsDialogOpen] = useState(false)
     const [editingService, setEditingService] = useState<CabinetService | null>(null)
     const [formData, setFormData] = useState({
@@ -58,19 +60,19 @@ export default function CabinetServicesClient({ services, tenantId }: { services
             description: formData.description,
             price: parseFloat(formData.price),
             duration: parseInt(formData.duration),
-        })
+        }, tenantSlug)
 
         if (result.success) {
             setIsDialogOpen(false)
-            window.location.reload() // Simple refresh for now
+            router.refresh()
         }
     }
 
     const handleDelete = async (id: string) => {
         if (confirm('Are you sure you want to delete this service?')) {
-            const result = await deleteCabinetService(id)
+            const result = await deleteCabinetService(id, tenantSlug)
             if (result.success) {
-                window.location.reload()
+                router.refresh()
             }
         }
     }

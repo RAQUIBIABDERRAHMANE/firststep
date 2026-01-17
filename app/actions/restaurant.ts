@@ -4,9 +4,18 @@ import prisma from '@/lib/prisma'
 import { getCurrentUser } from '@/app/actions/auth'
 import { revalidatePath } from 'next/cache'
 
-export async function getTenant() {
+export async function getTenant(slug?: string) {
     const user = await getCurrentUser()
     if (!user) return null
+
+    if (slug) {
+        return await prisma.tenantWebsite.findFirst({
+            where: {
+                slug,
+                userId: user.id
+            }
+        })
+    }
 
     // Find the tenant associated with the restaurant service
     const tenant = await prisma.tenantWebsite.findFirst({
@@ -26,8 +35,8 @@ export async function getTenant() {
 
 // --- Categories ---
 
-export async function getCategories() {
-    const tenant = await getTenant()
+export async function getCategories(slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return []
 
     return await prisma.restaurantCategory.findMany({
@@ -37,8 +46,8 @@ export async function getCategories() {
     })
 }
 
-export async function createCategory(name: string) {
-    const tenant = await getTenant()
+export async function createCategory(name: string, slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
     try {
@@ -59,8 +68,8 @@ export async function createCategory(name: string) {
     }
 }
 
-export async function updateCategory(id: string, data: { name?: string, isActive?: boolean, order?: number }) {
-    const tenant = await getTenant()
+export async function updateCategory(id: string, data: { name?: string, isActive?: boolean, order?: number }, slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
     try {
@@ -76,8 +85,8 @@ export async function updateCategory(id: string, data: { name?: string, isActive
     }
 }
 
-export async function deleteCategory(id: string) {
-    const tenant = await getTenant()
+export async function deleteCategory(id: string, slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
     try {
@@ -94,8 +103,8 @@ export async function deleteCategory(id: string) {
 
 // --- Dishes ---
 
-export async function createDish(categoryId: string, data: { name: string, description: string, price: number, image?: string }) {
-    const tenant = await getTenant()
+export async function createDish(categoryId: string, data: { name: string, description: string, price: number, image?: string }, slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
     try {
@@ -115,8 +124,8 @@ export async function createDish(categoryId: string, data: { name: string, descr
     }
 }
 
-export async function updateDish(id: string, data: { name?: string, description?: string, price?: number, image?: string, isActive?: boolean, categoryId?: string, order?: number }) {
-    const tenant = await getTenant()
+export async function updateDish(id: string, data: { name?: string, description?: string, price?: number, image?: string, isActive?: boolean, categoryId?: string, order?: number }, slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
     try {
@@ -140,8 +149,8 @@ export async function updateDish(id: string, data: { name?: string, description?
     }
 }
 
-export async function deleteDish(id: string) {
-    const tenant = await getTenant()
+export async function deleteDish(id: string, slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
     try {
@@ -164,8 +173,8 @@ export async function deleteDish(id: string) {
 
 // --- Tables ---
 
-export async function getTables() {
-    const tenant = await getTenant()
+export async function getTables(slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return []
 
     return await prisma.restaurantTable.findMany({
@@ -174,8 +183,8 @@ export async function getTables() {
     })
 }
 
-export async function createTable(number: string, capacity?: number) {
-    const tenant = await getTenant()
+export async function createTable(number: string, capacity?: number, slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
     try {
@@ -196,8 +205,8 @@ export async function createTable(number: string, capacity?: number) {
     }
 }
 
-export async function updateTable(id: string, data: { number?: string, capacity?: number, isActive?: boolean }) {
-    const tenant = await getTenant()
+export async function updateTable(id: string, data: { number?: string, capacity?: number, isActive?: boolean }, slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
     try {
@@ -213,8 +222,8 @@ export async function updateTable(id: string, data: { number?: string, capacity?
     }
 }
 
-export async function deleteTable(id: string) {
-    const tenant = await getTenant()
+export async function deleteTable(id: string, slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
     try {
@@ -316,8 +325,8 @@ export async function getOrderStatus(orderId: string) {
     }
 }
 
-export async function getOrders() {
-    const tenant = await getTenant()
+export async function getOrders(slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return []
 
     return await prisma.restaurantOrder.findMany({
@@ -332,8 +341,8 @@ export async function getOrders() {
     })
 }
 
-export async function updateOrderStatus(id: string, status: string) {
-    const tenant = await getTenant()
+export async function updateOrderStatus(id: string, status: string, slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
     try {
@@ -348,8 +357,8 @@ export async function updateOrderStatus(id: string, status: string) {
     }
 }
 
-export async function updateRestaurantDesign(designTemplate: string) {
-    const tenant = await getTenant()
+export async function updateRestaurantDesign(designTemplate: string, slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
     if (!['classic', 'modern', 'minimal'].includes(designTemplate)) {
@@ -380,8 +389,8 @@ export async function updateRestaurantConfig(data: {
     phone?: string;
     hours?: string;
     pageTitle?: string;
-}) {
-    const tenant = await getTenant()
+}, slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
     try {

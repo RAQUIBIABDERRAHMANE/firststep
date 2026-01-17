@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
@@ -17,7 +18,8 @@ type CabinetClient = {
     appointments: any[]
 }
 
-export default function CabinetClientsClient({ clients, tenantId }: { clients: CabinetClient[], tenantId: string }) {
+export default function CabinetClientsClient({ clients, tenantId, tenantSlug }: { clients: CabinetClient[], tenantId: string, tenantSlug: string }) {
+    const router = useRouter()
     const [isDialogOpen, setIsDialogOpen] = useState(false)
     const [editingClient, setEditingClient] = useState<CabinetClient | null>(null)
     const [selectedClient, setSelectedClient] = useState<CabinetClient | null>(null)
@@ -60,11 +62,11 @@ export default function CabinetClientsClient({ clients, tenantId }: { clients: C
             email: formData.email,
             phone: formData.phone,
             notes: formData.notes,
-        })
+        }, tenantSlug)
 
         if (result.success) {
             setIsDialogOpen(false)
-            window.location.reload()
+            router.refresh()
         }
     }
 

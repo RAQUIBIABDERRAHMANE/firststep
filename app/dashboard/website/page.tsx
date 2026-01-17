@@ -5,50 +5,79 @@ import prisma from '@/lib/prisma'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card'
 import { redirect } from 'next/navigation'
 
-export default async function WebsiteManagementPage() {
+export default async function WebsiteManagementPage({
+    searchParams
+}: {
+    searchParams: Promise<{ type?: string }>
+}) {
     const user = await getCurrentUser()
     if (!user) redirect('/login')
 
-    const website = await getMyWebsite()
+    const resolvedSearchParams = await searchParams
+    const type = resolvedSearchParams.type || 'restaurant'
+    const serviceSlug = type === 'cabinet' ? 'cabinet-system' : 'restaurant-website'
 
-    // Get service ID for restaurant website
+    // Get service ID for the requested type
     const service = await prisma.service.findUnique({
-        where: { slug: 'restaurant-website' }
+        where: { slug: serviceSlug }
     })
+
+    if (!service) {
+        return (
+            <div className="p-8">
+                <h1 className="text-2xl font-bold text-red-600">Error</h1>
+                <p>Service {serviceSlug} not found.</p>
+            </div>
+        )
+    }
 
     // Verify user has this service
     const hasService = await prisma.userService.findUnique({
         where: {
             userId_serviceId: {
                 userId: user.id,
-                serviceId: service?.id || ''
+                serviceId: service.id
             }
         }
     })
 
-    if (!service || !hasService) {
+    if (!hasService) {
         return (
             <div className="p-8">
                 <h1 className="text-2xl font-bold text-red-600">Access Denied</h1>
-                <p>You do not have access to the Restaurant Website service.</p>
+                <p>You do not have access to the {service.name} service.</p>
             </div>
         )
     }
 
+    // Get existing website for THIS specific service
+    const website = await prisma.tenantWebsite.findFirst({
+        where: {
+            userId: user.id,
+            serviceId: service.id
+        }
+    })
+
     return (
         <div className="space-y-8 max-w-4xl">
             <div>
-                <h1 className="text-3xl font-bold tracking-tight">Website Management</h1>
-                <p className="text-muted-foreground mt-1">
-                    Configure your public restaurant website.
+                <h1 className="text-3xl font-bold tracking-tight">
+                    {type === 'cabinet' ? 'Cabinet Setup' : 'Restaurant Website Setup'}
+                </h1>
+                <p className="text-muted-foreground mt-1 text-lg">
+                    {type === 'cabinet'
+                        ? 'Configure your professional clinic presence.'
+                        : 'Configure your public restaurant website.'}
                 </p>
             </div>
 
             <Card>
                 <CardHeader>
-                    <CardTitle>General Settings</CardTitle>
+                    <CardTitle>Configuration</CardTitle>
                     <CardDescription>
-                        Basic configuration for your website at {website ? `firststepco.com/${website.slug}` : '...'}
+                        {website
+                            ? `Edit your website settings at /${website.slug}`
+                            : 'Set up your website address and basic information.'}
                     </CardDescription>
                 </CardHeader>
                 <CardContent>

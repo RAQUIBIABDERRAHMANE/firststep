@@ -30,7 +30,7 @@ import Link from 'next/link'
 import { translations, Language } from '@/lib/translations'
 import { ChevronLeft, Globe } from 'lucide-react'
 
-export default function MenuClient({ initialCategories }: { initialCategories: any[] }) {
+export default function MenuClient({ initialCategories, tenantSlug }: { initialCategories: any[], tenantSlug: string }) {
     const router = useRouter()
     const [lang, setLang] = useState<Language>('fr')
     const t = translations[lang].admin
@@ -53,7 +53,7 @@ export default function MenuClient({ initialCategories }: { initialCategories: a
         if (!newCatName.trim()) return
         setLoading(true)
         try {
-            const res = await createCategory(newCatName)
+            const res = await createCategory(newCatName, tenantSlug)
             if (res?.error) alert(res.error)
             else setNewCatName('')
         } catch (e) {
@@ -68,7 +68,7 @@ export default function MenuClient({ initialCategories }: { initialCategories: a
         if (!tempCatName.trim()) return
         setLoading(true)
         try {
-            const res = await updateCategory(id, { name: tempCatName })
+            const res = await updateCategory(id, { name: tempCatName }, tenantSlug)
             if (res?.error) alert(res.error)
             else setEditingCat(null)
         } catch (e) {
@@ -82,7 +82,7 @@ export default function MenuClient({ initialCategories }: { initialCategories: a
     const handleToggleCategory = async (id: string, currentStatus: boolean) => {
         setLoading(true)
         try {
-            const res = await updateCategory(id, { isActive: !currentStatus })
+            const res = await updateCategory(id, { isActive: !currentStatus }, tenantSlug)
             if (res?.error) alert(res.error)
         } catch (e) {
             alert('Failed to toggle status')
@@ -95,7 +95,7 @@ export default function MenuClient({ initialCategories }: { initialCategories: a
     const handleDeleteCategory = async (id: string) => {
         if (!confirm('Are you sure? All dishes in this category will be lost.')) return
         try {
-            const res = await deleteCategory(id)
+            const res = await deleteCategory(id, tenantSlug)
             if (res?.error) alert(res.error)
         } catch (e) {
             alert('Failed to delete category')
@@ -114,12 +114,12 @@ export default function MenuClient({ initialCategories }: { initialCategories: a
                 res = await updateDish(editingDish, {
                     ...dishForm,
                     price: parseFloat(dishForm.price)
-                })
+                }, tenantSlug)
             } else {
                 res = await createDish(categoryId, {
                     ...dishForm,
                     price: parseFloat(dishForm.price)
-                })
+                }, tenantSlug)
             }
 
             if (res?.error) alert(res.error)
@@ -150,7 +150,7 @@ export default function MenuClient({ initialCategories }: { initialCategories: a
 
     const handleToggleDish = async (id: string, currentStatus: boolean) => {
         try {
-            const res = await updateDish(id, { isActive: !currentStatus })
+            const res = await updateDish(id, { isActive: !currentStatus }, tenantSlug)
             if (res?.error) alert(res.error)
         } catch (e) {
             alert('Failed to update item availability')
@@ -162,7 +162,7 @@ export default function MenuClient({ initialCategories }: { initialCategories: a
     const handleDeleteDish = async (id: string) => {
         if (!confirm('Delete this item?')) return
         try {
-            const res = await deleteDish(id)
+            const res = await deleteDish(id, tenantSlug)
             if (res?.error) alert(res.error)
         } catch (e) {
             alert('Failed to delete item')
@@ -175,7 +175,7 @@ export default function MenuClient({ initialCategories }: { initialCategories: a
         <div className="space-y-8 animate-fade-in max-w-5xl">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <Link href="/dashboard/restaurant" className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 mb-2 transition-colors">
+                    <Link href={`/dashboard/restaurant/${tenantSlug}`} className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 mb-2 transition-colors">
                         <ChevronLeft size={14} /> {t.back_dashboard}
                     </Link>
                     <h1 className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-3">

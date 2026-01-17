@@ -6,8 +6,8 @@ import { getTenant } from './restaurant'
 
 // --- Admin Actions ---
 
-export async function getWaiters() {
-    const tenant = await getTenant()
+export async function getWaiters(slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return []
 
     // @ts-ignore - Prisma client might be stale
@@ -20,8 +20,8 @@ export async function getWaiters() {
     })
 }
 
-export async function createWaiter(name: string, pin: string, tableIds: string[]) {
-    const tenant = await getTenant()
+export async function createWaiter(name: string, pin: string, tableIds: string[], slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
     if (!name || !pin || pin.length !== 4) return { error: 'Invalid name or PIN' }
@@ -39,7 +39,7 @@ export async function createWaiter(name: string, pin: string, tableIds: string[]
             }
         })
 
-        revalidatePath('/dashboard/restaurant/waiters')
+        revalidatePath('/dashboard/restaurant/[tenantSlug]/waiters', 'page')
         return { success: true }
     } catch (e) {
         console.error('Error creating waiter:', e)
@@ -47,8 +47,8 @@ export async function createWaiter(name: string, pin: string, tableIds: string[]
     }
 }
 
-export async function deleteWaiter(id: string) {
-    const tenant = await getTenant()
+export async function deleteWaiter(id: string, slug?: string) {
+    const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
     try {
@@ -57,7 +57,7 @@ export async function deleteWaiter(id: string) {
             where: { id, tenantId: tenant.id }
         })
 
-        revalidatePath('/dashboard/restaurant/waiters')
+        revalidatePath('/dashboard/restaurant/[tenantSlug]/waiters', 'page')
         return { success: true }
     } catch (e) {
         return { error: 'Failed to delete waiter' }

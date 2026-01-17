@@ -1,8 +1,10 @@
+import Sidebar from '@/components/dashboard/Sidebar'
 import Link from 'next/link'
 import { getCurrentUser, signOut } from '@/app/actions/auth'
+import prisma from '@/lib/prisma'
 import { redirect } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
-import { LayoutDashboard, Layers, Bell, Settings, LogOut, ChevronRight, Bot, Users, Briefcase } from 'lucide-react'
+import { LogOut, ChevronRight } from 'lucide-react'
 import { translations } from '@/lib/translations'
 import { getUserServices } from '@/app/actions/services'
 
@@ -23,35 +25,11 @@ export default async function DashboardLayout({
     const userServices = await getUserServices()
     const subscribedServiceSlugs = userServices.map((us: any) => us.service.slug)
 
-    // Base nav items (always shown)
-    const baseNavItems = [
-        { label: t.dashboard, href: '/dashboard', icon: LayoutDashboard },
-    ]
-
-    // Service-specific nav items (only shown if user has that service)
-    const serviceNavItems: { label: string; href: string; icon: any }[] = []
-
-    if (subscribedServiceSlugs.includes('restaurant-website') || subscribedServiceSlugs.includes('restaurant-pos')) {
-        serviceNavItems.push({ label: t.restaurant, href: '/dashboard/restaurant', icon: Users })
-    }
-
-    // Check for any cabinet-related service (cabinet-system, cabinet-management, etc.)
-    const hasCabinetService = subscribedServiceSlugs.some((slug: string) =>
-        slug.includes('cabinet') || slug.includes('professional-services')
-    )
-    if (hasCabinetService) {
-        serviceNavItems.push({ label: t.cabinet, href: '/dashboard/cabinet', icon: Briefcase })
-    }
-
-    // Common nav items (always shown)
-    const commonNavItems = [
-        { label: t.services, href: '/dashboard/services', icon: Layers },
-        { label: t.ai_assistant, href: '/dashboard/ai', icon: Bot },
-        { label: t.notifications, href: '/dashboard/notifications', icon: Bell },
-        { label: t.settings, href: '/dashboard/settings', icon: Settings },
-    ]
-
-    const navItems = [...baseNavItems, ...serviceNavItems, ...commonNavItems]
+    // Get all website instances
+    const websiteInstances = await prisma.tenantWebsite.findMany({
+        where: { userId: user.id },
+        include: { service: true }
+    })
 
     return (
         <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr] bg-muted/40">
@@ -59,7 +37,7 @@ export default async function DashboardLayout({
             <div className="hidden lg:block border-r bg-background/50 backdrop-blur-md">
                 <div className="flex h-full flex-col gap-4">
                     <div className="flex h-20 items-center border-b px-8">
-                        <Link className="flex items-center gap-3 font-bold text-xl tracking-tight" href="/">
+                        <Link className="flex items-center gap-3 font-bold text-xl tracking-tight" href="/dashboard">
                             <div className="h-8 w-8 rounded-lg overflow-hidden flex items-center justify-center bg-white shadow-sm border border-slate-100">
                                 <img src="/logo.ico" alt="FirstStep" className="h-full w-full object-contain" />
                             </div>
@@ -67,21 +45,11 @@ export default async function DashboardLayout({
                         </Link>
                     </div>
                     <div className="flex-1 overflow-auto py-4">
-                        <nav className="grid items-start px-4 gap-1">
-                            {navItems.map((item) => (
-                                <Link
-                                    key={item.href}
-                                    className="group flex items-center justify-between gap-3 rounded-xl px-4 py-3 text-sm font-medium text-muted-foreground transition-all hover:bg-white dark:hover:bg-zinc-800 hover:text-primary hover:shadow-sm"
-                                    href={item.href}
-                                >
-                                    <div className="flex items-center gap-3">
-                                        <item.icon className="h-5 w-5 transition-transform group-hover:scale-110" />
-                                        {item.label}
-                                    </div>
-                                    <ChevronRight className="h-4 w-4 opacity-0 group-hover:opacity-40 transition-opacity" />
-                                </Link>
-                            ))}
-                        </nav>
+                        <Sidebar
+                            subscribedServiceSlugs={subscribedServiceSlugs}
+                            translations={t}
+                            websites={websiteInstances}
+                        />
                     </div>
                     <div className="mt-auto p-6 border-t bg-white/30 dark:bg-zinc-900/30">
                         <div className="flex items-center gap-4">

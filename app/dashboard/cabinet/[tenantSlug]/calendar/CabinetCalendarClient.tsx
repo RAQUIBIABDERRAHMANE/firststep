@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
@@ -50,16 +51,28 @@ const MONTHS = [
 
 export default function CabinetCalendarClient({
     appointments,
+    tenantSlug,
 }: {
     appointments: Appointment[]
+    tenantSlug: string
 }) {
+    const router = useRouter()
     const [viewDate, setViewDate] = useState(new Date())
     const [selectedDate, setSelectedDate] = useState<Date>(new Date())
 
+    // Polling for new appointments
+    useEffect(() => {
+        const timer = setInterval(() => {
+            router.refresh()
+        }, 10000)
+
+        return () => clearInterval(timer)
+    }, [router])
+
     const handleStatusChange = async (id: string, newStatus: string) => {
-        const result = await updateCabinetAppointmentStatus(id, newStatus)
+        const result = await updateCabinetAppointmentStatus(id, newStatus, tenantSlug)
         if (result.success) {
-            window.location.reload()
+            router.refresh()
         }
     }
 

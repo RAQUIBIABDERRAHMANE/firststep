@@ -68,7 +68,27 @@ export default function WebsiteForm({ initialData, serviceId, serviceName = 'pro
             setError(result.error)
         } else {
             setSuccess('Website saved successfully!')
-            router.refresh()
+
+            // Determine redirect path based on service type and slug
+            const website = result.website
+            const serviceSlug = website?.service?.slug
+            const tenantSlug = website?.slug
+
+            let redirectPath = '/dashboard'
+            if (serviceSlug?.includes('restaurant')) {
+                redirectPath = `/dashboard/restaurant/${tenantSlug}`
+            } else if (serviceSlug?.includes('cabinet') || serviceSlug?.includes('professional')) {
+                redirectPath = `/dashboard/cabinet/${tenantSlug}`
+            }
+
+            // Small delay to show success message before redirecting if it's a new creation or slug change
+            if (!initialData?.slug || initialData.slug !== tenantSlug) {
+                setTimeout(() => {
+                    router.push(redirectPath)
+                }, 1500)
+            } else {
+                router.refresh()
+            }
         }
         setLoading(false)
     }

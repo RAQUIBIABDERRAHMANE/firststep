@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { useEffect, useState } from 'react'
-import { Sparkles } from 'lucide-react'
+import { Sparkles, Layers } from 'lucide-react'
 
 export default function Navbar({ user }: { user?: any }) {
     const [scrolled, setScrolled] = useState(false)
@@ -51,12 +51,21 @@ export default function Navbar({ user }: { user?: any }) {
 
                     <div className="flex items-center gap-4">
                         {user ? (
-                            <Link href="/dashboard">
-                                <Button size="default" className="font-bold gap-2">
-                                    <Sparkles className="h-4 w-4" />
-                                    Dashboard
-                                </Button>
-                            </Link>
+                            user.role === 'ADMIN' ? (
+                                <Link href="/admin">
+                                    <Button size="default" className="font-bold gap-2">
+                                        <Layers className="h-4 w-4" />
+                                        Admin Panel
+                                    </Button>
+                                </Link>
+                            ) : (
+                                <Link href="/dashboard">
+                                    <Button size="default" className="font-bold gap-2">
+                                        <Sparkles className="h-4 w-4" />
+                                        Go to Dashboard
+                                    </Button>
+                                </Link>
+                            )
                         ) : (
                             <>
                                 <Link href="/login">
