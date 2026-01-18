@@ -5,7 +5,7 @@ import { useRouter, useParams, usePathname } from 'next/navigation'
 import { getWaiterOrders } from '@/app/actions/waiter'
 import { Button } from '@/components/ui/Button'
 import { Loader2, LogOut, RefreshCw } from 'lucide-react'
-import OrdersClient from '@/app/dashboard/restaurant/orders/OrdersClient'
+import OrdersClient from '@/app/dashboard/restaurant/[tenantSlug]/orders/OrdersClient'
 
 export default function WaiterDashboard() {
     const router = useRouter()
