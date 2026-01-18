@@ -1,24 +1,46 @@
 import Link from 'next/link'
 import { getCurrentUser } from '@/app/actions/auth'
 import { redirect } from 'next/navigation'
-import { Briefcase, ClipboardList, Users, Calendar } from 'lucide-react'
+import { Briefcase, ClipboardList, Users, Calendar, Settings } from 'lucide-react'
+import prisma from '@/lib/prisma'
+import { notFound } from 'next/navigation'
+
+interface CabinetLayoutProps {
+    children: React.ReactNode
+    params: Promise<{ tenantSlug: string }>
+}
 
 export default async function CabinetLayout({
     children,
-}: {
-    children: React.ReactNode
-}) {
+    params,
+}: CabinetLayoutProps) {
+    const { tenantSlug } = await params
     const user = await getCurrentUser()
 
     if (!user) {
-        redirect('/login?redirect=/dashboard/cabinet')
+        redirect(`/login?redirect=/dashboard/cabinet/${tenantSlug}`)
+    }
+
+    // Verify the user owns this cabinet website
+    const cabinetWebsite = await prisma.tenantWebsite.findFirst({
+        where: {
+            slug: tenantSlug,
+            userId: user.id,
+        },
+        include: {
+            service: true,
+        }
+    })
+
+    if (!cabinetWebsite) {
+        notFound()
     }
 
     const navItems = [
-        { label: 'Services', href: '/dashboard/cabinet/services', icon: Briefcase },
-        { label: 'Clients', href: '/dashboard/cabinet/clients', icon: Users },
-        { label: 'Calendar', href: '/dashboard/cabinet/calendar', icon: Calendar },
-        { label: 'Settings', href: '/dashboard/cabinet/settings', icon: ClipboardList },
+        { label: 'Services', href: `/dashboard/cabinet/${tenantSlug}/services`, icon: Briefcase },
+        { label: 'Clients', href: `/dashboard/cabinet/${tenantSlug}/clients`, icon: Users },
+        { label: 'Calendar', href: `/dashboard/cabinet/${tenantSlug}/calendar`, icon: Calendar },
+        { label: 'Settings', href: `/dashboard/cabinet/${tenantSlug}/settings`, icon: Settings },
     ]
 
     return (
@@ -27,10 +49,10 @@ export default async function CabinetLayout({
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-3xl font-black tracking-tight text-foreground">
-                        Cabinet Management
+                        {cabinetWebsite.siteName}
                     </h1>
                     <p className="text-muted-foreground mt-2">
-                        Manage your professional services, clients, and appointments
+                        Gérez vos services professionnels, clients et rendez-vous
                     </p>
                 </div>
             </div>

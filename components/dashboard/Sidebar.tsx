@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useParams, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { LayoutDashboard, Layers, Bell, Settings, ChevronRight, Bot, Users, Briefcase } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -12,10 +12,8 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ subscribedServiceSlugs, translations, websites }: SidebarProps) {
-    const params = useParams()
     const pathname = usePathname()
     const t = translations
-    const tenantSlug = params.tenantSlug as string
 
     // Base nav items (always shown)
     const baseNavItems = [
@@ -30,8 +28,9 @@ export default function Sidebar({ subscribedServiceSlugs, translations, websites
     if (hasRestaurantService) {
         const restaurantInstance = websites.find(w => w.service.slug.includes('restaurant'))
         const label = restaurantInstance?.siteName || t.restaurant
-        const href = pathname.includes('/dashboard/restaurant/') && tenantSlug
-            ? `/dashboard/restaurant/${tenantSlug}`
+        // Always use the website slug if available, otherwise fallback to base route
+        const href = restaurantInstance?.slug 
+            ? `/dashboard/restaurant/${restaurantInstance.slug}`
             : '/dashboard/restaurant'
 
         serviceNavItems.push({ label, href, icon: Users })
@@ -44,8 +43,9 @@ export default function Sidebar({ subscribedServiceSlugs, translations, websites
     if (hasCabinetService) {
         const cabinetInstance = websites.find(w => w.service.slug.includes('cabinet') || w.service.slug.includes('professional'))
         const label = cabinetInstance?.siteName || t.cabinet
-        const href = pathname.includes('/dashboard/cabinet/') && tenantSlug
-            ? `/dashboard/cabinet/${tenantSlug}`
+        // Always use the website slug if available, otherwise fallback to base route
+        const href = cabinetInstance?.slug 
+            ? `/dashboard/cabinet/${cabinetInstance.slug}`
             : '/dashboard/cabinet'
 
         serviceNavItems.push({ label, href, icon: Briefcase })
