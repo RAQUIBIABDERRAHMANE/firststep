@@ -84,7 +84,7 @@ export default function WaiterDashboard() {
             <div className="p-4 md:p-6 flex-1 overflow-y-auto">
                 <div className="max-w-4xl mx-auto">
                     <h2 className="text-xl font-bold mb-4 text-slate-800">My Tables</h2>
-                    <OrdersClient initialOrders={orders} />
+                    <OrdersClient initialOrders={orders} tenantSlug={tenantSlug} />
                 </div>
             </div>
         </div>
