@@ -50,17 +50,67 @@ export async function addUserService(serviceId: string) {
             return { error: 'Service not found' }
         }
 
-        await prisma.userService.create({
+        // Check if user already has this service
+        const existingUserService = await prisma.userService.findFirst({
+            where: {
+                userId: user.id,
+                serviceId: serviceId,
+            }
+        })
+
+        if (existingUserService) {
+            return { error: 'Vous avez déjà accès à ce service' }
+        }
+
+        // For coming soon services, just add notification
+        if (service.status === 'COMING_SOON') {
+            await prisma.userService.create({
+                data: {
+                    userId: user.id,
+                    serviceId: serviceId,
+                    notify: true,
+                },
+            })
+            revalidatePath('/dashboard')
+            revalidatePath('/dashboard/services')
+            return { success: true, type: 'notification' }
+        }
+
+        // Check if user already has a pending payment for this service
+        const existingPayment = await prisma.paymentRequest.findFirst({
+            where: {
+                userId: user.id,
+                serviceId: serviceId,
+                status: 'PENDING'
+            }
+        })
+
+        if (existingPayment) {
+            // Return existing payment request instead of creating new one
+            revalidatePath('/dashboard')
+            revalidatePath('/dashboard/services')
+            return { success: true, type: 'payment', paymentId: existingPayment.id }
+        }
+
+        // For available services, create payment request
+        // Use price from database, fallback to default if not set
+        const servicePrice = service.price || 99.00
+        
+        const expiresAt = new Date()
+        expiresAt.setDate(expiresAt.getDate() + 7) // Expires in 7 days
+
+        const paymentRequest = await prisma.paymentRequest.create({
             data: {
                 userId: user.id,
                 serviceId: serviceId,
-                notify: service.status === 'COMING_SOON',
+                amount: servicePrice,
+                expiresAt: expiresAt,
             },
         })
 
         revalidatePath('/dashboard')
         revalidatePath('/dashboard/services')
-        return { success: true }
+        return { success: true, type: 'payment', paymentId: paymentRequest.id }
     } catch (error) {
         console.error('Failed to add service:', error)
         return { error: 'Failed to add service' }

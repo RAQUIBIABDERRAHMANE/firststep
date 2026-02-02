@@ -31,7 +31,6 @@ async function main() {
 
     console.log({ admin })
 
-    // Service: Restaurant Website & Online Ordering (AVAILABLE)
     const websiteService = await prisma.service.upsert({
         where: { slug: 'restaurant-website' },
         update: { status: 'AVAILABLE' },
@@ -123,6 +122,22 @@ async function main() {
     })
 
     console.log({ websiteService, posService, stockService, carRentalService, hotelService, hospitalService, cabinetService })
+
+    // Create default bank account
+    const bankAccount = await prisma.bankAccount.upsert({
+        where: { id: 'default-bank-account' },
+        update: {},
+        create: {
+            id: 'default-bank-account',
+            accountName: 'FirstStep Solutions SARL',
+            iban: 'FR76 1234 5678 9012 3456 7890 123',
+            bic: 'BNPAFRPPXXX',
+            bankName: 'BNP Paribas',
+            isActive: true,
+        }
+    })
+
+    console.log({ bankAccount })
 }
 
 main()

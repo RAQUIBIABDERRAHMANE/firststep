@@ -11,16 +11,17 @@ datasource db {
 }
 
 model User {
-  id            String          @id @default(cuid())
-  email         String          @unique
-  password      String
-  companyName   String
-  role          String          @default("CLIENT") // "ADMIN" | "CLIENT"
-  createdAt     DateTime        @default(now())
-  services      UserService[]
-  notifications Notification[]
-  websites      TenantWebsite[]
-  chatSessions  ChatSession[]
+  id              String           @id @default(cuid())
+  email           String           @unique
+  password        String
+  companyName     String
+  role            String           @default("CLIENT") // "ADMIN" | "CLIENT"
+  createdAt       DateTime         @default(now())
+  services        UserService[]
+  notifications   Notification[]
+  websites        TenantWebsite[]
+  chatSessions    ChatSession[]
+  paymentRequests PaymentRequest[]
 }
 
 model ChatSession {
@@ -57,15 +58,18 @@ model Notification {
 }
 
 model Service {
-  id          String          @id @default(cuid())
-  name        String
-  slug        String          @unique
-  description String?
-  status      String          @default("COMING_SOON") // "AVAILABLE" | "COMING_SOON"
-  category    String?
-  createdAt   DateTime        @default(now())
-  users       UserService[]
-  websites    TenantWebsite[]
+  id              String           @id @default(cuid())
+  name            String
+  slug            String           @unique
+  description     String?
+  status          String           @default("COMING_SOON") // "AVAILABLE" | "COMING_SOON"
+  category        String?
+  price           Float? // Prix du service en euros
+  icon            String? // Icône du service
+  createdAt       DateTime         @default(now())
+  users           UserService[]
+  websites        TenantWebsite[]
+  paymentRequests PaymentRequest[]
 }
 
 model UserService {
@@ -266,4 +270,42 @@ model CabinetAppointment {
   @@index([serviceId])
   @@index([clientId])
   @@index([appointmentDate])
+}
+
+// Payment Models
+model PaymentRequest {
+  id        String @id @default(cuid())
+  userId    String
+  serviceId String
+  amount    Float
+  status    String @default("PENDING") // PENDING, PAID, EXPIRED, CANCELLED
+
+  // Bank transfer details
+  transferReference String? // Reference number from bank transfer
+
+  // Metadata
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  expiresAt   DateTime // Payment request expires after X days
+  confirmedAt DateTime? // When admin confirmed payment
+  confirmedBy String? // Admin who confirmed
+
+  // Relations
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  service Service @relation(fields: [serviceId], references: [id])
+
+  @@index([userId])
+  @@index([serviceId])
+  @@index([status])
+}
+
+// Bank account info for payments
+model BankAccount {
+  id          String   @id @default(cuid())
+  accountName String // Nom du titulaire
+  iban        String // IBAN
+  bic         String? // Code BIC/SWIFT
+  bankName    String // Nom de la banque
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
 }

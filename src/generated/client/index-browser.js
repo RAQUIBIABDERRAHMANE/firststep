@@ -158,6 +158,8 @@ exports.Prisma.ServiceScalarFieldEnum = {
   description: 'description',
   status: 'status',
   category: 'category',
+  price: 'price',
+  icon: 'icon',
   createdAt: 'createdAt'
 };
 
@@ -283,6 +285,30 @@ exports.Prisma.CabinetAppointmentScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PaymentRequestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  serviceId: 'serviceId',
+  amount: 'amount',
+  status: 'status',
+  transferReference: 'transferReference',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  expiresAt: 'expiresAt',
+  confirmedAt: 'confirmedAt',
+  confirmedBy: 'confirmedBy'
+};
+
+exports.Prisma.BankAccountScalarFieldEnum = {
+  id: 'id',
+  accountName: 'accountName',
+  iban: 'iban',
+  bic: 'bic',
+  bankName: 'bankName',
+  isActive: 'isActive',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -311,7 +337,9 @@ exports.Prisma.ModelName = {
   RestaurantOrderItem: 'RestaurantOrderItem',
   CabinetService: 'CabinetService',
   CabinetClient: 'CabinetClient',
-  CabinetAppointment: 'CabinetAppointment'
+  CabinetAppointment: 'CabinetAppointment',
+  PaymentRequest: 'PaymentRequest',
+  BankAccount: 'BankAccount'
 };
 
 /**

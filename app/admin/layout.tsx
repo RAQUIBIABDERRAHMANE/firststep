@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { getCurrentUser, signOut } from '@/app/actions/auth'
 import { redirect } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
-import { LayoutDashboard, Users, Layers, LogOut, ShieldCheck, ChevronRight } from 'lucide-react'
+import { LayoutDashboard, Users, Layers, LogOut, ShieldCheck, ChevronRight, CreditCard, Globe, ExternalLink } from 'lucide-react'
 
 export default async function AdminLayout({
     children,
@@ -19,6 +19,9 @@ export default async function AdminLayout({
         { label: 'Admin Overview', href: '/admin', icon: LayoutDashboard },
         { label: 'Manage Services', href: '/admin/services', icon: Layers },
         { label: 'User Directory', href: '/admin/users', icon: Users },
+        { label: 'Websites', href: '/admin/websites', icon: Globe },
+        { label: 'Client Access', href: '/admin/access', icon: ExternalLink },
+        { label: 'Payments', href: '/admin/payments', icon: CreditCard },
     ]
 
     return (

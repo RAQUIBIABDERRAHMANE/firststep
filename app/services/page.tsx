@@ -1,6 +1,9 @@
-import { getServices } from '@/app/actions/services'
+import { getServices, getUserServices } from '@/app/actions/services'
+import { getBankAccount } from '@/app/actions/payments'
+import { getCurrentUser } from '@/app/actions/auth'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
+import ServiceButton from '@/components/ui/ServiceButton'
 import { Utensils, Store, Package, Car, Hotel, Hospital, Briefcase, Sparkles, Clock, Check, ArrowRight, Zap, Shield, Headphones, TrendingUp } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/landing/Navbar'
@@ -94,7 +97,11 @@ const getServiceFeatures = (category: string | null): string[] => {
 }
 
 export default async function ServicesPage() {
-    const services = await getServices()
+    const [services, user, userServices] = await Promise.all([
+        getServices(),
+        getCurrentUser(),
+        getCurrentUser().then(user => user ? getUserServices() : [])
+    ])
 
     // Sort services: available first, then coming soon
     const sortedServices = [...services].sort((a, b) => {
@@ -279,61 +286,70 @@ export default async function ServicesPage() {
                                                             À partir de
                                                         </p>
                                                         <div className="flex items-baseline gap-2">
-                                                            <span className="text-4xl font-bold text-white">2,500</span>
-                                                            <span className="text-lg text-slate-500">DH</span>
+                                                            <span className="text-4xl font-bold text-white">
+                                                                {(() => {
+                                                                    const prices: Record<string, number> = {
+                                                                        'restaurant': 299.00,
+                                                                        'professional-services': 199.00,
+                                                                        'inventory': 149.00,
+                                                                        'rental': 249.00,
+                                                                        'hospitality': 399.00,
+                                                                        'healthcare': 349.00,
+                                                                    }
+                                                                    return prices[service.category || ''] || 99.00
+                                                                })()
+                                                                .toFixed(2)
+                                                                }
+                                                            </span>
+                                                            <span className="text-lg text-slate-500">€</span>
                                                             <span className="text-xs text-slate-600 ml-1">
-                                                                {service.slug === 'restaurant-website' ? '/ à vie' : '/ mois'}
+                                                                paiement unique
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    {service.slug === 'restaurant-website' && (
-                                                        <Badge className="bg-emerald-500/20 text-emerald-400 border-0 text-xs font-bold">
-                                                            <Sparkles className="h-3 w-3 mr-1" />
-                                                            À vie
-                                                        </Badge>
-                                                    )}
+                                                    <Badge className="bg-emerald-500/20 text-emerald-400 border-0 text-xs font-bold">
+                                                        <Sparkles className="h-3 w-3 mr-1" />
+                                                        À vie
+                                                    </Badge>
                                                 </div>
 
-                                                {/* Special Offer */}
-                                                {service.slug === 'restaurant-website' && (
-                                                    <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-                                                        <div className="flex items-start gap-3">
-                                                            <Sparkles className="h-5 w-5 text-emerald-400 flex-shrink-0 mt-0.5" />
-                                                            <div>
-                                                                <p className="text-sm font-bold text-emerald-400 mb-1">
-                                                                    🎁 Offre de lancement
-                                                                </p>
-                                                                <p className="text-sm text-slate-400">
-                                                                    Abonnez-vous maintenant et obtenez <strong className="text-emerald-400">-20%</strong> sur le POS Restaurant lors de sa sortie !
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                {user ? (
+                                                    <ServiceButton 
+                                                        service={service}
+                                                        userHasService={userServices.some(us => us.serviceId === service.id)}
+                                                    />
+                                                ) : (
+                                                    <Link href="/login" className="block">
+                                                        <Button className="w-full h-14 font-bold text-base bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white border-0 gap-2 group/btn">
+                                                            <Sparkles className="h-5 w-5" />
+                                                            Se connecter pour acheter
+                                                            <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                                                        </Button>
+                                                    </Link>
                                                 )}
-
-                                                <Link href="/#signup" className="block">
-                                                    <Button className="w-full h-14 font-bold text-base bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white border-0 gap-2 group/btn">
-                                                        <Sparkles className="h-5 w-5" />
-                                                        Démarrer avec {service.name.split(' ')[0]}
-                                                        <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                                                    </Button>
-                                                </Link>
                                             </div>
                                         ) : (
                                             <div className="space-y-4">
                                                 <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.05]">
                                                     <p className="text-sm text-slate-500 text-center">
-                                                        Ce service sera bientôt disponible. Inscrivez-vous pour être notifié.
+                                                        Ce service sera bientôt disponible.
                                                     </p>
                                                 </div>
-                                                <Button 
-                                                    disabled 
-                                                    variant="outline" 
-                                                    className="w-full h-14 font-bold text-base bg-white/5 border-white/10 text-slate-500 cursor-not-allowed gap-2"
-                                                >
-                                                    <Clock className="h-5 w-5" />
-                                                    Me notifier du lancement
-                                                </Button>
+                                                {user ? (
+                                                    <ServiceButton 
+                                                        service={service}
+                                                        userHasService={userServices.some(us => us.serviceId === service.id)}
+                                                    />
+                                                ) : (
+                                                    <Button 
+                                                        disabled 
+                                                        variant="outline" 
+                                                        className="w-full h-14 font-bold text-base bg-white/5 border-white/10 text-slate-500 cursor-not-allowed gap-2"
+                                                    >
+                                                        <Clock className="h-5 w-5" />
+                                                        Me notifier du lancement
+                                                    </Button>
+                                                )}
                                             </div>
                                         )}
                                     </div>
