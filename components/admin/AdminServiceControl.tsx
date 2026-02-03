@@ -14,9 +14,9 @@ interface AdminServiceControlProps {
         service: {
             id: string
             name: string
-            description: string
-            icon: string
-            category: string
+            description: string | null
+            icon: string | null
+            category: string | null
             status: string
             price: number | null
         }
@@ -38,9 +38,9 @@ interface AdminServiceControlProps {
     allServices: Array<{
         id: string
         name: string
-        description: string
-        icon: string
-        category: string
+        description: string | null
+        icon: string | null
+        category: string | null
         status: string
         price: number | null
     }>
@@ -146,11 +146,11 @@ export default function AdminServiceControl({
                                 className="p-4 border rounded-lg flex items-start justify-between hover:border-primary/50 transition-colors"
                             >
                                 <div className="flex items-start gap-3 flex-1">
-                                    <div className="text-2xl">{us.service.icon}</div>
+                                    <div className="text-2xl">{us.service.icon || '🛠️'}</div>
                                     <div className="flex-1 min-w-0">
                                         <h4 className="font-medium text-sm">{us.service.name}</h4>
                                         <p className="text-xs text-muted-foreground mt-1">
-                                            {us.service.category}
+                                            {us.service.category || 'General'}
                                         </p>
                                         {us.service.price && (
                                             <p className="text-xs font-semibold text-primary mt-1">
@@ -185,11 +185,11 @@ export default function AdminServiceControl({
                                 className="p-4 border bg-white rounded-lg flex items-start justify-between hover:border-primary transition-colors"
                             >
                                 <div className="flex items-start gap-3 flex-1">
-                                    <div className="text-2xl">{service.icon}</div>
+                                    <div className="text-2xl">{service.icon || '🛠️'}</div>
                                     <div className="flex-1 min-w-0">
                                         <h4 className="font-medium text-sm">{service.name}</h4>
                                         <p className="text-xs text-muted-foreground mt-1">
-                                            {service.category}
+                                            {service.category || 'General'}
                                         </p>
                                         {service.price && (
                                             <p className="text-xs font-semibold text-primary mt-1">
