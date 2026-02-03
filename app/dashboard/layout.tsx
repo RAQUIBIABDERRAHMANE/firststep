@@ -21,13 +21,23 @@ export default async function DashboardLayout({
 
     const t = translations['fr'].admin
 
-    // Get user's subscribed services
-    const userServices = await getUserServices()
+    // Get user's subscribed services (only active ones)
+    const userServices = await prisma.userService.findMany({
+        where: {
+            userId: user.id,
+            isActive: true
+        },
+        include: { service: true }
+    })
     const subscribedServiceSlugs = userServices.map((us: any) => us.service.slug)
 
-    // Get all website instances
+    // Get all website instances (only for active services)
+    const activeServiceIds = userServices.map(us => us.serviceId)
     const websiteInstances = await prisma.tenantWebsite.findMany({
-        where: { userId: user.id },
+        where: { 
+            userId: user.id,
+            serviceId: { in: activeServiceIds }
+        },
         include: { service: true }
     })
 

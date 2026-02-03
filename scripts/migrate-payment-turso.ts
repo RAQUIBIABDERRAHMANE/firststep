@@ -52,8 +52,8 @@ async function migrate() {
         try {
             await client.execute(statements[i]);
             console.log(`✅ Statement ${i + 1}/${statements.length} executed successfully`);
-        } catch (error: any) {
-            console.error(`❌ Error executing statement ${i + 1}:`, error.message);
+        } catch (error: unknown) {
+            console.error(`❌ Error executing statement ${i + 1}:`, error instanceof Error ? error.message : error)
         }
     }
 

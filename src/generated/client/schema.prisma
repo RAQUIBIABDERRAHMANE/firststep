@@ -77,6 +77,7 @@ model UserService {
   userId     String
   serviceId  String
   notify     Boolean  @default(false)
+  isActive   Boolean  @default(true)
   selectedAt DateTime @default(now())
 
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)

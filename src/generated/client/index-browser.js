@@ -168,6 +168,7 @@ exports.Prisma.UserServiceScalarFieldEnum = {
   userId: 'userId',
   serviceId: 'serviceId',
   notify: 'notify',
+  isActive: 'isActive',
   selectedAt: 'selectedAt'
 };
 

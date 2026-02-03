@@ -8537,6 +8537,7 @@ export namespace Prisma {
     userId: string | null
     serviceId: string | null
     notify: boolean | null
+    isActive: boolean | null
     selectedAt: Date | null
   }
 
@@ -8545,6 +8546,7 @@ export namespace Prisma {
     userId: string | null
     serviceId: string | null
     notify: boolean | null
+    isActive: boolean | null
     selectedAt: Date | null
   }
 
@@ -8553,6 +8555,7 @@ export namespace Prisma {
     userId: number
     serviceId: number
     notify: number
+    isActive: number
     selectedAt: number
     _all: number
   }
@@ -8563,6 +8566,7 @@ export namespace Prisma {
     userId?: true
     serviceId?: true
     notify?: true
+    isActive?: true
     selectedAt?: true
   }
 
@@ -8571,6 +8575,7 @@ export namespace Prisma {
     userId?: true
     serviceId?: true
     notify?: true
+    isActive?: true
     selectedAt?: true
   }
 
@@ -8579,6 +8584,7 @@ export namespace Prisma {
     userId?: true
     serviceId?: true
     notify?: true
+    isActive?: true
     selectedAt?: true
     _all?: true
   }
@@ -8660,6 +8666,7 @@ export namespace Prisma {
     userId: string
     serviceId: string
     notify: boolean
+    isActive: boolean
     selectedAt: Date
     _count: UserServiceCountAggregateOutputType | null
     _min: UserServiceMinAggregateOutputType | null
@@ -8685,6 +8692,7 @@ export namespace Prisma {
     userId?: boolean
     serviceId?: boolean
     notify?: boolean
+    isActive?: boolean
     selectedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
@@ -8695,6 +8703,7 @@ export namespace Prisma {
     userId?: boolean
     serviceId?: boolean
     notify?: boolean
+    isActive?: boolean
     selectedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
@@ -8705,6 +8714,7 @@ export namespace Prisma {
     userId?: boolean
     serviceId?: boolean
     notify?: boolean
+    isActive?: boolean
     selectedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
@@ -8715,10 +8725,11 @@ export namespace Prisma {
     userId?: boolean
     serviceId?: boolean
     notify?: boolean
+    isActive?: boolean
     selectedAt?: boolean
   }
 
-  export type UserServiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "serviceId" | "notify" | "selectedAt", ExtArgs["result"]["userService"]>
+  export type UserServiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "serviceId" | "notify" | "isActive" | "selectedAt", ExtArgs["result"]["userService"]>
   export type UserServiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
@@ -8743,6 +8754,7 @@ export namespace Prisma {
       userId: string
       serviceId: string
       notify: boolean
+      isActive: boolean
       selectedAt: Date
     }, ExtArgs["result"]["userService"]>
     composites: {}
@@ -9173,6 +9185,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"UserService", 'String'>
     readonly serviceId: FieldRef<"UserService", 'String'>
     readonly notify: FieldRef<"UserService", 'Boolean'>
+    readonly isActive: FieldRef<"UserService", 'Boolean'>
     readonly selectedAt: FieldRef<"UserService", 'DateTime'>
   }
     
@@ -24366,6 +24379,7 @@ export namespace Prisma {
     userId: 'userId',
     serviceId: 'serviceId',
     notify: 'notify',
+    isActive: 'isActive',
     selectedAt: 'selectedAt'
   };
 
@@ -24944,6 +24958,7 @@ export namespace Prisma {
     userId?: StringFilter<"UserService"> | string
     serviceId?: StringFilter<"UserService"> | string
     notify?: BoolFilter<"UserService"> | boolean
+    isActive?: BoolFilter<"UserService"> | boolean
     selectedAt?: DateTimeFilter<"UserService"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     service?: XOR<ServiceScalarRelationFilter, ServiceWhereInput>
@@ -24954,6 +24969,7 @@ export namespace Prisma {
     userId?: SortOrder
     serviceId?: SortOrder
     notify?: SortOrder
+    isActive?: SortOrder
     selectedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     service?: ServiceOrderByWithRelationInput
@@ -24968,6 +24984,7 @@ export namespace Prisma {
     userId?: StringFilter<"UserService"> | string
     serviceId?: StringFilter<"UserService"> | string
     notify?: BoolFilter<"UserService"> | boolean
+    isActive?: BoolFilter<"UserService"> | boolean
     selectedAt?: DateTimeFilter<"UserService"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     service?: XOR<ServiceScalarRelationFilter, ServiceWhereInput>
@@ -24978,6 +24995,7 @@ export namespace Prisma {
     userId?: SortOrder
     serviceId?: SortOrder
     notify?: SortOrder
+    isActive?: SortOrder
     selectedAt?: SortOrder
     _count?: UserServiceCountOrderByAggregateInput
     _max?: UserServiceMaxOrderByAggregateInput
@@ -24992,6 +25010,7 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"UserService"> | string
     serviceId?: StringWithAggregatesFilter<"UserService"> | string
     notify?: BoolWithAggregatesFilter<"UserService"> | boolean
+    isActive?: BoolWithAggregatesFilter<"UserService"> | boolean
     selectedAt?: DateTimeWithAggregatesFilter<"UserService"> | Date | string
   }
 
@@ -26298,6 +26317,7 @@ export namespace Prisma {
   export type UserServiceCreateInput = {
     id?: string
     notify?: boolean
+    isActive?: boolean
     selectedAt?: Date | string
     user: UserCreateNestedOneWithoutServicesInput
     service: ServiceCreateNestedOneWithoutUsersInput
@@ -26308,12 +26328,14 @@ export namespace Prisma {
     userId: string
     serviceId: string
     notify?: boolean
+    isActive?: boolean
     selectedAt?: Date | string
   }
 
   export type UserServiceUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     notify?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutServicesNestedInput
     service?: ServiceUpdateOneRequiredWithoutUsersNestedInput
@@ -26324,6 +26346,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     serviceId?: StringFieldUpdateOperationsInput | string
     notify?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -26332,12 +26355,14 @@ export namespace Prisma {
     userId: string
     serviceId: string
     notify?: boolean
+    isActive?: boolean
     selectedAt?: Date | string
   }
 
   export type UserServiceUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     notify?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -26346,6 +26371,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     serviceId?: StringFieldUpdateOperationsInput | string
     notify?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -27710,6 +27736,7 @@ export namespace Prisma {
     userId?: SortOrder
     serviceId?: SortOrder
     notify?: SortOrder
+    isActive?: SortOrder
     selectedAt?: SortOrder
   }
 
@@ -27718,6 +27745,7 @@ export namespace Prisma {
     userId?: SortOrder
     serviceId?: SortOrder
     notify?: SortOrder
+    isActive?: SortOrder
     selectedAt?: SortOrder
   }
 
@@ -27726,6 +27754,7 @@ export namespace Prisma {
     userId?: SortOrder
     serviceId?: SortOrder
     notify?: SortOrder
+    isActive?: SortOrder
     selectedAt?: SortOrder
   }
 
@@ -29907,6 +29936,7 @@ export namespace Prisma {
   export type UserServiceCreateWithoutUserInput = {
     id?: string
     notify?: boolean
+    isActive?: boolean
     selectedAt?: Date | string
     service: ServiceCreateNestedOneWithoutUsersInput
   }
@@ -29915,6 +29945,7 @@ export namespace Prisma {
     id?: string
     serviceId: string
     notify?: boolean
+    isActive?: boolean
     selectedAt?: Date | string
   }
 
@@ -30089,6 +30120,7 @@ export namespace Prisma {
     userId?: StringFilter<"UserService"> | string
     serviceId?: StringFilter<"UserService"> | string
     notify?: BoolFilter<"UserService"> | boolean
+    isActive?: BoolFilter<"UserService"> | boolean
     selectedAt?: DateTimeFilter<"UserService"> | Date | string
   }
 
@@ -30453,6 +30485,7 @@ export namespace Prisma {
   export type UserServiceCreateWithoutServiceInput = {
     id?: string
     notify?: boolean
+    isActive?: boolean
     selectedAt?: Date | string
     user: UserCreateNestedOneWithoutServicesInput
   }
@@ -30461,6 +30494,7 @@ export namespace Prisma {
     id?: string
     userId: string
     notify?: boolean
+    isActive?: boolean
     selectedAt?: Date | string
   }
 
@@ -32631,6 +32665,7 @@ export namespace Prisma {
     id?: string
     serviceId: string
     notify?: boolean
+    isActive?: boolean
     selectedAt?: Date | string
   }
 
@@ -32681,6 +32716,7 @@ export namespace Prisma {
   export type UserServiceUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     notify?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     service?: ServiceUpdateOneRequiredWithoutUsersNestedInput
   }
@@ -32689,6 +32725,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     serviceId?: StringFieldUpdateOperationsInput | string
     notify?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -32696,6 +32733,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     serviceId?: StringFieldUpdateOperationsInput | string
     notify?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -32877,6 +32915,7 @@ export namespace Prisma {
     id?: string
     userId: string
     notify?: boolean
+    isActive?: boolean
     selectedAt?: Date | string
   }
 
@@ -32912,6 +32951,7 @@ export namespace Prisma {
   export type UserServiceUpdateWithoutServiceInput = {
     id?: StringFieldUpdateOperationsInput | string
     notify?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutServicesNestedInput
   }
@@ -32920,6 +32960,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     notify?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -32927,6 +32968,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     notify?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

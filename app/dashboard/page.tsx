@@ -13,12 +13,21 @@ export default async function DashboardPage() {
     if (!user) return null
 
     const userServices = await prisma.userService.findMany({
-        where: { userId: user.id },
+        where: { 
+            userId: user.id,
+            isActive: true
+        },
         include: { service: true },
     })
 
+    // Get active service IDs (all userServices are now active)
+    const activeServiceIds = userServices.map(us => us.serviceId)
+
     const websiteInstances = await prisma.tenantWebsite.findMany({
-        where: { userId: user.id },
+        where: { 
+            userId: user.id,
+            serviceId: { in: activeServiceIds } // Only show websites for active services
+        },
         include: { service: true }
     })
 
@@ -41,7 +50,7 @@ export default async function DashboardPage() {
                     </CardHeader>
                     <CardContent>
                         <div className="text-4xl font-bold tracking-tight text-foreground">{userServices.length}</div>
-                        <p className="text-sm text-muted-foreground mt-1">Operational modules</p>
+                        <p className="text-sm text-muted-foreground mt-1">Services actifs</p>
                     </CardContent>
                 </Card>
                 <Card className="glass-card">

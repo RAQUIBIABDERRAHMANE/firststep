@@ -24,11 +24,11 @@ async function migrate() {
         try {
             await client.execute(statements[i]);
             console.log(`✅ Statement ${i + 1}/${statements.length} executed successfully`);
-        } catch (error: any) {
-            if (error.message.includes('duplicate column name')) {
-                console.log(`⚠️ Column already exists, skipping...`);
+        } catch (error: unknown) {
+            if (error instanceof Error && error.message.includes('duplicate column name')) {
+                console.log(`⚠️ Column already exists, skipping...`)
             } else {
-                console.error(`❌ Error executing statement ${i + 1}:`, error.message);
+                console.error(`❌ Error executing statement ${i + 1}:`, error instanceof Error ? error.message : error)
             }
         }
     }

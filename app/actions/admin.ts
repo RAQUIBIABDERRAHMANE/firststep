@@ -18,6 +18,9 @@ export async function getAllUsersWithServices() {
             },
             include: {
                 services: {
+                    where: {
+                        isActive: true
+                    },
                     include: {
                         service: true
                     }
@@ -89,11 +92,15 @@ export async function adminToggleUserService(userId: string, serviceId: string, 
             })
 
         } else {
-            // Remove service
-            await prisma.userService.deleteMany({
+            // Soft delete: désactiver uniquement le service utilisateur
+            // Les sites web restent actifs mais getTenantBySlug vérifie userService.isActive
+            await prisma.userService.updateMany({
                 where: {
                     userId: userId,
                     serviceId: serviceId
+                },
+                data: {
+                    isActive: false
                 }
             })
         }

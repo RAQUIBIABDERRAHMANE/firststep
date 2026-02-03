@@ -31,6 +31,25 @@ export const getTenantBySlug = cache(async (slug: string) => {
         },
     })
 
+    if (!tenant) return null
+
+    // Vérifier si l'utilisateur a toujours accès à ce service
+    const userService = await prisma.userService.findFirst({
+        where: {
+            userId: tenant.userId,
+            serviceId: tenant.serviceId,
+            isActive: true
+        }
+    })
+
+    // Si le service est désactivé, retourner un objet spécial
+    if (!userService) {
+        return {
+            ...tenant,
+            serviceDisabled: true
+        }
+    }
+
     return tenant
 })
 

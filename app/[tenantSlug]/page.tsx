@@ -2,6 +2,7 @@ import { getTenantBySlug } from '@/lib/tenant'
 import { notFound } from 'next/navigation'
 import RestaurantTemplate from '@/components/tenant/restaurant/RestaurantTemplate'
 import CabinetTemplate from '@/components/tenant/cabinet/CabinetTemplate'
+import ServiceDownPage from '@/components/tenant/ServiceDownPage'
 import { getCurrentUser } from '@/app/actions/auth'
 
 interface Props {
@@ -12,8 +13,14 @@ export default async function TenantPage({ params }: Props) {
     const { tenantSlug } = await params
     const tenant = await getTenantBySlug(tenantSlug)
 
-    if (!tenant || !tenant.isActive) {
-        notFound()
+    // Site inexistant
+    if (!tenant) {
+        return <ServiceDownPage />
+    }
+
+    // Site désactivé ou service supprimé par l'admin
+    if (!tenant.isActive || (tenant as any).serviceDisabled) {
+        return <ServiceDownPage />
     }
 
     // Parse config safely
