@@ -34,6 +34,21 @@ export const getWelcomeEmailTemplate = (companyName: string) => {
             .logo img {
                 height: 48px;
                 width: auto;
+                pointer-events: none;
+                user-select: none;
+                -webkit-user-drag: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                pointer-events: none;
+                user-select: none;
+                -webkit-user-drag: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                pointer-events: none;
+                user-select: none;
+                -webkit-user-drag: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
             }
             h1 { 
                 font-size: 28px; 
@@ -119,6 +134,15 @@ export const getResetCodeTemplate = (code: string) => {
                 font-weight: 800; 
                 letter-spacing: -0.025em; 
                 margin-bottom: 32px;
+            }
+            .logo img {
+                height: 48px;
+                width: auto;
+                pointer-events: none;
+                user-select: none;
+                -webkit-user-drag: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
             }
             .logo-f {
                 display: inline-block;
@@ -240,6 +264,15 @@ export const getPaymentRequestTemplate = (
                 font-weight: 800; 
                 letter-spacing: -0.025em; 
                 margin-bottom: 32px;
+            }
+            .logo img {
+                height: 48px;
+                width: auto;
+                pointer-events: none;
+                user-select: none;
+                -webkit-user-drag: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
             }
             .logo-f {
                 display: inline-block;
@@ -416,6 +449,15 @@ export const getPaymentApprovedTemplate = (
                 letter-spacing: -0.025em; 
                 margin-bottom: 32px;
             }
+            .logo img {
+                height: 48px;
+                width: auto;
+                pointer-events: none;
+                user-select: none;
+                -webkit-user-drag: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+            }
             .logo-f {
                 display: inline-block;
                 width: 32px;
@@ -555,6 +597,15 @@ export const getPaymentDeclinedTemplate = (
                 font-weight: 800; 
                 letter-spacing: -0.025em; 
                 margin-bottom: 32px;
+            }
+            .logo img {
+                height: 48px;
+                width: auto;
+                pointer-events: none;
+                user-select: none;
+                -webkit-user-drag: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
             }
             .logo-f {
                 display: inline-block;
