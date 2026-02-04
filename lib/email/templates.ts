@@ -29,22 +29,11 @@ export const getWelcomeEmailTemplate = (companyName: string) => {
                 border-radius: 8px;
             }
             .logo { 
-                font-size: 24px; 
-                font-weight: 800; 
-                letter-spacing: -0.025em; 
                 margin-bottom: 32px;
-                color: ${textColor};
             }
-            .logo-f {
-                display: inline-block;
-                width: 32px;
-                height: 32px;
-                background-color: ${primaryColor};
-                color: white;
-                text-align: center;
-                line-height: 32px;
-                border-radius: 4px;
-                margin-right: 8px;
+            .logo img {
+                height: 48px;
+                width: auto;
             }
             h1 { 
                 font-size: 28px; 
@@ -80,7 +69,7 @@ export const getWelcomeEmailTemplate = (companyName: string) => {
     </head>
     <body>
         <div class="container">
-            <div class="logo"><span class="logo-f">F</span>FirstStep</div>
+            <div class="logo"><img src="https://firststepco.com/og-image.png" alt="FirstStep Logo" /></div>
             <h1>Welcome, ${companyName}!</h1>
             <p>Your business profile has been successfully created. You now have access to the FirstStep platform, where you can manage your operations with clarity and control.</p>
             <p>Ready to get started? Access your dashboard to configure your services and monitor your system status.</p>
@@ -185,7 +174,7 @@ export const getResetCodeTemplate = (code: string) => {
     </head>
     <body>
         <div class="container">
-            <div class="logo"><span class="logo-f">F</span>FirstStep</div>
+            <div class="logo"><img src="https://firststepco.com/og-image.png" alt="FirstStep Logo" /></div>
             <h1>Reset your password</h1>
             <p>We received a request to reset the password for your FirstStep account. Use the verification code below to proceed:</p>
             
@@ -341,7 +330,7 @@ export const getPaymentRequestTemplate = (
     </head>
     <body>
         <div class="container">
-            <div class="logo"><span class="logo-f">F</span>FirstStep</div>
+            <div class="logo"><img src="https://firststepco.com/og-image.png" alt="FirstStep Logo" /></div>
             <h1>Demande de Paiement</h1>
             <p>Bonjour ${companyName},</p>
             <p>Votre demande de paiement pour le service suivant a été créée avec succès :</p>
@@ -500,7 +489,7 @@ export const getPaymentApprovedTemplate = (
     </head>
     <body>
         <div class="container">
-            <div class="logo"><span class="logo-f">F</span>FirstStep</div>
+            <div class="logo"><img src="https://firststepco.com/og-image.png" alt="FirstStep Logo" /></div>
             <div class="success-badge">✓ PAIEMENT APPROUVÉ</div>
             <h1>Félicitations !</h1>
             <p>Bonjour ${companyName},</p>
@@ -636,7 +625,7 @@ export const getPaymentDeclinedTemplate = (
     </head>
     <body>
         <div class="container">
-            <div class="logo"><span class="logo-f">F</span>FirstStep</div>
+            <div class="logo"><img src="https://firststepco.com/og-image.png" alt="FirstStep Logo" /></div>
             <div class="declined-badge">✗ PAIEMENT REFUSÉ</div>
             <h1>Demande de Paiement Non Validée</h1>
             <p>Bonjour ${companyName},</p>

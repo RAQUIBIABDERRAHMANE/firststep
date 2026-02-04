@@ -40,9 +40,11 @@ function LoginForm() {
 
             <div className="w-full max-w-md animate-scale-in relative z-10">
                 <Link href="/" className="flex items-center justify-center gap-3 mb-8 group">
-                    <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-primary via-accent to-primary flex items-center justify-center text-primary-foreground font-black shadow-xl shadow-primary/30 group-hover:shadow-2xl group-hover:shadow-primary/40 group-hover:scale-110 transition-all duration-300">
-                        F
-                    </div>
+                    <img 
+                        src="/og-image.png" 
+                        alt="FirstStep Logo" 
+                        className="h-16 w-16 rounded-2xl shadow-xl group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300"
+                    />
                     <span className="text-3xl font-black gradient-text">FirstStep</span>
                 </Link>
 
