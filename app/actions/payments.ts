@@ -3,6 +3,7 @@
 import prisma from '@/lib/prisma'
 import { getCurrentUser } from './auth'
 import { revalidatePath } from 'next/cache'
+import { sendPaymentRequestEmail, sendPaymentApprovedEmail, sendPaymentDeclinedEmail } from '@/lib/mail'
 
 export async function createPaymentRequest(serviceId: string, amount: number) {
     const user = await getCurrentUser()
@@ -46,6 +47,31 @@ export async function createPaymentRequest(serviceId: string, amount: number) {
                 expiresAt: expiresAt,
             },
         })
+
+        // Get bank account details
+        const bankAccount = await getBankAccount()
+        
+        console.log('[PAYMENT] Sending email to:', user.email)
+        console.log('[PAYMENT] Bank account found:', !!bankAccount)
+        
+        // Send email with bank details to the client
+        if (bankAccount) {
+            const emailResult = await sendPaymentRequestEmail(
+                user.email,
+                user.companyName || 'Client',
+                service.name,
+                amount,
+                {
+                    accountName: bankAccount.accountName,
+                    accountNumber: bankAccount.iban || '',
+                    rib: bankAccount.rib || '',
+                    bankName: bankAccount.bankName
+                }
+            )
+            console.log('[PAYMENT] Email result:', emailResult)
+        } else {
+            console.log('[PAYMENT] No bank account found, skipping email')
+        }
 
         revalidatePath('/services')
         revalidatePath('/dashboard')
@@ -106,6 +132,7 @@ export async function getBankAccount() {
                 id: true,
                 accountName: true,
                 iban: true,
+                rib: true,
                 bic: true,
                 bankName: true,
                 createdAt: true
@@ -181,6 +208,10 @@ export async function confirmPayment(paymentId: string) {
     try {
         const paymentRequest = await prisma.paymentRequest.findUnique({
             where: { id: paymentId },
+            include: {
+                user: true,
+                service: true,
+            }
         })
 
         if (!paymentRequest) {
@@ -206,6 +237,16 @@ export async function confirmPayment(paymentId: string) {
             },
         })
 
+        // Send approval email to the client
+        console.log('[PAYMENT] Sending approval email to:', paymentRequest.user.email)
+        const approvalResult = await sendPaymentApprovedEmail(
+            paymentRequest.user.email,
+            paymentRequest.user.companyName || 'Client',
+            paymentRequest.service.name,
+            paymentRequest.amount
+        )
+        console.log('[PAYMENT] Approval email result:', approvalResult)
+
         revalidatePath('/admin')
         revalidatePath('/dashboard')
         return { success: true }
@@ -223,6 +264,18 @@ export async function rejectPayment(paymentId: string) {
     }
 
     try {
+        const paymentRequest = await prisma.paymentRequest.findUnique({
+            where: { id: paymentId },
+            include: {
+                user: true,
+                service: true,
+            }
+        })
+
+        if (!paymentRequest) {
+            return { error: 'Payment request not found' }
+        }
+
         await prisma.paymentRequest.update({
             where: { id: paymentId },
             data: {
@@ -230,6 +283,16 @@ export async function rejectPayment(paymentId: string) {
                 confirmedBy: user.id,
             },
         })
+
+        // Send decline email to the client
+        console.log('[PAYMENT] Sending declined email to:', paymentRequest.user.email)
+        const declineResult = await sendPaymentDeclinedEmail(
+            paymentRequest.user.email,
+            paymentRequest.user.companyName || 'Client',
+            paymentRequest.service.name,
+            paymentRequest.amount
+        )
+        console.log('[PAYMENT] Decline email result:', declineResult)
 
         revalidatePath('/admin')
         return { success: true }

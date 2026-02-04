@@ -301,7 +301,7 @@ export default async function ServicesPage() {
                                                                 .toFixed(2)
                                                                 }
                                                             </span>
-                                                            <span className="text-lg text-slate-500">€</span>
+                                                            <span className="text-lg text-slate-500">$</span>
                                                             <span className="text-xs text-slate-600 ml-1">
                                                                 paiement unique
                                                             </span>

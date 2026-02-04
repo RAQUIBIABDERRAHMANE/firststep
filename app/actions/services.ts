@@ -3,6 +3,8 @@
 import prisma from '@/lib/prisma'
 import { getCurrentUser } from './auth'
 import { revalidatePath } from 'next/cache'
+import { sendPaymentRequestEmail } from '@/lib/mail'
+import { getBankAccount } from './payments'
 
 export async function getServices() {
     try {
@@ -107,6 +109,28 @@ export async function addUserService(serviceId: string) {
                 expiresAt: expiresAt,
             },
         })
+
+        console.log('[SERVICE] Payment request created, sending email...')
+        
+        // Get bank account details and send email
+        const bankAccount = await getBankAccount()
+        if (bankAccount) {
+            const emailResult = await sendPaymentRequestEmail(
+                user.email,
+                user.companyName || 'Client',
+                service.name,
+                servicePrice,
+                {
+                    accountName: bankAccount.accountName,
+                    accountNumber: bankAccount.iban || '',
+                    rib: bankAccount.rib || '',
+                    bankName: bankAccount.bankName
+                }
+            )
+            console.log('[SERVICE] Email result:', emailResult)
+        } else {
+            console.log('[SERVICE] No bank account found, skipping email')
+        }
 
         revalidatePath('/dashboard')
         revalidatePath('/dashboard/services')

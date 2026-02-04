@@ -82,7 +82,7 @@ export default async function PendingPaymentsPage() {
 
                                     <div className="text-right ml-6">
                                         <div className="text-2xl font-bold text-gray-900">
-                                            {payment.amount.toFixed(2)} €
+                                            {payment.amount.toFixed(2)} $
                                         </div>
                                         <div className="text-sm text-gray-500">
                                             Expire le {expiresAt.toLocaleDateString('fr-FR')}

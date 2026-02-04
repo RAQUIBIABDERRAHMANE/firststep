@@ -304,6 +304,7 @@ model BankAccount {
   id          String  @id @default(cuid())
   accountName String  // Nom du titulaire
   iban        String  // IBAN
+  rib         String? // RIB
   bic         String? // Code BIC/SWIFT
   bankName    String  // Nom de la banque
   isActive    Boolean @default(true)

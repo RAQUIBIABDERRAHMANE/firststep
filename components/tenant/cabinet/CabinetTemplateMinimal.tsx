@@ -87,7 +87,7 @@ export default function CabinetTemplateMinimal({
                                         Clinical
                                     </Badge>
                                     <div className="text-3xl font-black tracking-tighter" style={{ color: primaryColor }}>
-                                        {service.price} DH
+                                        {service.price} MAD
                                     </div>
                                 </div>
                                 <h2 className="text-4xl font-black tracking-tight leading-none group-hover:translate-x-2 transition-transform">

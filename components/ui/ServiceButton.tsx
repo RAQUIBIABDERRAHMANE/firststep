@@ -134,7 +134,7 @@ export default function ServiceButton({ service, userHasService }: ServiceButton
                 {service.status === 'AVAILABLE' && !userHasService && (
                     <div className="text-center">
                         <span className="text-lg font-bold text-blue-600">
-                            {getServicePrice(service.category).toFixed(2)} €
+                            {getServicePrice(service.category).toFixed(2)} $
                         </span>
                         <div className="text-xs text-gray-500">
                             Paiement unique

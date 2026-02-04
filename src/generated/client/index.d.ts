@@ -23297,6 +23297,7 @@ export namespace Prisma {
     id: string | null
     accountName: string | null
     iban: string | null
+    rib: string | null
     bic: string | null
     bankName: string | null
     isActive: boolean | null
@@ -23307,6 +23308,7 @@ export namespace Prisma {
     id: string | null
     accountName: string | null
     iban: string | null
+    rib: string | null
     bic: string | null
     bankName: string | null
     isActive: boolean | null
@@ -23317,6 +23319,7 @@ export namespace Prisma {
     id: number
     accountName: number
     iban: number
+    rib: number
     bic: number
     bankName: number
     isActive: number
@@ -23329,6 +23332,7 @@ export namespace Prisma {
     id?: true
     accountName?: true
     iban?: true
+    rib?: true
     bic?: true
     bankName?: true
     isActive?: true
@@ -23339,6 +23343,7 @@ export namespace Prisma {
     id?: true
     accountName?: true
     iban?: true
+    rib?: true
     bic?: true
     bankName?: true
     isActive?: true
@@ -23349,6 +23354,7 @@ export namespace Prisma {
     id?: true
     accountName?: true
     iban?: true
+    rib?: true
     bic?: true
     bankName?: true
     isActive?: true
@@ -23432,6 +23438,7 @@ export namespace Prisma {
     id: string
     accountName: string
     iban: string
+    rib: string | null
     bic: string | null
     bankName: string
     isActive: boolean
@@ -23459,6 +23466,7 @@ export namespace Prisma {
     id?: boolean
     accountName?: boolean
     iban?: boolean
+    rib?: boolean
     bic?: boolean
     bankName?: boolean
     isActive?: boolean
@@ -23469,6 +23477,7 @@ export namespace Prisma {
     id?: boolean
     accountName?: boolean
     iban?: boolean
+    rib?: boolean
     bic?: boolean
     bankName?: boolean
     isActive?: boolean
@@ -23479,6 +23488,7 @@ export namespace Prisma {
     id?: boolean
     accountName?: boolean
     iban?: boolean
+    rib?: boolean
     bic?: boolean
     bankName?: boolean
     isActive?: boolean
@@ -23489,13 +23499,14 @@ export namespace Prisma {
     id?: boolean
     accountName?: boolean
     iban?: boolean
+    rib?: boolean
     bic?: boolean
     bankName?: boolean
     isActive?: boolean
     createdAt?: boolean
   }
 
-  export type BankAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountName" | "iban" | "bic" | "bankName" | "isActive" | "createdAt", ExtArgs["result"]["bankAccount"]>
+  export type BankAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountName" | "iban" | "rib" | "bic" | "bankName" | "isActive" | "createdAt", ExtArgs["result"]["bankAccount"]>
 
   export type $BankAccountPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "BankAccount"
@@ -23504,6 +23515,7 @@ export namespace Prisma {
       id: string
       accountName: string
       iban: string
+      rib: string | null
       bic: string | null
       bankName: string
       isActive: boolean
@@ -23934,6 +23946,7 @@ export namespace Prisma {
     readonly id: FieldRef<"BankAccount", 'String'>
     readonly accountName: FieldRef<"BankAccount", 'String'>
     readonly iban: FieldRef<"BankAccount", 'String'>
+    readonly rib: FieldRef<"BankAccount", 'String'>
     readonly bic: FieldRef<"BankAccount", 'String'>
     readonly bankName: FieldRef<"BankAccount", 'String'>
     readonly isActive: FieldRef<"BankAccount", 'Boolean'>
@@ -24554,6 +24567,7 @@ export namespace Prisma {
     id: 'id',
     accountName: 'accountName',
     iban: 'iban',
+    rib: 'rib',
     bic: 'bic',
     bankName: 'bankName',
     isActive: 'isActive',
@@ -25904,6 +25918,7 @@ export namespace Prisma {
     id?: StringFilter<"BankAccount"> | string
     accountName?: StringFilter<"BankAccount"> | string
     iban?: StringFilter<"BankAccount"> | string
+    rib?: StringNullableFilter<"BankAccount"> | string | null
     bic?: StringNullableFilter<"BankAccount"> | string | null
     bankName?: StringFilter<"BankAccount"> | string
     isActive?: BoolFilter<"BankAccount"> | boolean
@@ -25914,6 +25929,7 @@ export namespace Prisma {
     id?: SortOrder
     accountName?: SortOrder
     iban?: SortOrder
+    rib?: SortOrderInput | SortOrder
     bic?: SortOrderInput | SortOrder
     bankName?: SortOrder
     isActive?: SortOrder
@@ -25927,6 +25943,7 @@ export namespace Prisma {
     NOT?: BankAccountWhereInput | BankAccountWhereInput[]
     accountName?: StringFilter<"BankAccount"> | string
     iban?: StringFilter<"BankAccount"> | string
+    rib?: StringNullableFilter<"BankAccount"> | string | null
     bic?: StringNullableFilter<"BankAccount"> | string | null
     bankName?: StringFilter<"BankAccount"> | string
     isActive?: BoolFilter<"BankAccount"> | boolean
@@ -25937,6 +25954,7 @@ export namespace Prisma {
     id?: SortOrder
     accountName?: SortOrder
     iban?: SortOrder
+    rib?: SortOrderInput | SortOrder
     bic?: SortOrderInput | SortOrder
     bankName?: SortOrder
     isActive?: SortOrder
@@ -25953,6 +25971,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"BankAccount"> | string
     accountName?: StringWithAggregatesFilter<"BankAccount"> | string
     iban?: StringWithAggregatesFilter<"BankAccount"> | string
+    rib?: StringNullableWithAggregatesFilter<"BankAccount"> | string | null
     bic?: StringNullableWithAggregatesFilter<"BankAccount"> | string | null
     bankName?: StringWithAggregatesFilter<"BankAccount"> | string
     isActive?: BoolWithAggregatesFilter<"BankAccount"> | boolean
@@ -27307,6 +27326,7 @@ export namespace Prisma {
     id?: string
     accountName: string
     iban: string
+    rib?: string | null
     bic?: string | null
     bankName: string
     isActive?: boolean
@@ -27317,6 +27337,7 @@ export namespace Prisma {
     id?: string
     accountName: string
     iban: string
+    rib?: string | null
     bic?: string | null
     bankName: string
     isActive?: boolean
@@ -27327,6 +27348,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     accountName?: StringFieldUpdateOperationsInput | string
     iban?: StringFieldUpdateOperationsInput | string
+    rib?: NullableStringFieldUpdateOperationsInput | string | null
     bic?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -27337,6 +27359,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     accountName?: StringFieldUpdateOperationsInput | string
     iban?: StringFieldUpdateOperationsInput | string
+    rib?: NullableStringFieldUpdateOperationsInput | string | null
     bic?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -27347,6 +27370,7 @@ export namespace Prisma {
     id?: string
     accountName: string
     iban: string
+    rib?: string | null
     bic?: string | null
     bankName: string
     isActive?: boolean
@@ -27357,6 +27381,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     accountName?: StringFieldUpdateOperationsInput | string
     iban?: StringFieldUpdateOperationsInput | string
+    rib?: NullableStringFieldUpdateOperationsInput | string | null
     bic?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -27367,6 +27392,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     accountName?: StringFieldUpdateOperationsInput | string
     iban?: StringFieldUpdateOperationsInput | string
+    rib?: NullableStringFieldUpdateOperationsInput | string | null
     bic?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -28444,6 +28470,7 @@ export namespace Prisma {
     id?: SortOrder
     accountName?: SortOrder
     iban?: SortOrder
+    rib?: SortOrder
     bic?: SortOrder
     bankName?: SortOrder
     isActive?: SortOrder
@@ -28454,6 +28481,7 @@ export namespace Prisma {
     id?: SortOrder
     accountName?: SortOrder
     iban?: SortOrder
+    rib?: SortOrder
     bic?: SortOrder
     bankName?: SortOrder
     isActive?: SortOrder
@@ -28464,6 +28492,7 @@ export namespace Prisma {
     id?: SortOrder
     accountName?: SortOrder
     iban?: SortOrder
+    rib?: SortOrder
     bic?: SortOrder
     bankName?: SortOrder
     isActive?: SortOrder

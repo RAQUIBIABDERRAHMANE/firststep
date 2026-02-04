@@ -13,7 +13,8 @@ async function updateBankAccount() {
             const newAccount = await prisma.bankAccount.create({
                 data: {
                     accountName: 'Abderrahmane Raquibi',
-                    iban: 'MA64350810000000001335098279',
+                    iban: '0000000013350982',
+                    rib: '350810000000001335098279',
                     bankName: 'AL BARID BANK'
                 }
             })
@@ -27,7 +28,8 @@ async function updateBankAccount() {
                 where: { id: existingAccount.id },
                 data: {
                     accountName: 'Abderrahmane Raquibi',
-                    iban: 'MA64350810000000001335098279',
+                    iban: '0000000013350982',
+                    rib: '350810000000001335098279',
                     bankName: 'AL BARID BANK',
                     bic: null
                 }
@@ -42,7 +44,7 @@ async function updateBankAccount() {
         console.log('\n📋 New Bank Details:')
         console.log('   Titulaire: Abderrahmane Raquibi')
         console.log('   RIB: 350810000000001335098279')
-        console.log('   IBAN: MA64 350 810 0000000013350982 79')
+        console.log('   Numéro de compte: 0000000013350982')
         console.log('   Bank Name: AL BARID BANK')
 
     } catch (error) {

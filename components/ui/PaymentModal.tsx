@@ -25,6 +25,7 @@ interface PaymentModalProps {
     bankAccount: {
         accountName: string
         iban: string
+        rib?: string | null
         bic?: string | null
         bankName: string
     }
@@ -136,7 +137,7 @@ export default function PaymentModal({ isOpen, onClose, paymentRequest, bankAcco
                                     <div className="flex justify-between items-center">
                                         <span className="text-lg font-semibold text-gray-900">Montant total</span>
                                         <span className="text-3xl font-bold text-blue-600">
-                                            {paymentRequest.amount.toFixed(2)} €
+                                            {paymentRequest.amount.toFixed(2)} $
                                         </span>
                                     </div>
                                 </div>
@@ -167,30 +168,30 @@ export default function PaymentModal({ isOpen, onClose, paymentRequest, bankAcco
 
                                 <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                                     <div>
-                                        <div className="text-sm text-gray-600">IBAN</div>
+                                        <div className="text-sm text-gray-600">Numéro de compte</div>
                                         <div className="font-mono font-medium break-all">{bankAccount.iban}</div>
                                     </div>
                                     <Button
                                         variant="ghost"
                                         size="sm"
-                                        onClick={() => copyToClipboard(bankAccount.iban, 'iban')}
+                                        onClick={() => copyToClipboard(bankAccount.iban, 'account')}
                                     >
-                                        {copied === 'iban' ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                                        {copied === 'account' ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                                     </Button>
                                 </div>
 
-                                {bankAccount.bic && (
+                                {bankAccount.rib && (
                                     <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                                         <div>
-                                            <div className="text-sm text-gray-600">Code BIC/SWIFT</div>
-                                            <div className="font-mono font-medium">{bankAccount.bic}</div>
+                                            <div className="text-sm text-gray-600">RIB</div>
+                                            <div className="font-mono font-medium break-all">{bankAccount.rib}</div>
                                         </div>
                                         <Button
                                             variant="ghost"
                                             size="sm"
-                                            onClick={() => copyToClipboard(bankAccount.bic!, 'bic')}
+                                            onClick={() => copyToClipboard(bankAccount.rib!, 'rib')}
                                         >
-                                            {copied === 'bic' ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                                            {copied === 'rib' ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                                         </Button>
                                     </div>
                                 )}

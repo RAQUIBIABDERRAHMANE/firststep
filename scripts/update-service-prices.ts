@@ -27,7 +27,7 @@ async function updateServicePrices() {
                         icon: priceInfo.icon
                     }
                 })
-                console.log(`✅ Updated ${service.name}: €${priceInfo.price}`)
+                console.log(`✅ Updated ${service.name}: $${priceInfo.price}`)
             } else {
                 console.log(`⚠️ No price found for ${service.name}`)
             }

@@ -154,7 +154,7 @@ export default function AdminServiceControl({
                                         </p>
                                         {us.service.price && (
                                             <p className="text-xs font-semibold text-primary mt-1">
-                                                €{us.service.price.toFixed(2)}
+                                                ${us.service.price.toFixed(2)}
                                             </p>
                                         )}
                                     </div>
@@ -193,7 +193,7 @@ export default function AdminServiceControl({
                                         </p>
                                         {service.price && (
                                             <p className="text-xs font-semibold text-primary mt-1">
-                                                €{service.price.toFixed(2)}
+                                                ${service.price.toFixed(2)}
                                             </p>
                                         )}
                                         {service.status === 'COMING_SOON' && (
@@ -234,7 +234,7 @@ export default function AdminServiceControl({
                                     <div className="flex-1">
                                         <h4 className="font-medium text-sm">{payment.service.name}</h4>
                                         <p className="text-xs text-muted-foreground mt-1">
-                                            Amount: €{payment.amount} • Created: {new Date(payment.createdAt).toLocaleDateString()}
+                                            Amount: ${payment.amount} • Created: {new Date(payment.createdAt).toLocaleDateString()}
                                         </p>
                                         {payment.transferReference && (
                                             <p className="text-xs text-muted-foreground mt-1">
@@ -243,7 +243,7 @@ export default function AdminServiceControl({
                                         )}
                                     </div>
                                     <div className="text-right">
-                                        <p className="text-sm font-semibold">€{payment.amount}</p>
+                                        <p className="text-sm font-semibold">${payment.amount}</p>
                                         <p className="text-xs text-muted-foreground">
                                             Expires: {new Date(payment.expiresAt).toLocaleDateString()}
                                         </p>

@@ -159,7 +159,7 @@ export default function BookingFlow({
                                     </div>
                                     <div>
                                         <h3 className="font-bold">{service.name}</h3>
-                                        <p className="text-sm text-slate-500">{service.duration} mins • {service.price} DH</p>
+                                        <p className="text-sm text-slate-500">{service.duration} mins • {service.price} MAD</p>
                                     </div>
                                 </div>
                                 {selectedServiceId === service.id && (
@@ -272,7 +272,7 @@ export default function BookingFlow({
                                 <p><strong>Service:</strong> {selectedService?.name}</p>
                                 <p><strong>Date:</strong> {selectedDate} at {selectedTime}</p>
                                 <p><strong>Duration:</strong> {selectedService?.duration} minutes</p>
-                                <p><strong>Price:</strong> {selectedService?.price} DH</p>
+                                <p><strong>Price:</strong> {selectedService?.price} MAD</p>
                             </div>
                         </div>
                     </div>

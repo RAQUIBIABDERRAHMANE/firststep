@@ -13,6 +13,7 @@ type Service = {
     description: string | null
     status: string
     category: string | null
+    price: number | null
 }
 
 interface ServicesOverviewProps {
@@ -147,10 +148,10 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
                                     {isAvailable ? (
                                         <div className="space-y-4">
                                             <div className="flex items-baseline gap-2">
-                                                <span className="text-3xl font-bold text-white">2,500</span>
-                                                <span className="text-slate-500 font-medium">DH</span>
+                                                <span className="text-3xl font-bold text-white">{service.price?.toFixed(0) || '0'}</span>
+                                                <span className="text-slate-500 font-medium">MAD</span>
                                                 <span className="text-xs text-slate-600 ml-1">
-                                                    {service.slug === 'restaurant-website' ? '/ à vie' : '/ mois'}
+                                                    {service.slug === 'restaurant-website' ? '/ lifetime' : '/ month'}
                                                 </span>
                                             </div>
                                             

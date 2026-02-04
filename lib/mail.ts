@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import { getWelcomeEmailTemplate } from './email/templates';
+import { getWelcomeEmailTemplate, getPaymentRequestTemplate, getPaymentApprovedTemplate, getPaymentDeclinedTemplate } from './email/templates';
 
 const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
@@ -62,6 +62,133 @@ export async function sendResetCodeEmail(email: string, code: string) {
         return { success: true };
     } catch (error) {
         console.error('[MAILER] Error sending reset email:', error);
+        return { success: false, error };
+    }
+}
+
+export async function sendPaymentRequestEmail(
+    email: string,
+    companyName: string,
+    serviceName: string,
+    amount: number,
+    bankDetails: {
+        accountName: string;
+        accountNumber: string;
+        rib: string;
+        bankName: string;
+    }
+) {
+    console.log('🔍 [MAILER DEBUG] sendPaymentRequestEmail called');
+    console.log('   EMAIL_HOST:', process.env.EMAIL_HOST);
+    console.log('   EMAIL_USER:', process.env.EMAIL_USER);
+    console.log('   EMAIL_PASS exists:', !!process.env.EMAIL_PASS);
+    
+    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
+        console.log('⚠️  [MAILER] Email configuration missing:');
+        console.log(`   EMAIL_USER: ${process.env.EMAIL_USER ? '✓' : '✗'}`);
+        console.log(`   EMAIL_PASS: ${process.env.EMAIL_PASS ? '✓' : '✗'}`);
+        console.log(`   EMAIL_PASSWORD: ${process.env.EMAIL_PASSWORD ? '✓' : '✗'}`);
+        console.log('--------------------------------------------------');
+        console.log(`[MAILER] PAYMENT REQUEST EMAIL`);
+        console.log(`[MAILER] TO: ${email}`);
+        console.log(`[MAILER] Service: ${serviceName} - ${amount} MAD`);
+        console.log('--------------------------------------------------');
+        return { success: true, logged: true };
+    }
+
+    console.log('📧 [MAILER] Sending payment request email...');
+    console.log(`   To: ${email}`);
+    console.log(`   Service: ${serviceName}`);
+    console.log(`   Amount: ${amount} MAD`);
+
+    try {
+        const html = getPaymentRequestTemplate(companyName, serviceName, amount, bankDetails);
+
+        await transporter.sendMail({
+            from: `"FirstStep SaaS" <${process.env.EMAIL_USER}>`,
+            to: email,
+            subject: `Demande de Paiement - ${serviceName}`,
+            html: html,
+        });
+
+        console.log('✅ [MAILER] Payment request email sent successfully!');
+        return { success: true };
+    } catch (error) {
+        console.error('❌ [MAILER] Error sending payment request email:', error);
+        return { success: false, error };
+    }
+}
+
+export async function sendPaymentApprovedEmail(
+    email: string,
+    companyName: string,
+    serviceName: string,
+    amount: number
+) {
+    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
+        console.log('⚠️  [MAILER] Email configuration missing (Approved)');
+        console.log('--------------------------------------------------');
+        console.log(`[MAILER] PAYMENT APPROVED EMAIL`);
+        console.log(`[MAILER] TO: ${email}`);
+        console.log(`[MAILER] Service: ${serviceName} - ${amount} MAD`);
+        console.log('--------------------------------------------------');
+        return { success: true, logged: true };
+    }
+
+    console.log('📧 [MAILER] Sending payment approved email...');
+    console.log(`   To: ${email}`);
+
+    try {
+        const html = getPaymentApprovedTemplate(companyName, serviceName, amount);
+
+        await transporter.sendMail({
+            from: `"FirstStep SaaS" <${process.env.EMAIL_USER}>`,
+            to: email,
+            subject: `✓ Paiement Approuvé - ${serviceName}`,
+            html: html,
+        });
+
+        console.log('✅ [MAILER] Payment approved email sent successfully!');
+        return { success: true };
+    } catch (error) {
+        console.error('❌ [MAILER] Error sending payment approved email:', error);
+        return { success: false, error };
+    }
+}
+
+export async function sendPaymentDeclinedEmail(
+    email: string,
+    companyName: string,
+    serviceName: string,
+    amount: number
+) {
+    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
+        console.log('⚠️  [MAILER] Email configuration missing (Declined)');
+        console.log('--------------------------------------------------');
+        console.log(`[MAILER] PAYMENT DECLINED EMAIL`);
+        console.log(`[MAILER] TO: ${email}`);
+        console.log(`[MAILER] Service: ${serviceName} - ${amount} MAD`);
+        console.log('--------------------------------------------------');
+        return { success: true, logged: true };
+    }
+
+    console.log('📧 [MAILER] Sending payment declined email...');
+    console.log(`   To: ${email}`);
+
+    try {
+        const html = getPaymentDeclinedTemplate(companyName, serviceName, amount);
+
+        await transporter.sendMail({
+            from: `"FirstStep SaaS" <${process.env.EMAIL_USER}>`,
+            to: email,
+            subject: `Demande de Paiement - ${serviceName}`,
+            html: html,
+        });
+
+        console.log('✅ [MAILER] Payment declined email sent successfully!');
+        return { success: true };
+    } catch (error) {
+        console.error('❌ [MAILER] Error sending payment declined email:', error);
         return { success: false, error };
     }
 }

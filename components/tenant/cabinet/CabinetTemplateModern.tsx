@@ -23,7 +23,7 @@ export default function CabinetTemplateModern({
     const phone = config.phone || ''
     const email = config.email || ''
     const address = config.address || ''
-    const CURRENCY = config.currency || 'DH'
+    const CURRENCY = config.currency || 'MAD'
 
     return (
         <div className="min-h-screen bg-white font-sans selection:bg-slate-900 selection:text-white">

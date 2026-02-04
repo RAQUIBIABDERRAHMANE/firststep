@@ -97,7 +97,7 @@ export default async function UserPayments() {
                                 
                                 <div className="text-right">
                                     <div className="text-xl font-bold text-gray-900 mb-2">
-                                        {payment.amount.toFixed(2)} €
+                                        {payment.amount.toFixed(2)} $
                                     </div>
                                     <Badge className={`border ${getStatusColor(isExpired ? 'EXPIRED' : payment.status)}`}>
                                         <div className="flex items-center gap-1">

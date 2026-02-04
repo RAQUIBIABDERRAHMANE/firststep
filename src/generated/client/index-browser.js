@@ -304,6 +304,7 @@ exports.Prisma.BankAccountScalarFieldEnum = {
   id: 'id',
   accountName: 'accountName',
   iban: 'iban',
+  rib: 'rib',
   bic: 'bic',
   bankName: 'bankName',
   isActive: 'isActive',

@@ -124,7 +124,7 @@ export default function CabinetServicesClient({ services, tenantId, tenantSlug }
                                         <DollarSign className="h-4 w-4" />
                                         <span>Price</span>
                                     </div>
-                                    <span className="font-semibold">{service.price} DH</span>
+                                    <span className="font-semibold">{service.price} MAD</span>
                                 </div>
                                 <div className="flex items-center justify-between text-sm">
                                     <div className="flex items-center gap-2 text-muted-foreground">
@@ -194,7 +194,7 @@ export default function CabinetServicesClient({ services, tenantId, tenantSlug }
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label className="text-sm font-medium">Price (DH)</label>
+                                        <label className="text-sm font-medium">Price (MAD)</label>
                                         <input
                                             type="number"
                                             step="0.01"

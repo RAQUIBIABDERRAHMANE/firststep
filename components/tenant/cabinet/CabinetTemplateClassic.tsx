@@ -331,7 +331,7 @@ export default function CabinetTemplateClassic({
                                                 <span className="text-2xl font-bold" style={{ color: primaryColor }}>
                                                     {service.price}
                                                 </span>
-                                                <span className="text-sm text-slate-400 font-medium">DH</span>
+                                                <span className="text-sm text-slate-400 font-medium">MAD</span>
                                             </div>
                                         </div>
 
