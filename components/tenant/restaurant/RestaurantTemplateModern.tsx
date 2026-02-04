@@ -281,7 +281,7 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                                         <img src={item.image || ''} className="h-16 w-16 rounded-lg object-cover" alt="" />
                                         <div className="flex-1">
                                             <h4 className="font-medium">{item.name}</h4>
-                                            <span className="text-[var(--primary)]">${item.price}</span>
+                                            <span className="text-[var(--primary)]">{item.price} MAD</span>
                                         </div>
                                         <div className="flex items-center gap-2 bg-black/30 rounded-lg p-1">
                                             <button onClick={() => updateQuantity(item.id, -1)} className="p-2 hover:text-[var(--primary)]">
@@ -300,7 +300,7 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                             <div className="p-6 border-t border-white/10 bg-black/30">
                                 <div className="flex justify-between items-center mb-6">
                                     <span className="text-zinc-400">Total</span>
-                                    <span className="text-3xl font-light">${totalPrice.toFixed(2)}</span>
+                                    <span className="text-3xl font-light">{totalPrice.toFixed(2)} MAD</span>
                                 </div>
                                 <Button
                                     onClick={handlePlaceOrder}

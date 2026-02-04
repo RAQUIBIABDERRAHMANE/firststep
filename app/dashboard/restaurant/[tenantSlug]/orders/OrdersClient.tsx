@@ -146,14 +146,14 @@ export default function OrdersClient({ initialOrders, tenantSlug }: { initialOrd
                                                         </span>
                                                         <span className="font-bold text-slate-900">{item.name}</span>
                                                     </div>
-                                                    <span className="text-sm font-black text-slate-400">${(item.price * item.quantity).toFixed(2)}</span>
+                                                    <span className="text-sm font-black text-slate-400">{(item.price * item.quantity).toFixed(2)} MAD</span>
                                                 </div>
                                             ))}
                                         </div>
 
                                         <div className="pt-6 border-t border-slate-100 flex justify-between items-center">
                                             <span className="text-slate-400 font-bold text-sm uppercase tracking-widest">Total Amount</span>
-                                            <span className="text-3xl font-black tracking-tighter text-blue-600">${order.totalAmount.toFixed(2)}</span>
+                                            <span className="text-3xl font-black tracking-tighter text-blue-600">{order.totalAmount.toFixed(0)} MAD</span>
                                         </div>
 
                                         <div className="pt-6 grid grid-cols-2 md:grid-cols-4 gap-3">

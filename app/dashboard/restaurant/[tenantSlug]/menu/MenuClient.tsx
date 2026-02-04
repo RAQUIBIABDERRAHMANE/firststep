@@ -364,7 +364,7 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
                                                         />
                                                     </div>
                                                     <div className="space-y-2">
-                                                        <label className="text-xs font-black text-slate-400 uppercase ml-1">Price ($)</label>
+                                                        <label className="text-xs font-black text-slate-400 uppercase ml-1">Price (MAD)</label>
                                                         <div className="relative">
                                                             <DollarSign size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
                                                             <Input

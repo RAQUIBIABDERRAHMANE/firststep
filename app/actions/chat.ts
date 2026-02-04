@@ -37,7 +37,7 @@ async function getRestaurantContext() {
         ])
 
         const menuSummary = categories.map((cat: any) =>
-            `${cat.name}: ${cat.dishes?.map((d: any) => `${d.name} ($${d.price})`).join(', ') || 'No dishes'}`
+            `${cat.name}: ${cat.dishes?.map((d: any) => `${d.name} (${d.price} MAD)`).join(', ') || 'No dishes'}`
         ).join('\n')
 
         const orderStats = {
@@ -80,7 +80,7 @@ async function getCabinetContext() {
         ])
 
         return {
-            serviceSummary: servicesRes.map((s: any) => `${s.name} ($${s.price})`).join(', '),
+            serviceSummary: servicesRes.map((s: any) => `${s.name} (${s.price} MAD)`).join(', '),
             clientCount: clientsRes.length,
             appointmentStats: {
                 total: appointmentsRes.length,
@@ -195,7 +195,7 @@ export async function chat(messages: Message[]) {
 Restaurant Context:
 - Menu: ${restContext.menuSummary || 'No items'}
 - Tables: ${restContext.activeTables}/${restContext.tableCount}
-- Orders: ${restContext.orderStats.total} total ($${restContext.orderStats.totalRevenue.toFixed(2)})
+- Orders: ${restContext.orderStats.total} total (${restContext.orderStats.totalRevenue.toFixed(0)} MAD)
 `
             }
         }

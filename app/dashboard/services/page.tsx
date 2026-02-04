@@ -12,7 +12,7 @@ export default async function ServicesPage() {
     const userServices = await getUserServices()
 
     // Create a map of selected services for ID lookup
-    const selectedServiceIds: Set<string> = new Set(userServices.map((us: any) => us.serviceId))
+    const selectedServiceIds: Set<string> = new Set(userServices.map((us: { serviceId: string }) => us.serviceId))
 
     return (
         <div className="flex flex-col gap-6">

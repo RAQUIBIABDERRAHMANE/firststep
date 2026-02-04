@@ -138,7 +138,7 @@ export function ServiceList({ allServices, selectedServiceIds }: ServiceListProp
                                 <CardDescription>{service.description}</CardDescription>
                                 {service.price && service.status === 'AVAILABLE' && (
                                     <p className="text-lg font-semibold text-primary mt-2">
-                                        ${service.price.toFixed(2)}
+                                        {service.price.toFixed(0)} MAD
                                     </p>
                                 )}
                             </CardHeader>

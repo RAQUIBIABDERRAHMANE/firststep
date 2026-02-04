@@ -289,19 +289,19 @@ export default async function ServicesPage() {
                                                             <span className="text-4xl font-bold text-white">
                                                                 {(() => {
                                                                     const prices: Record<string, number> = {
-                                                                        'restaurant': 299.00,
-                                                                        'professional-services': 199.00,
-                                                                        'inventory': 149.00,
-                                                                        'rental': 249.00,
-                                                                        'hospitality': 399.00,
-                                                                        'healthcare': 349.00,
+                                                                        'restaurant': 2990,
+                                                                        'professional-services': 1990,
+                                                                        'inventory': 1490,
+                                                                        'rental': 2490,
+                                                                        'hospitality': 3990,
+                                                                        'healthcare': 4490,
                                                                     }
-                                                                    return prices[service.category || ''] || 99.00
+                                                                    return prices[service.category || ''] || 990
                                                                 })()
-                                                                .toFixed(2)
+                                                                .toFixed(0)
                                                                 }
                                                             </span>
-                                                            <span className="text-lg text-slate-500">$</span>
+                                                            <span className="text-lg text-slate-500">MAD</span>
                                                             <span className="text-xs text-slate-600 ml-1">
                                                                 paiement unique
                                                             </span>

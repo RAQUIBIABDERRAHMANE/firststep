@@ -137,7 +137,7 @@ export default function PaymentModal({ isOpen, onClose, paymentRequest, bankAcco
                                     <div className="flex justify-between items-center">
                                         <span className="text-lg font-semibold text-gray-900">Montant total</span>
                                         <span className="text-3xl font-bold text-blue-600">
-                                            {paymentRequest.amount.toFixed(2)} $
+                                            {paymentRequest.amount.toFixed(0)} MAD
                                         </span>
                                     </div>
                                 </div>
