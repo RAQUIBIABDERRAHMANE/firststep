@@ -14,8 +14,8 @@ async function main() {
 
     console.log(`Connecting to Turso: ${url}`);
     const client = createClient({
-        url,
-        authToken,
+        url: url!,
+        authToken: authToken!,
     });
 
     try {

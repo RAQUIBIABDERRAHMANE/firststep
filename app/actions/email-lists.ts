@@ -178,14 +178,41 @@ export async function addMembersToList(listId: string, members: Array<{ userId?:
     }
 
     try {
+        // 1. Fetch existing members for this list to filter duplicates
+        // We need to check both userId and email collision
+        const existingMembers = await prisma.emailListMember.findMany({
+            where: {
+                listId,
+                OR: [
+                    { userId: { in: members.map(m => m.userId).filter(Boolean) as string[] } },
+                    { email: { in: members.map(m => m.email).filter(Boolean) as string[] } }
+                ]
+            },
+            select: { userId: true, email: true }
+        })
+
+        const existingUserIds = new Set(existingMembers.map(m => m.userId).filter(Boolean))
+        const existingEmails = new Set(existingMembers.map(m => m.email).filter(Boolean))
+
+        // 2. Filter out duplicates
+        const newMembers = members.filter(member => {
+            if (member.userId && existingUserIds.has(member.userId)) return false
+            if (member.email && existingEmails.has(member.email)) return false
+            return true
+        })
+
+        if (newMembers.length === 0) {
+            return { success: true, message: 'No new members to add' }
+        }
+
+        // 3. Create new members
         await prisma.emailListMember.createMany({
-            data: members.map(member => ({
+            data: newMembers.map(member => ({
                 listId,
                 userId: member.userId,
                 email: member.email,
                 name: member.name
-            })),
-            skipDuplicates: true
+            }))
         })
 
         revalidatePath(`/admin/email-lists/${listId}`)

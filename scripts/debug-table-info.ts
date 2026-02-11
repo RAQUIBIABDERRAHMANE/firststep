@@ -8,8 +8,8 @@ async function main() {
     const authToken = process.env.TURSO_AUTH_TOKEN;
 
     const client = createClient({
-        url,
-        authToken,
+        url: url!,
+        authToken: authToken!,
     });
 
     try {
