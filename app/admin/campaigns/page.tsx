@@ -26,12 +26,20 @@ export default async function CampaignsPage() {
                         Manage and send email broadcasts to your users.
                     </p>
                 </div>
-                <Link href="/admin/campaigns/new">
-                    <Button className="w-full md:w-auto">
-                        <Plus className="mr-2 h-4 w-4" />
-                        New Campaign
-                    </Button>
-                </Link>
+                <div className="flex gap-2">
+                    <Link href="/admin/email-lists">
+                        <Button variant="outline" className="w-full md:w-auto">
+                            <Mail className="mr-2 h-4 w-4" />
+                            Manage Lists
+                        </Button>
+                    </Link>
+                    <Link href="/admin/campaigns/new">
+                        <Button className="w-full md:w-auto">
+                            <Plus className="mr-2 h-4 w-4" />
+                            New Campaign
+                        </Button>
+                    </Link>
+                </div>
             </div>
 
             <Card className="border-border/50 shadow-sm">
@@ -92,16 +100,33 @@ export default async function CampaignsPage() {
                                                             <Eye className="h-4 w-4" />
                                                         </Button>
                                                     </Link>
-                                                    {campaign.status === 'DRAFT' && (
-                                                        <form action={async () => {
-                                                            'use server'
-                                                            await deleteCampaign(campaign.id)
-                                                        }}>
-                                                            <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive hover:bg-destructive/10" title="Delete">
-                                                                <Trash2 className="h-4 w-4" />
+                                                    {(campaign.status === 'DRAFT' || campaign.status === 'SCHEDULED') && (
+                                                        <Link href={`/admin/campaigns/${campaign.id}/edit`}>
+                                                            <Button variant="ghost" size="icon" title="Edit">
+                                                                <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 24 24"
+                                                                    fill="none"
+                                                                    stroke="currentColor"
+                                                                    strokeWidth="2"
+                                                                    strokeLinecap="round"
+                                                                    strokeLinejoin="round"
+                                                                    className="h-4 w-4"
+                                                                >
+                                                                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+                                                                </svg>
                                                             </Button>
-                                                        </form>
+                                                        </Link>
                                                     )}
+
+                                                    <form action={async () => {
+                                                        'use server'
+                                                        await deleteCampaign(campaign.id)
+                                                    }}>
+                                                        <Button variant="ghost" size="icon" className="text-destructive hover:text-destructive hover:bg-destructive/10" title="Delete">
+                                                            <Trash2 className="h-4 w-4" />
+                                                        </Button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>

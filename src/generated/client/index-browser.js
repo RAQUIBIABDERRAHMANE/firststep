@@ -123,7 +123,8 @@ exports.Prisma.UserScalarFieldEnum = {
   password: 'password',
   companyName: 'companyName',
   role: 'role',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  unsubscribed: 'unsubscribed'
 };
 
 exports.Prisma.ChatSessionScalarFieldEnum = {
@@ -322,7 +323,28 @@ exports.Prisma.CampaignScalarFieldEnum = {
   recipientCount: 'recipientCount',
   successCount: 'successCount',
   failureCount: 'failureCount',
-  selectedRecipients: 'selectedRecipients'
+  selectedRecipients: 'selectedRecipients',
+  emailListIds: 'emailListIds',
+  scheduledAt: 'scheduledAt',
+  attachments: 'attachments'
+};
+
+exports.Prisma.EmailListScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EmailListMemberScalarFieldEnum = {
+  id: 'id',
+  listId: 'listId',
+  userId: 'userId',
+  email: 'email',
+  name: 'name',
+  createdAt: 'createdAt',
+  unsubscribed: 'unsubscribed'
 };
 
 exports.Prisma.SortOrder = {
@@ -356,7 +378,9 @@ exports.Prisma.ModelName = {
   CabinetAppointment: 'CabinetAppointment',
   PaymentRequest: 'PaymentRequest',
   BankAccount: 'BankAccount',
-  Campaign: 'Campaign'
+  Campaign: 'Campaign',
+  EmailList: 'EmailList',
+  EmailListMember: 'EmailListMember'
 };
 
 /**

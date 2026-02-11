@@ -9,17 +9,19 @@ datasource db {
 }
 
 model User {
-  id              String           @id @default(cuid())
-  email           String           @unique
-  password        String
-  companyName     String
-  role            String           @default("CLIENT")
-  createdAt       DateTime         @default(now())
-  chatSessions    ChatSession[]
-  notifications   Notification[]
-  paymentRequests PaymentRequest[]
-  websites        TenantWebsite[]
-  services        UserService[]
+  id               String            @id @default(cuid())
+  email            String            @unique
+  password         String
+  companyName      String
+  role             String            @default("CLIENT")
+  createdAt        DateTime          @default(now())
+  chatSessions     ChatSession[]
+  notifications    Notification[]
+  paymentRequests  PaymentRequest[]
+  emailListMembers EmailListMember[]
+  websites         TenantWebsite[]
+  services         UserService[]
+  unsubscribed     Boolean           @default(false)
 }
 
 model ChatSession {
@@ -295,4 +297,31 @@ model Campaign {
   successCount       Int       @default(0)
   failureCount       Int       @default(0)
   selectedRecipients String    @default("[]")
+  emailListIds       String    @default("[]")
+  scheduledAt        DateTime?
+  attachments        String?   @default("[]")
+}
+
+model EmailList {
+  id          String            @id @default(cuid())
+  name        String
+  description String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  members     EmailListMember[]
+}
+
+model EmailListMember {
+  id           String    @id @default(cuid())
+  listId       String
+  list         EmailList @relation(fields: [listId], references: [id], onDelete: Cascade)
+  userId       String?
+  user         User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  email        String?
+  name         String?
+  createdAt    DateTime  @default(now())
+  unsubscribed Boolean   @default(false)
+
+  @@unique([listId, userId])
+  @@unique([listId, email])
 }

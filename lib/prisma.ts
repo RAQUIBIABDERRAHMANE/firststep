@@ -49,7 +49,7 @@ function createPrismaClient() {
     return new PrismaClient();
 }
 
-const PRISMA_DEV_KEY = 'prisma_v18_unified'
+const PRISMA_DEV_KEY = 'prisma_v19_unified_campaign_fix'
 const g = globalThis as any
 let prisma: PrismaClient;
 
@@ -62,11 +62,18 @@ if (process.env.NODE_ENV === 'production') {
     prisma = g[PRISMA_DEV_KEY]
 
     // Diagnostic check
-    if (!(prisma as any).chatSession) {
-        console.warn('[Prisma] chatSession MISSING in cached instance. Re-initializing...');
+    if (!(prisma as any).chatSession || !(prisma as any).emailList) {
+        console.warn('[Prisma] chatSession or emailList MISSING in cached instance. Re-initializing...');
         g[PRISMA_DEV_KEY] = createPrismaClient();
         prisma = g[PRISMA_DEV_KEY];
     }
+}
+
+console.log('[Prisma Debug] Keys on prisma instance:', Object.keys(prisma || {}));
+if (!(prisma as any).emailList) {
+    console.error('[Prisma CRITICAL] emailList is MISSING on prisma instance!');
+} else {
+    console.log('[Prisma Debug] emailList exists on prisma instance.');
 }
 
 export default prisma

@@ -39,7 +39,7 @@ export async function sendWelcomeEmail(email: string, companyName: string) {
     }
 }
 
-export async function sendHtmlEmail(to: string, subject: string, html: string) {
+export async function sendHtmlEmail(to: string, subject: string, html: string, attachments?: any[]) {
     if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
         console.warn('[MAILER] WARNING: Email credentials missing in environment variables.');
         return { success: false, error: 'Configuration missing' };
@@ -51,6 +51,7 @@ export async function sendHtmlEmail(to: string, subject: string, html: string) {
             to,
             subject,
             html,
+            attachments,
         });
         return { success: true };
     } catch (error) {

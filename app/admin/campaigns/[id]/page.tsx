@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/Button'
 import { ChevronLeft, Send, Users, CheckCircle, XCircle, AlertCircle } from 'lucide-react'
 import { RecipientSelectorWrapper } from './RecipientSelectorWrapper'
+import { EmailListSelector } from './EmailListSelector'
 
 export default async function CampaignDetailsPage({
     params,
@@ -25,9 +26,10 @@ export default async function CampaignDetailsPage({
         redirect('/admin/campaigns')
     }
 
-    // Parse selected recipients
+    // Parse selected recipients and email lists
     const selectedRecipients = JSON.parse(campaign.selectedRecipients || '[]')
-    const hasRecipients = selectedRecipients.length > 0
+    const selectedEmailListIds = JSON.parse(campaign.emailListIds || '[]')
+    const hasRecipients = selectedRecipients.length > 0 || selectedEmailListIds.length > 0
 
     return (
         <div className="space-y-8 animate-fade-in max-w-4xl mx-auto">
@@ -79,10 +81,17 @@ export default async function CampaignDetailsPage({
             </div>
 
             {campaign.status === 'DRAFT' && (
-                <RecipientSelectorWrapper
-                    campaignId={campaign.id}
-                    initialSelectedIds={selectedRecipients}
-                />
+                <>
+                    <EmailListSelector
+                        campaignId={campaign.id}
+                        initialSelectedListIds={selectedEmailListIds}
+                    />
+
+                    <RecipientSelectorWrapper
+                        campaignId={campaign.id}
+                        initialSelectedIds={selectedRecipients}
+                    />
+                </>
             )}
 
             <div className="grid gap-6 md:grid-cols-3">
