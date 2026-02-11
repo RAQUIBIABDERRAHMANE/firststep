@@ -158,9 +158,9 @@ exports.Prisma.ServiceScalarFieldEnum = {
   description: 'description',
   status: 'status',
   category: 'category',
-  price: 'price',
+  createdAt: 'createdAt',
   icon: 'icon',
-  createdAt: 'createdAt'
+  price: 'price'
 };
 
 exports.Prisma.UserServiceScalarFieldEnum = {
@@ -168,8 +168,8 @@ exports.Prisma.UserServiceScalarFieldEnum = {
   userId: 'userId',
   serviceId: 'serviceId',
   notify: 'notify',
-  isActive: 'isActive',
-  selectedAt: 'selectedAt'
+  selectedAt: 'selectedAt',
+  isActive: 'isActive'
 };
 
 exports.Prisma.PasswordResetScalarFieldEnum = {
@@ -304,11 +304,25 @@ exports.Prisma.BankAccountScalarFieldEnum = {
   id: 'id',
   accountName: 'accountName',
   iban: 'iban',
-  rib: 'rib',
   bic: 'bic',
   bankName: 'bankName',
   isActive: 'isActive',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  rib: 'rib'
+};
+
+exports.Prisma.CampaignScalarFieldEnum = {
+  id: 'id',
+  subject: 'subject',
+  content: 'content',
+  status: 'status',
+  sentAt: 'sentAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  recipientCount: 'recipientCount',
+  successCount: 'successCount',
+  failureCount: 'failureCount',
+  selectedRecipients: 'selectedRecipients'
 };
 
 exports.Prisma.SortOrder = {
@@ -341,7 +355,8 @@ exports.Prisma.ModelName = {
   CabinetClient: 'CabinetClient',
   CabinetAppointment: 'CabinetAppointment',
   PaymentRequest: 'PaymentRequest',
-  BankAccount: 'BankAccount'
+  BankAccount: 'BankAccount',
+  Campaign: 'Campaign'
 };
 
 /**

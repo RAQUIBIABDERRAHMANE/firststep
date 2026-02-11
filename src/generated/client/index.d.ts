@@ -108,6 +108,11 @@ export type PaymentRequest = $Result.DefaultSelection<Prisma.$PaymentRequestPayl
  * 
  */
 export type BankAccount = $Result.DefaultSelection<Prisma.$BankAccountPayload>
+/**
+ * Model Campaign
+ * 
+ */
+export type Campaign = $Result.DefaultSelection<Prisma.$CampaignPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -415,6 +420,16 @@ export class PrismaClient<
     * ```
     */
   get bankAccount(): Prisma.BankAccountDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.campaign`: Exposes CRUD operations for the **Campaign** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Campaigns
+    * const campaigns = await prisma.campaign.findMany()
+    * ```
+    */
+  get campaign(): Prisma.CampaignDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -867,7 +882,8 @@ export namespace Prisma {
     CabinetClient: 'CabinetClient',
     CabinetAppointment: 'CabinetAppointment',
     PaymentRequest: 'PaymentRequest',
-    BankAccount: 'BankAccount'
+    BankAccount: 'BankAccount',
+    Campaign: 'Campaign'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -883,7 +899,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "chatSession" | "chatMessage" | "notification" | "service" | "userService" | "passwordReset" | "tenantWebsite" | "restaurantCategory" | "restaurantDish" | "restaurantTable" | "restaurantWaiter" | "restaurantOrder" | "restaurantOrderItem" | "cabinetService" | "cabinetClient" | "cabinetAppointment" | "paymentRequest" | "bankAccount"
+      modelProps: "user" | "chatSession" | "chatMessage" | "notification" | "service" | "userService" | "passwordReset" | "tenantWebsite" | "restaurantCategory" | "restaurantDish" | "restaurantTable" | "restaurantWaiter" | "restaurantOrder" | "restaurantOrderItem" | "cabinetService" | "cabinetClient" | "cabinetAppointment" | "paymentRequest" | "bankAccount" | "campaign"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2293,6 +2309,80 @@ export namespace Prisma {
           }
         }
       }
+      Campaign: {
+        payload: Prisma.$CampaignPayload<ExtArgs>
+        fields: Prisma.CampaignFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CampaignFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CampaignPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CampaignFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CampaignPayload>
+          }
+          findFirst: {
+            args: Prisma.CampaignFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CampaignPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CampaignFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CampaignPayload>
+          }
+          findMany: {
+            args: Prisma.CampaignFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CampaignPayload>[]
+          }
+          create: {
+            args: Prisma.CampaignCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CampaignPayload>
+          }
+          createMany: {
+            args: Prisma.CampaignCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CampaignCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CampaignPayload>[]
+          }
+          delete: {
+            args: Prisma.CampaignDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CampaignPayload>
+          }
+          update: {
+            args: Prisma.CampaignUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CampaignPayload>
+          }
+          deleteMany: {
+            args: Prisma.CampaignDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CampaignUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CampaignUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CampaignPayload>[]
+          }
+          upsert: {
+            args: Prisma.CampaignUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CampaignPayload>
+          }
+          aggregate: {
+            args: Prisma.CampaignAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCampaign>
+          }
+          groupBy: {
+            args: Prisma.CampaignGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CampaignGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CampaignCountArgs<ExtArgs>
+            result: $Utils.Optional<CampaignCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2420,6 +2510,7 @@ export namespace Prisma {
     cabinetAppointment?: CabinetAppointmentOmit
     paymentRequest?: PaymentRequestOmit
     bankAccount?: BankAccountOmit
+    campaign?: CampaignOmit
   }
 
   /* Types for Logging */
@@ -2500,19 +2591,19 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    services: number
-    notifications: number
-    websites: number
     chatSessions: number
+    notifications: number
     paymentRequests: number
+    websites: number
+    services: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    services?: boolean | UserCountOutputTypeCountServicesArgs
-    notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
-    websites?: boolean | UserCountOutputTypeCountWebsitesArgs
     chatSessions?: boolean | UserCountOutputTypeCountChatSessionsArgs
+    notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
     paymentRequests?: boolean | UserCountOutputTypeCountPaymentRequestsArgs
+    websites?: boolean | UserCountOutputTypeCountWebsitesArgs
+    services?: boolean | UserCountOutputTypeCountServicesArgs
   }
 
   // Custom InputTypes
@@ -2529,8 +2620,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountServicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserServiceWhereInput
+  export type UserCountOutputTypeCountChatSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChatSessionWhereInput
   }
 
   /**
@@ -2543,6 +2634,13 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountPaymentRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentRequestWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountWebsitesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TenantWebsiteWhereInput
   }
@@ -2550,15 +2648,8 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountChatSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ChatSessionWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountPaymentRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PaymentRequestWhereInput
+  export type UserCountOutputTypeCountServicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserServiceWhereInput
   }
 
 
@@ -2598,15 +2689,15 @@ export namespace Prisma {
    */
 
   export type ServiceCountOutputType = {
-    users: number
-    websites: number
     paymentRequests: number
+    websites: number
+    users: number
   }
 
   export type ServiceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users?: boolean | ServiceCountOutputTypeCountUsersArgs
-    websites?: boolean | ServiceCountOutputTypeCountWebsitesArgs
     paymentRequests?: boolean | ServiceCountOutputTypeCountPaymentRequestsArgs
+    websites?: boolean | ServiceCountOutputTypeCountWebsitesArgs
+    users?: boolean | ServiceCountOutputTypeCountUsersArgs
   }
 
   // Custom InputTypes
@@ -2623,8 +2714,8 @@ export namespace Prisma {
   /**
    * ServiceCountOutputType without action
    */
-  export type ServiceCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserServiceWhereInput
+  export type ServiceCountOutputTypeCountPaymentRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentRequestWhereInput
   }
 
   /**
@@ -2637,8 +2728,8 @@ export namespace Prisma {
   /**
    * ServiceCountOutputType without action
    */
-  export type ServiceCountOutputTypeCountPaymentRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PaymentRequestWhereInput
+  export type ServiceCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserServiceWhereInput
   }
 
 
@@ -2647,21 +2738,21 @@ export namespace Prisma {
    */
 
   export type TenantWebsiteCountOutputType = {
+    cabinetAppointments: number
+    cabinetClients: number
+    cabinetServices: number
     categories: number
     tables: number
     waiters: number
-    cabinetServices: number
-    cabinetClients: number
-    cabinetAppointments: number
   }
 
   export type TenantWebsiteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cabinetAppointments?: boolean | TenantWebsiteCountOutputTypeCountCabinetAppointmentsArgs
+    cabinetClients?: boolean | TenantWebsiteCountOutputTypeCountCabinetClientsArgs
+    cabinetServices?: boolean | TenantWebsiteCountOutputTypeCountCabinetServicesArgs
     categories?: boolean | TenantWebsiteCountOutputTypeCountCategoriesArgs
     tables?: boolean | TenantWebsiteCountOutputTypeCountTablesArgs
     waiters?: boolean | TenantWebsiteCountOutputTypeCountWaitersArgs
-    cabinetServices?: boolean | TenantWebsiteCountOutputTypeCountCabinetServicesArgs
-    cabinetClients?: boolean | TenantWebsiteCountOutputTypeCountCabinetClientsArgs
-    cabinetAppointments?: boolean | TenantWebsiteCountOutputTypeCountCabinetAppointmentsArgs
   }
 
   // Custom InputTypes
@@ -2673,6 +2764,27 @@ export namespace Prisma {
      * Select specific fields to fetch from the TenantWebsiteCountOutputType
      */
     select?: TenantWebsiteCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TenantWebsiteCountOutputType without action
+   */
+  export type TenantWebsiteCountOutputTypeCountCabinetAppointmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CabinetAppointmentWhereInput
+  }
+
+  /**
+   * TenantWebsiteCountOutputType without action
+   */
+  export type TenantWebsiteCountOutputTypeCountCabinetClientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CabinetClientWhereInput
+  }
+
+  /**
+   * TenantWebsiteCountOutputType without action
+   */
+  export type TenantWebsiteCountOutputTypeCountCabinetServicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CabinetServiceWhereInput
   }
 
   /**
@@ -2694,27 +2806,6 @@ export namespace Prisma {
    */
   export type TenantWebsiteCountOutputTypeCountWaitersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RestaurantWaiterWhereInput
-  }
-
-  /**
-   * TenantWebsiteCountOutputType without action
-   */
-  export type TenantWebsiteCountOutputTypeCountCabinetServicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CabinetServiceWhereInput
-  }
-
-  /**
-   * TenantWebsiteCountOutputType without action
-   */
-  export type TenantWebsiteCountOutputTypeCountCabinetClientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CabinetClientWhereInput
-  }
-
-  /**
-   * TenantWebsiteCountOutputType without action
-   */
-  export type TenantWebsiteCountOutputTypeCountCabinetAppointmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CabinetAppointmentWhereInput
   }
 
 
@@ -3080,11 +3171,11 @@ export namespace Prisma {
     companyName?: boolean
     role?: boolean
     createdAt?: boolean
-    services?: boolean | User$servicesArgs<ExtArgs>
-    notifications?: boolean | User$notificationsArgs<ExtArgs>
-    websites?: boolean | User$websitesArgs<ExtArgs>
     chatSessions?: boolean | User$chatSessionsArgs<ExtArgs>
+    notifications?: boolean | User$notificationsArgs<ExtArgs>
     paymentRequests?: boolean | User$paymentRequestsArgs<ExtArgs>
+    websites?: boolean | User$websitesArgs<ExtArgs>
+    services?: boolean | User$servicesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3117,11 +3208,11 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "companyName" | "role" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    services?: boolean | User$servicesArgs<ExtArgs>
-    notifications?: boolean | User$notificationsArgs<ExtArgs>
-    websites?: boolean | User$websitesArgs<ExtArgs>
     chatSessions?: boolean | User$chatSessionsArgs<ExtArgs>
+    notifications?: boolean | User$notificationsArgs<ExtArgs>
     paymentRequests?: boolean | User$paymentRequestsArgs<ExtArgs>
+    websites?: boolean | User$websitesArgs<ExtArgs>
+    services?: boolean | User$servicesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3130,11 +3221,11 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      services: Prisma.$UserServicePayload<ExtArgs>[]
-      notifications: Prisma.$NotificationPayload<ExtArgs>[]
-      websites: Prisma.$TenantWebsitePayload<ExtArgs>[]
       chatSessions: Prisma.$ChatSessionPayload<ExtArgs>[]
+      notifications: Prisma.$NotificationPayload<ExtArgs>[]
       paymentRequests: Prisma.$PaymentRequestPayload<ExtArgs>[]
+      websites: Prisma.$TenantWebsitePayload<ExtArgs>[]
+      services: Prisma.$UserServicePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3537,11 +3628,11 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    services<T extends User$servicesArgs<ExtArgs> = {}>(args?: Subset<T, User$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    websites<T extends User$websitesArgs<ExtArgs> = {}>(args?: Subset<T, User$websitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantWebsitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     chatSessions<T extends User$chatSessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$chatSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     paymentRequests<T extends User$paymentRequestsArgs<ExtArgs> = {}>(args?: Subset<T, User$paymentRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    websites<T extends User$websitesArgs<ExtArgs> = {}>(args?: Subset<T, User$websitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantWebsitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    services<T extends User$servicesArgs<ExtArgs> = {}>(args?: Subset<T, User$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3963,27 +4054,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.services
+   * User.chatSessions
    */
-  export type User$servicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$chatSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserService
+     * Select specific fields to fetch from the ChatSession
      */
-    select?: UserServiceSelect<ExtArgs> | null
+    select?: ChatSessionSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the UserService
+     * Omit specific fields from the ChatSession
      */
-    omit?: UserServiceOmit<ExtArgs> | null
+    omit?: ChatSessionOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserServiceInclude<ExtArgs> | null
-    where?: UserServiceWhereInput
-    orderBy?: UserServiceOrderByWithRelationInput | UserServiceOrderByWithRelationInput[]
-    cursor?: UserServiceWhereUniqueInput
+    include?: ChatSessionInclude<ExtArgs> | null
+    where?: ChatSessionWhereInput
+    orderBy?: ChatSessionOrderByWithRelationInput | ChatSessionOrderByWithRelationInput[]
+    cursor?: ChatSessionWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: UserServiceScalarFieldEnum | UserServiceScalarFieldEnum[]
+    distinct?: ChatSessionScalarFieldEnum | ChatSessionScalarFieldEnum[]
   }
 
   /**
@@ -4011,6 +4102,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.paymentRequests
+   */
+  export type User$paymentRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentRequest
+     */
+    select?: PaymentRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentRequest
+     */
+    omit?: PaymentRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentRequestInclude<ExtArgs> | null
+    where?: PaymentRequestWhereInput
+    orderBy?: PaymentRequestOrderByWithRelationInput | PaymentRequestOrderByWithRelationInput[]
+    cursor?: PaymentRequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaymentRequestScalarFieldEnum | PaymentRequestScalarFieldEnum[]
+  }
+
+  /**
    * User.websites
    */
   export type User$websitesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4035,51 +4150,27 @@ export namespace Prisma {
   }
 
   /**
-   * User.chatSessions
+   * User.services
    */
-  export type User$chatSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$servicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ChatSession
+     * Select specific fields to fetch from the UserService
      */
-    select?: ChatSessionSelect<ExtArgs> | null
+    select?: UserServiceSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the ChatSession
+     * Omit specific fields from the UserService
      */
-    omit?: ChatSessionOmit<ExtArgs> | null
+    omit?: UserServiceOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChatSessionInclude<ExtArgs> | null
-    where?: ChatSessionWhereInput
-    orderBy?: ChatSessionOrderByWithRelationInput | ChatSessionOrderByWithRelationInput[]
-    cursor?: ChatSessionWhereUniqueInput
+    include?: UserServiceInclude<ExtArgs> | null
+    where?: UserServiceWhereInput
+    orderBy?: UserServiceOrderByWithRelationInput | UserServiceOrderByWithRelationInput[]
+    cursor?: UserServiceWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ChatSessionScalarFieldEnum | ChatSessionScalarFieldEnum[]
-  }
-
-  /**
-   * User.paymentRequests
-   */
-  export type User$paymentRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PaymentRequest
-     */
-    select?: PaymentRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the PaymentRequest
-     */
-    omit?: PaymentRequestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PaymentRequestInclude<ExtArgs> | null
-    where?: PaymentRequestWhereInput
-    orderBy?: PaymentRequestOrderByWithRelationInput | PaymentRequestOrderByWithRelationInput[]
-    cursor?: PaymentRequestWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PaymentRequestScalarFieldEnum | PaymentRequestScalarFieldEnum[]
+    distinct?: UserServiceScalarFieldEnum | UserServiceScalarFieldEnum[]
   }
 
   /**
@@ -7339,9 +7430,9 @@ export namespace Prisma {
     description: string | null
     status: string | null
     category: string | null
-    price: number | null
-    icon: string | null
     createdAt: Date | null
+    icon: string | null
+    price: number | null
   }
 
   export type ServiceMaxAggregateOutputType = {
@@ -7351,9 +7442,9 @@ export namespace Prisma {
     description: string | null
     status: string | null
     category: string | null
-    price: number | null
-    icon: string | null
     createdAt: Date | null
+    icon: string | null
+    price: number | null
   }
 
   export type ServiceCountAggregateOutputType = {
@@ -7363,9 +7454,9 @@ export namespace Prisma {
     description: number
     status: number
     category: number
-    price: number
-    icon: number
     createdAt: number
+    icon: number
+    price: number
     _all: number
   }
 
@@ -7385,9 +7476,9 @@ export namespace Prisma {
     description?: true
     status?: true
     category?: true
-    price?: true
-    icon?: true
     createdAt?: true
+    icon?: true
+    price?: true
   }
 
   export type ServiceMaxAggregateInputType = {
@@ -7397,9 +7488,9 @@ export namespace Prisma {
     description?: true
     status?: true
     category?: true
-    price?: true
-    icon?: true
     createdAt?: true
+    icon?: true
+    price?: true
   }
 
   export type ServiceCountAggregateInputType = {
@@ -7409,9 +7500,9 @@ export namespace Prisma {
     description?: true
     status?: true
     category?: true
-    price?: true
-    icon?: true
     createdAt?: true
+    icon?: true
+    price?: true
     _all?: true
   }
 
@@ -7508,9 +7599,9 @@ export namespace Prisma {
     description: string | null
     status: string
     category: string | null
-    price: number | null
-    icon: string | null
     createdAt: Date
+    icon: string | null
+    price: number | null
     _count: ServiceCountAggregateOutputType | null
     _avg: ServiceAvgAggregateOutputType | null
     _sum: ServiceSumAggregateOutputType | null
@@ -7539,12 +7630,12 @@ export namespace Prisma {
     description?: boolean
     status?: boolean
     category?: boolean
-    price?: boolean
-    icon?: boolean
     createdAt?: boolean
-    users?: boolean | Service$usersArgs<ExtArgs>
-    websites?: boolean | Service$websitesArgs<ExtArgs>
+    icon?: boolean
+    price?: boolean
     paymentRequests?: boolean | Service$paymentRequestsArgs<ExtArgs>
+    websites?: boolean | Service$websitesArgs<ExtArgs>
+    users?: boolean | Service$usersArgs<ExtArgs>
     _count?: boolean | ServiceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["service"]>
 
@@ -7555,9 +7646,9 @@ export namespace Prisma {
     description?: boolean
     status?: boolean
     category?: boolean
-    price?: boolean
-    icon?: boolean
     createdAt?: boolean
+    icon?: boolean
+    price?: boolean
   }, ExtArgs["result"]["service"]>
 
   export type ServiceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7567,9 +7658,9 @@ export namespace Prisma {
     description?: boolean
     status?: boolean
     category?: boolean
-    price?: boolean
-    icon?: boolean
     createdAt?: boolean
+    icon?: boolean
+    price?: boolean
   }, ExtArgs["result"]["service"]>
 
   export type ServiceSelectScalar = {
@@ -7579,16 +7670,16 @@ export namespace Prisma {
     description?: boolean
     status?: boolean
     category?: boolean
-    price?: boolean
-    icon?: boolean
     createdAt?: boolean
+    icon?: boolean
+    price?: boolean
   }
 
-  export type ServiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "status" | "category" | "price" | "icon" | "createdAt", ExtArgs["result"]["service"]>
+  export type ServiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "status" | "category" | "createdAt" | "icon" | "price", ExtArgs["result"]["service"]>
   export type ServiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    users?: boolean | Service$usersArgs<ExtArgs>
-    websites?: boolean | Service$websitesArgs<ExtArgs>
     paymentRequests?: boolean | Service$paymentRequestsArgs<ExtArgs>
+    websites?: boolean | Service$websitesArgs<ExtArgs>
+    users?: boolean | Service$usersArgs<ExtArgs>
     _count?: boolean | ServiceCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ServiceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -7597,9 +7688,9 @@ export namespace Prisma {
   export type $ServicePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Service"
     objects: {
-      users: Prisma.$UserServicePayload<ExtArgs>[]
-      websites: Prisma.$TenantWebsitePayload<ExtArgs>[]
       paymentRequests: Prisma.$PaymentRequestPayload<ExtArgs>[]
+      websites: Prisma.$TenantWebsitePayload<ExtArgs>[]
+      users: Prisma.$UserServicePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7608,9 +7699,9 @@ export namespace Prisma {
       description: string | null
       status: string
       category: string | null
-      price: number | null
-      icon: string | null
       createdAt: Date
+      icon: string | null
+      price: number | null
     }, ExtArgs["result"]["service"]>
     composites: {}
   }
@@ -8005,9 +8096,9 @@ export namespace Prisma {
    */
   export interface Prisma__ServiceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    users<T extends Service$usersArgs<ExtArgs> = {}>(args?: Subset<T, Service$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    websites<T extends Service$websitesArgs<ExtArgs> = {}>(args?: Subset<T, Service$websitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantWebsitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     paymentRequests<T extends Service$paymentRequestsArgs<ExtArgs> = {}>(args?: Subset<T, Service$paymentRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    websites<T extends Service$websitesArgs<ExtArgs> = {}>(args?: Subset<T, Service$websitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantWebsitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    users<T extends Service$usersArgs<ExtArgs> = {}>(args?: Subset<T, Service$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8043,9 +8134,9 @@ export namespace Prisma {
     readonly description: FieldRef<"Service", 'String'>
     readonly status: FieldRef<"Service", 'String'>
     readonly category: FieldRef<"Service", 'String'>
-    readonly price: FieldRef<"Service", 'Float'>
-    readonly icon: FieldRef<"Service", 'String'>
     readonly createdAt: FieldRef<"Service", 'DateTime'>
+    readonly icon: FieldRef<"Service", 'String'>
+    readonly price: FieldRef<"Service", 'Float'>
   }
     
 
@@ -8432,27 +8523,27 @@ export namespace Prisma {
   }
 
   /**
-   * Service.users
+   * Service.paymentRequests
    */
-  export type Service$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Service$paymentRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserService
+     * Select specific fields to fetch from the PaymentRequest
      */
-    select?: UserServiceSelect<ExtArgs> | null
+    select?: PaymentRequestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the UserService
+     * Omit specific fields from the PaymentRequest
      */
-    omit?: UserServiceOmit<ExtArgs> | null
+    omit?: PaymentRequestOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserServiceInclude<ExtArgs> | null
-    where?: UserServiceWhereInput
-    orderBy?: UserServiceOrderByWithRelationInput | UserServiceOrderByWithRelationInput[]
-    cursor?: UserServiceWhereUniqueInput
+    include?: PaymentRequestInclude<ExtArgs> | null
+    where?: PaymentRequestWhereInput
+    orderBy?: PaymentRequestOrderByWithRelationInput | PaymentRequestOrderByWithRelationInput[]
+    cursor?: PaymentRequestWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: UserServiceScalarFieldEnum | UserServiceScalarFieldEnum[]
+    distinct?: PaymentRequestScalarFieldEnum | PaymentRequestScalarFieldEnum[]
   }
 
   /**
@@ -8480,27 +8571,27 @@ export namespace Prisma {
   }
 
   /**
-   * Service.paymentRequests
+   * Service.users
    */
-  export type Service$paymentRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Service$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the PaymentRequest
+     * Select specific fields to fetch from the UserService
      */
-    select?: PaymentRequestSelect<ExtArgs> | null
+    select?: UserServiceSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the PaymentRequest
+     * Omit specific fields from the UserService
      */
-    omit?: PaymentRequestOmit<ExtArgs> | null
+    omit?: UserServiceOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PaymentRequestInclude<ExtArgs> | null
-    where?: PaymentRequestWhereInput
-    orderBy?: PaymentRequestOrderByWithRelationInput | PaymentRequestOrderByWithRelationInput[]
-    cursor?: PaymentRequestWhereUniqueInput
+    include?: UserServiceInclude<ExtArgs> | null
+    where?: UserServiceWhereInput
+    orderBy?: UserServiceOrderByWithRelationInput | UserServiceOrderByWithRelationInput[]
+    cursor?: UserServiceWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: PaymentRequestScalarFieldEnum | PaymentRequestScalarFieldEnum[]
+    distinct?: UserServiceScalarFieldEnum | UserServiceScalarFieldEnum[]
   }
 
   /**
@@ -8537,8 +8628,8 @@ export namespace Prisma {
     userId: string | null
     serviceId: string | null
     notify: boolean | null
-    isActive: boolean | null
     selectedAt: Date | null
+    isActive: boolean | null
   }
 
   export type UserServiceMaxAggregateOutputType = {
@@ -8546,8 +8637,8 @@ export namespace Prisma {
     userId: string | null
     serviceId: string | null
     notify: boolean | null
-    isActive: boolean | null
     selectedAt: Date | null
+    isActive: boolean | null
   }
 
   export type UserServiceCountAggregateOutputType = {
@@ -8555,8 +8646,8 @@ export namespace Prisma {
     userId: number
     serviceId: number
     notify: number
-    isActive: number
     selectedAt: number
+    isActive: number
     _all: number
   }
 
@@ -8566,8 +8657,8 @@ export namespace Prisma {
     userId?: true
     serviceId?: true
     notify?: true
-    isActive?: true
     selectedAt?: true
+    isActive?: true
   }
 
   export type UserServiceMaxAggregateInputType = {
@@ -8575,8 +8666,8 @@ export namespace Prisma {
     userId?: true
     serviceId?: true
     notify?: true
-    isActive?: true
     selectedAt?: true
+    isActive?: true
   }
 
   export type UserServiceCountAggregateInputType = {
@@ -8584,8 +8675,8 @@ export namespace Prisma {
     userId?: true
     serviceId?: true
     notify?: true
-    isActive?: true
     selectedAt?: true
+    isActive?: true
     _all?: true
   }
 
@@ -8666,8 +8757,8 @@ export namespace Prisma {
     userId: string
     serviceId: string
     notify: boolean
-    isActive: boolean
     selectedAt: Date
+    isActive: boolean
     _count: UserServiceCountAggregateOutputType | null
     _min: UserServiceMinAggregateOutputType | null
     _max: UserServiceMaxAggregateOutputType | null
@@ -8692,10 +8783,10 @@ export namespace Prisma {
     userId?: boolean
     serviceId?: boolean
     notify?: boolean
-    isActive?: boolean
     selectedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    isActive?: boolean
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userService"]>
 
   export type UserServiceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8703,10 +8794,10 @@ export namespace Prisma {
     userId?: boolean
     serviceId?: boolean
     notify?: boolean
-    isActive?: boolean
     selectedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    isActive?: boolean
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userService"]>
 
   export type UserServiceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -8714,10 +8805,10 @@ export namespace Prisma {
     userId?: boolean
     serviceId?: boolean
     notify?: boolean
-    isActive?: boolean
     selectedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    isActive?: boolean
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userService"]>
 
   export type UserServiceSelectScalar = {
@@ -8725,37 +8816,37 @@ export namespace Prisma {
     userId?: boolean
     serviceId?: boolean
     notify?: boolean
-    isActive?: boolean
     selectedAt?: boolean
+    isActive?: boolean
   }
 
-  export type UserServiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "serviceId" | "notify" | "isActive" | "selectedAt", ExtArgs["result"]["userService"]>
+  export type UserServiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "serviceId" | "notify" | "selectedAt" | "isActive", ExtArgs["result"]["userService"]>
   export type UserServiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type UserServiceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type UserServiceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $UserServicePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "UserService"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       service: Prisma.$ServicePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
       serviceId: string
       notify: boolean
-      isActive: boolean
       selectedAt: Date
+      isActive: boolean
     }, ExtArgs["result"]["userService"]>
     composites: {}
   }
@@ -9150,8 +9241,8 @@ export namespace Prisma {
    */
   export interface Prisma__UserServiceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     service<T extends ServiceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ServiceDefaultArgs<ExtArgs>>): Prisma__ServiceClient<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9185,8 +9276,8 @@ export namespace Prisma {
     readonly userId: FieldRef<"UserService", 'String'>
     readonly serviceId: FieldRef<"UserService", 'String'>
     readonly notify: FieldRef<"UserService", 'Boolean'>
-    readonly isActive: FieldRef<"UserService", 'Boolean'>
     readonly selectedAt: FieldRef<"UserService", 'DateTime'>
+    readonly isActive: FieldRef<"UserService", 'Boolean'>
   }
     
 
@@ -10828,14 +10919,14 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    cabinetAppointments?: boolean | TenantWebsite$cabinetAppointmentsArgs<ExtArgs>
+    cabinetClients?: boolean | TenantWebsite$cabinetClientsArgs<ExtArgs>
+    cabinetServices?: boolean | TenantWebsite$cabinetServicesArgs<ExtArgs>
     categories?: boolean | TenantWebsite$categoriesArgs<ExtArgs>
     tables?: boolean | TenantWebsite$tablesArgs<ExtArgs>
     waiters?: boolean | TenantWebsite$waitersArgs<ExtArgs>
-    cabinetServices?: boolean | TenantWebsite$cabinetServicesArgs<ExtArgs>
-    cabinetClients?: boolean | TenantWebsite$cabinetClientsArgs<ExtArgs>
-    cabinetAppointments?: boolean | TenantWebsite$cabinetAppointmentsArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | TenantWebsiteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tenantWebsite"]>
 
@@ -10854,8 +10945,8 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tenantWebsite"]>
 
   export type TenantWebsiteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -10873,8 +10964,8 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tenantWebsite"]>
 
   export type TenantWebsiteSelectScalar = {
@@ -10896,36 +10987,36 @@ export namespace Prisma {
 
   export type TenantWebsiteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "userId" | "serviceId" | "siteName" | "description" | "logo" | "coverImage" | "primaryColor" | "config" | "designTemplate" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["tenantWebsite"]>
   export type TenantWebsiteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cabinetAppointments?: boolean | TenantWebsite$cabinetAppointmentsArgs<ExtArgs>
+    cabinetClients?: boolean | TenantWebsite$cabinetClientsArgs<ExtArgs>
+    cabinetServices?: boolean | TenantWebsite$cabinetServicesArgs<ExtArgs>
     categories?: boolean | TenantWebsite$categoriesArgs<ExtArgs>
     tables?: boolean | TenantWebsite$tablesArgs<ExtArgs>
     waiters?: boolean | TenantWebsite$waitersArgs<ExtArgs>
-    cabinetServices?: boolean | TenantWebsite$cabinetServicesArgs<ExtArgs>
-    cabinetClients?: boolean | TenantWebsite$cabinetClientsArgs<ExtArgs>
-    cabinetAppointments?: boolean | TenantWebsite$cabinetAppointmentsArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | TenantWebsiteCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TenantWebsiteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type TenantWebsiteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $TenantWebsitePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "TenantWebsite"
     objects: {
+      cabinetAppointments: Prisma.$CabinetAppointmentPayload<ExtArgs>[]
+      cabinetClients: Prisma.$CabinetClientPayload<ExtArgs>[]
+      cabinetServices: Prisma.$CabinetServicePayload<ExtArgs>[]
       categories: Prisma.$RestaurantCategoryPayload<ExtArgs>[]
       tables: Prisma.$RestaurantTablePayload<ExtArgs>[]
       waiters: Prisma.$RestaurantWaiterPayload<ExtArgs>[]
-      cabinetServices: Prisma.$CabinetServicePayload<ExtArgs>[]
-      cabinetClients: Prisma.$CabinetClientPayload<ExtArgs>[]
-      cabinetAppointments: Prisma.$CabinetAppointmentPayload<ExtArgs>[]
-      user: Prisma.$UserPayload<ExtArgs>
       service: Prisma.$ServicePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -11336,14 +11427,14 @@ export namespace Prisma {
    */
   export interface Prisma__TenantWebsiteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    cabinetAppointments<T extends TenantWebsite$cabinetAppointmentsArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$cabinetAppointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CabinetAppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    cabinetClients<T extends TenantWebsite$cabinetClientsArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$cabinetClientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CabinetClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    cabinetServices<T extends TenantWebsite$cabinetServicesArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$cabinetServicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CabinetServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     categories<T extends TenantWebsite$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tables<T extends TenantWebsite$tablesArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$tablesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantTablePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     waiters<T extends TenantWebsite$waitersArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$waitersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantWaiterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    cabinetServices<T extends TenantWebsite$cabinetServicesArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$cabinetServicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CabinetServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    cabinetClients<T extends TenantWebsite$cabinetClientsArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$cabinetClientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CabinetClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    cabinetAppointments<T extends TenantWebsite$cabinetAppointmentsArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$cabinetAppointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CabinetAppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     service<T extends ServiceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ServiceDefaultArgs<ExtArgs>>): Prisma__ServiceClient<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11781,6 +11872,78 @@ export namespace Prisma {
   }
 
   /**
+   * TenantWebsite.cabinetAppointments
+   */
+  export type TenantWebsite$cabinetAppointmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CabinetAppointment
+     */
+    select?: CabinetAppointmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CabinetAppointment
+     */
+    omit?: CabinetAppointmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CabinetAppointmentInclude<ExtArgs> | null
+    where?: CabinetAppointmentWhereInput
+    orderBy?: CabinetAppointmentOrderByWithRelationInput | CabinetAppointmentOrderByWithRelationInput[]
+    cursor?: CabinetAppointmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CabinetAppointmentScalarFieldEnum | CabinetAppointmentScalarFieldEnum[]
+  }
+
+  /**
+   * TenantWebsite.cabinetClients
+   */
+  export type TenantWebsite$cabinetClientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CabinetClient
+     */
+    select?: CabinetClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CabinetClient
+     */
+    omit?: CabinetClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CabinetClientInclude<ExtArgs> | null
+    where?: CabinetClientWhereInput
+    orderBy?: CabinetClientOrderByWithRelationInput | CabinetClientOrderByWithRelationInput[]
+    cursor?: CabinetClientWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CabinetClientScalarFieldEnum | CabinetClientScalarFieldEnum[]
+  }
+
+  /**
+   * TenantWebsite.cabinetServices
+   */
+  export type TenantWebsite$cabinetServicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CabinetService
+     */
+    select?: CabinetServiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CabinetService
+     */
+    omit?: CabinetServiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CabinetServiceInclude<ExtArgs> | null
+    where?: CabinetServiceWhereInput
+    orderBy?: CabinetServiceOrderByWithRelationInput | CabinetServiceOrderByWithRelationInput[]
+    cursor?: CabinetServiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CabinetServiceScalarFieldEnum | CabinetServiceScalarFieldEnum[]
+  }
+
+  /**
    * TenantWebsite.categories
    */
   export type TenantWebsite$categoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11850,78 +12013,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RestaurantWaiterScalarFieldEnum | RestaurantWaiterScalarFieldEnum[]
-  }
-
-  /**
-   * TenantWebsite.cabinetServices
-   */
-  export type TenantWebsite$cabinetServicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CabinetService
-     */
-    select?: CabinetServiceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CabinetService
-     */
-    omit?: CabinetServiceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CabinetServiceInclude<ExtArgs> | null
-    where?: CabinetServiceWhereInput
-    orderBy?: CabinetServiceOrderByWithRelationInput | CabinetServiceOrderByWithRelationInput[]
-    cursor?: CabinetServiceWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CabinetServiceScalarFieldEnum | CabinetServiceScalarFieldEnum[]
-  }
-
-  /**
-   * TenantWebsite.cabinetClients
-   */
-  export type TenantWebsite$cabinetClientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CabinetClient
-     */
-    select?: CabinetClientSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CabinetClient
-     */
-    omit?: CabinetClientOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CabinetClientInclude<ExtArgs> | null
-    where?: CabinetClientWhereInput
-    orderBy?: CabinetClientOrderByWithRelationInput | CabinetClientOrderByWithRelationInput[]
-    cursor?: CabinetClientWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CabinetClientScalarFieldEnum | CabinetClientScalarFieldEnum[]
-  }
-
-  /**
-   * TenantWebsite.cabinetAppointments
-   */
-  export type TenantWebsite$cabinetAppointmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CabinetAppointment
-     */
-    select?: CabinetAppointmentSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CabinetAppointment
-     */
-    omit?: CabinetAppointmentOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CabinetAppointmentInclude<ExtArgs> | null
-    where?: CabinetAppointmentWhereInput
-    orderBy?: CabinetAppointmentOrderByWithRelationInput | CabinetAppointmentOrderByWithRelationInput[]
-    cursor?: CabinetAppointmentWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CabinetAppointmentScalarFieldEnum | CabinetAppointmentScalarFieldEnum[]
   }
 
   /**
@@ -12141,8 +12232,8 @@ export namespace Prisma {
     name?: boolean
     order?: boolean
     isActive?: boolean
-    dishes?: boolean | RestaurantCategory$dishesArgs<ExtArgs>
     tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+    dishes?: boolean | RestaurantCategory$dishesArgs<ExtArgs>
     _count?: boolean | RestaurantCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["restaurantCategory"]>
 
@@ -12174,8 +12265,8 @@ export namespace Prisma {
 
   export type RestaurantCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "name" | "order" | "isActive", ExtArgs["result"]["restaurantCategory"]>
   export type RestaurantCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    dishes?: boolean | RestaurantCategory$dishesArgs<ExtArgs>
     tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+    dishes?: boolean | RestaurantCategory$dishesArgs<ExtArgs>
     _count?: boolean | RestaurantCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RestaurantCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12188,8 +12279,8 @@ export namespace Prisma {
   export type $RestaurantCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "RestaurantCategory"
     objects: {
-      dishes: Prisma.$RestaurantDishPayload<ExtArgs>[]
       tenant: Prisma.$TenantWebsitePayload<ExtArgs>
+      dishes: Prisma.$RestaurantDishPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -12591,8 +12682,8 @@ export namespace Prisma {
    */
   export interface Prisma__RestaurantCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    dishes<T extends RestaurantCategory$dishesArgs<ExtArgs> = {}>(args?: Subset<T, RestaurantCategory$dishesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantDishPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tenant<T extends TenantWebsiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsiteDefaultArgs<ExtArgs>>): Prisma__TenantWebsiteClient<$Result.GetResult<Prisma.$TenantWebsitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    dishes<T extends RestaurantCategory$dishesArgs<ExtArgs> = {}>(args?: Subset<T, RestaurantCategory$dishesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantDishPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14403,8 +14494,8 @@ export namespace Prisma {
     isActive?: boolean
     waiterId?: boolean
     orders?: boolean | RestaurantTable$ordersArgs<ExtArgs>
-    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
     waiter?: boolean | RestaurantTable$waiterArgs<ExtArgs>
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
     _count?: boolean | RestaurantTableCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["restaurantTable"]>
 
@@ -14415,8 +14506,8 @@ export namespace Prisma {
     capacity?: boolean
     isActive?: boolean
     waiterId?: boolean
-    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
     waiter?: boolean | RestaurantTable$waiterArgs<ExtArgs>
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["restaurantTable"]>
 
   export type RestaurantTableSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -14426,8 +14517,8 @@ export namespace Prisma {
     capacity?: boolean
     isActive?: boolean
     waiterId?: boolean
-    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
     waiter?: boolean | RestaurantTable$waiterArgs<ExtArgs>
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["restaurantTable"]>
 
   export type RestaurantTableSelectScalar = {
@@ -14442,25 +14533,25 @@ export namespace Prisma {
   export type RestaurantTableOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "number" | "capacity" | "isActive" | "waiterId", ExtArgs["result"]["restaurantTable"]>
   export type RestaurantTableInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orders?: boolean | RestaurantTable$ordersArgs<ExtArgs>
-    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
     waiter?: boolean | RestaurantTable$waiterArgs<ExtArgs>
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
     _count?: boolean | RestaurantTableCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RestaurantTableIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
     waiter?: boolean | RestaurantTable$waiterArgs<ExtArgs>
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
   }
   export type RestaurantTableIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
     waiter?: boolean | RestaurantTable$waiterArgs<ExtArgs>
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
   }
 
   export type $RestaurantTablePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "RestaurantTable"
     objects: {
       orders: Prisma.$RestaurantOrderPayload<ExtArgs>[]
-      tenant: Prisma.$TenantWebsitePayload<ExtArgs>
       waiter: Prisma.$RestaurantWaiterPayload<ExtArgs> | null
+      tenant: Prisma.$TenantWebsitePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -14864,8 +14955,8 @@ export namespace Prisma {
   export interface Prisma__RestaurantTableClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     orders<T extends RestaurantTable$ordersArgs<ExtArgs> = {}>(args?: Subset<T, RestaurantTable$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    tenant<T extends TenantWebsiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsiteDefaultArgs<ExtArgs>>): Prisma__TenantWebsiteClient<$Result.GetResult<Prisma.$TenantWebsitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     waiter<T extends RestaurantTable$waiterArgs<ExtArgs> = {}>(args?: Subset<T, RestaurantTable$waiterArgs<ExtArgs>>): Prisma__RestaurantWaiterClient<$Result.GetResult<Prisma.$RestaurantWaiterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    tenant<T extends TenantWebsiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsiteDefaultArgs<ExtArgs>>): Prisma__TenantWebsiteClient<$Result.GetResult<Prisma.$TenantWebsitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -16661,8 +16752,8 @@ export namespace Prisma {
     totalAmount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    items?: boolean | RestaurantOrder$itemsArgs<ExtArgs>
     table?: boolean | RestaurantTableDefaultArgs<ExtArgs>
+    items?: boolean | RestaurantOrder$itemsArgs<ExtArgs>
     _count?: boolean | RestaurantOrderCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["restaurantOrder"]>
 
@@ -16697,8 +16788,8 @@ export namespace Prisma {
 
   export type RestaurantOrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tableId" | "status" | "totalAmount" | "createdAt" | "updatedAt", ExtArgs["result"]["restaurantOrder"]>
   export type RestaurantOrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    items?: boolean | RestaurantOrder$itemsArgs<ExtArgs>
     table?: boolean | RestaurantTableDefaultArgs<ExtArgs>
+    items?: boolean | RestaurantOrder$itemsArgs<ExtArgs>
     _count?: boolean | RestaurantOrderCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RestaurantOrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16711,8 +16802,8 @@ export namespace Prisma {
   export type $RestaurantOrderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "RestaurantOrder"
     objects: {
-      items: Prisma.$RestaurantOrderItemPayload<ExtArgs>[]
       table: Prisma.$RestaurantTablePayload<ExtArgs>
+      items: Prisma.$RestaurantOrderItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -17115,8 +17206,8 @@ export namespace Prisma {
    */
   export interface Prisma__RestaurantOrderClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    items<T extends RestaurantOrder$itemsArgs<ExtArgs> = {}>(args?: Subset<T, RestaurantOrder$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     table<T extends RestaurantTableDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RestaurantTableDefaultArgs<ExtArgs>>): Prisma__RestaurantTableClient<$Result.GetResult<Prisma.$RestaurantTablePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    items<T extends RestaurantOrder$itemsArgs<ExtArgs> = {}>(args?: Subset<T, RestaurantOrder$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21179,9 +21270,9 @@ export namespace Prisma {
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    service?: boolean | CabinetServiceDefaultArgs<ExtArgs>
-    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
     tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+    service?: boolean | CabinetServiceDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cabinetAppointment"]>
 
   export type CabinetAppointmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -21194,9 +21285,9 @@ export namespace Prisma {
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    service?: boolean | CabinetServiceDefaultArgs<ExtArgs>
-    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
     tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+    service?: boolean | CabinetServiceDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cabinetAppointment"]>
 
   export type CabinetAppointmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -21209,9 +21300,9 @@ export namespace Prisma {
     notes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    service?: boolean | CabinetServiceDefaultArgs<ExtArgs>
-    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
     tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+    service?: boolean | CabinetServiceDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cabinetAppointment"]>
 
   export type CabinetAppointmentSelectScalar = {
@@ -21228,27 +21319,27 @@ export namespace Prisma {
 
   export type CabinetAppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "serviceId" | "clientId" | "appointmentDate" | "status" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["cabinetAppointment"]>
   export type CabinetAppointmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    service?: boolean | CabinetServiceDefaultArgs<ExtArgs>
-    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
     tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+    service?: boolean | CabinetServiceDefaultArgs<ExtArgs>
   }
   export type CabinetAppointmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    service?: boolean | CabinetServiceDefaultArgs<ExtArgs>
-    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
     tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+    service?: boolean | CabinetServiceDefaultArgs<ExtArgs>
   }
   export type CabinetAppointmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    service?: boolean | CabinetServiceDefaultArgs<ExtArgs>
-    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
     tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+    service?: boolean | CabinetServiceDefaultArgs<ExtArgs>
   }
 
   export type $CabinetAppointmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "CabinetAppointment"
     objects: {
-      service: Prisma.$CabinetServicePayload<ExtArgs>
-      client: Prisma.$CabinetClientPayload<ExtArgs>
       tenant: Prisma.$TenantWebsitePayload<ExtArgs>
+      client: Prisma.$CabinetClientPayload<ExtArgs>
+      service: Prisma.$CabinetServicePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -21654,9 +21745,9 @@ export namespace Prisma {
    */
   export interface Prisma__CabinetAppointmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    service<T extends CabinetServiceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CabinetServiceDefaultArgs<ExtArgs>>): Prisma__CabinetServiceClient<$Result.GetResult<Prisma.$CabinetServicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    client<T extends CabinetClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CabinetClientDefaultArgs<ExtArgs>>): Prisma__CabinetClientClient<$Result.GetResult<Prisma.$CabinetClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     tenant<T extends TenantWebsiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsiteDefaultArgs<ExtArgs>>): Prisma__TenantWebsiteClient<$Result.GetResult<Prisma.$TenantWebsitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    client<T extends CabinetClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CabinetClientDefaultArgs<ExtArgs>>): Prisma__CabinetClientClient<$Result.GetResult<Prisma.$CabinetClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    service<T extends CabinetServiceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CabinetServiceDefaultArgs<ExtArgs>>): Prisma__CabinetServiceClient<$Result.GetResult<Prisma.$CabinetServicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -22353,8 +22444,8 @@ export namespace Prisma {
     expiresAt?: boolean
     confirmedAt?: boolean
     confirmedBy?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["paymentRequest"]>
 
   export type PaymentRequestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -22369,8 +22460,8 @@ export namespace Prisma {
     expiresAt?: boolean
     confirmedAt?: boolean
     confirmedBy?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["paymentRequest"]>
 
   export type PaymentRequestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -22385,8 +22476,8 @@ export namespace Prisma {
     expiresAt?: boolean
     confirmedAt?: boolean
     confirmedBy?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["paymentRequest"]>
 
   export type PaymentRequestSelectScalar = {
@@ -22405,23 +22496,23 @@ export namespace Prisma {
 
   export type PaymentRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "serviceId" | "amount" | "status" | "transferReference" | "createdAt" | "updatedAt" | "expiresAt" | "confirmedAt" | "confirmedBy", ExtArgs["result"]["paymentRequest"]>
   export type PaymentRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type PaymentRequestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type PaymentRequestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $PaymentRequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "PaymentRequest"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       service: Prisma.$ServicePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -22829,8 +22920,8 @@ export namespace Prisma {
    */
   export interface Prisma__PaymentRequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     service<T extends ServiceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ServiceDefaultArgs<ExtArgs>>): Prisma__ServiceClient<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -23297,33 +23388,33 @@ export namespace Prisma {
     id: string | null
     accountName: string | null
     iban: string | null
-    rib: string | null
     bic: string | null
     bankName: string | null
     isActive: boolean | null
     createdAt: Date | null
+    rib: string | null
   }
 
   export type BankAccountMaxAggregateOutputType = {
     id: string | null
     accountName: string | null
     iban: string | null
-    rib: string | null
     bic: string | null
     bankName: string | null
     isActive: boolean | null
     createdAt: Date | null
+    rib: string | null
   }
 
   export type BankAccountCountAggregateOutputType = {
     id: number
     accountName: number
     iban: number
-    rib: number
     bic: number
     bankName: number
     isActive: number
     createdAt: number
+    rib: number
     _all: number
   }
 
@@ -23332,33 +23423,33 @@ export namespace Prisma {
     id?: true
     accountName?: true
     iban?: true
-    rib?: true
     bic?: true
     bankName?: true
     isActive?: true
     createdAt?: true
+    rib?: true
   }
 
   export type BankAccountMaxAggregateInputType = {
     id?: true
     accountName?: true
     iban?: true
-    rib?: true
     bic?: true
     bankName?: true
     isActive?: true
     createdAt?: true
+    rib?: true
   }
 
   export type BankAccountCountAggregateInputType = {
     id?: true
     accountName?: true
     iban?: true
-    rib?: true
     bic?: true
     bankName?: true
     isActive?: true
     createdAt?: true
+    rib?: true
     _all?: true
   }
 
@@ -23438,11 +23529,11 @@ export namespace Prisma {
     id: string
     accountName: string
     iban: string
-    rib: string | null
     bic: string | null
     bankName: string
     isActive: boolean
     createdAt: Date
+    rib: string | null
     _count: BankAccountCountAggregateOutputType | null
     _min: BankAccountMinAggregateOutputType | null
     _max: BankAccountMaxAggregateOutputType | null
@@ -23466,47 +23557,47 @@ export namespace Prisma {
     id?: boolean
     accountName?: boolean
     iban?: boolean
-    rib?: boolean
     bic?: boolean
     bankName?: boolean
     isActive?: boolean
     createdAt?: boolean
+    rib?: boolean
   }, ExtArgs["result"]["bankAccount"]>
 
   export type BankAccountSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     accountName?: boolean
     iban?: boolean
-    rib?: boolean
     bic?: boolean
     bankName?: boolean
     isActive?: boolean
     createdAt?: boolean
+    rib?: boolean
   }, ExtArgs["result"]["bankAccount"]>
 
   export type BankAccountSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     accountName?: boolean
     iban?: boolean
-    rib?: boolean
     bic?: boolean
     bankName?: boolean
     isActive?: boolean
     createdAt?: boolean
+    rib?: boolean
   }, ExtArgs["result"]["bankAccount"]>
 
   export type BankAccountSelectScalar = {
     id?: boolean
     accountName?: boolean
     iban?: boolean
-    rib?: boolean
     bic?: boolean
     bankName?: boolean
     isActive?: boolean
     createdAt?: boolean
+    rib?: boolean
   }
 
-  export type BankAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountName" | "iban" | "rib" | "bic" | "bankName" | "isActive" | "createdAt", ExtArgs["result"]["bankAccount"]>
+  export type BankAccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountName" | "iban" | "bic" | "bankName" | "isActive" | "createdAt" | "rib", ExtArgs["result"]["bankAccount"]>
 
   export type $BankAccountPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "BankAccount"
@@ -23515,11 +23606,11 @@ export namespace Prisma {
       id: string
       accountName: string
       iban: string
-      rib: string | null
       bic: string | null
       bankName: string
       isActive: boolean
       createdAt: Date
+      rib: string | null
     }, ExtArgs["result"]["bankAccount"]>
     composites: {}
   }
@@ -23946,11 +24037,11 @@ export namespace Prisma {
     readonly id: FieldRef<"BankAccount", 'String'>
     readonly accountName: FieldRef<"BankAccount", 'String'>
     readonly iban: FieldRef<"BankAccount", 'String'>
-    readonly rib: FieldRef<"BankAccount", 'String'>
     readonly bic: FieldRef<"BankAccount", 'String'>
     readonly bankName: FieldRef<"BankAccount", 'String'>
     readonly isActive: FieldRef<"BankAccount", 'Boolean'>
     readonly createdAt: FieldRef<"BankAccount", 'DateTime'>
+    readonly rib: FieldRef<"BankAccount", 'String'>
   }
     
 
@@ -24316,6 +24407,1119 @@ export namespace Prisma {
 
 
   /**
+   * Model Campaign
+   */
+
+  export type AggregateCampaign = {
+    _count: CampaignCountAggregateOutputType | null
+    _avg: CampaignAvgAggregateOutputType | null
+    _sum: CampaignSumAggregateOutputType | null
+    _min: CampaignMinAggregateOutputType | null
+    _max: CampaignMaxAggregateOutputType | null
+  }
+
+  export type CampaignAvgAggregateOutputType = {
+    recipientCount: number | null
+    successCount: number | null
+    failureCount: number | null
+  }
+
+  export type CampaignSumAggregateOutputType = {
+    recipientCount: number | null
+    successCount: number | null
+    failureCount: number | null
+  }
+
+  export type CampaignMinAggregateOutputType = {
+    id: string | null
+    subject: string | null
+    content: string | null
+    status: string | null
+    sentAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    recipientCount: number | null
+    successCount: number | null
+    failureCount: number | null
+    selectedRecipients: string | null
+  }
+
+  export type CampaignMaxAggregateOutputType = {
+    id: string | null
+    subject: string | null
+    content: string | null
+    status: string | null
+    sentAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    recipientCount: number | null
+    successCount: number | null
+    failureCount: number | null
+    selectedRecipients: string | null
+  }
+
+  export type CampaignCountAggregateOutputType = {
+    id: number
+    subject: number
+    content: number
+    status: number
+    sentAt: number
+    createdAt: number
+    updatedAt: number
+    recipientCount: number
+    successCount: number
+    failureCount: number
+    selectedRecipients: number
+    _all: number
+  }
+
+
+  export type CampaignAvgAggregateInputType = {
+    recipientCount?: true
+    successCount?: true
+    failureCount?: true
+  }
+
+  export type CampaignSumAggregateInputType = {
+    recipientCount?: true
+    successCount?: true
+    failureCount?: true
+  }
+
+  export type CampaignMinAggregateInputType = {
+    id?: true
+    subject?: true
+    content?: true
+    status?: true
+    sentAt?: true
+    createdAt?: true
+    updatedAt?: true
+    recipientCount?: true
+    successCount?: true
+    failureCount?: true
+    selectedRecipients?: true
+  }
+
+  export type CampaignMaxAggregateInputType = {
+    id?: true
+    subject?: true
+    content?: true
+    status?: true
+    sentAt?: true
+    createdAt?: true
+    updatedAt?: true
+    recipientCount?: true
+    successCount?: true
+    failureCount?: true
+    selectedRecipients?: true
+  }
+
+  export type CampaignCountAggregateInputType = {
+    id?: true
+    subject?: true
+    content?: true
+    status?: true
+    sentAt?: true
+    createdAt?: true
+    updatedAt?: true
+    recipientCount?: true
+    successCount?: true
+    failureCount?: true
+    selectedRecipients?: true
+    _all?: true
+  }
+
+  export type CampaignAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Campaign to aggregate.
+     */
+    where?: CampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Campaigns to fetch.
+     */
+    orderBy?: CampaignOrderByWithRelationInput | CampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Campaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Campaigns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Campaigns
+    **/
+    _count?: true | CampaignCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CampaignAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CampaignSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CampaignMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CampaignMaxAggregateInputType
+  }
+
+  export type GetCampaignAggregateType<T extends CampaignAggregateArgs> = {
+        [P in keyof T & keyof AggregateCampaign]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCampaign[P]>
+      : GetScalarType<T[P], AggregateCampaign[P]>
+  }
+
+
+
+
+  export type CampaignGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CampaignWhereInput
+    orderBy?: CampaignOrderByWithAggregationInput | CampaignOrderByWithAggregationInput[]
+    by: CampaignScalarFieldEnum[] | CampaignScalarFieldEnum
+    having?: CampaignScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CampaignCountAggregateInputType | true
+    _avg?: CampaignAvgAggregateInputType
+    _sum?: CampaignSumAggregateInputType
+    _min?: CampaignMinAggregateInputType
+    _max?: CampaignMaxAggregateInputType
+  }
+
+  export type CampaignGroupByOutputType = {
+    id: string
+    subject: string
+    content: string
+    status: string
+    sentAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    recipientCount: number
+    successCount: number
+    failureCount: number
+    selectedRecipients: string
+    _count: CampaignCountAggregateOutputType | null
+    _avg: CampaignAvgAggregateOutputType | null
+    _sum: CampaignSumAggregateOutputType | null
+    _min: CampaignMinAggregateOutputType | null
+    _max: CampaignMaxAggregateOutputType | null
+  }
+
+  type GetCampaignGroupByPayload<T extends CampaignGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CampaignGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CampaignGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CampaignGroupByOutputType[P]>
+            : GetScalarType<T[P], CampaignGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CampaignSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    subject?: boolean
+    content?: boolean
+    status?: boolean
+    sentAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    recipientCount?: boolean
+    successCount?: boolean
+    failureCount?: boolean
+    selectedRecipients?: boolean
+  }, ExtArgs["result"]["campaign"]>
+
+  export type CampaignSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    subject?: boolean
+    content?: boolean
+    status?: boolean
+    sentAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    recipientCount?: boolean
+    successCount?: boolean
+    failureCount?: boolean
+    selectedRecipients?: boolean
+  }, ExtArgs["result"]["campaign"]>
+
+  export type CampaignSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    subject?: boolean
+    content?: boolean
+    status?: boolean
+    sentAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    recipientCount?: boolean
+    successCount?: boolean
+    failureCount?: boolean
+    selectedRecipients?: boolean
+  }, ExtArgs["result"]["campaign"]>
+
+  export type CampaignSelectScalar = {
+    id?: boolean
+    subject?: boolean
+    content?: boolean
+    status?: boolean
+    sentAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    recipientCount?: boolean
+    successCount?: boolean
+    failureCount?: boolean
+    selectedRecipients?: boolean
+  }
+
+  export type CampaignOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "subject" | "content" | "status" | "sentAt" | "createdAt" | "updatedAt" | "recipientCount" | "successCount" | "failureCount" | "selectedRecipients", ExtArgs["result"]["campaign"]>
+
+  export type $CampaignPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Campaign"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      subject: string
+      content: string
+      status: string
+      sentAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+      recipientCount: number
+      successCount: number
+      failureCount: number
+      selectedRecipients: string
+    }, ExtArgs["result"]["campaign"]>
+    composites: {}
+  }
+
+  type CampaignGetPayload<S extends boolean | null | undefined | CampaignDefaultArgs> = $Result.GetResult<Prisma.$CampaignPayload, S>
+
+  type CampaignCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CampaignFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CampaignCountAggregateInputType | true
+    }
+
+  export interface CampaignDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Campaign'], meta: { name: 'Campaign' } }
+    /**
+     * Find zero or one Campaign that matches the filter.
+     * @param {CampaignFindUniqueArgs} args - Arguments to find a Campaign
+     * @example
+     * // Get one Campaign
+     * const campaign = await prisma.campaign.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CampaignFindUniqueArgs>(args: SelectSubset<T, CampaignFindUniqueArgs<ExtArgs>>): Prisma__CampaignClient<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Campaign that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CampaignFindUniqueOrThrowArgs} args - Arguments to find a Campaign
+     * @example
+     * // Get one Campaign
+     * const campaign = await prisma.campaign.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CampaignFindUniqueOrThrowArgs>(args: SelectSubset<T, CampaignFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CampaignClient<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Campaign that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CampaignFindFirstArgs} args - Arguments to find a Campaign
+     * @example
+     * // Get one Campaign
+     * const campaign = await prisma.campaign.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CampaignFindFirstArgs>(args?: SelectSubset<T, CampaignFindFirstArgs<ExtArgs>>): Prisma__CampaignClient<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Campaign that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CampaignFindFirstOrThrowArgs} args - Arguments to find a Campaign
+     * @example
+     * // Get one Campaign
+     * const campaign = await prisma.campaign.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CampaignFindFirstOrThrowArgs>(args?: SelectSubset<T, CampaignFindFirstOrThrowArgs<ExtArgs>>): Prisma__CampaignClient<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Campaigns that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CampaignFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Campaigns
+     * const campaigns = await prisma.campaign.findMany()
+     * 
+     * // Get first 10 Campaigns
+     * const campaigns = await prisma.campaign.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const campaignWithIdOnly = await prisma.campaign.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CampaignFindManyArgs>(args?: SelectSubset<T, CampaignFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Campaign.
+     * @param {CampaignCreateArgs} args - Arguments to create a Campaign.
+     * @example
+     * // Create one Campaign
+     * const Campaign = await prisma.campaign.create({
+     *   data: {
+     *     // ... data to create a Campaign
+     *   }
+     * })
+     * 
+     */
+    create<T extends CampaignCreateArgs>(args: SelectSubset<T, CampaignCreateArgs<ExtArgs>>): Prisma__CampaignClient<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Campaigns.
+     * @param {CampaignCreateManyArgs} args - Arguments to create many Campaigns.
+     * @example
+     * // Create many Campaigns
+     * const campaign = await prisma.campaign.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CampaignCreateManyArgs>(args?: SelectSubset<T, CampaignCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Campaigns and returns the data saved in the database.
+     * @param {CampaignCreateManyAndReturnArgs} args - Arguments to create many Campaigns.
+     * @example
+     * // Create many Campaigns
+     * const campaign = await prisma.campaign.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Campaigns and only return the `id`
+     * const campaignWithIdOnly = await prisma.campaign.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CampaignCreateManyAndReturnArgs>(args?: SelectSubset<T, CampaignCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Campaign.
+     * @param {CampaignDeleteArgs} args - Arguments to delete one Campaign.
+     * @example
+     * // Delete one Campaign
+     * const Campaign = await prisma.campaign.delete({
+     *   where: {
+     *     // ... filter to delete one Campaign
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CampaignDeleteArgs>(args: SelectSubset<T, CampaignDeleteArgs<ExtArgs>>): Prisma__CampaignClient<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Campaign.
+     * @param {CampaignUpdateArgs} args - Arguments to update one Campaign.
+     * @example
+     * // Update one Campaign
+     * const campaign = await prisma.campaign.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CampaignUpdateArgs>(args: SelectSubset<T, CampaignUpdateArgs<ExtArgs>>): Prisma__CampaignClient<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Campaigns.
+     * @param {CampaignDeleteManyArgs} args - Arguments to filter Campaigns to delete.
+     * @example
+     * // Delete a few Campaigns
+     * const { count } = await prisma.campaign.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CampaignDeleteManyArgs>(args?: SelectSubset<T, CampaignDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Campaigns.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CampaignUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Campaigns
+     * const campaign = await prisma.campaign.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CampaignUpdateManyArgs>(args: SelectSubset<T, CampaignUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Campaigns and returns the data updated in the database.
+     * @param {CampaignUpdateManyAndReturnArgs} args - Arguments to update many Campaigns.
+     * @example
+     * // Update many Campaigns
+     * const campaign = await prisma.campaign.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Campaigns and only return the `id`
+     * const campaignWithIdOnly = await prisma.campaign.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CampaignUpdateManyAndReturnArgs>(args: SelectSubset<T, CampaignUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Campaign.
+     * @param {CampaignUpsertArgs} args - Arguments to update or create a Campaign.
+     * @example
+     * // Update or create a Campaign
+     * const campaign = await prisma.campaign.upsert({
+     *   create: {
+     *     // ... data to create a Campaign
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Campaign we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CampaignUpsertArgs>(args: SelectSubset<T, CampaignUpsertArgs<ExtArgs>>): Prisma__CampaignClient<$Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Campaigns.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CampaignCountArgs} args - Arguments to filter Campaigns to count.
+     * @example
+     * // Count the number of Campaigns
+     * const count = await prisma.campaign.count({
+     *   where: {
+     *     // ... the filter for the Campaigns we want to count
+     *   }
+     * })
+    **/
+    count<T extends CampaignCountArgs>(
+      args?: Subset<T, CampaignCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CampaignCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Campaign.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CampaignAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CampaignAggregateArgs>(args: Subset<T, CampaignAggregateArgs>): Prisma.PrismaPromise<GetCampaignAggregateType<T>>
+
+    /**
+     * Group by Campaign.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CampaignGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CampaignGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CampaignGroupByArgs['orderBy'] }
+        : { orderBy?: CampaignGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CampaignGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCampaignGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Campaign model
+   */
+  readonly fields: CampaignFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Campaign.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CampaignClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Campaign model
+   */
+  interface CampaignFieldRefs {
+    readonly id: FieldRef<"Campaign", 'String'>
+    readonly subject: FieldRef<"Campaign", 'String'>
+    readonly content: FieldRef<"Campaign", 'String'>
+    readonly status: FieldRef<"Campaign", 'String'>
+    readonly sentAt: FieldRef<"Campaign", 'DateTime'>
+    readonly createdAt: FieldRef<"Campaign", 'DateTime'>
+    readonly updatedAt: FieldRef<"Campaign", 'DateTime'>
+    readonly recipientCount: FieldRef<"Campaign", 'Int'>
+    readonly successCount: FieldRef<"Campaign", 'Int'>
+    readonly failureCount: FieldRef<"Campaign", 'Int'>
+    readonly selectedRecipients: FieldRef<"Campaign", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Campaign findUnique
+   */
+  export type CampaignFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Campaign
+     */
+    select?: CampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Campaign
+     */
+    omit?: CampaignOmit<ExtArgs> | null
+    /**
+     * Filter, which Campaign to fetch.
+     */
+    where: CampaignWhereUniqueInput
+  }
+
+  /**
+   * Campaign findUniqueOrThrow
+   */
+  export type CampaignFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Campaign
+     */
+    select?: CampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Campaign
+     */
+    omit?: CampaignOmit<ExtArgs> | null
+    /**
+     * Filter, which Campaign to fetch.
+     */
+    where: CampaignWhereUniqueInput
+  }
+
+  /**
+   * Campaign findFirst
+   */
+  export type CampaignFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Campaign
+     */
+    select?: CampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Campaign
+     */
+    omit?: CampaignOmit<ExtArgs> | null
+    /**
+     * Filter, which Campaign to fetch.
+     */
+    where?: CampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Campaigns to fetch.
+     */
+    orderBy?: CampaignOrderByWithRelationInput | CampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Campaigns.
+     */
+    cursor?: CampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Campaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Campaigns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Campaigns.
+     */
+    distinct?: CampaignScalarFieldEnum | CampaignScalarFieldEnum[]
+  }
+
+  /**
+   * Campaign findFirstOrThrow
+   */
+  export type CampaignFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Campaign
+     */
+    select?: CampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Campaign
+     */
+    omit?: CampaignOmit<ExtArgs> | null
+    /**
+     * Filter, which Campaign to fetch.
+     */
+    where?: CampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Campaigns to fetch.
+     */
+    orderBy?: CampaignOrderByWithRelationInput | CampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Campaigns.
+     */
+    cursor?: CampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Campaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Campaigns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Campaigns.
+     */
+    distinct?: CampaignScalarFieldEnum | CampaignScalarFieldEnum[]
+  }
+
+  /**
+   * Campaign findMany
+   */
+  export type CampaignFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Campaign
+     */
+    select?: CampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Campaign
+     */
+    omit?: CampaignOmit<ExtArgs> | null
+    /**
+     * Filter, which Campaigns to fetch.
+     */
+    where?: CampaignWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Campaigns to fetch.
+     */
+    orderBy?: CampaignOrderByWithRelationInput | CampaignOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Campaigns.
+     */
+    cursor?: CampaignWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Campaigns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Campaigns.
+     */
+    skip?: number
+    distinct?: CampaignScalarFieldEnum | CampaignScalarFieldEnum[]
+  }
+
+  /**
+   * Campaign create
+   */
+  export type CampaignCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Campaign
+     */
+    select?: CampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Campaign
+     */
+    omit?: CampaignOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Campaign.
+     */
+    data: XOR<CampaignCreateInput, CampaignUncheckedCreateInput>
+  }
+
+  /**
+   * Campaign createMany
+   */
+  export type CampaignCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Campaigns.
+     */
+    data: CampaignCreateManyInput | CampaignCreateManyInput[]
+  }
+
+  /**
+   * Campaign createManyAndReturn
+   */
+  export type CampaignCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Campaign
+     */
+    select?: CampaignSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Campaign
+     */
+    omit?: CampaignOmit<ExtArgs> | null
+    /**
+     * The data used to create many Campaigns.
+     */
+    data: CampaignCreateManyInput | CampaignCreateManyInput[]
+  }
+
+  /**
+   * Campaign update
+   */
+  export type CampaignUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Campaign
+     */
+    select?: CampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Campaign
+     */
+    omit?: CampaignOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Campaign.
+     */
+    data: XOR<CampaignUpdateInput, CampaignUncheckedUpdateInput>
+    /**
+     * Choose, which Campaign to update.
+     */
+    where: CampaignWhereUniqueInput
+  }
+
+  /**
+   * Campaign updateMany
+   */
+  export type CampaignUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Campaigns.
+     */
+    data: XOR<CampaignUpdateManyMutationInput, CampaignUncheckedUpdateManyInput>
+    /**
+     * Filter which Campaigns to update
+     */
+    where?: CampaignWhereInput
+    /**
+     * Limit how many Campaigns to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Campaign updateManyAndReturn
+   */
+  export type CampaignUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Campaign
+     */
+    select?: CampaignSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Campaign
+     */
+    omit?: CampaignOmit<ExtArgs> | null
+    /**
+     * The data used to update Campaigns.
+     */
+    data: XOR<CampaignUpdateManyMutationInput, CampaignUncheckedUpdateManyInput>
+    /**
+     * Filter which Campaigns to update
+     */
+    where?: CampaignWhereInput
+    /**
+     * Limit how many Campaigns to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Campaign upsert
+   */
+  export type CampaignUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Campaign
+     */
+    select?: CampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Campaign
+     */
+    omit?: CampaignOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Campaign to update in case it exists.
+     */
+    where: CampaignWhereUniqueInput
+    /**
+     * In case the Campaign found by the `where` argument doesn't exist, create a new Campaign with this data.
+     */
+    create: XOR<CampaignCreateInput, CampaignUncheckedCreateInput>
+    /**
+     * In case the Campaign was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CampaignUpdateInput, CampaignUncheckedUpdateInput>
+  }
+
+  /**
+   * Campaign delete
+   */
+  export type CampaignDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Campaign
+     */
+    select?: CampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Campaign
+     */
+    omit?: CampaignOmit<ExtArgs> | null
+    /**
+     * Filter which Campaign to delete.
+     */
+    where: CampaignWhereUniqueInput
+  }
+
+  /**
+   * Campaign deleteMany
+   */
+  export type CampaignDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Campaigns to delete
+     */
+    where?: CampaignWhereInput
+    /**
+     * Limit how many Campaigns to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Campaign without action
+   */
+  export type CampaignDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Campaign
+     */
+    select?: CampaignSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Campaign
+     */
+    omit?: CampaignOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -24379,9 +25583,9 @@ export namespace Prisma {
     description: 'description',
     status: 'status',
     category: 'category',
-    price: 'price',
+    createdAt: 'createdAt',
     icon: 'icon',
-    createdAt: 'createdAt'
+    price: 'price'
   };
 
   export type ServiceScalarFieldEnum = (typeof ServiceScalarFieldEnum)[keyof typeof ServiceScalarFieldEnum]
@@ -24392,8 +25596,8 @@ export namespace Prisma {
     userId: 'userId',
     serviceId: 'serviceId',
     notify: 'notify',
-    isActive: 'isActive',
-    selectedAt: 'selectedAt'
+    selectedAt: 'selectedAt',
+    isActive: 'isActive'
   };
 
   export type UserServiceScalarFieldEnum = (typeof UserServiceScalarFieldEnum)[keyof typeof UserServiceScalarFieldEnum]
@@ -24567,14 +25771,31 @@ export namespace Prisma {
     id: 'id',
     accountName: 'accountName',
     iban: 'iban',
-    rib: 'rib',
     bic: 'bic',
     bankName: 'bankName',
     isActive: 'isActive',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    rib: 'rib'
   };
 
   export type BankAccountScalarFieldEnum = (typeof BankAccountScalarFieldEnum)[keyof typeof BankAccountScalarFieldEnum]
+
+
+  export const CampaignScalarFieldEnum: {
+    id: 'id',
+    subject: 'subject',
+    content: 'content',
+    status: 'status',
+    sentAt: 'sentAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    recipientCount: 'recipientCount',
+    successCount: 'successCount',
+    failureCount: 'failureCount',
+    selectedRecipients: 'selectedRecipients'
+  };
+
+  export type CampaignScalarFieldEnum = (typeof CampaignScalarFieldEnum)[keyof typeof CampaignScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -24646,11 +25867,11 @@ export namespace Prisma {
     companyName?: StringFilter<"User"> | string
     role?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
-    services?: UserServiceListRelationFilter
-    notifications?: NotificationListRelationFilter
-    websites?: TenantWebsiteListRelationFilter
     chatSessions?: ChatSessionListRelationFilter
+    notifications?: NotificationListRelationFilter
     paymentRequests?: PaymentRequestListRelationFilter
+    websites?: TenantWebsiteListRelationFilter
+    services?: UserServiceListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -24660,11 +25881,11 @@ export namespace Prisma {
     companyName?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
-    services?: UserServiceOrderByRelationAggregateInput
-    notifications?: NotificationOrderByRelationAggregateInput
-    websites?: TenantWebsiteOrderByRelationAggregateInput
     chatSessions?: ChatSessionOrderByRelationAggregateInput
+    notifications?: NotificationOrderByRelationAggregateInput
     paymentRequests?: PaymentRequestOrderByRelationAggregateInput
+    websites?: TenantWebsiteOrderByRelationAggregateInput
+    services?: UserServiceOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -24677,11 +25898,11 @@ export namespace Prisma {
     companyName?: StringFilter<"User"> | string
     role?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
-    services?: UserServiceListRelationFilter
-    notifications?: NotificationListRelationFilter
-    websites?: TenantWebsiteListRelationFilter
     chatSessions?: ChatSessionListRelationFilter
+    notifications?: NotificationListRelationFilter
     paymentRequests?: PaymentRequestListRelationFilter
+    websites?: TenantWebsiteListRelationFilter
+    services?: UserServiceListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -24891,12 +26112,12 @@ export namespace Prisma {
     description?: StringNullableFilter<"Service"> | string | null
     status?: StringFilter<"Service"> | string
     category?: StringNullableFilter<"Service"> | string | null
-    price?: FloatNullableFilter<"Service"> | number | null
-    icon?: StringNullableFilter<"Service"> | string | null
     createdAt?: DateTimeFilter<"Service"> | Date | string
-    users?: UserServiceListRelationFilter
-    websites?: TenantWebsiteListRelationFilter
+    icon?: StringNullableFilter<"Service"> | string | null
+    price?: FloatNullableFilter<"Service"> | number | null
     paymentRequests?: PaymentRequestListRelationFilter
+    websites?: TenantWebsiteListRelationFilter
+    users?: UserServiceListRelationFilter
   }
 
   export type ServiceOrderByWithRelationInput = {
@@ -24906,12 +26127,12 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     status?: SortOrder
     category?: SortOrderInput | SortOrder
-    price?: SortOrderInput | SortOrder
-    icon?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    users?: UserServiceOrderByRelationAggregateInput
-    websites?: TenantWebsiteOrderByRelationAggregateInput
+    icon?: SortOrderInput | SortOrder
+    price?: SortOrderInput | SortOrder
     paymentRequests?: PaymentRequestOrderByRelationAggregateInput
+    websites?: TenantWebsiteOrderByRelationAggregateInput
+    users?: UserServiceOrderByRelationAggregateInput
   }
 
   export type ServiceWhereUniqueInput = Prisma.AtLeast<{
@@ -24924,12 +26145,12 @@ export namespace Prisma {
     description?: StringNullableFilter<"Service"> | string | null
     status?: StringFilter<"Service"> | string
     category?: StringNullableFilter<"Service"> | string | null
-    price?: FloatNullableFilter<"Service"> | number | null
-    icon?: StringNullableFilter<"Service"> | string | null
     createdAt?: DateTimeFilter<"Service"> | Date | string
-    users?: UserServiceListRelationFilter
-    websites?: TenantWebsiteListRelationFilter
+    icon?: StringNullableFilter<"Service"> | string | null
+    price?: FloatNullableFilter<"Service"> | number | null
     paymentRequests?: PaymentRequestListRelationFilter
+    websites?: TenantWebsiteListRelationFilter
+    users?: UserServiceListRelationFilter
   }, "id" | "slug">
 
   export type ServiceOrderByWithAggregationInput = {
@@ -24939,9 +26160,9 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     status?: SortOrder
     category?: SortOrderInput | SortOrder
-    price?: SortOrderInput | SortOrder
-    icon?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    icon?: SortOrderInput | SortOrder
+    price?: SortOrderInput | SortOrder
     _count?: ServiceCountOrderByAggregateInput
     _avg?: ServiceAvgOrderByAggregateInput
     _max?: ServiceMaxOrderByAggregateInput
@@ -24959,9 +26180,9 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"Service"> | string | null
     status?: StringWithAggregatesFilter<"Service"> | string
     category?: StringNullableWithAggregatesFilter<"Service"> | string | null
-    price?: FloatNullableWithAggregatesFilter<"Service"> | number | null
-    icon?: StringNullableWithAggregatesFilter<"Service"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Service"> | Date | string
+    icon?: StringNullableWithAggregatesFilter<"Service"> | string | null
+    price?: FloatNullableWithAggregatesFilter<"Service"> | number | null
   }
 
   export type UserServiceWhereInput = {
@@ -24972,10 +26193,10 @@ export namespace Prisma {
     userId?: StringFilter<"UserService"> | string
     serviceId?: StringFilter<"UserService"> | string
     notify?: BoolFilter<"UserService"> | boolean
-    isActive?: BoolFilter<"UserService"> | boolean
     selectedAt?: DateTimeFilter<"UserService"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    isActive?: BoolFilter<"UserService"> | boolean
     service?: XOR<ServiceScalarRelationFilter, ServiceWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type UserServiceOrderByWithRelationInput = {
@@ -24983,10 +26204,10 @@ export namespace Prisma {
     userId?: SortOrder
     serviceId?: SortOrder
     notify?: SortOrder
-    isActive?: SortOrder
     selectedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
+    isActive?: SortOrder
     service?: ServiceOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type UserServiceWhereUniqueInput = Prisma.AtLeast<{
@@ -24998,10 +26219,10 @@ export namespace Prisma {
     userId?: StringFilter<"UserService"> | string
     serviceId?: StringFilter<"UserService"> | string
     notify?: BoolFilter<"UserService"> | boolean
-    isActive?: BoolFilter<"UserService"> | boolean
     selectedAt?: DateTimeFilter<"UserService"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    isActive?: BoolFilter<"UserService"> | boolean
     service?: XOR<ServiceScalarRelationFilter, ServiceWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId_serviceId">
 
   export type UserServiceOrderByWithAggregationInput = {
@@ -25009,8 +26230,8 @@ export namespace Prisma {
     userId?: SortOrder
     serviceId?: SortOrder
     notify?: SortOrder
-    isActive?: SortOrder
     selectedAt?: SortOrder
+    isActive?: SortOrder
     _count?: UserServiceCountOrderByAggregateInput
     _max?: UserServiceMaxOrderByAggregateInput
     _min?: UserServiceMinOrderByAggregateInput
@@ -25024,8 +26245,8 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"UserService"> | string
     serviceId?: StringWithAggregatesFilter<"UserService"> | string
     notify?: BoolWithAggregatesFilter<"UserService"> | boolean
-    isActive?: BoolWithAggregatesFilter<"UserService"> | boolean
     selectedAt?: DateTimeWithAggregatesFilter<"UserService"> | Date | string
+    isActive?: BoolWithAggregatesFilter<"UserService"> | boolean
   }
 
   export type PasswordResetWhereInput = {
@@ -25098,14 +26319,14 @@ export namespace Prisma {
     isActive?: BoolFilter<"TenantWebsite"> | boolean
     createdAt?: DateTimeFilter<"TenantWebsite"> | Date | string
     updatedAt?: DateTimeFilter<"TenantWebsite"> | Date | string
+    cabinetAppointments?: CabinetAppointmentListRelationFilter
+    cabinetClients?: CabinetClientListRelationFilter
+    cabinetServices?: CabinetServiceListRelationFilter
     categories?: RestaurantCategoryListRelationFilter
     tables?: RestaurantTableListRelationFilter
     waiters?: RestaurantWaiterListRelationFilter
-    cabinetServices?: CabinetServiceListRelationFilter
-    cabinetClients?: CabinetClientListRelationFilter
-    cabinetAppointments?: CabinetAppointmentListRelationFilter
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     service?: XOR<ServiceScalarRelationFilter, ServiceWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type TenantWebsiteOrderByWithRelationInput = {
@@ -25123,14 +26344,14 @@ export namespace Prisma {
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    cabinetAppointments?: CabinetAppointmentOrderByRelationAggregateInput
+    cabinetClients?: CabinetClientOrderByRelationAggregateInput
+    cabinetServices?: CabinetServiceOrderByRelationAggregateInput
     categories?: RestaurantCategoryOrderByRelationAggregateInput
     tables?: RestaurantTableOrderByRelationAggregateInput
     waiters?: RestaurantWaiterOrderByRelationAggregateInput
-    cabinetServices?: CabinetServiceOrderByRelationAggregateInput
-    cabinetClients?: CabinetClientOrderByRelationAggregateInput
-    cabinetAppointments?: CabinetAppointmentOrderByRelationAggregateInput
-    user?: UserOrderByWithRelationInput
     service?: ServiceOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type TenantWebsiteWhereUniqueInput = Prisma.AtLeast<{
@@ -25151,14 +26372,14 @@ export namespace Prisma {
     isActive?: BoolFilter<"TenantWebsite"> | boolean
     createdAt?: DateTimeFilter<"TenantWebsite"> | Date | string
     updatedAt?: DateTimeFilter<"TenantWebsite"> | Date | string
+    cabinetAppointments?: CabinetAppointmentListRelationFilter
+    cabinetClients?: CabinetClientListRelationFilter
+    cabinetServices?: CabinetServiceListRelationFilter
     categories?: RestaurantCategoryListRelationFilter
     tables?: RestaurantTableListRelationFilter
     waiters?: RestaurantWaiterListRelationFilter
-    cabinetServices?: CabinetServiceListRelationFilter
-    cabinetClients?: CabinetClientListRelationFilter
-    cabinetAppointments?: CabinetAppointmentListRelationFilter
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     service?: XOR<ServiceScalarRelationFilter, ServiceWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "slug">
 
   export type TenantWebsiteOrderByWithAggregationInput = {
@@ -25210,8 +26431,8 @@ export namespace Prisma {
     name?: StringFilter<"RestaurantCategory"> | string
     order?: IntFilter<"RestaurantCategory"> | number
     isActive?: BoolFilter<"RestaurantCategory"> | boolean
-    dishes?: RestaurantDishListRelationFilter
     tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
+    dishes?: RestaurantDishListRelationFilter
   }
 
   export type RestaurantCategoryOrderByWithRelationInput = {
@@ -25220,8 +26441,8 @@ export namespace Prisma {
     name?: SortOrder
     order?: SortOrder
     isActive?: SortOrder
-    dishes?: RestaurantDishOrderByRelationAggregateInput
     tenant?: TenantWebsiteOrderByWithRelationInput
+    dishes?: RestaurantDishOrderByRelationAggregateInput
   }
 
   export type RestaurantCategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -25233,8 +26454,8 @@ export namespace Prisma {
     name?: StringFilter<"RestaurantCategory"> | string
     order?: IntFilter<"RestaurantCategory"> | number
     isActive?: BoolFilter<"RestaurantCategory"> | boolean
-    dishes?: RestaurantDishListRelationFilter
     tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
+    dishes?: RestaurantDishListRelationFilter
   }, "id">
 
   export type RestaurantCategoryOrderByWithAggregationInput = {
@@ -25344,8 +26565,8 @@ export namespace Prisma {
     isActive?: BoolFilter<"RestaurantTable"> | boolean
     waiterId?: StringNullableFilter<"RestaurantTable"> | string | null
     orders?: RestaurantOrderListRelationFilter
-    tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
     waiter?: XOR<RestaurantWaiterNullableScalarRelationFilter, RestaurantWaiterWhereInput> | null
+    tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
   }
 
   export type RestaurantTableOrderByWithRelationInput = {
@@ -25356,8 +26577,8 @@ export namespace Prisma {
     isActive?: SortOrder
     waiterId?: SortOrderInput | SortOrder
     orders?: RestaurantOrderOrderByRelationAggregateInput
-    tenant?: TenantWebsiteOrderByWithRelationInput
     waiter?: RestaurantWaiterOrderByWithRelationInput
+    tenant?: TenantWebsiteOrderByWithRelationInput
   }
 
   export type RestaurantTableWhereUniqueInput = Prisma.AtLeast<{
@@ -25372,8 +26593,8 @@ export namespace Prisma {
     isActive?: BoolFilter<"RestaurantTable"> | boolean
     waiterId?: StringNullableFilter<"RestaurantTable"> | string | null
     orders?: RestaurantOrderListRelationFilter
-    tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
     waiter?: XOR<RestaurantWaiterNullableScalarRelationFilter, RestaurantWaiterWhereInput> | null
+    tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
   }, "id" | "tenantId_number">
 
   export type RestaurantTableOrderByWithAggregationInput = {
@@ -25475,8 +26696,8 @@ export namespace Prisma {
     totalAmount?: FloatFilter<"RestaurantOrder"> | number
     createdAt?: DateTimeFilter<"RestaurantOrder"> | Date | string
     updatedAt?: DateTimeFilter<"RestaurantOrder"> | Date | string
-    items?: RestaurantOrderItemListRelationFilter
     table?: XOR<RestaurantTableScalarRelationFilter, RestaurantTableWhereInput>
+    items?: RestaurantOrderItemListRelationFilter
   }
 
   export type RestaurantOrderOrderByWithRelationInput = {
@@ -25486,8 +26707,8 @@ export namespace Prisma {
     totalAmount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    items?: RestaurantOrderItemOrderByRelationAggregateInput
     table?: RestaurantTableOrderByWithRelationInput
+    items?: RestaurantOrderItemOrderByRelationAggregateInput
   }
 
   export type RestaurantOrderWhereUniqueInput = Prisma.AtLeast<{
@@ -25500,8 +26721,8 @@ export namespace Prisma {
     totalAmount?: FloatFilter<"RestaurantOrder"> | number
     createdAt?: DateTimeFilter<"RestaurantOrder"> | Date | string
     updatedAt?: DateTimeFilter<"RestaurantOrder"> | Date | string
-    items?: RestaurantOrderItemListRelationFilter
     table?: XOR<RestaurantTableScalarRelationFilter, RestaurantTableWhereInput>
+    items?: RestaurantOrderItemListRelationFilter
   }, "id">
 
   export type RestaurantOrderOrderByWithAggregationInput = {
@@ -25753,9 +26974,9 @@ export namespace Prisma {
     notes?: StringNullableFilter<"CabinetAppointment"> | string | null
     createdAt?: DateTimeFilter<"CabinetAppointment"> | Date | string
     updatedAt?: DateTimeFilter<"CabinetAppointment"> | Date | string
-    service?: XOR<CabinetServiceScalarRelationFilter, CabinetServiceWhereInput>
-    client?: XOR<CabinetClientScalarRelationFilter, CabinetClientWhereInput>
     tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
+    client?: XOR<CabinetClientScalarRelationFilter, CabinetClientWhereInput>
+    service?: XOR<CabinetServiceScalarRelationFilter, CabinetServiceWhereInput>
   }
 
   export type CabinetAppointmentOrderByWithRelationInput = {
@@ -25768,9 +26989,9 @@ export namespace Prisma {
     notes?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    service?: CabinetServiceOrderByWithRelationInput
-    client?: CabinetClientOrderByWithRelationInput
     tenant?: TenantWebsiteOrderByWithRelationInput
+    client?: CabinetClientOrderByWithRelationInput
+    service?: CabinetServiceOrderByWithRelationInput
   }
 
   export type CabinetAppointmentWhereUniqueInput = Prisma.AtLeast<{
@@ -25786,9 +27007,9 @@ export namespace Prisma {
     notes?: StringNullableFilter<"CabinetAppointment"> | string | null
     createdAt?: DateTimeFilter<"CabinetAppointment"> | Date | string
     updatedAt?: DateTimeFilter<"CabinetAppointment"> | Date | string
-    service?: XOR<CabinetServiceScalarRelationFilter, CabinetServiceWhereInput>
-    client?: XOR<CabinetClientScalarRelationFilter, CabinetClientWhereInput>
     tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
+    client?: XOR<CabinetClientScalarRelationFilter, CabinetClientWhereInput>
+    service?: XOR<CabinetServiceScalarRelationFilter, CabinetServiceWhereInput>
   }, "id">
 
   export type CabinetAppointmentOrderByWithAggregationInput = {
@@ -25836,8 +27057,8 @@ export namespace Prisma {
     expiresAt?: DateTimeFilter<"PaymentRequest"> | Date | string
     confirmedAt?: DateTimeNullableFilter<"PaymentRequest"> | Date | string | null
     confirmedBy?: StringNullableFilter<"PaymentRequest"> | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     service?: XOR<ServiceScalarRelationFilter, ServiceWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type PaymentRequestOrderByWithRelationInput = {
@@ -25852,8 +27073,8 @@ export namespace Prisma {
     expiresAt?: SortOrder
     confirmedAt?: SortOrderInput | SortOrder
     confirmedBy?: SortOrderInput | SortOrder
-    user?: UserOrderByWithRelationInput
     service?: ServiceOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type PaymentRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -25871,8 +27092,8 @@ export namespace Prisma {
     expiresAt?: DateTimeFilter<"PaymentRequest"> | Date | string
     confirmedAt?: DateTimeNullableFilter<"PaymentRequest"> | Date | string | null
     confirmedBy?: StringNullableFilter<"PaymentRequest"> | string | null
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     service?: XOR<ServiceScalarRelationFilter, ServiceWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type PaymentRequestOrderByWithAggregationInput = {
@@ -25918,22 +27139,22 @@ export namespace Prisma {
     id?: StringFilter<"BankAccount"> | string
     accountName?: StringFilter<"BankAccount"> | string
     iban?: StringFilter<"BankAccount"> | string
-    rib?: StringNullableFilter<"BankAccount"> | string | null
     bic?: StringNullableFilter<"BankAccount"> | string | null
     bankName?: StringFilter<"BankAccount"> | string
     isActive?: BoolFilter<"BankAccount"> | boolean
     createdAt?: DateTimeFilter<"BankAccount"> | Date | string
+    rib?: StringNullableFilter<"BankAccount"> | string | null
   }
 
   export type BankAccountOrderByWithRelationInput = {
     id?: SortOrder
     accountName?: SortOrder
     iban?: SortOrder
-    rib?: SortOrderInput | SortOrder
     bic?: SortOrderInput | SortOrder
     bankName?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
+    rib?: SortOrderInput | SortOrder
   }
 
   export type BankAccountWhereUniqueInput = Prisma.AtLeast<{
@@ -25943,22 +27164,22 @@ export namespace Prisma {
     NOT?: BankAccountWhereInput | BankAccountWhereInput[]
     accountName?: StringFilter<"BankAccount"> | string
     iban?: StringFilter<"BankAccount"> | string
-    rib?: StringNullableFilter<"BankAccount"> | string | null
     bic?: StringNullableFilter<"BankAccount"> | string | null
     bankName?: StringFilter<"BankAccount"> | string
     isActive?: BoolFilter<"BankAccount"> | boolean
     createdAt?: DateTimeFilter<"BankAccount"> | Date | string
+    rib?: StringNullableFilter<"BankAccount"> | string | null
   }, "id">
 
   export type BankAccountOrderByWithAggregationInput = {
     id?: SortOrder
     accountName?: SortOrder
     iban?: SortOrder
-    rib?: SortOrderInput | SortOrder
     bic?: SortOrderInput | SortOrder
     bankName?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
+    rib?: SortOrderInput | SortOrder
     _count?: BankAccountCountOrderByAggregateInput
     _max?: BankAccountMaxOrderByAggregateInput
     _min?: BankAccountMinOrderByAggregateInput
@@ -25971,11 +27192,95 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"BankAccount"> | string
     accountName?: StringWithAggregatesFilter<"BankAccount"> | string
     iban?: StringWithAggregatesFilter<"BankAccount"> | string
-    rib?: StringNullableWithAggregatesFilter<"BankAccount"> | string | null
     bic?: StringNullableWithAggregatesFilter<"BankAccount"> | string | null
     bankName?: StringWithAggregatesFilter<"BankAccount"> | string
     isActive?: BoolWithAggregatesFilter<"BankAccount"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"BankAccount"> | Date | string
+    rib?: StringNullableWithAggregatesFilter<"BankAccount"> | string | null
+  }
+
+  export type CampaignWhereInput = {
+    AND?: CampaignWhereInput | CampaignWhereInput[]
+    OR?: CampaignWhereInput[]
+    NOT?: CampaignWhereInput | CampaignWhereInput[]
+    id?: StringFilter<"Campaign"> | string
+    subject?: StringFilter<"Campaign"> | string
+    content?: StringFilter<"Campaign"> | string
+    status?: StringFilter<"Campaign"> | string
+    sentAt?: DateTimeNullableFilter<"Campaign"> | Date | string | null
+    createdAt?: DateTimeFilter<"Campaign"> | Date | string
+    updatedAt?: DateTimeFilter<"Campaign"> | Date | string
+    recipientCount?: IntFilter<"Campaign"> | number
+    successCount?: IntFilter<"Campaign"> | number
+    failureCount?: IntFilter<"Campaign"> | number
+    selectedRecipients?: StringFilter<"Campaign"> | string
+  }
+
+  export type CampaignOrderByWithRelationInput = {
+    id?: SortOrder
+    subject?: SortOrder
+    content?: SortOrder
+    status?: SortOrder
+    sentAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    recipientCount?: SortOrder
+    successCount?: SortOrder
+    failureCount?: SortOrder
+    selectedRecipients?: SortOrder
+  }
+
+  export type CampaignWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CampaignWhereInput | CampaignWhereInput[]
+    OR?: CampaignWhereInput[]
+    NOT?: CampaignWhereInput | CampaignWhereInput[]
+    subject?: StringFilter<"Campaign"> | string
+    content?: StringFilter<"Campaign"> | string
+    status?: StringFilter<"Campaign"> | string
+    sentAt?: DateTimeNullableFilter<"Campaign"> | Date | string | null
+    createdAt?: DateTimeFilter<"Campaign"> | Date | string
+    updatedAt?: DateTimeFilter<"Campaign"> | Date | string
+    recipientCount?: IntFilter<"Campaign"> | number
+    successCount?: IntFilter<"Campaign"> | number
+    failureCount?: IntFilter<"Campaign"> | number
+    selectedRecipients?: StringFilter<"Campaign"> | string
+  }, "id">
+
+  export type CampaignOrderByWithAggregationInput = {
+    id?: SortOrder
+    subject?: SortOrder
+    content?: SortOrder
+    status?: SortOrder
+    sentAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    recipientCount?: SortOrder
+    successCount?: SortOrder
+    failureCount?: SortOrder
+    selectedRecipients?: SortOrder
+    _count?: CampaignCountOrderByAggregateInput
+    _avg?: CampaignAvgOrderByAggregateInput
+    _max?: CampaignMaxOrderByAggregateInput
+    _min?: CampaignMinOrderByAggregateInput
+    _sum?: CampaignSumOrderByAggregateInput
+  }
+
+  export type CampaignScalarWhereWithAggregatesInput = {
+    AND?: CampaignScalarWhereWithAggregatesInput | CampaignScalarWhereWithAggregatesInput[]
+    OR?: CampaignScalarWhereWithAggregatesInput[]
+    NOT?: CampaignScalarWhereWithAggregatesInput | CampaignScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Campaign"> | string
+    subject?: StringWithAggregatesFilter<"Campaign"> | string
+    content?: StringWithAggregatesFilter<"Campaign"> | string
+    status?: StringWithAggregatesFilter<"Campaign"> | string
+    sentAt?: DateTimeNullableWithAggregatesFilter<"Campaign"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Campaign"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Campaign"> | Date | string
+    recipientCount?: IntWithAggregatesFilter<"Campaign"> | number
+    successCount?: IntWithAggregatesFilter<"Campaign"> | number
+    failureCount?: IntWithAggregatesFilter<"Campaign"> | number
+    selectedRecipients?: StringWithAggregatesFilter<"Campaign"> | string
   }
 
   export type UserCreateInput = {
@@ -25985,11 +27290,11 @@ export namespace Prisma {
     companyName: string
     role?: string
     createdAt?: Date | string
-    services?: UserServiceCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    websites?: TenantWebsiteCreateNestedManyWithoutUserInput
     chatSessions?: ChatSessionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
+    websites?: TenantWebsiteCreateNestedManyWithoutUserInput
+    services?: UserServiceCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -25999,11 +27304,11 @@ export namespace Prisma {
     companyName: string
     role?: string
     createdAt?: Date | string
-    services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
     chatSessions?: ChatSessionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
+    websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
+    services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -26013,11 +27318,11 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    services?: UserServiceUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
     chatSessions?: ChatSessionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
+    websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
+    services?: UserServiceUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -26027,11 +27332,11 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
     chatSessions?: ChatSessionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
+    websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
+    services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -26244,12 +27549,12 @@ export namespace Prisma {
     description?: string | null
     status?: string
     category?: string | null
-    price?: number | null
-    icon?: string | null
     createdAt?: Date | string
-    users?: UserServiceCreateNestedManyWithoutServiceInput
-    websites?: TenantWebsiteCreateNestedManyWithoutServiceInput
+    icon?: string | null
+    price?: number | null
     paymentRequests?: PaymentRequestCreateNestedManyWithoutServiceInput
+    websites?: TenantWebsiteCreateNestedManyWithoutServiceInput
+    users?: UserServiceCreateNestedManyWithoutServiceInput
   }
 
   export type ServiceUncheckedCreateInput = {
@@ -26259,12 +27564,12 @@ export namespace Prisma {
     description?: string | null
     status?: string
     category?: string | null
-    price?: number | null
-    icon?: string | null
     createdAt?: Date | string
-    users?: UserServiceUncheckedCreateNestedManyWithoutServiceInput
-    websites?: TenantWebsiteUncheckedCreateNestedManyWithoutServiceInput
+    icon?: string | null
+    price?: number | null
     paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutServiceInput
+    websites?: TenantWebsiteUncheckedCreateNestedManyWithoutServiceInput
+    users?: UserServiceUncheckedCreateNestedManyWithoutServiceInput
   }
 
   export type ServiceUpdateInput = {
@@ -26274,12 +27579,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     category?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserServiceUpdateManyWithoutServiceNestedInput
-    websites?: TenantWebsiteUpdateManyWithoutServiceNestedInput
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     paymentRequests?: PaymentRequestUpdateManyWithoutServiceNestedInput
+    websites?: TenantWebsiteUpdateManyWithoutServiceNestedInput
+    users?: UserServiceUpdateManyWithoutServiceNestedInput
   }
 
   export type ServiceUncheckedUpdateInput = {
@@ -26289,12 +27594,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     category?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserServiceUncheckedUpdateManyWithoutServiceNestedInput
-    websites?: TenantWebsiteUncheckedUpdateManyWithoutServiceNestedInput
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutServiceNestedInput
+    websites?: TenantWebsiteUncheckedUpdateManyWithoutServiceNestedInput
+    users?: UserServiceUncheckedUpdateManyWithoutServiceNestedInput
   }
 
   export type ServiceCreateManyInput = {
@@ -26304,9 +27609,9 @@ export namespace Prisma {
     description?: string | null
     status?: string
     category?: string | null
-    price?: number | null
-    icon?: string | null
     createdAt?: Date | string
+    icon?: string | null
+    price?: number | null
   }
 
   export type ServiceUpdateManyMutationInput = {
@@ -26316,9 +27621,9 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     category?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type ServiceUncheckedUpdateManyInput = {
@@ -26328,18 +27633,18 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     category?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type UserServiceCreateInput = {
     id?: string
     notify?: boolean
-    isActive?: boolean
     selectedAt?: Date | string
-    user: UserCreateNestedOneWithoutServicesInput
+    isActive?: boolean
     service: ServiceCreateNestedOneWithoutUsersInput
+    user: UserCreateNestedOneWithoutServicesInput
   }
 
   export type UserServiceUncheckedCreateInput = {
@@ -26347,17 +27652,17 @@ export namespace Prisma {
     userId: string
     serviceId: string
     notify?: boolean
-    isActive?: boolean
     selectedAt?: Date | string
+    isActive?: boolean
   }
 
   export type UserServiceUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     notify?: BoolFieldUpdateOperationsInput | boolean
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutServicesNestedInput
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     service?: ServiceUpdateOneRequiredWithoutUsersNestedInput
+    user?: UserUpdateOneRequiredWithoutServicesNestedInput
   }
 
   export type UserServiceUncheckedUpdateInput = {
@@ -26365,8 +27670,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     serviceId?: StringFieldUpdateOperationsInput | string
     notify?: BoolFieldUpdateOperationsInput | boolean
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserServiceCreateManyInput = {
@@ -26374,15 +27679,15 @@ export namespace Prisma {
     userId: string
     serviceId: string
     notify?: boolean
-    isActive?: boolean
     selectedAt?: Date | string
+    isActive?: boolean
   }
 
   export type UserServiceUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     notify?: BoolFieldUpdateOperationsInput | boolean
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserServiceUncheckedUpdateManyInput = {
@@ -26390,8 +27695,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     serviceId?: StringFieldUpdateOperationsInput | string
     notify?: BoolFieldUpdateOperationsInput | boolean
-    isActive?: BoolFieldUpdateOperationsInput | boolean
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PasswordResetCreateInput = {
@@ -26463,14 +27768,14 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
-    user: UserCreateNestedOneWithoutWebsitesInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
+    user: UserCreateNestedOneWithoutWebsitesInput
   }
 
   export type TenantWebsiteUncheckedCreateInput = {
@@ -26488,12 +27793,12 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantWebsiteUpdateInput = {
@@ -26509,14 +27814,14 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
-    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
+    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
 
   export type TenantWebsiteUncheckedUpdateInput = {
@@ -26534,12 +27839,12 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantWebsiteCreateManyInput = {
@@ -26596,8 +27901,8 @@ export namespace Prisma {
     name: string
     order?: number
     isActive?: boolean
-    dishes?: RestaurantDishCreateNestedManyWithoutCategoryInput
     tenant: TenantWebsiteCreateNestedOneWithoutCategoriesInput
+    dishes?: RestaurantDishCreateNestedManyWithoutCategoryInput
   }
 
   export type RestaurantCategoryUncheckedCreateInput = {
@@ -26614,8 +27919,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     order?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
-    dishes?: RestaurantDishUpdateManyWithoutCategoryNestedInput
     tenant?: TenantWebsiteUpdateOneRequiredWithoutCategoriesNestedInput
+    dishes?: RestaurantDishUpdateManyWithoutCategoryNestedInput
   }
 
   export type RestaurantCategoryUncheckedUpdateInput = {
@@ -26732,8 +28037,8 @@ export namespace Prisma {
     capacity?: number | null
     isActive?: boolean
     orders?: RestaurantOrderCreateNestedManyWithoutTableInput
-    tenant: TenantWebsiteCreateNestedOneWithoutTablesInput
     waiter?: RestaurantWaiterCreateNestedOneWithoutTablesInput
+    tenant: TenantWebsiteCreateNestedOneWithoutTablesInput
   }
 
   export type RestaurantTableUncheckedCreateInput = {
@@ -26752,8 +28057,8 @@ export namespace Prisma {
     capacity?: NullableIntFieldUpdateOperationsInput | number | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
     orders?: RestaurantOrderUpdateManyWithoutTableNestedInput
-    tenant?: TenantWebsiteUpdateOneRequiredWithoutTablesNestedInput
     waiter?: RestaurantWaiterUpdateOneWithoutTablesNestedInput
+    tenant?: TenantWebsiteUpdateOneRequiredWithoutTablesNestedInput
   }
 
   export type RestaurantTableUncheckedUpdateInput = {
@@ -26863,8 +28168,8 @@ export namespace Prisma {
     totalAmount: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    items?: RestaurantOrderItemCreateNestedManyWithoutOrderInput
     table: RestaurantTableCreateNestedOneWithoutOrdersInput
+    items?: RestaurantOrderItemCreateNestedManyWithoutOrderInput
   }
 
   export type RestaurantOrderUncheckedCreateInput = {
@@ -26883,8 +28188,8 @@ export namespace Prisma {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    items?: RestaurantOrderItemUpdateManyWithoutOrderNestedInput
     table?: RestaurantTableUpdateOneRequiredWithoutOrdersNestedInput
+    items?: RestaurantOrderItemUpdateManyWithoutOrderNestedInput
   }
 
   export type RestaurantOrderUncheckedUpdateInput = {
@@ -27152,9 +28457,9 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    service: CabinetServiceCreateNestedOneWithoutAppointmentsInput
-    client: CabinetClientCreateNestedOneWithoutAppointmentsInput
     tenant: TenantWebsiteCreateNestedOneWithoutCabinetAppointmentsInput
+    client: CabinetClientCreateNestedOneWithoutAppointmentsInput
+    service: CabinetServiceCreateNestedOneWithoutAppointmentsInput
   }
 
   export type CabinetAppointmentUncheckedCreateInput = {
@@ -27176,9 +28481,9 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    service?: CabinetServiceUpdateOneRequiredWithoutAppointmentsNestedInput
-    client?: CabinetClientUpdateOneRequiredWithoutAppointmentsNestedInput
     tenant?: TenantWebsiteUpdateOneRequiredWithoutCabinetAppointmentsNestedInput
+    client?: CabinetClientUpdateOneRequiredWithoutAppointmentsNestedInput
+    service?: CabinetServiceUpdateOneRequiredWithoutAppointmentsNestedInput
   }
 
   export type CabinetAppointmentUncheckedUpdateInput = {
@@ -27236,8 +28541,8 @@ export namespace Prisma {
     expiresAt: Date | string
     confirmedAt?: Date | string | null
     confirmedBy?: string | null
-    user: UserCreateNestedOneWithoutPaymentRequestsInput
     service: ServiceCreateNestedOneWithoutPaymentRequestsInput
+    user: UserCreateNestedOneWithoutPaymentRequestsInput
   }
 
   export type PaymentRequestUncheckedCreateInput = {
@@ -27264,8 +28569,8 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     confirmedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     confirmedBy?: NullableStringFieldUpdateOperationsInput | string | null
-    user?: UserUpdateOneRequiredWithoutPaymentRequestsNestedInput
     service?: ServiceUpdateOneRequiredWithoutPaymentRequestsNestedInput
+    user?: UserUpdateOneRequiredWithoutPaymentRequestsNestedInput
   }
 
   export type PaymentRequestUncheckedUpdateInput = {
@@ -27326,77 +28631,175 @@ export namespace Prisma {
     id?: string
     accountName: string
     iban: string
-    rib?: string | null
     bic?: string | null
     bankName: string
     isActive?: boolean
     createdAt?: Date | string
+    rib?: string | null
   }
 
   export type BankAccountUncheckedCreateInput = {
     id?: string
     accountName: string
     iban: string
-    rib?: string | null
     bic?: string | null
     bankName: string
     isActive?: boolean
     createdAt?: Date | string
+    rib?: string | null
   }
 
   export type BankAccountUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     accountName?: StringFieldUpdateOperationsInput | string
     iban?: StringFieldUpdateOperationsInput | string
-    rib?: NullableStringFieldUpdateOperationsInput | string | null
     bic?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rib?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BankAccountUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     accountName?: StringFieldUpdateOperationsInput | string
     iban?: StringFieldUpdateOperationsInput | string
-    rib?: NullableStringFieldUpdateOperationsInput | string | null
     bic?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rib?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BankAccountCreateManyInput = {
     id?: string
     accountName: string
     iban: string
-    rib?: string | null
     bic?: string | null
     bankName: string
     isActive?: boolean
     createdAt?: Date | string
+    rib?: string | null
   }
 
   export type BankAccountUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     accountName?: StringFieldUpdateOperationsInput | string
     iban?: StringFieldUpdateOperationsInput | string
-    rib?: NullableStringFieldUpdateOperationsInput | string | null
     bic?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rib?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BankAccountUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     accountName?: StringFieldUpdateOperationsInput | string
     iban?: StringFieldUpdateOperationsInput | string
-    rib?: NullableStringFieldUpdateOperationsInput | string | null
     bic?: NullableStringFieldUpdateOperationsInput | string | null
     bankName?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    rib?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CampaignCreateInput = {
+    id?: string
+    subject: string
+    content: string
+    status?: string
+    sentAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    recipientCount?: number
+    successCount?: number
+    failureCount?: number
+    selectedRecipients?: string
+  }
+
+  export type CampaignUncheckedCreateInput = {
+    id?: string
+    subject: string
+    content: string
+    status?: string
+    sentAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    recipientCount?: number
+    successCount?: number
+    failureCount?: number
+    selectedRecipients?: string
+  }
+
+  export type CampaignUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recipientCount?: IntFieldUpdateOperationsInput | number
+    successCount?: IntFieldUpdateOperationsInput | number
+    failureCount?: IntFieldUpdateOperationsInput | number
+    selectedRecipients?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CampaignUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recipientCount?: IntFieldUpdateOperationsInput | number
+    successCount?: IntFieldUpdateOperationsInput | number
+    failureCount?: IntFieldUpdateOperationsInput | number
+    selectedRecipients?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CampaignCreateManyInput = {
+    id?: string
+    subject: string
+    content: string
+    status?: string
+    sentAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    recipientCount?: number
+    successCount?: number
+    failureCount?: number
+    selectedRecipients?: string
+  }
+
+  export type CampaignUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recipientCount?: IntFieldUpdateOperationsInput | number
+    successCount?: IntFieldUpdateOperationsInput | number
+    failureCount?: IntFieldUpdateOperationsInput | number
+    selectedRecipients?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CampaignUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    recipientCount?: IntFieldUpdateOperationsInput | number
+    successCount?: IntFieldUpdateOperationsInput | number
+    failureCount?: IntFieldUpdateOperationsInput | number
+    selectedRecipients?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -27424,10 +28827,10 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type UserServiceListRelationFilter = {
-    every?: UserServiceWhereInput
-    some?: UserServiceWhereInput
-    none?: UserServiceWhereInput
+  export type ChatSessionListRelationFilter = {
+    every?: ChatSessionWhereInput
+    some?: ChatSessionWhereInput
+    none?: ChatSessionWhereInput
   }
 
   export type NotificationListRelationFilter = {
@@ -27436,25 +28839,25 @@ export namespace Prisma {
     none?: NotificationWhereInput
   }
 
-  export type TenantWebsiteListRelationFilter = {
-    every?: TenantWebsiteWhereInput
-    some?: TenantWebsiteWhereInput
-    none?: TenantWebsiteWhereInput
-  }
-
-  export type ChatSessionListRelationFilter = {
-    every?: ChatSessionWhereInput
-    some?: ChatSessionWhereInput
-    none?: ChatSessionWhereInput
-  }
-
   export type PaymentRequestListRelationFilter = {
     every?: PaymentRequestWhereInput
     some?: PaymentRequestWhereInput
     none?: PaymentRequestWhereInput
   }
 
-  export type UserServiceOrderByRelationAggregateInput = {
+  export type TenantWebsiteListRelationFilter = {
+    every?: TenantWebsiteWhereInput
+    some?: TenantWebsiteWhereInput
+    none?: TenantWebsiteWhereInput
+  }
+
+  export type UserServiceListRelationFilter = {
+    every?: UserServiceWhereInput
+    some?: UserServiceWhereInput
+    none?: UserServiceWhereInput
+  }
+
+  export type ChatSessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -27462,15 +28865,15 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type PaymentRequestOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type TenantWebsiteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type ChatSessionOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type PaymentRequestOrderByRelationAggregateInput = {
+  export type UserServiceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -27694,9 +29097,9 @@ export namespace Prisma {
     description?: SortOrder
     status?: SortOrder
     category?: SortOrder
-    price?: SortOrder
-    icon?: SortOrder
     createdAt?: SortOrder
+    icon?: SortOrder
+    price?: SortOrder
   }
 
   export type ServiceAvgOrderByAggregateInput = {
@@ -27710,9 +29113,9 @@ export namespace Prisma {
     description?: SortOrder
     status?: SortOrder
     category?: SortOrder
-    price?: SortOrder
-    icon?: SortOrder
     createdAt?: SortOrder
+    icon?: SortOrder
+    price?: SortOrder
   }
 
   export type ServiceMinOrderByAggregateInput = {
@@ -27722,9 +29125,9 @@ export namespace Prisma {
     description?: SortOrder
     status?: SortOrder
     category?: SortOrder
-    price?: SortOrder
-    icon?: SortOrder
     createdAt?: SortOrder
+    icon?: SortOrder
+    price?: SortOrder
   }
 
   export type ServiceSumOrderByAggregateInput = {
@@ -27762,8 +29165,8 @@ export namespace Prisma {
     userId?: SortOrder
     serviceId?: SortOrder
     notify?: SortOrder
-    isActive?: SortOrder
     selectedAt?: SortOrder
+    isActive?: SortOrder
   }
 
   export type UserServiceMaxOrderByAggregateInput = {
@@ -27771,8 +29174,8 @@ export namespace Prisma {
     userId?: SortOrder
     serviceId?: SortOrder
     notify?: SortOrder
-    isActive?: SortOrder
     selectedAt?: SortOrder
+    isActive?: SortOrder
   }
 
   export type UserServiceMinOrderByAggregateInput = {
@@ -27780,8 +29183,8 @@ export namespace Prisma {
     userId?: SortOrder
     serviceId?: SortOrder
     notify?: SortOrder
-    isActive?: SortOrder
     selectedAt?: SortOrder
+    isActive?: SortOrder
   }
 
   export type PasswordResetCountOrderByAggregateInput = {
@@ -27808,6 +29211,24 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type CabinetAppointmentListRelationFilter = {
+    every?: CabinetAppointmentWhereInput
+    some?: CabinetAppointmentWhereInput
+    none?: CabinetAppointmentWhereInput
+  }
+
+  export type CabinetClientListRelationFilter = {
+    every?: CabinetClientWhereInput
+    some?: CabinetClientWhereInput
+    none?: CabinetClientWhereInput
+  }
+
+  export type CabinetServiceListRelationFilter = {
+    every?: CabinetServiceWhereInput
+    some?: CabinetServiceWhereInput
+    none?: CabinetServiceWhereInput
+  }
+
   export type RestaurantCategoryListRelationFilter = {
     every?: RestaurantCategoryWhereInput
     some?: RestaurantCategoryWhereInput
@@ -27826,22 +29247,16 @@ export namespace Prisma {
     none?: RestaurantWaiterWhereInput
   }
 
-  export type CabinetServiceListRelationFilter = {
-    every?: CabinetServiceWhereInput
-    some?: CabinetServiceWhereInput
-    none?: CabinetServiceWhereInput
+  export type CabinetAppointmentOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
-  export type CabinetClientListRelationFilter = {
-    every?: CabinetClientWhereInput
-    some?: CabinetClientWhereInput
-    none?: CabinetClientWhereInput
+  export type CabinetClientOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
-  export type CabinetAppointmentListRelationFilter = {
-    every?: CabinetAppointmentWhereInput
-    some?: CabinetAppointmentWhereInput
-    none?: CabinetAppointmentWhereInput
+  export type CabinetServiceOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type RestaurantCategoryOrderByRelationAggregateInput = {
@@ -27853,18 +29268,6 @@ export namespace Prisma {
   }
 
   export type RestaurantWaiterOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type CabinetServiceOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type CabinetClientOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type CabinetAppointmentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -27930,15 +29333,15 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type TenantWebsiteScalarRelationFilter = {
+    is?: TenantWebsiteWhereInput
+    isNot?: TenantWebsiteWhereInput
+  }
+
   export type RestaurantDishListRelationFilter = {
     every?: RestaurantDishWhereInput
     some?: RestaurantDishWhereInput
     none?: RestaurantDishWhereInput
-  }
-
-  export type TenantWebsiteScalarRelationFilter = {
-    is?: TenantWebsiteWhereInput
-    isNot?: TenantWebsiteWhereInput
   }
 
   export type RestaurantDishOrderByRelationAggregateInput = {
@@ -28177,15 +29580,15 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type RestaurantTableScalarRelationFilter = {
+    is?: RestaurantTableWhereInput
+    isNot?: RestaurantTableWhereInput
+  }
+
   export type RestaurantOrderItemListRelationFilter = {
     every?: RestaurantOrderItemWhereInput
     some?: RestaurantOrderItemWhereInput
     none?: RestaurantOrderItemWhereInput
-  }
-
-  export type RestaurantTableScalarRelationFilter = {
-    is?: RestaurantTableWhereInput
-    isNot?: RestaurantTableWhereInput
   }
 
   export type RestaurantOrderItemOrderByRelationAggregateInput = {
@@ -28345,14 +29748,14 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type CabinetServiceScalarRelationFilter = {
-    is?: CabinetServiceWhereInput
-    isNot?: CabinetServiceWhereInput
-  }
-
   export type CabinetClientScalarRelationFilter = {
     is?: CabinetClientWhereInput
     isNot?: CabinetClientWhereInput
+  }
+
+  export type CabinetServiceScalarRelationFilter = {
+    is?: CabinetServiceWhereInput
+    isNot?: CabinetServiceWhereInput
   }
 
   export type CabinetAppointmentCountOrderByAggregateInput = {
@@ -28470,54 +29873,87 @@ export namespace Prisma {
     id?: SortOrder
     accountName?: SortOrder
     iban?: SortOrder
-    rib?: SortOrder
     bic?: SortOrder
     bankName?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
+    rib?: SortOrder
   }
 
   export type BankAccountMaxOrderByAggregateInput = {
     id?: SortOrder
     accountName?: SortOrder
     iban?: SortOrder
-    rib?: SortOrder
     bic?: SortOrder
     bankName?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
+    rib?: SortOrder
   }
 
   export type BankAccountMinOrderByAggregateInput = {
     id?: SortOrder
     accountName?: SortOrder
     iban?: SortOrder
-    rib?: SortOrder
     bic?: SortOrder
     bankName?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
+    rib?: SortOrder
   }
 
-  export type UserServiceCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserServiceCreateWithoutUserInput, UserServiceUncheckedCreateWithoutUserInput> | UserServiceCreateWithoutUserInput[] | UserServiceUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserServiceCreateOrConnectWithoutUserInput | UserServiceCreateOrConnectWithoutUserInput[]
-    createMany?: UserServiceCreateManyUserInputEnvelope
-    connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+  export type CampaignCountOrderByAggregateInput = {
+    id?: SortOrder
+    subject?: SortOrder
+    content?: SortOrder
+    status?: SortOrder
+    sentAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    recipientCount?: SortOrder
+    successCount?: SortOrder
+    failureCount?: SortOrder
+    selectedRecipients?: SortOrder
   }
 
-  export type NotificationCreateNestedManyWithoutUserInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  export type CampaignAvgOrderByAggregateInput = {
+    recipientCount?: SortOrder
+    successCount?: SortOrder
+    failureCount?: SortOrder
   }
 
-  export type TenantWebsiteCreateNestedManyWithoutUserInput = {
-    create?: XOR<TenantWebsiteCreateWithoutUserInput, TenantWebsiteUncheckedCreateWithoutUserInput> | TenantWebsiteCreateWithoutUserInput[] | TenantWebsiteUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutUserInput | TenantWebsiteCreateOrConnectWithoutUserInput[]
-    createMany?: TenantWebsiteCreateManyUserInputEnvelope
-    connect?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
+  export type CampaignMaxOrderByAggregateInput = {
+    id?: SortOrder
+    subject?: SortOrder
+    content?: SortOrder
+    status?: SortOrder
+    sentAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    recipientCount?: SortOrder
+    successCount?: SortOrder
+    failureCount?: SortOrder
+    selectedRecipients?: SortOrder
+  }
+
+  export type CampaignMinOrderByAggregateInput = {
+    id?: SortOrder
+    subject?: SortOrder
+    content?: SortOrder
+    status?: SortOrder
+    sentAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    recipientCount?: SortOrder
+    successCount?: SortOrder
+    failureCount?: SortOrder
+    selectedRecipients?: SortOrder
+  }
+
+  export type CampaignSumOrderByAggregateInput = {
+    recipientCount?: SortOrder
+    successCount?: SortOrder
+    failureCount?: SortOrder
   }
 
   export type ChatSessionCreateNestedManyWithoutUserInput = {
@@ -28527,6 +29963,13 @@ export namespace Prisma {
     connect?: ChatSessionWhereUniqueInput | ChatSessionWhereUniqueInput[]
   }
 
+  export type NotificationCreateNestedManyWithoutUserInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
   export type PaymentRequestCreateNestedManyWithoutUserInput = {
     create?: XOR<PaymentRequestCreateWithoutUserInput, PaymentRequestUncheckedCreateWithoutUserInput> | PaymentRequestCreateWithoutUserInput[] | PaymentRequestUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PaymentRequestCreateOrConnectWithoutUserInput | PaymentRequestCreateOrConnectWithoutUserInput[]
@@ -28534,25 +29977,18 @@ export namespace Prisma {
     connect?: PaymentRequestWhereUniqueInput | PaymentRequestWhereUniqueInput[]
   }
 
-  export type UserServiceUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserServiceCreateWithoutUserInput, UserServiceUncheckedCreateWithoutUserInput> | UserServiceCreateWithoutUserInput[] | UserServiceUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserServiceCreateOrConnectWithoutUserInput | UserServiceCreateOrConnectWithoutUserInput[]
-    createMany?: UserServiceCreateManyUserInputEnvelope
-    connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-  }
-
-  export type NotificationUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-  }
-
-  export type TenantWebsiteUncheckedCreateNestedManyWithoutUserInput = {
+  export type TenantWebsiteCreateNestedManyWithoutUserInput = {
     create?: XOR<TenantWebsiteCreateWithoutUserInput, TenantWebsiteUncheckedCreateWithoutUserInput> | TenantWebsiteCreateWithoutUserInput[] | TenantWebsiteUncheckedCreateWithoutUserInput[]
     connectOrCreate?: TenantWebsiteCreateOrConnectWithoutUserInput | TenantWebsiteCreateOrConnectWithoutUserInput[]
     createMany?: TenantWebsiteCreateManyUserInputEnvelope
     connect?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
+  }
+
+  export type UserServiceCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserServiceCreateWithoutUserInput, UserServiceUncheckedCreateWithoutUserInput> | UserServiceCreateWithoutUserInput[] | UserServiceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserServiceCreateOrConnectWithoutUserInput | UserServiceCreateOrConnectWithoutUserInput[]
+    createMany?: UserServiceCreateManyUserInputEnvelope
+    connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
   }
 
   export type ChatSessionUncheckedCreateNestedManyWithoutUserInput = {
@@ -28562,11 +29998,32 @@ export namespace Prisma {
     connect?: ChatSessionWhereUniqueInput | ChatSessionWhereUniqueInput[]
   }
 
+  export type NotificationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
   export type PaymentRequestUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<PaymentRequestCreateWithoutUserInput, PaymentRequestUncheckedCreateWithoutUserInput> | PaymentRequestCreateWithoutUserInput[] | PaymentRequestUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PaymentRequestCreateOrConnectWithoutUserInput | PaymentRequestCreateOrConnectWithoutUserInput[]
     createMany?: PaymentRequestCreateManyUserInputEnvelope
     connect?: PaymentRequestWhereUniqueInput | PaymentRequestWhereUniqueInput[]
+  }
+
+  export type TenantWebsiteUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<TenantWebsiteCreateWithoutUserInput, TenantWebsiteUncheckedCreateWithoutUserInput> | TenantWebsiteCreateWithoutUserInput[] | TenantWebsiteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutUserInput | TenantWebsiteCreateOrConnectWithoutUserInput[]
+    createMany?: TenantWebsiteCreateManyUserInputEnvelope
+    connect?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
+  }
+
+  export type UserServiceUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserServiceCreateWithoutUserInput, UserServiceUncheckedCreateWithoutUserInput> | UserServiceCreateWithoutUserInput[] | UserServiceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserServiceCreateOrConnectWithoutUserInput | UserServiceCreateOrConnectWithoutUserInput[]
+    createMany?: UserServiceCreateManyUserInputEnvelope
+    connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -28575,48 +30032,6 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
-  }
-
-  export type UserServiceUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserServiceCreateWithoutUserInput, UserServiceUncheckedCreateWithoutUserInput> | UserServiceCreateWithoutUserInput[] | UserServiceUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserServiceCreateOrConnectWithoutUserInput | UserServiceCreateOrConnectWithoutUserInput[]
-    upsert?: UserServiceUpsertWithWhereUniqueWithoutUserInput | UserServiceUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserServiceCreateManyUserInputEnvelope
-    set?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    disconnect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    delete?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    update?: UserServiceUpdateWithWhereUniqueWithoutUserInput | UserServiceUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserServiceUpdateManyWithWhereWithoutUserInput | UserServiceUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserServiceScalarWhereInput | UserServiceScalarWhereInput[]
-  }
-
-  export type NotificationUpdateManyWithoutUserNestedInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
-  }
-
-  export type TenantWebsiteUpdateManyWithoutUserNestedInput = {
-    create?: XOR<TenantWebsiteCreateWithoutUserInput, TenantWebsiteUncheckedCreateWithoutUserInput> | TenantWebsiteCreateWithoutUserInput[] | TenantWebsiteUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutUserInput | TenantWebsiteCreateOrConnectWithoutUserInput[]
-    upsert?: TenantWebsiteUpsertWithWhereUniqueWithoutUserInput | TenantWebsiteUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: TenantWebsiteCreateManyUserInputEnvelope
-    set?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
-    disconnect?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
-    delete?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
-    connect?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
-    update?: TenantWebsiteUpdateWithWhereUniqueWithoutUserInput | TenantWebsiteUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: TenantWebsiteUpdateManyWithWhereWithoutUserInput | TenantWebsiteUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: TenantWebsiteScalarWhereInput | TenantWebsiteScalarWhereInput[]
   }
 
   export type ChatSessionUpdateManyWithoutUserNestedInput = {
@@ -28633,6 +30048,20 @@ export namespace Prisma {
     deleteMany?: ChatSessionScalarWhereInput | ChatSessionScalarWhereInput[]
   }
 
+  export type NotificationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
   export type PaymentRequestUpdateManyWithoutUserNestedInput = {
     create?: XOR<PaymentRequestCreateWithoutUserInput, PaymentRequestUncheckedCreateWithoutUserInput> | PaymentRequestCreateWithoutUserInput[] | PaymentRequestUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PaymentRequestCreateOrConnectWithoutUserInput | PaymentRequestCreateOrConnectWithoutUserInput[]
@@ -28647,35 +30076,7 @@ export namespace Prisma {
     deleteMany?: PaymentRequestScalarWhereInput | PaymentRequestScalarWhereInput[]
   }
 
-  export type UserServiceUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserServiceCreateWithoutUserInput, UserServiceUncheckedCreateWithoutUserInput> | UserServiceCreateWithoutUserInput[] | UserServiceUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserServiceCreateOrConnectWithoutUserInput | UserServiceCreateOrConnectWithoutUserInput[]
-    upsert?: UserServiceUpsertWithWhereUniqueWithoutUserInput | UserServiceUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserServiceCreateManyUserInputEnvelope
-    set?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    disconnect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    delete?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    update?: UserServiceUpdateWithWhereUniqueWithoutUserInput | UserServiceUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserServiceUpdateManyWithWhereWithoutUserInput | UserServiceUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserServiceScalarWhereInput | UserServiceScalarWhereInput[]
-  }
-
-  export type NotificationUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
-  }
-
-  export type TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput = {
+  export type TenantWebsiteUpdateManyWithoutUserNestedInput = {
     create?: XOR<TenantWebsiteCreateWithoutUserInput, TenantWebsiteUncheckedCreateWithoutUserInput> | TenantWebsiteCreateWithoutUserInput[] | TenantWebsiteUncheckedCreateWithoutUserInput[]
     connectOrCreate?: TenantWebsiteCreateOrConnectWithoutUserInput | TenantWebsiteCreateOrConnectWithoutUserInput[]
     upsert?: TenantWebsiteUpsertWithWhereUniqueWithoutUserInput | TenantWebsiteUpsertWithWhereUniqueWithoutUserInput[]
@@ -28687,6 +30088,20 @@ export namespace Prisma {
     update?: TenantWebsiteUpdateWithWhereUniqueWithoutUserInput | TenantWebsiteUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: TenantWebsiteUpdateManyWithWhereWithoutUserInput | TenantWebsiteUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: TenantWebsiteScalarWhereInput | TenantWebsiteScalarWhereInput[]
+  }
+
+  export type UserServiceUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserServiceCreateWithoutUserInput, UserServiceUncheckedCreateWithoutUserInput> | UserServiceCreateWithoutUserInput[] | UserServiceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserServiceCreateOrConnectWithoutUserInput | UserServiceCreateOrConnectWithoutUserInput[]
+    upsert?: UserServiceUpsertWithWhereUniqueWithoutUserInput | UserServiceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserServiceCreateManyUserInputEnvelope
+    set?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    disconnect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    delete?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    update?: UserServiceUpdateWithWhereUniqueWithoutUserInput | UserServiceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserServiceUpdateManyWithWhereWithoutUserInput | UserServiceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserServiceScalarWhereInput | UserServiceScalarWhereInput[]
   }
 
   export type ChatSessionUncheckedUpdateManyWithoutUserNestedInput = {
@@ -28703,6 +30118,20 @@ export namespace Prisma {
     deleteMany?: ChatSessionScalarWhereInput | ChatSessionScalarWhereInput[]
   }
 
+  export type NotificationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
   export type PaymentRequestUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<PaymentRequestCreateWithoutUserInput, PaymentRequestUncheckedCreateWithoutUserInput> | PaymentRequestCreateWithoutUserInput[] | PaymentRequestUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PaymentRequestCreateOrConnectWithoutUserInput | PaymentRequestCreateOrConnectWithoutUserInput[]
@@ -28715,6 +30144,34 @@ export namespace Prisma {
     update?: PaymentRequestUpdateWithWhereUniqueWithoutUserInput | PaymentRequestUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: PaymentRequestUpdateManyWithWhereWithoutUserInput | PaymentRequestUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: PaymentRequestScalarWhereInput | PaymentRequestScalarWhereInput[]
+  }
+
+  export type TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<TenantWebsiteCreateWithoutUserInput, TenantWebsiteUncheckedCreateWithoutUserInput> | TenantWebsiteCreateWithoutUserInput[] | TenantWebsiteUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutUserInput | TenantWebsiteCreateOrConnectWithoutUserInput[]
+    upsert?: TenantWebsiteUpsertWithWhereUniqueWithoutUserInput | TenantWebsiteUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: TenantWebsiteCreateManyUserInputEnvelope
+    set?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
+    disconnect?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
+    delete?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
+    connect?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
+    update?: TenantWebsiteUpdateWithWhereUniqueWithoutUserInput | TenantWebsiteUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: TenantWebsiteUpdateManyWithWhereWithoutUserInput | TenantWebsiteUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: TenantWebsiteScalarWhereInput | TenantWebsiteScalarWhereInput[]
+  }
+
+  export type UserServiceUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserServiceCreateWithoutUserInput, UserServiceUncheckedCreateWithoutUserInput> | UserServiceCreateWithoutUserInput[] | UserServiceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserServiceCreateOrConnectWithoutUserInput | UserServiceCreateOrConnectWithoutUserInput[]
+    upsert?: UserServiceUpsertWithWhereUniqueWithoutUserInput | UserServiceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserServiceCreateManyUserInputEnvelope
+    set?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    disconnect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    delete?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    update?: UserServiceUpdateWithWhereUniqueWithoutUserInput | UserServiceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserServiceUpdateManyWithWhereWithoutUserInput | UserServiceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserServiceScalarWhereInput | UserServiceScalarWhereInput[]
   }
 
   export type ChatMessageCreateNestedManyWithoutSessionInput = {
@@ -28809,11 +30266,11 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNotificationsInput, UserUpdateWithoutNotificationsInput>, UserUncheckedUpdateWithoutNotificationsInput>
   }
 
-  export type UserServiceCreateNestedManyWithoutServiceInput = {
-    create?: XOR<UserServiceCreateWithoutServiceInput, UserServiceUncheckedCreateWithoutServiceInput> | UserServiceCreateWithoutServiceInput[] | UserServiceUncheckedCreateWithoutServiceInput[]
-    connectOrCreate?: UserServiceCreateOrConnectWithoutServiceInput | UserServiceCreateOrConnectWithoutServiceInput[]
-    createMany?: UserServiceCreateManyServiceInputEnvelope
-    connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+  export type PaymentRequestCreateNestedManyWithoutServiceInput = {
+    create?: XOR<PaymentRequestCreateWithoutServiceInput, PaymentRequestUncheckedCreateWithoutServiceInput> | PaymentRequestCreateWithoutServiceInput[] | PaymentRequestUncheckedCreateWithoutServiceInput[]
+    connectOrCreate?: PaymentRequestCreateOrConnectWithoutServiceInput | PaymentRequestCreateOrConnectWithoutServiceInput[]
+    createMany?: PaymentRequestCreateManyServiceInputEnvelope
+    connect?: PaymentRequestWhereUniqueInput | PaymentRequestWhereUniqueInput[]
   }
 
   export type TenantWebsiteCreateNestedManyWithoutServiceInput = {
@@ -28823,25 +30280,11 @@ export namespace Prisma {
     connect?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
   }
 
-  export type PaymentRequestCreateNestedManyWithoutServiceInput = {
-    create?: XOR<PaymentRequestCreateWithoutServiceInput, PaymentRequestUncheckedCreateWithoutServiceInput> | PaymentRequestCreateWithoutServiceInput[] | PaymentRequestUncheckedCreateWithoutServiceInput[]
-    connectOrCreate?: PaymentRequestCreateOrConnectWithoutServiceInput | PaymentRequestCreateOrConnectWithoutServiceInput[]
-    createMany?: PaymentRequestCreateManyServiceInputEnvelope
-    connect?: PaymentRequestWhereUniqueInput | PaymentRequestWhereUniqueInput[]
-  }
-
-  export type UserServiceUncheckedCreateNestedManyWithoutServiceInput = {
+  export type UserServiceCreateNestedManyWithoutServiceInput = {
     create?: XOR<UserServiceCreateWithoutServiceInput, UserServiceUncheckedCreateWithoutServiceInput> | UserServiceCreateWithoutServiceInput[] | UserServiceUncheckedCreateWithoutServiceInput[]
     connectOrCreate?: UserServiceCreateOrConnectWithoutServiceInput | UserServiceCreateOrConnectWithoutServiceInput[]
     createMany?: UserServiceCreateManyServiceInputEnvelope
     connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-  }
-
-  export type TenantWebsiteUncheckedCreateNestedManyWithoutServiceInput = {
-    create?: XOR<TenantWebsiteCreateWithoutServiceInput, TenantWebsiteUncheckedCreateWithoutServiceInput> | TenantWebsiteCreateWithoutServiceInput[] | TenantWebsiteUncheckedCreateWithoutServiceInput[]
-    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutServiceInput | TenantWebsiteCreateOrConnectWithoutServiceInput[]
-    createMany?: TenantWebsiteCreateManyServiceInputEnvelope
-    connect?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
   }
 
   export type PaymentRequestUncheckedCreateNestedManyWithoutServiceInput = {
@@ -28851,40 +30294,26 @@ export namespace Prisma {
     connect?: PaymentRequestWhereUniqueInput | PaymentRequestWhereUniqueInput[]
   }
 
+  export type TenantWebsiteUncheckedCreateNestedManyWithoutServiceInput = {
+    create?: XOR<TenantWebsiteCreateWithoutServiceInput, TenantWebsiteUncheckedCreateWithoutServiceInput> | TenantWebsiteCreateWithoutServiceInput[] | TenantWebsiteUncheckedCreateWithoutServiceInput[]
+    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutServiceInput | TenantWebsiteCreateOrConnectWithoutServiceInput[]
+    createMany?: TenantWebsiteCreateManyServiceInputEnvelope
+    connect?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
+  }
+
+  export type UserServiceUncheckedCreateNestedManyWithoutServiceInput = {
+    create?: XOR<UserServiceCreateWithoutServiceInput, UserServiceUncheckedCreateWithoutServiceInput> | UserServiceCreateWithoutServiceInput[] | UserServiceUncheckedCreateWithoutServiceInput[]
+    connectOrCreate?: UserServiceCreateOrConnectWithoutServiceInput | UserServiceCreateOrConnectWithoutServiceInput[]
+    createMany?: UserServiceCreateManyServiceInputEnvelope
+    connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+  }
+
   export type NullableFloatFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type UserServiceUpdateManyWithoutServiceNestedInput = {
-    create?: XOR<UserServiceCreateWithoutServiceInput, UserServiceUncheckedCreateWithoutServiceInput> | UserServiceCreateWithoutServiceInput[] | UserServiceUncheckedCreateWithoutServiceInput[]
-    connectOrCreate?: UserServiceCreateOrConnectWithoutServiceInput | UserServiceCreateOrConnectWithoutServiceInput[]
-    upsert?: UserServiceUpsertWithWhereUniqueWithoutServiceInput | UserServiceUpsertWithWhereUniqueWithoutServiceInput[]
-    createMany?: UserServiceCreateManyServiceInputEnvelope
-    set?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    disconnect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    delete?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    update?: UserServiceUpdateWithWhereUniqueWithoutServiceInput | UserServiceUpdateWithWhereUniqueWithoutServiceInput[]
-    updateMany?: UserServiceUpdateManyWithWhereWithoutServiceInput | UserServiceUpdateManyWithWhereWithoutServiceInput[]
-    deleteMany?: UserServiceScalarWhereInput | UserServiceScalarWhereInput[]
-  }
-
-  export type TenantWebsiteUpdateManyWithoutServiceNestedInput = {
-    create?: XOR<TenantWebsiteCreateWithoutServiceInput, TenantWebsiteUncheckedCreateWithoutServiceInput> | TenantWebsiteCreateWithoutServiceInput[] | TenantWebsiteUncheckedCreateWithoutServiceInput[]
-    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutServiceInput | TenantWebsiteCreateOrConnectWithoutServiceInput[]
-    upsert?: TenantWebsiteUpsertWithWhereUniqueWithoutServiceInput | TenantWebsiteUpsertWithWhereUniqueWithoutServiceInput[]
-    createMany?: TenantWebsiteCreateManyServiceInputEnvelope
-    set?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
-    disconnect?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
-    delete?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
-    connect?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
-    update?: TenantWebsiteUpdateWithWhereUniqueWithoutServiceInput | TenantWebsiteUpdateWithWhereUniqueWithoutServiceInput[]
-    updateMany?: TenantWebsiteUpdateManyWithWhereWithoutServiceInput | TenantWebsiteUpdateManyWithWhereWithoutServiceInput[]
-    deleteMany?: TenantWebsiteScalarWhereInput | TenantWebsiteScalarWhereInput[]
   }
 
   export type PaymentRequestUpdateManyWithoutServiceNestedInput = {
@@ -28901,21 +30330,7 @@ export namespace Prisma {
     deleteMany?: PaymentRequestScalarWhereInput | PaymentRequestScalarWhereInput[]
   }
 
-  export type UserServiceUncheckedUpdateManyWithoutServiceNestedInput = {
-    create?: XOR<UserServiceCreateWithoutServiceInput, UserServiceUncheckedCreateWithoutServiceInput> | UserServiceCreateWithoutServiceInput[] | UserServiceUncheckedCreateWithoutServiceInput[]
-    connectOrCreate?: UserServiceCreateOrConnectWithoutServiceInput | UserServiceCreateOrConnectWithoutServiceInput[]
-    upsert?: UserServiceUpsertWithWhereUniqueWithoutServiceInput | UserServiceUpsertWithWhereUniqueWithoutServiceInput[]
-    createMany?: UserServiceCreateManyServiceInputEnvelope
-    set?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    disconnect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    delete?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
-    update?: UserServiceUpdateWithWhereUniqueWithoutServiceInput | UserServiceUpdateWithWhereUniqueWithoutServiceInput[]
-    updateMany?: UserServiceUpdateManyWithWhereWithoutServiceInput | UserServiceUpdateManyWithWhereWithoutServiceInput[]
-    deleteMany?: UserServiceScalarWhereInput | UserServiceScalarWhereInput[]
-  }
-
-  export type TenantWebsiteUncheckedUpdateManyWithoutServiceNestedInput = {
+  export type TenantWebsiteUpdateManyWithoutServiceNestedInput = {
     create?: XOR<TenantWebsiteCreateWithoutServiceInput, TenantWebsiteUncheckedCreateWithoutServiceInput> | TenantWebsiteCreateWithoutServiceInput[] | TenantWebsiteUncheckedCreateWithoutServiceInput[]
     connectOrCreate?: TenantWebsiteCreateOrConnectWithoutServiceInput | TenantWebsiteCreateOrConnectWithoutServiceInput[]
     upsert?: TenantWebsiteUpsertWithWhereUniqueWithoutServiceInput | TenantWebsiteUpsertWithWhereUniqueWithoutServiceInput[]
@@ -28927,6 +30342,20 @@ export namespace Prisma {
     update?: TenantWebsiteUpdateWithWhereUniqueWithoutServiceInput | TenantWebsiteUpdateWithWhereUniqueWithoutServiceInput[]
     updateMany?: TenantWebsiteUpdateManyWithWhereWithoutServiceInput | TenantWebsiteUpdateManyWithWhereWithoutServiceInput[]
     deleteMany?: TenantWebsiteScalarWhereInput | TenantWebsiteScalarWhereInput[]
+  }
+
+  export type UserServiceUpdateManyWithoutServiceNestedInput = {
+    create?: XOR<UserServiceCreateWithoutServiceInput, UserServiceUncheckedCreateWithoutServiceInput> | UserServiceCreateWithoutServiceInput[] | UserServiceUncheckedCreateWithoutServiceInput[]
+    connectOrCreate?: UserServiceCreateOrConnectWithoutServiceInput | UserServiceCreateOrConnectWithoutServiceInput[]
+    upsert?: UserServiceUpsertWithWhereUniqueWithoutServiceInput | UserServiceUpsertWithWhereUniqueWithoutServiceInput[]
+    createMany?: UserServiceCreateManyServiceInputEnvelope
+    set?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    disconnect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    delete?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    update?: UserServiceUpdateWithWhereUniqueWithoutServiceInput | UserServiceUpdateWithWhereUniqueWithoutServiceInput[]
+    updateMany?: UserServiceUpdateManyWithWhereWithoutServiceInput | UserServiceUpdateManyWithWhereWithoutServiceInput[]
+    deleteMany?: UserServiceScalarWhereInput | UserServiceScalarWhereInput[]
   }
 
   export type PaymentRequestUncheckedUpdateManyWithoutServiceNestedInput = {
@@ -28943,16 +30372,52 @@ export namespace Prisma {
     deleteMany?: PaymentRequestScalarWhereInput | PaymentRequestScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutServicesInput = {
-    create?: XOR<UserCreateWithoutServicesInput, UserUncheckedCreateWithoutServicesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutServicesInput
-    connect?: UserWhereUniqueInput
+  export type TenantWebsiteUncheckedUpdateManyWithoutServiceNestedInput = {
+    create?: XOR<TenantWebsiteCreateWithoutServiceInput, TenantWebsiteUncheckedCreateWithoutServiceInput> | TenantWebsiteCreateWithoutServiceInput[] | TenantWebsiteUncheckedCreateWithoutServiceInput[]
+    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutServiceInput | TenantWebsiteCreateOrConnectWithoutServiceInput[]
+    upsert?: TenantWebsiteUpsertWithWhereUniqueWithoutServiceInput | TenantWebsiteUpsertWithWhereUniqueWithoutServiceInput[]
+    createMany?: TenantWebsiteCreateManyServiceInputEnvelope
+    set?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
+    disconnect?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
+    delete?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
+    connect?: TenantWebsiteWhereUniqueInput | TenantWebsiteWhereUniqueInput[]
+    update?: TenantWebsiteUpdateWithWhereUniqueWithoutServiceInput | TenantWebsiteUpdateWithWhereUniqueWithoutServiceInput[]
+    updateMany?: TenantWebsiteUpdateManyWithWhereWithoutServiceInput | TenantWebsiteUpdateManyWithWhereWithoutServiceInput[]
+    deleteMany?: TenantWebsiteScalarWhereInput | TenantWebsiteScalarWhereInput[]
+  }
+
+  export type UserServiceUncheckedUpdateManyWithoutServiceNestedInput = {
+    create?: XOR<UserServiceCreateWithoutServiceInput, UserServiceUncheckedCreateWithoutServiceInput> | UserServiceCreateWithoutServiceInput[] | UserServiceUncheckedCreateWithoutServiceInput[]
+    connectOrCreate?: UserServiceCreateOrConnectWithoutServiceInput | UserServiceCreateOrConnectWithoutServiceInput[]
+    upsert?: UserServiceUpsertWithWhereUniqueWithoutServiceInput | UserServiceUpsertWithWhereUniqueWithoutServiceInput[]
+    createMany?: UserServiceCreateManyServiceInputEnvelope
+    set?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    disconnect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    delete?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+    update?: UserServiceUpdateWithWhereUniqueWithoutServiceInput | UserServiceUpdateWithWhereUniqueWithoutServiceInput[]
+    updateMany?: UserServiceUpdateManyWithWhereWithoutServiceInput | UserServiceUpdateManyWithWhereWithoutServiceInput[]
+    deleteMany?: UserServiceScalarWhereInput | UserServiceScalarWhereInput[]
   }
 
   export type ServiceCreateNestedOneWithoutUsersInput = {
     create?: XOR<ServiceCreateWithoutUsersInput, ServiceUncheckedCreateWithoutUsersInput>
     connectOrCreate?: ServiceCreateOrConnectWithoutUsersInput
     connect?: ServiceWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutServicesInput = {
+    create?: XOR<UserCreateWithoutServicesInput, UserUncheckedCreateWithoutServicesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutServicesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ServiceUpdateOneRequiredWithoutUsersNestedInput = {
+    create?: XOR<ServiceCreateWithoutUsersInput, ServiceUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: ServiceCreateOrConnectWithoutUsersInput
+    upsert?: ServiceUpsertWithoutUsersInput
+    connect?: ServiceWhereUniqueInput
+    update?: XOR<XOR<ServiceUpdateToOneWithWhereWithoutUsersInput, ServiceUpdateWithoutUsersInput>, ServiceUncheckedUpdateWithoutUsersInput>
   }
 
   export type UserUpdateOneRequiredWithoutServicesNestedInput = {
@@ -28963,12 +30428,25 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutServicesInput, UserUpdateWithoutServicesInput>, UserUncheckedUpdateWithoutServicesInput>
   }
 
-  export type ServiceUpdateOneRequiredWithoutUsersNestedInput = {
-    create?: XOR<ServiceCreateWithoutUsersInput, ServiceUncheckedCreateWithoutUsersInput>
-    connectOrCreate?: ServiceCreateOrConnectWithoutUsersInput
-    upsert?: ServiceUpsertWithoutUsersInput
-    connect?: ServiceWhereUniqueInput
-    update?: XOR<XOR<ServiceUpdateToOneWithWhereWithoutUsersInput, ServiceUpdateWithoutUsersInput>, ServiceUncheckedUpdateWithoutUsersInput>
+  export type CabinetAppointmentCreateNestedManyWithoutTenantInput = {
+    create?: XOR<CabinetAppointmentCreateWithoutTenantInput, CabinetAppointmentUncheckedCreateWithoutTenantInput> | CabinetAppointmentCreateWithoutTenantInput[] | CabinetAppointmentUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: CabinetAppointmentCreateOrConnectWithoutTenantInput | CabinetAppointmentCreateOrConnectWithoutTenantInput[]
+    createMany?: CabinetAppointmentCreateManyTenantInputEnvelope
+    connect?: CabinetAppointmentWhereUniqueInput | CabinetAppointmentWhereUniqueInput[]
+  }
+
+  export type CabinetClientCreateNestedManyWithoutTenantInput = {
+    create?: XOR<CabinetClientCreateWithoutTenantInput, CabinetClientUncheckedCreateWithoutTenantInput> | CabinetClientCreateWithoutTenantInput[] | CabinetClientUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: CabinetClientCreateOrConnectWithoutTenantInput | CabinetClientCreateOrConnectWithoutTenantInput[]
+    createMany?: CabinetClientCreateManyTenantInputEnvelope
+    connect?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
+  }
+
+  export type CabinetServiceCreateNestedManyWithoutTenantInput = {
+    create?: XOR<CabinetServiceCreateWithoutTenantInput, CabinetServiceUncheckedCreateWithoutTenantInput> | CabinetServiceCreateWithoutTenantInput[] | CabinetServiceUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: CabinetServiceCreateOrConnectWithoutTenantInput | CabinetServiceCreateOrConnectWithoutTenantInput[]
+    createMany?: CabinetServiceCreateManyTenantInputEnvelope
+    connect?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
   }
 
   export type RestaurantCategoryCreateNestedManyWithoutTenantInput = {
@@ -28992,25 +30470,10 @@ export namespace Prisma {
     connect?: RestaurantWaiterWhereUniqueInput | RestaurantWaiterWhereUniqueInput[]
   }
 
-  export type CabinetServiceCreateNestedManyWithoutTenantInput = {
-    create?: XOR<CabinetServiceCreateWithoutTenantInput, CabinetServiceUncheckedCreateWithoutTenantInput> | CabinetServiceCreateWithoutTenantInput[] | CabinetServiceUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: CabinetServiceCreateOrConnectWithoutTenantInput | CabinetServiceCreateOrConnectWithoutTenantInput[]
-    createMany?: CabinetServiceCreateManyTenantInputEnvelope
-    connect?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
-  }
-
-  export type CabinetClientCreateNestedManyWithoutTenantInput = {
-    create?: XOR<CabinetClientCreateWithoutTenantInput, CabinetClientUncheckedCreateWithoutTenantInput> | CabinetClientCreateWithoutTenantInput[] | CabinetClientUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: CabinetClientCreateOrConnectWithoutTenantInput | CabinetClientCreateOrConnectWithoutTenantInput[]
-    createMany?: CabinetClientCreateManyTenantInputEnvelope
-    connect?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
-  }
-
-  export type CabinetAppointmentCreateNestedManyWithoutTenantInput = {
-    create?: XOR<CabinetAppointmentCreateWithoutTenantInput, CabinetAppointmentUncheckedCreateWithoutTenantInput> | CabinetAppointmentCreateWithoutTenantInput[] | CabinetAppointmentUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: CabinetAppointmentCreateOrConnectWithoutTenantInput | CabinetAppointmentCreateOrConnectWithoutTenantInput[]
-    createMany?: CabinetAppointmentCreateManyTenantInputEnvelope
-    connect?: CabinetAppointmentWhereUniqueInput | CabinetAppointmentWhereUniqueInput[]
+  export type ServiceCreateNestedOneWithoutWebsitesInput = {
+    create?: XOR<ServiceCreateWithoutWebsitesInput, ServiceUncheckedCreateWithoutWebsitesInput>
+    connectOrCreate?: ServiceCreateOrConnectWithoutWebsitesInput
+    connect?: ServiceWhereUniqueInput
   }
 
   export type UserCreateNestedOneWithoutWebsitesInput = {
@@ -29019,10 +30482,25 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type ServiceCreateNestedOneWithoutWebsitesInput = {
-    create?: XOR<ServiceCreateWithoutWebsitesInput, ServiceUncheckedCreateWithoutWebsitesInput>
-    connectOrCreate?: ServiceCreateOrConnectWithoutWebsitesInput
-    connect?: ServiceWhereUniqueInput
+  export type CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<CabinetAppointmentCreateWithoutTenantInput, CabinetAppointmentUncheckedCreateWithoutTenantInput> | CabinetAppointmentCreateWithoutTenantInput[] | CabinetAppointmentUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: CabinetAppointmentCreateOrConnectWithoutTenantInput | CabinetAppointmentCreateOrConnectWithoutTenantInput[]
+    createMany?: CabinetAppointmentCreateManyTenantInputEnvelope
+    connect?: CabinetAppointmentWhereUniqueInput | CabinetAppointmentWhereUniqueInput[]
+  }
+
+  export type CabinetClientUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<CabinetClientCreateWithoutTenantInput, CabinetClientUncheckedCreateWithoutTenantInput> | CabinetClientCreateWithoutTenantInput[] | CabinetClientUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: CabinetClientCreateOrConnectWithoutTenantInput | CabinetClientCreateOrConnectWithoutTenantInput[]
+    createMany?: CabinetClientCreateManyTenantInputEnvelope
+    connect?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
+  }
+
+  export type CabinetServiceUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<CabinetServiceCreateWithoutTenantInput, CabinetServiceUncheckedCreateWithoutTenantInput> | CabinetServiceCreateWithoutTenantInput[] | CabinetServiceUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: CabinetServiceCreateOrConnectWithoutTenantInput | CabinetServiceCreateOrConnectWithoutTenantInput[]
+    createMany?: CabinetServiceCreateManyTenantInputEnvelope
+    connect?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
   }
 
   export type RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput = {
@@ -29046,25 +30524,46 @@ export namespace Prisma {
     connect?: RestaurantWaiterWhereUniqueInput | RestaurantWaiterWhereUniqueInput[]
   }
 
-  export type CabinetServiceUncheckedCreateNestedManyWithoutTenantInput = {
-    create?: XOR<CabinetServiceCreateWithoutTenantInput, CabinetServiceUncheckedCreateWithoutTenantInput> | CabinetServiceCreateWithoutTenantInput[] | CabinetServiceUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: CabinetServiceCreateOrConnectWithoutTenantInput | CabinetServiceCreateOrConnectWithoutTenantInput[]
-    createMany?: CabinetServiceCreateManyTenantInputEnvelope
-    connect?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
-  }
-
-  export type CabinetClientUncheckedCreateNestedManyWithoutTenantInput = {
-    create?: XOR<CabinetClientCreateWithoutTenantInput, CabinetClientUncheckedCreateWithoutTenantInput> | CabinetClientCreateWithoutTenantInput[] | CabinetClientUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: CabinetClientCreateOrConnectWithoutTenantInput | CabinetClientCreateOrConnectWithoutTenantInput[]
-    createMany?: CabinetClientCreateManyTenantInputEnvelope
-    connect?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
-  }
-
-  export type CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput = {
+  export type CabinetAppointmentUpdateManyWithoutTenantNestedInput = {
     create?: XOR<CabinetAppointmentCreateWithoutTenantInput, CabinetAppointmentUncheckedCreateWithoutTenantInput> | CabinetAppointmentCreateWithoutTenantInput[] | CabinetAppointmentUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: CabinetAppointmentCreateOrConnectWithoutTenantInput | CabinetAppointmentCreateOrConnectWithoutTenantInput[]
+    upsert?: CabinetAppointmentUpsertWithWhereUniqueWithoutTenantInput | CabinetAppointmentUpsertWithWhereUniqueWithoutTenantInput[]
     createMany?: CabinetAppointmentCreateManyTenantInputEnvelope
+    set?: CabinetAppointmentWhereUniqueInput | CabinetAppointmentWhereUniqueInput[]
+    disconnect?: CabinetAppointmentWhereUniqueInput | CabinetAppointmentWhereUniqueInput[]
+    delete?: CabinetAppointmentWhereUniqueInput | CabinetAppointmentWhereUniqueInput[]
     connect?: CabinetAppointmentWhereUniqueInput | CabinetAppointmentWhereUniqueInput[]
+    update?: CabinetAppointmentUpdateWithWhereUniqueWithoutTenantInput | CabinetAppointmentUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: CabinetAppointmentUpdateManyWithWhereWithoutTenantInput | CabinetAppointmentUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: CabinetAppointmentScalarWhereInput | CabinetAppointmentScalarWhereInput[]
+  }
+
+  export type CabinetClientUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<CabinetClientCreateWithoutTenantInput, CabinetClientUncheckedCreateWithoutTenantInput> | CabinetClientCreateWithoutTenantInput[] | CabinetClientUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: CabinetClientCreateOrConnectWithoutTenantInput | CabinetClientCreateOrConnectWithoutTenantInput[]
+    upsert?: CabinetClientUpsertWithWhereUniqueWithoutTenantInput | CabinetClientUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: CabinetClientCreateManyTenantInputEnvelope
+    set?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
+    disconnect?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
+    delete?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
+    connect?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
+    update?: CabinetClientUpdateWithWhereUniqueWithoutTenantInput | CabinetClientUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: CabinetClientUpdateManyWithWhereWithoutTenantInput | CabinetClientUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: CabinetClientScalarWhereInput | CabinetClientScalarWhereInput[]
+  }
+
+  export type CabinetServiceUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<CabinetServiceCreateWithoutTenantInput, CabinetServiceUncheckedCreateWithoutTenantInput> | CabinetServiceCreateWithoutTenantInput[] | CabinetServiceUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: CabinetServiceCreateOrConnectWithoutTenantInput | CabinetServiceCreateOrConnectWithoutTenantInput[]
+    upsert?: CabinetServiceUpsertWithWhereUniqueWithoutTenantInput | CabinetServiceUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: CabinetServiceCreateManyTenantInputEnvelope
+    set?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
+    disconnect?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
+    delete?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
+    connect?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
+    update?: CabinetServiceUpdateWithWhereUniqueWithoutTenantInput | CabinetServiceUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: CabinetServiceUpdateManyWithWhereWithoutTenantInput | CabinetServiceUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: CabinetServiceScalarWhereInput | CabinetServiceScalarWhereInput[]
   }
 
   export type RestaurantCategoryUpdateManyWithoutTenantNestedInput = {
@@ -29109,35 +30608,23 @@ export namespace Prisma {
     deleteMany?: RestaurantWaiterScalarWhereInput | RestaurantWaiterScalarWhereInput[]
   }
 
-  export type CabinetServiceUpdateManyWithoutTenantNestedInput = {
-    create?: XOR<CabinetServiceCreateWithoutTenantInput, CabinetServiceUncheckedCreateWithoutTenantInput> | CabinetServiceCreateWithoutTenantInput[] | CabinetServiceUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: CabinetServiceCreateOrConnectWithoutTenantInput | CabinetServiceCreateOrConnectWithoutTenantInput[]
-    upsert?: CabinetServiceUpsertWithWhereUniqueWithoutTenantInput | CabinetServiceUpsertWithWhereUniqueWithoutTenantInput[]
-    createMany?: CabinetServiceCreateManyTenantInputEnvelope
-    set?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
-    disconnect?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
-    delete?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
-    connect?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
-    update?: CabinetServiceUpdateWithWhereUniqueWithoutTenantInput | CabinetServiceUpdateWithWhereUniqueWithoutTenantInput[]
-    updateMany?: CabinetServiceUpdateManyWithWhereWithoutTenantInput | CabinetServiceUpdateManyWithWhereWithoutTenantInput[]
-    deleteMany?: CabinetServiceScalarWhereInput | CabinetServiceScalarWhereInput[]
+  export type ServiceUpdateOneRequiredWithoutWebsitesNestedInput = {
+    create?: XOR<ServiceCreateWithoutWebsitesInput, ServiceUncheckedCreateWithoutWebsitesInput>
+    connectOrCreate?: ServiceCreateOrConnectWithoutWebsitesInput
+    upsert?: ServiceUpsertWithoutWebsitesInput
+    connect?: ServiceWhereUniqueInput
+    update?: XOR<XOR<ServiceUpdateToOneWithWhereWithoutWebsitesInput, ServiceUpdateWithoutWebsitesInput>, ServiceUncheckedUpdateWithoutWebsitesInput>
   }
 
-  export type CabinetClientUpdateManyWithoutTenantNestedInput = {
-    create?: XOR<CabinetClientCreateWithoutTenantInput, CabinetClientUncheckedCreateWithoutTenantInput> | CabinetClientCreateWithoutTenantInput[] | CabinetClientUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: CabinetClientCreateOrConnectWithoutTenantInput | CabinetClientCreateOrConnectWithoutTenantInput[]
-    upsert?: CabinetClientUpsertWithWhereUniqueWithoutTenantInput | CabinetClientUpsertWithWhereUniqueWithoutTenantInput[]
-    createMany?: CabinetClientCreateManyTenantInputEnvelope
-    set?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
-    disconnect?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
-    delete?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
-    connect?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
-    update?: CabinetClientUpdateWithWhereUniqueWithoutTenantInput | CabinetClientUpdateWithWhereUniqueWithoutTenantInput[]
-    updateMany?: CabinetClientUpdateManyWithWhereWithoutTenantInput | CabinetClientUpdateManyWithWhereWithoutTenantInput[]
-    deleteMany?: CabinetClientScalarWhereInput | CabinetClientScalarWhereInput[]
+  export type UserUpdateOneRequiredWithoutWebsitesNestedInput = {
+    create?: XOR<UserCreateWithoutWebsitesInput, UserUncheckedCreateWithoutWebsitesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutWebsitesInput
+    upsert?: UserUpsertWithoutWebsitesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWebsitesInput, UserUpdateWithoutWebsitesInput>, UserUncheckedUpdateWithoutWebsitesInput>
   }
 
-  export type CabinetAppointmentUpdateManyWithoutTenantNestedInput = {
+  export type CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput = {
     create?: XOR<CabinetAppointmentCreateWithoutTenantInput, CabinetAppointmentUncheckedCreateWithoutTenantInput> | CabinetAppointmentCreateWithoutTenantInput[] | CabinetAppointmentUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: CabinetAppointmentCreateOrConnectWithoutTenantInput | CabinetAppointmentCreateOrConnectWithoutTenantInput[]
     upsert?: CabinetAppointmentUpsertWithWhereUniqueWithoutTenantInput | CabinetAppointmentUpsertWithWhereUniqueWithoutTenantInput[]
@@ -29151,20 +30638,32 @@ export namespace Prisma {
     deleteMany?: CabinetAppointmentScalarWhereInput | CabinetAppointmentScalarWhereInput[]
   }
 
-  export type UserUpdateOneRequiredWithoutWebsitesNestedInput = {
-    create?: XOR<UserCreateWithoutWebsitesInput, UserUncheckedCreateWithoutWebsitesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutWebsitesInput
-    upsert?: UserUpsertWithoutWebsitesInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWebsitesInput, UserUpdateWithoutWebsitesInput>, UserUncheckedUpdateWithoutWebsitesInput>
+  export type CabinetClientUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<CabinetClientCreateWithoutTenantInput, CabinetClientUncheckedCreateWithoutTenantInput> | CabinetClientCreateWithoutTenantInput[] | CabinetClientUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: CabinetClientCreateOrConnectWithoutTenantInput | CabinetClientCreateOrConnectWithoutTenantInput[]
+    upsert?: CabinetClientUpsertWithWhereUniqueWithoutTenantInput | CabinetClientUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: CabinetClientCreateManyTenantInputEnvelope
+    set?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
+    disconnect?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
+    delete?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
+    connect?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
+    update?: CabinetClientUpdateWithWhereUniqueWithoutTenantInput | CabinetClientUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: CabinetClientUpdateManyWithWhereWithoutTenantInput | CabinetClientUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: CabinetClientScalarWhereInput | CabinetClientScalarWhereInput[]
   }
 
-  export type ServiceUpdateOneRequiredWithoutWebsitesNestedInput = {
-    create?: XOR<ServiceCreateWithoutWebsitesInput, ServiceUncheckedCreateWithoutWebsitesInput>
-    connectOrCreate?: ServiceCreateOrConnectWithoutWebsitesInput
-    upsert?: ServiceUpsertWithoutWebsitesInput
-    connect?: ServiceWhereUniqueInput
-    update?: XOR<XOR<ServiceUpdateToOneWithWhereWithoutWebsitesInput, ServiceUpdateWithoutWebsitesInput>, ServiceUncheckedUpdateWithoutWebsitesInput>
+  export type CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<CabinetServiceCreateWithoutTenantInput, CabinetServiceUncheckedCreateWithoutTenantInput> | CabinetServiceCreateWithoutTenantInput[] | CabinetServiceUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: CabinetServiceCreateOrConnectWithoutTenantInput | CabinetServiceCreateOrConnectWithoutTenantInput[]
+    upsert?: CabinetServiceUpsertWithWhereUniqueWithoutTenantInput | CabinetServiceUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: CabinetServiceCreateManyTenantInputEnvelope
+    set?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
+    disconnect?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
+    delete?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
+    connect?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
+    update?: CabinetServiceUpdateWithWhereUniqueWithoutTenantInput | CabinetServiceUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: CabinetServiceUpdateManyWithWhereWithoutTenantInput | CabinetServiceUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: CabinetServiceScalarWhereInput | CabinetServiceScalarWhereInput[]
   }
 
   export type RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput = {
@@ -29209,46 +30708,10 @@ export namespace Prisma {
     deleteMany?: RestaurantWaiterScalarWhereInput | RestaurantWaiterScalarWhereInput[]
   }
 
-  export type CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput = {
-    create?: XOR<CabinetServiceCreateWithoutTenantInput, CabinetServiceUncheckedCreateWithoutTenantInput> | CabinetServiceCreateWithoutTenantInput[] | CabinetServiceUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: CabinetServiceCreateOrConnectWithoutTenantInput | CabinetServiceCreateOrConnectWithoutTenantInput[]
-    upsert?: CabinetServiceUpsertWithWhereUniqueWithoutTenantInput | CabinetServiceUpsertWithWhereUniqueWithoutTenantInput[]
-    createMany?: CabinetServiceCreateManyTenantInputEnvelope
-    set?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
-    disconnect?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
-    delete?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
-    connect?: CabinetServiceWhereUniqueInput | CabinetServiceWhereUniqueInput[]
-    update?: CabinetServiceUpdateWithWhereUniqueWithoutTenantInput | CabinetServiceUpdateWithWhereUniqueWithoutTenantInput[]
-    updateMany?: CabinetServiceUpdateManyWithWhereWithoutTenantInput | CabinetServiceUpdateManyWithWhereWithoutTenantInput[]
-    deleteMany?: CabinetServiceScalarWhereInput | CabinetServiceScalarWhereInput[]
-  }
-
-  export type CabinetClientUncheckedUpdateManyWithoutTenantNestedInput = {
-    create?: XOR<CabinetClientCreateWithoutTenantInput, CabinetClientUncheckedCreateWithoutTenantInput> | CabinetClientCreateWithoutTenantInput[] | CabinetClientUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: CabinetClientCreateOrConnectWithoutTenantInput | CabinetClientCreateOrConnectWithoutTenantInput[]
-    upsert?: CabinetClientUpsertWithWhereUniqueWithoutTenantInput | CabinetClientUpsertWithWhereUniqueWithoutTenantInput[]
-    createMany?: CabinetClientCreateManyTenantInputEnvelope
-    set?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
-    disconnect?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
-    delete?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
-    connect?: CabinetClientWhereUniqueInput | CabinetClientWhereUniqueInput[]
-    update?: CabinetClientUpdateWithWhereUniqueWithoutTenantInput | CabinetClientUpdateWithWhereUniqueWithoutTenantInput[]
-    updateMany?: CabinetClientUpdateManyWithWhereWithoutTenantInput | CabinetClientUpdateManyWithWhereWithoutTenantInput[]
-    deleteMany?: CabinetClientScalarWhereInput | CabinetClientScalarWhereInput[]
-  }
-
-  export type CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput = {
-    create?: XOR<CabinetAppointmentCreateWithoutTenantInput, CabinetAppointmentUncheckedCreateWithoutTenantInput> | CabinetAppointmentCreateWithoutTenantInput[] | CabinetAppointmentUncheckedCreateWithoutTenantInput[]
-    connectOrCreate?: CabinetAppointmentCreateOrConnectWithoutTenantInput | CabinetAppointmentCreateOrConnectWithoutTenantInput[]
-    upsert?: CabinetAppointmentUpsertWithWhereUniqueWithoutTenantInput | CabinetAppointmentUpsertWithWhereUniqueWithoutTenantInput[]
-    createMany?: CabinetAppointmentCreateManyTenantInputEnvelope
-    set?: CabinetAppointmentWhereUniqueInput | CabinetAppointmentWhereUniqueInput[]
-    disconnect?: CabinetAppointmentWhereUniqueInput | CabinetAppointmentWhereUniqueInput[]
-    delete?: CabinetAppointmentWhereUniqueInput | CabinetAppointmentWhereUniqueInput[]
-    connect?: CabinetAppointmentWhereUniqueInput | CabinetAppointmentWhereUniqueInput[]
-    update?: CabinetAppointmentUpdateWithWhereUniqueWithoutTenantInput | CabinetAppointmentUpdateWithWhereUniqueWithoutTenantInput[]
-    updateMany?: CabinetAppointmentUpdateManyWithWhereWithoutTenantInput | CabinetAppointmentUpdateManyWithWhereWithoutTenantInput[]
-    deleteMany?: CabinetAppointmentScalarWhereInput | CabinetAppointmentScalarWhereInput[]
+  export type TenantWebsiteCreateNestedOneWithoutCategoriesInput = {
+    create?: XOR<TenantWebsiteCreateWithoutCategoriesInput, TenantWebsiteUncheckedCreateWithoutCategoriesInput>
+    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutCategoriesInput
+    connect?: TenantWebsiteWhereUniqueInput
   }
 
   export type RestaurantDishCreateNestedManyWithoutCategoryInput = {
@@ -29256,12 +30719,6 @@ export namespace Prisma {
     connectOrCreate?: RestaurantDishCreateOrConnectWithoutCategoryInput | RestaurantDishCreateOrConnectWithoutCategoryInput[]
     createMany?: RestaurantDishCreateManyCategoryInputEnvelope
     connect?: RestaurantDishWhereUniqueInput | RestaurantDishWhereUniqueInput[]
-  }
-
-  export type TenantWebsiteCreateNestedOneWithoutCategoriesInput = {
-    create?: XOR<TenantWebsiteCreateWithoutCategoriesInput, TenantWebsiteUncheckedCreateWithoutCategoriesInput>
-    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutCategoriesInput
-    connect?: TenantWebsiteWhereUniqueInput
   }
 
   export type RestaurantDishUncheckedCreateNestedManyWithoutCategoryInput = {
@@ -29279,6 +30736,14 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type TenantWebsiteUpdateOneRequiredWithoutCategoriesNestedInput = {
+    create?: XOR<TenantWebsiteCreateWithoutCategoriesInput, TenantWebsiteUncheckedCreateWithoutCategoriesInput>
+    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutCategoriesInput
+    upsert?: TenantWebsiteUpsertWithoutCategoriesInput
+    connect?: TenantWebsiteWhereUniqueInput
+    update?: XOR<XOR<TenantWebsiteUpdateToOneWithWhereWithoutCategoriesInput, TenantWebsiteUpdateWithoutCategoriesInput>, TenantWebsiteUncheckedUpdateWithoutCategoriesInput>
+  }
+
   export type RestaurantDishUpdateManyWithoutCategoryNestedInput = {
     create?: XOR<RestaurantDishCreateWithoutCategoryInput, RestaurantDishUncheckedCreateWithoutCategoryInput> | RestaurantDishCreateWithoutCategoryInput[] | RestaurantDishUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: RestaurantDishCreateOrConnectWithoutCategoryInput | RestaurantDishCreateOrConnectWithoutCategoryInput[]
@@ -29291,14 +30756,6 @@ export namespace Prisma {
     update?: RestaurantDishUpdateWithWhereUniqueWithoutCategoryInput | RestaurantDishUpdateWithWhereUniqueWithoutCategoryInput[]
     updateMany?: RestaurantDishUpdateManyWithWhereWithoutCategoryInput | RestaurantDishUpdateManyWithWhereWithoutCategoryInput[]
     deleteMany?: RestaurantDishScalarWhereInput | RestaurantDishScalarWhereInput[]
-  }
-
-  export type TenantWebsiteUpdateOneRequiredWithoutCategoriesNestedInput = {
-    create?: XOR<TenantWebsiteCreateWithoutCategoriesInput, TenantWebsiteUncheckedCreateWithoutCategoriesInput>
-    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutCategoriesInput
-    upsert?: TenantWebsiteUpsertWithoutCategoriesInput
-    connect?: TenantWebsiteWhereUniqueInput
-    update?: XOR<XOR<TenantWebsiteUpdateToOneWithWhereWithoutCategoriesInput, TenantWebsiteUpdateWithoutCategoriesInput>, TenantWebsiteUncheckedUpdateWithoutCategoriesInput>
   }
 
   export type RestaurantDishUncheckedUpdateManyWithoutCategoryNestedInput = {
@@ -29344,16 +30801,16 @@ export namespace Prisma {
     connect?: RestaurantOrderWhereUniqueInput | RestaurantOrderWhereUniqueInput[]
   }
 
-  export type TenantWebsiteCreateNestedOneWithoutTablesInput = {
-    create?: XOR<TenantWebsiteCreateWithoutTablesInput, TenantWebsiteUncheckedCreateWithoutTablesInput>
-    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutTablesInput
-    connect?: TenantWebsiteWhereUniqueInput
-  }
-
   export type RestaurantWaiterCreateNestedOneWithoutTablesInput = {
     create?: XOR<RestaurantWaiterCreateWithoutTablesInput, RestaurantWaiterUncheckedCreateWithoutTablesInput>
     connectOrCreate?: RestaurantWaiterCreateOrConnectWithoutTablesInput
     connect?: RestaurantWaiterWhereUniqueInput
+  }
+
+  export type TenantWebsiteCreateNestedOneWithoutTablesInput = {
+    create?: XOR<TenantWebsiteCreateWithoutTablesInput, TenantWebsiteUncheckedCreateWithoutTablesInput>
+    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutTablesInput
+    connect?: TenantWebsiteWhereUniqueInput
   }
 
   export type RestaurantOrderUncheckedCreateNestedManyWithoutTableInput = {
@@ -29385,14 +30842,6 @@ export namespace Prisma {
     deleteMany?: RestaurantOrderScalarWhereInput | RestaurantOrderScalarWhereInput[]
   }
 
-  export type TenantWebsiteUpdateOneRequiredWithoutTablesNestedInput = {
-    create?: XOR<TenantWebsiteCreateWithoutTablesInput, TenantWebsiteUncheckedCreateWithoutTablesInput>
-    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutTablesInput
-    upsert?: TenantWebsiteUpsertWithoutTablesInput
-    connect?: TenantWebsiteWhereUniqueInput
-    update?: XOR<XOR<TenantWebsiteUpdateToOneWithWhereWithoutTablesInput, TenantWebsiteUpdateWithoutTablesInput>, TenantWebsiteUncheckedUpdateWithoutTablesInput>
-  }
-
   export type RestaurantWaiterUpdateOneWithoutTablesNestedInput = {
     create?: XOR<RestaurantWaiterCreateWithoutTablesInput, RestaurantWaiterUncheckedCreateWithoutTablesInput>
     connectOrCreate?: RestaurantWaiterCreateOrConnectWithoutTablesInput
@@ -29401,6 +30850,14 @@ export namespace Prisma {
     delete?: RestaurantWaiterWhereInput | boolean
     connect?: RestaurantWaiterWhereUniqueInput
     update?: XOR<XOR<RestaurantWaiterUpdateToOneWithWhereWithoutTablesInput, RestaurantWaiterUpdateWithoutTablesInput>, RestaurantWaiterUncheckedUpdateWithoutTablesInput>
+  }
+
+  export type TenantWebsiteUpdateOneRequiredWithoutTablesNestedInput = {
+    create?: XOR<TenantWebsiteCreateWithoutTablesInput, TenantWebsiteUncheckedCreateWithoutTablesInput>
+    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutTablesInput
+    upsert?: TenantWebsiteUpsertWithoutTablesInput
+    connect?: TenantWebsiteWhereUniqueInput
+    update?: XOR<XOR<TenantWebsiteUpdateToOneWithWhereWithoutTablesInput, TenantWebsiteUpdateWithoutTablesInput>, TenantWebsiteUncheckedUpdateWithoutTablesInput>
   }
 
   export type RestaurantOrderUncheckedUpdateManyWithoutTableNestedInput = {
@@ -29473,6 +30930,12 @@ export namespace Prisma {
     deleteMany?: RestaurantTableScalarWhereInput | RestaurantTableScalarWhereInput[]
   }
 
+  export type RestaurantTableCreateNestedOneWithoutOrdersInput = {
+    create?: XOR<RestaurantTableCreateWithoutOrdersInput, RestaurantTableUncheckedCreateWithoutOrdersInput>
+    connectOrCreate?: RestaurantTableCreateOrConnectWithoutOrdersInput
+    connect?: RestaurantTableWhereUniqueInput
+  }
+
   export type RestaurantOrderItemCreateNestedManyWithoutOrderInput = {
     create?: XOR<RestaurantOrderItemCreateWithoutOrderInput, RestaurantOrderItemUncheckedCreateWithoutOrderInput> | RestaurantOrderItemCreateWithoutOrderInput[] | RestaurantOrderItemUncheckedCreateWithoutOrderInput[]
     connectOrCreate?: RestaurantOrderItemCreateOrConnectWithoutOrderInput | RestaurantOrderItemCreateOrConnectWithoutOrderInput[]
@@ -29480,17 +30943,19 @@ export namespace Prisma {
     connect?: RestaurantOrderItemWhereUniqueInput | RestaurantOrderItemWhereUniqueInput[]
   }
 
-  export type RestaurantTableCreateNestedOneWithoutOrdersInput = {
-    create?: XOR<RestaurantTableCreateWithoutOrdersInput, RestaurantTableUncheckedCreateWithoutOrdersInput>
-    connectOrCreate?: RestaurantTableCreateOrConnectWithoutOrdersInput
-    connect?: RestaurantTableWhereUniqueInput
-  }
-
   export type RestaurantOrderItemUncheckedCreateNestedManyWithoutOrderInput = {
     create?: XOR<RestaurantOrderItemCreateWithoutOrderInput, RestaurantOrderItemUncheckedCreateWithoutOrderInput> | RestaurantOrderItemCreateWithoutOrderInput[] | RestaurantOrderItemUncheckedCreateWithoutOrderInput[]
     connectOrCreate?: RestaurantOrderItemCreateOrConnectWithoutOrderInput | RestaurantOrderItemCreateOrConnectWithoutOrderInput[]
     createMany?: RestaurantOrderItemCreateManyOrderInputEnvelope
     connect?: RestaurantOrderItemWhereUniqueInput | RestaurantOrderItemWhereUniqueInput[]
+  }
+
+  export type RestaurantTableUpdateOneRequiredWithoutOrdersNestedInput = {
+    create?: XOR<RestaurantTableCreateWithoutOrdersInput, RestaurantTableUncheckedCreateWithoutOrdersInput>
+    connectOrCreate?: RestaurantTableCreateOrConnectWithoutOrdersInput
+    upsert?: RestaurantTableUpsertWithoutOrdersInput
+    connect?: RestaurantTableWhereUniqueInput
+    update?: XOR<XOR<RestaurantTableUpdateToOneWithWhereWithoutOrdersInput, RestaurantTableUpdateWithoutOrdersInput>, RestaurantTableUncheckedUpdateWithoutOrdersInput>
   }
 
   export type RestaurantOrderItemUpdateManyWithoutOrderNestedInput = {
@@ -29505,14 +30970,6 @@ export namespace Prisma {
     update?: RestaurantOrderItemUpdateWithWhereUniqueWithoutOrderInput | RestaurantOrderItemUpdateWithWhereUniqueWithoutOrderInput[]
     updateMany?: RestaurantOrderItemUpdateManyWithWhereWithoutOrderInput | RestaurantOrderItemUpdateManyWithWhereWithoutOrderInput[]
     deleteMany?: RestaurantOrderItemScalarWhereInput | RestaurantOrderItemScalarWhereInput[]
-  }
-
-  export type RestaurantTableUpdateOneRequiredWithoutOrdersNestedInput = {
-    create?: XOR<RestaurantTableCreateWithoutOrdersInput, RestaurantTableUncheckedCreateWithoutOrdersInput>
-    connectOrCreate?: RestaurantTableCreateOrConnectWithoutOrdersInput
-    upsert?: RestaurantTableUpsertWithoutOrdersInput
-    connect?: RestaurantTableWhereUniqueInput
-    update?: XOR<XOR<RestaurantTableUpdateToOneWithWhereWithoutOrdersInput, RestaurantTableUpdateWithoutOrdersInput>, RestaurantTableUncheckedUpdateWithoutOrdersInput>
   }
 
   export type RestaurantOrderItemUncheckedUpdateManyWithoutOrderNestedInput = {
@@ -29655,10 +31112,10 @@ export namespace Prisma {
     deleteMany?: CabinetAppointmentScalarWhereInput | CabinetAppointmentScalarWhereInput[]
   }
 
-  export type CabinetServiceCreateNestedOneWithoutAppointmentsInput = {
-    create?: XOR<CabinetServiceCreateWithoutAppointmentsInput, CabinetServiceUncheckedCreateWithoutAppointmentsInput>
-    connectOrCreate?: CabinetServiceCreateOrConnectWithoutAppointmentsInput
-    connect?: CabinetServiceWhereUniqueInput
+  export type TenantWebsiteCreateNestedOneWithoutCabinetAppointmentsInput = {
+    create?: XOR<TenantWebsiteCreateWithoutCabinetAppointmentsInput, TenantWebsiteUncheckedCreateWithoutCabinetAppointmentsInput>
+    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutCabinetAppointmentsInput
+    connect?: TenantWebsiteWhereUniqueInput
   }
 
   export type CabinetClientCreateNestedOneWithoutAppointmentsInput = {
@@ -29667,26 +31124,10 @@ export namespace Prisma {
     connect?: CabinetClientWhereUniqueInput
   }
 
-  export type TenantWebsiteCreateNestedOneWithoutCabinetAppointmentsInput = {
-    create?: XOR<TenantWebsiteCreateWithoutCabinetAppointmentsInput, TenantWebsiteUncheckedCreateWithoutCabinetAppointmentsInput>
-    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutCabinetAppointmentsInput
-    connect?: TenantWebsiteWhereUniqueInput
-  }
-
-  export type CabinetServiceUpdateOneRequiredWithoutAppointmentsNestedInput = {
+  export type CabinetServiceCreateNestedOneWithoutAppointmentsInput = {
     create?: XOR<CabinetServiceCreateWithoutAppointmentsInput, CabinetServiceUncheckedCreateWithoutAppointmentsInput>
     connectOrCreate?: CabinetServiceCreateOrConnectWithoutAppointmentsInput
-    upsert?: CabinetServiceUpsertWithoutAppointmentsInput
     connect?: CabinetServiceWhereUniqueInput
-    update?: XOR<XOR<CabinetServiceUpdateToOneWithWhereWithoutAppointmentsInput, CabinetServiceUpdateWithoutAppointmentsInput>, CabinetServiceUncheckedUpdateWithoutAppointmentsInput>
-  }
-
-  export type CabinetClientUpdateOneRequiredWithoutAppointmentsNestedInput = {
-    create?: XOR<CabinetClientCreateWithoutAppointmentsInput, CabinetClientUncheckedCreateWithoutAppointmentsInput>
-    connectOrCreate?: CabinetClientCreateOrConnectWithoutAppointmentsInput
-    upsert?: CabinetClientUpsertWithoutAppointmentsInput
-    connect?: CabinetClientWhereUniqueInput
-    update?: XOR<XOR<CabinetClientUpdateToOneWithWhereWithoutAppointmentsInput, CabinetClientUpdateWithoutAppointmentsInput>, CabinetClientUncheckedUpdateWithoutAppointmentsInput>
   }
 
   export type TenantWebsiteUpdateOneRequiredWithoutCabinetAppointmentsNestedInput = {
@@ -29697,10 +31138,20 @@ export namespace Prisma {
     update?: XOR<XOR<TenantWebsiteUpdateToOneWithWhereWithoutCabinetAppointmentsInput, TenantWebsiteUpdateWithoutCabinetAppointmentsInput>, TenantWebsiteUncheckedUpdateWithoutCabinetAppointmentsInput>
   }
 
-  export type UserCreateNestedOneWithoutPaymentRequestsInput = {
-    create?: XOR<UserCreateWithoutPaymentRequestsInput, UserUncheckedCreateWithoutPaymentRequestsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPaymentRequestsInput
-    connect?: UserWhereUniqueInput
+  export type CabinetClientUpdateOneRequiredWithoutAppointmentsNestedInput = {
+    create?: XOR<CabinetClientCreateWithoutAppointmentsInput, CabinetClientUncheckedCreateWithoutAppointmentsInput>
+    connectOrCreate?: CabinetClientCreateOrConnectWithoutAppointmentsInput
+    upsert?: CabinetClientUpsertWithoutAppointmentsInput
+    connect?: CabinetClientWhereUniqueInput
+    update?: XOR<XOR<CabinetClientUpdateToOneWithWhereWithoutAppointmentsInput, CabinetClientUpdateWithoutAppointmentsInput>, CabinetClientUncheckedUpdateWithoutAppointmentsInput>
+  }
+
+  export type CabinetServiceUpdateOneRequiredWithoutAppointmentsNestedInput = {
+    create?: XOR<CabinetServiceCreateWithoutAppointmentsInput, CabinetServiceUncheckedCreateWithoutAppointmentsInput>
+    connectOrCreate?: CabinetServiceCreateOrConnectWithoutAppointmentsInput
+    upsert?: CabinetServiceUpsertWithoutAppointmentsInput
+    connect?: CabinetServiceWhereUniqueInput
+    update?: XOR<XOR<CabinetServiceUpdateToOneWithWhereWithoutAppointmentsInput, CabinetServiceUpdateWithoutAppointmentsInput>, CabinetServiceUncheckedUpdateWithoutAppointmentsInput>
   }
 
   export type ServiceCreateNestedOneWithoutPaymentRequestsInput = {
@@ -29709,16 +31160,14 @@ export namespace Prisma {
     connect?: ServiceWhereUniqueInput
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
-  export type UserUpdateOneRequiredWithoutPaymentRequestsNestedInput = {
+  export type UserCreateNestedOneWithoutPaymentRequestsInput = {
     create?: XOR<UserCreateWithoutPaymentRequestsInput, UserUncheckedCreateWithoutPaymentRequestsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPaymentRequestsInput
-    upsert?: UserUpsertWithoutPaymentRequestsInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPaymentRequestsInput, UserUpdateWithoutPaymentRequestsInput>, UserUncheckedUpdateWithoutPaymentRequestsInput>
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type ServiceUpdateOneRequiredWithoutPaymentRequestsNestedInput = {
@@ -29727,6 +31176,14 @@ export namespace Prisma {
     upsert?: ServiceUpsertWithoutPaymentRequestsInput
     connect?: ServiceWhereUniqueInput
     update?: XOR<XOR<ServiceUpdateToOneWithWhereWithoutPaymentRequestsInput, ServiceUpdateWithoutPaymentRequestsInput>, ServiceUncheckedUpdateWithoutPaymentRequestsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutPaymentRequestsNestedInput = {
+    create?: XOR<UserCreateWithoutPaymentRequestsInput, UserUncheckedCreateWithoutPaymentRequestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPaymentRequestsInput
+    upsert?: UserUpsertWithoutPaymentRequestsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPaymentRequestsInput, UserUpdateWithoutPaymentRequestsInput>, UserUncheckedUpdateWithoutPaymentRequestsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -29962,29 +31419,29 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type UserServiceCreateWithoutUserInput = {
+  export type ChatSessionCreateWithoutUserInput = {
     id?: string
-    notify?: boolean
-    isActive?: boolean
-    selectedAt?: Date | string
-    service: ServiceCreateNestedOneWithoutUsersInput
+    title?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: ChatMessageCreateNestedManyWithoutSessionInput
   }
 
-  export type UserServiceUncheckedCreateWithoutUserInput = {
+  export type ChatSessionUncheckedCreateWithoutUserInput = {
     id?: string
-    serviceId: string
-    notify?: boolean
-    isActive?: boolean
-    selectedAt?: Date | string
+    title?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    messages?: ChatMessageUncheckedCreateNestedManyWithoutSessionInput
   }
 
-  export type UserServiceCreateOrConnectWithoutUserInput = {
-    where: UserServiceWhereUniqueInput
-    create: XOR<UserServiceCreateWithoutUserInput, UserServiceUncheckedCreateWithoutUserInput>
+  export type ChatSessionCreateOrConnectWithoutUserInput = {
+    where: ChatSessionWhereUniqueInput
+    create: XOR<ChatSessionCreateWithoutUserInput, ChatSessionUncheckedCreateWithoutUserInput>
   }
 
-  export type UserServiceCreateManyUserInputEnvelope = {
-    data: UserServiceCreateManyUserInput | UserServiceCreateManyUserInput[]
+  export type ChatSessionCreateManyUserInputEnvelope = {
+    data: ChatSessionCreateManyUserInput | ChatSessionCreateManyUserInput[]
   }
 
   export type NotificationCreateWithoutUserInput = {
@@ -30010,84 +31467,6 @@ export namespace Prisma {
 
   export type NotificationCreateManyUserInputEnvelope = {
     data: NotificationCreateManyUserInput | NotificationCreateManyUserInput[]
-  }
-
-  export type TenantWebsiteCreateWithoutUserInput = {
-    id?: string
-    slug: string
-    siteName: string
-    description?: string | null
-    logo?: string | null
-    coverImage?: string | null
-    primaryColor?: string
-    config?: string
-    designTemplate?: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
-    tables?: RestaurantTableCreateNestedManyWithoutTenantInput
-    waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
-    service: ServiceCreateNestedOneWithoutWebsitesInput
-  }
-
-  export type TenantWebsiteUncheckedCreateWithoutUserInput = {
-    id?: string
-    slug: string
-    serviceId: string
-    siteName: string
-    description?: string | null
-    logo?: string | null
-    coverImage?: string | null
-    primaryColor?: string
-    config?: string
-    designTemplate?: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
-    tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
-    waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
-  }
-
-  export type TenantWebsiteCreateOrConnectWithoutUserInput = {
-    where: TenantWebsiteWhereUniqueInput
-    create: XOR<TenantWebsiteCreateWithoutUserInput, TenantWebsiteUncheckedCreateWithoutUserInput>
-  }
-
-  export type TenantWebsiteCreateManyUserInputEnvelope = {
-    data: TenantWebsiteCreateManyUserInput | TenantWebsiteCreateManyUserInput[]
-  }
-
-  export type ChatSessionCreateWithoutUserInput = {
-    id?: string
-    title?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    messages?: ChatMessageCreateNestedManyWithoutSessionInput
-  }
-
-  export type ChatSessionUncheckedCreateWithoutUserInput = {
-    id?: string
-    title?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    messages?: ChatMessageUncheckedCreateNestedManyWithoutSessionInput
-  }
-
-  export type ChatSessionCreateOrConnectWithoutUserInput = {
-    where: ChatSessionWhereUniqueInput
-    create: XOR<ChatSessionCreateWithoutUserInput, ChatSessionUncheckedCreateWithoutUserInput>
-  }
-
-  export type ChatSessionCreateManyUserInputEnvelope = {
-    data: ChatSessionCreateManyUserInput | ChatSessionCreateManyUserInput[]
   }
 
   export type PaymentRequestCreateWithoutUserInput = {
@@ -30125,32 +31504,109 @@ export namespace Prisma {
     data: PaymentRequestCreateManyUserInput | PaymentRequestCreateManyUserInput[]
   }
 
-  export type UserServiceUpsertWithWhereUniqueWithoutUserInput = {
+  export type TenantWebsiteCreateWithoutUserInput = {
+    id?: string
+    slug: string
+    siteName: string
+    description?: string | null
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
+    categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
+    tables?: RestaurantTableCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    service: ServiceCreateNestedOneWithoutWebsitesInput
+  }
+
+  export type TenantWebsiteUncheckedCreateWithoutUserInput = {
+    id?: string
+    slug: string
+    serviceId: string
+    siteName: string
+    description?: string | null
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
+    categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
+    tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantWebsiteCreateOrConnectWithoutUserInput = {
+    where: TenantWebsiteWhereUniqueInput
+    create: XOR<TenantWebsiteCreateWithoutUserInput, TenantWebsiteUncheckedCreateWithoutUserInput>
+  }
+
+  export type TenantWebsiteCreateManyUserInputEnvelope = {
+    data: TenantWebsiteCreateManyUserInput | TenantWebsiteCreateManyUserInput[]
+  }
+
+  export type UserServiceCreateWithoutUserInput = {
+    id?: string
+    notify?: boolean
+    selectedAt?: Date | string
+    isActive?: boolean
+    service: ServiceCreateNestedOneWithoutUsersInput
+  }
+
+  export type UserServiceUncheckedCreateWithoutUserInput = {
+    id?: string
+    serviceId: string
+    notify?: boolean
+    selectedAt?: Date | string
+    isActive?: boolean
+  }
+
+  export type UserServiceCreateOrConnectWithoutUserInput = {
     where: UserServiceWhereUniqueInput
-    update: XOR<UserServiceUpdateWithoutUserInput, UserServiceUncheckedUpdateWithoutUserInput>
     create: XOR<UserServiceCreateWithoutUserInput, UserServiceUncheckedCreateWithoutUserInput>
   }
 
-  export type UserServiceUpdateWithWhereUniqueWithoutUserInput = {
-    where: UserServiceWhereUniqueInput
-    data: XOR<UserServiceUpdateWithoutUserInput, UserServiceUncheckedUpdateWithoutUserInput>
+  export type UserServiceCreateManyUserInputEnvelope = {
+    data: UserServiceCreateManyUserInput | UserServiceCreateManyUserInput[]
   }
 
-  export type UserServiceUpdateManyWithWhereWithoutUserInput = {
-    where: UserServiceScalarWhereInput
-    data: XOR<UserServiceUpdateManyMutationInput, UserServiceUncheckedUpdateManyWithoutUserInput>
+  export type ChatSessionUpsertWithWhereUniqueWithoutUserInput = {
+    where: ChatSessionWhereUniqueInput
+    update: XOR<ChatSessionUpdateWithoutUserInput, ChatSessionUncheckedUpdateWithoutUserInput>
+    create: XOR<ChatSessionCreateWithoutUserInput, ChatSessionUncheckedCreateWithoutUserInput>
   }
 
-  export type UserServiceScalarWhereInput = {
-    AND?: UserServiceScalarWhereInput | UserServiceScalarWhereInput[]
-    OR?: UserServiceScalarWhereInput[]
-    NOT?: UserServiceScalarWhereInput | UserServiceScalarWhereInput[]
-    id?: StringFilter<"UserService"> | string
-    userId?: StringFilter<"UserService"> | string
-    serviceId?: StringFilter<"UserService"> | string
-    notify?: BoolFilter<"UserService"> | boolean
-    isActive?: BoolFilter<"UserService"> | boolean
-    selectedAt?: DateTimeFilter<"UserService"> | Date | string
+  export type ChatSessionUpdateWithWhereUniqueWithoutUserInput = {
+    where: ChatSessionWhereUniqueInput
+    data: XOR<ChatSessionUpdateWithoutUserInput, ChatSessionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ChatSessionUpdateManyWithWhereWithoutUserInput = {
+    where: ChatSessionScalarWhereInput
+    data: XOR<ChatSessionUpdateManyMutationInput, ChatSessionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ChatSessionScalarWhereInput = {
+    AND?: ChatSessionScalarWhereInput | ChatSessionScalarWhereInput[]
+    OR?: ChatSessionScalarWhereInput[]
+    NOT?: ChatSessionScalarWhereInput | ChatSessionScalarWhereInput[]
+    id?: StringFilter<"ChatSession"> | string
+    userId?: StringFilter<"ChatSession"> | string
+    title?: StringNullableFilter<"ChatSession"> | string | null
+    createdAt?: DateTimeFilter<"ChatSession"> | Date | string
+    updatedAt?: DateTimeFilter<"ChatSession"> | Date | string
   }
 
   export type NotificationUpsertWithWhereUniqueWithoutUserInput = {
@@ -30179,6 +31635,39 @@ export namespace Prisma {
     message?: StringFilter<"Notification"> | string
     read?: BoolFilter<"Notification"> | boolean
     createdAt?: DateTimeFilter<"Notification"> | Date | string
+  }
+
+  export type PaymentRequestUpsertWithWhereUniqueWithoutUserInput = {
+    where: PaymentRequestWhereUniqueInput
+    update: XOR<PaymentRequestUpdateWithoutUserInput, PaymentRequestUncheckedUpdateWithoutUserInput>
+    create: XOR<PaymentRequestCreateWithoutUserInput, PaymentRequestUncheckedCreateWithoutUserInput>
+  }
+
+  export type PaymentRequestUpdateWithWhereUniqueWithoutUserInput = {
+    where: PaymentRequestWhereUniqueInput
+    data: XOR<PaymentRequestUpdateWithoutUserInput, PaymentRequestUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PaymentRequestUpdateManyWithWhereWithoutUserInput = {
+    where: PaymentRequestScalarWhereInput
+    data: XOR<PaymentRequestUpdateManyMutationInput, PaymentRequestUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type PaymentRequestScalarWhereInput = {
+    AND?: PaymentRequestScalarWhereInput | PaymentRequestScalarWhereInput[]
+    OR?: PaymentRequestScalarWhereInput[]
+    NOT?: PaymentRequestScalarWhereInput | PaymentRequestScalarWhereInput[]
+    id?: StringFilter<"PaymentRequest"> | string
+    userId?: StringFilter<"PaymentRequest"> | string
+    serviceId?: StringFilter<"PaymentRequest"> | string
+    amount?: FloatFilter<"PaymentRequest"> | number
+    status?: StringFilter<"PaymentRequest"> | string
+    transferReference?: StringNullableFilter<"PaymentRequest"> | string | null
+    createdAt?: DateTimeFilter<"PaymentRequest"> | Date | string
+    updatedAt?: DateTimeFilter<"PaymentRequest"> | Date | string
+    expiresAt?: DateTimeFilter<"PaymentRequest"> | Date | string
+    confirmedAt?: DateTimeNullableFilter<"PaymentRequest"> | Date | string | null
+    confirmedBy?: StringNullableFilter<"PaymentRequest"> | string | null
   }
 
   export type TenantWebsiteUpsertWithWhereUniqueWithoutUserInput = {
@@ -30217,64 +31706,32 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"TenantWebsite"> | Date | string
   }
 
-  export type ChatSessionUpsertWithWhereUniqueWithoutUserInput = {
-    where: ChatSessionWhereUniqueInput
-    update: XOR<ChatSessionUpdateWithoutUserInput, ChatSessionUncheckedUpdateWithoutUserInput>
-    create: XOR<ChatSessionCreateWithoutUserInput, ChatSessionUncheckedCreateWithoutUserInput>
+  export type UserServiceUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserServiceWhereUniqueInput
+    update: XOR<UserServiceUpdateWithoutUserInput, UserServiceUncheckedUpdateWithoutUserInput>
+    create: XOR<UserServiceCreateWithoutUserInput, UserServiceUncheckedCreateWithoutUserInput>
   }
 
-  export type ChatSessionUpdateWithWhereUniqueWithoutUserInput = {
-    where: ChatSessionWhereUniqueInput
-    data: XOR<ChatSessionUpdateWithoutUserInput, ChatSessionUncheckedUpdateWithoutUserInput>
+  export type UserServiceUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserServiceWhereUniqueInput
+    data: XOR<UserServiceUpdateWithoutUserInput, UserServiceUncheckedUpdateWithoutUserInput>
   }
 
-  export type ChatSessionUpdateManyWithWhereWithoutUserInput = {
-    where: ChatSessionScalarWhereInput
-    data: XOR<ChatSessionUpdateManyMutationInput, ChatSessionUncheckedUpdateManyWithoutUserInput>
+  export type UserServiceUpdateManyWithWhereWithoutUserInput = {
+    where: UserServiceScalarWhereInput
+    data: XOR<UserServiceUpdateManyMutationInput, UserServiceUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type ChatSessionScalarWhereInput = {
-    AND?: ChatSessionScalarWhereInput | ChatSessionScalarWhereInput[]
-    OR?: ChatSessionScalarWhereInput[]
-    NOT?: ChatSessionScalarWhereInput | ChatSessionScalarWhereInput[]
-    id?: StringFilter<"ChatSession"> | string
-    userId?: StringFilter<"ChatSession"> | string
-    title?: StringNullableFilter<"ChatSession"> | string | null
-    createdAt?: DateTimeFilter<"ChatSession"> | Date | string
-    updatedAt?: DateTimeFilter<"ChatSession"> | Date | string
-  }
-
-  export type PaymentRequestUpsertWithWhereUniqueWithoutUserInput = {
-    where: PaymentRequestWhereUniqueInput
-    update: XOR<PaymentRequestUpdateWithoutUserInput, PaymentRequestUncheckedUpdateWithoutUserInput>
-    create: XOR<PaymentRequestCreateWithoutUserInput, PaymentRequestUncheckedCreateWithoutUserInput>
-  }
-
-  export type PaymentRequestUpdateWithWhereUniqueWithoutUserInput = {
-    where: PaymentRequestWhereUniqueInput
-    data: XOR<PaymentRequestUpdateWithoutUserInput, PaymentRequestUncheckedUpdateWithoutUserInput>
-  }
-
-  export type PaymentRequestUpdateManyWithWhereWithoutUserInput = {
-    where: PaymentRequestScalarWhereInput
-    data: XOR<PaymentRequestUpdateManyMutationInput, PaymentRequestUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type PaymentRequestScalarWhereInput = {
-    AND?: PaymentRequestScalarWhereInput | PaymentRequestScalarWhereInput[]
-    OR?: PaymentRequestScalarWhereInput[]
-    NOT?: PaymentRequestScalarWhereInput | PaymentRequestScalarWhereInput[]
-    id?: StringFilter<"PaymentRequest"> | string
-    userId?: StringFilter<"PaymentRequest"> | string
-    serviceId?: StringFilter<"PaymentRequest"> | string
-    amount?: FloatFilter<"PaymentRequest"> | number
-    status?: StringFilter<"PaymentRequest"> | string
-    transferReference?: StringNullableFilter<"PaymentRequest"> | string | null
-    createdAt?: DateTimeFilter<"PaymentRequest"> | Date | string
-    updatedAt?: DateTimeFilter<"PaymentRequest"> | Date | string
-    expiresAt?: DateTimeFilter<"PaymentRequest"> | Date | string
-    confirmedAt?: DateTimeNullableFilter<"PaymentRequest"> | Date | string | null
-    confirmedBy?: StringNullableFilter<"PaymentRequest"> | string | null
+  export type UserServiceScalarWhereInput = {
+    AND?: UserServiceScalarWhereInput | UserServiceScalarWhereInput[]
+    OR?: UserServiceScalarWhereInput[]
+    NOT?: UserServiceScalarWhereInput | UserServiceScalarWhereInput[]
+    id?: StringFilter<"UserService"> | string
+    userId?: StringFilter<"UserService"> | string
+    serviceId?: StringFilter<"UserService"> | string
+    notify?: BoolFilter<"UserService"> | boolean
+    selectedAt?: DateTimeFilter<"UserService"> | Date | string
+    isActive?: BoolFilter<"UserService"> | boolean
   }
 
   export type ChatMessageCreateWithoutSessionInput = {
@@ -30307,10 +31764,10 @@ export namespace Prisma {
     companyName: string
     role?: string
     createdAt?: Date | string
-    services?: UserServiceCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    websites?: TenantWebsiteCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
+    websites?: TenantWebsiteCreateNestedManyWithoutUserInput
+    services?: UserServiceCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChatSessionsInput = {
@@ -30320,10 +31777,10 @@ export namespace Prisma {
     companyName: string
     role?: string
     createdAt?: Date | string
-    services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
+    websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
+    services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChatSessionsInput = {
@@ -30376,10 +31833,10 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    services?: UserServiceUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
+    websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
+    services?: UserServiceUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChatSessionsInput = {
@@ -30389,10 +31846,10 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
+    websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
+    services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ChatSessionCreateWithoutMessagesInput = {
@@ -30450,10 +31907,10 @@ export namespace Prisma {
     companyName: string
     role?: string
     createdAt?: Date | string
-    services?: UserServiceCreateNestedManyWithoutUserInput
-    websites?: TenantWebsiteCreateNestedManyWithoutUserInput
     chatSessions?: ChatSessionCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
+    websites?: TenantWebsiteCreateNestedManyWithoutUserInput
+    services?: UserServiceCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -30463,10 +31920,10 @@ export namespace Prisma {
     companyName: string
     role?: string
     createdAt?: Date | string
-    services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
-    websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
     chatSessions?: ChatSessionUncheckedCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
+    websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
+    services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -30492,10 +31949,10 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    services?: UserServiceUpdateManyWithoutUserNestedInput
-    websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
     chatSessions?: ChatSessionUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
+    websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
+    services?: UserServiceUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -30505,88 +31962,10 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
-    websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
     chatSessions?: ChatSessionUncheckedUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserServiceCreateWithoutServiceInput = {
-    id?: string
-    notify?: boolean
-    isActive?: boolean
-    selectedAt?: Date | string
-    user: UserCreateNestedOneWithoutServicesInput
-  }
-
-  export type UserServiceUncheckedCreateWithoutServiceInput = {
-    id?: string
-    userId: string
-    notify?: boolean
-    isActive?: boolean
-    selectedAt?: Date | string
-  }
-
-  export type UserServiceCreateOrConnectWithoutServiceInput = {
-    where: UserServiceWhereUniqueInput
-    create: XOR<UserServiceCreateWithoutServiceInput, UserServiceUncheckedCreateWithoutServiceInput>
-  }
-
-  export type UserServiceCreateManyServiceInputEnvelope = {
-    data: UserServiceCreateManyServiceInput | UserServiceCreateManyServiceInput[]
-  }
-
-  export type TenantWebsiteCreateWithoutServiceInput = {
-    id?: string
-    slug: string
-    siteName: string
-    description?: string | null
-    logo?: string | null
-    coverImage?: string | null
-    primaryColor?: string
-    config?: string
-    designTemplate?: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
-    tables?: RestaurantTableCreateNestedManyWithoutTenantInput
-    waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
-    user: UserCreateNestedOneWithoutWebsitesInput
-  }
-
-  export type TenantWebsiteUncheckedCreateWithoutServiceInput = {
-    id?: string
-    slug: string
-    userId: string
-    siteName: string
-    description?: string | null
-    logo?: string | null
-    coverImage?: string | null
-    primaryColor?: string
-    config?: string
-    designTemplate?: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
-    tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
-    waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
-  }
-
-  export type TenantWebsiteCreateOrConnectWithoutServiceInput = {
-    where: TenantWebsiteWhereUniqueInput
-    create: XOR<TenantWebsiteCreateWithoutServiceInput, TenantWebsiteUncheckedCreateWithoutServiceInput>
-  }
-
-  export type TenantWebsiteCreateManyServiceInputEnvelope = {
-    data: TenantWebsiteCreateManyServiceInput | TenantWebsiteCreateManyServiceInput[]
+    websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
+    services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PaymentRequestCreateWithoutServiceInput = {
@@ -30624,36 +32003,82 @@ export namespace Prisma {
     data: PaymentRequestCreateManyServiceInput | PaymentRequestCreateManyServiceInput[]
   }
 
-  export type UserServiceUpsertWithWhereUniqueWithoutServiceInput = {
-    where: UserServiceWhereUniqueInput
-    update: XOR<UserServiceUpdateWithoutServiceInput, UserServiceUncheckedUpdateWithoutServiceInput>
-    create: XOR<UserServiceCreateWithoutServiceInput, UserServiceUncheckedCreateWithoutServiceInput>
+  export type TenantWebsiteCreateWithoutServiceInput = {
+    id?: string
+    slug: string
+    siteName: string
+    description?: string | null
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
+    categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
+    tables?: RestaurantTableCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    user: UserCreateNestedOneWithoutWebsitesInput
   }
 
-  export type UserServiceUpdateWithWhereUniqueWithoutServiceInput = {
-    where: UserServiceWhereUniqueInput
-    data: XOR<UserServiceUpdateWithoutServiceInput, UserServiceUncheckedUpdateWithoutServiceInput>
+  export type TenantWebsiteUncheckedCreateWithoutServiceInput = {
+    id?: string
+    slug: string
+    userId: string
+    siteName: string
+    description?: string | null
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
+    categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
+    tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
   }
 
-  export type UserServiceUpdateManyWithWhereWithoutServiceInput = {
-    where: UserServiceScalarWhereInput
-    data: XOR<UserServiceUpdateManyMutationInput, UserServiceUncheckedUpdateManyWithoutServiceInput>
-  }
-
-  export type TenantWebsiteUpsertWithWhereUniqueWithoutServiceInput = {
+  export type TenantWebsiteCreateOrConnectWithoutServiceInput = {
     where: TenantWebsiteWhereUniqueInput
-    update: XOR<TenantWebsiteUpdateWithoutServiceInput, TenantWebsiteUncheckedUpdateWithoutServiceInput>
     create: XOR<TenantWebsiteCreateWithoutServiceInput, TenantWebsiteUncheckedCreateWithoutServiceInput>
   }
 
-  export type TenantWebsiteUpdateWithWhereUniqueWithoutServiceInput = {
-    where: TenantWebsiteWhereUniqueInput
-    data: XOR<TenantWebsiteUpdateWithoutServiceInput, TenantWebsiteUncheckedUpdateWithoutServiceInput>
+  export type TenantWebsiteCreateManyServiceInputEnvelope = {
+    data: TenantWebsiteCreateManyServiceInput | TenantWebsiteCreateManyServiceInput[]
   }
 
-  export type TenantWebsiteUpdateManyWithWhereWithoutServiceInput = {
-    where: TenantWebsiteScalarWhereInput
-    data: XOR<TenantWebsiteUpdateManyMutationInput, TenantWebsiteUncheckedUpdateManyWithoutServiceInput>
+  export type UserServiceCreateWithoutServiceInput = {
+    id?: string
+    notify?: boolean
+    selectedAt?: Date | string
+    isActive?: boolean
+    user: UserCreateNestedOneWithoutServicesInput
+  }
+
+  export type UserServiceUncheckedCreateWithoutServiceInput = {
+    id?: string
+    userId: string
+    notify?: boolean
+    selectedAt?: Date | string
+    isActive?: boolean
+  }
+
+  export type UserServiceCreateOrConnectWithoutServiceInput = {
+    where: UserServiceWhereUniqueInput
+    create: XOR<UserServiceCreateWithoutServiceInput, UserServiceUncheckedCreateWithoutServiceInput>
+  }
+
+  export type UserServiceCreateManyServiceInputEnvelope = {
+    data: UserServiceCreateManyServiceInput | UserServiceCreateManyServiceInput[]
   }
 
   export type PaymentRequestUpsertWithWhereUniqueWithoutServiceInput = {
@@ -30672,35 +32097,36 @@ export namespace Prisma {
     data: XOR<PaymentRequestUpdateManyMutationInput, PaymentRequestUncheckedUpdateManyWithoutServiceInput>
   }
 
-  export type UserCreateWithoutServicesInput = {
-    id?: string
-    email: string
-    password: string
-    companyName: string
-    role?: string
-    createdAt?: Date | string
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    websites?: TenantWebsiteCreateNestedManyWithoutUserInput
-    chatSessions?: ChatSessionCreateNestedManyWithoutUserInput
-    paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
+  export type TenantWebsiteUpsertWithWhereUniqueWithoutServiceInput = {
+    where: TenantWebsiteWhereUniqueInput
+    update: XOR<TenantWebsiteUpdateWithoutServiceInput, TenantWebsiteUncheckedUpdateWithoutServiceInput>
+    create: XOR<TenantWebsiteCreateWithoutServiceInput, TenantWebsiteUncheckedCreateWithoutServiceInput>
   }
 
-  export type UserUncheckedCreateWithoutServicesInput = {
-    id?: string
-    email: string
-    password: string
-    companyName: string
-    role?: string
-    createdAt?: Date | string
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
-    chatSessions?: ChatSessionUncheckedCreateNestedManyWithoutUserInput
-    paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
+  export type TenantWebsiteUpdateWithWhereUniqueWithoutServiceInput = {
+    where: TenantWebsiteWhereUniqueInput
+    data: XOR<TenantWebsiteUpdateWithoutServiceInput, TenantWebsiteUncheckedUpdateWithoutServiceInput>
   }
 
-  export type UserCreateOrConnectWithoutServicesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutServicesInput, UserUncheckedCreateWithoutServicesInput>
+  export type TenantWebsiteUpdateManyWithWhereWithoutServiceInput = {
+    where: TenantWebsiteScalarWhereInput
+    data: XOR<TenantWebsiteUpdateManyMutationInput, TenantWebsiteUncheckedUpdateManyWithoutServiceInput>
+  }
+
+  export type UserServiceUpsertWithWhereUniqueWithoutServiceInput = {
+    where: UserServiceWhereUniqueInput
+    update: XOR<UserServiceUpdateWithoutServiceInput, UserServiceUncheckedUpdateWithoutServiceInput>
+    create: XOR<UserServiceCreateWithoutServiceInput, UserServiceUncheckedCreateWithoutServiceInput>
+  }
+
+  export type UserServiceUpdateWithWhereUniqueWithoutServiceInput = {
+    where: UserServiceWhereUniqueInput
+    data: XOR<UserServiceUpdateWithoutServiceInput, UserServiceUncheckedUpdateWithoutServiceInput>
+  }
+
+  export type UserServiceUpdateManyWithWhereWithoutServiceInput = {
+    where: UserServiceScalarWhereInput
+    data: XOR<UserServiceUpdateManyMutationInput, UserServiceUncheckedUpdateManyWithoutServiceInput>
   }
 
   export type ServiceCreateWithoutUsersInput = {
@@ -30710,11 +32136,11 @@ export namespace Prisma {
     description?: string | null
     status?: string
     category?: string | null
-    price?: number | null
-    icon?: string | null
     createdAt?: Date | string
-    websites?: TenantWebsiteCreateNestedManyWithoutServiceInput
+    icon?: string | null
+    price?: number | null
     paymentRequests?: PaymentRequestCreateNestedManyWithoutServiceInput
+    websites?: TenantWebsiteCreateNestedManyWithoutServiceInput
   }
 
   export type ServiceUncheckedCreateWithoutUsersInput = {
@@ -30724,11 +32150,11 @@ export namespace Prisma {
     description?: string | null
     status?: string
     category?: string | null
-    price?: number | null
-    icon?: string | null
     createdAt?: Date | string
-    websites?: TenantWebsiteUncheckedCreateNestedManyWithoutServiceInput
+    icon?: string | null
+    price?: number | null
     paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutServiceInput
+    websites?: TenantWebsiteUncheckedCreateNestedManyWithoutServiceInput
   }
 
   export type ServiceCreateOrConnectWithoutUsersInput = {
@@ -30736,41 +32162,35 @@ export namespace Prisma {
     create: XOR<ServiceCreateWithoutUsersInput, ServiceUncheckedCreateWithoutUsersInput>
   }
 
-  export type UserUpsertWithoutServicesInput = {
-    update: XOR<UserUpdateWithoutServicesInput, UserUncheckedUpdateWithoutServicesInput>
+  export type UserCreateWithoutServicesInput = {
+    id?: string
+    email: string
+    password: string
+    companyName: string
+    role?: string
+    createdAt?: Date | string
+    chatSessions?: ChatSessionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
+    websites?: TenantWebsiteCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutServicesInput = {
+    id?: string
+    email: string
+    password: string
+    companyName: string
+    role?: string
+    createdAt?: Date | string
+    chatSessions?: ChatSessionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
+    websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutServicesInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutServicesInput, UserUncheckedCreateWithoutServicesInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutServicesInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutServicesInput, UserUncheckedUpdateWithoutServicesInput>
-  }
-
-  export type UserUpdateWithoutServicesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    companyName?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
-    chatSessions?: ChatSessionUpdateManyWithoutUserNestedInput
-    paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutServicesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    companyName?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
-    chatSessions?: ChatSessionUncheckedUpdateManyWithoutUserNestedInput
-    paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ServiceUpsertWithoutUsersInput = {
@@ -30791,11 +32211,11 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     category?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    websites?: TenantWebsiteUpdateManyWithoutServiceNestedInput
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     paymentRequests?: PaymentRequestUpdateManyWithoutServiceNestedInput
+    websites?: TenantWebsiteUpdateManyWithoutServiceNestedInput
   }
 
   export type ServiceUncheckedUpdateWithoutUsersInput = {
@@ -30805,11 +32225,141 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     category?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    websites?: TenantWebsiteUncheckedUpdateManyWithoutServiceNestedInput
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutServiceNestedInput
+    websites?: TenantWebsiteUncheckedUpdateManyWithoutServiceNestedInput
+  }
+
+  export type UserUpsertWithoutServicesInput = {
+    update: XOR<UserUpdateWithoutServicesInput, UserUncheckedUpdateWithoutServicesInput>
+    create: XOR<UserCreateWithoutServicesInput, UserUncheckedCreateWithoutServicesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutServicesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutServicesInput, UserUncheckedUpdateWithoutServicesInput>
+  }
+
+  export type UserUpdateWithoutServicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chatSessions?: ChatSessionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
+    websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutServicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chatSessions?: ChatSessionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
+    websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type CabinetAppointmentCreateWithoutTenantInput = {
+    id?: string
+    appointmentDate: Date | string
+    status?: string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: CabinetClientCreateNestedOneWithoutAppointmentsInput
+    service: CabinetServiceCreateNestedOneWithoutAppointmentsInput
+  }
+
+  export type CabinetAppointmentUncheckedCreateWithoutTenantInput = {
+    id?: string
+    serviceId: string
+    clientId: string
+    appointmentDate: Date | string
+    status?: string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CabinetAppointmentCreateOrConnectWithoutTenantInput = {
+    where: CabinetAppointmentWhereUniqueInput
+    create: XOR<CabinetAppointmentCreateWithoutTenantInput, CabinetAppointmentUncheckedCreateWithoutTenantInput>
+  }
+
+  export type CabinetAppointmentCreateManyTenantInputEnvelope = {
+    data: CabinetAppointmentCreateManyTenantInput | CabinetAppointmentCreateManyTenantInput[]
+  }
+
+  export type CabinetClientCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    appointments?: CabinetAppointmentCreateNestedManyWithoutClientInput
+  }
+
+  export type CabinetClientUncheckedCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    appointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type CabinetClientCreateOrConnectWithoutTenantInput = {
+    where: CabinetClientWhereUniqueInput
+    create: XOR<CabinetClientCreateWithoutTenantInput, CabinetClientUncheckedCreateWithoutTenantInput>
+  }
+
+  export type CabinetClientCreateManyTenantInputEnvelope = {
+    data: CabinetClientCreateManyTenantInput | CabinetClientCreateManyTenantInput[]
+  }
+
+  export type CabinetServiceCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    description?: string | null
+    price: number
+    duration: number
+    isActive?: boolean
+    createdAt?: Date | string
+    appointments?: CabinetAppointmentCreateNestedManyWithoutServiceInput
+  }
+
+  export type CabinetServiceUncheckedCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    description?: string | null
+    price: number
+    duration: number
+    isActive?: boolean
+    createdAt?: Date | string
+    appointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutServiceInput
+  }
+
+  export type CabinetServiceCreateOrConnectWithoutTenantInput = {
+    where: CabinetServiceWhereUniqueInput
+    create: XOR<CabinetServiceCreateWithoutTenantInput, CabinetServiceUncheckedCreateWithoutTenantInput>
+  }
+
+  export type CabinetServiceCreateManyTenantInputEnvelope = {
+    data: CabinetServiceCreateManyTenantInput | CabinetServiceCreateManyTenantInput[]
   }
 
   export type RestaurantCategoryCreateWithoutTenantInput = {
@@ -30891,130 +32441,6 @@ export namespace Prisma {
     data: RestaurantWaiterCreateManyTenantInput | RestaurantWaiterCreateManyTenantInput[]
   }
 
-  export type CabinetServiceCreateWithoutTenantInput = {
-    id?: string
-    name: string
-    description?: string | null
-    price: number
-    duration: number
-    isActive?: boolean
-    createdAt?: Date | string
-    appointments?: CabinetAppointmentCreateNestedManyWithoutServiceInput
-  }
-
-  export type CabinetServiceUncheckedCreateWithoutTenantInput = {
-    id?: string
-    name: string
-    description?: string | null
-    price: number
-    duration: number
-    isActive?: boolean
-    createdAt?: Date | string
-    appointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutServiceInput
-  }
-
-  export type CabinetServiceCreateOrConnectWithoutTenantInput = {
-    where: CabinetServiceWhereUniqueInput
-    create: XOR<CabinetServiceCreateWithoutTenantInput, CabinetServiceUncheckedCreateWithoutTenantInput>
-  }
-
-  export type CabinetServiceCreateManyTenantInputEnvelope = {
-    data: CabinetServiceCreateManyTenantInput | CabinetServiceCreateManyTenantInput[]
-  }
-
-  export type CabinetClientCreateWithoutTenantInput = {
-    id?: string
-    name: string
-    email?: string | null
-    phone?: string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    appointments?: CabinetAppointmentCreateNestedManyWithoutClientInput
-  }
-
-  export type CabinetClientUncheckedCreateWithoutTenantInput = {
-    id?: string
-    name: string
-    email?: string | null
-    phone?: string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    appointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutClientInput
-  }
-
-  export type CabinetClientCreateOrConnectWithoutTenantInput = {
-    where: CabinetClientWhereUniqueInput
-    create: XOR<CabinetClientCreateWithoutTenantInput, CabinetClientUncheckedCreateWithoutTenantInput>
-  }
-
-  export type CabinetClientCreateManyTenantInputEnvelope = {
-    data: CabinetClientCreateManyTenantInput | CabinetClientCreateManyTenantInput[]
-  }
-
-  export type CabinetAppointmentCreateWithoutTenantInput = {
-    id?: string
-    appointmentDate: Date | string
-    status?: string
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    service: CabinetServiceCreateNestedOneWithoutAppointmentsInput
-    client: CabinetClientCreateNestedOneWithoutAppointmentsInput
-  }
-
-  export type CabinetAppointmentUncheckedCreateWithoutTenantInput = {
-    id?: string
-    serviceId: string
-    clientId: string
-    appointmentDate: Date | string
-    status?: string
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type CabinetAppointmentCreateOrConnectWithoutTenantInput = {
-    where: CabinetAppointmentWhereUniqueInput
-    create: XOR<CabinetAppointmentCreateWithoutTenantInput, CabinetAppointmentUncheckedCreateWithoutTenantInput>
-  }
-
-  export type CabinetAppointmentCreateManyTenantInputEnvelope = {
-    data: CabinetAppointmentCreateManyTenantInput | CabinetAppointmentCreateManyTenantInput[]
-  }
-
-  export type UserCreateWithoutWebsitesInput = {
-    id?: string
-    email: string
-    password: string
-    companyName: string
-    role?: string
-    createdAt?: Date | string
-    services?: UserServiceCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    chatSessions?: ChatSessionCreateNestedManyWithoutUserInput
-    paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutWebsitesInput = {
-    id?: string
-    email: string
-    password: string
-    companyName: string
-    role?: string
-    createdAt?: Date | string
-    services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    chatSessions?: ChatSessionUncheckedCreateNestedManyWithoutUserInput
-    paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutWebsitesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutWebsitesInput, UserUncheckedCreateWithoutWebsitesInput>
-  }
-
   export type ServiceCreateWithoutWebsitesInput = {
     id?: string
     name: string
@@ -31022,11 +32448,11 @@ export namespace Prisma {
     description?: string | null
     status?: string
     category?: string | null
-    price?: number | null
-    icon?: string | null
     createdAt?: Date | string
-    users?: UserServiceCreateNestedManyWithoutServiceInput
+    icon?: string | null
+    price?: number | null
     paymentRequests?: PaymentRequestCreateNestedManyWithoutServiceInput
+    users?: UserServiceCreateNestedManyWithoutServiceInput
   }
 
   export type ServiceUncheckedCreateWithoutWebsitesInput = {
@@ -31036,16 +32462,138 @@ export namespace Prisma {
     description?: string | null
     status?: string
     category?: string | null
-    price?: number | null
-    icon?: string | null
     createdAt?: Date | string
-    users?: UserServiceUncheckedCreateNestedManyWithoutServiceInput
+    icon?: string | null
+    price?: number | null
     paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutServiceInput
+    users?: UserServiceUncheckedCreateNestedManyWithoutServiceInput
   }
 
   export type ServiceCreateOrConnectWithoutWebsitesInput = {
     where: ServiceWhereUniqueInput
     create: XOR<ServiceCreateWithoutWebsitesInput, ServiceUncheckedCreateWithoutWebsitesInput>
+  }
+
+  export type UserCreateWithoutWebsitesInput = {
+    id?: string
+    email: string
+    password: string
+    companyName: string
+    role?: string
+    createdAt?: Date | string
+    chatSessions?: ChatSessionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
+    services?: UserServiceCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutWebsitesInput = {
+    id?: string
+    email: string
+    password: string
+    companyName: string
+    role?: string
+    createdAt?: Date | string
+    chatSessions?: ChatSessionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
+    services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutWebsitesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutWebsitesInput, UserUncheckedCreateWithoutWebsitesInput>
+  }
+
+  export type CabinetAppointmentUpsertWithWhereUniqueWithoutTenantInput = {
+    where: CabinetAppointmentWhereUniqueInput
+    update: XOR<CabinetAppointmentUpdateWithoutTenantInput, CabinetAppointmentUncheckedUpdateWithoutTenantInput>
+    create: XOR<CabinetAppointmentCreateWithoutTenantInput, CabinetAppointmentUncheckedCreateWithoutTenantInput>
+  }
+
+  export type CabinetAppointmentUpdateWithWhereUniqueWithoutTenantInput = {
+    where: CabinetAppointmentWhereUniqueInput
+    data: XOR<CabinetAppointmentUpdateWithoutTenantInput, CabinetAppointmentUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type CabinetAppointmentUpdateManyWithWhereWithoutTenantInput = {
+    where: CabinetAppointmentScalarWhereInput
+    data: XOR<CabinetAppointmentUpdateManyMutationInput, CabinetAppointmentUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type CabinetAppointmentScalarWhereInput = {
+    AND?: CabinetAppointmentScalarWhereInput | CabinetAppointmentScalarWhereInput[]
+    OR?: CabinetAppointmentScalarWhereInput[]
+    NOT?: CabinetAppointmentScalarWhereInput | CabinetAppointmentScalarWhereInput[]
+    id?: StringFilter<"CabinetAppointment"> | string
+    tenantId?: StringFilter<"CabinetAppointment"> | string
+    serviceId?: StringFilter<"CabinetAppointment"> | string
+    clientId?: StringFilter<"CabinetAppointment"> | string
+    appointmentDate?: DateTimeFilter<"CabinetAppointment"> | Date | string
+    status?: StringFilter<"CabinetAppointment"> | string
+    notes?: StringNullableFilter<"CabinetAppointment"> | string | null
+    createdAt?: DateTimeFilter<"CabinetAppointment"> | Date | string
+    updatedAt?: DateTimeFilter<"CabinetAppointment"> | Date | string
+  }
+
+  export type CabinetClientUpsertWithWhereUniqueWithoutTenantInput = {
+    where: CabinetClientWhereUniqueInput
+    update: XOR<CabinetClientUpdateWithoutTenantInput, CabinetClientUncheckedUpdateWithoutTenantInput>
+    create: XOR<CabinetClientCreateWithoutTenantInput, CabinetClientUncheckedCreateWithoutTenantInput>
+  }
+
+  export type CabinetClientUpdateWithWhereUniqueWithoutTenantInput = {
+    where: CabinetClientWhereUniqueInput
+    data: XOR<CabinetClientUpdateWithoutTenantInput, CabinetClientUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type CabinetClientUpdateManyWithWhereWithoutTenantInput = {
+    where: CabinetClientScalarWhereInput
+    data: XOR<CabinetClientUpdateManyMutationInput, CabinetClientUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type CabinetClientScalarWhereInput = {
+    AND?: CabinetClientScalarWhereInput | CabinetClientScalarWhereInput[]
+    OR?: CabinetClientScalarWhereInput[]
+    NOT?: CabinetClientScalarWhereInput | CabinetClientScalarWhereInput[]
+    id?: StringFilter<"CabinetClient"> | string
+    tenantId?: StringFilter<"CabinetClient"> | string
+    name?: StringFilter<"CabinetClient"> | string
+    email?: StringNullableFilter<"CabinetClient"> | string | null
+    phone?: StringNullableFilter<"CabinetClient"> | string | null
+    notes?: StringNullableFilter<"CabinetClient"> | string | null
+    createdAt?: DateTimeFilter<"CabinetClient"> | Date | string
+    updatedAt?: DateTimeFilter<"CabinetClient"> | Date | string
+  }
+
+  export type CabinetServiceUpsertWithWhereUniqueWithoutTenantInput = {
+    where: CabinetServiceWhereUniqueInput
+    update: XOR<CabinetServiceUpdateWithoutTenantInput, CabinetServiceUncheckedUpdateWithoutTenantInput>
+    create: XOR<CabinetServiceCreateWithoutTenantInput, CabinetServiceUncheckedCreateWithoutTenantInput>
+  }
+
+  export type CabinetServiceUpdateWithWhereUniqueWithoutTenantInput = {
+    where: CabinetServiceWhereUniqueInput
+    data: XOR<CabinetServiceUpdateWithoutTenantInput, CabinetServiceUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type CabinetServiceUpdateManyWithWhereWithoutTenantInput = {
+    where: CabinetServiceScalarWhereInput
+    data: XOR<CabinetServiceUpdateManyMutationInput, CabinetServiceUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type CabinetServiceScalarWhereInput = {
+    AND?: CabinetServiceScalarWhereInput | CabinetServiceScalarWhereInput[]
+    OR?: CabinetServiceScalarWhereInput[]
+    NOT?: CabinetServiceScalarWhereInput | CabinetServiceScalarWhereInput[]
+    id?: StringFilter<"CabinetService"> | string
+    tenantId?: StringFilter<"CabinetService"> | string
+    name?: StringFilter<"CabinetService"> | string
+    description?: StringNullableFilter<"CabinetService"> | string | null
+    price?: FloatFilter<"CabinetService"> | number
+    duration?: IntFilter<"CabinetService"> | number
+    isActive?: BoolFilter<"CabinetService"> | boolean
+    createdAt?: DateTimeFilter<"CabinetService"> | Date | string
   }
 
   export type RestaurantCategoryUpsertWithWhereUniqueWithoutTenantInput = {
@@ -31131,95 +32679,43 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"RestaurantWaiter"> | Date | string
   }
 
-  export type CabinetServiceUpsertWithWhereUniqueWithoutTenantInput = {
-    where: CabinetServiceWhereUniqueInput
-    update: XOR<CabinetServiceUpdateWithoutTenantInput, CabinetServiceUncheckedUpdateWithoutTenantInput>
-    create: XOR<CabinetServiceCreateWithoutTenantInput, CabinetServiceUncheckedCreateWithoutTenantInput>
+  export type ServiceUpsertWithoutWebsitesInput = {
+    update: XOR<ServiceUpdateWithoutWebsitesInput, ServiceUncheckedUpdateWithoutWebsitesInput>
+    create: XOR<ServiceCreateWithoutWebsitesInput, ServiceUncheckedCreateWithoutWebsitesInput>
+    where?: ServiceWhereInput
   }
 
-  export type CabinetServiceUpdateWithWhereUniqueWithoutTenantInput = {
-    where: CabinetServiceWhereUniqueInput
-    data: XOR<CabinetServiceUpdateWithoutTenantInput, CabinetServiceUncheckedUpdateWithoutTenantInput>
+  export type ServiceUpdateToOneWithWhereWithoutWebsitesInput = {
+    where?: ServiceWhereInput
+    data: XOR<ServiceUpdateWithoutWebsitesInput, ServiceUncheckedUpdateWithoutWebsitesInput>
   }
 
-  export type CabinetServiceUpdateManyWithWhereWithoutTenantInput = {
-    where: CabinetServiceScalarWhereInput
-    data: XOR<CabinetServiceUpdateManyMutationInput, CabinetServiceUncheckedUpdateManyWithoutTenantInput>
+  export type ServiceUpdateWithoutWebsitesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    paymentRequests?: PaymentRequestUpdateManyWithoutServiceNestedInput
+    users?: UserServiceUpdateManyWithoutServiceNestedInput
   }
 
-  export type CabinetServiceScalarWhereInput = {
-    AND?: CabinetServiceScalarWhereInput | CabinetServiceScalarWhereInput[]
-    OR?: CabinetServiceScalarWhereInput[]
-    NOT?: CabinetServiceScalarWhereInput | CabinetServiceScalarWhereInput[]
-    id?: StringFilter<"CabinetService"> | string
-    tenantId?: StringFilter<"CabinetService"> | string
-    name?: StringFilter<"CabinetService"> | string
-    description?: StringNullableFilter<"CabinetService"> | string | null
-    price?: FloatFilter<"CabinetService"> | number
-    duration?: IntFilter<"CabinetService"> | number
-    isActive?: BoolFilter<"CabinetService"> | boolean
-    createdAt?: DateTimeFilter<"CabinetService"> | Date | string
-  }
-
-  export type CabinetClientUpsertWithWhereUniqueWithoutTenantInput = {
-    where: CabinetClientWhereUniqueInput
-    update: XOR<CabinetClientUpdateWithoutTenantInput, CabinetClientUncheckedUpdateWithoutTenantInput>
-    create: XOR<CabinetClientCreateWithoutTenantInput, CabinetClientUncheckedCreateWithoutTenantInput>
-  }
-
-  export type CabinetClientUpdateWithWhereUniqueWithoutTenantInput = {
-    where: CabinetClientWhereUniqueInput
-    data: XOR<CabinetClientUpdateWithoutTenantInput, CabinetClientUncheckedUpdateWithoutTenantInput>
-  }
-
-  export type CabinetClientUpdateManyWithWhereWithoutTenantInput = {
-    where: CabinetClientScalarWhereInput
-    data: XOR<CabinetClientUpdateManyMutationInput, CabinetClientUncheckedUpdateManyWithoutTenantInput>
-  }
-
-  export type CabinetClientScalarWhereInput = {
-    AND?: CabinetClientScalarWhereInput | CabinetClientScalarWhereInput[]
-    OR?: CabinetClientScalarWhereInput[]
-    NOT?: CabinetClientScalarWhereInput | CabinetClientScalarWhereInput[]
-    id?: StringFilter<"CabinetClient"> | string
-    tenantId?: StringFilter<"CabinetClient"> | string
-    name?: StringFilter<"CabinetClient"> | string
-    email?: StringNullableFilter<"CabinetClient"> | string | null
-    phone?: StringNullableFilter<"CabinetClient"> | string | null
-    notes?: StringNullableFilter<"CabinetClient"> | string | null
-    createdAt?: DateTimeFilter<"CabinetClient"> | Date | string
-    updatedAt?: DateTimeFilter<"CabinetClient"> | Date | string
-  }
-
-  export type CabinetAppointmentUpsertWithWhereUniqueWithoutTenantInput = {
-    where: CabinetAppointmentWhereUniqueInput
-    update: XOR<CabinetAppointmentUpdateWithoutTenantInput, CabinetAppointmentUncheckedUpdateWithoutTenantInput>
-    create: XOR<CabinetAppointmentCreateWithoutTenantInput, CabinetAppointmentUncheckedCreateWithoutTenantInput>
-  }
-
-  export type CabinetAppointmentUpdateWithWhereUniqueWithoutTenantInput = {
-    where: CabinetAppointmentWhereUniqueInput
-    data: XOR<CabinetAppointmentUpdateWithoutTenantInput, CabinetAppointmentUncheckedUpdateWithoutTenantInput>
-  }
-
-  export type CabinetAppointmentUpdateManyWithWhereWithoutTenantInput = {
-    where: CabinetAppointmentScalarWhereInput
-    data: XOR<CabinetAppointmentUpdateManyMutationInput, CabinetAppointmentUncheckedUpdateManyWithoutTenantInput>
-  }
-
-  export type CabinetAppointmentScalarWhereInput = {
-    AND?: CabinetAppointmentScalarWhereInput | CabinetAppointmentScalarWhereInput[]
-    OR?: CabinetAppointmentScalarWhereInput[]
-    NOT?: CabinetAppointmentScalarWhereInput | CabinetAppointmentScalarWhereInput[]
-    id?: StringFilter<"CabinetAppointment"> | string
-    tenantId?: StringFilter<"CabinetAppointment"> | string
-    serviceId?: StringFilter<"CabinetAppointment"> | string
-    clientId?: StringFilter<"CabinetAppointment"> | string
-    appointmentDate?: DateTimeFilter<"CabinetAppointment"> | Date | string
-    status?: StringFilter<"CabinetAppointment"> | string
-    notes?: StringNullableFilter<"CabinetAppointment"> | string | null
-    createdAt?: DateTimeFilter<"CabinetAppointment"> | Date | string
-    updatedAt?: DateTimeFilter<"CabinetAppointment"> | Date | string
+  export type ServiceUncheckedUpdateWithoutWebsitesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutServiceNestedInput
+    users?: UserServiceUncheckedUpdateManyWithoutServiceNestedInput
   }
 
   export type UserUpsertWithoutWebsitesInput = {
@@ -31240,10 +32736,10 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    services?: UserServiceUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
     chatSessions?: ChatSessionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
+    services?: UserServiceUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWebsitesInput = {
@@ -31253,49 +32749,59 @@ export namespace Prisma {
     companyName?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     chatSessions?: ChatSessionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
+    services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type ServiceUpsertWithoutWebsitesInput = {
-    update: XOR<ServiceUpdateWithoutWebsitesInput, ServiceUncheckedUpdateWithoutWebsitesInput>
-    create: XOR<ServiceCreateWithoutWebsitesInput, ServiceUncheckedCreateWithoutWebsitesInput>
-    where?: ServiceWhereInput
+  export type TenantWebsiteCreateWithoutCategoriesInput = {
+    id?: string
+    slug: string
+    siteName: string
+    description?: string | null
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
+    tables?: RestaurantTableCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    service: ServiceCreateNestedOneWithoutWebsitesInput
+    user: UserCreateNestedOneWithoutWebsitesInput
   }
 
-  export type ServiceUpdateToOneWithWhereWithoutWebsitesInput = {
-    where?: ServiceWhereInput
-    data: XOR<ServiceUpdateWithoutWebsitesInput, ServiceUncheckedUpdateWithoutWebsitesInput>
+  export type TenantWebsiteUncheckedCreateWithoutCategoriesInput = {
+    id?: string
+    slug: string
+    userId: string
+    serviceId: string
+    siteName: string
+    description?: string | null
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
+    tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
   }
 
-  export type ServiceUpdateWithoutWebsitesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    icon?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserServiceUpdateManyWithoutServiceNestedInput
-    paymentRequests?: PaymentRequestUpdateManyWithoutServiceNestedInput
-  }
-
-  export type ServiceUncheckedUpdateWithoutWebsitesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: StringFieldUpdateOperationsInput | string
-    category?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    icon?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserServiceUncheckedUpdateManyWithoutServiceNestedInput
-    paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutServiceNestedInput
+  export type TenantWebsiteCreateOrConnectWithoutCategoriesInput = {
+    where: TenantWebsiteWhereUniqueInput
+    create: XOR<TenantWebsiteCreateWithoutCategoriesInput, TenantWebsiteUncheckedCreateWithoutCategoriesInput>
   }
 
   export type RestaurantDishCreateWithoutCategoryInput = {
@@ -31327,53 +32833,59 @@ export namespace Prisma {
     data: RestaurantDishCreateManyCategoryInput | RestaurantDishCreateManyCategoryInput[]
   }
 
-  export type TenantWebsiteCreateWithoutCategoriesInput = {
-    id?: string
-    slug: string
-    siteName: string
-    description?: string | null
-    logo?: string | null
-    coverImage?: string | null
-    primaryColor?: string
-    config?: string
-    designTemplate?: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    tables?: RestaurantTableCreateNestedManyWithoutTenantInput
-    waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
-    user: UserCreateNestedOneWithoutWebsitesInput
-    service: ServiceCreateNestedOneWithoutWebsitesInput
-  }
-
-  export type TenantWebsiteUncheckedCreateWithoutCategoriesInput = {
-    id?: string
-    slug: string
-    userId: string
-    serviceId: string
-    siteName: string
-    description?: string | null
-    logo?: string | null
-    coverImage?: string | null
-    primaryColor?: string
-    config?: string
-    designTemplate?: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
-    waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
-  }
-
-  export type TenantWebsiteCreateOrConnectWithoutCategoriesInput = {
-    where: TenantWebsiteWhereUniqueInput
+  export type TenantWebsiteUpsertWithoutCategoriesInput = {
+    update: XOR<TenantWebsiteUpdateWithoutCategoriesInput, TenantWebsiteUncheckedUpdateWithoutCategoriesInput>
     create: XOR<TenantWebsiteCreateWithoutCategoriesInput, TenantWebsiteUncheckedCreateWithoutCategoriesInput>
+    where?: TenantWebsiteWhereInput
+  }
+
+  export type TenantWebsiteUpdateToOneWithWhereWithoutCategoriesInput = {
+    where?: TenantWebsiteWhereInput
+    data: XOR<TenantWebsiteUpdateWithoutCategoriesInput, TenantWebsiteUncheckedUpdateWithoutCategoriesInput>
+  }
+
+  export type TenantWebsiteUpdateWithoutCategoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
+    tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
+    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
+  }
+
+  export type TenantWebsiteUncheckedUpdateWithoutCategoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    serviceId?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
+    tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type RestaurantDishUpsertWithWhereUniqueWithoutCategoryInput = {
@@ -31404,61 +32916,6 @@ export namespace Prisma {
     image?: StringNullableFilter<"RestaurantDish"> | string | null
     isActive?: BoolFilter<"RestaurantDish"> | boolean
     order?: IntFilter<"RestaurantDish"> | number
-  }
-
-  export type TenantWebsiteUpsertWithoutCategoriesInput = {
-    update: XOR<TenantWebsiteUpdateWithoutCategoriesInput, TenantWebsiteUncheckedUpdateWithoutCategoriesInput>
-    create: XOR<TenantWebsiteCreateWithoutCategoriesInput, TenantWebsiteUncheckedCreateWithoutCategoriesInput>
-    where?: TenantWebsiteWhereInput
-  }
-
-  export type TenantWebsiteUpdateToOneWithWhereWithoutCategoriesInput = {
-    where?: TenantWebsiteWhereInput
-    data: XOR<TenantWebsiteUpdateWithoutCategoriesInput, TenantWebsiteUncheckedUpdateWithoutCategoriesInput>
-  }
-
-  export type TenantWebsiteUpdateWithoutCategoriesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    siteName?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: StringFieldUpdateOperationsInput | string
-    config?: StringFieldUpdateOperationsInput | string
-    designTemplate?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
-    waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
-    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
-    service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
-  }
-
-  export type TenantWebsiteUncheckedUpdateWithoutCategoriesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    serviceId?: StringFieldUpdateOperationsInput | string
-    siteName?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: StringFieldUpdateOperationsInput | string
-    config?: StringFieldUpdateOperationsInput | string
-    designTemplate?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
-    waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type RestaurantCategoryCreateWithoutDishesInput = {
@@ -31536,55 +32993,6 @@ export namespace Prisma {
     data: RestaurantOrderCreateManyTableInput | RestaurantOrderCreateManyTableInput[]
   }
 
-  export type TenantWebsiteCreateWithoutTablesInput = {
-    id?: string
-    slug: string
-    siteName: string
-    description?: string | null
-    logo?: string | null
-    coverImage?: string | null
-    primaryColor?: string
-    config?: string
-    designTemplate?: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
-    waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
-    user: UserCreateNestedOneWithoutWebsitesInput
-    service: ServiceCreateNestedOneWithoutWebsitesInput
-  }
-
-  export type TenantWebsiteUncheckedCreateWithoutTablesInput = {
-    id?: string
-    slug: string
-    userId: string
-    serviceId: string
-    siteName: string
-    description?: string | null
-    logo?: string | null
-    coverImage?: string | null
-    primaryColor?: string
-    config?: string
-    designTemplate?: string
-    isActive?: boolean
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
-    waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
-  }
-
-  export type TenantWebsiteCreateOrConnectWithoutTablesInput = {
-    where: TenantWebsiteWhereUniqueInput
-    create: XOR<TenantWebsiteCreateWithoutTablesInput, TenantWebsiteUncheckedCreateWithoutTablesInput>
-  }
-
   export type RestaurantWaiterCreateWithoutTablesInput = {
     id?: string
     name: string
@@ -31606,6 +33014,55 @@ export namespace Prisma {
   export type RestaurantWaiterCreateOrConnectWithoutTablesInput = {
     where: RestaurantWaiterWhereUniqueInput
     create: XOR<RestaurantWaiterCreateWithoutTablesInput, RestaurantWaiterUncheckedCreateWithoutTablesInput>
+  }
+
+  export type TenantWebsiteCreateWithoutTablesInput = {
+    id?: string
+    slug: string
+    siteName: string
+    description?: string | null
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
+    categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    service: ServiceCreateNestedOneWithoutWebsitesInput
+    user: UserCreateNestedOneWithoutWebsitesInput
+  }
+
+  export type TenantWebsiteUncheckedCreateWithoutTablesInput = {
+    id?: string
+    slug: string
+    userId: string
+    serviceId: string
+    siteName: string
+    description?: string | null
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
+    categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantWebsiteCreateOrConnectWithoutTablesInput = {
+    where: TenantWebsiteWhereUniqueInput
+    create: XOR<TenantWebsiteCreateWithoutTablesInput, TenantWebsiteUncheckedCreateWithoutTablesInput>
   }
 
   export type RestaurantOrderUpsertWithWhereUniqueWithoutTableInput = {
@@ -31636,61 +33093,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"RestaurantOrder"> | Date | string
   }
 
-  export type TenantWebsiteUpsertWithoutTablesInput = {
-    update: XOR<TenantWebsiteUpdateWithoutTablesInput, TenantWebsiteUncheckedUpdateWithoutTablesInput>
-    create: XOR<TenantWebsiteCreateWithoutTablesInput, TenantWebsiteUncheckedCreateWithoutTablesInput>
-    where?: TenantWebsiteWhereInput
-  }
-
-  export type TenantWebsiteUpdateToOneWithWhereWithoutTablesInput = {
-    where?: TenantWebsiteWhereInput
-    data: XOR<TenantWebsiteUpdateWithoutTablesInput, TenantWebsiteUncheckedUpdateWithoutTablesInput>
-  }
-
-  export type TenantWebsiteUpdateWithoutTablesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    siteName?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: StringFieldUpdateOperationsInput | string
-    config?: StringFieldUpdateOperationsInput | string
-    designTemplate?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
-    waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
-    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
-    service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
-  }
-
-  export type TenantWebsiteUncheckedUpdateWithoutTablesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    serviceId?: StringFieldUpdateOperationsInput | string
-    siteName?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: StringFieldUpdateOperationsInput | string
-    config?: StringFieldUpdateOperationsInput | string
-    designTemplate?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
-    waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
-  }
-
   export type RestaurantWaiterUpsertWithoutTablesInput = {
     update: XOR<RestaurantWaiterUpdateWithoutTablesInput, RestaurantWaiterUncheckedUpdateWithoutTablesInput>
     create: XOR<RestaurantWaiterCreateWithoutTablesInput, RestaurantWaiterUncheckedCreateWithoutTablesInput>
@@ -31718,6 +33120,61 @@ export namespace Prisma {
     pin?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantWebsiteUpsertWithoutTablesInput = {
+    update: XOR<TenantWebsiteUpdateWithoutTablesInput, TenantWebsiteUncheckedUpdateWithoutTablesInput>
+    create: XOR<TenantWebsiteCreateWithoutTablesInput, TenantWebsiteUncheckedCreateWithoutTablesInput>
+    where?: TenantWebsiteWhereInput
+  }
+
+  export type TenantWebsiteUpdateToOneWithWhereWithoutTablesInput = {
+    where?: TenantWebsiteWhereInput
+    data: XOR<TenantWebsiteUpdateWithoutTablesInput, TenantWebsiteUncheckedUpdateWithoutTablesInput>
+  }
+
+  export type TenantWebsiteUpdateWithoutTablesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
+    categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
+    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
+  }
+
+  export type TenantWebsiteUncheckedUpdateWithoutTablesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    serviceId?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
+    categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type RestaurantTableCreateWithoutWaiterInput = {
@@ -31760,13 +33217,13 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
-    user: UserCreateNestedOneWithoutWebsitesInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
+    user: UserCreateNestedOneWithoutWebsitesInput
   }
 
   export type TenantWebsiteUncheckedCreateWithoutWaitersInput = {
@@ -31784,11 +33241,11 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantWebsiteCreateOrConnectWithoutWaitersInput = {
@@ -31836,13 +33293,13 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
-    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
+    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
 
   export type TenantWebsiteUncheckedUpdateWithoutWaitersInput = {
@@ -31860,11 +33317,34 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type RestaurantTableCreateWithoutOrdersInput = {
+    id?: string
+    number: string
+    capacity?: number | null
+    isActive?: boolean
+    waiter?: RestaurantWaiterCreateNestedOneWithoutTablesInput
+    tenant: TenantWebsiteCreateNestedOneWithoutTablesInput
+  }
+
+  export type RestaurantTableUncheckedCreateWithoutOrdersInput = {
+    id?: string
+    tenantId: string
+    number: string
+    capacity?: number | null
+    isActive?: boolean
+    waiterId?: string | null
+  }
+
+  export type RestaurantTableCreateOrConnectWithoutOrdersInput = {
+    where: RestaurantTableWhereUniqueInput
+    create: XOR<RestaurantTableCreateWithoutOrdersInput, RestaurantTableUncheckedCreateWithoutOrdersInput>
   }
 
   export type RestaurantOrderItemCreateWithoutOrderInput = {
@@ -31892,27 +33372,33 @@ export namespace Prisma {
     data: RestaurantOrderItemCreateManyOrderInput | RestaurantOrderItemCreateManyOrderInput[]
   }
 
-  export type RestaurantTableCreateWithoutOrdersInput = {
-    id?: string
-    number: string
-    capacity?: number | null
-    isActive?: boolean
-    tenant: TenantWebsiteCreateNestedOneWithoutTablesInput
-    waiter?: RestaurantWaiterCreateNestedOneWithoutTablesInput
-  }
-
-  export type RestaurantTableUncheckedCreateWithoutOrdersInput = {
-    id?: string
-    tenantId: string
-    number: string
-    capacity?: number | null
-    isActive?: boolean
-    waiterId?: string | null
-  }
-
-  export type RestaurantTableCreateOrConnectWithoutOrdersInput = {
-    where: RestaurantTableWhereUniqueInput
+  export type RestaurantTableUpsertWithoutOrdersInput = {
+    update: XOR<RestaurantTableUpdateWithoutOrdersInput, RestaurantTableUncheckedUpdateWithoutOrdersInput>
     create: XOR<RestaurantTableCreateWithoutOrdersInput, RestaurantTableUncheckedCreateWithoutOrdersInput>
+    where?: RestaurantTableWhereInput
+  }
+
+  export type RestaurantTableUpdateToOneWithWhereWithoutOrdersInput = {
+    where?: RestaurantTableWhereInput
+    data: XOR<RestaurantTableUpdateWithoutOrdersInput, RestaurantTableUncheckedUpdateWithoutOrdersInput>
+  }
+
+  export type RestaurantTableUpdateWithoutOrdersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    capacity?: NullableIntFieldUpdateOperationsInput | number | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    waiter?: RestaurantWaiterUpdateOneWithoutTablesNestedInput
+    tenant?: TenantWebsiteUpdateOneRequiredWithoutTablesNestedInput
+  }
+
+  export type RestaurantTableUncheckedUpdateWithoutOrdersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    capacity?: NullableIntFieldUpdateOperationsInput | number | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    waiterId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RestaurantOrderItemUpsertWithWhereUniqueWithoutOrderInput = {
@@ -31941,35 +33427,6 @@ export namespace Prisma {
     name?: StringFilter<"RestaurantOrderItem"> | string
     price?: FloatFilter<"RestaurantOrderItem"> | number
     quantity?: IntFilter<"RestaurantOrderItem"> | number
-  }
-
-  export type RestaurantTableUpsertWithoutOrdersInput = {
-    update: XOR<RestaurantTableUpdateWithoutOrdersInput, RestaurantTableUncheckedUpdateWithoutOrdersInput>
-    create: XOR<RestaurantTableCreateWithoutOrdersInput, RestaurantTableUncheckedCreateWithoutOrdersInput>
-    where?: RestaurantTableWhereInput
-  }
-
-  export type RestaurantTableUpdateToOneWithWhereWithoutOrdersInput = {
-    where?: RestaurantTableWhereInput
-    data: XOR<RestaurantTableUpdateWithoutOrdersInput, RestaurantTableUncheckedUpdateWithoutOrdersInput>
-  }
-
-  export type RestaurantTableUpdateWithoutOrdersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    number?: StringFieldUpdateOperationsInput | string
-    capacity?: NullableIntFieldUpdateOperationsInput | number | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    tenant?: TenantWebsiteUpdateOneRequiredWithoutTablesNestedInput
-    waiter?: RestaurantWaiterUpdateOneWithoutTablesNestedInput
-  }
-
-  export type RestaurantTableUncheckedUpdateWithoutOrdersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
-    number?: StringFieldUpdateOperationsInput | string
-    capacity?: NullableIntFieldUpdateOperationsInput | number | null
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    waiterId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RestaurantOrderCreateWithoutItemsInput = {
@@ -32031,8 +33488,8 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    client: CabinetClientCreateNestedOneWithoutAppointmentsInput
     tenant: TenantWebsiteCreateNestedOneWithoutCabinetAppointmentsInput
+    client: CabinetClientCreateNestedOneWithoutAppointmentsInput
   }
 
   export type CabinetAppointmentUncheckedCreateWithoutServiceInput = {
@@ -32068,13 +33525,13 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
-    user: UserCreateNestedOneWithoutWebsitesInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
+    user: UserCreateNestedOneWithoutWebsitesInput
   }
 
   export type TenantWebsiteUncheckedCreateWithoutCabinetServicesInput = {
@@ -32092,11 +33549,11 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantWebsiteCreateOrConnectWithoutCabinetServicesInput = {
@@ -32144,13 +33601,13 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
-    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
+    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
 
   export type TenantWebsiteUncheckedUpdateWithoutCabinetServicesInput = {
@@ -32168,11 +33625,11 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type CabinetAppointmentCreateWithoutClientInput = {
@@ -32182,8 +33639,8 @@ export namespace Prisma {
     notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    service: CabinetServiceCreateNestedOneWithoutAppointmentsInput
     tenant: TenantWebsiteCreateNestedOneWithoutCabinetAppointmentsInput
+    service: CabinetServiceCreateNestedOneWithoutAppointmentsInput
   }
 
   export type CabinetAppointmentUncheckedCreateWithoutClientInput = {
@@ -32219,13 +33676,13 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
-    user: UserCreateNestedOneWithoutWebsitesInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
+    user: UserCreateNestedOneWithoutWebsitesInput
   }
 
   export type TenantWebsiteUncheckedCreateWithoutCabinetClientsInput = {
@@ -32243,11 +33700,11 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
-    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantWebsiteCreateOrConnectWithoutCabinetClientsInput = {
@@ -32295,13 +33752,13 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
-    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
+    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
 
   export type TenantWebsiteUncheckedUpdateWithoutCabinetClientsInput = {
@@ -32319,38 +33776,60 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
   }
 
-  export type CabinetServiceCreateWithoutAppointmentsInput = {
+  export type TenantWebsiteCreateWithoutCabinetAppointmentsInput = {
     id?: string
-    name: string
+    slug: string
+    siteName: string
     description?: string | null
-    price: number
-    duration: number
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
     isActive?: boolean
     createdAt?: Date | string
-    tenant: TenantWebsiteCreateNestedOneWithoutCabinetServicesInput
+    updatedAt?: Date | string
+    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
+    categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
+    tables?: RestaurantTableCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    service: ServiceCreateNestedOneWithoutWebsitesInput
+    user: UserCreateNestedOneWithoutWebsitesInput
   }
 
-  export type CabinetServiceUncheckedCreateWithoutAppointmentsInput = {
+  export type TenantWebsiteUncheckedCreateWithoutCabinetAppointmentsInput = {
     id?: string
-    tenantId: string
-    name: string
+    slug: string
+    userId: string
+    serviceId: string
+    siteName: string
     description?: string | null
-    price: number
-    duration: number
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
     isActive?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
+    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
+    categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
+    tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
   }
 
-  export type CabinetServiceCreateOrConnectWithoutAppointmentsInput = {
-    where: CabinetServiceWhereUniqueInput
-    create: XOR<CabinetServiceCreateWithoutAppointmentsInput, CabinetServiceUncheckedCreateWithoutAppointmentsInput>
+  export type TenantWebsiteCreateOrConnectWithoutCabinetAppointmentsInput = {
+    where: TenantWebsiteWhereUniqueInput
+    create: XOR<TenantWebsiteCreateWithoutCabinetAppointmentsInput, TenantWebsiteUncheckedCreateWithoutCabinetAppointmentsInput>
   }
 
   export type CabinetClientCreateWithoutAppointmentsInput = {
@@ -32380,86 +33859,86 @@ export namespace Prisma {
     create: XOR<CabinetClientCreateWithoutAppointmentsInput, CabinetClientUncheckedCreateWithoutAppointmentsInput>
   }
 
-  export type TenantWebsiteCreateWithoutCabinetAppointmentsInput = {
+  export type CabinetServiceCreateWithoutAppointmentsInput = {
     id?: string
-    slug: string
-    siteName: string
+    name: string
     description?: string | null
-    logo?: string | null
-    coverImage?: string | null
-    primaryColor?: string
-    config?: string
-    designTemplate?: string
+    price: number
+    duration: number
     isActive?: boolean
     createdAt?: Date | string
-    updatedAt?: Date | string
-    categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
-    tables?: RestaurantTableCreateNestedManyWithoutTenantInput
-    waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
-    user: UserCreateNestedOneWithoutWebsitesInput
-    service: ServiceCreateNestedOneWithoutWebsitesInput
+    tenant: TenantWebsiteCreateNestedOneWithoutCabinetServicesInput
   }
 
-  export type TenantWebsiteUncheckedCreateWithoutCabinetAppointmentsInput = {
+  export type CabinetServiceUncheckedCreateWithoutAppointmentsInput = {
     id?: string
-    slug: string
-    userId: string
-    serviceId: string
-    siteName: string
+    tenantId: string
+    name: string
     description?: string | null
-    logo?: string | null
-    coverImage?: string | null
-    primaryColor?: string
-    config?: string
-    designTemplate?: string
+    price: number
+    duration: number
     isActive?: boolean
     createdAt?: Date | string
-    updatedAt?: Date | string
-    categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
-    tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
-    waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
-    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
-    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
   }
 
-  export type TenantWebsiteCreateOrConnectWithoutCabinetAppointmentsInput = {
-    where: TenantWebsiteWhereUniqueInput
-    create: XOR<TenantWebsiteCreateWithoutCabinetAppointmentsInput, TenantWebsiteUncheckedCreateWithoutCabinetAppointmentsInput>
-  }
-
-  export type CabinetServiceUpsertWithoutAppointmentsInput = {
-    update: XOR<CabinetServiceUpdateWithoutAppointmentsInput, CabinetServiceUncheckedUpdateWithoutAppointmentsInput>
+  export type CabinetServiceCreateOrConnectWithoutAppointmentsInput = {
+    where: CabinetServiceWhereUniqueInput
     create: XOR<CabinetServiceCreateWithoutAppointmentsInput, CabinetServiceUncheckedCreateWithoutAppointmentsInput>
-    where?: CabinetServiceWhereInput
   }
 
-  export type CabinetServiceUpdateToOneWithWhereWithoutAppointmentsInput = {
-    where?: CabinetServiceWhereInput
-    data: XOR<CabinetServiceUpdateWithoutAppointmentsInput, CabinetServiceUncheckedUpdateWithoutAppointmentsInput>
+  export type TenantWebsiteUpsertWithoutCabinetAppointmentsInput = {
+    update: XOR<TenantWebsiteUpdateWithoutCabinetAppointmentsInput, TenantWebsiteUncheckedUpdateWithoutCabinetAppointmentsInput>
+    create: XOR<TenantWebsiteCreateWithoutCabinetAppointmentsInput, TenantWebsiteUncheckedCreateWithoutCabinetAppointmentsInput>
+    where?: TenantWebsiteWhereInput
   }
 
-  export type CabinetServiceUpdateWithoutAppointmentsInput = {
+  export type TenantWebsiteUpdateToOneWithWhereWithoutCabinetAppointmentsInput = {
+    where?: TenantWebsiteWhereInput
+    data: XOR<TenantWebsiteUpdateWithoutCabinetAppointmentsInput, TenantWebsiteUncheckedUpdateWithoutCabinetAppointmentsInput>
+  }
+
+  export type TenantWebsiteUpdateWithoutCabinetAppointmentsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: FloatFieldUpdateOperationsInput | number
-    duration?: IntFieldUpdateOperationsInput | number
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    tenant?: TenantWebsiteUpdateOneRequiredWithoutCabinetServicesNestedInput
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
+    categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
+    tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
+    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
 
-  export type CabinetServiceUncheckedUpdateWithoutAppointmentsInput = {
+  export type TenantWebsiteUncheckedUpdateWithoutCabinetAppointmentsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    serviceId?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: FloatFieldUpdateOperationsInput | number
-    duration?: IntFieldUpdateOperationsInput | number
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
+    categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type CabinetClientUpsertWithoutAppointmentsInput = {
@@ -32495,90 +33974,37 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TenantWebsiteUpsertWithoutCabinetAppointmentsInput = {
-    update: XOR<TenantWebsiteUpdateWithoutCabinetAppointmentsInput, TenantWebsiteUncheckedUpdateWithoutCabinetAppointmentsInput>
-    create: XOR<TenantWebsiteCreateWithoutCabinetAppointmentsInput, TenantWebsiteUncheckedCreateWithoutCabinetAppointmentsInput>
-    where?: TenantWebsiteWhereInput
+  export type CabinetServiceUpsertWithoutAppointmentsInput = {
+    update: XOR<CabinetServiceUpdateWithoutAppointmentsInput, CabinetServiceUncheckedUpdateWithoutAppointmentsInput>
+    create: XOR<CabinetServiceCreateWithoutAppointmentsInput, CabinetServiceUncheckedCreateWithoutAppointmentsInput>
+    where?: CabinetServiceWhereInput
   }
 
-  export type TenantWebsiteUpdateToOneWithWhereWithoutCabinetAppointmentsInput = {
-    where?: TenantWebsiteWhereInput
-    data: XOR<TenantWebsiteUpdateWithoutCabinetAppointmentsInput, TenantWebsiteUncheckedUpdateWithoutCabinetAppointmentsInput>
+  export type CabinetServiceUpdateToOneWithWhereWithoutAppointmentsInput = {
+    where?: CabinetServiceWhereInput
+    data: XOR<CabinetServiceUpdateWithoutAppointmentsInput, CabinetServiceUncheckedUpdateWithoutAppointmentsInput>
   }
 
-  export type TenantWebsiteUpdateWithoutCabinetAppointmentsInput = {
+  export type CabinetServiceUpdateWithoutAppointmentsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    siteName?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: StringFieldUpdateOperationsInput | string
-    config?: StringFieldUpdateOperationsInput | string
-    designTemplate?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    duration?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
-    tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
-    waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
-    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
-    service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
+    tenant?: TenantWebsiteUpdateOneRequiredWithoutCabinetServicesNestedInput
   }
 
-  export type TenantWebsiteUncheckedUpdateWithoutCabinetAppointmentsInput = {
+  export type CabinetServiceUncheckedUpdateWithoutAppointmentsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    serviceId?: StringFieldUpdateOperationsInput | string
-    siteName?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: StringFieldUpdateOperationsInput | string
-    config?: StringFieldUpdateOperationsInput | string
-    designTemplate?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    duration?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
-    tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
-    waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
-  }
-
-  export type UserCreateWithoutPaymentRequestsInput = {
-    id?: string
-    email: string
-    password: string
-    companyName: string
-    role?: string
-    createdAt?: Date | string
-    services?: UserServiceCreateNestedManyWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    websites?: TenantWebsiteCreateNestedManyWithoutUserInput
-    chatSessions?: ChatSessionCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutPaymentRequestsInput = {
-    id?: string
-    email: string
-    password: string
-    companyName: string
-    role?: string
-    createdAt?: Date | string
-    services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
-    chatSessions?: ChatSessionUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutPaymentRequestsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutPaymentRequestsInput, UserUncheckedCreateWithoutPaymentRequestsInput>
   }
 
   export type ServiceCreateWithoutPaymentRequestsInput = {
@@ -32588,11 +34014,11 @@ export namespace Prisma {
     description?: string | null
     status?: string
     category?: string | null
-    price?: number | null
-    icon?: string | null
     createdAt?: Date | string
-    users?: UserServiceCreateNestedManyWithoutServiceInput
+    icon?: string | null
+    price?: number | null
     websites?: TenantWebsiteCreateNestedManyWithoutServiceInput
+    users?: UserServiceCreateNestedManyWithoutServiceInput
   }
 
   export type ServiceUncheckedCreateWithoutPaymentRequestsInput = {
@@ -32602,11 +34028,11 @@ export namespace Prisma {
     description?: string | null
     status?: string
     category?: string | null
-    price?: number | null
-    icon?: string | null
     createdAt?: Date | string
-    users?: UserServiceUncheckedCreateNestedManyWithoutServiceInput
+    icon?: string | null
+    price?: number | null
     websites?: TenantWebsiteUncheckedCreateNestedManyWithoutServiceInput
+    users?: UserServiceUncheckedCreateNestedManyWithoutServiceInput
   }
 
   export type ServiceCreateOrConnectWithoutPaymentRequestsInput = {
@@ -32614,41 +34040,35 @@ export namespace Prisma {
     create: XOR<ServiceCreateWithoutPaymentRequestsInput, ServiceUncheckedCreateWithoutPaymentRequestsInput>
   }
 
-  export type UserUpsertWithoutPaymentRequestsInput = {
-    update: XOR<UserUpdateWithoutPaymentRequestsInput, UserUncheckedUpdateWithoutPaymentRequestsInput>
+  export type UserCreateWithoutPaymentRequestsInput = {
+    id?: string
+    email: string
+    password: string
+    companyName: string
+    role?: string
+    createdAt?: Date | string
+    chatSessions?: ChatSessionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    websites?: TenantWebsiteCreateNestedManyWithoutUserInput
+    services?: UserServiceCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPaymentRequestsInput = {
+    id?: string
+    email: string
+    password: string
+    companyName: string
+    role?: string
+    createdAt?: Date | string
+    chatSessions?: ChatSessionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
+    services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPaymentRequestsInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutPaymentRequestsInput, UserUncheckedCreateWithoutPaymentRequestsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutPaymentRequestsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutPaymentRequestsInput, UserUncheckedUpdateWithoutPaymentRequestsInput>
-  }
-
-  export type UserUpdateWithoutPaymentRequestsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    companyName?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    services?: UserServiceUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
-    chatSessions?: ChatSessionUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutPaymentRequestsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    companyName?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
-    chatSessions?: ChatSessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ServiceUpsertWithoutPaymentRequestsInput = {
@@ -32669,11 +34089,11 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     category?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserServiceUpdateManyWithoutServiceNestedInput
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     websites?: TenantWebsiteUpdateManyWithoutServiceNestedInput
+    users?: UserServiceUpdateManyWithoutServiceNestedInput
   }
 
   export type ServiceUncheckedUpdateWithoutPaymentRequestsInput = {
@@ -32683,19 +34103,55 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     category?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
-    icon?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    users?: UserServiceUncheckedUpdateManyWithoutServiceNestedInput
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     websites?: TenantWebsiteUncheckedUpdateManyWithoutServiceNestedInput
+    users?: UserServiceUncheckedUpdateManyWithoutServiceNestedInput
   }
 
-  export type UserServiceCreateManyUserInput = {
+  export type UserUpsertWithoutPaymentRequestsInput = {
+    update: XOR<UserUpdateWithoutPaymentRequestsInput, UserUncheckedUpdateWithoutPaymentRequestsInput>
+    create: XOR<UserCreateWithoutPaymentRequestsInput, UserUncheckedCreateWithoutPaymentRequestsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPaymentRequestsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPaymentRequestsInput, UserUncheckedUpdateWithoutPaymentRequestsInput>
+  }
+
+  export type UserUpdateWithoutPaymentRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chatSessions?: ChatSessionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
+    services?: UserServiceUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPaymentRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chatSessions?: ChatSessionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
+    services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ChatSessionCreateManyUserInput = {
     id?: string
-    serviceId: string
-    notify?: boolean
-    isActive?: boolean
-    selectedAt?: Date | string
+    title?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type NotificationCreateManyUserInput = {
@@ -32704,6 +34160,19 @@ export namespace Prisma {
     message: string
     read?: boolean
     createdAt?: Date | string
+  }
+
+  export type PaymentRequestCreateManyUserInput = {
+    id?: string
+    serviceId: string
+    amount: number
+    status?: string
+    transferReference?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    expiresAt: Date | string
+    confirmedAt?: Date | string | null
+    confirmedBy?: string | null
   }
 
   export type TenantWebsiteCreateManyUserInput = {
@@ -32722,48 +34191,35 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type ChatSessionCreateManyUserInput = {
-    id?: string
-    title?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type PaymentRequestCreateManyUserInput = {
+  export type UserServiceCreateManyUserInput = {
     id?: string
     serviceId: string
-    amount: number
-    status?: string
-    transferReference?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    expiresAt: Date | string
-    confirmedAt?: Date | string | null
-    confirmedBy?: string | null
+    notify?: boolean
+    selectedAt?: Date | string
+    isActive?: boolean
   }
 
-  export type UserServiceUpdateWithoutUserInput = {
+  export type ChatSessionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    notify?: BoolFieldUpdateOperationsInput | boolean
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    service?: ServiceUpdateOneRequiredWithoutUsersNestedInput
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: ChatMessageUpdateManyWithoutSessionNestedInput
   }
 
-  export type UserServiceUncheckedUpdateWithoutUserInput = {
+  export type ChatSessionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    serviceId?: StringFieldUpdateOperationsInput | string
-    notify?: BoolFieldUpdateOperationsInput | boolean
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    messages?: ChatMessageUncheckedUpdateManyWithoutSessionNestedInput
   }
 
-  export type UserServiceUncheckedUpdateManyWithoutUserInput = {
+  export type ChatSessionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    serviceId?: StringFieldUpdateOperationsInput | string
-    notify?: BoolFieldUpdateOperationsInput | boolean
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NotificationUpdateWithoutUserInput = {
@@ -32788,89 +34244,6 @@ export namespace Prisma {
     message?: StringFieldUpdateOperationsInput | string
     read?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TenantWebsiteUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    siteName?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: StringFieldUpdateOperationsInput | string
-    config?: StringFieldUpdateOperationsInput | string
-    designTemplate?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
-    tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
-    waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
-    service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
-  }
-
-  export type TenantWebsiteUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    serviceId?: StringFieldUpdateOperationsInput | string
-    siteName?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: StringFieldUpdateOperationsInput | string
-    config?: StringFieldUpdateOperationsInput | string
-    designTemplate?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
-    tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
-    waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
-  }
-
-  export type TenantWebsiteUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    serviceId?: StringFieldUpdateOperationsInput | string
-    siteName?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: StringFieldUpdateOperationsInput | string
-    config?: StringFieldUpdateOperationsInput | string
-    designTemplate?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ChatSessionUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    messages?: ChatMessageUpdateManyWithoutSessionNestedInput
-  }
-
-  export type ChatSessionUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    messages?: ChatMessageUncheckedUpdateManyWithoutSessionNestedInput
-  }
-
-  export type ChatSessionUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentRequestUpdateWithoutUserInput = {
@@ -32912,6 +34285,90 @@ export namespace Prisma {
     confirmedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type TenantWebsiteUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
+    categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
+    tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
+  }
+
+  export type TenantWebsiteUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    serviceId?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
+    categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantWebsiteUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    serviceId?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserServiceUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    notify?: BoolFieldUpdateOperationsInput | boolean
+    selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    service?: ServiceUpdateOneRequiredWithoutUsersNestedInput
+  }
+
+  export type UserServiceUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serviceId?: StringFieldUpdateOperationsInput | string
+    notify?: BoolFieldUpdateOperationsInput | boolean
+    selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type UserServiceUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serviceId?: StringFieldUpdateOperationsInput | string
+    notify?: BoolFieldUpdateOperationsInput | boolean
+    selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type ChatMessageCreateManySessionInput = {
     id?: string
     role: string
@@ -32940,12 +34397,17 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserServiceCreateManyServiceInput = {
+  export type PaymentRequestCreateManyServiceInput = {
     id?: string
     userId: string
-    notify?: boolean
-    isActive?: boolean
-    selectedAt?: Date | string
+    amount: number
+    status?: string
+    transferReference?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    expiresAt: Date | string
+    confirmedAt?: Date | string | null
+    confirmedBy?: string | null
   }
 
   export type TenantWebsiteCreateManyServiceInput = {
@@ -32964,101 +34426,12 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type PaymentRequestCreateManyServiceInput = {
+  export type UserServiceCreateManyServiceInput = {
     id?: string
     userId: string
-    amount: number
-    status?: string
-    transferReference?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    expiresAt: Date | string
-    confirmedAt?: Date | string | null
-    confirmedBy?: string | null
-  }
-
-  export type UserServiceUpdateWithoutServiceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    notify?: BoolFieldUpdateOperationsInput | boolean
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutServicesNestedInput
-  }
-
-  export type UserServiceUncheckedUpdateWithoutServiceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    notify?: BoolFieldUpdateOperationsInput | boolean
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserServiceUncheckedUpdateManyWithoutServiceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    notify?: BoolFieldUpdateOperationsInput | boolean
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TenantWebsiteUpdateWithoutServiceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    siteName?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: StringFieldUpdateOperationsInput | string
-    config?: StringFieldUpdateOperationsInput | string
-    designTemplate?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
-    tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
-    waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
-    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
-  }
-
-  export type TenantWebsiteUncheckedUpdateWithoutServiceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    siteName?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: StringFieldUpdateOperationsInput | string
-    config?: StringFieldUpdateOperationsInput | string
-    designTemplate?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
-    tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
-    waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
-    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
-  }
-
-  export type TenantWebsiteUncheckedUpdateManyWithoutServiceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    siteName?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    logo?: NullableStringFieldUpdateOperationsInput | string | null
-    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
-    primaryColor?: StringFieldUpdateOperationsInput | string
-    config?: StringFieldUpdateOperationsInput | string
-    designTemplate?: StringFieldUpdateOperationsInput | string
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notify?: boolean
+    selectedAt?: Date | string
+    isActive?: boolean
   }
 
   export type PaymentRequestUpdateWithoutServiceInput = {
@@ -33100,6 +34473,121 @@ export namespace Prisma {
     confirmedBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type TenantWebsiteUpdateWithoutServiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
+    categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
+    tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
+  }
+
+  export type TenantWebsiteUncheckedUpdateWithoutServiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
+    categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantWebsiteUncheckedUpdateManyWithoutServiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserServiceUpdateWithoutServiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    notify?: BoolFieldUpdateOperationsInput | boolean
+    selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    user?: UserUpdateOneRequiredWithoutServicesNestedInput
+  }
+
+  export type UserServiceUncheckedUpdateWithoutServiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    notify?: BoolFieldUpdateOperationsInput | boolean
+    selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type UserServiceUncheckedUpdateManyWithoutServiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    notify?: BoolFieldUpdateOperationsInput | boolean
+    selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CabinetAppointmentCreateManyTenantInput = {
+    id?: string
+    serviceId: string
+    clientId: string
+    appointmentDate: Date | string
+    status?: string
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CabinetClientCreateManyTenantInput = {
+    id?: string
+    name: string
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CabinetServiceCreateManyTenantInput = {
+    id?: string
+    name: string
+    description?: string | null
+    price: number
+    duration: number
+    isActive?: boolean
+    createdAt?: Date | string
+  }
+
   export type RestaurantCategoryCreateManyTenantInput = {
     id?: string
     name: string
@@ -33123,35 +34611,101 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type CabinetServiceCreateManyTenantInput = {
-    id?: string
-    name: string
-    description?: string | null
-    price: number
-    duration: number
-    isActive?: boolean
-    createdAt?: Date | string
+  export type CabinetAppointmentUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: CabinetClientUpdateOneRequiredWithoutAppointmentsNestedInput
+    service?: CabinetServiceUpdateOneRequiredWithoutAppointmentsNestedInput
   }
 
-  export type CabinetClientCreateManyTenantInput = {
-    id?: string
-    name: string
-    email?: string | null
-    phone?: string | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
+  export type CabinetAppointmentUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serviceId?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CabinetAppointmentCreateManyTenantInput = {
-    id?: string
-    serviceId: string
-    clientId: string
-    appointmentDate: Date | string
-    status?: string
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
+  export type CabinetAppointmentUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    serviceId?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CabinetClientUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appointments?: CabinetAppointmentUpdateManyWithoutClientNestedInput
+  }
+
+  export type CabinetClientUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appointments?: CabinetAppointmentUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type CabinetClientUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CabinetServiceUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: FloatFieldUpdateOperationsInput | number
+    duration?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appointments?: CabinetAppointmentUpdateManyWithoutServiceNestedInput
+  }
+
+  export type CabinetServiceUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: FloatFieldUpdateOperationsInput | number
+    duration?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appointments?: CabinetAppointmentUncheckedUpdateManyWithoutServiceNestedInput
+  }
+
+  export type CabinetServiceUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: FloatFieldUpdateOperationsInput | number
+    duration?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RestaurantCategoryUpdateWithoutTenantInput = {
@@ -33227,103 +34781,6 @@ export namespace Prisma {
     pin?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CabinetServiceUpdateWithoutTenantInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: FloatFieldUpdateOperationsInput | number
-    duration?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    appointments?: CabinetAppointmentUpdateManyWithoutServiceNestedInput
-  }
-
-  export type CabinetServiceUncheckedUpdateWithoutTenantInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: FloatFieldUpdateOperationsInput | number
-    duration?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    appointments?: CabinetAppointmentUncheckedUpdateManyWithoutServiceNestedInput
-  }
-
-  export type CabinetServiceUncheckedUpdateManyWithoutTenantInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: FloatFieldUpdateOperationsInput | number
-    duration?: IntFieldUpdateOperationsInput | number
-    isActive?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CabinetClientUpdateWithoutTenantInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    appointments?: CabinetAppointmentUpdateManyWithoutClientNestedInput
-  }
-
-  export type CabinetClientUncheckedUpdateWithoutTenantInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    appointments?: CabinetAppointmentUncheckedUpdateManyWithoutClientNestedInput
-  }
-
-  export type CabinetClientUncheckedUpdateManyWithoutTenantInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CabinetAppointmentUpdateWithoutTenantInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: StringFieldUpdateOperationsInput | string
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    service?: CabinetServiceUpdateOneRequiredWithoutAppointmentsNestedInput
-    client?: CabinetClientUpdateOneRequiredWithoutAppointmentsNestedInput
-  }
-
-  export type CabinetAppointmentUncheckedUpdateWithoutTenantInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    serviceId?: StringFieldUpdateOperationsInput | string
-    clientId?: StringFieldUpdateOperationsInput | string
-    appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: StringFieldUpdateOperationsInput | string
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type CabinetAppointmentUncheckedUpdateManyWithoutTenantInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    serviceId?: StringFieldUpdateOperationsInput | string
-    clientId?: StringFieldUpdateOperationsInput | string
-    appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    status?: StringFieldUpdateOperationsInput | string
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RestaurantDishCreateManyCategoryInput = {
@@ -33484,8 +34941,8 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    client?: CabinetClientUpdateOneRequiredWithoutAppointmentsNestedInput
     tenant?: TenantWebsiteUpdateOneRequiredWithoutCabinetAppointmentsNestedInput
+    client?: CabinetClientUpdateOneRequiredWithoutAppointmentsNestedInput
   }
 
   export type CabinetAppointmentUncheckedUpdateWithoutServiceInput = {
@@ -33528,8 +34985,8 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    service?: CabinetServiceUpdateOneRequiredWithoutAppointmentsNestedInput
     tenant?: TenantWebsiteUpdateOneRequiredWithoutCabinetAppointmentsNestedInput
+    service?: CabinetServiceUpdateOneRequiredWithoutAppointmentsNestedInput
   }
 
   export type CabinetAppointmentUncheckedUpdateWithoutClientInput = {

@@ -1,9 +1,7 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/client"
+  provider        = "prisma-client-js"
+  output          = "../src/generated/client"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
@@ -11,17 +9,17 @@ datasource db {
 }
 
 model User {
-  id            String          @id @default(cuid())
-  email         String          @unique
-  password      String
-  companyName   String
-  role          String          @default("CLIENT") // "ADMIN" | "CLIENT"
-  createdAt     DateTime        @default(now())
-  services      UserService[]
-  notifications Notification[]
-  websites      TenantWebsite[]
-  chatSessions  ChatSession[]
+  id              String           @id @default(cuid())
+  email           String           @unique
+  password        String
+  companyName     String
+  role            String           @default("CLIENT")
+  createdAt       DateTime         @default(now())
+  chatSessions    ChatSession[]
+  notifications   Notification[]
   paymentRequests PaymentRequest[]
+  websites        TenantWebsite[]
+  services        UserService[]
 }
 
 model ChatSession {
@@ -39,7 +37,7 @@ model ChatSession {
 model ChatMessage {
   id        String      @id @default(cuid())
   sessionId String
-  role      String // "user" | "assistant" | "system"
+  role      String
   content   String
   createdAt DateTime    @default(now())
   session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
@@ -58,18 +56,18 @@ model Notification {
 }
 
 model Service {
-  id          String          @id @default(cuid())
-  name        String
-  slug        String          @unique
-  description String?
-  status      String          @default("COMING_SOON") // "AVAILABLE" | "COMING_SOON"
-  category    String?
-  price       Float?          // Prix du service en euros
-  icon        String?         // Icône du service
-  createdAt   DateTime        @default(now())
-  users       UserService[]
-  websites    TenantWebsite[]
+  id              String           @id @default(cuid())
+  name            String
+  slug            String           @unique
+  description     String?
+  status          String           @default("COMING_SOON")
+  category        String?
+  createdAt       DateTime         @default(now())
+  icon            String?
+  price           Float?
   paymentRequests PaymentRequest[]
+  websites        TenantWebsite[]
+  users           UserService[]
 }
 
 model UserService {
@@ -77,11 +75,10 @@ model UserService {
   userId     String
   serviceId  String
   notify     Boolean  @default(false)
-  isActive   Boolean  @default(true)
   selectedAt DateTime @default(now())
-
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  service Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  isActive   Boolean  @default(true)
+  service    Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, serviceId])
 }
@@ -96,45 +93,29 @@ model PasswordReset {
   @@index([email])
 }
 
-// Multi-tenant website configuration
 model TenantWebsite {
-  id        String @id @default(cuid())
-  slug      String @unique // URL path: "delicious-cafe" -> firststepco.com/delicious-cafe
-  userId    String
-  serviceId String
-
-  // Website branding & info
-  siteName     String // Display name
-  description  String? // Short description / tagline
-  logo         String? // Logo URL
-  coverImage   String? // Hero/cover image URL
-  primaryColor String  @default("#3B82F6")
-
-  // Restaurant-specific config (stored as JSON string for flexibility)
-  // Contains: menu items, categories, hours, contact info, address, socials, etc.
-  config String @default("{}")
-
-  // Design Choice
-  designTemplate String @default("classic") // "classic" | "modern" | "minimal"
-
-  // Status
-  isActive  Boolean  @default(false) // Website is published
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Restaurant Commerce
-  categories RestaurantCategory[]
-  tables     RestaurantTable[]
-  waiters    RestaurantWaiter[]
-
-  // Cabinet/Professional Services
-  cabinetServices     CabinetService[]
-  cabinetClients      CabinetClient[]
+  id                  String               @id @default(cuid())
+  slug                String               @unique
+  userId              String
+  serviceId           String
+  siteName            String
+  description         String?
+  logo                String?
+  coverImage          String?
+  primaryColor        String               @default("#3B82F6")
+  config              String               @default("{}")
+  designTemplate      String               @default("classic")
+  isActive            Boolean              @default(false)
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
   cabinetAppointments CabinetAppointment[]
-
-  // Relations
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  service Service @relation(fields: [serviceId], references: [id])
+  cabinetClients      CabinetClient[]
+  cabinetServices     CabinetService[]
+  categories          RestaurantCategory[]
+  tables              RestaurantTable[]
+  waiters             RestaurantWaiter[]
+  service             Service              @relation(fields: [serviceId], references: [id])
+  user                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([slug])
   @@index([userId])
@@ -146,8 +127,8 @@ model RestaurantCategory {
   name     String
   order    Int              @default(0)
   isActive Boolean          @default(true)
-  dishes   RestaurantDish[]
   tenant   TenantWebsite    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  dishes   RestaurantDish[]
 
   @@index([tenantId])
 }
@@ -169,13 +150,13 @@ model RestaurantDish {
 model RestaurantTable {
   id       String            @id @default(cuid())
   tenantId String
-  number   String // Table number/name (e.g., "1", "A-5")
+  number   String
   capacity Int?
   isActive Boolean           @default(true)
   waiterId String?
   orders   RestaurantOrder[]
-  tenant   TenantWebsite     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   waiter   RestaurantWaiter? @relation(fields: [waiterId], references: [id])
+  tenant   TenantWebsite     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
   @@unique([tenantId, number])
   @@index([tenantId])
@@ -183,15 +164,14 @@ model RestaurantTable {
 }
 
 model RestaurantWaiter {
-  id        String   @id @default(cuid())
+  id        String            @id @default(cuid())
   tenantId  String
   name      String
-  pin       String // 4-digit PIN
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-
-  tables RestaurantTable[]
-  tenant TenantWebsite     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  pin       String
+  isActive  Boolean           @default(true)
+  createdAt DateTime          @default(now())
+  tables    RestaurantTable[]
+  tenant    TenantWebsite     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
   @@index([tenantId])
 }
@@ -199,12 +179,12 @@ model RestaurantWaiter {
 model RestaurantOrder {
   id          String                @id @default(cuid())
   tableId     String
-  status      String                @default("PENDING") // PENDING, PREPARING, READY, SERVED, PAID, CANCELLED
+  status      String                @default("PENDING")
   totalAmount Float
   createdAt   DateTime              @default(now())
   updatedAt   DateTime              @updatedAt
-  items       RestaurantOrderItem[]
   table       RestaurantTable       @relation(fields: [tableId], references: [id])
+  items       RestaurantOrderItem[]
 
   @@index([tableId])
 }
@@ -213,22 +193,21 @@ model RestaurantOrderItem {
   id       String          @id @default(cuid())
   orderId  String
   dishId   String
-  name     String // Snapshot of name at time of order
-  price    Float // Snapshot of price
+  name     String
+  price    Float
   quantity Int
   order    RestaurantOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
   @@index([orderId])
 }
 
-// Cabinet/Professional Services Models
 model CabinetService {
   id           String               @id @default(cuid())
   tenantId     String
-  name         String // e.g., "General Consultation", "Legal Advice"
+  name         String
   description  String?
-  price        Float // Service price
-  duration     Int // Duration in minutes
+  price        Float
+  duration     Int
   isActive     Boolean              @default(true)
   createdAt    DateTime             @default(now())
   appointments CabinetAppointment[]
@@ -243,7 +222,7 @@ model CabinetClient {
   name         String
   email        String?
   phone        String?
-  notes        String? // Medical history, preferences, etc.
+  notes        String?
   createdAt    DateTime             @default(now())
   updatedAt    DateTime             @updatedAt
   appointments CabinetAppointment[]
@@ -258,55 +237,62 @@ model CabinetAppointment {
   tenantId        String
   serviceId       String
   clientId        String
-  appointmentDate DateTime // Date and time of the appointment
-  status          String         @default("SCHEDULED") // SCHEDULED, CONFIRMED, COMPLETED, CANCELLED, NO_SHOW
-  notes           String? // Appointment notes
+  appointmentDate DateTime
+  status          String         @default("SCHEDULED")
+  notes           String?
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt
-  service         CabinetService @relation(fields: [serviceId], references: [id])
-  client          CabinetClient  @relation(fields: [clientId], references: [id])
   tenant          TenantWebsite  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  client          CabinetClient  @relation(fields: [clientId], references: [id])
+  service         CabinetService @relation(fields: [serviceId], references: [id])
 
   @@index([tenantId])
   @@index([serviceId])
   @@index([clientId])
   @@index([appointmentDate])
 }
-// Payment Models
+
 model PaymentRequest {
-  id        String   @id @default(cuid())
-  userId    String
-  serviceId String
-  amount    Float
-  status    String   @default("PENDING") // PENDING, PAID, EXPIRED, CANCELLED
-  
-  // Bank transfer details
-  transferReference String? // Reference number from bank transfer
-  
-  // Metadata
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  expiresAt DateTime // Payment request expires after X days
-  confirmedAt DateTime? // When admin confirmed payment
-  confirmedBy String? // Admin who confirmed
-  
-  // Relations
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  service Service @relation(fields: [serviceId], references: [id])
-  
+  id                String    @id @default(cuid())
+  userId            String
+  serviceId         String
+  amount            Float
+  status            String    @default("PENDING")
+  transferReference String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  expiresAt         DateTime
+  confirmedAt       DateTime?
+  confirmedBy       String?
+  service           Service   @relation(fields: [serviceId], references: [id])
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@index([userId])
   @@index([serviceId])
   @@index([status])
 }
 
-// Bank account info for payments
 model BankAccount {
-  id          String  @id @default(cuid())
-  accountName String  // Nom du titulaire
-  iban        String  // IBAN
-  rib         String? // RIB
-  bic         String? // Code BIC/SWIFT
-  bankName    String  // Nom de la banque
-  isActive    Boolean @default(true)
+  id          String   @id @default(cuid())
+  accountName String
+  iban        String
+  bic         String?
+  bankName    String
+  isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
+  rib         String?
+}
+
+model Campaign {
+  id                 String    @id @default(cuid())
+  subject            String
+  content            String
+  status             String    @default("DRAFT")
+  sentAt             DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  recipientCount     Int       @default(0)
+  successCount       Int       @default(0)
+  failureCount       Int       @default(0)
+  selectedRecipients String    @default("[]")
 }

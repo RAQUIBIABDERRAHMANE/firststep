@@ -39,6 +39,26 @@ export async function sendWelcomeEmail(email: string, companyName: string) {
     }
 }
 
+export async function sendHtmlEmail(to: string, subject: string, html: string) {
+    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
+        console.warn('[MAILER] WARNING: Email credentials missing in environment variables.');
+        return { success: false, error: 'Configuration missing' };
+    }
+
+    try {
+        await transporter.sendMail({
+            from: `"FirstStep SaaS" <${process.env.EMAIL_USER}>`,
+            to,
+            subject,
+            html,
+        });
+        return { success: true };
+    } catch (error) {
+        console.error('[MAILER] Error sending HTML email:', error);
+        return { success: false, error };
+    }
+}
+
 export async function sendResetCodeEmail(email: string, code: string) {
     if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
         console.log('--------------------------------------------------');
@@ -82,7 +102,7 @@ export async function sendPaymentRequestEmail(
     console.log('   EMAIL_HOST:', process.env.EMAIL_HOST);
     console.log('   EMAIL_USER:', process.env.EMAIL_USER);
     console.log('   EMAIL_PASS exists:', !!process.env.EMAIL_PASS);
-    
+
     if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
         console.log('⚠️  [MAILER] Email configuration missing:');
         console.log(`   EMAIL_USER: ${process.env.EMAIL_USER ? '✓' : '✗'}`);

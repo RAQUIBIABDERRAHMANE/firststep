@@ -89,7 +89,16 @@ export async function signIn(prevState: any, formData: FormData) {
         where: { email },
     })
 
-    if (!user || !(await verifyPassword(password, user.password))) {
+    console.log(`[Auth] Attempting login for: ${email}`);
+    if (!user) {
+        console.log(`[Auth] User not found: ${email}`);
+        return { error: 'Invalid email or password' }
+    }
+
+    const isValid = await verifyPassword(password, user.password);
+    console.log(`[Auth] Password check for ${email}: ${isValid ? 'MATCH' : 'FAIL'}`);
+
+    if (!isValid) {
         return { error: 'Invalid email or password' }
     }
 
