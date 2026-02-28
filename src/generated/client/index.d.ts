@@ -123,6 +123,36 @@ export type EmailList = $Result.DefaultSelection<Prisma.$EmailListPayload>
  * 
  */
 export type EmailListMember = $Result.DefaultSelection<Prisma.$EmailListMemberPayload>
+/**
+ * Model InvoiceSettings
+ * 
+ */
+export type InvoiceSettings = $Result.DefaultSelection<Prisma.$InvoiceSettingsPayload>
+/**
+ * Model Invoice
+ * 
+ */
+export type Invoice = $Result.DefaultSelection<Prisma.$InvoicePayload>
+/**
+ * Model InvoiceItem
+ * 
+ */
+export type InvoiceItem = $Result.DefaultSelection<Prisma.$InvoiceItemPayload>
+/**
+ * Model MedicalRecord
+ * 
+ */
+export type MedicalRecord = $Result.DefaultSelection<Prisma.$MedicalRecordPayload>
+/**
+ * Model Prescription
+ * 
+ */
+export type Prescription = $Result.DefaultSelection<Prisma.$PrescriptionPayload>
+/**
+ * Model MedicalHistory
+ * 
+ */
+export type MedicalHistory = $Result.DefaultSelection<Prisma.$MedicalHistoryPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -460,6 +490,66 @@ export class PrismaClient<
     * ```
     */
   get emailListMember(): Prisma.EmailListMemberDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.invoiceSettings`: Exposes CRUD operations for the **InvoiceSettings** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InvoiceSettings
+    * const invoiceSettings = await prisma.invoiceSettings.findMany()
+    * ```
+    */
+  get invoiceSettings(): Prisma.InvoiceSettingsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.invoice`: Exposes CRUD operations for the **Invoice** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Invoices
+    * const invoices = await prisma.invoice.findMany()
+    * ```
+    */
+  get invoice(): Prisma.InvoiceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.invoiceItem`: Exposes CRUD operations for the **InvoiceItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InvoiceItems
+    * const invoiceItems = await prisma.invoiceItem.findMany()
+    * ```
+    */
+  get invoiceItem(): Prisma.InvoiceItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.medicalRecord`: Exposes CRUD operations for the **MedicalRecord** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MedicalRecords
+    * const medicalRecords = await prisma.medicalRecord.findMany()
+    * ```
+    */
+  get medicalRecord(): Prisma.MedicalRecordDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.prescription`: Exposes CRUD operations for the **Prescription** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Prescriptions
+    * const prescriptions = await prisma.prescription.findMany()
+    * ```
+    */
+  get prescription(): Prisma.PrescriptionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.medicalHistory`: Exposes CRUD operations for the **MedicalHistory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MedicalHistories
+    * const medicalHistories = await prisma.medicalHistory.findMany()
+    * ```
+    */
+  get medicalHistory(): Prisma.MedicalHistoryDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -915,7 +1005,13 @@ export namespace Prisma {
     BankAccount: 'BankAccount',
     Campaign: 'Campaign',
     EmailList: 'EmailList',
-    EmailListMember: 'EmailListMember'
+    EmailListMember: 'EmailListMember',
+    InvoiceSettings: 'InvoiceSettings',
+    Invoice: 'Invoice',
+    InvoiceItem: 'InvoiceItem',
+    MedicalRecord: 'MedicalRecord',
+    Prescription: 'Prescription',
+    MedicalHistory: 'MedicalHistory'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -931,7 +1027,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "chatSession" | "chatMessage" | "notification" | "service" | "userService" | "passwordReset" | "tenantWebsite" | "restaurantCategory" | "restaurantDish" | "restaurantTable" | "restaurantWaiter" | "restaurantOrder" | "restaurantOrderItem" | "cabinetService" | "cabinetClient" | "cabinetAppointment" | "paymentRequest" | "bankAccount" | "campaign" | "emailList" | "emailListMember"
+      modelProps: "user" | "chatSession" | "chatMessage" | "notification" | "service" | "userService" | "passwordReset" | "tenantWebsite" | "restaurantCategory" | "restaurantDish" | "restaurantTable" | "restaurantWaiter" | "restaurantOrder" | "restaurantOrderItem" | "cabinetService" | "cabinetClient" | "cabinetAppointment" | "paymentRequest" | "bankAccount" | "campaign" | "emailList" | "emailListMember" | "invoiceSettings" | "invoice" | "invoiceItem" | "medicalRecord" | "prescription" | "medicalHistory"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2563,6 +2659,450 @@ export namespace Prisma {
           }
         }
       }
+      InvoiceSettings: {
+        payload: Prisma.$InvoiceSettingsPayload<ExtArgs>
+        fields: Prisma.InvoiceSettingsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InvoiceSettingsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceSettingsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InvoiceSettingsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceSettingsPayload>
+          }
+          findFirst: {
+            args: Prisma.InvoiceSettingsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceSettingsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InvoiceSettingsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceSettingsPayload>
+          }
+          findMany: {
+            args: Prisma.InvoiceSettingsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceSettingsPayload>[]
+          }
+          create: {
+            args: Prisma.InvoiceSettingsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceSettingsPayload>
+          }
+          createMany: {
+            args: Prisma.InvoiceSettingsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InvoiceSettingsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceSettingsPayload>[]
+          }
+          delete: {
+            args: Prisma.InvoiceSettingsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceSettingsPayload>
+          }
+          update: {
+            args: Prisma.InvoiceSettingsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceSettingsPayload>
+          }
+          deleteMany: {
+            args: Prisma.InvoiceSettingsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InvoiceSettingsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InvoiceSettingsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceSettingsPayload>[]
+          }
+          upsert: {
+            args: Prisma.InvoiceSettingsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceSettingsPayload>
+          }
+          aggregate: {
+            args: Prisma.InvoiceSettingsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInvoiceSettings>
+          }
+          groupBy: {
+            args: Prisma.InvoiceSettingsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InvoiceSettingsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InvoiceSettingsCountArgs<ExtArgs>
+            result: $Utils.Optional<InvoiceSettingsCountAggregateOutputType> | number
+          }
+        }
+      }
+      Invoice: {
+        payload: Prisma.$InvoicePayload<ExtArgs>
+        fields: Prisma.InvoiceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InvoiceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InvoiceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          findFirst: {
+            args: Prisma.InvoiceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InvoiceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          findMany: {
+            args: Prisma.InvoiceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>[]
+          }
+          create: {
+            args: Prisma.InvoiceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          createMany: {
+            args: Prisma.InvoiceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InvoiceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>[]
+          }
+          delete: {
+            args: Prisma.InvoiceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          update: {
+            args: Prisma.InvoiceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          deleteMany: {
+            args: Prisma.InvoiceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InvoiceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InvoiceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>[]
+          }
+          upsert: {
+            args: Prisma.InvoiceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          aggregate: {
+            args: Prisma.InvoiceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInvoice>
+          }
+          groupBy: {
+            args: Prisma.InvoiceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InvoiceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InvoiceCountArgs<ExtArgs>
+            result: $Utils.Optional<InvoiceCountAggregateOutputType> | number
+          }
+        }
+      }
+      InvoiceItem: {
+        payload: Prisma.$InvoiceItemPayload<ExtArgs>
+        fields: Prisma.InvoiceItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InvoiceItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InvoiceItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>
+          }
+          findFirst: {
+            args: Prisma.InvoiceItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InvoiceItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>
+          }
+          findMany: {
+            args: Prisma.InvoiceItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>[]
+          }
+          create: {
+            args: Prisma.InvoiceItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>
+          }
+          createMany: {
+            args: Prisma.InvoiceItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InvoiceItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>[]
+          }
+          delete: {
+            args: Prisma.InvoiceItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>
+          }
+          update: {
+            args: Prisma.InvoiceItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.InvoiceItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InvoiceItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InvoiceItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.InvoiceItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>
+          }
+          aggregate: {
+            args: Prisma.InvoiceItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInvoiceItem>
+          }
+          groupBy: {
+            args: Prisma.InvoiceItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InvoiceItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InvoiceItemCountArgs<ExtArgs>
+            result: $Utils.Optional<InvoiceItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      MedicalRecord: {
+        payload: Prisma.$MedicalRecordPayload<ExtArgs>
+        fields: Prisma.MedicalRecordFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MedicalRecordFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalRecordPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MedicalRecordFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalRecordPayload>
+          }
+          findFirst: {
+            args: Prisma.MedicalRecordFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalRecordPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MedicalRecordFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalRecordPayload>
+          }
+          findMany: {
+            args: Prisma.MedicalRecordFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalRecordPayload>[]
+          }
+          create: {
+            args: Prisma.MedicalRecordCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalRecordPayload>
+          }
+          createMany: {
+            args: Prisma.MedicalRecordCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MedicalRecordCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalRecordPayload>[]
+          }
+          delete: {
+            args: Prisma.MedicalRecordDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalRecordPayload>
+          }
+          update: {
+            args: Prisma.MedicalRecordUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalRecordPayload>
+          }
+          deleteMany: {
+            args: Prisma.MedicalRecordDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MedicalRecordUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MedicalRecordUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalRecordPayload>[]
+          }
+          upsert: {
+            args: Prisma.MedicalRecordUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalRecordPayload>
+          }
+          aggregate: {
+            args: Prisma.MedicalRecordAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMedicalRecord>
+          }
+          groupBy: {
+            args: Prisma.MedicalRecordGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MedicalRecordGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MedicalRecordCountArgs<ExtArgs>
+            result: $Utils.Optional<MedicalRecordCountAggregateOutputType> | number
+          }
+        }
+      }
+      Prescription: {
+        payload: Prisma.$PrescriptionPayload<ExtArgs>
+        fields: Prisma.PrescriptionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PrescriptionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrescriptionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PrescriptionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrescriptionPayload>
+          }
+          findFirst: {
+            args: Prisma.PrescriptionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrescriptionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PrescriptionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrescriptionPayload>
+          }
+          findMany: {
+            args: Prisma.PrescriptionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrescriptionPayload>[]
+          }
+          create: {
+            args: Prisma.PrescriptionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrescriptionPayload>
+          }
+          createMany: {
+            args: Prisma.PrescriptionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PrescriptionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrescriptionPayload>[]
+          }
+          delete: {
+            args: Prisma.PrescriptionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrescriptionPayload>
+          }
+          update: {
+            args: Prisma.PrescriptionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrescriptionPayload>
+          }
+          deleteMany: {
+            args: Prisma.PrescriptionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PrescriptionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PrescriptionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrescriptionPayload>[]
+          }
+          upsert: {
+            args: Prisma.PrescriptionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PrescriptionPayload>
+          }
+          aggregate: {
+            args: Prisma.PrescriptionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePrescription>
+          }
+          groupBy: {
+            args: Prisma.PrescriptionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PrescriptionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PrescriptionCountArgs<ExtArgs>
+            result: $Utils.Optional<PrescriptionCountAggregateOutputType> | number
+          }
+        }
+      }
+      MedicalHistory: {
+        payload: Prisma.$MedicalHistoryPayload<ExtArgs>
+        fields: Prisma.MedicalHistoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MedicalHistoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalHistoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MedicalHistoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalHistoryPayload>
+          }
+          findFirst: {
+            args: Prisma.MedicalHistoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalHistoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MedicalHistoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalHistoryPayload>
+          }
+          findMany: {
+            args: Prisma.MedicalHistoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalHistoryPayload>[]
+          }
+          create: {
+            args: Prisma.MedicalHistoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalHistoryPayload>
+          }
+          createMany: {
+            args: Prisma.MedicalHistoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MedicalHistoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalHistoryPayload>[]
+          }
+          delete: {
+            args: Prisma.MedicalHistoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalHistoryPayload>
+          }
+          update: {
+            args: Prisma.MedicalHistoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalHistoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.MedicalHistoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MedicalHistoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MedicalHistoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalHistoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.MedicalHistoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MedicalHistoryPayload>
+          }
+          aggregate: {
+            args: Prisma.MedicalHistoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMedicalHistory>
+          }
+          groupBy: {
+            args: Prisma.MedicalHistoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MedicalHistoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MedicalHistoryCountArgs<ExtArgs>
+            result: $Utils.Optional<MedicalHistoryCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2693,6 +3233,12 @@ export namespace Prisma {
     campaign?: CampaignOmit
     emailList?: EmailListOmit
     emailListMember?: EmailListMemberOmit
+    invoiceSettings?: InvoiceSettingsOmit
+    invoice?: InvoiceOmit
+    invoiceItem?: InvoiceItemOmit
+    medicalRecord?: MedicalRecordOmit
+    prescription?: PrescriptionOmit
+    medicalHistory?: MedicalHistoryOmit
   }
 
   /* Types for Logging */
@@ -2935,6 +3481,7 @@ export namespace Prisma {
     categories: number
     tables: number
     waiters: number
+    invoices: number
   }
 
   export type TenantWebsiteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2944,6 +3491,7 @@ export namespace Prisma {
     categories?: boolean | TenantWebsiteCountOutputTypeCountCategoriesArgs
     tables?: boolean | TenantWebsiteCountOutputTypeCountTablesArgs
     waiters?: boolean | TenantWebsiteCountOutputTypeCountWaitersArgs
+    invoices?: boolean | TenantWebsiteCountOutputTypeCountInvoicesArgs
   }
 
   // Custom InputTypes
@@ -2997,6 +3545,13 @@ export namespace Prisma {
    */
   export type TenantWebsiteCountOutputTypeCountWaitersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RestaurantWaiterWhereInput
+  }
+
+  /**
+   * TenantWebsiteCountOutputType without action
+   */
+  export type TenantWebsiteCountOutputTypeCountInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvoiceWhereInput
   }
 
 
@@ -3161,10 +3716,16 @@ export namespace Prisma {
 
   export type CabinetClientCountOutputType = {
     appointments: number
+    invoices: number
+    medicalRecords: number
+    medicalHistory: number
   }
 
   export type CabinetClientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     appointments?: boolean | CabinetClientCountOutputTypeCountAppointmentsArgs
+    invoices?: boolean | CabinetClientCountOutputTypeCountInvoicesArgs
+    medicalRecords?: boolean | CabinetClientCountOutputTypeCountMedicalRecordsArgs
+    medicalHistory?: boolean | CabinetClientCountOutputTypeCountMedicalHistoryArgs
   }
 
   // Custom InputTypes
@@ -3183,6 +3744,27 @@ export namespace Prisma {
    */
   export type CabinetClientCountOutputTypeCountAppointmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CabinetAppointmentWhereInput
+  }
+
+  /**
+   * CabinetClientCountOutputType without action
+   */
+  export type CabinetClientCountOutputTypeCountInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvoiceWhereInput
+  }
+
+  /**
+   * CabinetClientCountOutputType without action
+   */
+  export type CabinetClientCountOutputTypeCountMedicalRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MedicalRecordWhereInput
+  }
+
+  /**
+   * CabinetClientCountOutputType without action
+   */
+  export type CabinetClientCountOutputTypeCountMedicalHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MedicalHistoryWhereInput
   }
 
 
@@ -3214,6 +3796,68 @@ export namespace Prisma {
    */
   export type EmailListCountOutputTypeCountMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EmailListMemberWhereInput
+  }
+
+
+  /**
+   * Count Type InvoiceCountOutputType
+   */
+
+  export type InvoiceCountOutputType = {
+    items: number
+  }
+
+  export type InvoiceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | InvoiceCountOutputTypeCountItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * InvoiceCountOutputType without action
+   */
+  export type InvoiceCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceCountOutputType
+     */
+    select?: InvoiceCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * InvoiceCountOutputType without action
+   */
+  export type InvoiceCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvoiceItemWhereInput
+  }
+
+
+  /**
+   * Count Type MedicalRecordCountOutputType
+   */
+
+  export type MedicalRecordCountOutputType = {
+    prescriptions: number
+  }
+
+  export type MedicalRecordCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    prescriptions?: boolean | MedicalRecordCountOutputTypeCountPrescriptionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MedicalRecordCountOutputType without action
+   */
+  export type MedicalRecordCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalRecordCountOutputType
+     */
+    select?: MedicalRecordCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MedicalRecordCountOutputType without action
+   */
+  export type MedicalRecordCountOutputTypeCountPrescriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PrescriptionWhereInput
   }
 
 
@@ -11188,6 +11832,8 @@ export namespace Prisma {
     categories?: boolean | TenantWebsite$categoriesArgs<ExtArgs>
     tables?: boolean | TenantWebsite$tablesArgs<ExtArgs>
     waiters?: boolean | TenantWebsite$waitersArgs<ExtArgs>
+    invoices?: boolean | TenantWebsite$invoicesArgs<ExtArgs>
+    invoiceSettings?: boolean | TenantWebsite$invoiceSettingsArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | TenantWebsiteCountOutputTypeDefaultArgs<ExtArgs>
@@ -11256,6 +11902,8 @@ export namespace Prisma {
     categories?: boolean | TenantWebsite$categoriesArgs<ExtArgs>
     tables?: boolean | TenantWebsite$tablesArgs<ExtArgs>
     waiters?: boolean | TenantWebsite$waitersArgs<ExtArgs>
+    invoices?: boolean | TenantWebsite$invoicesArgs<ExtArgs>
+    invoiceSettings?: boolean | TenantWebsite$invoiceSettingsArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | TenantWebsiteCountOutputTypeDefaultArgs<ExtArgs>
@@ -11278,6 +11926,8 @@ export namespace Prisma {
       categories: Prisma.$RestaurantCategoryPayload<ExtArgs>[]
       tables: Prisma.$RestaurantTablePayload<ExtArgs>[]
       waiters: Prisma.$RestaurantWaiterPayload<ExtArgs>[]
+      invoices: Prisma.$InvoicePayload<ExtArgs>[]
+      invoiceSettings: Prisma.$InvoiceSettingsPayload<ExtArgs> | null
       service: Prisma.$ServicePayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs>
     }
@@ -11696,6 +12346,8 @@ export namespace Prisma {
     categories<T extends TenantWebsite$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tables<T extends TenantWebsite$tablesArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$tablesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantTablePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     waiters<T extends TenantWebsite$waitersArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$waitersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantWaiterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    invoices<T extends TenantWebsite$invoicesArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    invoiceSettings<T extends TenantWebsite$invoiceSettingsArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$invoiceSettingsArgs<ExtArgs>>): Prisma__InvoiceSettingsClient<$Result.GetResult<Prisma.$InvoiceSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     service<T extends ServiceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ServiceDefaultArgs<ExtArgs>>): Prisma__ServiceClient<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -12276,6 +12928,49 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RestaurantWaiterScalarFieldEnum | RestaurantWaiterScalarFieldEnum[]
+  }
+
+  /**
+   * TenantWebsite.invoices
+   */
+  export type TenantWebsite$invoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    where?: InvoiceWhereInput
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    cursor?: InvoiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * TenantWebsite.invoiceSettings
+   */
+  export type TenantWebsite$invoiceSettingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceSettings
+     */
+    select?: InvoiceSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceSettings
+     */
+    omit?: InvoiceSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceSettingsInclude<ExtArgs> | null
+    where?: InvoiceSettingsWhereInput
   }
 
   /**
@@ -20218,8 +20913,18 @@ export namespace Prisma {
 
   export type AggregateCabinetClient = {
     _count: CabinetClientCountAggregateOutputType | null
+    _avg: CabinetClientAvgAggregateOutputType | null
+    _sum: CabinetClientSumAggregateOutputType | null
     _min: CabinetClientMinAggregateOutputType | null
     _max: CabinetClientMaxAggregateOutputType | null
+  }
+
+  export type CabinetClientAvgAggregateOutputType = {
+    age: number | null
+  }
+
+  export type CabinetClientSumAggregateOutputType = {
+    age: number | null
   }
 
   export type CabinetClientMinAggregateOutputType = {
@@ -20229,6 +20934,8 @@ export namespace Prisma {
     email: string | null
     phone: string | null
     notes: string | null
+    age: number | null
+    cni: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -20240,6 +20947,8 @@ export namespace Prisma {
     email: string | null
     phone: string | null
     notes: string | null
+    age: number | null
+    cni: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -20251,11 +20960,21 @@ export namespace Prisma {
     email: number
     phone: number
     notes: number
+    age: number
+    cni: number
     createdAt: number
     updatedAt: number
     _all: number
   }
 
+
+  export type CabinetClientAvgAggregateInputType = {
+    age?: true
+  }
+
+  export type CabinetClientSumAggregateInputType = {
+    age?: true
+  }
 
   export type CabinetClientMinAggregateInputType = {
     id?: true
@@ -20264,6 +20983,8 @@ export namespace Prisma {
     email?: true
     phone?: true
     notes?: true
+    age?: true
+    cni?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -20275,6 +20996,8 @@ export namespace Prisma {
     email?: true
     phone?: true
     notes?: true
+    age?: true
+    cni?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -20286,6 +21009,8 @@ export namespace Prisma {
     email?: true
     phone?: true
     notes?: true
+    age?: true
+    cni?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -20329,6 +21054,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: CabinetClientAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CabinetClientSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: CabinetClientMinAggregateInputType
@@ -20359,6 +21096,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: CabinetClientCountAggregateInputType | true
+    _avg?: CabinetClientAvgAggregateInputType
+    _sum?: CabinetClientSumAggregateInputType
     _min?: CabinetClientMinAggregateInputType
     _max?: CabinetClientMaxAggregateInputType
   }
@@ -20370,9 +21109,13 @@ export namespace Prisma {
     email: string | null
     phone: string | null
     notes: string | null
+    age: number | null
+    cni: string | null
     createdAt: Date
     updatedAt: Date
     _count: CabinetClientCountAggregateOutputType | null
+    _avg: CabinetClientAvgAggregateOutputType | null
+    _sum: CabinetClientSumAggregateOutputType | null
     _min: CabinetClientMinAggregateOutputType | null
     _max: CabinetClientMaxAggregateOutputType | null
   }
@@ -20398,9 +21141,14 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     notes?: boolean
+    age?: boolean
+    cni?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     appointments?: boolean | CabinetClient$appointmentsArgs<ExtArgs>
+    invoices?: boolean | CabinetClient$invoicesArgs<ExtArgs>
+    medicalRecords?: boolean | CabinetClient$medicalRecordsArgs<ExtArgs>
+    medicalHistory?: boolean | CabinetClient$medicalHistoryArgs<ExtArgs>
     tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
     _count?: boolean | CabinetClientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cabinetClient"]>
@@ -20412,6 +21160,8 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     notes?: boolean
+    age?: boolean
+    cni?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
@@ -20424,6 +21174,8 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     notes?: boolean
+    age?: boolean
+    cni?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
@@ -20436,13 +21188,18 @@ export namespace Prisma {
     email?: boolean
     phone?: boolean
     notes?: boolean
+    age?: boolean
+    cni?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CabinetClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "name" | "email" | "phone" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["cabinetClient"]>
+  export type CabinetClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "name" | "email" | "phone" | "notes" | "age" | "cni" | "createdAt" | "updatedAt", ExtArgs["result"]["cabinetClient"]>
   export type CabinetClientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     appointments?: boolean | CabinetClient$appointmentsArgs<ExtArgs>
+    invoices?: boolean | CabinetClient$invoicesArgs<ExtArgs>
+    medicalRecords?: boolean | CabinetClient$medicalRecordsArgs<ExtArgs>
+    medicalHistory?: boolean | CabinetClient$medicalHistoryArgs<ExtArgs>
     tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
     _count?: boolean | CabinetClientCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -20457,6 +21214,9 @@ export namespace Prisma {
     name: "CabinetClient"
     objects: {
       appointments: Prisma.$CabinetAppointmentPayload<ExtArgs>[]
+      invoices: Prisma.$InvoicePayload<ExtArgs>[]
+      medicalRecords: Prisma.$MedicalRecordPayload<ExtArgs>[]
+      medicalHistory: Prisma.$MedicalHistoryPayload<ExtArgs>[]
       tenant: Prisma.$TenantWebsitePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -20466,6 +21226,8 @@ export namespace Prisma {
       email: string | null
       phone: string | null
       notes: string | null
+      age: number | null
+      cni: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["cabinetClient"]>
@@ -20863,6 +21625,9 @@ export namespace Prisma {
   export interface Prisma__CabinetClientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     appointments<T extends CabinetClient$appointmentsArgs<ExtArgs> = {}>(args?: Subset<T, CabinetClient$appointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CabinetAppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    invoices<T extends CabinetClient$invoicesArgs<ExtArgs> = {}>(args?: Subset<T, CabinetClient$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    medicalRecords<T extends CabinetClient$medicalRecordsArgs<ExtArgs> = {}>(args?: Subset<T, CabinetClient$medicalRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MedicalRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    medicalHistory<T extends CabinetClient$medicalHistoryArgs<ExtArgs> = {}>(args?: Subset<T, CabinetClient$medicalHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MedicalHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tenant<T extends TenantWebsiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsiteDefaultArgs<ExtArgs>>): Prisma__TenantWebsiteClient<$Result.GetResult<Prisma.$TenantWebsitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -20899,6 +21664,8 @@ export namespace Prisma {
     readonly email: FieldRef<"CabinetClient", 'String'>
     readonly phone: FieldRef<"CabinetClient", 'String'>
     readonly notes: FieldRef<"CabinetClient", 'String'>
+    readonly age: FieldRef<"CabinetClient", 'Int'>
+    readonly cni: FieldRef<"CabinetClient", 'String'>
     readonly createdAt: FieldRef<"CabinetClient", 'DateTime'>
     readonly updatedAt: FieldRef<"CabinetClient", 'DateTime'>
   }
@@ -21316,6 +22083,78 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CabinetAppointmentScalarFieldEnum | CabinetAppointmentScalarFieldEnum[]
+  }
+
+  /**
+   * CabinetClient.invoices
+   */
+  export type CabinetClient$invoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    where?: InvoiceWhereInput
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    cursor?: InvoiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * CabinetClient.medicalRecords
+   */
+  export type CabinetClient$medicalRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalRecord
+     */
+    select?: MedicalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalRecord
+     */
+    omit?: MedicalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalRecordInclude<ExtArgs> | null
+    where?: MedicalRecordWhereInput
+    orderBy?: MedicalRecordOrderByWithRelationInput | MedicalRecordOrderByWithRelationInput[]
+    cursor?: MedicalRecordWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MedicalRecordScalarFieldEnum | MedicalRecordScalarFieldEnum[]
+  }
+
+  /**
+   * CabinetClient.medicalHistory
+   */
+  export type CabinetClient$medicalHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalHistory
+     */
+    select?: MedicalHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalHistory
+     */
+    omit?: MedicalHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalHistoryInclude<ExtArgs> | null
+    where?: MedicalHistoryWhereInput
+    orderBy?: MedicalHistoryOrderByWithRelationInput | MedicalHistoryOrderByWithRelationInput[]
+    cursor?: MedicalHistoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MedicalHistoryScalarFieldEnum | MedicalHistoryScalarFieldEnum[]
   }
 
   /**
@@ -27999,6 +28838,7117 @@ export namespace Prisma {
 
 
   /**
+   * Model InvoiceSettings
+   */
+
+  export type AggregateInvoiceSettings = {
+    _count: InvoiceSettingsCountAggregateOutputType | null
+    _avg: InvoiceSettingsAvgAggregateOutputType | null
+    _sum: InvoiceSettingsSumAggregateOutputType | null
+    _min: InvoiceSettingsMinAggregateOutputType | null
+    _max: InvoiceSettingsMaxAggregateOutputType | null
+  }
+
+  export type InvoiceSettingsAvgAggregateOutputType = {
+    taxRate: number | null
+    nextNumber: number | null
+  }
+
+  export type InvoiceSettingsSumAggregateOutputType = {
+    taxRate: number | null
+    nextNumber: number | null
+  }
+
+  export type InvoiceSettingsMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    companyName: string | null
+    companyAddress: string | null
+    companyPhone: string | null
+    companyEmail: string | null
+    companyLogo: string | null
+    taxRate: number | null
+    currency: string | null
+    prefix: string | null
+    nextNumber: number | null
+    footerNote: string | null
+    bankDetails: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InvoiceSettingsMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    companyName: string | null
+    companyAddress: string | null
+    companyPhone: string | null
+    companyEmail: string | null
+    companyLogo: string | null
+    taxRate: number | null
+    currency: string | null
+    prefix: string | null
+    nextNumber: number | null
+    footerNote: string | null
+    bankDetails: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InvoiceSettingsCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    companyName: number
+    companyAddress: number
+    companyPhone: number
+    companyEmail: number
+    companyLogo: number
+    taxRate: number
+    currency: number
+    prefix: number
+    nextNumber: number
+    footerNote: number
+    bankDetails: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type InvoiceSettingsAvgAggregateInputType = {
+    taxRate?: true
+    nextNumber?: true
+  }
+
+  export type InvoiceSettingsSumAggregateInputType = {
+    taxRate?: true
+    nextNumber?: true
+  }
+
+  export type InvoiceSettingsMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    companyName?: true
+    companyAddress?: true
+    companyPhone?: true
+    companyEmail?: true
+    companyLogo?: true
+    taxRate?: true
+    currency?: true
+    prefix?: true
+    nextNumber?: true
+    footerNote?: true
+    bankDetails?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InvoiceSettingsMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    companyName?: true
+    companyAddress?: true
+    companyPhone?: true
+    companyEmail?: true
+    companyLogo?: true
+    taxRate?: true
+    currency?: true
+    prefix?: true
+    nextNumber?: true
+    footerNote?: true
+    bankDetails?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InvoiceSettingsCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    companyName?: true
+    companyAddress?: true
+    companyPhone?: true
+    companyEmail?: true
+    companyLogo?: true
+    taxRate?: true
+    currency?: true
+    prefix?: true
+    nextNumber?: true
+    footerNote?: true
+    bankDetails?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type InvoiceSettingsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InvoiceSettings to aggregate.
+     */
+    where?: InvoiceSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InvoiceSettings to fetch.
+     */
+    orderBy?: InvoiceSettingsOrderByWithRelationInput | InvoiceSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InvoiceSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InvoiceSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InvoiceSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InvoiceSettings
+    **/
+    _count?: true | InvoiceSettingsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InvoiceSettingsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InvoiceSettingsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InvoiceSettingsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InvoiceSettingsMaxAggregateInputType
+  }
+
+  export type GetInvoiceSettingsAggregateType<T extends InvoiceSettingsAggregateArgs> = {
+        [P in keyof T & keyof AggregateInvoiceSettings]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInvoiceSettings[P]>
+      : GetScalarType<T[P], AggregateInvoiceSettings[P]>
+  }
+
+
+
+
+  export type InvoiceSettingsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvoiceSettingsWhereInput
+    orderBy?: InvoiceSettingsOrderByWithAggregationInput | InvoiceSettingsOrderByWithAggregationInput[]
+    by: InvoiceSettingsScalarFieldEnum[] | InvoiceSettingsScalarFieldEnum
+    having?: InvoiceSettingsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InvoiceSettingsCountAggregateInputType | true
+    _avg?: InvoiceSettingsAvgAggregateInputType
+    _sum?: InvoiceSettingsSumAggregateInputType
+    _min?: InvoiceSettingsMinAggregateInputType
+    _max?: InvoiceSettingsMaxAggregateInputType
+  }
+
+  export type InvoiceSettingsGroupByOutputType = {
+    id: string
+    tenantId: string
+    companyName: string | null
+    companyAddress: string | null
+    companyPhone: string | null
+    companyEmail: string | null
+    companyLogo: string | null
+    taxRate: number
+    currency: string
+    prefix: string
+    nextNumber: number
+    footerNote: string | null
+    bankDetails: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: InvoiceSettingsCountAggregateOutputType | null
+    _avg: InvoiceSettingsAvgAggregateOutputType | null
+    _sum: InvoiceSettingsSumAggregateOutputType | null
+    _min: InvoiceSettingsMinAggregateOutputType | null
+    _max: InvoiceSettingsMaxAggregateOutputType | null
+  }
+
+  type GetInvoiceSettingsGroupByPayload<T extends InvoiceSettingsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InvoiceSettingsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InvoiceSettingsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InvoiceSettingsGroupByOutputType[P]>
+            : GetScalarType<T[P], InvoiceSettingsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InvoiceSettingsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    companyName?: boolean
+    companyAddress?: boolean
+    companyPhone?: boolean
+    companyEmail?: boolean
+    companyLogo?: boolean
+    taxRate?: boolean
+    currency?: boolean
+    prefix?: boolean
+    nextNumber?: boolean
+    footerNote?: boolean
+    bankDetails?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invoiceSettings"]>
+
+  export type InvoiceSettingsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    companyName?: boolean
+    companyAddress?: boolean
+    companyPhone?: boolean
+    companyEmail?: boolean
+    companyLogo?: boolean
+    taxRate?: boolean
+    currency?: boolean
+    prefix?: boolean
+    nextNumber?: boolean
+    footerNote?: boolean
+    bankDetails?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invoiceSettings"]>
+
+  export type InvoiceSettingsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    companyName?: boolean
+    companyAddress?: boolean
+    companyPhone?: boolean
+    companyEmail?: boolean
+    companyLogo?: boolean
+    taxRate?: boolean
+    currency?: boolean
+    prefix?: boolean
+    nextNumber?: boolean
+    footerNote?: boolean
+    bankDetails?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invoiceSettings"]>
+
+  export type InvoiceSettingsSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    companyName?: boolean
+    companyAddress?: boolean
+    companyPhone?: boolean
+    companyEmail?: boolean
+    companyLogo?: boolean
+    taxRate?: boolean
+    currency?: boolean
+    prefix?: boolean
+    nextNumber?: boolean
+    footerNote?: boolean
+    bankDetails?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type InvoiceSettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "companyName" | "companyAddress" | "companyPhone" | "companyEmail" | "companyLogo" | "taxRate" | "currency" | "prefix" | "nextNumber" | "footerNote" | "bankDetails" | "createdAt" | "updatedAt", ExtArgs["result"]["invoiceSettings"]>
+  export type InvoiceSettingsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+  }
+  export type InvoiceSettingsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+  }
+  export type InvoiceSettingsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+  }
+
+  export type $InvoiceSettingsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InvoiceSettings"
+    objects: {
+      tenant: Prisma.$TenantWebsitePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      companyName: string | null
+      companyAddress: string | null
+      companyPhone: string | null
+      companyEmail: string | null
+      companyLogo: string | null
+      taxRate: number
+      currency: string
+      prefix: string
+      nextNumber: number
+      footerNote: string | null
+      bankDetails: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["invoiceSettings"]>
+    composites: {}
+  }
+
+  type InvoiceSettingsGetPayload<S extends boolean | null | undefined | InvoiceSettingsDefaultArgs> = $Result.GetResult<Prisma.$InvoiceSettingsPayload, S>
+
+  type InvoiceSettingsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InvoiceSettingsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InvoiceSettingsCountAggregateInputType | true
+    }
+
+  export interface InvoiceSettingsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InvoiceSettings'], meta: { name: 'InvoiceSettings' } }
+    /**
+     * Find zero or one InvoiceSettings that matches the filter.
+     * @param {InvoiceSettingsFindUniqueArgs} args - Arguments to find a InvoiceSettings
+     * @example
+     * // Get one InvoiceSettings
+     * const invoiceSettings = await prisma.invoiceSettings.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InvoiceSettingsFindUniqueArgs>(args: SelectSubset<T, InvoiceSettingsFindUniqueArgs<ExtArgs>>): Prisma__InvoiceSettingsClient<$Result.GetResult<Prisma.$InvoiceSettingsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InvoiceSettings that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InvoiceSettingsFindUniqueOrThrowArgs} args - Arguments to find a InvoiceSettings
+     * @example
+     * // Get one InvoiceSettings
+     * const invoiceSettings = await prisma.invoiceSettings.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InvoiceSettingsFindUniqueOrThrowArgs>(args: SelectSubset<T, InvoiceSettingsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InvoiceSettingsClient<$Result.GetResult<Prisma.$InvoiceSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InvoiceSettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceSettingsFindFirstArgs} args - Arguments to find a InvoiceSettings
+     * @example
+     * // Get one InvoiceSettings
+     * const invoiceSettings = await prisma.invoiceSettings.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InvoiceSettingsFindFirstArgs>(args?: SelectSubset<T, InvoiceSettingsFindFirstArgs<ExtArgs>>): Prisma__InvoiceSettingsClient<$Result.GetResult<Prisma.$InvoiceSettingsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InvoiceSettings that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceSettingsFindFirstOrThrowArgs} args - Arguments to find a InvoiceSettings
+     * @example
+     * // Get one InvoiceSettings
+     * const invoiceSettings = await prisma.invoiceSettings.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InvoiceSettingsFindFirstOrThrowArgs>(args?: SelectSubset<T, InvoiceSettingsFindFirstOrThrowArgs<ExtArgs>>): Prisma__InvoiceSettingsClient<$Result.GetResult<Prisma.$InvoiceSettingsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InvoiceSettings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceSettingsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InvoiceSettings
+     * const invoiceSettings = await prisma.invoiceSettings.findMany()
+     * 
+     * // Get first 10 InvoiceSettings
+     * const invoiceSettings = await prisma.invoiceSettings.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const invoiceSettingsWithIdOnly = await prisma.invoiceSettings.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InvoiceSettingsFindManyArgs>(args?: SelectSubset<T, InvoiceSettingsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoiceSettingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InvoiceSettings.
+     * @param {InvoiceSettingsCreateArgs} args - Arguments to create a InvoiceSettings.
+     * @example
+     * // Create one InvoiceSettings
+     * const InvoiceSettings = await prisma.invoiceSettings.create({
+     *   data: {
+     *     // ... data to create a InvoiceSettings
+     *   }
+     * })
+     * 
+     */
+    create<T extends InvoiceSettingsCreateArgs>(args: SelectSubset<T, InvoiceSettingsCreateArgs<ExtArgs>>): Prisma__InvoiceSettingsClient<$Result.GetResult<Prisma.$InvoiceSettingsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InvoiceSettings.
+     * @param {InvoiceSettingsCreateManyArgs} args - Arguments to create many InvoiceSettings.
+     * @example
+     * // Create many InvoiceSettings
+     * const invoiceSettings = await prisma.invoiceSettings.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InvoiceSettingsCreateManyArgs>(args?: SelectSubset<T, InvoiceSettingsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InvoiceSettings and returns the data saved in the database.
+     * @param {InvoiceSettingsCreateManyAndReturnArgs} args - Arguments to create many InvoiceSettings.
+     * @example
+     * // Create many InvoiceSettings
+     * const invoiceSettings = await prisma.invoiceSettings.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many InvoiceSettings and only return the `id`
+     * const invoiceSettingsWithIdOnly = await prisma.invoiceSettings.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InvoiceSettingsCreateManyAndReturnArgs>(args?: SelectSubset<T, InvoiceSettingsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoiceSettingsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InvoiceSettings.
+     * @param {InvoiceSettingsDeleteArgs} args - Arguments to delete one InvoiceSettings.
+     * @example
+     * // Delete one InvoiceSettings
+     * const InvoiceSettings = await prisma.invoiceSettings.delete({
+     *   where: {
+     *     // ... filter to delete one InvoiceSettings
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InvoiceSettingsDeleteArgs>(args: SelectSubset<T, InvoiceSettingsDeleteArgs<ExtArgs>>): Prisma__InvoiceSettingsClient<$Result.GetResult<Prisma.$InvoiceSettingsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InvoiceSettings.
+     * @param {InvoiceSettingsUpdateArgs} args - Arguments to update one InvoiceSettings.
+     * @example
+     * // Update one InvoiceSettings
+     * const invoiceSettings = await prisma.invoiceSettings.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InvoiceSettingsUpdateArgs>(args: SelectSubset<T, InvoiceSettingsUpdateArgs<ExtArgs>>): Prisma__InvoiceSettingsClient<$Result.GetResult<Prisma.$InvoiceSettingsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InvoiceSettings.
+     * @param {InvoiceSettingsDeleteManyArgs} args - Arguments to filter InvoiceSettings to delete.
+     * @example
+     * // Delete a few InvoiceSettings
+     * const { count } = await prisma.invoiceSettings.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InvoiceSettingsDeleteManyArgs>(args?: SelectSubset<T, InvoiceSettingsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InvoiceSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceSettingsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InvoiceSettings
+     * const invoiceSettings = await prisma.invoiceSettings.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InvoiceSettingsUpdateManyArgs>(args: SelectSubset<T, InvoiceSettingsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InvoiceSettings and returns the data updated in the database.
+     * @param {InvoiceSettingsUpdateManyAndReturnArgs} args - Arguments to update many InvoiceSettings.
+     * @example
+     * // Update many InvoiceSettings
+     * const invoiceSettings = await prisma.invoiceSettings.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more InvoiceSettings and only return the `id`
+     * const invoiceSettingsWithIdOnly = await prisma.invoiceSettings.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InvoiceSettingsUpdateManyAndReturnArgs>(args: SelectSubset<T, InvoiceSettingsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoiceSettingsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InvoiceSettings.
+     * @param {InvoiceSettingsUpsertArgs} args - Arguments to update or create a InvoiceSettings.
+     * @example
+     * // Update or create a InvoiceSettings
+     * const invoiceSettings = await prisma.invoiceSettings.upsert({
+     *   create: {
+     *     // ... data to create a InvoiceSettings
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InvoiceSettings we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InvoiceSettingsUpsertArgs>(args: SelectSubset<T, InvoiceSettingsUpsertArgs<ExtArgs>>): Prisma__InvoiceSettingsClient<$Result.GetResult<Prisma.$InvoiceSettingsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InvoiceSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceSettingsCountArgs} args - Arguments to filter InvoiceSettings to count.
+     * @example
+     * // Count the number of InvoiceSettings
+     * const count = await prisma.invoiceSettings.count({
+     *   where: {
+     *     // ... the filter for the InvoiceSettings we want to count
+     *   }
+     * })
+    **/
+    count<T extends InvoiceSettingsCountArgs>(
+      args?: Subset<T, InvoiceSettingsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InvoiceSettingsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InvoiceSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceSettingsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InvoiceSettingsAggregateArgs>(args: Subset<T, InvoiceSettingsAggregateArgs>): Prisma.PrismaPromise<GetInvoiceSettingsAggregateType<T>>
+
+    /**
+     * Group by InvoiceSettings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceSettingsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InvoiceSettingsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InvoiceSettingsGroupByArgs['orderBy'] }
+        : { orderBy?: InvoiceSettingsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InvoiceSettingsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInvoiceSettingsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InvoiceSettings model
+   */
+  readonly fields: InvoiceSettingsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InvoiceSettings.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InvoiceSettingsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantWebsiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsiteDefaultArgs<ExtArgs>>): Prisma__TenantWebsiteClient<$Result.GetResult<Prisma.$TenantWebsitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InvoiceSettings model
+   */
+  interface InvoiceSettingsFieldRefs {
+    readonly id: FieldRef<"InvoiceSettings", 'String'>
+    readonly tenantId: FieldRef<"InvoiceSettings", 'String'>
+    readonly companyName: FieldRef<"InvoiceSettings", 'String'>
+    readonly companyAddress: FieldRef<"InvoiceSettings", 'String'>
+    readonly companyPhone: FieldRef<"InvoiceSettings", 'String'>
+    readonly companyEmail: FieldRef<"InvoiceSettings", 'String'>
+    readonly companyLogo: FieldRef<"InvoiceSettings", 'String'>
+    readonly taxRate: FieldRef<"InvoiceSettings", 'Float'>
+    readonly currency: FieldRef<"InvoiceSettings", 'String'>
+    readonly prefix: FieldRef<"InvoiceSettings", 'String'>
+    readonly nextNumber: FieldRef<"InvoiceSettings", 'Int'>
+    readonly footerNote: FieldRef<"InvoiceSettings", 'String'>
+    readonly bankDetails: FieldRef<"InvoiceSettings", 'String'>
+    readonly createdAt: FieldRef<"InvoiceSettings", 'DateTime'>
+    readonly updatedAt: FieldRef<"InvoiceSettings", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InvoiceSettings findUnique
+   */
+  export type InvoiceSettingsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceSettings
+     */
+    select?: InvoiceSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceSettings
+     */
+    omit?: InvoiceSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which InvoiceSettings to fetch.
+     */
+    where: InvoiceSettingsWhereUniqueInput
+  }
+
+  /**
+   * InvoiceSettings findUniqueOrThrow
+   */
+  export type InvoiceSettingsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceSettings
+     */
+    select?: InvoiceSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceSettings
+     */
+    omit?: InvoiceSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which InvoiceSettings to fetch.
+     */
+    where: InvoiceSettingsWhereUniqueInput
+  }
+
+  /**
+   * InvoiceSettings findFirst
+   */
+  export type InvoiceSettingsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceSettings
+     */
+    select?: InvoiceSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceSettings
+     */
+    omit?: InvoiceSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which InvoiceSettings to fetch.
+     */
+    where?: InvoiceSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InvoiceSettings to fetch.
+     */
+    orderBy?: InvoiceSettingsOrderByWithRelationInput | InvoiceSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InvoiceSettings.
+     */
+    cursor?: InvoiceSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InvoiceSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InvoiceSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InvoiceSettings.
+     */
+    distinct?: InvoiceSettingsScalarFieldEnum | InvoiceSettingsScalarFieldEnum[]
+  }
+
+  /**
+   * InvoiceSettings findFirstOrThrow
+   */
+  export type InvoiceSettingsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceSettings
+     */
+    select?: InvoiceSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceSettings
+     */
+    omit?: InvoiceSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which InvoiceSettings to fetch.
+     */
+    where?: InvoiceSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InvoiceSettings to fetch.
+     */
+    orderBy?: InvoiceSettingsOrderByWithRelationInput | InvoiceSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InvoiceSettings.
+     */
+    cursor?: InvoiceSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InvoiceSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InvoiceSettings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InvoiceSettings.
+     */
+    distinct?: InvoiceSettingsScalarFieldEnum | InvoiceSettingsScalarFieldEnum[]
+  }
+
+  /**
+   * InvoiceSettings findMany
+   */
+  export type InvoiceSettingsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceSettings
+     */
+    select?: InvoiceSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceSettings
+     */
+    omit?: InvoiceSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceSettingsInclude<ExtArgs> | null
+    /**
+     * Filter, which InvoiceSettings to fetch.
+     */
+    where?: InvoiceSettingsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InvoiceSettings to fetch.
+     */
+    orderBy?: InvoiceSettingsOrderByWithRelationInput | InvoiceSettingsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InvoiceSettings.
+     */
+    cursor?: InvoiceSettingsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InvoiceSettings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InvoiceSettings.
+     */
+    skip?: number
+    distinct?: InvoiceSettingsScalarFieldEnum | InvoiceSettingsScalarFieldEnum[]
+  }
+
+  /**
+   * InvoiceSettings create
+   */
+  export type InvoiceSettingsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceSettings
+     */
+    select?: InvoiceSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceSettings
+     */
+    omit?: InvoiceSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceSettingsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InvoiceSettings.
+     */
+    data: XOR<InvoiceSettingsCreateInput, InvoiceSettingsUncheckedCreateInput>
+  }
+
+  /**
+   * InvoiceSettings createMany
+   */
+  export type InvoiceSettingsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InvoiceSettings.
+     */
+    data: InvoiceSettingsCreateManyInput | InvoiceSettingsCreateManyInput[]
+  }
+
+  /**
+   * InvoiceSettings createManyAndReturn
+   */
+  export type InvoiceSettingsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceSettings
+     */
+    select?: InvoiceSettingsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceSettings
+     */
+    omit?: InvoiceSettingsOmit<ExtArgs> | null
+    /**
+     * The data used to create many InvoiceSettings.
+     */
+    data: InvoiceSettingsCreateManyInput | InvoiceSettingsCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceSettingsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InvoiceSettings update
+   */
+  export type InvoiceSettingsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceSettings
+     */
+    select?: InvoiceSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceSettings
+     */
+    omit?: InvoiceSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceSettingsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InvoiceSettings.
+     */
+    data: XOR<InvoiceSettingsUpdateInput, InvoiceSettingsUncheckedUpdateInput>
+    /**
+     * Choose, which InvoiceSettings to update.
+     */
+    where: InvoiceSettingsWhereUniqueInput
+  }
+
+  /**
+   * InvoiceSettings updateMany
+   */
+  export type InvoiceSettingsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InvoiceSettings.
+     */
+    data: XOR<InvoiceSettingsUpdateManyMutationInput, InvoiceSettingsUncheckedUpdateManyInput>
+    /**
+     * Filter which InvoiceSettings to update
+     */
+    where?: InvoiceSettingsWhereInput
+    /**
+     * Limit how many InvoiceSettings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InvoiceSettings updateManyAndReturn
+   */
+  export type InvoiceSettingsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceSettings
+     */
+    select?: InvoiceSettingsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceSettings
+     */
+    omit?: InvoiceSettingsOmit<ExtArgs> | null
+    /**
+     * The data used to update InvoiceSettings.
+     */
+    data: XOR<InvoiceSettingsUpdateManyMutationInput, InvoiceSettingsUncheckedUpdateManyInput>
+    /**
+     * Filter which InvoiceSettings to update
+     */
+    where?: InvoiceSettingsWhereInput
+    /**
+     * Limit how many InvoiceSettings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceSettingsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InvoiceSettings upsert
+   */
+  export type InvoiceSettingsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceSettings
+     */
+    select?: InvoiceSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceSettings
+     */
+    omit?: InvoiceSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceSettingsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InvoiceSettings to update in case it exists.
+     */
+    where: InvoiceSettingsWhereUniqueInput
+    /**
+     * In case the InvoiceSettings found by the `where` argument doesn't exist, create a new InvoiceSettings with this data.
+     */
+    create: XOR<InvoiceSettingsCreateInput, InvoiceSettingsUncheckedCreateInput>
+    /**
+     * In case the InvoiceSettings was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InvoiceSettingsUpdateInput, InvoiceSettingsUncheckedUpdateInput>
+  }
+
+  /**
+   * InvoiceSettings delete
+   */
+  export type InvoiceSettingsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceSettings
+     */
+    select?: InvoiceSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceSettings
+     */
+    omit?: InvoiceSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceSettingsInclude<ExtArgs> | null
+    /**
+     * Filter which InvoiceSettings to delete.
+     */
+    where: InvoiceSettingsWhereUniqueInput
+  }
+
+  /**
+   * InvoiceSettings deleteMany
+   */
+  export type InvoiceSettingsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InvoiceSettings to delete
+     */
+    where?: InvoiceSettingsWhereInput
+    /**
+     * Limit how many InvoiceSettings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InvoiceSettings without action
+   */
+  export type InvoiceSettingsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceSettings
+     */
+    select?: InvoiceSettingsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceSettings
+     */
+    omit?: InvoiceSettingsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceSettingsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Invoice
+   */
+
+  export type AggregateInvoice = {
+    _count: InvoiceCountAggregateOutputType | null
+    _avg: InvoiceAvgAggregateOutputType | null
+    _sum: InvoiceSumAggregateOutputType | null
+    _min: InvoiceMinAggregateOutputType | null
+    _max: InvoiceMaxAggregateOutputType | null
+  }
+
+  export type InvoiceAvgAggregateOutputType = {
+    subtotal: number | null
+    taxRate: number | null
+    taxAmount: number | null
+    total: number | null
+  }
+
+  export type InvoiceSumAggregateOutputType = {
+    subtotal: number | null
+    taxRate: number | null
+    taxAmount: number | null
+    total: number | null
+  }
+
+  export type InvoiceMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    clientId: string | null
+    number: string | null
+    status: string | null
+    issueDate: Date | null
+    dueDate: Date | null
+    subtotal: number | null
+    taxRate: number | null
+    taxAmount: number | null
+    total: number | null
+    notes: string | null
+    clientName: string | null
+    clientEmail: string | null
+    clientPhone: string | null
+    clientAddress: string | null
+    sentAt: Date | null
+    paidAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InvoiceMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    clientId: string | null
+    number: string | null
+    status: string | null
+    issueDate: Date | null
+    dueDate: Date | null
+    subtotal: number | null
+    taxRate: number | null
+    taxAmount: number | null
+    total: number | null
+    notes: string | null
+    clientName: string | null
+    clientEmail: string | null
+    clientPhone: string | null
+    clientAddress: string | null
+    sentAt: Date | null
+    paidAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InvoiceCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    clientId: number
+    number: number
+    status: number
+    issueDate: number
+    dueDate: number
+    subtotal: number
+    taxRate: number
+    taxAmount: number
+    total: number
+    notes: number
+    clientName: number
+    clientEmail: number
+    clientPhone: number
+    clientAddress: number
+    sentAt: number
+    paidAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type InvoiceAvgAggregateInputType = {
+    subtotal?: true
+    taxRate?: true
+    taxAmount?: true
+    total?: true
+  }
+
+  export type InvoiceSumAggregateInputType = {
+    subtotal?: true
+    taxRate?: true
+    taxAmount?: true
+    total?: true
+  }
+
+  export type InvoiceMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    clientId?: true
+    number?: true
+    status?: true
+    issueDate?: true
+    dueDate?: true
+    subtotal?: true
+    taxRate?: true
+    taxAmount?: true
+    total?: true
+    notes?: true
+    clientName?: true
+    clientEmail?: true
+    clientPhone?: true
+    clientAddress?: true
+    sentAt?: true
+    paidAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InvoiceMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    clientId?: true
+    number?: true
+    status?: true
+    issueDate?: true
+    dueDate?: true
+    subtotal?: true
+    taxRate?: true
+    taxAmount?: true
+    total?: true
+    notes?: true
+    clientName?: true
+    clientEmail?: true
+    clientPhone?: true
+    clientAddress?: true
+    sentAt?: true
+    paidAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InvoiceCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    clientId?: true
+    number?: true
+    status?: true
+    issueDate?: true
+    dueDate?: true
+    subtotal?: true
+    taxRate?: true
+    taxAmount?: true
+    total?: true
+    notes?: true
+    clientName?: true
+    clientEmail?: true
+    clientPhone?: true
+    clientAddress?: true
+    sentAt?: true
+    paidAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type InvoiceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Invoice to aggregate.
+     */
+    where?: InvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invoices to fetch.
+     */
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invoices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Invoices
+    **/
+    _count?: true | InvoiceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InvoiceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InvoiceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InvoiceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InvoiceMaxAggregateInputType
+  }
+
+  export type GetInvoiceAggregateType<T extends InvoiceAggregateArgs> = {
+        [P in keyof T & keyof AggregateInvoice]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInvoice[P]>
+      : GetScalarType<T[P], AggregateInvoice[P]>
+  }
+
+
+
+
+  export type InvoiceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvoiceWhereInput
+    orderBy?: InvoiceOrderByWithAggregationInput | InvoiceOrderByWithAggregationInput[]
+    by: InvoiceScalarFieldEnum[] | InvoiceScalarFieldEnum
+    having?: InvoiceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InvoiceCountAggregateInputType | true
+    _avg?: InvoiceAvgAggregateInputType
+    _sum?: InvoiceSumAggregateInputType
+    _min?: InvoiceMinAggregateInputType
+    _max?: InvoiceMaxAggregateInputType
+  }
+
+  export type InvoiceGroupByOutputType = {
+    id: string
+    tenantId: string
+    clientId: string | null
+    number: string
+    status: string
+    issueDate: Date
+    dueDate: Date | null
+    subtotal: number
+    taxRate: number
+    taxAmount: number
+    total: number
+    notes: string | null
+    clientName: string
+    clientEmail: string | null
+    clientPhone: string | null
+    clientAddress: string | null
+    sentAt: Date | null
+    paidAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: InvoiceCountAggregateOutputType | null
+    _avg: InvoiceAvgAggregateOutputType | null
+    _sum: InvoiceSumAggregateOutputType | null
+    _min: InvoiceMinAggregateOutputType | null
+    _max: InvoiceMaxAggregateOutputType | null
+  }
+
+  type GetInvoiceGroupByPayload<T extends InvoiceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InvoiceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InvoiceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InvoiceGroupByOutputType[P]>
+            : GetScalarType<T[P], InvoiceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InvoiceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    clientId?: boolean
+    number?: boolean
+    status?: boolean
+    issueDate?: boolean
+    dueDate?: boolean
+    subtotal?: boolean
+    taxRate?: boolean
+    taxAmount?: boolean
+    total?: boolean
+    notes?: boolean
+    clientName?: boolean
+    clientEmail?: boolean
+    clientPhone?: boolean
+    clientAddress?: boolean
+    sentAt?: boolean
+    paidAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+    client?: boolean | Invoice$clientArgs<ExtArgs>
+    items?: boolean | Invoice$itemsArgs<ExtArgs>
+    _count?: boolean | InvoiceCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invoice"]>
+
+  export type InvoiceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    clientId?: boolean
+    number?: boolean
+    status?: boolean
+    issueDate?: boolean
+    dueDate?: boolean
+    subtotal?: boolean
+    taxRate?: boolean
+    taxAmount?: boolean
+    total?: boolean
+    notes?: boolean
+    clientName?: boolean
+    clientEmail?: boolean
+    clientPhone?: boolean
+    clientAddress?: boolean
+    sentAt?: boolean
+    paidAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+    client?: boolean | Invoice$clientArgs<ExtArgs>
+  }, ExtArgs["result"]["invoice"]>
+
+  export type InvoiceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    clientId?: boolean
+    number?: boolean
+    status?: boolean
+    issueDate?: boolean
+    dueDate?: boolean
+    subtotal?: boolean
+    taxRate?: boolean
+    taxAmount?: boolean
+    total?: boolean
+    notes?: boolean
+    clientName?: boolean
+    clientEmail?: boolean
+    clientPhone?: boolean
+    clientAddress?: boolean
+    sentAt?: boolean
+    paidAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+    client?: boolean | Invoice$clientArgs<ExtArgs>
+  }, ExtArgs["result"]["invoice"]>
+
+  export type InvoiceSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    clientId?: boolean
+    number?: boolean
+    status?: boolean
+    issueDate?: boolean
+    dueDate?: boolean
+    subtotal?: boolean
+    taxRate?: boolean
+    taxAmount?: boolean
+    total?: boolean
+    notes?: boolean
+    clientName?: boolean
+    clientEmail?: boolean
+    clientPhone?: boolean
+    clientAddress?: boolean
+    sentAt?: boolean
+    paidAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type InvoiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "clientId" | "number" | "status" | "issueDate" | "dueDate" | "subtotal" | "taxRate" | "taxAmount" | "total" | "notes" | "clientName" | "clientEmail" | "clientPhone" | "clientAddress" | "sentAt" | "paidAt" | "createdAt" | "updatedAt", ExtArgs["result"]["invoice"]>
+  export type InvoiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+    client?: boolean | Invoice$clientArgs<ExtArgs>
+    items?: boolean | Invoice$itemsArgs<ExtArgs>
+    _count?: boolean | InvoiceCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type InvoiceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+    client?: boolean | Invoice$clientArgs<ExtArgs>
+  }
+  export type InvoiceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+    client?: boolean | Invoice$clientArgs<ExtArgs>
+  }
+
+  export type $InvoicePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Invoice"
+    objects: {
+      tenant: Prisma.$TenantWebsitePayload<ExtArgs>
+      client: Prisma.$CabinetClientPayload<ExtArgs> | null
+      items: Prisma.$InvoiceItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      clientId: string | null
+      number: string
+      status: string
+      issueDate: Date
+      dueDate: Date | null
+      subtotal: number
+      taxRate: number
+      taxAmount: number
+      total: number
+      notes: string | null
+      clientName: string
+      clientEmail: string | null
+      clientPhone: string | null
+      clientAddress: string | null
+      sentAt: Date | null
+      paidAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["invoice"]>
+    composites: {}
+  }
+
+  type InvoiceGetPayload<S extends boolean | null | undefined | InvoiceDefaultArgs> = $Result.GetResult<Prisma.$InvoicePayload, S>
+
+  type InvoiceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InvoiceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InvoiceCountAggregateInputType | true
+    }
+
+  export interface InvoiceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Invoice'], meta: { name: 'Invoice' } }
+    /**
+     * Find zero or one Invoice that matches the filter.
+     * @param {InvoiceFindUniqueArgs} args - Arguments to find a Invoice
+     * @example
+     * // Get one Invoice
+     * const invoice = await prisma.invoice.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InvoiceFindUniqueArgs>(args: SelectSubset<T, InvoiceFindUniqueArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Invoice that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InvoiceFindUniqueOrThrowArgs} args - Arguments to find a Invoice
+     * @example
+     * // Get one Invoice
+     * const invoice = await prisma.invoice.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InvoiceFindUniqueOrThrowArgs>(args: SelectSubset<T, InvoiceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Invoice that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceFindFirstArgs} args - Arguments to find a Invoice
+     * @example
+     * // Get one Invoice
+     * const invoice = await prisma.invoice.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InvoiceFindFirstArgs>(args?: SelectSubset<T, InvoiceFindFirstArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Invoice that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceFindFirstOrThrowArgs} args - Arguments to find a Invoice
+     * @example
+     * // Get one Invoice
+     * const invoice = await prisma.invoice.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InvoiceFindFirstOrThrowArgs>(args?: SelectSubset<T, InvoiceFindFirstOrThrowArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Invoices that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Invoices
+     * const invoices = await prisma.invoice.findMany()
+     * 
+     * // Get first 10 Invoices
+     * const invoices = await prisma.invoice.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const invoiceWithIdOnly = await prisma.invoice.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InvoiceFindManyArgs>(args?: SelectSubset<T, InvoiceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Invoice.
+     * @param {InvoiceCreateArgs} args - Arguments to create a Invoice.
+     * @example
+     * // Create one Invoice
+     * const Invoice = await prisma.invoice.create({
+     *   data: {
+     *     // ... data to create a Invoice
+     *   }
+     * })
+     * 
+     */
+    create<T extends InvoiceCreateArgs>(args: SelectSubset<T, InvoiceCreateArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Invoices.
+     * @param {InvoiceCreateManyArgs} args - Arguments to create many Invoices.
+     * @example
+     * // Create many Invoices
+     * const invoice = await prisma.invoice.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InvoiceCreateManyArgs>(args?: SelectSubset<T, InvoiceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Invoices and returns the data saved in the database.
+     * @param {InvoiceCreateManyAndReturnArgs} args - Arguments to create many Invoices.
+     * @example
+     * // Create many Invoices
+     * const invoice = await prisma.invoice.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Invoices and only return the `id`
+     * const invoiceWithIdOnly = await prisma.invoice.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InvoiceCreateManyAndReturnArgs>(args?: SelectSubset<T, InvoiceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Invoice.
+     * @param {InvoiceDeleteArgs} args - Arguments to delete one Invoice.
+     * @example
+     * // Delete one Invoice
+     * const Invoice = await prisma.invoice.delete({
+     *   where: {
+     *     // ... filter to delete one Invoice
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InvoiceDeleteArgs>(args: SelectSubset<T, InvoiceDeleteArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Invoice.
+     * @param {InvoiceUpdateArgs} args - Arguments to update one Invoice.
+     * @example
+     * // Update one Invoice
+     * const invoice = await prisma.invoice.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InvoiceUpdateArgs>(args: SelectSubset<T, InvoiceUpdateArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Invoices.
+     * @param {InvoiceDeleteManyArgs} args - Arguments to filter Invoices to delete.
+     * @example
+     * // Delete a few Invoices
+     * const { count } = await prisma.invoice.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InvoiceDeleteManyArgs>(args?: SelectSubset<T, InvoiceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Invoices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Invoices
+     * const invoice = await prisma.invoice.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InvoiceUpdateManyArgs>(args: SelectSubset<T, InvoiceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Invoices and returns the data updated in the database.
+     * @param {InvoiceUpdateManyAndReturnArgs} args - Arguments to update many Invoices.
+     * @example
+     * // Update many Invoices
+     * const invoice = await prisma.invoice.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Invoices and only return the `id`
+     * const invoiceWithIdOnly = await prisma.invoice.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InvoiceUpdateManyAndReturnArgs>(args: SelectSubset<T, InvoiceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Invoice.
+     * @param {InvoiceUpsertArgs} args - Arguments to update or create a Invoice.
+     * @example
+     * // Update or create a Invoice
+     * const invoice = await prisma.invoice.upsert({
+     *   create: {
+     *     // ... data to create a Invoice
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Invoice we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InvoiceUpsertArgs>(args: SelectSubset<T, InvoiceUpsertArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Invoices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceCountArgs} args - Arguments to filter Invoices to count.
+     * @example
+     * // Count the number of Invoices
+     * const count = await prisma.invoice.count({
+     *   where: {
+     *     // ... the filter for the Invoices we want to count
+     *   }
+     * })
+    **/
+    count<T extends InvoiceCountArgs>(
+      args?: Subset<T, InvoiceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InvoiceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Invoice.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InvoiceAggregateArgs>(args: Subset<T, InvoiceAggregateArgs>): Prisma.PrismaPromise<GetInvoiceAggregateType<T>>
+
+    /**
+     * Group by Invoice.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InvoiceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InvoiceGroupByArgs['orderBy'] }
+        : { orderBy?: InvoiceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InvoiceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInvoiceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Invoice model
+   */
+  readonly fields: InvoiceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Invoice.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InvoiceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantWebsiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsiteDefaultArgs<ExtArgs>>): Prisma__TenantWebsiteClient<$Result.GetResult<Prisma.$TenantWebsitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    client<T extends Invoice$clientArgs<ExtArgs> = {}>(args?: Subset<T, Invoice$clientArgs<ExtArgs>>): Prisma__CabinetClientClient<$Result.GetResult<Prisma.$CabinetClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    items<T extends Invoice$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Invoice$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Invoice model
+   */
+  interface InvoiceFieldRefs {
+    readonly id: FieldRef<"Invoice", 'String'>
+    readonly tenantId: FieldRef<"Invoice", 'String'>
+    readonly clientId: FieldRef<"Invoice", 'String'>
+    readonly number: FieldRef<"Invoice", 'String'>
+    readonly status: FieldRef<"Invoice", 'String'>
+    readonly issueDate: FieldRef<"Invoice", 'DateTime'>
+    readonly dueDate: FieldRef<"Invoice", 'DateTime'>
+    readonly subtotal: FieldRef<"Invoice", 'Float'>
+    readonly taxRate: FieldRef<"Invoice", 'Float'>
+    readonly taxAmount: FieldRef<"Invoice", 'Float'>
+    readonly total: FieldRef<"Invoice", 'Float'>
+    readonly notes: FieldRef<"Invoice", 'String'>
+    readonly clientName: FieldRef<"Invoice", 'String'>
+    readonly clientEmail: FieldRef<"Invoice", 'String'>
+    readonly clientPhone: FieldRef<"Invoice", 'String'>
+    readonly clientAddress: FieldRef<"Invoice", 'String'>
+    readonly sentAt: FieldRef<"Invoice", 'DateTime'>
+    readonly paidAt: FieldRef<"Invoice", 'DateTime'>
+    readonly createdAt: FieldRef<"Invoice", 'DateTime'>
+    readonly updatedAt: FieldRef<"Invoice", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Invoice findUnique
+   */
+  export type InvoiceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Invoice to fetch.
+     */
+    where: InvoiceWhereUniqueInput
+  }
+
+  /**
+   * Invoice findUniqueOrThrow
+   */
+  export type InvoiceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Invoice to fetch.
+     */
+    where: InvoiceWhereUniqueInput
+  }
+
+  /**
+   * Invoice findFirst
+   */
+  export type InvoiceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Invoice to fetch.
+     */
+    where?: InvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invoices to fetch.
+     */
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Invoices.
+     */
+    cursor?: InvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invoices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invoices.
+     */
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * Invoice findFirstOrThrow
+   */
+  export type InvoiceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Invoice to fetch.
+     */
+    where?: InvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invoices to fetch.
+     */
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Invoices.
+     */
+    cursor?: InvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invoices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invoices.
+     */
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * Invoice findMany
+   */
+  export type InvoiceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Invoices to fetch.
+     */
+    where?: InvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invoices to fetch.
+     */
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Invoices.
+     */
+    cursor?: InvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invoices.
+     */
+    skip?: number
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * Invoice create
+   */
+  export type InvoiceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Invoice.
+     */
+    data: XOR<InvoiceCreateInput, InvoiceUncheckedCreateInput>
+  }
+
+  /**
+   * Invoice createMany
+   */
+  export type InvoiceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Invoices.
+     */
+    data: InvoiceCreateManyInput | InvoiceCreateManyInput[]
+  }
+
+  /**
+   * Invoice createManyAndReturn
+   */
+  export type InvoiceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * The data used to create many Invoices.
+     */
+    data: InvoiceCreateManyInput | InvoiceCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Invoice update
+   */
+  export type InvoiceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Invoice.
+     */
+    data: XOR<InvoiceUpdateInput, InvoiceUncheckedUpdateInput>
+    /**
+     * Choose, which Invoice to update.
+     */
+    where: InvoiceWhereUniqueInput
+  }
+
+  /**
+   * Invoice updateMany
+   */
+  export type InvoiceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Invoices.
+     */
+    data: XOR<InvoiceUpdateManyMutationInput, InvoiceUncheckedUpdateManyInput>
+    /**
+     * Filter which Invoices to update
+     */
+    where?: InvoiceWhereInput
+    /**
+     * Limit how many Invoices to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Invoice updateManyAndReturn
+   */
+  export type InvoiceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * The data used to update Invoices.
+     */
+    data: XOR<InvoiceUpdateManyMutationInput, InvoiceUncheckedUpdateManyInput>
+    /**
+     * Filter which Invoices to update
+     */
+    where?: InvoiceWhereInput
+    /**
+     * Limit how many Invoices to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Invoice upsert
+   */
+  export type InvoiceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Invoice to update in case it exists.
+     */
+    where: InvoiceWhereUniqueInput
+    /**
+     * In case the Invoice found by the `where` argument doesn't exist, create a new Invoice with this data.
+     */
+    create: XOR<InvoiceCreateInput, InvoiceUncheckedCreateInput>
+    /**
+     * In case the Invoice was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InvoiceUpdateInput, InvoiceUncheckedUpdateInput>
+  }
+
+  /**
+   * Invoice delete
+   */
+  export type InvoiceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter which Invoice to delete.
+     */
+    where: InvoiceWhereUniqueInput
+  }
+
+  /**
+   * Invoice deleteMany
+   */
+  export type InvoiceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Invoices to delete
+     */
+    where?: InvoiceWhereInput
+    /**
+     * Limit how many Invoices to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Invoice.client
+   */
+  export type Invoice$clientArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CabinetClient
+     */
+    select?: CabinetClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CabinetClient
+     */
+    omit?: CabinetClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CabinetClientInclude<ExtArgs> | null
+    where?: CabinetClientWhereInput
+  }
+
+  /**
+   * Invoice.items
+   */
+  export type Invoice$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    where?: InvoiceItemWhereInput
+    orderBy?: InvoiceItemOrderByWithRelationInput | InvoiceItemOrderByWithRelationInput[]
+    cursor?: InvoiceItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvoiceItemScalarFieldEnum | InvoiceItemScalarFieldEnum[]
+  }
+
+  /**
+   * Invoice without action
+   */
+  export type InvoiceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model InvoiceItem
+   */
+
+  export type AggregateInvoiceItem = {
+    _count: InvoiceItemCountAggregateOutputType | null
+    _avg: InvoiceItemAvgAggregateOutputType | null
+    _sum: InvoiceItemSumAggregateOutputType | null
+    _min: InvoiceItemMinAggregateOutputType | null
+    _max: InvoiceItemMaxAggregateOutputType | null
+  }
+
+  export type InvoiceItemAvgAggregateOutputType = {
+    quantity: number | null
+    unitPrice: number | null
+    total: number | null
+  }
+
+  export type InvoiceItemSumAggregateOutputType = {
+    quantity: number | null
+    unitPrice: number | null
+    total: number | null
+  }
+
+  export type InvoiceItemMinAggregateOutputType = {
+    id: string | null
+    invoiceId: string | null
+    description: string | null
+    quantity: number | null
+    unitPrice: number | null
+    total: number | null
+  }
+
+  export type InvoiceItemMaxAggregateOutputType = {
+    id: string | null
+    invoiceId: string | null
+    description: string | null
+    quantity: number | null
+    unitPrice: number | null
+    total: number | null
+  }
+
+  export type InvoiceItemCountAggregateOutputType = {
+    id: number
+    invoiceId: number
+    description: number
+    quantity: number
+    unitPrice: number
+    total: number
+    _all: number
+  }
+
+
+  export type InvoiceItemAvgAggregateInputType = {
+    quantity?: true
+    unitPrice?: true
+    total?: true
+  }
+
+  export type InvoiceItemSumAggregateInputType = {
+    quantity?: true
+    unitPrice?: true
+    total?: true
+  }
+
+  export type InvoiceItemMinAggregateInputType = {
+    id?: true
+    invoiceId?: true
+    description?: true
+    quantity?: true
+    unitPrice?: true
+    total?: true
+  }
+
+  export type InvoiceItemMaxAggregateInputType = {
+    id?: true
+    invoiceId?: true
+    description?: true
+    quantity?: true
+    unitPrice?: true
+    total?: true
+  }
+
+  export type InvoiceItemCountAggregateInputType = {
+    id?: true
+    invoiceId?: true
+    description?: true
+    quantity?: true
+    unitPrice?: true
+    total?: true
+    _all?: true
+  }
+
+  export type InvoiceItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InvoiceItem to aggregate.
+     */
+    where?: InvoiceItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InvoiceItems to fetch.
+     */
+    orderBy?: InvoiceItemOrderByWithRelationInput | InvoiceItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InvoiceItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InvoiceItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InvoiceItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InvoiceItems
+    **/
+    _count?: true | InvoiceItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InvoiceItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InvoiceItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InvoiceItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InvoiceItemMaxAggregateInputType
+  }
+
+  export type GetInvoiceItemAggregateType<T extends InvoiceItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateInvoiceItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInvoiceItem[P]>
+      : GetScalarType<T[P], AggregateInvoiceItem[P]>
+  }
+
+
+
+
+  export type InvoiceItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvoiceItemWhereInput
+    orderBy?: InvoiceItemOrderByWithAggregationInput | InvoiceItemOrderByWithAggregationInput[]
+    by: InvoiceItemScalarFieldEnum[] | InvoiceItemScalarFieldEnum
+    having?: InvoiceItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InvoiceItemCountAggregateInputType | true
+    _avg?: InvoiceItemAvgAggregateInputType
+    _sum?: InvoiceItemSumAggregateInputType
+    _min?: InvoiceItemMinAggregateInputType
+    _max?: InvoiceItemMaxAggregateInputType
+  }
+
+  export type InvoiceItemGroupByOutputType = {
+    id: string
+    invoiceId: string
+    description: string
+    quantity: number
+    unitPrice: number
+    total: number
+    _count: InvoiceItemCountAggregateOutputType | null
+    _avg: InvoiceItemAvgAggregateOutputType | null
+    _sum: InvoiceItemSumAggregateOutputType | null
+    _min: InvoiceItemMinAggregateOutputType | null
+    _max: InvoiceItemMaxAggregateOutputType | null
+  }
+
+  type GetInvoiceItemGroupByPayload<T extends InvoiceItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InvoiceItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InvoiceItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InvoiceItemGroupByOutputType[P]>
+            : GetScalarType<T[P], InvoiceItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InvoiceItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invoiceId?: boolean
+    description?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    total?: boolean
+    invoice?: boolean | InvoiceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invoiceItem"]>
+
+  export type InvoiceItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invoiceId?: boolean
+    description?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    total?: boolean
+    invoice?: boolean | InvoiceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invoiceItem"]>
+
+  export type InvoiceItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invoiceId?: boolean
+    description?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    total?: boolean
+    invoice?: boolean | InvoiceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invoiceItem"]>
+
+  export type InvoiceItemSelectScalar = {
+    id?: boolean
+    invoiceId?: boolean
+    description?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    total?: boolean
+  }
+
+  export type InvoiceItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "invoiceId" | "description" | "quantity" | "unitPrice" | "total", ExtArgs["result"]["invoiceItem"]>
+  export type InvoiceItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    invoice?: boolean | InvoiceDefaultArgs<ExtArgs>
+  }
+  export type InvoiceItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    invoice?: boolean | InvoiceDefaultArgs<ExtArgs>
+  }
+  export type InvoiceItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    invoice?: boolean | InvoiceDefaultArgs<ExtArgs>
+  }
+
+  export type $InvoiceItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InvoiceItem"
+    objects: {
+      invoice: Prisma.$InvoicePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      invoiceId: string
+      description: string
+      quantity: number
+      unitPrice: number
+      total: number
+    }, ExtArgs["result"]["invoiceItem"]>
+    composites: {}
+  }
+
+  type InvoiceItemGetPayload<S extends boolean | null | undefined | InvoiceItemDefaultArgs> = $Result.GetResult<Prisma.$InvoiceItemPayload, S>
+
+  type InvoiceItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InvoiceItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InvoiceItemCountAggregateInputType | true
+    }
+
+  export interface InvoiceItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InvoiceItem'], meta: { name: 'InvoiceItem' } }
+    /**
+     * Find zero or one InvoiceItem that matches the filter.
+     * @param {InvoiceItemFindUniqueArgs} args - Arguments to find a InvoiceItem
+     * @example
+     * // Get one InvoiceItem
+     * const invoiceItem = await prisma.invoiceItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InvoiceItemFindUniqueArgs>(args: SelectSubset<T, InvoiceItemFindUniqueArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InvoiceItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InvoiceItemFindUniqueOrThrowArgs} args - Arguments to find a InvoiceItem
+     * @example
+     * // Get one InvoiceItem
+     * const invoiceItem = await prisma.invoiceItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InvoiceItemFindUniqueOrThrowArgs>(args: SelectSubset<T, InvoiceItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InvoiceItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceItemFindFirstArgs} args - Arguments to find a InvoiceItem
+     * @example
+     * // Get one InvoiceItem
+     * const invoiceItem = await prisma.invoiceItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InvoiceItemFindFirstArgs>(args?: SelectSubset<T, InvoiceItemFindFirstArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InvoiceItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceItemFindFirstOrThrowArgs} args - Arguments to find a InvoiceItem
+     * @example
+     * // Get one InvoiceItem
+     * const invoiceItem = await prisma.invoiceItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InvoiceItemFindFirstOrThrowArgs>(args?: SelectSubset<T, InvoiceItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InvoiceItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InvoiceItems
+     * const invoiceItems = await prisma.invoiceItem.findMany()
+     * 
+     * // Get first 10 InvoiceItems
+     * const invoiceItems = await prisma.invoiceItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const invoiceItemWithIdOnly = await prisma.invoiceItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InvoiceItemFindManyArgs>(args?: SelectSubset<T, InvoiceItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InvoiceItem.
+     * @param {InvoiceItemCreateArgs} args - Arguments to create a InvoiceItem.
+     * @example
+     * // Create one InvoiceItem
+     * const InvoiceItem = await prisma.invoiceItem.create({
+     *   data: {
+     *     // ... data to create a InvoiceItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends InvoiceItemCreateArgs>(args: SelectSubset<T, InvoiceItemCreateArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InvoiceItems.
+     * @param {InvoiceItemCreateManyArgs} args - Arguments to create many InvoiceItems.
+     * @example
+     * // Create many InvoiceItems
+     * const invoiceItem = await prisma.invoiceItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InvoiceItemCreateManyArgs>(args?: SelectSubset<T, InvoiceItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InvoiceItems and returns the data saved in the database.
+     * @param {InvoiceItemCreateManyAndReturnArgs} args - Arguments to create many InvoiceItems.
+     * @example
+     * // Create many InvoiceItems
+     * const invoiceItem = await prisma.invoiceItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many InvoiceItems and only return the `id`
+     * const invoiceItemWithIdOnly = await prisma.invoiceItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InvoiceItemCreateManyAndReturnArgs>(args?: SelectSubset<T, InvoiceItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InvoiceItem.
+     * @param {InvoiceItemDeleteArgs} args - Arguments to delete one InvoiceItem.
+     * @example
+     * // Delete one InvoiceItem
+     * const InvoiceItem = await prisma.invoiceItem.delete({
+     *   where: {
+     *     // ... filter to delete one InvoiceItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InvoiceItemDeleteArgs>(args: SelectSubset<T, InvoiceItemDeleteArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InvoiceItem.
+     * @param {InvoiceItemUpdateArgs} args - Arguments to update one InvoiceItem.
+     * @example
+     * // Update one InvoiceItem
+     * const invoiceItem = await prisma.invoiceItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InvoiceItemUpdateArgs>(args: SelectSubset<T, InvoiceItemUpdateArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InvoiceItems.
+     * @param {InvoiceItemDeleteManyArgs} args - Arguments to filter InvoiceItems to delete.
+     * @example
+     * // Delete a few InvoiceItems
+     * const { count } = await prisma.invoiceItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InvoiceItemDeleteManyArgs>(args?: SelectSubset<T, InvoiceItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InvoiceItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InvoiceItems
+     * const invoiceItem = await prisma.invoiceItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InvoiceItemUpdateManyArgs>(args: SelectSubset<T, InvoiceItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InvoiceItems and returns the data updated in the database.
+     * @param {InvoiceItemUpdateManyAndReturnArgs} args - Arguments to update many InvoiceItems.
+     * @example
+     * // Update many InvoiceItems
+     * const invoiceItem = await prisma.invoiceItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more InvoiceItems and only return the `id`
+     * const invoiceItemWithIdOnly = await prisma.invoiceItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InvoiceItemUpdateManyAndReturnArgs>(args: SelectSubset<T, InvoiceItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InvoiceItem.
+     * @param {InvoiceItemUpsertArgs} args - Arguments to update or create a InvoiceItem.
+     * @example
+     * // Update or create a InvoiceItem
+     * const invoiceItem = await prisma.invoiceItem.upsert({
+     *   create: {
+     *     // ... data to create a InvoiceItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InvoiceItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InvoiceItemUpsertArgs>(args: SelectSubset<T, InvoiceItemUpsertArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InvoiceItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceItemCountArgs} args - Arguments to filter InvoiceItems to count.
+     * @example
+     * // Count the number of InvoiceItems
+     * const count = await prisma.invoiceItem.count({
+     *   where: {
+     *     // ... the filter for the InvoiceItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends InvoiceItemCountArgs>(
+      args?: Subset<T, InvoiceItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InvoiceItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InvoiceItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InvoiceItemAggregateArgs>(args: Subset<T, InvoiceItemAggregateArgs>): Prisma.PrismaPromise<GetInvoiceItemAggregateType<T>>
+
+    /**
+     * Group by InvoiceItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InvoiceItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InvoiceItemGroupByArgs['orderBy'] }
+        : { orderBy?: InvoiceItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InvoiceItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInvoiceItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InvoiceItem model
+   */
+  readonly fields: InvoiceItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InvoiceItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InvoiceItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    invoice<T extends InvoiceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InvoiceDefaultArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InvoiceItem model
+   */
+  interface InvoiceItemFieldRefs {
+    readonly id: FieldRef<"InvoiceItem", 'String'>
+    readonly invoiceId: FieldRef<"InvoiceItem", 'String'>
+    readonly description: FieldRef<"InvoiceItem", 'String'>
+    readonly quantity: FieldRef<"InvoiceItem", 'Float'>
+    readonly unitPrice: FieldRef<"InvoiceItem", 'Float'>
+    readonly total: FieldRef<"InvoiceItem", 'Float'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InvoiceItem findUnique
+   */
+  export type InvoiceItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter, which InvoiceItem to fetch.
+     */
+    where: InvoiceItemWhereUniqueInput
+  }
+
+  /**
+   * InvoiceItem findUniqueOrThrow
+   */
+  export type InvoiceItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter, which InvoiceItem to fetch.
+     */
+    where: InvoiceItemWhereUniqueInput
+  }
+
+  /**
+   * InvoiceItem findFirst
+   */
+  export type InvoiceItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter, which InvoiceItem to fetch.
+     */
+    where?: InvoiceItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InvoiceItems to fetch.
+     */
+    orderBy?: InvoiceItemOrderByWithRelationInput | InvoiceItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InvoiceItems.
+     */
+    cursor?: InvoiceItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InvoiceItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InvoiceItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InvoiceItems.
+     */
+    distinct?: InvoiceItemScalarFieldEnum | InvoiceItemScalarFieldEnum[]
+  }
+
+  /**
+   * InvoiceItem findFirstOrThrow
+   */
+  export type InvoiceItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter, which InvoiceItem to fetch.
+     */
+    where?: InvoiceItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InvoiceItems to fetch.
+     */
+    orderBy?: InvoiceItemOrderByWithRelationInput | InvoiceItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InvoiceItems.
+     */
+    cursor?: InvoiceItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InvoiceItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InvoiceItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InvoiceItems.
+     */
+    distinct?: InvoiceItemScalarFieldEnum | InvoiceItemScalarFieldEnum[]
+  }
+
+  /**
+   * InvoiceItem findMany
+   */
+  export type InvoiceItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter, which InvoiceItems to fetch.
+     */
+    where?: InvoiceItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InvoiceItems to fetch.
+     */
+    orderBy?: InvoiceItemOrderByWithRelationInput | InvoiceItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InvoiceItems.
+     */
+    cursor?: InvoiceItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InvoiceItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InvoiceItems.
+     */
+    skip?: number
+    distinct?: InvoiceItemScalarFieldEnum | InvoiceItemScalarFieldEnum[]
+  }
+
+  /**
+   * InvoiceItem create
+   */
+  export type InvoiceItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InvoiceItem.
+     */
+    data: XOR<InvoiceItemCreateInput, InvoiceItemUncheckedCreateInput>
+  }
+
+  /**
+   * InvoiceItem createMany
+   */
+  export type InvoiceItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InvoiceItems.
+     */
+    data: InvoiceItemCreateManyInput | InvoiceItemCreateManyInput[]
+  }
+
+  /**
+   * InvoiceItem createManyAndReturn
+   */
+  export type InvoiceItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many InvoiceItems.
+     */
+    data: InvoiceItemCreateManyInput | InvoiceItemCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InvoiceItem update
+   */
+  export type InvoiceItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InvoiceItem.
+     */
+    data: XOR<InvoiceItemUpdateInput, InvoiceItemUncheckedUpdateInput>
+    /**
+     * Choose, which InvoiceItem to update.
+     */
+    where: InvoiceItemWhereUniqueInput
+  }
+
+  /**
+   * InvoiceItem updateMany
+   */
+  export type InvoiceItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InvoiceItems.
+     */
+    data: XOR<InvoiceItemUpdateManyMutationInput, InvoiceItemUncheckedUpdateManyInput>
+    /**
+     * Filter which InvoiceItems to update
+     */
+    where?: InvoiceItemWhereInput
+    /**
+     * Limit how many InvoiceItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InvoiceItem updateManyAndReturn
+   */
+  export type InvoiceItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * The data used to update InvoiceItems.
+     */
+    data: XOR<InvoiceItemUpdateManyMutationInput, InvoiceItemUncheckedUpdateManyInput>
+    /**
+     * Filter which InvoiceItems to update
+     */
+    where?: InvoiceItemWhereInput
+    /**
+     * Limit how many InvoiceItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InvoiceItem upsert
+   */
+  export type InvoiceItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InvoiceItem to update in case it exists.
+     */
+    where: InvoiceItemWhereUniqueInput
+    /**
+     * In case the InvoiceItem found by the `where` argument doesn't exist, create a new InvoiceItem with this data.
+     */
+    create: XOR<InvoiceItemCreateInput, InvoiceItemUncheckedCreateInput>
+    /**
+     * In case the InvoiceItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InvoiceItemUpdateInput, InvoiceItemUncheckedUpdateInput>
+  }
+
+  /**
+   * InvoiceItem delete
+   */
+  export type InvoiceItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter which InvoiceItem to delete.
+     */
+    where: InvoiceItemWhereUniqueInput
+  }
+
+  /**
+   * InvoiceItem deleteMany
+   */
+  export type InvoiceItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InvoiceItems to delete
+     */
+    where?: InvoiceItemWhereInput
+    /**
+     * Limit how many InvoiceItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InvoiceItem without action
+   */
+  export type InvoiceItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MedicalRecord
+   */
+
+  export type AggregateMedicalRecord = {
+    _count: MedicalRecordCountAggregateOutputType | null
+    _avg: MedicalRecordAvgAggregateOutputType | null
+    _sum: MedicalRecordSumAggregateOutputType | null
+    _min: MedicalRecordMinAggregateOutputType | null
+    _max: MedicalRecordMaxAggregateOutputType | null
+  }
+
+  export type MedicalRecordAvgAggregateOutputType = {
+    weight: number | null
+    temperature: number | null
+    heartRate: number | null
+  }
+
+  export type MedicalRecordSumAggregateOutputType = {
+    weight: number | null
+    temperature: number | null
+    heartRate: number | null
+  }
+
+  export type MedicalRecordMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    clientId: string | null
+    visitDate: Date | null
+    chiefComplaint: string | null
+    diagnosis: string | null
+    treatment: string | null
+    notes: string | null
+    weight: number | null
+    bloodPressure: string | null
+    temperature: number | null
+    heartRate: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MedicalRecordMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    clientId: string | null
+    visitDate: Date | null
+    chiefComplaint: string | null
+    diagnosis: string | null
+    treatment: string | null
+    notes: string | null
+    weight: number | null
+    bloodPressure: string | null
+    temperature: number | null
+    heartRate: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MedicalRecordCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    clientId: number
+    visitDate: number
+    chiefComplaint: number
+    diagnosis: number
+    treatment: number
+    notes: number
+    weight: number
+    bloodPressure: number
+    temperature: number
+    heartRate: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MedicalRecordAvgAggregateInputType = {
+    weight?: true
+    temperature?: true
+    heartRate?: true
+  }
+
+  export type MedicalRecordSumAggregateInputType = {
+    weight?: true
+    temperature?: true
+    heartRate?: true
+  }
+
+  export type MedicalRecordMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    clientId?: true
+    visitDate?: true
+    chiefComplaint?: true
+    diagnosis?: true
+    treatment?: true
+    notes?: true
+    weight?: true
+    bloodPressure?: true
+    temperature?: true
+    heartRate?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MedicalRecordMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    clientId?: true
+    visitDate?: true
+    chiefComplaint?: true
+    diagnosis?: true
+    treatment?: true
+    notes?: true
+    weight?: true
+    bloodPressure?: true
+    temperature?: true
+    heartRate?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MedicalRecordCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    clientId?: true
+    visitDate?: true
+    chiefComplaint?: true
+    diagnosis?: true
+    treatment?: true
+    notes?: true
+    weight?: true
+    bloodPressure?: true
+    temperature?: true
+    heartRate?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MedicalRecordAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MedicalRecord to aggregate.
+     */
+    where?: MedicalRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MedicalRecords to fetch.
+     */
+    orderBy?: MedicalRecordOrderByWithRelationInput | MedicalRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MedicalRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MedicalRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MedicalRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MedicalRecords
+    **/
+    _count?: true | MedicalRecordCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MedicalRecordAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MedicalRecordSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MedicalRecordMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MedicalRecordMaxAggregateInputType
+  }
+
+  export type GetMedicalRecordAggregateType<T extends MedicalRecordAggregateArgs> = {
+        [P in keyof T & keyof AggregateMedicalRecord]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMedicalRecord[P]>
+      : GetScalarType<T[P], AggregateMedicalRecord[P]>
+  }
+
+
+
+
+  export type MedicalRecordGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MedicalRecordWhereInput
+    orderBy?: MedicalRecordOrderByWithAggregationInput | MedicalRecordOrderByWithAggregationInput[]
+    by: MedicalRecordScalarFieldEnum[] | MedicalRecordScalarFieldEnum
+    having?: MedicalRecordScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MedicalRecordCountAggregateInputType | true
+    _avg?: MedicalRecordAvgAggregateInputType
+    _sum?: MedicalRecordSumAggregateInputType
+    _min?: MedicalRecordMinAggregateInputType
+    _max?: MedicalRecordMaxAggregateInputType
+  }
+
+  export type MedicalRecordGroupByOutputType = {
+    id: string
+    tenantId: string
+    clientId: string
+    visitDate: Date
+    chiefComplaint: string | null
+    diagnosis: string | null
+    treatment: string | null
+    notes: string | null
+    weight: number | null
+    bloodPressure: string | null
+    temperature: number | null
+    heartRate: number | null
+    createdAt: Date
+    updatedAt: Date
+    _count: MedicalRecordCountAggregateOutputType | null
+    _avg: MedicalRecordAvgAggregateOutputType | null
+    _sum: MedicalRecordSumAggregateOutputType | null
+    _min: MedicalRecordMinAggregateOutputType | null
+    _max: MedicalRecordMaxAggregateOutputType | null
+  }
+
+  type GetMedicalRecordGroupByPayload<T extends MedicalRecordGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MedicalRecordGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MedicalRecordGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MedicalRecordGroupByOutputType[P]>
+            : GetScalarType<T[P], MedicalRecordGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MedicalRecordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    clientId?: boolean
+    visitDate?: boolean
+    chiefComplaint?: boolean
+    diagnosis?: boolean
+    treatment?: boolean
+    notes?: boolean
+    weight?: boolean
+    bloodPressure?: boolean
+    temperature?: boolean
+    heartRate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+    prescriptions?: boolean | MedicalRecord$prescriptionsArgs<ExtArgs>
+    _count?: boolean | MedicalRecordCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["medicalRecord"]>
+
+  export type MedicalRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    clientId?: boolean
+    visitDate?: boolean
+    chiefComplaint?: boolean
+    diagnosis?: boolean
+    treatment?: boolean
+    notes?: boolean
+    weight?: boolean
+    bloodPressure?: boolean
+    temperature?: boolean
+    heartRate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["medicalRecord"]>
+
+  export type MedicalRecordSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    clientId?: boolean
+    visitDate?: boolean
+    chiefComplaint?: boolean
+    diagnosis?: boolean
+    treatment?: boolean
+    notes?: boolean
+    weight?: boolean
+    bloodPressure?: boolean
+    temperature?: boolean
+    heartRate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["medicalRecord"]>
+
+  export type MedicalRecordSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    clientId?: boolean
+    visitDate?: boolean
+    chiefComplaint?: boolean
+    diagnosis?: boolean
+    treatment?: boolean
+    notes?: boolean
+    weight?: boolean
+    bloodPressure?: boolean
+    temperature?: boolean
+    heartRate?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type MedicalRecordOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "clientId" | "visitDate" | "chiefComplaint" | "diagnosis" | "treatment" | "notes" | "weight" | "bloodPressure" | "temperature" | "heartRate" | "createdAt" | "updatedAt", ExtArgs["result"]["medicalRecord"]>
+  export type MedicalRecordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+    prescriptions?: boolean | MedicalRecord$prescriptionsArgs<ExtArgs>
+    _count?: boolean | MedicalRecordCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type MedicalRecordIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+  }
+  export type MedicalRecordIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+  }
+
+  export type $MedicalRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MedicalRecord"
+    objects: {
+      client: Prisma.$CabinetClientPayload<ExtArgs>
+      prescriptions: Prisma.$PrescriptionPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      clientId: string
+      visitDate: Date
+      chiefComplaint: string | null
+      diagnosis: string | null
+      treatment: string | null
+      notes: string | null
+      weight: number | null
+      bloodPressure: string | null
+      temperature: number | null
+      heartRate: number | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["medicalRecord"]>
+    composites: {}
+  }
+
+  type MedicalRecordGetPayload<S extends boolean | null | undefined | MedicalRecordDefaultArgs> = $Result.GetResult<Prisma.$MedicalRecordPayload, S>
+
+  type MedicalRecordCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MedicalRecordFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MedicalRecordCountAggregateInputType | true
+    }
+
+  export interface MedicalRecordDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MedicalRecord'], meta: { name: 'MedicalRecord' } }
+    /**
+     * Find zero or one MedicalRecord that matches the filter.
+     * @param {MedicalRecordFindUniqueArgs} args - Arguments to find a MedicalRecord
+     * @example
+     * // Get one MedicalRecord
+     * const medicalRecord = await prisma.medicalRecord.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MedicalRecordFindUniqueArgs>(args: SelectSubset<T, MedicalRecordFindUniqueArgs<ExtArgs>>): Prisma__MedicalRecordClient<$Result.GetResult<Prisma.$MedicalRecordPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MedicalRecord that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MedicalRecordFindUniqueOrThrowArgs} args - Arguments to find a MedicalRecord
+     * @example
+     * // Get one MedicalRecord
+     * const medicalRecord = await prisma.medicalRecord.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MedicalRecordFindUniqueOrThrowArgs>(args: SelectSubset<T, MedicalRecordFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MedicalRecordClient<$Result.GetResult<Prisma.$MedicalRecordPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MedicalRecord that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MedicalRecordFindFirstArgs} args - Arguments to find a MedicalRecord
+     * @example
+     * // Get one MedicalRecord
+     * const medicalRecord = await prisma.medicalRecord.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MedicalRecordFindFirstArgs>(args?: SelectSubset<T, MedicalRecordFindFirstArgs<ExtArgs>>): Prisma__MedicalRecordClient<$Result.GetResult<Prisma.$MedicalRecordPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MedicalRecord that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MedicalRecordFindFirstOrThrowArgs} args - Arguments to find a MedicalRecord
+     * @example
+     * // Get one MedicalRecord
+     * const medicalRecord = await prisma.medicalRecord.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MedicalRecordFindFirstOrThrowArgs>(args?: SelectSubset<T, MedicalRecordFindFirstOrThrowArgs<ExtArgs>>): Prisma__MedicalRecordClient<$Result.GetResult<Prisma.$MedicalRecordPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MedicalRecords that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MedicalRecordFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MedicalRecords
+     * const medicalRecords = await prisma.medicalRecord.findMany()
+     * 
+     * // Get first 10 MedicalRecords
+     * const medicalRecords = await prisma.medicalRecord.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const medicalRecordWithIdOnly = await prisma.medicalRecord.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MedicalRecordFindManyArgs>(args?: SelectSubset<T, MedicalRecordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MedicalRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MedicalRecord.
+     * @param {MedicalRecordCreateArgs} args - Arguments to create a MedicalRecord.
+     * @example
+     * // Create one MedicalRecord
+     * const MedicalRecord = await prisma.medicalRecord.create({
+     *   data: {
+     *     // ... data to create a MedicalRecord
+     *   }
+     * })
+     * 
+     */
+    create<T extends MedicalRecordCreateArgs>(args: SelectSubset<T, MedicalRecordCreateArgs<ExtArgs>>): Prisma__MedicalRecordClient<$Result.GetResult<Prisma.$MedicalRecordPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MedicalRecords.
+     * @param {MedicalRecordCreateManyArgs} args - Arguments to create many MedicalRecords.
+     * @example
+     * // Create many MedicalRecords
+     * const medicalRecord = await prisma.medicalRecord.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MedicalRecordCreateManyArgs>(args?: SelectSubset<T, MedicalRecordCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MedicalRecords and returns the data saved in the database.
+     * @param {MedicalRecordCreateManyAndReturnArgs} args - Arguments to create many MedicalRecords.
+     * @example
+     * // Create many MedicalRecords
+     * const medicalRecord = await prisma.medicalRecord.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MedicalRecords and only return the `id`
+     * const medicalRecordWithIdOnly = await prisma.medicalRecord.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MedicalRecordCreateManyAndReturnArgs>(args?: SelectSubset<T, MedicalRecordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MedicalRecordPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MedicalRecord.
+     * @param {MedicalRecordDeleteArgs} args - Arguments to delete one MedicalRecord.
+     * @example
+     * // Delete one MedicalRecord
+     * const MedicalRecord = await prisma.medicalRecord.delete({
+     *   where: {
+     *     // ... filter to delete one MedicalRecord
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MedicalRecordDeleteArgs>(args: SelectSubset<T, MedicalRecordDeleteArgs<ExtArgs>>): Prisma__MedicalRecordClient<$Result.GetResult<Prisma.$MedicalRecordPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MedicalRecord.
+     * @param {MedicalRecordUpdateArgs} args - Arguments to update one MedicalRecord.
+     * @example
+     * // Update one MedicalRecord
+     * const medicalRecord = await prisma.medicalRecord.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MedicalRecordUpdateArgs>(args: SelectSubset<T, MedicalRecordUpdateArgs<ExtArgs>>): Prisma__MedicalRecordClient<$Result.GetResult<Prisma.$MedicalRecordPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MedicalRecords.
+     * @param {MedicalRecordDeleteManyArgs} args - Arguments to filter MedicalRecords to delete.
+     * @example
+     * // Delete a few MedicalRecords
+     * const { count } = await prisma.medicalRecord.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MedicalRecordDeleteManyArgs>(args?: SelectSubset<T, MedicalRecordDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MedicalRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MedicalRecordUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MedicalRecords
+     * const medicalRecord = await prisma.medicalRecord.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MedicalRecordUpdateManyArgs>(args: SelectSubset<T, MedicalRecordUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MedicalRecords and returns the data updated in the database.
+     * @param {MedicalRecordUpdateManyAndReturnArgs} args - Arguments to update many MedicalRecords.
+     * @example
+     * // Update many MedicalRecords
+     * const medicalRecord = await prisma.medicalRecord.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MedicalRecords and only return the `id`
+     * const medicalRecordWithIdOnly = await prisma.medicalRecord.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MedicalRecordUpdateManyAndReturnArgs>(args: SelectSubset<T, MedicalRecordUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MedicalRecordPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MedicalRecord.
+     * @param {MedicalRecordUpsertArgs} args - Arguments to update or create a MedicalRecord.
+     * @example
+     * // Update or create a MedicalRecord
+     * const medicalRecord = await prisma.medicalRecord.upsert({
+     *   create: {
+     *     // ... data to create a MedicalRecord
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MedicalRecord we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MedicalRecordUpsertArgs>(args: SelectSubset<T, MedicalRecordUpsertArgs<ExtArgs>>): Prisma__MedicalRecordClient<$Result.GetResult<Prisma.$MedicalRecordPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MedicalRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MedicalRecordCountArgs} args - Arguments to filter MedicalRecords to count.
+     * @example
+     * // Count the number of MedicalRecords
+     * const count = await prisma.medicalRecord.count({
+     *   where: {
+     *     // ... the filter for the MedicalRecords we want to count
+     *   }
+     * })
+    **/
+    count<T extends MedicalRecordCountArgs>(
+      args?: Subset<T, MedicalRecordCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MedicalRecordCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MedicalRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MedicalRecordAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MedicalRecordAggregateArgs>(args: Subset<T, MedicalRecordAggregateArgs>): Prisma.PrismaPromise<GetMedicalRecordAggregateType<T>>
+
+    /**
+     * Group by MedicalRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MedicalRecordGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MedicalRecordGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MedicalRecordGroupByArgs['orderBy'] }
+        : { orderBy?: MedicalRecordGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MedicalRecordGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMedicalRecordGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MedicalRecord model
+   */
+  readonly fields: MedicalRecordFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MedicalRecord.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MedicalRecordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends CabinetClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CabinetClientDefaultArgs<ExtArgs>>): Prisma__CabinetClientClient<$Result.GetResult<Prisma.$CabinetClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    prescriptions<T extends MedicalRecord$prescriptionsArgs<ExtArgs> = {}>(args?: Subset<T, MedicalRecord$prescriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MedicalRecord model
+   */
+  interface MedicalRecordFieldRefs {
+    readonly id: FieldRef<"MedicalRecord", 'String'>
+    readonly tenantId: FieldRef<"MedicalRecord", 'String'>
+    readonly clientId: FieldRef<"MedicalRecord", 'String'>
+    readonly visitDate: FieldRef<"MedicalRecord", 'DateTime'>
+    readonly chiefComplaint: FieldRef<"MedicalRecord", 'String'>
+    readonly diagnosis: FieldRef<"MedicalRecord", 'String'>
+    readonly treatment: FieldRef<"MedicalRecord", 'String'>
+    readonly notes: FieldRef<"MedicalRecord", 'String'>
+    readonly weight: FieldRef<"MedicalRecord", 'Float'>
+    readonly bloodPressure: FieldRef<"MedicalRecord", 'String'>
+    readonly temperature: FieldRef<"MedicalRecord", 'Float'>
+    readonly heartRate: FieldRef<"MedicalRecord", 'Int'>
+    readonly createdAt: FieldRef<"MedicalRecord", 'DateTime'>
+    readonly updatedAt: FieldRef<"MedicalRecord", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MedicalRecord findUnique
+   */
+  export type MedicalRecordFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalRecord
+     */
+    select?: MedicalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalRecord
+     */
+    omit?: MedicalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which MedicalRecord to fetch.
+     */
+    where: MedicalRecordWhereUniqueInput
+  }
+
+  /**
+   * MedicalRecord findUniqueOrThrow
+   */
+  export type MedicalRecordFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalRecord
+     */
+    select?: MedicalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalRecord
+     */
+    omit?: MedicalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which MedicalRecord to fetch.
+     */
+    where: MedicalRecordWhereUniqueInput
+  }
+
+  /**
+   * MedicalRecord findFirst
+   */
+  export type MedicalRecordFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalRecord
+     */
+    select?: MedicalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalRecord
+     */
+    omit?: MedicalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which MedicalRecord to fetch.
+     */
+    where?: MedicalRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MedicalRecords to fetch.
+     */
+    orderBy?: MedicalRecordOrderByWithRelationInput | MedicalRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MedicalRecords.
+     */
+    cursor?: MedicalRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MedicalRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MedicalRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MedicalRecords.
+     */
+    distinct?: MedicalRecordScalarFieldEnum | MedicalRecordScalarFieldEnum[]
+  }
+
+  /**
+   * MedicalRecord findFirstOrThrow
+   */
+  export type MedicalRecordFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalRecord
+     */
+    select?: MedicalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalRecord
+     */
+    omit?: MedicalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which MedicalRecord to fetch.
+     */
+    where?: MedicalRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MedicalRecords to fetch.
+     */
+    orderBy?: MedicalRecordOrderByWithRelationInput | MedicalRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MedicalRecords.
+     */
+    cursor?: MedicalRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MedicalRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MedicalRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MedicalRecords.
+     */
+    distinct?: MedicalRecordScalarFieldEnum | MedicalRecordScalarFieldEnum[]
+  }
+
+  /**
+   * MedicalRecord findMany
+   */
+  export type MedicalRecordFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalRecord
+     */
+    select?: MedicalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalRecord
+     */
+    omit?: MedicalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which MedicalRecords to fetch.
+     */
+    where?: MedicalRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MedicalRecords to fetch.
+     */
+    orderBy?: MedicalRecordOrderByWithRelationInput | MedicalRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MedicalRecords.
+     */
+    cursor?: MedicalRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MedicalRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MedicalRecords.
+     */
+    skip?: number
+    distinct?: MedicalRecordScalarFieldEnum | MedicalRecordScalarFieldEnum[]
+  }
+
+  /**
+   * MedicalRecord create
+   */
+  export type MedicalRecordCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalRecord
+     */
+    select?: MedicalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalRecord
+     */
+    omit?: MedicalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalRecordInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MedicalRecord.
+     */
+    data: XOR<MedicalRecordCreateInput, MedicalRecordUncheckedCreateInput>
+  }
+
+  /**
+   * MedicalRecord createMany
+   */
+  export type MedicalRecordCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MedicalRecords.
+     */
+    data: MedicalRecordCreateManyInput | MedicalRecordCreateManyInput[]
+  }
+
+  /**
+   * MedicalRecord createManyAndReturn
+   */
+  export type MedicalRecordCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalRecord
+     */
+    select?: MedicalRecordSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalRecord
+     */
+    omit?: MedicalRecordOmit<ExtArgs> | null
+    /**
+     * The data used to create many MedicalRecords.
+     */
+    data: MedicalRecordCreateManyInput | MedicalRecordCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalRecordIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MedicalRecord update
+   */
+  export type MedicalRecordUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalRecord
+     */
+    select?: MedicalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalRecord
+     */
+    omit?: MedicalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalRecordInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MedicalRecord.
+     */
+    data: XOR<MedicalRecordUpdateInput, MedicalRecordUncheckedUpdateInput>
+    /**
+     * Choose, which MedicalRecord to update.
+     */
+    where: MedicalRecordWhereUniqueInput
+  }
+
+  /**
+   * MedicalRecord updateMany
+   */
+  export type MedicalRecordUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MedicalRecords.
+     */
+    data: XOR<MedicalRecordUpdateManyMutationInput, MedicalRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which MedicalRecords to update
+     */
+    where?: MedicalRecordWhereInput
+    /**
+     * Limit how many MedicalRecords to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MedicalRecord updateManyAndReturn
+   */
+  export type MedicalRecordUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalRecord
+     */
+    select?: MedicalRecordSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalRecord
+     */
+    omit?: MedicalRecordOmit<ExtArgs> | null
+    /**
+     * The data used to update MedicalRecords.
+     */
+    data: XOR<MedicalRecordUpdateManyMutationInput, MedicalRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which MedicalRecords to update
+     */
+    where?: MedicalRecordWhereInput
+    /**
+     * Limit how many MedicalRecords to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalRecordIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MedicalRecord upsert
+   */
+  export type MedicalRecordUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalRecord
+     */
+    select?: MedicalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalRecord
+     */
+    omit?: MedicalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalRecordInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MedicalRecord to update in case it exists.
+     */
+    where: MedicalRecordWhereUniqueInput
+    /**
+     * In case the MedicalRecord found by the `where` argument doesn't exist, create a new MedicalRecord with this data.
+     */
+    create: XOR<MedicalRecordCreateInput, MedicalRecordUncheckedCreateInput>
+    /**
+     * In case the MedicalRecord was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MedicalRecordUpdateInput, MedicalRecordUncheckedUpdateInput>
+  }
+
+  /**
+   * MedicalRecord delete
+   */
+  export type MedicalRecordDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalRecord
+     */
+    select?: MedicalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalRecord
+     */
+    omit?: MedicalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalRecordInclude<ExtArgs> | null
+    /**
+     * Filter which MedicalRecord to delete.
+     */
+    where: MedicalRecordWhereUniqueInput
+  }
+
+  /**
+   * MedicalRecord deleteMany
+   */
+  export type MedicalRecordDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MedicalRecords to delete
+     */
+    where?: MedicalRecordWhereInput
+    /**
+     * Limit how many MedicalRecords to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MedicalRecord.prescriptions
+   */
+  export type MedicalRecord$prescriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prescription
+     */
+    select?: PrescriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prescription
+     */
+    omit?: PrescriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrescriptionInclude<ExtArgs> | null
+    where?: PrescriptionWhereInput
+    orderBy?: PrescriptionOrderByWithRelationInput | PrescriptionOrderByWithRelationInput[]
+    cursor?: PrescriptionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PrescriptionScalarFieldEnum | PrescriptionScalarFieldEnum[]
+  }
+
+  /**
+   * MedicalRecord without action
+   */
+  export type MedicalRecordDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalRecord
+     */
+    select?: MedicalRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalRecord
+     */
+    omit?: MedicalRecordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalRecordInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Prescription
+   */
+
+  export type AggregatePrescription = {
+    _count: PrescriptionCountAggregateOutputType | null
+    _min: PrescriptionMinAggregateOutputType | null
+    _max: PrescriptionMaxAggregateOutputType | null
+  }
+
+  export type PrescriptionMinAggregateOutputType = {
+    id: string | null
+    medicalRecordId: string | null
+    medication: string | null
+    dosage: string | null
+    frequency: string | null
+    duration: string | null
+    instructions: string | null
+    createdAt: Date | null
+  }
+
+  export type PrescriptionMaxAggregateOutputType = {
+    id: string | null
+    medicalRecordId: string | null
+    medication: string | null
+    dosage: string | null
+    frequency: string | null
+    duration: string | null
+    instructions: string | null
+    createdAt: Date | null
+  }
+
+  export type PrescriptionCountAggregateOutputType = {
+    id: number
+    medicalRecordId: number
+    medication: number
+    dosage: number
+    frequency: number
+    duration: number
+    instructions: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type PrescriptionMinAggregateInputType = {
+    id?: true
+    medicalRecordId?: true
+    medication?: true
+    dosage?: true
+    frequency?: true
+    duration?: true
+    instructions?: true
+    createdAt?: true
+  }
+
+  export type PrescriptionMaxAggregateInputType = {
+    id?: true
+    medicalRecordId?: true
+    medication?: true
+    dosage?: true
+    frequency?: true
+    duration?: true
+    instructions?: true
+    createdAt?: true
+  }
+
+  export type PrescriptionCountAggregateInputType = {
+    id?: true
+    medicalRecordId?: true
+    medication?: true
+    dosage?: true
+    frequency?: true
+    duration?: true
+    instructions?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type PrescriptionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Prescription to aggregate.
+     */
+    where?: PrescriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Prescriptions to fetch.
+     */
+    orderBy?: PrescriptionOrderByWithRelationInput | PrescriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PrescriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Prescriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Prescriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Prescriptions
+    **/
+    _count?: true | PrescriptionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PrescriptionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PrescriptionMaxAggregateInputType
+  }
+
+  export type GetPrescriptionAggregateType<T extends PrescriptionAggregateArgs> = {
+        [P in keyof T & keyof AggregatePrescription]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePrescription[P]>
+      : GetScalarType<T[P], AggregatePrescription[P]>
+  }
+
+
+
+
+  export type PrescriptionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PrescriptionWhereInput
+    orderBy?: PrescriptionOrderByWithAggregationInput | PrescriptionOrderByWithAggregationInput[]
+    by: PrescriptionScalarFieldEnum[] | PrescriptionScalarFieldEnum
+    having?: PrescriptionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PrescriptionCountAggregateInputType | true
+    _min?: PrescriptionMinAggregateInputType
+    _max?: PrescriptionMaxAggregateInputType
+  }
+
+  export type PrescriptionGroupByOutputType = {
+    id: string
+    medicalRecordId: string
+    medication: string
+    dosage: string | null
+    frequency: string | null
+    duration: string | null
+    instructions: string | null
+    createdAt: Date
+    _count: PrescriptionCountAggregateOutputType | null
+    _min: PrescriptionMinAggregateOutputType | null
+    _max: PrescriptionMaxAggregateOutputType | null
+  }
+
+  type GetPrescriptionGroupByPayload<T extends PrescriptionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PrescriptionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PrescriptionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PrescriptionGroupByOutputType[P]>
+            : GetScalarType<T[P], PrescriptionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PrescriptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    medicalRecordId?: boolean
+    medication?: boolean
+    dosage?: boolean
+    frequency?: boolean
+    duration?: boolean
+    instructions?: boolean
+    createdAt?: boolean
+    medicalRecord?: boolean | MedicalRecordDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["prescription"]>
+
+  export type PrescriptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    medicalRecordId?: boolean
+    medication?: boolean
+    dosage?: boolean
+    frequency?: boolean
+    duration?: boolean
+    instructions?: boolean
+    createdAt?: boolean
+    medicalRecord?: boolean | MedicalRecordDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["prescription"]>
+
+  export type PrescriptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    medicalRecordId?: boolean
+    medication?: boolean
+    dosage?: boolean
+    frequency?: boolean
+    duration?: boolean
+    instructions?: boolean
+    createdAt?: boolean
+    medicalRecord?: boolean | MedicalRecordDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["prescription"]>
+
+  export type PrescriptionSelectScalar = {
+    id?: boolean
+    medicalRecordId?: boolean
+    medication?: boolean
+    dosage?: boolean
+    frequency?: boolean
+    duration?: boolean
+    instructions?: boolean
+    createdAt?: boolean
+  }
+
+  export type PrescriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "medicalRecordId" | "medication" | "dosage" | "frequency" | "duration" | "instructions" | "createdAt", ExtArgs["result"]["prescription"]>
+  export type PrescriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    medicalRecord?: boolean | MedicalRecordDefaultArgs<ExtArgs>
+  }
+  export type PrescriptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    medicalRecord?: boolean | MedicalRecordDefaultArgs<ExtArgs>
+  }
+  export type PrescriptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    medicalRecord?: boolean | MedicalRecordDefaultArgs<ExtArgs>
+  }
+
+  export type $PrescriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Prescription"
+    objects: {
+      medicalRecord: Prisma.$MedicalRecordPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      medicalRecordId: string
+      medication: string
+      dosage: string | null
+      frequency: string | null
+      duration: string | null
+      instructions: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["prescription"]>
+    composites: {}
+  }
+
+  type PrescriptionGetPayload<S extends boolean | null | undefined | PrescriptionDefaultArgs> = $Result.GetResult<Prisma.$PrescriptionPayload, S>
+
+  type PrescriptionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PrescriptionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PrescriptionCountAggregateInputType | true
+    }
+
+  export interface PrescriptionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Prescription'], meta: { name: 'Prescription' } }
+    /**
+     * Find zero or one Prescription that matches the filter.
+     * @param {PrescriptionFindUniqueArgs} args - Arguments to find a Prescription
+     * @example
+     * // Get one Prescription
+     * const prescription = await prisma.prescription.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PrescriptionFindUniqueArgs>(args: SelectSubset<T, PrescriptionFindUniqueArgs<ExtArgs>>): Prisma__PrescriptionClient<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Prescription that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PrescriptionFindUniqueOrThrowArgs} args - Arguments to find a Prescription
+     * @example
+     * // Get one Prescription
+     * const prescription = await prisma.prescription.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PrescriptionFindUniqueOrThrowArgs>(args: SelectSubset<T, PrescriptionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PrescriptionClient<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Prescription that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrescriptionFindFirstArgs} args - Arguments to find a Prescription
+     * @example
+     * // Get one Prescription
+     * const prescription = await prisma.prescription.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PrescriptionFindFirstArgs>(args?: SelectSubset<T, PrescriptionFindFirstArgs<ExtArgs>>): Prisma__PrescriptionClient<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Prescription that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrescriptionFindFirstOrThrowArgs} args - Arguments to find a Prescription
+     * @example
+     * // Get one Prescription
+     * const prescription = await prisma.prescription.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PrescriptionFindFirstOrThrowArgs>(args?: SelectSubset<T, PrescriptionFindFirstOrThrowArgs<ExtArgs>>): Prisma__PrescriptionClient<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Prescriptions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrescriptionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Prescriptions
+     * const prescriptions = await prisma.prescription.findMany()
+     * 
+     * // Get first 10 Prescriptions
+     * const prescriptions = await prisma.prescription.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const prescriptionWithIdOnly = await prisma.prescription.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PrescriptionFindManyArgs>(args?: SelectSubset<T, PrescriptionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Prescription.
+     * @param {PrescriptionCreateArgs} args - Arguments to create a Prescription.
+     * @example
+     * // Create one Prescription
+     * const Prescription = await prisma.prescription.create({
+     *   data: {
+     *     // ... data to create a Prescription
+     *   }
+     * })
+     * 
+     */
+    create<T extends PrescriptionCreateArgs>(args: SelectSubset<T, PrescriptionCreateArgs<ExtArgs>>): Prisma__PrescriptionClient<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Prescriptions.
+     * @param {PrescriptionCreateManyArgs} args - Arguments to create many Prescriptions.
+     * @example
+     * // Create many Prescriptions
+     * const prescription = await prisma.prescription.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PrescriptionCreateManyArgs>(args?: SelectSubset<T, PrescriptionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Prescriptions and returns the data saved in the database.
+     * @param {PrescriptionCreateManyAndReturnArgs} args - Arguments to create many Prescriptions.
+     * @example
+     * // Create many Prescriptions
+     * const prescription = await prisma.prescription.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Prescriptions and only return the `id`
+     * const prescriptionWithIdOnly = await prisma.prescription.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PrescriptionCreateManyAndReturnArgs>(args?: SelectSubset<T, PrescriptionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Prescription.
+     * @param {PrescriptionDeleteArgs} args - Arguments to delete one Prescription.
+     * @example
+     * // Delete one Prescription
+     * const Prescription = await prisma.prescription.delete({
+     *   where: {
+     *     // ... filter to delete one Prescription
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PrescriptionDeleteArgs>(args: SelectSubset<T, PrescriptionDeleteArgs<ExtArgs>>): Prisma__PrescriptionClient<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Prescription.
+     * @param {PrescriptionUpdateArgs} args - Arguments to update one Prescription.
+     * @example
+     * // Update one Prescription
+     * const prescription = await prisma.prescription.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PrescriptionUpdateArgs>(args: SelectSubset<T, PrescriptionUpdateArgs<ExtArgs>>): Prisma__PrescriptionClient<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Prescriptions.
+     * @param {PrescriptionDeleteManyArgs} args - Arguments to filter Prescriptions to delete.
+     * @example
+     * // Delete a few Prescriptions
+     * const { count } = await prisma.prescription.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PrescriptionDeleteManyArgs>(args?: SelectSubset<T, PrescriptionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Prescriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrescriptionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Prescriptions
+     * const prescription = await prisma.prescription.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PrescriptionUpdateManyArgs>(args: SelectSubset<T, PrescriptionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Prescriptions and returns the data updated in the database.
+     * @param {PrescriptionUpdateManyAndReturnArgs} args - Arguments to update many Prescriptions.
+     * @example
+     * // Update many Prescriptions
+     * const prescription = await prisma.prescription.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Prescriptions and only return the `id`
+     * const prescriptionWithIdOnly = await prisma.prescription.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PrescriptionUpdateManyAndReturnArgs>(args: SelectSubset<T, PrescriptionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Prescription.
+     * @param {PrescriptionUpsertArgs} args - Arguments to update or create a Prescription.
+     * @example
+     * // Update or create a Prescription
+     * const prescription = await prisma.prescription.upsert({
+     *   create: {
+     *     // ... data to create a Prescription
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Prescription we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PrescriptionUpsertArgs>(args: SelectSubset<T, PrescriptionUpsertArgs<ExtArgs>>): Prisma__PrescriptionClient<$Result.GetResult<Prisma.$PrescriptionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Prescriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrescriptionCountArgs} args - Arguments to filter Prescriptions to count.
+     * @example
+     * // Count the number of Prescriptions
+     * const count = await prisma.prescription.count({
+     *   where: {
+     *     // ... the filter for the Prescriptions we want to count
+     *   }
+     * })
+    **/
+    count<T extends PrescriptionCountArgs>(
+      args?: Subset<T, PrescriptionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PrescriptionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Prescription.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrescriptionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PrescriptionAggregateArgs>(args: Subset<T, PrescriptionAggregateArgs>): Prisma.PrismaPromise<GetPrescriptionAggregateType<T>>
+
+    /**
+     * Group by Prescription.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PrescriptionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PrescriptionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PrescriptionGroupByArgs['orderBy'] }
+        : { orderBy?: PrescriptionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PrescriptionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPrescriptionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Prescription model
+   */
+  readonly fields: PrescriptionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Prescription.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PrescriptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    medicalRecord<T extends MedicalRecordDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MedicalRecordDefaultArgs<ExtArgs>>): Prisma__MedicalRecordClient<$Result.GetResult<Prisma.$MedicalRecordPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Prescription model
+   */
+  interface PrescriptionFieldRefs {
+    readonly id: FieldRef<"Prescription", 'String'>
+    readonly medicalRecordId: FieldRef<"Prescription", 'String'>
+    readonly medication: FieldRef<"Prescription", 'String'>
+    readonly dosage: FieldRef<"Prescription", 'String'>
+    readonly frequency: FieldRef<"Prescription", 'String'>
+    readonly duration: FieldRef<"Prescription", 'String'>
+    readonly instructions: FieldRef<"Prescription", 'String'>
+    readonly createdAt: FieldRef<"Prescription", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Prescription findUnique
+   */
+  export type PrescriptionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prescription
+     */
+    select?: PrescriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prescription
+     */
+    omit?: PrescriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrescriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Prescription to fetch.
+     */
+    where: PrescriptionWhereUniqueInput
+  }
+
+  /**
+   * Prescription findUniqueOrThrow
+   */
+  export type PrescriptionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prescription
+     */
+    select?: PrescriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prescription
+     */
+    omit?: PrescriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrescriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Prescription to fetch.
+     */
+    where: PrescriptionWhereUniqueInput
+  }
+
+  /**
+   * Prescription findFirst
+   */
+  export type PrescriptionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prescription
+     */
+    select?: PrescriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prescription
+     */
+    omit?: PrescriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrescriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Prescription to fetch.
+     */
+    where?: PrescriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Prescriptions to fetch.
+     */
+    orderBy?: PrescriptionOrderByWithRelationInput | PrescriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Prescriptions.
+     */
+    cursor?: PrescriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Prescriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Prescriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Prescriptions.
+     */
+    distinct?: PrescriptionScalarFieldEnum | PrescriptionScalarFieldEnum[]
+  }
+
+  /**
+   * Prescription findFirstOrThrow
+   */
+  export type PrescriptionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prescription
+     */
+    select?: PrescriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prescription
+     */
+    omit?: PrescriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrescriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Prescription to fetch.
+     */
+    where?: PrescriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Prescriptions to fetch.
+     */
+    orderBy?: PrescriptionOrderByWithRelationInput | PrescriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Prescriptions.
+     */
+    cursor?: PrescriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Prescriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Prescriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Prescriptions.
+     */
+    distinct?: PrescriptionScalarFieldEnum | PrescriptionScalarFieldEnum[]
+  }
+
+  /**
+   * Prescription findMany
+   */
+  export type PrescriptionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prescription
+     */
+    select?: PrescriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prescription
+     */
+    omit?: PrescriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrescriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which Prescriptions to fetch.
+     */
+    where?: PrescriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Prescriptions to fetch.
+     */
+    orderBy?: PrescriptionOrderByWithRelationInput | PrescriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Prescriptions.
+     */
+    cursor?: PrescriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Prescriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Prescriptions.
+     */
+    skip?: number
+    distinct?: PrescriptionScalarFieldEnum | PrescriptionScalarFieldEnum[]
+  }
+
+  /**
+   * Prescription create
+   */
+  export type PrescriptionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prescription
+     */
+    select?: PrescriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prescription
+     */
+    omit?: PrescriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrescriptionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Prescription.
+     */
+    data: XOR<PrescriptionCreateInput, PrescriptionUncheckedCreateInput>
+  }
+
+  /**
+   * Prescription createMany
+   */
+  export type PrescriptionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Prescriptions.
+     */
+    data: PrescriptionCreateManyInput | PrescriptionCreateManyInput[]
+  }
+
+  /**
+   * Prescription createManyAndReturn
+   */
+  export type PrescriptionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prescription
+     */
+    select?: PrescriptionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prescription
+     */
+    omit?: PrescriptionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Prescriptions.
+     */
+    data: PrescriptionCreateManyInput | PrescriptionCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrescriptionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Prescription update
+   */
+  export type PrescriptionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prescription
+     */
+    select?: PrescriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prescription
+     */
+    omit?: PrescriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrescriptionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Prescription.
+     */
+    data: XOR<PrescriptionUpdateInput, PrescriptionUncheckedUpdateInput>
+    /**
+     * Choose, which Prescription to update.
+     */
+    where: PrescriptionWhereUniqueInput
+  }
+
+  /**
+   * Prescription updateMany
+   */
+  export type PrescriptionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Prescriptions.
+     */
+    data: XOR<PrescriptionUpdateManyMutationInput, PrescriptionUncheckedUpdateManyInput>
+    /**
+     * Filter which Prescriptions to update
+     */
+    where?: PrescriptionWhereInput
+    /**
+     * Limit how many Prescriptions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Prescription updateManyAndReturn
+   */
+  export type PrescriptionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prescription
+     */
+    select?: PrescriptionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prescription
+     */
+    omit?: PrescriptionOmit<ExtArgs> | null
+    /**
+     * The data used to update Prescriptions.
+     */
+    data: XOR<PrescriptionUpdateManyMutationInput, PrescriptionUncheckedUpdateManyInput>
+    /**
+     * Filter which Prescriptions to update
+     */
+    where?: PrescriptionWhereInput
+    /**
+     * Limit how many Prescriptions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrescriptionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Prescription upsert
+   */
+  export type PrescriptionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prescription
+     */
+    select?: PrescriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prescription
+     */
+    omit?: PrescriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrescriptionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Prescription to update in case it exists.
+     */
+    where: PrescriptionWhereUniqueInput
+    /**
+     * In case the Prescription found by the `where` argument doesn't exist, create a new Prescription with this data.
+     */
+    create: XOR<PrescriptionCreateInput, PrescriptionUncheckedCreateInput>
+    /**
+     * In case the Prescription was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PrescriptionUpdateInput, PrescriptionUncheckedUpdateInput>
+  }
+
+  /**
+   * Prescription delete
+   */
+  export type PrescriptionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prescription
+     */
+    select?: PrescriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prescription
+     */
+    omit?: PrescriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrescriptionInclude<ExtArgs> | null
+    /**
+     * Filter which Prescription to delete.
+     */
+    where: PrescriptionWhereUniqueInput
+  }
+
+  /**
+   * Prescription deleteMany
+   */
+  export type PrescriptionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Prescriptions to delete
+     */
+    where?: PrescriptionWhereInput
+    /**
+     * Limit how many Prescriptions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Prescription without action
+   */
+  export type PrescriptionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Prescription
+     */
+    select?: PrescriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Prescription
+     */
+    omit?: PrescriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PrescriptionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MedicalHistory
+   */
+
+  export type AggregateMedicalHistory = {
+    _count: MedicalHistoryCountAggregateOutputType | null
+    _min: MedicalHistoryMinAggregateOutputType | null
+    _max: MedicalHistoryMaxAggregateOutputType | null
+  }
+
+  export type MedicalHistoryMinAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    condition: string | null
+    since: string | null
+    status: string | null
+    notes: string | null
+    createdAt: Date | null
+  }
+
+  export type MedicalHistoryMaxAggregateOutputType = {
+    id: string | null
+    clientId: string | null
+    condition: string | null
+    since: string | null
+    status: string | null
+    notes: string | null
+    createdAt: Date | null
+  }
+
+  export type MedicalHistoryCountAggregateOutputType = {
+    id: number
+    clientId: number
+    condition: number
+    since: number
+    status: number
+    notes: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type MedicalHistoryMinAggregateInputType = {
+    id?: true
+    clientId?: true
+    condition?: true
+    since?: true
+    status?: true
+    notes?: true
+    createdAt?: true
+  }
+
+  export type MedicalHistoryMaxAggregateInputType = {
+    id?: true
+    clientId?: true
+    condition?: true
+    since?: true
+    status?: true
+    notes?: true
+    createdAt?: true
+  }
+
+  export type MedicalHistoryCountAggregateInputType = {
+    id?: true
+    clientId?: true
+    condition?: true
+    since?: true
+    status?: true
+    notes?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type MedicalHistoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MedicalHistory to aggregate.
+     */
+    where?: MedicalHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MedicalHistories to fetch.
+     */
+    orderBy?: MedicalHistoryOrderByWithRelationInput | MedicalHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MedicalHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MedicalHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MedicalHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MedicalHistories
+    **/
+    _count?: true | MedicalHistoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MedicalHistoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MedicalHistoryMaxAggregateInputType
+  }
+
+  export type GetMedicalHistoryAggregateType<T extends MedicalHistoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateMedicalHistory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMedicalHistory[P]>
+      : GetScalarType<T[P], AggregateMedicalHistory[P]>
+  }
+
+
+
+
+  export type MedicalHistoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MedicalHistoryWhereInput
+    orderBy?: MedicalHistoryOrderByWithAggregationInput | MedicalHistoryOrderByWithAggregationInput[]
+    by: MedicalHistoryScalarFieldEnum[] | MedicalHistoryScalarFieldEnum
+    having?: MedicalHistoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MedicalHistoryCountAggregateInputType | true
+    _min?: MedicalHistoryMinAggregateInputType
+    _max?: MedicalHistoryMaxAggregateInputType
+  }
+
+  export type MedicalHistoryGroupByOutputType = {
+    id: string
+    clientId: string
+    condition: string
+    since: string | null
+    status: string
+    notes: string | null
+    createdAt: Date
+    _count: MedicalHistoryCountAggregateOutputType | null
+    _min: MedicalHistoryMinAggregateOutputType | null
+    _max: MedicalHistoryMaxAggregateOutputType | null
+  }
+
+  type GetMedicalHistoryGroupByPayload<T extends MedicalHistoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MedicalHistoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MedicalHistoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MedicalHistoryGroupByOutputType[P]>
+            : GetScalarType<T[P], MedicalHistoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MedicalHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    condition?: boolean
+    since?: boolean
+    status?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["medicalHistory"]>
+
+  export type MedicalHistorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    condition?: boolean
+    since?: boolean
+    status?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["medicalHistory"]>
+
+  export type MedicalHistorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    clientId?: boolean
+    condition?: boolean
+    since?: boolean
+    status?: boolean
+    notes?: boolean
+    createdAt?: boolean
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["medicalHistory"]>
+
+  export type MedicalHistorySelectScalar = {
+    id?: boolean
+    clientId?: boolean
+    condition?: boolean
+    since?: boolean
+    status?: boolean
+    notes?: boolean
+    createdAt?: boolean
+  }
+
+  export type MedicalHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "clientId" | "condition" | "since" | "status" | "notes" | "createdAt", ExtArgs["result"]["medicalHistory"]>
+  export type MedicalHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+  }
+  export type MedicalHistoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+  }
+  export type MedicalHistoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | CabinetClientDefaultArgs<ExtArgs>
+  }
+
+  export type $MedicalHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MedicalHistory"
+    objects: {
+      client: Prisma.$CabinetClientPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      clientId: string
+      condition: string
+      since: string | null
+      status: string
+      notes: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["medicalHistory"]>
+    composites: {}
+  }
+
+  type MedicalHistoryGetPayload<S extends boolean | null | undefined | MedicalHistoryDefaultArgs> = $Result.GetResult<Prisma.$MedicalHistoryPayload, S>
+
+  type MedicalHistoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MedicalHistoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MedicalHistoryCountAggregateInputType | true
+    }
+
+  export interface MedicalHistoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MedicalHistory'], meta: { name: 'MedicalHistory' } }
+    /**
+     * Find zero or one MedicalHistory that matches the filter.
+     * @param {MedicalHistoryFindUniqueArgs} args - Arguments to find a MedicalHistory
+     * @example
+     * // Get one MedicalHistory
+     * const medicalHistory = await prisma.medicalHistory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MedicalHistoryFindUniqueArgs>(args: SelectSubset<T, MedicalHistoryFindUniqueArgs<ExtArgs>>): Prisma__MedicalHistoryClient<$Result.GetResult<Prisma.$MedicalHistoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MedicalHistory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MedicalHistoryFindUniqueOrThrowArgs} args - Arguments to find a MedicalHistory
+     * @example
+     * // Get one MedicalHistory
+     * const medicalHistory = await prisma.medicalHistory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MedicalHistoryFindUniqueOrThrowArgs>(args: SelectSubset<T, MedicalHistoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MedicalHistoryClient<$Result.GetResult<Prisma.$MedicalHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MedicalHistory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MedicalHistoryFindFirstArgs} args - Arguments to find a MedicalHistory
+     * @example
+     * // Get one MedicalHistory
+     * const medicalHistory = await prisma.medicalHistory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MedicalHistoryFindFirstArgs>(args?: SelectSubset<T, MedicalHistoryFindFirstArgs<ExtArgs>>): Prisma__MedicalHistoryClient<$Result.GetResult<Prisma.$MedicalHistoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MedicalHistory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MedicalHistoryFindFirstOrThrowArgs} args - Arguments to find a MedicalHistory
+     * @example
+     * // Get one MedicalHistory
+     * const medicalHistory = await prisma.medicalHistory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MedicalHistoryFindFirstOrThrowArgs>(args?: SelectSubset<T, MedicalHistoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__MedicalHistoryClient<$Result.GetResult<Prisma.$MedicalHistoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MedicalHistories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MedicalHistoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MedicalHistories
+     * const medicalHistories = await prisma.medicalHistory.findMany()
+     * 
+     * // Get first 10 MedicalHistories
+     * const medicalHistories = await prisma.medicalHistory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const medicalHistoryWithIdOnly = await prisma.medicalHistory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MedicalHistoryFindManyArgs>(args?: SelectSubset<T, MedicalHistoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MedicalHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MedicalHistory.
+     * @param {MedicalHistoryCreateArgs} args - Arguments to create a MedicalHistory.
+     * @example
+     * // Create one MedicalHistory
+     * const MedicalHistory = await prisma.medicalHistory.create({
+     *   data: {
+     *     // ... data to create a MedicalHistory
+     *   }
+     * })
+     * 
+     */
+    create<T extends MedicalHistoryCreateArgs>(args: SelectSubset<T, MedicalHistoryCreateArgs<ExtArgs>>): Prisma__MedicalHistoryClient<$Result.GetResult<Prisma.$MedicalHistoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MedicalHistories.
+     * @param {MedicalHistoryCreateManyArgs} args - Arguments to create many MedicalHistories.
+     * @example
+     * // Create many MedicalHistories
+     * const medicalHistory = await prisma.medicalHistory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MedicalHistoryCreateManyArgs>(args?: SelectSubset<T, MedicalHistoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MedicalHistories and returns the data saved in the database.
+     * @param {MedicalHistoryCreateManyAndReturnArgs} args - Arguments to create many MedicalHistories.
+     * @example
+     * // Create many MedicalHistories
+     * const medicalHistory = await prisma.medicalHistory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MedicalHistories and only return the `id`
+     * const medicalHistoryWithIdOnly = await prisma.medicalHistory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MedicalHistoryCreateManyAndReturnArgs>(args?: SelectSubset<T, MedicalHistoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MedicalHistoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MedicalHistory.
+     * @param {MedicalHistoryDeleteArgs} args - Arguments to delete one MedicalHistory.
+     * @example
+     * // Delete one MedicalHistory
+     * const MedicalHistory = await prisma.medicalHistory.delete({
+     *   where: {
+     *     // ... filter to delete one MedicalHistory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MedicalHistoryDeleteArgs>(args: SelectSubset<T, MedicalHistoryDeleteArgs<ExtArgs>>): Prisma__MedicalHistoryClient<$Result.GetResult<Prisma.$MedicalHistoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MedicalHistory.
+     * @param {MedicalHistoryUpdateArgs} args - Arguments to update one MedicalHistory.
+     * @example
+     * // Update one MedicalHistory
+     * const medicalHistory = await prisma.medicalHistory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MedicalHistoryUpdateArgs>(args: SelectSubset<T, MedicalHistoryUpdateArgs<ExtArgs>>): Prisma__MedicalHistoryClient<$Result.GetResult<Prisma.$MedicalHistoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MedicalHistories.
+     * @param {MedicalHistoryDeleteManyArgs} args - Arguments to filter MedicalHistories to delete.
+     * @example
+     * // Delete a few MedicalHistories
+     * const { count } = await prisma.medicalHistory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MedicalHistoryDeleteManyArgs>(args?: SelectSubset<T, MedicalHistoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MedicalHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MedicalHistoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MedicalHistories
+     * const medicalHistory = await prisma.medicalHistory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MedicalHistoryUpdateManyArgs>(args: SelectSubset<T, MedicalHistoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MedicalHistories and returns the data updated in the database.
+     * @param {MedicalHistoryUpdateManyAndReturnArgs} args - Arguments to update many MedicalHistories.
+     * @example
+     * // Update many MedicalHistories
+     * const medicalHistory = await prisma.medicalHistory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MedicalHistories and only return the `id`
+     * const medicalHistoryWithIdOnly = await prisma.medicalHistory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MedicalHistoryUpdateManyAndReturnArgs>(args: SelectSubset<T, MedicalHistoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MedicalHistoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MedicalHistory.
+     * @param {MedicalHistoryUpsertArgs} args - Arguments to update or create a MedicalHistory.
+     * @example
+     * // Update or create a MedicalHistory
+     * const medicalHistory = await prisma.medicalHistory.upsert({
+     *   create: {
+     *     // ... data to create a MedicalHistory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MedicalHistory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MedicalHistoryUpsertArgs>(args: SelectSubset<T, MedicalHistoryUpsertArgs<ExtArgs>>): Prisma__MedicalHistoryClient<$Result.GetResult<Prisma.$MedicalHistoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MedicalHistories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MedicalHistoryCountArgs} args - Arguments to filter MedicalHistories to count.
+     * @example
+     * // Count the number of MedicalHistories
+     * const count = await prisma.medicalHistory.count({
+     *   where: {
+     *     // ... the filter for the MedicalHistories we want to count
+     *   }
+     * })
+    **/
+    count<T extends MedicalHistoryCountArgs>(
+      args?: Subset<T, MedicalHistoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MedicalHistoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MedicalHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MedicalHistoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MedicalHistoryAggregateArgs>(args: Subset<T, MedicalHistoryAggregateArgs>): Prisma.PrismaPromise<GetMedicalHistoryAggregateType<T>>
+
+    /**
+     * Group by MedicalHistory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MedicalHistoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MedicalHistoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MedicalHistoryGroupByArgs['orderBy'] }
+        : { orderBy?: MedicalHistoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MedicalHistoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMedicalHistoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MedicalHistory model
+   */
+  readonly fields: MedicalHistoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MedicalHistory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MedicalHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends CabinetClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CabinetClientDefaultArgs<ExtArgs>>): Prisma__CabinetClientClient<$Result.GetResult<Prisma.$CabinetClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MedicalHistory model
+   */
+  interface MedicalHistoryFieldRefs {
+    readonly id: FieldRef<"MedicalHistory", 'String'>
+    readonly clientId: FieldRef<"MedicalHistory", 'String'>
+    readonly condition: FieldRef<"MedicalHistory", 'String'>
+    readonly since: FieldRef<"MedicalHistory", 'String'>
+    readonly status: FieldRef<"MedicalHistory", 'String'>
+    readonly notes: FieldRef<"MedicalHistory", 'String'>
+    readonly createdAt: FieldRef<"MedicalHistory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MedicalHistory findUnique
+   */
+  export type MedicalHistoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalHistory
+     */
+    select?: MedicalHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalHistory
+     */
+    omit?: MedicalHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which MedicalHistory to fetch.
+     */
+    where: MedicalHistoryWhereUniqueInput
+  }
+
+  /**
+   * MedicalHistory findUniqueOrThrow
+   */
+  export type MedicalHistoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalHistory
+     */
+    select?: MedicalHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalHistory
+     */
+    omit?: MedicalHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which MedicalHistory to fetch.
+     */
+    where: MedicalHistoryWhereUniqueInput
+  }
+
+  /**
+   * MedicalHistory findFirst
+   */
+  export type MedicalHistoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalHistory
+     */
+    select?: MedicalHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalHistory
+     */
+    omit?: MedicalHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which MedicalHistory to fetch.
+     */
+    where?: MedicalHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MedicalHistories to fetch.
+     */
+    orderBy?: MedicalHistoryOrderByWithRelationInput | MedicalHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MedicalHistories.
+     */
+    cursor?: MedicalHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MedicalHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MedicalHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MedicalHistories.
+     */
+    distinct?: MedicalHistoryScalarFieldEnum | MedicalHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * MedicalHistory findFirstOrThrow
+   */
+  export type MedicalHistoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalHistory
+     */
+    select?: MedicalHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalHistory
+     */
+    omit?: MedicalHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which MedicalHistory to fetch.
+     */
+    where?: MedicalHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MedicalHistories to fetch.
+     */
+    orderBy?: MedicalHistoryOrderByWithRelationInput | MedicalHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MedicalHistories.
+     */
+    cursor?: MedicalHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MedicalHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MedicalHistories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MedicalHistories.
+     */
+    distinct?: MedicalHistoryScalarFieldEnum | MedicalHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * MedicalHistory findMany
+   */
+  export type MedicalHistoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalHistory
+     */
+    select?: MedicalHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalHistory
+     */
+    omit?: MedicalHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalHistoryInclude<ExtArgs> | null
+    /**
+     * Filter, which MedicalHistories to fetch.
+     */
+    where?: MedicalHistoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MedicalHistories to fetch.
+     */
+    orderBy?: MedicalHistoryOrderByWithRelationInput | MedicalHistoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MedicalHistories.
+     */
+    cursor?: MedicalHistoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MedicalHistories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MedicalHistories.
+     */
+    skip?: number
+    distinct?: MedicalHistoryScalarFieldEnum | MedicalHistoryScalarFieldEnum[]
+  }
+
+  /**
+   * MedicalHistory create
+   */
+  export type MedicalHistoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalHistory
+     */
+    select?: MedicalHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalHistory
+     */
+    omit?: MedicalHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MedicalHistory.
+     */
+    data: XOR<MedicalHistoryCreateInput, MedicalHistoryUncheckedCreateInput>
+  }
+
+  /**
+   * MedicalHistory createMany
+   */
+  export type MedicalHistoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MedicalHistories.
+     */
+    data: MedicalHistoryCreateManyInput | MedicalHistoryCreateManyInput[]
+  }
+
+  /**
+   * MedicalHistory createManyAndReturn
+   */
+  export type MedicalHistoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalHistory
+     */
+    select?: MedicalHistorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalHistory
+     */
+    omit?: MedicalHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many MedicalHistories.
+     */
+    data: MedicalHistoryCreateManyInput | MedicalHistoryCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalHistoryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MedicalHistory update
+   */
+  export type MedicalHistoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalHistory
+     */
+    select?: MedicalHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalHistory
+     */
+    omit?: MedicalHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalHistoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MedicalHistory.
+     */
+    data: XOR<MedicalHistoryUpdateInput, MedicalHistoryUncheckedUpdateInput>
+    /**
+     * Choose, which MedicalHistory to update.
+     */
+    where: MedicalHistoryWhereUniqueInput
+  }
+
+  /**
+   * MedicalHistory updateMany
+   */
+  export type MedicalHistoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MedicalHistories.
+     */
+    data: XOR<MedicalHistoryUpdateManyMutationInput, MedicalHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which MedicalHistories to update
+     */
+    where?: MedicalHistoryWhereInput
+    /**
+     * Limit how many MedicalHistories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MedicalHistory updateManyAndReturn
+   */
+  export type MedicalHistoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalHistory
+     */
+    select?: MedicalHistorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalHistory
+     */
+    omit?: MedicalHistoryOmit<ExtArgs> | null
+    /**
+     * The data used to update MedicalHistories.
+     */
+    data: XOR<MedicalHistoryUpdateManyMutationInput, MedicalHistoryUncheckedUpdateManyInput>
+    /**
+     * Filter which MedicalHistories to update
+     */
+    where?: MedicalHistoryWhereInput
+    /**
+     * Limit how many MedicalHistories to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalHistoryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MedicalHistory upsert
+   */
+  export type MedicalHistoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalHistory
+     */
+    select?: MedicalHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalHistory
+     */
+    omit?: MedicalHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalHistoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MedicalHistory to update in case it exists.
+     */
+    where: MedicalHistoryWhereUniqueInput
+    /**
+     * In case the MedicalHistory found by the `where` argument doesn't exist, create a new MedicalHistory with this data.
+     */
+    create: XOR<MedicalHistoryCreateInput, MedicalHistoryUncheckedCreateInput>
+    /**
+     * In case the MedicalHistory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MedicalHistoryUpdateInput, MedicalHistoryUncheckedUpdateInput>
+  }
+
+  /**
+   * MedicalHistory delete
+   */
+  export type MedicalHistoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalHistory
+     */
+    select?: MedicalHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalHistory
+     */
+    omit?: MedicalHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalHistoryInclude<ExtArgs> | null
+    /**
+     * Filter which MedicalHistory to delete.
+     */
+    where: MedicalHistoryWhereUniqueInput
+  }
+
+  /**
+   * MedicalHistory deleteMany
+   */
+  export type MedicalHistoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MedicalHistories to delete
+     */
+    where?: MedicalHistoryWhereInput
+    /**
+     * Limit how many MedicalHistories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MedicalHistory without action
+   */
+  export type MedicalHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MedicalHistory
+     */
+    select?: MedicalHistorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MedicalHistory
+     */
+    omit?: MedicalHistoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MedicalHistoryInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -28208,6 +36158,8 @@ export namespace Prisma {
     email: 'email',
     phone: 'phone',
     notes: 'notes',
+    age: 'age',
+    cni: 'cni',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -28303,6 +36255,112 @@ export namespace Prisma {
   };
 
   export type EmailListMemberScalarFieldEnum = (typeof EmailListMemberScalarFieldEnum)[keyof typeof EmailListMemberScalarFieldEnum]
+
+
+  export const InvoiceSettingsScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    companyName: 'companyName',
+    companyAddress: 'companyAddress',
+    companyPhone: 'companyPhone',
+    companyEmail: 'companyEmail',
+    companyLogo: 'companyLogo',
+    taxRate: 'taxRate',
+    currency: 'currency',
+    prefix: 'prefix',
+    nextNumber: 'nextNumber',
+    footerNote: 'footerNote',
+    bankDetails: 'bankDetails',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type InvoiceSettingsScalarFieldEnum = (typeof InvoiceSettingsScalarFieldEnum)[keyof typeof InvoiceSettingsScalarFieldEnum]
+
+
+  export const InvoiceScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    clientId: 'clientId',
+    number: 'number',
+    status: 'status',
+    issueDate: 'issueDate',
+    dueDate: 'dueDate',
+    subtotal: 'subtotal',
+    taxRate: 'taxRate',
+    taxAmount: 'taxAmount',
+    total: 'total',
+    notes: 'notes',
+    clientName: 'clientName',
+    clientEmail: 'clientEmail',
+    clientPhone: 'clientPhone',
+    clientAddress: 'clientAddress',
+    sentAt: 'sentAt',
+    paidAt: 'paidAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type InvoiceScalarFieldEnum = (typeof InvoiceScalarFieldEnum)[keyof typeof InvoiceScalarFieldEnum]
+
+
+  export const InvoiceItemScalarFieldEnum: {
+    id: 'id',
+    invoiceId: 'invoiceId',
+    description: 'description',
+    quantity: 'quantity',
+    unitPrice: 'unitPrice',
+    total: 'total'
+  };
+
+  export type InvoiceItemScalarFieldEnum = (typeof InvoiceItemScalarFieldEnum)[keyof typeof InvoiceItemScalarFieldEnum]
+
+
+  export const MedicalRecordScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    clientId: 'clientId',
+    visitDate: 'visitDate',
+    chiefComplaint: 'chiefComplaint',
+    diagnosis: 'diagnosis',
+    treatment: 'treatment',
+    notes: 'notes',
+    weight: 'weight',
+    bloodPressure: 'bloodPressure',
+    temperature: 'temperature',
+    heartRate: 'heartRate',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MedicalRecordScalarFieldEnum = (typeof MedicalRecordScalarFieldEnum)[keyof typeof MedicalRecordScalarFieldEnum]
+
+
+  export const PrescriptionScalarFieldEnum: {
+    id: 'id',
+    medicalRecordId: 'medicalRecordId',
+    medication: 'medication',
+    dosage: 'dosage',
+    frequency: 'frequency',
+    duration: 'duration',
+    instructions: 'instructions',
+    createdAt: 'createdAt'
+  };
+
+  export type PrescriptionScalarFieldEnum = (typeof PrescriptionScalarFieldEnum)[keyof typeof PrescriptionScalarFieldEnum]
+
+
+  export const MedicalHistoryScalarFieldEnum: {
+    id: 'id',
+    clientId: 'clientId',
+    condition: 'condition',
+    since: 'since',
+    status: 'status',
+    notes: 'notes',
+    createdAt: 'createdAt'
+  };
+
+  export type MedicalHistoryScalarFieldEnum = (typeof MedicalHistoryScalarFieldEnum)[keyof typeof MedicalHistoryScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -28840,6 +36898,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryListRelationFilter
     tables?: RestaurantTableListRelationFilter
     waiters?: RestaurantWaiterListRelationFilter
+    invoices?: InvoiceListRelationFilter
+    invoiceSettings?: XOR<InvoiceSettingsNullableScalarRelationFilter, InvoiceSettingsWhereInput> | null
     service?: XOR<ServiceScalarRelationFilter, ServiceWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -28865,6 +36925,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryOrderByRelationAggregateInput
     tables?: RestaurantTableOrderByRelationAggregateInput
     waiters?: RestaurantWaiterOrderByRelationAggregateInput
+    invoices?: InvoiceOrderByRelationAggregateInput
+    invoiceSettings?: InvoiceSettingsOrderByWithRelationInput
     service?: ServiceOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
   }
@@ -28893,6 +36955,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryListRelationFilter
     tables?: RestaurantTableListRelationFilter
     waiters?: RestaurantWaiterListRelationFilter
+    invoices?: InvoiceListRelationFilter
+    invoiceSettings?: XOR<InvoiceSettingsNullableScalarRelationFilter, InvoiceSettingsWhereInput> | null
     service?: XOR<ServiceScalarRelationFilter, ServiceWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "slug">
@@ -29413,9 +37477,14 @@ export namespace Prisma {
     email?: StringNullableFilter<"CabinetClient"> | string | null
     phone?: StringNullableFilter<"CabinetClient"> | string | null
     notes?: StringNullableFilter<"CabinetClient"> | string | null
+    age?: IntNullableFilter<"CabinetClient"> | number | null
+    cni?: StringNullableFilter<"CabinetClient"> | string | null
     createdAt?: DateTimeFilter<"CabinetClient"> | Date | string
     updatedAt?: DateTimeFilter<"CabinetClient"> | Date | string
     appointments?: CabinetAppointmentListRelationFilter
+    invoices?: InvoiceListRelationFilter
+    medicalRecords?: MedicalRecordListRelationFilter
+    medicalHistory?: MedicalHistoryListRelationFilter
     tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
   }
 
@@ -29426,9 +37495,14 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
+    age?: SortOrderInput | SortOrder
+    cni?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     appointments?: CabinetAppointmentOrderByRelationAggregateInput
+    invoices?: InvoiceOrderByRelationAggregateInput
+    medicalRecords?: MedicalRecordOrderByRelationAggregateInput
+    medicalHistory?: MedicalHistoryOrderByRelationAggregateInput
     tenant?: TenantWebsiteOrderByWithRelationInput
   }
 
@@ -29442,9 +37516,14 @@ export namespace Prisma {
     email?: StringNullableFilter<"CabinetClient"> | string | null
     phone?: StringNullableFilter<"CabinetClient"> | string | null
     notes?: StringNullableFilter<"CabinetClient"> | string | null
+    age?: IntNullableFilter<"CabinetClient"> | number | null
+    cni?: StringNullableFilter<"CabinetClient"> | string | null
     createdAt?: DateTimeFilter<"CabinetClient"> | Date | string
     updatedAt?: DateTimeFilter<"CabinetClient"> | Date | string
     appointments?: CabinetAppointmentListRelationFilter
+    invoices?: InvoiceListRelationFilter
+    medicalRecords?: MedicalRecordListRelationFilter
+    medicalHistory?: MedicalHistoryListRelationFilter
     tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
   }, "id">
 
@@ -29455,11 +37534,15 @@ export namespace Prisma {
     email?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
+    age?: SortOrderInput | SortOrder
+    cni?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CabinetClientCountOrderByAggregateInput
+    _avg?: CabinetClientAvgOrderByAggregateInput
     _max?: CabinetClientMaxOrderByAggregateInput
     _min?: CabinetClientMinOrderByAggregateInput
+    _sum?: CabinetClientSumOrderByAggregateInput
   }
 
   export type CabinetClientScalarWhereWithAggregatesInput = {
@@ -29472,6 +37555,8 @@ export namespace Prisma {
     email?: StringNullableWithAggregatesFilter<"CabinetClient"> | string | null
     phone?: StringNullableWithAggregatesFilter<"CabinetClient"> | string | null
     notes?: StringNullableWithAggregatesFilter<"CabinetClient"> | string | null
+    age?: IntNullableWithAggregatesFilter<"CabinetClient"> | number | null
+    cni?: StringNullableWithAggregatesFilter<"CabinetClient"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"CabinetClient"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"CabinetClient"> | Date | string
   }
@@ -29936,6 +38021,554 @@ export namespace Prisma {
     name?: StringNullableWithAggregatesFilter<"EmailListMember"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"EmailListMember"> | Date | string
     unsubscribed?: BoolWithAggregatesFilter<"EmailListMember"> | boolean
+  }
+
+  export type InvoiceSettingsWhereInput = {
+    AND?: InvoiceSettingsWhereInput | InvoiceSettingsWhereInput[]
+    OR?: InvoiceSettingsWhereInput[]
+    NOT?: InvoiceSettingsWhereInput | InvoiceSettingsWhereInput[]
+    id?: StringFilter<"InvoiceSettings"> | string
+    tenantId?: StringFilter<"InvoiceSettings"> | string
+    companyName?: StringNullableFilter<"InvoiceSettings"> | string | null
+    companyAddress?: StringNullableFilter<"InvoiceSettings"> | string | null
+    companyPhone?: StringNullableFilter<"InvoiceSettings"> | string | null
+    companyEmail?: StringNullableFilter<"InvoiceSettings"> | string | null
+    companyLogo?: StringNullableFilter<"InvoiceSettings"> | string | null
+    taxRate?: FloatFilter<"InvoiceSettings"> | number
+    currency?: StringFilter<"InvoiceSettings"> | string
+    prefix?: StringFilter<"InvoiceSettings"> | string
+    nextNumber?: IntFilter<"InvoiceSettings"> | number
+    footerNote?: StringNullableFilter<"InvoiceSettings"> | string | null
+    bankDetails?: StringNullableFilter<"InvoiceSettings"> | string | null
+    createdAt?: DateTimeFilter<"InvoiceSettings"> | Date | string
+    updatedAt?: DateTimeFilter<"InvoiceSettings"> | Date | string
+    tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
+  }
+
+  export type InvoiceSettingsOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    companyName?: SortOrderInput | SortOrder
+    companyAddress?: SortOrderInput | SortOrder
+    companyPhone?: SortOrderInput | SortOrder
+    companyEmail?: SortOrderInput | SortOrder
+    companyLogo?: SortOrderInput | SortOrder
+    taxRate?: SortOrder
+    currency?: SortOrder
+    prefix?: SortOrder
+    nextNumber?: SortOrder
+    footerNote?: SortOrderInput | SortOrder
+    bankDetails?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantWebsiteOrderByWithRelationInput
+  }
+
+  export type InvoiceSettingsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId?: string
+    AND?: InvoiceSettingsWhereInput | InvoiceSettingsWhereInput[]
+    OR?: InvoiceSettingsWhereInput[]
+    NOT?: InvoiceSettingsWhereInput | InvoiceSettingsWhereInput[]
+    companyName?: StringNullableFilter<"InvoiceSettings"> | string | null
+    companyAddress?: StringNullableFilter<"InvoiceSettings"> | string | null
+    companyPhone?: StringNullableFilter<"InvoiceSettings"> | string | null
+    companyEmail?: StringNullableFilter<"InvoiceSettings"> | string | null
+    companyLogo?: StringNullableFilter<"InvoiceSettings"> | string | null
+    taxRate?: FloatFilter<"InvoiceSettings"> | number
+    currency?: StringFilter<"InvoiceSettings"> | string
+    prefix?: StringFilter<"InvoiceSettings"> | string
+    nextNumber?: IntFilter<"InvoiceSettings"> | number
+    footerNote?: StringNullableFilter<"InvoiceSettings"> | string | null
+    bankDetails?: StringNullableFilter<"InvoiceSettings"> | string | null
+    createdAt?: DateTimeFilter<"InvoiceSettings"> | Date | string
+    updatedAt?: DateTimeFilter<"InvoiceSettings"> | Date | string
+    tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
+  }, "id" | "tenantId">
+
+  export type InvoiceSettingsOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    companyName?: SortOrderInput | SortOrder
+    companyAddress?: SortOrderInput | SortOrder
+    companyPhone?: SortOrderInput | SortOrder
+    companyEmail?: SortOrderInput | SortOrder
+    companyLogo?: SortOrderInput | SortOrder
+    taxRate?: SortOrder
+    currency?: SortOrder
+    prefix?: SortOrder
+    nextNumber?: SortOrder
+    footerNote?: SortOrderInput | SortOrder
+    bankDetails?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: InvoiceSettingsCountOrderByAggregateInput
+    _avg?: InvoiceSettingsAvgOrderByAggregateInput
+    _max?: InvoiceSettingsMaxOrderByAggregateInput
+    _min?: InvoiceSettingsMinOrderByAggregateInput
+    _sum?: InvoiceSettingsSumOrderByAggregateInput
+  }
+
+  export type InvoiceSettingsScalarWhereWithAggregatesInput = {
+    AND?: InvoiceSettingsScalarWhereWithAggregatesInput | InvoiceSettingsScalarWhereWithAggregatesInput[]
+    OR?: InvoiceSettingsScalarWhereWithAggregatesInput[]
+    NOT?: InvoiceSettingsScalarWhereWithAggregatesInput | InvoiceSettingsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"InvoiceSettings"> | string
+    tenantId?: StringWithAggregatesFilter<"InvoiceSettings"> | string
+    companyName?: StringNullableWithAggregatesFilter<"InvoiceSettings"> | string | null
+    companyAddress?: StringNullableWithAggregatesFilter<"InvoiceSettings"> | string | null
+    companyPhone?: StringNullableWithAggregatesFilter<"InvoiceSettings"> | string | null
+    companyEmail?: StringNullableWithAggregatesFilter<"InvoiceSettings"> | string | null
+    companyLogo?: StringNullableWithAggregatesFilter<"InvoiceSettings"> | string | null
+    taxRate?: FloatWithAggregatesFilter<"InvoiceSettings"> | number
+    currency?: StringWithAggregatesFilter<"InvoiceSettings"> | string
+    prefix?: StringWithAggregatesFilter<"InvoiceSettings"> | string
+    nextNumber?: IntWithAggregatesFilter<"InvoiceSettings"> | number
+    footerNote?: StringNullableWithAggregatesFilter<"InvoiceSettings"> | string | null
+    bankDetails?: StringNullableWithAggregatesFilter<"InvoiceSettings"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"InvoiceSettings"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"InvoiceSettings"> | Date | string
+  }
+
+  export type InvoiceWhereInput = {
+    AND?: InvoiceWhereInput | InvoiceWhereInput[]
+    OR?: InvoiceWhereInput[]
+    NOT?: InvoiceWhereInput | InvoiceWhereInput[]
+    id?: StringFilter<"Invoice"> | string
+    tenantId?: StringFilter<"Invoice"> | string
+    clientId?: StringNullableFilter<"Invoice"> | string | null
+    number?: StringFilter<"Invoice"> | string
+    status?: StringFilter<"Invoice"> | string
+    issueDate?: DateTimeFilter<"Invoice"> | Date | string
+    dueDate?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    subtotal?: FloatFilter<"Invoice"> | number
+    taxRate?: FloatFilter<"Invoice"> | number
+    taxAmount?: FloatFilter<"Invoice"> | number
+    total?: FloatFilter<"Invoice"> | number
+    notes?: StringNullableFilter<"Invoice"> | string | null
+    clientName?: StringFilter<"Invoice"> | string
+    clientEmail?: StringNullableFilter<"Invoice"> | string | null
+    clientPhone?: StringNullableFilter<"Invoice"> | string | null
+    clientAddress?: StringNullableFilter<"Invoice"> | string | null
+    sentAt?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    paidAt?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    createdAt?: DateTimeFilter<"Invoice"> | Date | string
+    updatedAt?: DateTimeFilter<"Invoice"> | Date | string
+    tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
+    client?: XOR<CabinetClientNullableScalarRelationFilter, CabinetClientWhereInput> | null
+    items?: InvoiceItemListRelationFilter
+  }
+
+  export type InvoiceOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    number?: SortOrder
+    status?: SortOrder
+    issueDate?: SortOrder
+    dueDate?: SortOrderInput | SortOrder
+    subtotal?: SortOrder
+    taxRate?: SortOrder
+    taxAmount?: SortOrder
+    total?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    clientName?: SortOrder
+    clientEmail?: SortOrderInput | SortOrder
+    clientPhone?: SortOrderInput | SortOrder
+    clientAddress?: SortOrderInput | SortOrder
+    sentAt?: SortOrderInput | SortOrder
+    paidAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantWebsiteOrderByWithRelationInput
+    client?: CabinetClientOrderByWithRelationInput
+    items?: InvoiceItemOrderByRelationAggregateInput
+  }
+
+  export type InvoiceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_number?: InvoiceTenantIdNumberCompoundUniqueInput
+    AND?: InvoiceWhereInput | InvoiceWhereInput[]
+    OR?: InvoiceWhereInput[]
+    NOT?: InvoiceWhereInput | InvoiceWhereInput[]
+    tenantId?: StringFilter<"Invoice"> | string
+    clientId?: StringNullableFilter<"Invoice"> | string | null
+    number?: StringFilter<"Invoice"> | string
+    status?: StringFilter<"Invoice"> | string
+    issueDate?: DateTimeFilter<"Invoice"> | Date | string
+    dueDate?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    subtotal?: FloatFilter<"Invoice"> | number
+    taxRate?: FloatFilter<"Invoice"> | number
+    taxAmount?: FloatFilter<"Invoice"> | number
+    total?: FloatFilter<"Invoice"> | number
+    notes?: StringNullableFilter<"Invoice"> | string | null
+    clientName?: StringFilter<"Invoice"> | string
+    clientEmail?: StringNullableFilter<"Invoice"> | string | null
+    clientPhone?: StringNullableFilter<"Invoice"> | string | null
+    clientAddress?: StringNullableFilter<"Invoice"> | string | null
+    sentAt?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    paidAt?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    createdAt?: DateTimeFilter<"Invoice"> | Date | string
+    updatedAt?: DateTimeFilter<"Invoice"> | Date | string
+    tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
+    client?: XOR<CabinetClientNullableScalarRelationFilter, CabinetClientWhereInput> | null
+    items?: InvoiceItemListRelationFilter
+  }, "id" | "tenantId_number">
+
+  export type InvoiceOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    clientId?: SortOrderInput | SortOrder
+    number?: SortOrder
+    status?: SortOrder
+    issueDate?: SortOrder
+    dueDate?: SortOrderInput | SortOrder
+    subtotal?: SortOrder
+    taxRate?: SortOrder
+    taxAmount?: SortOrder
+    total?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    clientName?: SortOrder
+    clientEmail?: SortOrderInput | SortOrder
+    clientPhone?: SortOrderInput | SortOrder
+    clientAddress?: SortOrderInput | SortOrder
+    sentAt?: SortOrderInput | SortOrder
+    paidAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: InvoiceCountOrderByAggregateInput
+    _avg?: InvoiceAvgOrderByAggregateInput
+    _max?: InvoiceMaxOrderByAggregateInput
+    _min?: InvoiceMinOrderByAggregateInput
+    _sum?: InvoiceSumOrderByAggregateInput
+  }
+
+  export type InvoiceScalarWhereWithAggregatesInput = {
+    AND?: InvoiceScalarWhereWithAggregatesInput | InvoiceScalarWhereWithAggregatesInput[]
+    OR?: InvoiceScalarWhereWithAggregatesInput[]
+    NOT?: InvoiceScalarWhereWithAggregatesInput | InvoiceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Invoice"> | string
+    tenantId?: StringWithAggregatesFilter<"Invoice"> | string
+    clientId?: StringNullableWithAggregatesFilter<"Invoice"> | string | null
+    number?: StringWithAggregatesFilter<"Invoice"> | string
+    status?: StringWithAggregatesFilter<"Invoice"> | string
+    issueDate?: DateTimeWithAggregatesFilter<"Invoice"> | Date | string
+    dueDate?: DateTimeNullableWithAggregatesFilter<"Invoice"> | Date | string | null
+    subtotal?: FloatWithAggregatesFilter<"Invoice"> | number
+    taxRate?: FloatWithAggregatesFilter<"Invoice"> | number
+    taxAmount?: FloatWithAggregatesFilter<"Invoice"> | number
+    total?: FloatWithAggregatesFilter<"Invoice"> | number
+    notes?: StringNullableWithAggregatesFilter<"Invoice"> | string | null
+    clientName?: StringWithAggregatesFilter<"Invoice"> | string
+    clientEmail?: StringNullableWithAggregatesFilter<"Invoice"> | string | null
+    clientPhone?: StringNullableWithAggregatesFilter<"Invoice"> | string | null
+    clientAddress?: StringNullableWithAggregatesFilter<"Invoice"> | string | null
+    sentAt?: DateTimeNullableWithAggregatesFilter<"Invoice"> | Date | string | null
+    paidAt?: DateTimeNullableWithAggregatesFilter<"Invoice"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Invoice"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Invoice"> | Date | string
+  }
+
+  export type InvoiceItemWhereInput = {
+    AND?: InvoiceItemWhereInput | InvoiceItemWhereInput[]
+    OR?: InvoiceItemWhereInput[]
+    NOT?: InvoiceItemWhereInput | InvoiceItemWhereInput[]
+    id?: StringFilter<"InvoiceItem"> | string
+    invoiceId?: StringFilter<"InvoiceItem"> | string
+    description?: StringFilter<"InvoiceItem"> | string
+    quantity?: FloatFilter<"InvoiceItem"> | number
+    unitPrice?: FloatFilter<"InvoiceItem"> | number
+    total?: FloatFilter<"InvoiceItem"> | number
+    invoice?: XOR<InvoiceScalarRelationFilter, InvoiceWhereInput>
+  }
+
+  export type InvoiceItemOrderByWithRelationInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    total?: SortOrder
+    invoice?: InvoiceOrderByWithRelationInput
+  }
+
+  export type InvoiceItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: InvoiceItemWhereInput | InvoiceItemWhereInput[]
+    OR?: InvoiceItemWhereInput[]
+    NOT?: InvoiceItemWhereInput | InvoiceItemWhereInput[]
+    invoiceId?: StringFilter<"InvoiceItem"> | string
+    description?: StringFilter<"InvoiceItem"> | string
+    quantity?: FloatFilter<"InvoiceItem"> | number
+    unitPrice?: FloatFilter<"InvoiceItem"> | number
+    total?: FloatFilter<"InvoiceItem"> | number
+    invoice?: XOR<InvoiceScalarRelationFilter, InvoiceWhereInput>
+  }, "id">
+
+  export type InvoiceItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    total?: SortOrder
+    _count?: InvoiceItemCountOrderByAggregateInput
+    _avg?: InvoiceItemAvgOrderByAggregateInput
+    _max?: InvoiceItemMaxOrderByAggregateInput
+    _min?: InvoiceItemMinOrderByAggregateInput
+    _sum?: InvoiceItemSumOrderByAggregateInput
+  }
+
+  export type InvoiceItemScalarWhereWithAggregatesInput = {
+    AND?: InvoiceItemScalarWhereWithAggregatesInput | InvoiceItemScalarWhereWithAggregatesInput[]
+    OR?: InvoiceItemScalarWhereWithAggregatesInput[]
+    NOT?: InvoiceItemScalarWhereWithAggregatesInput | InvoiceItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"InvoiceItem"> | string
+    invoiceId?: StringWithAggregatesFilter<"InvoiceItem"> | string
+    description?: StringWithAggregatesFilter<"InvoiceItem"> | string
+    quantity?: FloatWithAggregatesFilter<"InvoiceItem"> | number
+    unitPrice?: FloatWithAggregatesFilter<"InvoiceItem"> | number
+    total?: FloatWithAggregatesFilter<"InvoiceItem"> | number
+  }
+
+  export type MedicalRecordWhereInput = {
+    AND?: MedicalRecordWhereInput | MedicalRecordWhereInput[]
+    OR?: MedicalRecordWhereInput[]
+    NOT?: MedicalRecordWhereInput | MedicalRecordWhereInput[]
+    id?: StringFilter<"MedicalRecord"> | string
+    tenantId?: StringFilter<"MedicalRecord"> | string
+    clientId?: StringFilter<"MedicalRecord"> | string
+    visitDate?: DateTimeFilter<"MedicalRecord"> | Date | string
+    chiefComplaint?: StringNullableFilter<"MedicalRecord"> | string | null
+    diagnosis?: StringNullableFilter<"MedicalRecord"> | string | null
+    treatment?: StringNullableFilter<"MedicalRecord"> | string | null
+    notes?: StringNullableFilter<"MedicalRecord"> | string | null
+    weight?: FloatNullableFilter<"MedicalRecord"> | number | null
+    bloodPressure?: StringNullableFilter<"MedicalRecord"> | string | null
+    temperature?: FloatNullableFilter<"MedicalRecord"> | number | null
+    heartRate?: IntNullableFilter<"MedicalRecord"> | number | null
+    createdAt?: DateTimeFilter<"MedicalRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"MedicalRecord"> | Date | string
+    client?: XOR<CabinetClientScalarRelationFilter, CabinetClientWhereInput>
+    prescriptions?: PrescriptionListRelationFilter
+  }
+
+  export type MedicalRecordOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    clientId?: SortOrder
+    visitDate?: SortOrder
+    chiefComplaint?: SortOrderInput | SortOrder
+    diagnosis?: SortOrderInput | SortOrder
+    treatment?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    weight?: SortOrderInput | SortOrder
+    bloodPressure?: SortOrderInput | SortOrder
+    temperature?: SortOrderInput | SortOrder
+    heartRate?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    client?: CabinetClientOrderByWithRelationInput
+    prescriptions?: PrescriptionOrderByRelationAggregateInput
+  }
+
+  export type MedicalRecordWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MedicalRecordWhereInput | MedicalRecordWhereInput[]
+    OR?: MedicalRecordWhereInput[]
+    NOT?: MedicalRecordWhereInput | MedicalRecordWhereInput[]
+    tenantId?: StringFilter<"MedicalRecord"> | string
+    clientId?: StringFilter<"MedicalRecord"> | string
+    visitDate?: DateTimeFilter<"MedicalRecord"> | Date | string
+    chiefComplaint?: StringNullableFilter<"MedicalRecord"> | string | null
+    diagnosis?: StringNullableFilter<"MedicalRecord"> | string | null
+    treatment?: StringNullableFilter<"MedicalRecord"> | string | null
+    notes?: StringNullableFilter<"MedicalRecord"> | string | null
+    weight?: FloatNullableFilter<"MedicalRecord"> | number | null
+    bloodPressure?: StringNullableFilter<"MedicalRecord"> | string | null
+    temperature?: FloatNullableFilter<"MedicalRecord"> | number | null
+    heartRate?: IntNullableFilter<"MedicalRecord"> | number | null
+    createdAt?: DateTimeFilter<"MedicalRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"MedicalRecord"> | Date | string
+    client?: XOR<CabinetClientScalarRelationFilter, CabinetClientWhereInput>
+    prescriptions?: PrescriptionListRelationFilter
+  }, "id">
+
+  export type MedicalRecordOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    clientId?: SortOrder
+    visitDate?: SortOrder
+    chiefComplaint?: SortOrderInput | SortOrder
+    diagnosis?: SortOrderInput | SortOrder
+    treatment?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    weight?: SortOrderInput | SortOrder
+    bloodPressure?: SortOrderInput | SortOrder
+    temperature?: SortOrderInput | SortOrder
+    heartRate?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: MedicalRecordCountOrderByAggregateInput
+    _avg?: MedicalRecordAvgOrderByAggregateInput
+    _max?: MedicalRecordMaxOrderByAggregateInput
+    _min?: MedicalRecordMinOrderByAggregateInput
+    _sum?: MedicalRecordSumOrderByAggregateInput
+  }
+
+  export type MedicalRecordScalarWhereWithAggregatesInput = {
+    AND?: MedicalRecordScalarWhereWithAggregatesInput | MedicalRecordScalarWhereWithAggregatesInput[]
+    OR?: MedicalRecordScalarWhereWithAggregatesInput[]
+    NOT?: MedicalRecordScalarWhereWithAggregatesInput | MedicalRecordScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MedicalRecord"> | string
+    tenantId?: StringWithAggregatesFilter<"MedicalRecord"> | string
+    clientId?: StringWithAggregatesFilter<"MedicalRecord"> | string
+    visitDate?: DateTimeWithAggregatesFilter<"MedicalRecord"> | Date | string
+    chiefComplaint?: StringNullableWithAggregatesFilter<"MedicalRecord"> | string | null
+    diagnosis?: StringNullableWithAggregatesFilter<"MedicalRecord"> | string | null
+    treatment?: StringNullableWithAggregatesFilter<"MedicalRecord"> | string | null
+    notes?: StringNullableWithAggregatesFilter<"MedicalRecord"> | string | null
+    weight?: FloatNullableWithAggregatesFilter<"MedicalRecord"> | number | null
+    bloodPressure?: StringNullableWithAggregatesFilter<"MedicalRecord"> | string | null
+    temperature?: FloatNullableWithAggregatesFilter<"MedicalRecord"> | number | null
+    heartRate?: IntNullableWithAggregatesFilter<"MedicalRecord"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"MedicalRecord"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MedicalRecord"> | Date | string
+  }
+
+  export type PrescriptionWhereInput = {
+    AND?: PrescriptionWhereInput | PrescriptionWhereInput[]
+    OR?: PrescriptionWhereInput[]
+    NOT?: PrescriptionWhereInput | PrescriptionWhereInput[]
+    id?: StringFilter<"Prescription"> | string
+    medicalRecordId?: StringFilter<"Prescription"> | string
+    medication?: StringFilter<"Prescription"> | string
+    dosage?: StringNullableFilter<"Prescription"> | string | null
+    frequency?: StringNullableFilter<"Prescription"> | string | null
+    duration?: StringNullableFilter<"Prescription"> | string | null
+    instructions?: StringNullableFilter<"Prescription"> | string | null
+    createdAt?: DateTimeFilter<"Prescription"> | Date | string
+    medicalRecord?: XOR<MedicalRecordScalarRelationFilter, MedicalRecordWhereInput>
+  }
+
+  export type PrescriptionOrderByWithRelationInput = {
+    id?: SortOrder
+    medicalRecordId?: SortOrder
+    medication?: SortOrder
+    dosage?: SortOrderInput | SortOrder
+    frequency?: SortOrderInput | SortOrder
+    duration?: SortOrderInput | SortOrder
+    instructions?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    medicalRecord?: MedicalRecordOrderByWithRelationInput
+  }
+
+  export type PrescriptionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PrescriptionWhereInput | PrescriptionWhereInput[]
+    OR?: PrescriptionWhereInput[]
+    NOT?: PrescriptionWhereInput | PrescriptionWhereInput[]
+    medicalRecordId?: StringFilter<"Prescription"> | string
+    medication?: StringFilter<"Prescription"> | string
+    dosage?: StringNullableFilter<"Prescription"> | string | null
+    frequency?: StringNullableFilter<"Prescription"> | string | null
+    duration?: StringNullableFilter<"Prescription"> | string | null
+    instructions?: StringNullableFilter<"Prescription"> | string | null
+    createdAt?: DateTimeFilter<"Prescription"> | Date | string
+    medicalRecord?: XOR<MedicalRecordScalarRelationFilter, MedicalRecordWhereInput>
+  }, "id">
+
+  export type PrescriptionOrderByWithAggregationInput = {
+    id?: SortOrder
+    medicalRecordId?: SortOrder
+    medication?: SortOrder
+    dosage?: SortOrderInput | SortOrder
+    frequency?: SortOrderInput | SortOrder
+    duration?: SortOrderInput | SortOrder
+    instructions?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: PrescriptionCountOrderByAggregateInput
+    _max?: PrescriptionMaxOrderByAggregateInput
+    _min?: PrescriptionMinOrderByAggregateInput
+  }
+
+  export type PrescriptionScalarWhereWithAggregatesInput = {
+    AND?: PrescriptionScalarWhereWithAggregatesInput | PrescriptionScalarWhereWithAggregatesInput[]
+    OR?: PrescriptionScalarWhereWithAggregatesInput[]
+    NOT?: PrescriptionScalarWhereWithAggregatesInput | PrescriptionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Prescription"> | string
+    medicalRecordId?: StringWithAggregatesFilter<"Prescription"> | string
+    medication?: StringWithAggregatesFilter<"Prescription"> | string
+    dosage?: StringNullableWithAggregatesFilter<"Prescription"> | string | null
+    frequency?: StringNullableWithAggregatesFilter<"Prescription"> | string | null
+    duration?: StringNullableWithAggregatesFilter<"Prescription"> | string | null
+    instructions?: StringNullableWithAggregatesFilter<"Prescription"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Prescription"> | Date | string
+  }
+
+  export type MedicalHistoryWhereInput = {
+    AND?: MedicalHistoryWhereInput | MedicalHistoryWhereInput[]
+    OR?: MedicalHistoryWhereInput[]
+    NOT?: MedicalHistoryWhereInput | MedicalHistoryWhereInput[]
+    id?: StringFilter<"MedicalHistory"> | string
+    clientId?: StringFilter<"MedicalHistory"> | string
+    condition?: StringFilter<"MedicalHistory"> | string
+    since?: StringNullableFilter<"MedicalHistory"> | string | null
+    status?: StringFilter<"MedicalHistory"> | string
+    notes?: StringNullableFilter<"MedicalHistory"> | string | null
+    createdAt?: DateTimeFilter<"MedicalHistory"> | Date | string
+    client?: XOR<CabinetClientScalarRelationFilter, CabinetClientWhereInput>
+  }
+
+  export type MedicalHistoryOrderByWithRelationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    condition?: SortOrder
+    since?: SortOrderInput | SortOrder
+    status?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    client?: CabinetClientOrderByWithRelationInput
+  }
+
+  export type MedicalHistoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MedicalHistoryWhereInput | MedicalHistoryWhereInput[]
+    OR?: MedicalHistoryWhereInput[]
+    NOT?: MedicalHistoryWhereInput | MedicalHistoryWhereInput[]
+    clientId?: StringFilter<"MedicalHistory"> | string
+    condition?: StringFilter<"MedicalHistory"> | string
+    since?: StringNullableFilter<"MedicalHistory"> | string | null
+    status?: StringFilter<"MedicalHistory"> | string
+    notes?: StringNullableFilter<"MedicalHistory"> | string | null
+    createdAt?: DateTimeFilter<"MedicalHistory"> | Date | string
+    client?: XOR<CabinetClientScalarRelationFilter, CabinetClientWhereInput>
+  }, "id">
+
+  export type MedicalHistoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    condition?: SortOrder
+    since?: SortOrderInput | SortOrder
+    status?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: MedicalHistoryCountOrderByAggregateInput
+    _max?: MedicalHistoryMaxOrderByAggregateInput
+    _min?: MedicalHistoryMinOrderByAggregateInput
+  }
+
+  export type MedicalHistoryScalarWhereWithAggregatesInput = {
+    AND?: MedicalHistoryScalarWhereWithAggregatesInput | MedicalHistoryScalarWhereWithAggregatesInput[]
+    OR?: MedicalHistoryScalarWhereWithAggregatesInput[]
+    NOT?: MedicalHistoryScalarWhereWithAggregatesInput | MedicalHistoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MedicalHistory"> | string
+    clientId?: StringWithAggregatesFilter<"MedicalHistory"> | string
+    condition?: StringWithAggregatesFilter<"MedicalHistory"> | string
+    since?: StringNullableWithAggregatesFilter<"MedicalHistory"> | string | null
+    status?: StringWithAggregatesFilter<"MedicalHistory"> | string
+    notes?: StringNullableWithAggregatesFilter<"MedicalHistory"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"MedicalHistory"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -30440,6 +39073,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
     user: UserCreateNestedOneWithoutWebsitesInput
   }
@@ -30465,6 +39100,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
 
   export type TenantWebsiteUpdateInput = {
@@ -30486,6 +39123,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
     user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
@@ -30511,6 +39150,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
 
   export type TenantWebsiteCreateManyInput = {
@@ -31042,9 +39683,14 @@ export namespace Prisma {
     email?: string | null
     phone?: string | null
     notes?: string | null
+    age?: number | null
+    cni?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     appointments?: CabinetAppointmentCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    medicalRecords?: MedicalRecordCreateNestedManyWithoutClientInput
+    medicalHistory?: MedicalHistoryCreateNestedManyWithoutClientInput
     tenant: TenantWebsiteCreateNestedOneWithoutCabinetClientsInput
   }
 
@@ -31055,9 +39701,14 @@ export namespace Prisma {
     email?: string | null
     phone?: string | null
     notes?: string | null
+    age?: number | null
+    cni?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     appointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    medicalRecords?: MedicalRecordUncheckedCreateNestedManyWithoutClientInput
+    medicalHistory?: MedicalHistoryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type CabinetClientUpdateInput = {
@@ -31066,9 +39717,14 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    cni?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     appointments?: CabinetAppointmentUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    medicalRecords?: MedicalRecordUpdateManyWithoutClientNestedInput
+    medicalHistory?: MedicalHistoryUpdateManyWithoutClientNestedInput
     tenant?: TenantWebsiteUpdateOneRequiredWithoutCabinetClientsNestedInput
   }
 
@@ -31079,9 +39735,14 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    cni?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     appointments?: CabinetAppointmentUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    medicalRecords?: MedicalRecordUncheckedUpdateManyWithoutClientNestedInput
+    medicalHistory?: MedicalHistoryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type CabinetClientCreateManyInput = {
@@ -31091,6 +39752,8 @@ export namespace Prisma {
     email?: string | null
     phone?: string | null
     notes?: string | null
+    age?: number | null
+    cni?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -31101,6 +39764,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    cni?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31112,6 +39777,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    cni?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31617,6 +40284,623 @@ export namespace Prisma {
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type InvoiceSettingsCreateInput = {
+    id?: string
+    companyName?: string | null
+    companyAddress?: string | null
+    companyPhone?: string | null
+    companyEmail?: string | null
+    companyLogo?: string | null
+    taxRate?: number
+    currency?: string
+    prefix?: string
+    nextNumber?: number
+    footerNote?: string | null
+    bankDetails?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantWebsiteCreateNestedOneWithoutInvoiceSettingsInput
+  }
+
+  export type InvoiceSettingsUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    companyName?: string | null
+    companyAddress?: string | null
+    companyPhone?: string | null
+    companyEmail?: string | null
+    companyLogo?: string | null
+    taxRate?: number
+    currency?: string
+    prefix?: string
+    nextNumber?: number
+    footerNote?: string | null
+    bankDetails?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceSettingsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    prefix?: StringFieldUpdateOperationsInput | string
+    nextNumber?: IntFieldUpdateOperationsInput | number
+    footerNote?: NullableStringFieldUpdateOperationsInput | string | null
+    bankDetails?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantWebsiteUpdateOneRequiredWithoutInvoiceSettingsNestedInput
+  }
+
+  export type InvoiceSettingsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    prefix?: StringFieldUpdateOperationsInput | string
+    nextNumber?: IntFieldUpdateOperationsInput | number
+    footerNote?: NullableStringFieldUpdateOperationsInput | string | null
+    bankDetails?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceSettingsCreateManyInput = {
+    id?: string
+    tenantId: string
+    companyName?: string | null
+    companyAddress?: string | null
+    companyPhone?: string | null
+    companyEmail?: string | null
+    companyLogo?: string | null
+    taxRate?: number
+    currency?: string
+    prefix?: string
+    nextNumber?: number
+    footerNote?: string | null
+    bankDetails?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceSettingsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    prefix?: StringFieldUpdateOperationsInput | string
+    nextNumber?: IntFieldUpdateOperationsInput | number
+    footerNote?: NullableStringFieldUpdateOperationsInput | string | null
+    bankDetails?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceSettingsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    prefix?: StringFieldUpdateOperationsInput | string
+    nextNumber?: IntFieldUpdateOperationsInput | number
+    footerNote?: NullableStringFieldUpdateOperationsInput | string | null
+    bankDetails?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceCreateInput = {
+    id?: string
+    number: string
+    status?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    subtotal?: number
+    taxRate?: number
+    taxAmount?: number
+    total?: number
+    notes?: string | null
+    clientName: string
+    clientEmail?: string | null
+    clientPhone?: string | null
+    clientAddress?: string | null
+    sentAt?: Date | string | null
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantWebsiteCreateNestedOneWithoutInvoicesInput
+    client?: CabinetClientCreateNestedOneWithoutInvoicesInput
+    items?: InvoiceItemCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    clientId?: string | null
+    number: string
+    status?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    subtotal?: number
+    taxRate?: number
+    taxAmount?: number
+    total?: number
+    notes?: string | null
+    clientName: string
+    clientEmail?: string | null
+    clientPhone?: string | null
+    clientAddress?: string | null
+    sentAt?: Date | string | null
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantWebsiteUpdateOneRequiredWithoutInvoicesNestedInput
+    client?: CabinetClientUpdateOneWithoutInvoicesNestedInput
+    items?: InvoiceItemUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceCreateManyInput = {
+    id?: string
+    tenantId: string
+    clientId?: string | null
+    number: string
+    status?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    subtotal?: number
+    taxRate?: number
+    taxAmount?: number
+    total?: number
+    notes?: string | null
+    clientName: string
+    clientEmail?: string | null
+    clientPhone?: string | null
+    clientAddress?: string | null
+    sentAt?: Date | string | null
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceItemCreateInput = {
+    id?: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    total: number
+    invoice: InvoiceCreateNestedOneWithoutItemsInput
+  }
+
+  export type InvoiceItemUncheckedCreateInput = {
+    id?: string
+    invoiceId: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    total: number
+  }
+
+  export type InvoiceItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    invoice?: InvoiceUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type InvoiceItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceId?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type InvoiceItemCreateManyInput = {
+    id?: string
+    invoiceId: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    total: number
+  }
+
+  export type InvoiceItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type InvoiceItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceId?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type MedicalRecordCreateInput = {
+    id?: string
+    tenantId: string
+    visitDate?: Date | string
+    chiefComplaint?: string | null
+    diagnosis?: string | null
+    treatment?: string | null
+    notes?: string | null
+    weight?: number | null
+    bloodPressure?: string | null
+    temperature?: number | null
+    heartRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: CabinetClientCreateNestedOneWithoutMedicalRecordsInput
+    prescriptions?: PrescriptionCreateNestedManyWithoutMedicalRecordInput
+  }
+
+  export type MedicalRecordUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    clientId: string
+    visitDate?: Date | string
+    chiefComplaint?: string | null
+    diagnosis?: string | null
+    treatment?: string | null
+    notes?: string | null
+    weight?: number | null
+    bloodPressure?: string | null
+    temperature?: number | null
+    heartRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutMedicalRecordInput
+  }
+
+  export type MedicalRecordUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    visitDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    chiefComplaint?: NullableStringFieldUpdateOperationsInput | string | null
+    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    treatment?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    bloodPressure?: NullableStringFieldUpdateOperationsInput | string | null
+    temperature?: NullableFloatFieldUpdateOperationsInput | number | null
+    heartRate?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: CabinetClientUpdateOneRequiredWithoutMedicalRecordsNestedInput
+    prescriptions?: PrescriptionUpdateManyWithoutMedicalRecordNestedInput
+  }
+
+  export type MedicalRecordUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    visitDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    chiefComplaint?: NullableStringFieldUpdateOperationsInput | string | null
+    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    treatment?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    bloodPressure?: NullableStringFieldUpdateOperationsInput | string | null
+    temperature?: NullableFloatFieldUpdateOperationsInput | number | null
+    heartRate?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    prescriptions?: PrescriptionUncheckedUpdateManyWithoutMedicalRecordNestedInput
+  }
+
+  export type MedicalRecordCreateManyInput = {
+    id?: string
+    tenantId: string
+    clientId: string
+    visitDate?: Date | string
+    chiefComplaint?: string | null
+    diagnosis?: string | null
+    treatment?: string | null
+    notes?: string | null
+    weight?: number | null
+    bloodPressure?: string | null
+    temperature?: number | null
+    heartRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MedicalRecordUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    visitDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    chiefComplaint?: NullableStringFieldUpdateOperationsInput | string | null
+    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    treatment?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    bloodPressure?: NullableStringFieldUpdateOperationsInput | string | null
+    temperature?: NullableFloatFieldUpdateOperationsInput | number | null
+    heartRate?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MedicalRecordUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    visitDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    chiefComplaint?: NullableStringFieldUpdateOperationsInput | string | null
+    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    treatment?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    bloodPressure?: NullableStringFieldUpdateOperationsInput | string | null
+    temperature?: NullableFloatFieldUpdateOperationsInput | number | null
+    heartRate?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrescriptionCreateInput = {
+    id?: string
+    medication: string
+    dosage?: string | null
+    frequency?: string | null
+    duration?: string | null
+    instructions?: string | null
+    createdAt?: Date | string
+    medicalRecord: MedicalRecordCreateNestedOneWithoutPrescriptionsInput
+  }
+
+  export type PrescriptionUncheckedCreateInput = {
+    id?: string
+    medicalRecordId: string
+    medication: string
+    dosage?: string | null
+    frequency?: string | null
+    duration?: string | null
+    instructions?: string | null
+    createdAt?: Date | string
+  }
+
+  export type PrescriptionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    medication?: StringFieldUpdateOperationsInput | string
+    dosage?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    instructions?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    medicalRecord?: MedicalRecordUpdateOneRequiredWithoutPrescriptionsNestedInput
+  }
+
+  export type PrescriptionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    medicalRecordId?: StringFieldUpdateOperationsInput | string
+    medication?: StringFieldUpdateOperationsInput | string
+    dosage?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    instructions?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrescriptionCreateManyInput = {
+    id?: string
+    medicalRecordId: string
+    medication: string
+    dosage?: string | null
+    frequency?: string | null
+    duration?: string | null
+    instructions?: string | null
+    createdAt?: Date | string
+  }
+
+  export type PrescriptionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    medication?: StringFieldUpdateOperationsInput | string
+    dosage?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    instructions?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrescriptionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    medicalRecordId?: StringFieldUpdateOperationsInput | string
+    medication?: StringFieldUpdateOperationsInput | string
+    dosage?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    instructions?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MedicalHistoryCreateInput = {
+    id?: string
+    condition: string
+    since?: string | null
+    status?: string
+    notes?: string | null
+    createdAt?: Date | string
+    client: CabinetClientCreateNestedOneWithoutMedicalHistoryInput
+  }
+
+  export type MedicalHistoryUncheckedCreateInput = {
+    id?: string
+    clientId: string
+    condition: string
+    since?: string | null
+    status?: string
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
+  export type MedicalHistoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    condition?: StringFieldUpdateOperationsInput | string
+    since?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: CabinetClientUpdateOneRequiredWithoutMedicalHistoryNestedInput
+  }
+
+  export type MedicalHistoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    condition?: StringFieldUpdateOperationsInput | string
+    since?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MedicalHistoryCreateManyInput = {
+    id?: string
+    clientId: string
+    condition: string
+    since?: string | null
+    status?: string
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
+  export type MedicalHistoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    condition?: StringFieldUpdateOperationsInput | string
+    since?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MedicalHistoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    condition?: StringFieldUpdateOperationsInput | string
+    since?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -32075,6 +41359,17 @@ export namespace Prisma {
     none?: RestaurantWaiterWhereInput
   }
 
+  export type InvoiceListRelationFilter = {
+    every?: InvoiceWhereInput
+    some?: InvoiceWhereInput
+    none?: InvoiceWhereInput
+  }
+
+  export type InvoiceSettingsNullableScalarRelationFilter = {
+    is?: InvoiceSettingsWhereInput | null
+    isNot?: InvoiceSettingsWhereInput | null
+  }
+
   export type CabinetAppointmentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -32096,6 +41391,10 @@ export namespace Prisma {
   }
 
   export type RestaurantWaiterOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InvoiceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -32543,6 +41842,26 @@ export namespace Prisma {
     duration?: SortOrder
   }
 
+  export type MedicalRecordListRelationFilter = {
+    every?: MedicalRecordWhereInput
+    some?: MedicalRecordWhereInput
+    none?: MedicalRecordWhereInput
+  }
+
+  export type MedicalHistoryListRelationFilter = {
+    every?: MedicalHistoryWhereInput
+    some?: MedicalHistoryWhereInput
+    none?: MedicalHistoryWhereInput
+  }
+
+  export type MedicalRecordOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MedicalHistoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type CabinetClientCountOrderByAggregateInput = {
     id?: SortOrder
     tenantId?: SortOrder
@@ -32550,8 +41869,14 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrder
     notes?: SortOrder
+    age?: SortOrder
+    cni?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type CabinetClientAvgOrderByAggregateInput = {
+    age?: SortOrder
   }
 
   export type CabinetClientMaxOrderByAggregateInput = {
@@ -32561,6 +41886,8 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrder
     notes?: SortOrder
+    age?: SortOrder
+    cni?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -32572,8 +41899,14 @@ export namespace Prisma {
     email?: SortOrder
     phone?: SortOrder
     notes?: SortOrder
+    age?: SortOrder
+    cni?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type CabinetClientSumOrderByAggregateInput = {
+    age?: SortOrder
   }
 
   export type CabinetClientScalarRelationFilter = {
@@ -32865,6 +42198,358 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     unsubscribed?: SortOrder
+  }
+
+  export type InvoiceSettingsCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    companyName?: SortOrder
+    companyAddress?: SortOrder
+    companyPhone?: SortOrder
+    companyEmail?: SortOrder
+    companyLogo?: SortOrder
+    taxRate?: SortOrder
+    currency?: SortOrder
+    prefix?: SortOrder
+    nextNumber?: SortOrder
+    footerNote?: SortOrder
+    bankDetails?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InvoiceSettingsAvgOrderByAggregateInput = {
+    taxRate?: SortOrder
+    nextNumber?: SortOrder
+  }
+
+  export type InvoiceSettingsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    companyName?: SortOrder
+    companyAddress?: SortOrder
+    companyPhone?: SortOrder
+    companyEmail?: SortOrder
+    companyLogo?: SortOrder
+    taxRate?: SortOrder
+    currency?: SortOrder
+    prefix?: SortOrder
+    nextNumber?: SortOrder
+    footerNote?: SortOrder
+    bankDetails?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InvoiceSettingsMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    companyName?: SortOrder
+    companyAddress?: SortOrder
+    companyPhone?: SortOrder
+    companyEmail?: SortOrder
+    companyLogo?: SortOrder
+    taxRate?: SortOrder
+    currency?: SortOrder
+    prefix?: SortOrder
+    nextNumber?: SortOrder
+    footerNote?: SortOrder
+    bankDetails?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InvoiceSettingsSumOrderByAggregateInput = {
+    taxRate?: SortOrder
+    nextNumber?: SortOrder
+  }
+
+  export type CabinetClientNullableScalarRelationFilter = {
+    is?: CabinetClientWhereInput | null
+    isNot?: CabinetClientWhereInput | null
+  }
+
+  export type InvoiceItemListRelationFilter = {
+    every?: InvoiceItemWhereInput
+    some?: InvoiceItemWhereInput
+    none?: InvoiceItemWhereInput
+  }
+
+  export type InvoiceItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InvoiceTenantIdNumberCompoundUniqueInput = {
+    tenantId: string
+    number: string
+  }
+
+  export type InvoiceCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    clientId?: SortOrder
+    number?: SortOrder
+    status?: SortOrder
+    issueDate?: SortOrder
+    dueDate?: SortOrder
+    subtotal?: SortOrder
+    taxRate?: SortOrder
+    taxAmount?: SortOrder
+    total?: SortOrder
+    notes?: SortOrder
+    clientName?: SortOrder
+    clientEmail?: SortOrder
+    clientPhone?: SortOrder
+    clientAddress?: SortOrder
+    sentAt?: SortOrder
+    paidAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InvoiceAvgOrderByAggregateInput = {
+    subtotal?: SortOrder
+    taxRate?: SortOrder
+    taxAmount?: SortOrder
+    total?: SortOrder
+  }
+
+  export type InvoiceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    clientId?: SortOrder
+    number?: SortOrder
+    status?: SortOrder
+    issueDate?: SortOrder
+    dueDate?: SortOrder
+    subtotal?: SortOrder
+    taxRate?: SortOrder
+    taxAmount?: SortOrder
+    total?: SortOrder
+    notes?: SortOrder
+    clientName?: SortOrder
+    clientEmail?: SortOrder
+    clientPhone?: SortOrder
+    clientAddress?: SortOrder
+    sentAt?: SortOrder
+    paidAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InvoiceMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    clientId?: SortOrder
+    number?: SortOrder
+    status?: SortOrder
+    issueDate?: SortOrder
+    dueDate?: SortOrder
+    subtotal?: SortOrder
+    taxRate?: SortOrder
+    taxAmount?: SortOrder
+    total?: SortOrder
+    notes?: SortOrder
+    clientName?: SortOrder
+    clientEmail?: SortOrder
+    clientPhone?: SortOrder
+    clientAddress?: SortOrder
+    sentAt?: SortOrder
+    paidAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InvoiceSumOrderByAggregateInput = {
+    subtotal?: SortOrder
+    taxRate?: SortOrder
+    taxAmount?: SortOrder
+    total?: SortOrder
+  }
+
+  export type InvoiceScalarRelationFilter = {
+    is?: InvoiceWhereInput
+    isNot?: InvoiceWhereInput
+  }
+
+  export type InvoiceItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    total?: SortOrder
+  }
+
+  export type InvoiceItemAvgOrderByAggregateInput = {
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    total?: SortOrder
+  }
+
+  export type InvoiceItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    total?: SortOrder
+  }
+
+  export type InvoiceItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    total?: SortOrder
+  }
+
+  export type InvoiceItemSumOrderByAggregateInput = {
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    total?: SortOrder
+  }
+
+  export type PrescriptionListRelationFilter = {
+    every?: PrescriptionWhereInput
+    some?: PrescriptionWhereInput
+    none?: PrescriptionWhereInput
+  }
+
+  export type PrescriptionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MedicalRecordCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    clientId?: SortOrder
+    visitDate?: SortOrder
+    chiefComplaint?: SortOrder
+    diagnosis?: SortOrder
+    treatment?: SortOrder
+    notes?: SortOrder
+    weight?: SortOrder
+    bloodPressure?: SortOrder
+    temperature?: SortOrder
+    heartRate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MedicalRecordAvgOrderByAggregateInput = {
+    weight?: SortOrder
+    temperature?: SortOrder
+    heartRate?: SortOrder
+  }
+
+  export type MedicalRecordMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    clientId?: SortOrder
+    visitDate?: SortOrder
+    chiefComplaint?: SortOrder
+    diagnosis?: SortOrder
+    treatment?: SortOrder
+    notes?: SortOrder
+    weight?: SortOrder
+    bloodPressure?: SortOrder
+    temperature?: SortOrder
+    heartRate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MedicalRecordMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    clientId?: SortOrder
+    visitDate?: SortOrder
+    chiefComplaint?: SortOrder
+    diagnosis?: SortOrder
+    treatment?: SortOrder
+    notes?: SortOrder
+    weight?: SortOrder
+    bloodPressure?: SortOrder
+    temperature?: SortOrder
+    heartRate?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MedicalRecordSumOrderByAggregateInput = {
+    weight?: SortOrder
+    temperature?: SortOrder
+    heartRate?: SortOrder
+  }
+
+  export type MedicalRecordScalarRelationFilter = {
+    is?: MedicalRecordWhereInput
+    isNot?: MedicalRecordWhereInput
+  }
+
+  export type PrescriptionCountOrderByAggregateInput = {
+    id?: SortOrder
+    medicalRecordId?: SortOrder
+    medication?: SortOrder
+    dosage?: SortOrder
+    frequency?: SortOrder
+    duration?: SortOrder
+    instructions?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PrescriptionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    medicalRecordId?: SortOrder
+    medication?: SortOrder
+    dosage?: SortOrder
+    frequency?: SortOrder
+    duration?: SortOrder
+    instructions?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PrescriptionMinOrderByAggregateInput = {
+    id?: SortOrder
+    medicalRecordId?: SortOrder
+    medication?: SortOrder
+    dosage?: SortOrder
+    frequency?: SortOrder
+    duration?: SortOrder
+    instructions?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MedicalHistoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    condition?: SortOrder
+    since?: SortOrder
+    status?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MedicalHistoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    condition?: SortOrder
+    since?: SortOrder
+    status?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MedicalHistoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    clientId?: SortOrder
+    condition?: SortOrder
+    since?: SortOrder
+    status?: SortOrder
+    notes?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type ChatSessionCreateNestedManyWithoutUserInput = {
@@ -33423,6 +43108,19 @@ export namespace Prisma {
     connect?: RestaurantWaiterWhereUniqueInput | RestaurantWaiterWhereUniqueInput[]
   }
 
+  export type InvoiceCreateNestedManyWithoutTenantInput = {
+    create?: XOR<InvoiceCreateWithoutTenantInput, InvoiceUncheckedCreateWithoutTenantInput> | InvoiceCreateWithoutTenantInput[] | InvoiceUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutTenantInput | InvoiceCreateOrConnectWithoutTenantInput[]
+    createMany?: InvoiceCreateManyTenantInputEnvelope
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+  }
+
+  export type InvoiceSettingsCreateNestedOneWithoutTenantInput = {
+    create?: XOR<InvoiceSettingsCreateWithoutTenantInput, InvoiceSettingsUncheckedCreateWithoutTenantInput>
+    connectOrCreate?: InvoiceSettingsCreateOrConnectWithoutTenantInput
+    connect?: InvoiceSettingsWhereUniqueInput
+  }
+
   export type ServiceCreateNestedOneWithoutWebsitesInput = {
     create?: XOR<ServiceCreateWithoutWebsitesInput, ServiceUncheckedCreateWithoutWebsitesInput>
     connectOrCreate?: ServiceCreateOrConnectWithoutWebsitesInput
@@ -33475,6 +43173,19 @@ export namespace Prisma {
     connectOrCreate?: RestaurantWaiterCreateOrConnectWithoutTenantInput | RestaurantWaiterCreateOrConnectWithoutTenantInput[]
     createMany?: RestaurantWaiterCreateManyTenantInputEnvelope
     connect?: RestaurantWaiterWhereUniqueInput | RestaurantWaiterWhereUniqueInput[]
+  }
+
+  export type InvoiceUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<InvoiceCreateWithoutTenantInput, InvoiceUncheckedCreateWithoutTenantInput> | InvoiceCreateWithoutTenantInput[] | InvoiceUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutTenantInput | InvoiceCreateOrConnectWithoutTenantInput[]
+    createMany?: InvoiceCreateManyTenantInputEnvelope
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+  }
+
+  export type InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput = {
+    create?: XOR<InvoiceSettingsCreateWithoutTenantInput, InvoiceSettingsUncheckedCreateWithoutTenantInput>
+    connectOrCreate?: InvoiceSettingsCreateOrConnectWithoutTenantInput
+    connect?: InvoiceSettingsWhereUniqueInput
   }
 
   export type CabinetAppointmentUpdateManyWithoutTenantNestedInput = {
@@ -33559,6 +43270,30 @@ export namespace Prisma {
     update?: RestaurantWaiterUpdateWithWhereUniqueWithoutTenantInput | RestaurantWaiterUpdateWithWhereUniqueWithoutTenantInput[]
     updateMany?: RestaurantWaiterUpdateManyWithWhereWithoutTenantInput | RestaurantWaiterUpdateManyWithWhereWithoutTenantInput[]
     deleteMany?: RestaurantWaiterScalarWhereInput | RestaurantWaiterScalarWhereInput[]
+  }
+
+  export type InvoiceUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<InvoiceCreateWithoutTenantInput, InvoiceUncheckedCreateWithoutTenantInput> | InvoiceCreateWithoutTenantInput[] | InvoiceUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutTenantInput | InvoiceCreateOrConnectWithoutTenantInput[]
+    upsert?: InvoiceUpsertWithWhereUniqueWithoutTenantInput | InvoiceUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: InvoiceCreateManyTenantInputEnvelope
+    set?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    disconnect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    delete?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    update?: InvoiceUpdateWithWhereUniqueWithoutTenantInput | InvoiceUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: InvoiceUpdateManyWithWhereWithoutTenantInput | InvoiceUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+  }
+
+  export type InvoiceSettingsUpdateOneWithoutTenantNestedInput = {
+    create?: XOR<InvoiceSettingsCreateWithoutTenantInput, InvoiceSettingsUncheckedCreateWithoutTenantInput>
+    connectOrCreate?: InvoiceSettingsCreateOrConnectWithoutTenantInput
+    upsert?: InvoiceSettingsUpsertWithoutTenantInput
+    disconnect?: InvoiceSettingsWhereInput | boolean
+    delete?: InvoiceSettingsWhereInput | boolean
+    connect?: InvoiceSettingsWhereUniqueInput
+    update?: XOR<XOR<InvoiceSettingsUpdateToOneWithWhereWithoutTenantInput, InvoiceSettingsUpdateWithoutTenantInput>, InvoiceSettingsUncheckedUpdateWithoutTenantInput>
   }
 
   export type ServiceUpdateOneRequiredWithoutWebsitesNestedInput = {
@@ -33659,6 +43394,30 @@ export namespace Prisma {
     update?: RestaurantWaiterUpdateWithWhereUniqueWithoutTenantInput | RestaurantWaiterUpdateWithWhereUniqueWithoutTenantInput[]
     updateMany?: RestaurantWaiterUpdateManyWithWhereWithoutTenantInput | RestaurantWaiterUpdateManyWithWhereWithoutTenantInput[]
     deleteMany?: RestaurantWaiterScalarWhereInput | RestaurantWaiterScalarWhereInput[]
+  }
+
+  export type InvoiceUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<InvoiceCreateWithoutTenantInput, InvoiceUncheckedCreateWithoutTenantInput> | InvoiceCreateWithoutTenantInput[] | InvoiceUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutTenantInput | InvoiceCreateOrConnectWithoutTenantInput[]
+    upsert?: InvoiceUpsertWithWhereUniqueWithoutTenantInput | InvoiceUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: InvoiceCreateManyTenantInputEnvelope
+    set?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    disconnect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    delete?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    update?: InvoiceUpdateWithWhereUniqueWithoutTenantInput | InvoiceUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: InvoiceUpdateManyWithWhereWithoutTenantInput | InvoiceUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+  }
+
+  export type InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput = {
+    create?: XOR<InvoiceSettingsCreateWithoutTenantInput, InvoiceSettingsUncheckedCreateWithoutTenantInput>
+    connectOrCreate?: InvoiceSettingsCreateOrConnectWithoutTenantInput
+    upsert?: InvoiceSettingsUpsertWithoutTenantInput
+    disconnect?: InvoiceSettingsWhereInput | boolean
+    delete?: InvoiceSettingsWhereInput | boolean
+    connect?: InvoiceSettingsWhereUniqueInput
+    update?: XOR<XOR<InvoiceSettingsUpdateToOneWithWhereWithoutTenantInput, InvoiceSettingsUpdateWithoutTenantInput>, InvoiceSettingsUncheckedUpdateWithoutTenantInput>
   }
 
   export type TenantWebsiteCreateNestedOneWithoutCategoriesInput = {
@@ -34016,6 +43775,27 @@ export namespace Prisma {
     connect?: CabinetAppointmentWhereUniqueInput | CabinetAppointmentWhereUniqueInput[]
   }
 
+  export type InvoiceCreateNestedManyWithoutClientInput = {
+    create?: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput> | InvoiceCreateWithoutClientInput[] | InvoiceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutClientInput | InvoiceCreateOrConnectWithoutClientInput[]
+    createMany?: InvoiceCreateManyClientInputEnvelope
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+  }
+
+  export type MedicalRecordCreateNestedManyWithoutClientInput = {
+    create?: XOR<MedicalRecordCreateWithoutClientInput, MedicalRecordUncheckedCreateWithoutClientInput> | MedicalRecordCreateWithoutClientInput[] | MedicalRecordUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: MedicalRecordCreateOrConnectWithoutClientInput | MedicalRecordCreateOrConnectWithoutClientInput[]
+    createMany?: MedicalRecordCreateManyClientInputEnvelope
+    connect?: MedicalRecordWhereUniqueInput | MedicalRecordWhereUniqueInput[]
+  }
+
+  export type MedicalHistoryCreateNestedManyWithoutClientInput = {
+    create?: XOR<MedicalHistoryCreateWithoutClientInput, MedicalHistoryUncheckedCreateWithoutClientInput> | MedicalHistoryCreateWithoutClientInput[] | MedicalHistoryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: MedicalHistoryCreateOrConnectWithoutClientInput | MedicalHistoryCreateOrConnectWithoutClientInput[]
+    createMany?: MedicalHistoryCreateManyClientInputEnvelope
+    connect?: MedicalHistoryWhereUniqueInput | MedicalHistoryWhereUniqueInput[]
+  }
+
   export type TenantWebsiteCreateNestedOneWithoutCabinetClientsInput = {
     create?: XOR<TenantWebsiteCreateWithoutCabinetClientsInput, TenantWebsiteUncheckedCreateWithoutCabinetClientsInput>
     connectOrCreate?: TenantWebsiteCreateOrConnectWithoutCabinetClientsInput
@@ -34027,6 +43807,27 @@ export namespace Prisma {
     connectOrCreate?: CabinetAppointmentCreateOrConnectWithoutClientInput | CabinetAppointmentCreateOrConnectWithoutClientInput[]
     createMany?: CabinetAppointmentCreateManyClientInputEnvelope
     connect?: CabinetAppointmentWhereUniqueInput | CabinetAppointmentWhereUniqueInput[]
+  }
+
+  export type InvoiceUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput> | InvoiceCreateWithoutClientInput[] | InvoiceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutClientInput | InvoiceCreateOrConnectWithoutClientInput[]
+    createMany?: InvoiceCreateManyClientInputEnvelope
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+  }
+
+  export type MedicalRecordUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<MedicalRecordCreateWithoutClientInput, MedicalRecordUncheckedCreateWithoutClientInput> | MedicalRecordCreateWithoutClientInput[] | MedicalRecordUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: MedicalRecordCreateOrConnectWithoutClientInput | MedicalRecordCreateOrConnectWithoutClientInput[]
+    createMany?: MedicalRecordCreateManyClientInputEnvelope
+    connect?: MedicalRecordWhereUniqueInput | MedicalRecordWhereUniqueInput[]
+  }
+
+  export type MedicalHistoryUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<MedicalHistoryCreateWithoutClientInput, MedicalHistoryUncheckedCreateWithoutClientInput> | MedicalHistoryCreateWithoutClientInput[] | MedicalHistoryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: MedicalHistoryCreateOrConnectWithoutClientInput | MedicalHistoryCreateOrConnectWithoutClientInput[]
+    createMany?: MedicalHistoryCreateManyClientInputEnvelope
+    connect?: MedicalHistoryWhereUniqueInput | MedicalHistoryWhereUniqueInput[]
   }
 
   export type CabinetAppointmentUpdateManyWithoutClientNestedInput = {
@@ -34041,6 +43842,48 @@ export namespace Prisma {
     update?: CabinetAppointmentUpdateWithWhereUniqueWithoutClientInput | CabinetAppointmentUpdateWithWhereUniqueWithoutClientInput[]
     updateMany?: CabinetAppointmentUpdateManyWithWhereWithoutClientInput | CabinetAppointmentUpdateManyWithWhereWithoutClientInput[]
     deleteMany?: CabinetAppointmentScalarWhereInput | CabinetAppointmentScalarWhereInput[]
+  }
+
+  export type InvoiceUpdateManyWithoutClientNestedInput = {
+    create?: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput> | InvoiceCreateWithoutClientInput[] | InvoiceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutClientInput | InvoiceCreateOrConnectWithoutClientInput[]
+    upsert?: InvoiceUpsertWithWhereUniqueWithoutClientInput | InvoiceUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: InvoiceCreateManyClientInputEnvelope
+    set?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    disconnect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    delete?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    update?: InvoiceUpdateWithWhereUniqueWithoutClientInput | InvoiceUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: InvoiceUpdateManyWithWhereWithoutClientInput | InvoiceUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+  }
+
+  export type MedicalRecordUpdateManyWithoutClientNestedInput = {
+    create?: XOR<MedicalRecordCreateWithoutClientInput, MedicalRecordUncheckedCreateWithoutClientInput> | MedicalRecordCreateWithoutClientInput[] | MedicalRecordUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: MedicalRecordCreateOrConnectWithoutClientInput | MedicalRecordCreateOrConnectWithoutClientInput[]
+    upsert?: MedicalRecordUpsertWithWhereUniqueWithoutClientInput | MedicalRecordUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: MedicalRecordCreateManyClientInputEnvelope
+    set?: MedicalRecordWhereUniqueInput | MedicalRecordWhereUniqueInput[]
+    disconnect?: MedicalRecordWhereUniqueInput | MedicalRecordWhereUniqueInput[]
+    delete?: MedicalRecordWhereUniqueInput | MedicalRecordWhereUniqueInput[]
+    connect?: MedicalRecordWhereUniqueInput | MedicalRecordWhereUniqueInput[]
+    update?: MedicalRecordUpdateWithWhereUniqueWithoutClientInput | MedicalRecordUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: MedicalRecordUpdateManyWithWhereWithoutClientInput | MedicalRecordUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: MedicalRecordScalarWhereInput | MedicalRecordScalarWhereInput[]
+  }
+
+  export type MedicalHistoryUpdateManyWithoutClientNestedInput = {
+    create?: XOR<MedicalHistoryCreateWithoutClientInput, MedicalHistoryUncheckedCreateWithoutClientInput> | MedicalHistoryCreateWithoutClientInput[] | MedicalHistoryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: MedicalHistoryCreateOrConnectWithoutClientInput | MedicalHistoryCreateOrConnectWithoutClientInput[]
+    upsert?: MedicalHistoryUpsertWithWhereUniqueWithoutClientInput | MedicalHistoryUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: MedicalHistoryCreateManyClientInputEnvelope
+    set?: MedicalHistoryWhereUniqueInput | MedicalHistoryWhereUniqueInput[]
+    disconnect?: MedicalHistoryWhereUniqueInput | MedicalHistoryWhereUniqueInput[]
+    delete?: MedicalHistoryWhereUniqueInput | MedicalHistoryWhereUniqueInput[]
+    connect?: MedicalHistoryWhereUniqueInput | MedicalHistoryWhereUniqueInput[]
+    update?: MedicalHistoryUpdateWithWhereUniqueWithoutClientInput | MedicalHistoryUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: MedicalHistoryUpdateManyWithWhereWithoutClientInput | MedicalHistoryUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: MedicalHistoryScalarWhereInput | MedicalHistoryScalarWhereInput[]
   }
 
   export type TenantWebsiteUpdateOneRequiredWithoutCabinetClientsNestedInput = {
@@ -34063,6 +43906,48 @@ export namespace Prisma {
     update?: CabinetAppointmentUpdateWithWhereUniqueWithoutClientInput | CabinetAppointmentUpdateWithWhereUniqueWithoutClientInput[]
     updateMany?: CabinetAppointmentUpdateManyWithWhereWithoutClientInput | CabinetAppointmentUpdateManyWithWhereWithoutClientInput[]
     deleteMany?: CabinetAppointmentScalarWhereInput | CabinetAppointmentScalarWhereInput[]
+  }
+
+  export type InvoiceUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput> | InvoiceCreateWithoutClientInput[] | InvoiceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutClientInput | InvoiceCreateOrConnectWithoutClientInput[]
+    upsert?: InvoiceUpsertWithWhereUniqueWithoutClientInput | InvoiceUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: InvoiceCreateManyClientInputEnvelope
+    set?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    disconnect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    delete?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    update?: InvoiceUpdateWithWhereUniqueWithoutClientInput | InvoiceUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: InvoiceUpdateManyWithWhereWithoutClientInput | InvoiceUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+  }
+
+  export type MedicalRecordUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<MedicalRecordCreateWithoutClientInput, MedicalRecordUncheckedCreateWithoutClientInput> | MedicalRecordCreateWithoutClientInput[] | MedicalRecordUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: MedicalRecordCreateOrConnectWithoutClientInput | MedicalRecordCreateOrConnectWithoutClientInput[]
+    upsert?: MedicalRecordUpsertWithWhereUniqueWithoutClientInput | MedicalRecordUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: MedicalRecordCreateManyClientInputEnvelope
+    set?: MedicalRecordWhereUniqueInput | MedicalRecordWhereUniqueInput[]
+    disconnect?: MedicalRecordWhereUniqueInput | MedicalRecordWhereUniqueInput[]
+    delete?: MedicalRecordWhereUniqueInput | MedicalRecordWhereUniqueInput[]
+    connect?: MedicalRecordWhereUniqueInput | MedicalRecordWhereUniqueInput[]
+    update?: MedicalRecordUpdateWithWhereUniqueWithoutClientInput | MedicalRecordUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: MedicalRecordUpdateManyWithWhereWithoutClientInput | MedicalRecordUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: MedicalRecordScalarWhereInput | MedicalRecordScalarWhereInput[]
+  }
+
+  export type MedicalHistoryUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<MedicalHistoryCreateWithoutClientInput, MedicalHistoryUncheckedCreateWithoutClientInput> | MedicalHistoryCreateWithoutClientInput[] | MedicalHistoryUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: MedicalHistoryCreateOrConnectWithoutClientInput | MedicalHistoryCreateOrConnectWithoutClientInput[]
+    upsert?: MedicalHistoryUpsertWithWhereUniqueWithoutClientInput | MedicalHistoryUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: MedicalHistoryCreateManyClientInputEnvelope
+    set?: MedicalHistoryWhereUniqueInput | MedicalHistoryWhereUniqueInput[]
+    disconnect?: MedicalHistoryWhereUniqueInput | MedicalHistoryWhereUniqueInput[]
+    delete?: MedicalHistoryWhereUniqueInput | MedicalHistoryWhereUniqueInput[]
+    connect?: MedicalHistoryWhereUniqueInput | MedicalHistoryWhereUniqueInput[]
+    update?: MedicalHistoryUpdateWithWhereUniqueWithoutClientInput | MedicalHistoryUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: MedicalHistoryUpdateManyWithWhereWithoutClientInput | MedicalHistoryUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: MedicalHistoryScalarWhereInput | MedicalHistoryScalarWhereInput[]
   }
 
   export type TenantWebsiteCreateNestedOneWithoutCabinetAppointmentsInput = {
@@ -34209,6 +44094,190 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEmailListMembersInput, UserUpdateWithoutEmailListMembersInput>, UserUncheckedUpdateWithoutEmailListMembersInput>
+  }
+
+  export type TenantWebsiteCreateNestedOneWithoutInvoiceSettingsInput = {
+    create?: XOR<TenantWebsiteCreateWithoutInvoiceSettingsInput, TenantWebsiteUncheckedCreateWithoutInvoiceSettingsInput>
+    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutInvoiceSettingsInput
+    connect?: TenantWebsiteWhereUniqueInput
+  }
+
+  export type TenantWebsiteUpdateOneRequiredWithoutInvoiceSettingsNestedInput = {
+    create?: XOR<TenantWebsiteCreateWithoutInvoiceSettingsInput, TenantWebsiteUncheckedCreateWithoutInvoiceSettingsInput>
+    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutInvoiceSettingsInput
+    upsert?: TenantWebsiteUpsertWithoutInvoiceSettingsInput
+    connect?: TenantWebsiteWhereUniqueInput
+    update?: XOR<XOR<TenantWebsiteUpdateToOneWithWhereWithoutInvoiceSettingsInput, TenantWebsiteUpdateWithoutInvoiceSettingsInput>, TenantWebsiteUncheckedUpdateWithoutInvoiceSettingsInput>
+  }
+
+  export type TenantWebsiteCreateNestedOneWithoutInvoicesInput = {
+    create?: XOR<TenantWebsiteCreateWithoutInvoicesInput, TenantWebsiteUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutInvoicesInput
+    connect?: TenantWebsiteWhereUniqueInput
+  }
+
+  export type CabinetClientCreateNestedOneWithoutInvoicesInput = {
+    create?: XOR<CabinetClientCreateWithoutInvoicesInput, CabinetClientUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: CabinetClientCreateOrConnectWithoutInvoicesInput
+    connect?: CabinetClientWhereUniqueInput
+  }
+
+  export type InvoiceItemCreateNestedManyWithoutInvoiceInput = {
+    create?: XOR<InvoiceItemCreateWithoutInvoiceInput, InvoiceItemUncheckedCreateWithoutInvoiceInput> | InvoiceItemCreateWithoutInvoiceInput[] | InvoiceItemUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: InvoiceItemCreateOrConnectWithoutInvoiceInput | InvoiceItemCreateOrConnectWithoutInvoiceInput[]
+    createMany?: InvoiceItemCreateManyInvoiceInputEnvelope
+    connect?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+  }
+
+  export type InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput = {
+    create?: XOR<InvoiceItemCreateWithoutInvoiceInput, InvoiceItemUncheckedCreateWithoutInvoiceInput> | InvoiceItemCreateWithoutInvoiceInput[] | InvoiceItemUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: InvoiceItemCreateOrConnectWithoutInvoiceInput | InvoiceItemCreateOrConnectWithoutInvoiceInput[]
+    createMany?: InvoiceItemCreateManyInvoiceInputEnvelope
+    connect?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+  }
+
+  export type TenantWebsiteUpdateOneRequiredWithoutInvoicesNestedInput = {
+    create?: XOR<TenantWebsiteCreateWithoutInvoicesInput, TenantWebsiteUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutInvoicesInput
+    upsert?: TenantWebsiteUpsertWithoutInvoicesInput
+    connect?: TenantWebsiteWhereUniqueInput
+    update?: XOR<XOR<TenantWebsiteUpdateToOneWithWhereWithoutInvoicesInput, TenantWebsiteUpdateWithoutInvoicesInput>, TenantWebsiteUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type CabinetClientUpdateOneWithoutInvoicesNestedInput = {
+    create?: XOR<CabinetClientCreateWithoutInvoicesInput, CabinetClientUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: CabinetClientCreateOrConnectWithoutInvoicesInput
+    upsert?: CabinetClientUpsertWithoutInvoicesInput
+    disconnect?: CabinetClientWhereInput | boolean
+    delete?: CabinetClientWhereInput | boolean
+    connect?: CabinetClientWhereUniqueInput
+    update?: XOR<XOR<CabinetClientUpdateToOneWithWhereWithoutInvoicesInput, CabinetClientUpdateWithoutInvoicesInput>, CabinetClientUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type InvoiceItemUpdateManyWithoutInvoiceNestedInput = {
+    create?: XOR<InvoiceItemCreateWithoutInvoiceInput, InvoiceItemUncheckedCreateWithoutInvoiceInput> | InvoiceItemCreateWithoutInvoiceInput[] | InvoiceItemUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: InvoiceItemCreateOrConnectWithoutInvoiceInput | InvoiceItemCreateOrConnectWithoutInvoiceInput[]
+    upsert?: InvoiceItemUpsertWithWhereUniqueWithoutInvoiceInput | InvoiceItemUpsertWithWhereUniqueWithoutInvoiceInput[]
+    createMany?: InvoiceItemCreateManyInvoiceInputEnvelope
+    set?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    disconnect?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    delete?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    connect?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    update?: InvoiceItemUpdateWithWhereUniqueWithoutInvoiceInput | InvoiceItemUpdateWithWhereUniqueWithoutInvoiceInput[]
+    updateMany?: InvoiceItemUpdateManyWithWhereWithoutInvoiceInput | InvoiceItemUpdateManyWithWhereWithoutInvoiceInput[]
+    deleteMany?: InvoiceItemScalarWhereInput | InvoiceItemScalarWhereInput[]
+  }
+
+  export type InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput = {
+    create?: XOR<InvoiceItemCreateWithoutInvoiceInput, InvoiceItemUncheckedCreateWithoutInvoiceInput> | InvoiceItemCreateWithoutInvoiceInput[] | InvoiceItemUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: InvoiceItemCreateOrConnectWithoutInvoiceInput | InvoiceItemCreateOrConnectWithoutInvoiceInput[]
+    upsert?: InvoiceItemUpsertWithWhereUniqueWithoutInvoiceInput | InvoiceItemUpsertWithWhereUniqueWithoutInvoiceInput[]
+    createMany?: InvoiceItemCreateManyInvoiceInputEnvelope
+    set?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    disconnect?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    delete?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    connect?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    update?: InvoiceItemUpdateWithWhereUniqueWithoutInvoiceInput | InvoiceItemUpdateWithWhereUniqueWithoutInvoiceInput[]
+    updateMany?: InvoiceItemUpdateManyWithWhereWithoutInvoiceInput | InvoiceItemUpdateManyWithWhereWithoutInvoiceInput[]
+    deleteMany?: InvoiceItemScalarWhereInput | InvoiceItemScalarWhereInput[]
+  }
+
+  export type InvoiceCreateNestedOneWithoutItemsInput = {
+    create?: XOR<InvoiceCreateWithoutItemsInput, InvoiceUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: InvoiceCreateOrConnectWithoutItemsInput
+    connect?: InvoiceWhereUniqueInput
+  }
+
+  export type InvoiceUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<InvoiceCreateWithoutItemsInput, InvoiceUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: InvoiceCreateOrConnectWithoutItemsInput
+    upsert?: InvoiceUpsertWithoutItemsInput
+    connect?: InvoiceWhereUniqueInput
+    update?: XOR<XOR<InvoiceUpdateToOneWithWhereWithoutItemsInput, InvoiceUpdateWithoutItemsInput>, InvoiceUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type CabinetClientCreateNestedOneWithoutMedicalRecordsInput = {
+    create?: XOR<CabinetClientCreateWithoutMedicalRecordsInput, CabinetClientUncheckedCreateWithoutMedicalRecordsInput>
+    connectOrCreate?: CabinetClientCreateOrConnectWithoutMedicalRecordsInput
+    connect?: CabinetClientWhereUniqueInput
+  }
+
+  export type PrescriptionCreateNestedManyWithoutMedicalRecordInput = {
+    create?: XOR<PrescriptionCreateWithoutMedicalRecordInput, PrescriptionUncheckedCreateWithoutMedicalRecordInput> | PrescriptionCreateWithoutMedicalRecordInput[] | PrescriptionUncheckedCreateWithoutMedicalRecordInput[]
+    connectOrCreate?: PrescriptionCreateOrConnectWithoutMedicalRecordInput | PrescriptionCreateOrConnectWithoutMedicalRecordInput[]
+    createMany?: PrescriptionCreateManyMedicalRecordInputEnvelope
+    connect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+  }
+
+  export type PrescriptionUncheckedCreateNestedManyWithoutMedicalRecordInput = {
+    create?: XOR<PrescriptionCreateWithoutMedicalRecordInput, PrescriptionUncheckedCreateWithoutMedicalRecordInput> | PrescriptionCreateWithoutMedicalRecordInput[] | PrescriptionUncheckedCreateWithoutMedicalRecordInput[]
+    connectOrCreate?: PrescriptionCreateOrConnectWithoutMedicalRecordInput | PrescriptionCreateOrConnectWithoutMedicalRecordInput[]
+    createMany?: PrescriptionCreateManyMedicalRecordInputEnvelope
+    connect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+  }
+
+  export type CabinetClientUpdateOneRequiredWithoutMedicalRecordsNestedInput = {
+    create?: XOR<CabinetClientCreateWithoutMedicalRecordsInput, CabinetClientUncheckedCreateWithoutMedicalRecordsInput>
+    connectOrCreate?: CabinetClientCreateOrConnectWithoutMedicalRecordsInput
+    upsert?: CabinetClientUpsertWithoutMedicalRecordsInput
+    connect?: CabinetClientWhereUniqueInput
+    update?: XOR<XOR<CabinetClientUpdateToOneWithWhereWithoutMedicalRecordsInput, CabinetClientUpdateWithoutMedicalRecordsInput>, CabinetClientUncheckedUpdateWithoutMedicalRecordsInput>
+  }
+
+  export type PrescriptionUpdateManyWithoutMedicalRecordNestedInput = {
+    create?: XOR<PrescriptionCreateWithoutMedicalRecordInput, PrescriptionUncheckedCreateWithoutMedicalRecordInput> | PrescriptionCreateWithoutMedicalRecordInput[] | PrescriptionUncheckedCreateWithoutMedicalRecordInput[]
+    connectOrCreate?: PrescriptionCreateOrConnectWithoutMedicalRecordInput | PrescriptionCreateOrConnectWithoutMedicalRecordInput[]
+    upsert?: PrescriptionUpsertWithWhereUniqueWithoutMedicalRecordInput | PrescriptionUpsertWithWhereUniqueWithoutMedicalRecordInput[]
+    createMany?: PrescriptionCreateManyMedicalRecordInputEnvelope
+    set?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    disconnect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    delete?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    connect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    update?: PrescriptionUpdateWithWhereUniqueWithoutMedicalRecordInput | PrescriptionUpdateWithWhereUniqueWithoutMedicalRecordInput[]
+    updateMany?: PrescriptionUpdateManyWithWhereWithoutMedicalRecordInput | PrescriptionUpdateManyWithWhereWithoutMedicalRecordInput[]
+    deleteMany?: PrescriptionScalarWhereInput | PrescriptionScalarWhereInput[]
+  }
+
+  export type PrescriptionUncheckedUpdateManyWithoutMedicalRecordNestedInput = {
+    create?: XOR<PrescriptionCreateWithoutMedicalRecordInput, PrescriptionUncheckedCreateWithoutMedicalRecordInput> | PrescriptionCreateWithoutMedicalRecordInput[] | PrescriptionUncheckedCreateWithoutMedicalRecordInput[]
+    connectOrCreate?: PrescriptionCreateOrConnectWithoutMedicalRecordInput | PrescriptionCreateOrConnectWithoutMedicalRecordInput[]
+    upsert?: PrescriptionUpsertWithWhereUniqueWithoutMedicalRecordInput | PrescriptionUpsertWithWhereUniqueWithoutMedicalRecordInput[]
+    createMany?: PrescriptionCreateManyMedicalRecordInputEnvelope
+    set?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    disconnect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    delete?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    connect?: PrescriptionWhereUniqueInput | PrescriptionWhereUniqueInput[]
+    update?: PrescriptionUpdateWithWhereUniqueWithoutMedicalRecordInput | PrescriptionUpdateWithWhereUniqueWithoutMedicalRecordInput[]
+    updateMany?: PrescriptionUpdateManyWithWhereWithoutMedicalRecordInput | PrescriptionUpdateManyWithWhereWithoutMedicalRecordInput[]
+    deleteMany?: PrescriptionScalarWhereInput | PrescriptionScalarWhereInput[]
+  }
+
+  export type MedicalRecordCreateNestedOneWithoutPrescriptionsInput = {
+    create?: XOR<MedicalRecordCreateWithoutPrescriptionsInput, MedicalRecordUncheckedCreateWithoutPrescriptionsInput>
+    connectOrCreate?: MedicalRecordCreateOrConnectWithoutPrescriptionsInput
+    connect?: MedicalRecordWhereUniqueInput
+  }
+
+  export type MedicalRecordUpdateOneRequiredWithoutPrescriptionsNestedInput = {
+    create?: XOR<MedicalRecordCreateWithoutPrescriptionsInput, MedicalRecordUncheckedCreateWithoutPrescriptionsInput>
+    connectOrCreate?: MedicalRecordCreateOrConnectWithoutPrescriptionsInput
+    upsert?: MedicalRecordUpsertWithoutPrescriptionsInput
+    connect?: MedicalRecordWhereUniqueInput
+    update?: XOR<XOR<MedicalRecordUpdateToOneWithWhereWithoutPrescriptionsInput, MedicalRecordUpdateWithoutPrescriptionsInput>, MedicalRecordUncheckedUpdateWithoutPrescriptionsInput>
+  }
+
+  export type CabinetClientCreateNestedOneWithoutMedicalHistoryInput = {
+    create?: XOR<CabinetClientCreateWithoutMedicalHistoryInput, CabinetClientUncheckedCreateWithoutMedicalHistoryInput>
+    connectOrCreate?: CabinetClientCreateOrConnectWithoutMedicalHistoryInput
+    connect?: CabinetClientWhereUniqueInput
+  }
+
+  export type CabinetClientUpdateOneRequiredWithoutMedicalHistoryNestedInput = {
+    create?: XOR<CabinetClientCreateWithoutMedicalHistoryInput, CabinetClientUncheckedCreateWithoutMedicalHistoryInput>
+    connectOrCreate?: CabinetClientCreateOrConnectWithoutMedicalHistoryInput
+    upsert?: CabinetClientUpsertWithoutMedicalHistoryInput
+    connect?: CabinetClientWhereUniqueInput
+    update?: XOR<XOR<CabinetClientUpdateToOneWithWhereWithoutMedicalHistoryInput, CabinetClientUpdateWithoutMedicalHistoryInput>, CabinetClientUncheckedUpdateWithoutMedicalHistoryInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -34575,6 +44644,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
   }
 
@@ -34598,6 +44669,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
 
   export type TenantWebsiteCreateOrConnectWithoutUserInput = {
@@ -35119,6 +45192,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     user: UserCreateNestedOneWithoutWebsitesInput
   }
 
@@ -35142,6 +45217,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
 
   export type TenantWebsiteCreateOrConnectWithoutServiceInput = {
@@ -35411,9 +45488,14 @@ export namespace Prisma {
     email?: string | null
     phone?: string | null
     notes?: string | null
+    age?: number | null
+    cni?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     appointments?: CabinetAppointmentCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    medicalRecords?: MedicalRecordCreateNestedManyWithoutClientInput
+    medicalHistory?: MedicalHistoryCreateNestedManyWithoutClientInput
   }
 
   export type CabinetClientUncheckedCreateWithoutTenantInput = {
@@ -35422,9 +45504,14 @@ export namespace Prisma {
     email?: string | null
     phone?: string | null
     notes?: string | null
+    age?: number | null
+    cni?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     appointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    medicalRecords?: MedicalRecordUncheckedCreateNestedManyWithoutClientInput
+    medicalHistory?: MedicalHistoryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type CabinetClientCreateOrConnectWithoutTenantInput = {
@@ -35544,6 +45631,100 @@ export namespace Prisma {
 
   export type RestaurantWaiterCreateManyTenantInputEnvelope = {
     data: RestaurantWaiterCreateManyTenantInput | RestaurantWaiterCreateManyTenantInput[]
+  }
+
+  export type InvoiceCreateWithoutTenantInput = {
+    id?: string
+    number: string
+    status?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    subtotal?: number
+    taxRate?: number
+    taxAmount?: number
+    total?: number
+    notes?: string | null
+    clientName: string
+    clientEmail?: string | null
+    clientPhone?: string | null
+    clientAddress?: string | null
+    sentAt?: Date | string | null
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client?: CabinetClientCreateNestedOneWithoutInvoicesInput
+    items?: InvoiceItemCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceUncheckedCreateWithoutTenantInput = {
+    id?: string
+    clientId?: string | null
+    number: string
+    status?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    subtotal?: number
+    taxRate?: number
+    taxAmount?: number
+    total?: number
+    notes?: string | null
+    clientName: string
+    clientEmail?: string | null
+    clientPhone?: string | null
+    clientAddress?: string | null
+    sentAt?: Date | string | null
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceCreateOrConnectWithoutTenantInput = {
+    where: InvoiceWhereUniqueInput
+    create: XOR<InvoiceCreateWithoutTenantInput, InvoiceUncheckedCreateWithoutTenantInput>
+  }
+
+  export type InvoiceCreateManyTenantInputEnvelope = {
+    data: InvoiceCreateManyTenantInput | InvoiceCreateManyTenantInput[]
+  }
+
+  export type InvoiceSettingsCreateWithoutTenantInput = {
+    id?: string
+    companyName?: string | null
+    companyAddress?: string | null
+    companyPhone?: string | null
+    companyEmail?: string | null
+    companyLogo?: string | null
+    taxRate?: number
+    currency?: string
+    prefix?: string
+    nextNumber?: number
+    footerNote?: string | null
+    bankDetails?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceSettingsUncheckedCreateWithoutTenantInput = {
+    id?: string
+    companyName?: string | null
+    companyAddress?: string | null
+    companyPhone?: string | null
+    companyEmail?: string | null
+    companyLogo?: string | null
+    taxRate?: number
+    currency?: string
+    prefix?: string
+    nextNumber?: number
+    footerNote?: string | null
+    bankDetails?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceSettingsCreateOrConnectWithoutTenantInput = {
+    where: InvoiceSettingsWhereUniqueInput
+    create: XOR<InvoiceSettingsCreateWithoutTenantInput, InvoiceSettingsUncheckedCreateWithoutTenantInput>
   }
 
   export type ServiceCreateWithoutWebsitesInput = {
@@ -35671,6 +45852,8 @@ export namespace Prisma {
     email?: StringNullableFilter<"CabinetClient"> | string | null
     phone?: StringNullableFilter<"CabinetClient"> | string | null
     notes?: StringNullableFilter<"CabinetClient"> | string | null
+    age?: IntNullableFilter<"CabinetClient"> | number | null
+    cni?: StringNullableFilter<"CabinetClient"> | string | null
     createdAt?: DateTimeFilter<"CabinetClient"> | Date | string
     updatedAt?: DateTimeFilter<"CabinetClient"> | Date | string
   }
@@ -35788,6 +45971,93 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"RestaurantWaiter"> | Date | string
   }
 
+  export type InvoiceUpsertWithWhereUniqueWithoutTenantInput = {
+    where: InvoiceWhereUniqueInput
+    update: XOR<InvoiceUpdateWithoutTenantInput, InvoiceUncheckedUpdateWithoutTenantInput>
+    create: XOR<InvoiceCreateWithoutTenantInput, InvoiceUncheckedCreateWithoutTenantInput>
+  }
+
+  export type InvoiceUpdateWithWhereUniqueWithoutTenantInput = {
+    where: InvoiceWhereUniqueInput
+    data: XOR<InvoiceUpdateWithoutTenantInput, InvoiceUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type InvoiceUpdateManyWithWhereWithoutTenantInput = {
+    where: InvoiceScalarWhereInput
+    data: XOR<InvoiceUpdateManyMutationInput, InvoiceUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type InvoiceScalarWhereInput = {
+    AND?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+    OR?: InvoiceScalarWhereInput[]
+    NOT?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+    id?: StringFilter<"Invoice"> | string
+    tenantId?: StringFilter<"Invoice"> | string
+    clientId?: StringNullableFilter<"Invoice"> | string | null
+    number?: StringFilter<"Invoice"> | string
+    status?: StringFilter<"Invoice"> | string
+    issueDate?: DateTimeFilter<"Invoice"> | Date | string
+    dueDate?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    subtotal?: FloatFilter<"Invoice"> | number
+    taxRate?: FloatFilter<"Invoice"> | number
+    taxAmount?: FloatFilter<"Invoice"> | number
+    total?: FloatFilter<"Invoice"> | number
+    notes?: StringNullableFilter<"Invoice"> | string | null
+    clientName?: StringFilter<"Invoice"> | string
+    clientEmail?: StringNullableFilter<"Invoice"> | string | null
+    clientPhone?: StringNullableFilter<"Invoice"> | string | null
+    clientAddress?: StringNullableFilter<"Invoice"> | string | null
+    sentAt?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    paidAt?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    createdAt?: DateTimeFilter<"Invoice"> | Date | string
+    updatedAt?: DateTimeFilter<"Invoice"> | Date | string
+  }
+
+  export type InvoiceSettingsUpsertWithoutTenantInput = {
+    update: XOR<InvoiceSettingsUpdateWithoutTenantInput, InvoiceSettingsUncheckedUpdateWithoutTenantInput>
+    create: XOR<InvoiceSettingsCreateWithoutTenantInput, InvoiceSettingsUncheckedCreateWithoutTenantInput>
+    where?: InvoiceSettingsWhereInput
+  }
+
+  export type InvoiceSettingsUpdateToOneWithWhereWithoutTenantInput = {
+    where?: InvoiceSettingsWhereInput
+    data: XOR<InvoiceSettingsUpdateWithoutTenantInput, InvoiceSettingsUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type InvoiceSettingsUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    prefix?: StringFieldUpdateOperationsInput | string
+    nextNumber?: IntFieldUpdateOperationsInput | number
+    footerNote?: NullableStringFieldUpdateOperationsInput | string | null
+    bankDetails?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceSettingsUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    companyAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    companyPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    companyLogo?: NullableStringFieldUpdateOperationsInput | string | null
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    prefix?: StringFieldUpdateOperationsInput | string
+    nextNumber?: IntFieldUpdateOperationsInput | number
+    footerNote?: NullableStringFieldUpdateOperationsInput | string | null
+    bankDetails?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ServiceUpsertWithoutWebsitesInput = {
     update: XOR<ServiceUpdateWithoutWebsitesInput, ServiceUncheckedUpdateWithoutWebsitesInput>
     create: XOR<ServiceCreateWithoutWebsitesInput, ServiceUncheckedCreateWithoutWebsitesInput>
@@ -35886,6 +46156,8 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
     user: UserCreateNestedOneWithoutWebsitesInput
   }
@@ -35910,6 +46182,8 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
 
   export type TenantWebsiteCreateOrConnectWithoutCategoriesInput = {
@@ -35975,6 +46249,8 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
     user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
@@ -35999,6 +46275,8 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
 
   export type RestaurantDishUpsertWithWhereUniqueWithoutCategoryInput = {
@@ -36147,6 +46425,8 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
     user: UserCreateNestedOneWithoutWebsitesInput
   }
@@ -36171,6 +46451,8 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
 
   export type TenantWebsiteCreateOrConnectWithoutTablesInput = {
@@ -36264,6 +46546,8 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
     user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
@@ -36288,6 +46572,8 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
 
   export type RestaurantTableCreateWithoutWaiterInput = {
@@ -36335,6 +46621,8 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
     user: UserCreateNestedOneWithoutWebsitesInput
   }
@@ -36359,6 +46647,8 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
 
   export type TenantWebsiteCreateOrConnectWithoutWaitersInput = {
@@ -36411,6 +46701,8 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
     user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
@@ -36435,6 +46727,8 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
 
   export type RestaurantTableCreateWithoutOrdersInput = {
@@ -36643,6 +46937,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
     user: UserCreateNestedOneWithoutWebsitesInput
   }
@@ -36667,6 +46963,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
 
   export type TenantWebsiteCreateOrConnectWithoutCabinetServicesInput = {
@@ -36719,6 +47017,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
     user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
@@ -36743,6 +47043,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
 
   export type CabinetAppointmentCreateWithoutClientInput = {
@@ -36776,6 +47078,131 @@ export namespace Prisma {
     data: CabinetAppointmentCreateManyClientInput | CabinetAppointmentCreateManyClientInput[]
   }
 
+  export type InvoiceCreateWithoutClientInput = {
+    id?: string
+    number: string
+    status?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    subtotal?: number
+    taxRate?: number
+    taxAmount?: number
+    total?: number
+    notes?: string | null
+    clientName: string
+    clientEmail?: string | null
+    clientPhone?: string | null
+    clientAddress?: string | null
+    sentAt?: Date | string | null
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantWebsiteCreateNestedOneWithoutInvoicesInput
+    items?: InvoiceItemCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceUncheckedCreateWithoutClientInput = {
+    id?: string
+    tenantId: string
+    number: string
+    status?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    subtotal?: number
+    taxRate?: number
+    taxAmount?: number
+    total?: number
+    notes?: string | null
+    clientName: string
+    clientEmail?: string | null
+    clientPhone?: string | null
+    clientAddress?: string | null
+    sentAt?: Date | string | null
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceCreateOrConnectWithoutClientInput = {
+    where: InvoiceWhereUniqueInput
+    create: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput>
+  }
+
+  export type InvoiceCreateManyClientInputEnvelope = {
+    data: InvoiceCreateManyClientInput | InvoiceCreateManyClientInput[]
+  }
+
+  export type MedicalRecordCreateWithoutClientInput = {
+    id?: string
+    tenantId: string
+    visitDate?: Date | string
+    chiefComplaint?: string | null
+    diagnosis?: string | null
+    treatment?: string | null
+    notes?: string | null
+    weight?: number | null
+    bloodPressure?: string | null
+    temperature?: number | null
+    heartRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    prescriptions?: PrescriptionCreateNestedManyWithoutMedicalRecordInput
+  }
+
+  export type MedicalRecordUncheckedCreateWithoutClientInput = {
+    id?: string
+    tenantId: string
+    visitDate?: Date | string
+    chiefComplaint?: string | null
+    diagnosis?: string | null
+    treatment?: string | null
+    notes?: string | null
+    weight?: number | null
+    bloodPressure?: string | null
+    temperature?: number | null
+    heartRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    prescriptions?: PrescriptionUncheckedCreateNestedManyWithoutMedicalRecordInput
+  }
+
+  export type MedicalRecordCreateOrConnectWithoutClientInput = {
+    where: MedicalRecordWhereUniqueInput
+    create: XOR<MedicalRecordCreateWithoutClientInput, MedicalRecordUncheckedCreateWithoutClientInput>
+  }
+
+  export type MedicalRecordCreateManyClientInputEnvelope = {
+    data: MedicalRecordCreateManyClientInput | MedicalRecordCreateManyClientInput[]
+  }
+
+  export type MedicalHistoryCreateWithoutClientInput = {
+    id?: string
+    condition: string
+    since?: string | null
+    status?: string
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
+  export type MedicalHistoryUncheckedCreateWithoutClientInput = {
+    id?: string
+    condition: string
+    since?: string | null
+    status?: string
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
+  export type MedicalHistoryCreateOrConnectWithoutClientInput = {
+    where: MedicalHistoryWhereUniqueInput
+    create: XOR<MedicalHistoryCreateWithoutClientInput, MedicalHistoryUncheckedCreateWithoutClientInput>
+  }
+
+  export type MedicalHistoryCreateManyClientInputEnvelope = {
+    data: MedicalHistoryCreateManyClientInput | MedicalHistoryCreateManyClientInput[]
+  }
+
   export type TenantWebsiteCreateWithoutCabinetClientsInput = {
     id?: string
     slug: string
@@ -36794,6 +47221,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
     user: UserCreateNestedOneWithoutWebsitesInput
   }
@@ -36818,6 +47247,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
 
   export type TenantWebsiteCreateOrConnectWithoutCabinetClientsInput = {
@@ -36839,6 +47270,87 @@ export namespace Prisma {
   export type CabinetAppointmentUpdateManyWithWhereWithoutClientInput = {
     where: CabinetAppointmentScalarWhereInput
     data: XOR<CabinetAppointmentUpdateManyMutationInput, CabinetAppointmentUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type InvoiceUpsertWithWhereUniqueWithoutClientInput = {
+    where: InvoiceWhereUniqueInput
+    update: XOR<InvoiceUpdateWithoutClientInput, InvoiceUncheckedUpdateWithoutClientInput>
+    create: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput>
+  }
+
+  export type InvoiceUpdateWithWhereUniqueWithoutClientInput = {
+    where: InvoiceWhereUniqueInput
+    data: XOR<InvoiceUpdateWithoutClientInput, InvoiceUncheckedUpdateWithoutClientInput>
+  }
+
+  export type InvoiceUpdateManyWithWhereWithoutClientInput = {
+    where: InvoiceScalarWhereInput
+    data: XOR<InvoiceUpdateManyMutationInput, InvoiceUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type MedicalRecordUpsertWithWhereUniqueWithoutClientInput = {
+    where: MedicalRecordWhereUniqueInput
+    update: XOR<MedicalRecordUpdateWithoutClientInput, MedicalRecordUncheckedUpdateWithoutClientInput>
+    create: XOR<MedicalRecordCreateWithoutClientInput, MedicalRecordUncheckedCreateWithoutClientInput>
+  }
+
+  export type MedicalRecordUpdateWithWhereUniqueWithoutClientInput = {
+    where: MedicalRecordWhereUniqueInput
+    data: XOR<MedicalRecordUpdateWithoutClientInput, MedicalRecordUncheckedUpdateWithoutClientInput>
+  }
+
+  export type MedicalRecordUpdateManyWithWhereWithoutClientInput = {
+    where: MedicalRecordScalarWhereInput
+    data: XOR<MedicalRecordUpdateManyMutationInput, MedicalRecordUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type MedicalRecordScalarWhereInput = {
+    AND?: MedicalRecordScalarWhereInput | MedicalRecordScalarWhereInput[]
+    OR?: MedicalRecordScalarWhereInput[]
+    NOT?: MedicalRecordScalarWhereInput | MedicalRecordScalarWhereInput[]
+    id?: StringFilter<"MedicalRecord"> | string
+    tenantId?: StringFilter<"MedicalRecord"> | string
+    clientId?: StringFilter<"MedicalRecord"> | string
+    visitDate?: DateTimeFilter<"MedicalRecord"> | Date | string
+    chiefComplaint?: StringNullableFilter<"MedicalRecord"> | string | null
+    diagnosis?: StringNullableFilter<"MedicalRecord"> | string | null
+    treatment?: StringNullableFilter<"MedicalRecord"> | string | null
+    notes?: StringNullableFilter<"MedicalRecord"> | string | null
+    weight?: FloatNullableFilter<"MedicalRecord"> | number | null
+    bloodPressure?: StringNullableFilter<"MedicalRecord"> | string | null
+    temperature?: FloatNullableFilter<"MedicalRecord"> | number | null
+    heartRate?: IntNullableFilter<"MedicalRecord"> | number | null
+    createdAt?: DateTimeFilter<"MedicalRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"MedicalRecord"> | Date | string
+  }
+
+  export type MedicalHistoryUpsertWithWhereUniqueWithoutClientInput = {
+    where: MedicalHistoryWhereUniqueInput
+    update: XOR<MedicalHistoryUpdateWithoutClientInput, MedicalHistoryUncheckedUpdateWithoutClientInput>
+    create: XOR<MedicalHistoryCreateWithoutClientInput, MedicalHistoryUncheckedCreateWithoutClientInput>
+  }
+
+  export type MedicalHistoryUpdateWithWhereUniqueWithoutClientInput = {
+    where: MedicalHistoryWhereUniqueInput
+    data: XOR<MedicalHistoryUpdateWithoutClientInput, MedicalHistoryUncheckedUpdateWithoutClientInput>
+  }
+
+  export type MedicalHistoryUpdateManyWithWhereWithoutClientInput = {
+    where: MedicalHistoryScalarWhereInput
+    data: XOR<MedicalHistoryUpdateManyMutationInput, MedicalHistoryUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type MedicalHistoryScalarWhereInput = {
+    AND?: MedicalHistoryScalarWhereInput | MedicalHistoryScalarWhereInput[]
+    OR?: MedicalHistoryScalarWhereInput[]
+    NOT?: MedicalHistoryScalarWhereInput | MedicalHistoryScalarWhereInput[]
+    id?: StringFilter<"MedicalHistory"> | string
+    clientId?: StringFilter<"MedicalHistory"> | string
+    condition?: StringFilter<"MedicalHistory"> | string
+    since?: StringNullableFilter<"MedicalHistory"> | string | null
+    status?: StringFilter<"MedicalHistory"> | string
+    notes?: StringNullableFilter<"MedicalHistory"> | string | null
+    createdAt?: DateTimeFilter<"MedicalHistory"> | Date | string
   }
 
   export type TenantWebsiteUpsertWithoutCabinetClientsInput = {
@@ -36870,6 +47382,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
     user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
@@ -36894,6 +47408,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
 
   export type TenantWebsiteCreateWithoutCabinetAppointmentsInput = {
@@ -36914,6 +47430,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
     user: UserCreateNestedOneWithoutWebsitesInput
   }
@@ -36938,6 +47456,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
 
   export type TenantWebsiteCreateOrConnectWithoutCabinetAppointmentsInput = {
@@ -36951,8 +47471,13 @@ export namespace Prisma {
     email?: string | null
     phone?: string | null
     notes?: string | null
+    age?: number | null
+    cni?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    medicalRecords?: MedicalRecordCreateNestedManyWithoutClientInput
+    medicalHistory?: MedicalHistoryCreateNestedManyWithoutClientInput
     tenant: TenantWebsiteCreateNestedOneWithoutCabinetClientsInput
   }
 
@@ -36963,8 +47488,13 @@ export namespace Prisma {
     email?: string | null
     phone?: string | null
     notes?: string | null
+    age?: number | null
+    cni?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    medicalRecords?: MedicalRecordUncheckedCreateNestedManyWithoutClientInput
+    medicalHistory?: MedicalHistoryUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type CabinetClientCreateOrConnectWithoutAppointmentsInput = {
@@ -37028,6 +47558,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
     user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
@@ -37052,6 +47584,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
 
   export type CabinetClientUpsertWithoutAppointmentsInput = {
@@ -37071,8 +47605,13 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    cni?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    medicalRecords?: MedicalRecordUpdateManyWithoutClientNestedInput
+    medicalHistory?: MedicalHistoryUpdateManyWithoutClientNestedInput
     tenant?: TenantWebsiteUpdateOneRequiredWithoutCabinetClientsNestedInput
   }
 
@@ -37083,8 +47622,13 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    cni?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    medicalRecords?: MedicalRecordUncheckedUpdateManyWithoutClientNestedInput
+    medicalHistory?: MedicalHistoryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type CabinetServiceUpsertWithoutAppointmentsInput = {
@@ -37435,6 +47979,774 @@ export namespace Prisma {
     services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type TenantWebsiteCreateWithoutInvoiceSettingsInput = {
+    id?: string
+    slug: string
+    siteName: string
+    description?: string | null
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
+    categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
+    tables?: RestaurantTableCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    service: ServiceCreateNestedOneWithoutWebsitesInput
+    user: UserCreateNestedOneWithoutWebsitesInput
+  }
+
+  export type TenantWebsiteUncheckedCreateWithoutInvoiceSettingsInput = {
+    id?: string
+    slug: string
+    userId: string
+    serviceId: string
+    siteName: string
+    description?: string | null
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
+    categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
+    tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantWebsiteCreateOrConnectWithoutInvoiceSettingsInput = {
+    where: TenantWebsiteWhereUniqueInput
+    create: XOR<TenantWebsiteCreateWithoutInvoiceSettingsInput, TenantWebsiteUncheckedCreateWithoutInvoiceSettingsInput>
+  }
+
+  export type TenantWebsiteUpsertWithoutInvoiceSettingsInput = {
+    update: XOR<TenantWebsiteUpdateWithoutInvoiceSettingsInput, TenantWebsiteUncheckedUpdateWithoutInvoiceSettingsInput>
+    create: XOR<TenantWebsiteCreateWithoutInvoiceSettingsInput, TenantWebsiteUncheckedCreateWithoutInvoiceSettingsInput>
+    where?: TenantWebsiteWhereInput
+  }
+
+  export type TenantWebsiteUpdateToOneWithWhereWithoutInvoiceSettingsInput = {
+    where?: TenantWebsiteWhereInput
+    data: XOR<TenantWebsiteUpdateWithoutInvoiceSettingsInput, TenantWebsiteUncheckedUpdateWithoutInvoiceSettingsInput>
+  }
+
+  export type TenantWebsiteUpdateWithoutInvoiceSettingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
+    categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
+    tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
+    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
+  }
+
+  export type TenantWebsiteUncheckedUpdateWithoutInvoiceSettingsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    serviceId?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
+    categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantWebsiteCreateWithoutInvoicesInput = {
+    id?: string
+    slug: string
+    siteName: string
+    description?: string | null
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
+    categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
+    tables?: RestaurantTableCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
+    service: ServiceCreateNestedOneWithoutWebsitesInput
+    user: UserCreateNestedOneWithoutWebsitesInput
+  }
+
+  export type TenantWebsiteUncheckedCreateWithoutInvoicesInput = {
+    id?: string
+    slug: string
+    userId: string
+    serviceId: string
+    siteName: string
+    description?: string | null
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
+    categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
+    tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
+  }
+
+  export type TenantWebsiteCreateOrConnectWithoutInvoicesInput = {
+    where: TenantWebsiteWhereUniqueInput
+    create: XOR<TenantWebsiteCreateWithoutInvoicesInput, TenantWebsiteUncheckedCreateWithoutInvoicesInput>
+  }
+
+  export type CabinetClientCreateWithoutInvoicesInput = {
+    id?: string
+    name: string
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    age?: number | null
+    cni?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    appointments?: CabinetAppointmentCreateNestedManyWithoutClientInput
+    medicalRecords?: MedicalRecordCreateNestedManyWithoutClientInput
+    medicalHistory?: MedicalHistoryCreateNestedManyWithoutClientInput
+    tenant: TenantWebsiteCreateNestedOneWithoutCabinetClientsInput
+  }
+
+  export type CabinetClientUncheckedCreateWithoutInvoicesInput = {
+    id?: string
+    tenantId: string
+    name: string
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    age?: number | null
+    cni?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    appointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutClientInput
+    medicalRecords?: MedicalRecordUncheckedCreateNestedManyWithoutClientInput
+    medicalHistory?: MedicalHistoryUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type CabinetClientCreateOrConnectWithoutInvoicesInput = {
+    where: CabinetClientWhereUniqueInput
+    create: XOR<CabinetClientCreateWithoutInvoicesInput, CabinetClientUncheckedCreateWithoutInvoicesInput>
+  }
+
+  export type InvoiceItemCreateWithoutInvoiceInput = {
+    id?: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    total: number
+  }
+
+  export type InvoiceItemUncheckedCreateWithoutInvoiceInput = {
+    id?: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    total: number
+  }
+
+  export type InvoiceItemCreateOrConnectWithoutInvoiceInput = {
+    where: InvoiceItemWhereUniqueInput
+    create: XOR<InvoiceItemCreateWithoutInvoiceInput, InvoiceItemUncheckedCreateWithoutInvoiceInput>
+  }
+
+  export type InvoiceItemCreateManyInvoiceInputEnvelope = {
+    data: InvoiceItemCreateManyInvoiceInput | InvoiceItemCreateManyInvoiceInput[]
+  }
+
+  export type TenantWebsiteUpsertWithoutInvoicesInput = {
+    update: XOR<TenantWebsiteUpdateWithoutInvoicesInput, TenantWebsiteUncheckedUpdateWithoutInvoicesInput>
+    create: XOR<TenantWebsiteCreateWithoutInvoicesInput, TenantWebsiteUncheckedCreateWithoutInvoicesInput>
+    where?: TenantWebsiteWhereInput
+  }
+
+  export type TenantWebsiteUpdateToOneWithWhereWithoutInvoicesInput = {
+    where?: TenantWebsiteWhereInput
+    data: XOR<TenantWebsiteUpdateWithoutInvoicesInput, TenantWebsiteUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type TenantWebsiteUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
+    categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
+    tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
+    service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
+    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
+  }
+
+  export type TenantWebsiteUncheckedUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    serviceId?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
+    categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
+  }
+
+  export type CabinetClientUpsertWithoutInvoicesInput = {
+    update: XOR<CabinetClientUpdateWithoutInvoicesInput, CabinetClientUncheckedUpdateWithoutInvoicesInput>
+    create: XOR<CabinetClientCreateWithoutInvoicesInput, CabinetClientUncheckedCreateWithoutInvoicesInput>
+    where?: CabinetClientWhereInput
+  }
+
+  export type CabinetClientUpdateToOneWithWhereWithoutInvoicesInput = {
+    where?: CabinetClientWhereInput
+    data: XOR<CabinetClientUpdateWithoutInvoicesInput, CabinetClientUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type CabinetClientUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    cni?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appointments?: CabinetAppointmentUpdateManyWithoutClientNestedInput
+    medicalRecords?: MedicalRecordUpdateManyWithoutClientNestedInput
+    medicalHistory?: MedicalHistoryUpdateManyWithoutClientNestedInput
+    tenant?: TenantWebsiteUpdateOneRequiredWithoutCabinetClientsNestedInput
+  }
+
+  export type CabinetClientUncheckedUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    cni?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appointments?: CabinetAppointmentUncheckedUpdateManyWithoutClientNestedInput
+    medicalRecords?: MedicalRecordUncheckedUpdateManyWithoutClientNestedInput
+    medicalHistory?: MedicalHistoryUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type InvoiceItemUpsertWithWhereUniqueWithoutInvoiceInput = {
+    where: InvoiceItemWhereUniqueInput
+    update: XOR<InvoiceItemUpdateWithoutInvoiceInput, InvoiceItemUncheckedUpdateWithoutInvoiceInput>
+    create: XOR<InvoiceItemCreateWithoutInvoiceInput, InvoiceItemUncheckedCreateWithoutInvoiceInput>
+  }
+
+  export type InvoiceItemUpdateWithWhereUniqueWithoutInvoiceInput = {
+    where: InvoiceItemWhereUniqueInput
+    data: XOR<InvoiceItemUpdateWithoutInvoiceInput, InvoiceItemUncheckedUpdateWithoutInvoiceInput>
+  }
+
+  export type InvoiceItemUpdateManyWithWhereWithoutInvoiceInput = {
+    where: InvoiceItemScalarWhereInput
+    data: XOR<InvoiceItemUpdateManyMutationInput, InvoiceItemUncheckedUpdateManyWithoutInvoiceInput>
+  }
+
+  export type InvoiceItemScalarWhereInput = {
+    AND?: InvoiceItemScalarWhereInput | InvoiceItemScalarWhereInput[]
+    OR?: InvoiceItemScalarWhereInput[]
+    NOT?: InvoiceItemScalarWhereInput | InvoiceItemScalarWhereInput[]
+    id?: StringFilter<"InvoiceItem"> | string
+    invoiceId?: StringFilter<"InvoiceItem"> | string
+    description?: StringFilter<"InvoiceItem"> | string
+    quantity?: FloatFilter<"InvoiceItem"> | number
+    unitPrice?: FloatFilter<"InvoiceItem"> | number
+    total?: FloatFilter<"InvoiceItem"> | number
+  }
+
+  export type InvoiceCreateWithoutItemsInput = {
+    id?: string
+    number: string
+    status?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    subtotal?: number
+    taxRate?: number
+    taxAmount?: number
+    total?: number
+    notes?: string | null
+    clientName: string
+    clientEmail?: string | null
+    clientPhone?: string | null
+    clientAddress?: string | null
+    sentAt?: Date | string | null
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantWebsiteCreateNestedOneWithoutInvoicesInput
+    client?: CabinetClientCreateNestedOneWithoutInvoicesInput
+  }
+
+  export type InvoiceUncheckedCreateWithoutItemsInput = {
+    id?: string
+    tenantId: string
+    clientId?: string | null
+    number: string
+    status?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    subtotal?: number
+    taxRate?: number
+    taxAmount?: number
+    total?: number
+    notes?: string | null
+    clientName: string
+    clientEmail?: string | null
+    clientPhone?: string | null
+    clientAddress?: string | null
+    sentAt?: Date | string | null
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceCreateOrConnectWithoutItemsInput = {
+    where: InvoiceWhereUniqueInput
+    create: XOR<InvoiceCreateWithoutItemsInput, InvoiceUncheckedCreateWithoutItemsInput>
+  }
+
+  export type InvoiceUpsertWithoutItemsInput = {
+    update: XOR<InvoiceUpdateWithoutItemsInput, InvoiceUncheckedUpdateWithoutItemsInput>
+    create: XOR<InvoiceCreateWithoutItemsInput, InvoiceUncheckedCreateWithoutItemsInput>
+    where?: InvoiceWhereInput
+  }
+
+  export type InvoiceUpdateToOneWithWhereWithoutItemsInput = {
+    where?: InvoiceWhereInput
+    data: XOR<InvoiceUpdateWithoutItemsInput, InvoiceUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type InvoiceUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantWebsiteUpdateOneRequiredWithoutInvoicesNestedInput
+    client?: CabinetClientUpdateOneWithoutInvoicesNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CabinetClientCreateWithoutMedicalRecordsInput = {
+    id?: string
+    name: string
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    age?: number | null
+    cni?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    appointments?: CabinetAppointmentCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    medicalHistory?: MedicalHistoryCreateNestedManyWithoutClientInput
+    tenant: TenantWebsiteCreateNestedOneWithoutCabinetClientsInput
+  }
+
+  export type CabinetClientUncheckedCreateWithoutMedicalRecordsInput = {
+    id?: string
+    tenantId: string
+    name: string
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    age?: number | null
+    cni?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    appointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    medicalHistory?: MedicalHistoryUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type CabinetClientCreateOrConnectWithoutMedicalRecordsInput = {
+    where: CabinetClientWhereUniqueInput
+    create: XOR<CabinetClientCreateWithoutMedicalRecordsInput, CabinetClientUncheckedCreateWithoutMedicalRecordsInput>
+  }
+
+  export type PrescriptionCreateWithoutMedicalRecordInput = {
+    id?: string
+    medication: string
+    dosage?: string | null
+    frequency?: string | null
+    duration?: string | null
+    instructions?: string | null
+    createdAt?: Date | string
+  }
+
+  export type PrescriptionUncheckedCreateWithoutMedicalRecordInput = {
+    id?: string
+    medication: string
+    dosage?: string | null
+    frequency?: string | null
+    duration?: string | null
+    instructions?: string | null
+    createdAt?: Date | string
+  }
+
+  export type PrescriptionCreateOrConnectWithoutMedicalRecordInput = {
+    where: PrescriptionWhereUniqueInput
+    create: XOR<PrescriptionCreateWithoutMedicalRecordInput, PrescriptionUncheckedCreateWithoutMedicalRecordInput>
+  }
+
+  export type PrescriptionCreateManyMedicalRecordInputEnvelope = {
+    data: PrescriptionCreateManyMedicalRecordInput | PrescriptionCreateManyMedicalRecordInput[]
+  }
+
+  export type CabinetClientUpsertWithoutMedicalRecordsInput = {
+    update: XOR<CabinetClientUpdateWithoutMedicalRecordsInput, CabinetClientUncheckedUpdateWithoutMedicalRecordsInput>
+    create: XOR<CabinetClientCreateWithoutMedicalRecordsInput, CabinetClientUncheckedCreateWithoutMedicalRecordsInput>
+    where?: CabinetClientWhereInput
+  }
+
+  export type CabinetClientUpdateToOneWithWhereWithoutMedicalRecordsInput = {
+    where?: CabinetClientWhereInput
+    data: XOR<CabinetClientUpdateWithoutMedicalRecordsInput, CabinetClientUncheckedUpdateWithoutMedicalRecordsInput>
+  }
+
+  export type CabinetClientUpdateWithoutMedicalRecordsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    cni?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appointments?: CabinetAppointmentUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    medicalHistory?: MedicalHistoryUpdateManyWithoutClientNestedInput
+    tenant?: TenantWebsiteUpdateOneRequiredWithoutCabinetClientsNestedInput
+  }
+
+  export type CabinetClientUncheckedUpdateWithoutMedicalRecordsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    cni?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appointments?: CabinetAppointmentUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    medicalHistory?: MedicalHistoryUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type PrescriptionUpsertWithWhereUniqueWithoutMedicalRecordInput = {
+    where: PrescriptionWhereUniqueInput
+    update: XOR<PrescriptionUpdateWithoutMedicalRecordInput, PrescriptionUncheckedUpdateWithoutMedicalRecordInput>
+    create: XOR<PrescriptionCreateWithoutMedicalRecordInput, PrescriptionUncheckedCreateWithoutMedicalRecordInput>
+  }
+
+  export type PrescriptionUpdateWithWhereUniqueWithoutMedicalRecordInput = {
+    where: PrescriptionWhereUniqueInput
+    data: XOR<PrescriptionUpdateWithoutMedicalRecordInput, PrescriptionUncheckedUpdateWithoutMedicalRecordInput>
+  }
+
+  export type PrescriptionUpdateManyWithWhereWithoutMedicalRecordInput = {
+    where: PrescriptionScalarWhereInput
+    data: XOR<PrescriptionUpdateManyMutationInput, PrescriptionUncheckedUpdateManyWithoutMedicalRecordInput>
+  }
+
+  export type PrescriptionScalarWhereInput = {
+    AND?: PrescriptionScalarWhereInput | PrescriptionScalarWhereInput[]
+    OR?: PrescriptionScalarWhereInput[]
+    NOT?: PrescriptionScalarWhereInput | PrescriptionScalarWhereInput[]
+    id?: StringFilter<"Prescription"> | string
+    medicalRecordId?: StringFilter<"Prescription"> | string
+    medication?: StringFilter<"Prescription"> | string
+    dosage?: StringNullableFilter<"Prescription"> | string | null
+    frequency?: StringNullableFilter<"Prescription"> | string | null
+    duration?: StringNullableFilter<"Prescription"> | string | null
+    instructions?: StringNullableFilter<"Prescription"> | string | null
+    createdAt?: DateTimeFilter<"Prescription"> | Date | string
+  }
+
+  export type MedicalRecordCreateWithoutPrescriptionsInput = {
+    id?: string
+    tenantId: string
+    visitDate?: Date | string
+    chiefComplaint?: string | null
+    diagnosis?: string | null
+    treatment?: string | null
+    notes?: string | null
+    weight?: number | null
+    bloodPressure?: string | null
+    temperature?: number | null
+    heartRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: CabinetClientCreateNestedOneWithoutMedicalRecordsInput
+  }
+
+  export type MedicalRecordUncheckedCreateWithoutPrescriptionsInput = {
+    id?: string
+    tenantId: string
+    clientId: string
+    visitDate?: Date | string
+    chiefComplaint?: string | null
+    diagnosis?: string | null
+    treatment?: string | null
+    notes?: string | null
+    weight?: number | null
+    bloodPressure?: string | null
+    temperature?: number | null
+    heartRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MedicalRecordCreateOrConnectWithoutPrescriptionsInput = {
+    where: MedicalRecordWhereUniqueInput
+    create: XOR<MedicalRecordCreateWithoutPrescriptionsInput, MedicalRecordUncheckedCreateWithoutPrescriptionsInput>
+  }
+
+  export type MedicalRecordUpsertWithoutPrescriptionsInput = {
+    update: XOR<MedicalRecordUpdateWithoutPrescriptionsInput, MedicalRecordUncheckedUpdateWithoutPrescriptionsInput>
+    create: XOR<MedicalRecordCreateWithoutPrescriptionsInput, MedicalRecordUncheckedCreateWithoutPrescriptionsInput>
+    where?: MedicalRecordWhereInput
+  }
+
+  export type MedicalRecordUpdateToOneWithWhereWithoutPrescriptionsInput = {
+    where?: MedicalRecordWhereInput
+    data: XOR<MedicalRecordUpdateWithoutPrescriptionsInput, MedicalRecordUncheckedUpdateWithoutPrescriptionsInput>
+  }
+
+  export type MedicalRecordUpdateWithoutPrescriptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    visitDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    chiefComplaint?: NullableStringFieldUpdateOperationsInput | string | null
+    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    treatment?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    bloodPressure?: NullableStringFieldUpdateOperationsInput | string | null
+    temperature?: NullableFloatFieldUpdateOperationsInput | number | null
+    heartRate?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: CabinetClientUpdateOneRequiredWithoutMedicalRecordsNestedInput
+  }
+
+  export type MedicalRecordUncheckedUpdateWithoutPrescriptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    clientId?: StringFieldUpdateOperationsInput | string
+    visitDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    chiefComplaint?: NullableStringFieldUpdateOperationsInput | string | null
+    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    treatment?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    bloodPressure?: NullableStringFieldUpdateOperationsInput | string | null
+    temperature?: NullableFloatFieldUpdateOperationsInput | number | null
+    heartRate?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CabinetClientCreateWithoutMedicalHistoryInput = {
+    id?: string
+    name: string
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    age?: number | null
+    cni?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    appointments?: CabinetAppointmentCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    medicalRecords?: MedicalRecordCreateNestedManyWithoutClientInput
+    tenant: TenantWebsiteCreateNestedOneWithoutCabinetClientsInput
+  }
+
+  export type CabinetClientUncheckedCreateWithoutMedicalHistoryInput = {
+    id?: string
+    tenantId: string
+    name: string
+    email?: string | null
+    phone?: string | null
+    notes?: string | null
+    age?: number | null
+    cni?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    appointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    medicalRecords?: MedicalRecordUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type CabinetClientCreateOrConnectWithoutMedicalHistoryInput = {
+    where: CabinetClientWhereUniqueInput
+    create: XOR<CabinetClientCreateWithoutMedicalHistoryInput, CabinetClientUncheckedCreateWithoutMedicalHistoryInput>
+  }
+
+  export type CabinetClientUpsertWithoutMedicalHistoryInput = {
+    update: XOR<CabinetClientUpdateWithoutMedicalHistoryInput, CabinetClientUncheckedUpdateWithoutMedicalHistoryInput>
+    create: XOR<CabinetClientCreateWithoutMedicalHistoryInput, CabinetClientUncheckedCreateWithoutMedicalHistoryInput>
+    where?: CabinetClientWhereInput
+  }
+
+  export type CabinetClientUpdateToOneWithWhereWithoutMedicalHistoryInput = {
+    where?: CabinetClientWhereInput
+    data: XOR<CabinetClientUpdateWithoutMedicalHistoryInput, CabinetClientUncheckedUpdateWithoutMedicalHistoryInput>
+  }
+
+  export type CabinetClientUpdateWithoutMedicalHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    cni?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appointments?: CabinetAppointmentUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    medicalRecords?: MedicalRecordUpdateManyWithoutClientNestedInput
+    tenant?: TenantWebsiteUpdateOneRequiredWithoutCabinetClientsNestedInput
+  }
+
+  export type CabinetClientUncheckedUpdateWithoutMedicalHistoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    cni?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    appointments?: CabinetAppointmentUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    medicalRecords?: MedicalRecordUncheckedUpdateManyWithoutClientNestedInput
+  }
+
   export type ChatSessionCreateManyUserInput = {
     id?: string
     title?: string | null
@@ -37628,6 +48940,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
   }
 
@@ -37651,6 +48965,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
 
   export type TenantWebsiteUncheckedUpdateManyWithoutUserInput = {
@@ -37816,6 +49132,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
   }
 
@@ -37839,6 +49157,8 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
 
   export type TenantWebsiteUncheckedUpdateManyWithoutServiceInput = {
@@ -37898,6 +49218,8 @@ export namespace Prisma {
     email?: string | null
     phone?: string | null
     notes?: string | null
+    age?: number | null
+    cni?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -37933,6 +49255,28 @@ export namespace Prisma {
     pin: string
     isActive?: boolean
     createdAt?: Date | string
+  }
+
+  export type InvoiceCreateManyTenantInput = {
+    id?: string
+    clientId?: string | null
+    number: string
+    status?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    subtotal?: number
+    taxRate?: number
+    taxAmount?: number
+    total?: number
+    notes?: string | null
+    clientName: string
+    clientEmail?: string | null
+    clientPhone?: string | null
+    clientAddress?: string | null
+    sentAt?: Date | string | null
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CabinetAppointmentUpdateWithoutTenantInput = {
@@ -37974,9 +49318,14 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    cni?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     appointments?: CabinetAppointmentUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    medicalRecords?: MedicalRecordUpdateManyWithoutClientNestedInput
+    medicalHistory?: MedicalHistoryUpdateManyWithoutClientNestedInput
   }
 
   export type CabinetClientUncheckedUpdateWithoutTenantInput = {
@@ -37985,9 +49334,14 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    cni?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     appointments?: CabinetAppointmentUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    medicalRecords?: MedicalRecordUncheckedUpdateManyWithoutClientNestedInput
+    medicalHistory?: MedicalHistoryUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type CabinetClientUncheckedUpdateManyWithoutTenantInput = {
@@ -37996,6 +49350,8 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    cni?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38105,6 +49461,74 @@ export namespace Prisma {
     pin?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: CabinetClientUpdateOneWithoutInvoicesNestedInput
+    items?: InvoiceItemUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientId?: NullableStringFieldUpdateOperationsInput | string | null
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RestaurantDishCreateManyCategoryInput = {
@@ -38302,6 +49726,53 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type InvoiceCreateManyClientInput = {
+    id?: string
+    tenantId: string
+    number: string
+    status?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    subtotal?: number
+    taxRate?: number
+    taxAmount?: number
+    total?: number
+    notes?: string | null
+    clientName: string
+    clientEmail?: string | null
+    clientPhone?: string | null
+    clientAddress?: string | null
+    sentAt?: Date | string | null
+    paidAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MedicalRecordCreateManyClientInput = {
+    id?: string
+    tenantId: string
+    visitDate?: Date | string
+    chiefComplaint?: string | null
+    diagnosis?: string | null
+    treatment?: string | null
+    notes?: string | null
+    weight?: number | null
+    bloodPressure?: string | null
+    temperature?: number | null
+    heartRate?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MedicalHistoryCreateManyClientInput = {
+    id?: string
+    condition: string
+    since?: string | null
+    status?: string
+    notes?: string | null
+    createdAt?: Date | string
+  }
+
   export type CabinetAppointmentUpdateWithoutClientInput = {
     id?: StringFieldUpdateOperationsInput | string
     appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38333,6 +49804,151 @@ export namespace Prisma {
     notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantWebsiteUpdateOneRequiredWithoutInvoicesNestedInput
+    items?: InvoiceItemUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxRate?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MedicalRecordUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    visitDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    chiefComplaint?: NullableStringFieldUpdateOperationsInput | string | null
+    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    treatment?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    bloodPressure?: NullableStringFieldUpdateOperationsInput | string | null
+    temperature?: NullableFloatFieldUpdateOperationsInput | number | null
+    heartRate?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    prescriptions?: PrescriptionUpdateManyWithoutMedicalRecordNestedInput
+  }
+
+  export type MedicalRecordUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    visitDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    chiefComplaint?: NullableStringFieldUpdateOperationsInput | string | null
+    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    treatment?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    bloodPressure?: NullableStringFieldUpdateOperationsInput | string | null
+    temperature?: NullableFloatFieldUpdateOperationsInput | number | null
+    heartRate?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    prescriptions?: PrescriptionUncheckedUpdateManyWithoutMedicalRecordNestedInput
+  }
+
+  export type MedicalRecordUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    visitDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    chiefComplaint?: NullableStringFieldUpdateOperationsInput | string | null
+    diagnosis?: NullableStringFieldUpdateOperationsInput | string | null
+    treatment?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    weight?: NullableFloatFieldUpdateOperationsInput | number | null
+    bloodPressure?: NullableStringFieldUpdateOperationsInput | string | null
+    temperature?: NullableFloatFieldUpdateOperationsInput | number | null
+    heartRate?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MedicalHistoryUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    condition?: StringFieldUpdateOperationsInput | string
+    since?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MedicalHistoryUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    condition?: StringFieldUpdateOperationsInput | string
+    since?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MedicalHistoryUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    condition?: StringFieldUpdateOperationsInput | string
+    since?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmailListMemberCreateManyListInput = {
@@ -38369,6 +49985,78 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type InvoiceItemCreateManyInvoiceInput = {
+    id?: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    total: number
+  }
+
+  export type InvoiceItemUpdateWithoutInvoiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type InvoiceItemUncheckedUpdateWithoutInvoiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type InvoiceItemUncheckedUpdateManyWithoutInvoiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    total?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type PrescriptionCreateManyMedicalRecordInput = {
+    id?: string
+    medication: string
+    dosage?: string | null
+    frequency?: string | null
+    duration?: string | null
+    instructions?: string | null
+    createdAt?: Date | string
+  }
+
+  export type PrescriptionUpdateWithoutMedicalRecordInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    medication?: StringFieldUpdateOperationsInput | string
+    dosage?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    instructions?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrescriptionUncheckedUpdateWithoutMedicalRecordInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    medication?: StringFieldUpdateOperationsInput | string
+    dosage?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    instructions?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PrescriptionUncheckedUpdateManyWithoutMedicalRecordInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    medication?: StringFieldUpdateOperationsInput | string
+    dosage?: NullableStringFieldUpdateOperationsInput | string | null
+    frequency?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: NullableStringFieldUpdateOperationsInput | string | null
+    instructions?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

@@ -703,3 +703,132 @@ export const getPaymentDeclinedTemplate = (
     </html>
   `;
 };
+
+export const getInvoiceEmailTemplate = (invoice: {
+    number: string
+    issueDate: Date | string
+    dueDate?: Date | string | null
+    clientName: string
+    subtotal: number
+    taxRate: number
+    taxAmount: number
+    total: number
+    notes?: string | null
+    items: { description: string; quantity: number; unitPrice: number; total: number }[]
+}, settings: {
+    companyName?: string | null
+    companyAddress?: string | null
+    companyPhone?: string | null
+    companyEmail?: string | null
+    currency?: string | null
+    footerNote?: string | null
+    bankDetails?: string | null
+} | null) => {
+    const currency = settings?.currency ?? 'MAD'
+    const companyName = settings?.companyName ?? 'Votre prestataire'
+
+    const itemsHtml = invoice.items.map(item => `
+        <tr>
+            <td style="padding: 10px 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #333;">${item.description}</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #555; text-align: center;">${item.quantity}</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; color: #555; text-align: right;">${item.unitPrice.toFixed(0)} ${currency}</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid #f0f0f0; font-size: 14px; font-weight: 600; color: #111; text-align: right;">${item.total.toFixed(0)} ${currency}</td>
+        </tr>
+    `).join('')
+
+    const taxRow = invoice.taxRate > 0 ? `
+        <tr>
+            <td colspan="3" style="padding: 6px 12px; font-size: 13px; color: #666; text-align: right;">TVA (${invoice.taxRate}%)</td>
+            <td style="padding: 6px 12px; font-size: 13px; color: #666; text-align: right;">${invoice.taxAmount.toFixed(0)} ${currency}</td>
+        </tr>
+    ` : ''
+
+    const dueDateRow = invoice.dueDate ? `
+        <div style="margin-top: 8px; font-size: 13px; color: #666;">
+            Date d'échéance : <strong>${new Date(invoice.dueDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</strong>
+        </div>
+    ` : ''
+
+    const bankSection = settings?.bankDetails ? `
+        <div style="margin-top: 24px; background: #f0f7ff; border-radius: 8px; padding: 16px;">
+            <p style="margin: 0 0 8px; font-size: 12px; font-weight: 700; color: #2563eb; text-transform: uppercase; letter-spacing: 0.05em;">Coordonnées bancaires</p>
+            <pre style="margin: 0; font-family: monospace; font-size: 13px; color: #333; white-space: pre-wrap;">${settings.bankDetails}</pre>
+        </div>
+    ` : ''
+
+    const notesSection = invoice.notes ? `
+        <div style="margin-top: 16px; padding: 12px 16px; background: #f9f9f9; border-radius: 8px; font-size: 13px; color: #555;">
+            <strong>Notes :</strong> ${invoice.notes}
+        </div>
+    ` : ''
+
+    const footerNote = settings?.footerNote ?? 'Merci de votre confiance.'
+
+    return `<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture ${invoice.number}</title>
+</head>
+<body style="margin:0;padding:0;background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+    <div style="max-width:620px;margin:32px auto;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e5e5e5;">
+        
+        <!-- Header -->
+        <div style="background:#111827;padding:32px 40px;text-align:center;">
+            <img src="https://firststepco.com/og-image.png" alt="${companyName}" style="height:48px;width:auto;pointer-events:none;-webkit-user-drag:none;" />
+        </div>
+
+        <!-- Body -->
+        <div style="padding:32px 40px;">
+            <h2 style="margin:0 0 4px;font-size:22px;font-weight:700;color:#111;">Facture ${invoice.number}</h2>
+            <p style="margin:0 0 24px;font-size:14px;color:#666;">
+                Émise le ${new Date(invoice.issueDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                ${dueDateRow}
+            </p>
+
+            <p style="margin:0 0 24px;font-size:15px;color:#333;">
+                Bonjour <strong>${invoice.clientName}</strong>,<br><br>
+                Veuillez trouver ci-dessous votre facture de la part de <strong>${companyName}</strong>.
+            </p>
+
+            <!-- Items table -->
+            <table width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border:1px solid #e5e5e5;border-radius:8px;overflow:hidden;">
+                <thead>
+                    <tr style="background:#f9fafb;">
+                        <th style="padding:10px 12px;font-size:12px;font-weight:700;color:#666;text-transform:uppercase;text-align:left;letter-spacing:0.05em;">Description</th>
+                        <th style="padding:10px 12px;font-size:12px;font-weight:700;color:#666;text-transform:uppercase;text-align:center;letter-spacing:0.05em;">Qté</th>
+                        <th style="padding:10px 12px;font-size:12px;font-weight:700;color:#666;text-transform:uppercase;text-align:right;letter-spacing:0.05em;">Prix unit.</th>
+                        <th style="padding:10px 12px;font-size:12px;font-weight:700;color:#666;text-transform:uppercase;text-align:right;letter-spacing:0.05em;">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${itemsHtml}
+                    <tr style="background:#f9fafb;">
+                        <td colspan="3" style="padding:10px 12px;font-size:13px;color:#666;text-align:right;">Sous-total</td>
+                        <td style="padding:10px 12px;font-size:13px;color:#333;text-align:right;">${invoice.subtotal.toFixed(0)} ${currency}</td>
+                    </tr>
+                    ${taxRow}
+                    <tr style="background:#111827;">
+                        <td colspan="3" style="padding:12px 16px;font-size:15px;font-weight:700;color:#fff;text-align:right;">TOTAL</td>
+                        <td style="padding:12px 16px;font-size:18px;font-weight:800;color:#fff;text-align:right;">${invoice.total.toFixed(0)} ${currency}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            ${bankSection}
+            ${notesSection}
+
+            <div style="margin-top:32px;padding-top:24px;border-top:1px solid #e5e5e5;text-align:center;font-size:13px;color:#888;">
+                ${footerNote}
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="background:#f9fafb;padding:20px 40px;text-align:center;font-size:12px;color:#aaa;border-top:1px solid #e5e5e5;">
+            &copy; ${new Date().getFullYear()} ${companyName}. Tous droits réservés.
+        </div>
+    </div>
+</body>
+</html>`
+}

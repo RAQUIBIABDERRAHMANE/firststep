@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Badge } from '@/components/ui/Badge'
-import { Check, ChevronRight, ChevronLeft, Calendar, Clock, User, Briefcase, Phone, Mail } from 'lucide-react'
+import { Check, ChevronRight, ChevronLeft, Calendar, Clock, User, Briefcase, Phone, Mail, CreditCard, Hash } from 'lucide-react'
 import { createCabinetAppointment } from '@/app/actions/cabinet'
 
 interface Service {
@@ -36,6 +36,8 @@ export default function BookingFlow({
     const [clientName, setClientName] = useState('')
     const [clientEmail, setClientEmail] = useState('')
     const [clientPhone, setClientPhone] = useState('')
+    const [clientAge, setClientAge] = useState('')
+    const [clientCni, setClientCni] = useState('')
     const [notes, setNotes] = useState('')
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
@@ -57,6 +59,8 @@ export default function BookingFlow({
                 clientName,
                 clientEmail,
                 clientPhone,
+                clientAge: clientAge ? parseInt(clientAge) : undefined,
+                clientCni: clientCni || undefined,
                 appointmentDate,
                 notes,
             })
@@ -242,13 +246,40 @@ export default function BookingFlow({
                             <div className="space-y-2">
                                 <label className="text-sm font-bold flex items-center gap-2">
                                     <Phone className="h-4 w-4 text-slate-500" />
-                                    Phone Number
+                                    Téléphone
                                 </label>
                                 <Input
                                     type="tel"
                                     placeholder="+212 6..."
                                     value={clientPhone}
                                     onChange={(e) => setClientPhone(e.target.value)}
+                                />
+                            </div>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <label className="text-sm font-bold flex items-center gap-2">
+                                    <Hash className="h-4 w-4 text-slate-500" />
+                                    Âge
+                                </label>
+                                <Input
+                                    type="number"
+                                    min="0"
+                                    max="120"
+                                    placeholder="Ex: 35"
+                                    value={clientAge}
+                                    onChange={(e) => setClientAge(e.target.value)}
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-bold flex items-center gap-2">
+                                    <CreditCard className="h-4 w-4 text-slate-500" />
+                                    CNI (Carte Nationale)
+                                </label>
+                                <Input
+                                    placeholder="Ex: AB123456"
+                                    value={clientCni}
+                                    onChange={(e) => setClientCni(e.target.value)}
                                 />
                             </div>
                         </div>

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { getCurrentUser } from '@/app/actions/auth'
 import { redirect } from 'next/navigation'
-import { Briefcase, ClipboardList, Users, Calendar, Settings } from 'lucide-react'
+import { Briefcase, ClipboardList, Users, Calendar, Settings, FileText, Stethoscope } from 'lucide-react'
 import prisma from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 
@@ -40,6 +40,8 @@ export default async function CabinetLayout({
         { label: 'Services', href: `/dashboard/cabinet/${tenantSlug}/services`, icon: Briefcase },
         { label: 'Clients', href: `/dashboard/cabinet/${tenantSlug}/clients`, icon: Users },
         { label: 'Calendar', href: `/dashboard/cabinet/${tenantSlug}/calendar`, icon: Calendar },
+        { label: 'Factures', href: `/dashboard/cabinet/${tenantSlug}/invoices`, icon: FileText },
+        { label: 'Dossiers Médicaux', href: `/dashboard/cabinet/${tenantSlug}/medical`, icon: Stethoscope },
         { label: 'Settings', href: `/dashboard/cabinet/${tenantSlug}/settings`, icon: Settings },
     ]
 

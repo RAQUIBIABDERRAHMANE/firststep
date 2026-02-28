@@ -107,8 +107,11 @@ export async function saveCabinetClient(data: {
     email?: string
     phone?: string
     notes?: string
+    age?: number
+    cni?: string
 }, slug?: string) {
     try {
+        console.log('[saveCabinetClient] data received:', { id: data.id, age: data.age, cni: data.cni })
         if (data.id) {
             // Update existing client
             const client = await prisma.cabinetClient.update({
@@ -118,6 +121,8 @@ export async function saveCabinetClient(data: {
                     email: data.email,
                     phone: data.phone,
                     notes: data.notes,
+                    age: data.age ?? null,
+                    cni: data.cni || null,
                 },
             })
             if (slug) revalidatePath(`/dashboard/cabinet/${slug}/clients`)
@@ -132,6 +137,8 @@ export async function saveCabinetClient(data: {
                     email: data.email,
                     phone: data.phone,
                     notes: data.notes,
+                    age: data.age ?? null,
+                    cni: data.cni || null,
                 },
             })
             if (slug) revalidatePath(`/dashboard/cabinet/${slug}/clients`)
@@ -193,6 +200,8 @@ export async function createCabinetAppointment(data: {
     clientName: string
     clientEmail?: string
     clientPhone?: string
+    clientAge?: number
+    clientCni?: string
     appointmentDate: Date
     notes?: string
 }, slug?: string) {
@@ -222,6 +231,8 @@ export async function createCabinetAppointment(data: {
                         name: data.clientName,
                         email: data.clientEmail,
                         phone: data.clientPhone,
+                        age: data.clientAge ?? null,
+                        cni: data.clientCni || null,
                     },
                 })
                 clientId = newClient.id

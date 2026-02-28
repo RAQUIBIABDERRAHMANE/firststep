@@ -116,6 +116,8 @@ model TenantWebsite {
   categories          RestaurantCategory[]
   tables              RestaurantTable[]
   waiters             RestaurantWaiter[]
+  invoices            Invoice[]
+  invoiceSettings     InvoiceSettings?
   service             Service              @relation(fields: [serviceId], references: [id])
   user                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -219,16 +221,21 @@ model CabinetService {
 }
 
 model CabinetClient {
-  id           String               @id @default(cuid())
-  tenantId     String
-  name         String
-  email        String?
-  phone        String?
-  notes        String?
-  createdAt    DateTime             @default(now())
-  updatedAt    DateTime             @updatedAt
-  appointments CabinetAppointment[]
-  tenant       TenantWebsite        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  id             String               @id @default(cuid())
+  tenantId       String
+  name           String
+  email          String?
+  phone          String?
+  notes          String?
+  age            Int?
+  cni            String?
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  appointments   CabinetAppointment[]
+  invoices       Invoice[]
+  medicalRecords MedicalRecord[]
+  medicalHistory MedicalHistory[]
+  tenant         TenantWebsite        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
   @@index([tenantId])
   @@index([email])
@@ -324,4 +331,116 @@ model EmailListMember {
 
   @@unique([listId, userId])
   @@unique([listId, email])
+}
+
+model InvoiceSettings {
+  id             String        @id @default(cuid())
+  tenantId       String        @unique
+  companyName    String?
+  companyAddress String?
+  companyPhone   String?
+  companyEmail   String?
+  companyLogo    String?
+  taxRate        Float         @default(0)
+  currency       String        @default("MAD")
+  prefix         String        @default("FAC")
+  nextNumber     Int           @default(1)
+  footerNote     String?
+  bankDetails    String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  tenant         TenantWebsite @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+}
+
+model Invoice {
+  id            String         @id @default(cuid())
+  tenantId      String
+  clientId      String?
+  number        String
+  status        String         @default("DRAFT")
+  issueDate     DateTime       @default(now())
+  dueDate       DateTime?
+  subtotal      Float          @default(0)
+  taxRate       Float          @default(0)
+  taxAmount     Float          @default(0)
+  total         Float          @default(0)
+  notes         String?
+  clientName    String
+  clientEmail   String?
+  clientPhone   String?
+  clientAddress String?
+  sentAt        DateTime?
+  paidAt        DateTime?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  tenant        TenantWebsite  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  client        CabinetClient? @relation(fields: [clientId], references: [id])
+  items         InvoiceItem[]
+
+  @@unique([tenantId, number])
+  @@index([tenantId])
+  @@index([clientId])
+  @@index([status])
+}
+
+model InvoiceItem {
+  id          String  @id @default(cuid())
+  invoiceId   String
+  description String
+  quantity    Float   @default(1)
+  unitPrice   Float
+  total       Float
+  invoice     Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@index([invoiceId])
+}
+
+model MedicalRecord {
+  id             String         @id @default(cuid())
+  tenantId       String
+  clientId       String
+  visitDate      DateTime       @default(now())
+  chiefComplaint String?
+  diagnosis      String?
+  treatment      String?
+  notes          String?
+  weight         Float?
+  bloodPressure  String?
+  temperature    Float?
+  heartRate      Int?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  client         CabinetClient  @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  prescriptions  Prescription[]
+
+  @@index([tenantId])
+  @@index([clientId])
+  @@index([visitDate])
+}
+
+model Prescription {
+  id              String        @id @default(cuid())
+  medicalRecordId String
+  medication      String
+  dosage          String?
+  frequency       String?
+  duration        String?
+  instructions    String?
+  createdAt       DateTime      @default(now())
+  medicalRecord   MedicalRecord @relation(fields: [medicalRecordId], references: [id], onDelete: Cascade)
+
+  @@index([medicalRecordId])
+}
+
+model MedicalHistory {
+  id        String        @id @default(cuid())
+  clientId  String
+  condition String
+  since     String?
+  status    String        @default("ACTIVE")
+  notes     String?
+  createdAt DateTime      @default(now())
+  client    CabinetClient @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@index([clientId])
 }

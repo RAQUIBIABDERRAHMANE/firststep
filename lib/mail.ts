@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import { getWelcomeEmailTemplate, getPaymentRequestTemplate, getPaymentApprovedTemplate, getPaymentDeclinedTemplate } from './email/templates';
+import { getWelcomeEmailTemplate, getPaymentRequestTemplate, getPaymentApprovedTemplate, getPaymentDeclinedTemplate, getInvoiceEmailTemplate } from './email/templates';
 
 const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
@@ -210,6 +210,63 @@ export async function sendPaymentDeclinedEmail(
         return { success: true };
     } catch (error) {
         console.error('❌ [MAILER] Error sending payment declined email:', error);
+        return { success: false, error };
+    }
+}
+
+export async function sendInvoiceEmail(
+    invoice: {
+        number: string
+        issueDate: Date | string
+        dueDate?: Date | string | null
+        clientName: string
+        clientEmail: string
+        subtotal: number
+        taxRate: number
+        taxAmount: number
+        total: number
+        notes?: string | null
+        items: { description: string; quantity: number; unitPrice: number; total: number }[]
+    },
+    settings: {
+        companyName?: string | null
+        companyAddress?: string | null
+        companyPhone?: string | null
+        companyEmail?: string | null
+        currency?: string | null
+        footerNote?: string | null
+        bankDetails?: string | null
+    } | null
+) {
+    const companyName = settings?.companyName ?? 'Votre prestataire';
+
+    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
+        console.log('⚠️  [MAILER] Email configuration missing (Invoice)');
+        console.log('--------------------------------------------------');
+        console.log(`[MAILER] INVOICE EMAIL`);
+        console.log(`[MAILER] TO: ${invoice.clientEmail}`);
+        console.log(`[MAILER] Facture: ${invoice.number} - ${invoice.total} MAD`);
+        console.log('--------------------------------------------------');
+        return { success: true, logged: true };
+    }
+
+    console.log('📧 [MAILER] Sending invoice email...');
+    console.log(`   To: ${invoice.clientEmail} — Facture ${invoice.number}`);
+
+    try {
+        const html = getInvoiceEmailTemplate(invoice, settings);
+
+        await transporter.sendMail({
+            from: `"${companyName}" <${process.env.EMAIL_USER}>`,
+            to: invoice.clientEmail,
+            subject: `Facture ${invoice.number} - ${companyName}`,
+            html,
+        });
+
+        console.log('✅ [MAILER] Invoice email sent successfully!');
+        return { success: true };
+    } catch (error) {
+        console.error('❌ [MAILER] Error sending invoice email:', error);
         return { success: false, error };
     }
 }

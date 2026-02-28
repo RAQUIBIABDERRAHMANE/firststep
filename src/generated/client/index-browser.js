@@ -271,6 +271,8 @@ exports.Prisma.CabinetClientScalarFieldEnum = {
   email: 'email',
   phone: 'phone',
   notes: 'notes',
+  age: 'age',
+  cni: 'cni',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -347,6 +349,94 @@ exports.Prisma.EmailListMemberScalarFieldEnum = {
   unsubscribed: 'unsubscribed'
 };
 
+exports.Prisma.InvoiceSettingsScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  companyName: 'companyName',
+  companyAddress: 'companyAddress',
+  companyPhone: 'companyPhone',
+  companyEmail: 'companyEmail',
+  companyLogo: 'companyLogo',
+  taxRate: 'taxRate',
+  currency: 'currency',
+  prefix: 'prefix',
+  nextNumber: 'nextNumber',
+  footerNote: 'footerNote',
+  bankDetails: 'bankDetails',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InvoiceScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  clientId: 'clientId',
+  number: 'number',
+  status: 'status',
+  issueDate: 'issueDate',
+  dueDate: 'dueDate',
+  subtotal: 'subtotal',
+  taxRate: 'taxRate',
+  taxAmount: 'taxAmount',
+  total: 'total',
+  notes: 'notes',
+  clientName: 'clientName',
+  clientEmail: 'clientEmail',
+  clientPhone: 'clientPhone',
+  clientAddress: 'clientAddress',
+  sentAt: 'sentAt',
+  paidAt: 'paidAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InvoiceItemScalarFieldEnum = {
+  id: 'id',
+  invoiceId: 'invoiceId',
+  description: 'description',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  total: 'total'
+};
+
+exports.Prisma.MedicalRecordScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  clientId: 'clientId',
+  visitDate: 'visitDate',
+  chiefComplaint: 'chiefComplaint',
+  diagnosis: 'diagnosis',
+  treatment: 'treatment',
+  notes: 'notes',
+  weight: 'weight',
+  bloodPressure: 'bloodPressure',
+  temperature: 'temperature',
+  heartRate: 'heartRate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PrescriptionScalarFieldEnum = {
+  id: 'id',
+  medicalRecordId: 'medicalRecordId',
+  medication: 'medication',
+  dosage: 'dosage',
+  frequency: 'frequency',
+  duration: 'duration',
+  instructions: 'instructions',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.MedicalHistoryScalarFieldEnum = {
+  id: 'id',
+  clientId: 'clientId',
+  condition: 'condition',
+  since: 'since',
+  status: 'status',
+  notes: 'notes',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -380,7 +470,13 @@ exports.Prisma.ModelName = {
   BankAccount: 'BankAccount',
   Campaign: 'Campaign',
   EmailList: 'EmailList',
-  EmailListMember: 'EmailListMember'
+  EmailListMember: 'EmailListMember',
+  InvoiceSettings: 'InvoiceSettings',
+  Invoice: 'Invoice',
+  InvoiceItem: 'InvoiceItem',
+  MedicalRecord: 'MedicalRecord',
+  Prescription: 'Prescription',
+  MedicalHistory: 'MedicalHistory'
 };
 
 /**

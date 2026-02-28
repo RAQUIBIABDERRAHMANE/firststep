@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
-import { Plus, Edit, Mail, Phone, FileText, Calendar } from 'lucide-react'
+import { Plus, Edit, Mail, Phone, FileText, Calendar, CreditCard, Hash } from 'lucide-react'
 import { saveCabinetClient } from '@/app/actions/cabinet'
 
 type CabinetClient = {
@@ -14,6 +14,8 @@ type CabinetClient = {
     email: string | null
     phone: string | null
     notes: string | null
+    age: number | null
+    cni: string | null
     createdAt: Date
     appointments: any[]
 }
@@ -28,6 +30,8 @@ export default function CabinetClientsClient({ clients, tenantId, tenantSlug }: 
         email: '',
         phone: '',
         notes: '',
+        age: '',
+        cni: '',
     })
 
     const handleEdit = (client: CabinetClient) => {
@@ -37,6 +41,8 @@ export default function CabinetClientsClient({ clients, tenantId, tenantSlug }: 
             email: client.email || '',
             phone: client.phone || '',
             notes: client.notes || '',
+            age: client.age?.toString() || '',
+            cni: client.cni || '',
         })
         setIsDialogOpen(true)
     }
@@ -48,6 +54,8 @@ export default function CabinetClientsClient({ clients, tenantId, tenantSlug }: 
             email: '',
             phone: '',
             notes: '',
+            age: '',
+            cni: '',
         })
         setIsDialogOpen(true)
     }
@@ -62,6 +70,8 @@ export default function CabinetClientsClient({ clients, tenantId, tenantSlug }: 
             email: formData.email,
             phone: formData.phone,
             notes: formData.notes,
+            age: formData.age ? parseInt(formData.age) : undefined,
+            cni: formData.cni || undefined,
         }, tenantSlug)
 
         if (result.success) {
@@ -113,6 +123,18 @@ export default function CabinetClientsClient({ clients, tenantId, tenantSlug }: 
                                                 <div className="flex items-center gap-1 text-sm text-muted-foreground">
                                                     <Phone className="h-3 w-3" />
                                                     {client.phone}
+                                                </div>
+                                            )}
+                                            {client.age && (
+                                                <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                                                    <Hash className="h-3 w-3" />
+                                                    {client.age} ans
+                                                </div>
+                                            )}
+                                            {client.cni && (
+                                                <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                                                    <CreditCard className="h-3 w-3" />
+                                                    CNI: {client.cni}
                                                 </div>
                                             )}
                                         </div>
@@ -191,6 +213,34 @@ export default function CabinetClientsClient({ clients, tenantId, tenantSlug }: 
                                             setFormData({ ...formData, phone: e.target.value })
                                         }
                                     />
+                                </div>
+                                <div className="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label className="text-sm font-medium">Âge</label>
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            max="120"
+                                            className="w-full mt-1 px-3 py-2 border rounded-lg"
+                                            placeholder="Ex: 35"
+                                            value={formData.age}
+                                            onChange={(e) =>
+                                                setFormData({ ...formData, age: e.target.value })
+                                            }
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="text-sm font-medium">CNI</label>
+                                        <input
+                                            type="text"
+                                            className="w-full mt-1 px-3 py-2 border rounded-lg"
+                                            placeholder="Ex: AB123456"
+                                            value={formData.cni}
+                                            onChange={(e) =>
+                                                setFormData({ ...formData, cni: e.target.value })
+                                            }
+                                        />
+                                    </div>
                                 </div>
                                 <div>
                                     <label className="text-sm font-medium">Notes</label>
