@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { signUp } from '@/app/actions/auth'
+import Link from 'next/link'
 import { Loader2, ArrowRight, Shield, Zap, HeartHandshake, Star, Eye, EyeOff } from 'lucide-react'
 
 export default function SignupSection() {
@@ -126,7 +127,7 @@ export default function SignupSection() {
 
                                     <p className="text-center text-xs text-slate-600">
                                         En vous inscrivant, vous acceptez nos{' '}
-                                        <span className="text-slate-500 underline underline-offset-2 cursor-pointer">conditions d&apos;utilisation</span>
+                                        <Link href="/terms" className="text-slate-400 underline underline-offset-2 hover:text-white transition-colors">conditions d&apos;utilisation</Link>
                                     </p>
                                 </form>
                             </div>
