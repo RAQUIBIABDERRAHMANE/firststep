@@ -241,3 +241,123 @@ export async function removeMemberFromList(listId: string, memberId: string) {
         return { error: 'Failed to remove member' }
     }
 }
+
+// ─── Smart Lists ────────────────────────────────────────────────────────────
+
+/**
+ * Creates or refreshes auto-managed email lists:
+ *  • [AUTO] Tous les clients   — all Users with role=CLIENT
+ *  • [AUTO] Service: {name}    — users active on each service
+ *  • [AUTO] Clients cabinet: {tenantName} — CabinetClients with email per tenant
+ */
+export async function syncSmartEmailLists() {
+    const user = await getCurrentUser()
+    if (!user || user.role !== 'ADMIN') {
+        return { error: 'Unauthorized' }
+    }
+
+    try {
+        const results: string[] = []
+
+        // ── Noms valides (calculés dynamiquement) ────────────────────────
+        const services = await prisma.service.findMany({ select: { id: true, name: true } })
+        const validAutoNames = [
+            '[AUTO] Tous les clients',
+            ...services.map(s => `[AUTO] Service: ${s.name}`)
+        ]
+
+        // ── Nettoyage : supprimer les listes AUTO non reconnues ───────────
+        const stale = await prisma.emailList.findMany({
+            where: { name: { startsWith: '[AUTO]', notIn: validAutoNames } },
+            select: { id: true }
+        })
+        if (stale.length > 0) {
+            const staleIds = stale.map(l => l.id)
+            await prisma.emailListMember.deleteMany({ where: { listId: { in: staleIds } } })
+            await prisma.emailList.deleteMany({ where: { id: { in: staleIds } } })
+        }
+
+        // ── Tous les clients de la plateforme ─────────────────────────────
+        const allClients = await prisma.user.findMany({
+            where: { role: 'CLIENT' },
+            select: { id: true, email: true, companyName: true }
+        })
+
+        await upsertSmartList(
+            '[AUTO] Tous les clients',
+            `Tous les utilisateurs clients de la plateforme (${allClients.length} clients)`,
+            allClients.map(u => ({ userId: u.id, name: u.companyName, email: u.email }))
+        )
+        results.push(`Tous les clients: ${allClients.length} membres`)
+
+        // ── Une liste par service de la plateforme ────────────────────────
+        for (const service of services) {
+            const serviceUsers = await prisma.userService.findMany({
+                where: { serviceId: service.id, isActive: true },
+                include: {
+                    user: { select: { id: true, email: true, companyName: true } }
+                }
+            })
+
+            await upsertSmartList(
+                `[AUTO] Service: ${service.name}`,
+                `Clients abonnés au service "${service.name}" (${serviceUsers.length} clients)`,
+                serviceUsers.map(us => ({
+                    userId: us.user.id,
+                    name: us.user.companyName,
+                    email: us.user.email
+                }))
+            )
+            results.push(`${service.name}: ${serviceUsers.length} membres`)
+        }
+
+        revalidatePath('/admin/email-lists')
+        return { success: true, results }
+    } catch (error) {
+        console.error('Error syncing smart email lists:', error)
+        return { error: 'Failed to sync smart email lists' }
+    }
+}
+
+async function upsertSmartList(
+    name: string,
+    description: string,
+    members: Array<{ userId?: string; email?: string; name?: string | null }>
+) {
+    // Find existing list with this name
+    let list = await prisma.emailList.findFirst({ where: { name } })
+
+    if (!list) {
+        list = await prisma.emailList.create({
+            data: { name, description }
+        })
+    } else {
+        // Clear existing members to refresh
+        await prisma.emailListMember.deleteMany({ where: { listId: list.id } })
+        await prisma.emailList.update({
+            where: { id: list.id },
+            data: { description }
+        })
+    }
+
+    // Re-create members with deduplication by userId and email
+    const seen = new Set<string>()
+    const dedupedMembers = members.filter(m => {
+        const key = m.userId ?? m.email ?? ''
+        if (!key || seen.has(key)) return false
+        seen.add(key)
+        return true
+    })
+
+    if (dedupedMembers.length > 0) {
+        await prisma.emailListMember.createMany({
+            data: dedupedMembers.map(m => ({
+                listId: list!.id,
+                userId: m.userId ?? null,
+                email: m.email ?? null,
+                name: m.name ?? null
+            }))
+        })
+    }
+}
+

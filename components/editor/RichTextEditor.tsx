@@ -20,7 +20,7 @@ import {
     Heading2,
     Quote
 } from 'lucide-react'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 
 interface RichTextEditorProps {
     value: string
@@ -30,6 +30,7 @@ interface RichTextEditorProps {
 
 export function RichTextEditor({ value, onChange, editable = true }: RichTextEditorProps) {
     const editor = useEditor({
+        immediatelyRender: false,
         extensions: [
             StarterKit,
             Underline,
@@ -56,6 +57,15 @@ export function RichTextEditor({ value, onChange, editable = true }: RichTextEdi
             },
         },
     })
+
+    // Sync external value changes (e.g. AI generation) into the editor
+    useEffect(() => {
+        if (!editor) return
+        const current = editor.getHTML()
+        if (value !== current) {
+            editor.commands.setContent(value, { emitUpdate: false })
+        }
+    }, [editor, value])
 
     const setLink = useCallback(() => {
         if (!editor) return
@@ -214,7 +224,7 @@ export function RichTextEditor({ value, onChange, editable = true }: RichTextEdi
                     <Redo className="h-4 w-4" />
                 </Button>
             </div>
-            <EditorContent editor={editor} className="min-h-[200px] max-h-[500px] overflow-y-auto" />
+            <EditorContent editor={editor} className="min-h-50 max-h-125 overflow-y-auto" />
             <style jsx global>{`
                 .ProseMirror p.is-editor-empty:first-child::before {
                     color: #adb5bd;

@@ -9,11 +9,11 @@ import { Badge } from '@/components/ui/Badge'
 import { ArrowLeft, Plus, Pill, X, Loader2, Trash2, ChevronDown, ChevronRight, Clock } from 'lucide-react'
 import { saveMedicalHistory, deleteMedicalHistory } from '@/app/actions/medical'
 
-type Prescription = { id: string; medication: string; dosage: string; frequency: string; duration: string; instructions: string | null }
+type Prescription = { id: string; medication: string; dosage: string | null; frequency: string | null; duration: string | null; instructions: string | null }
 type MedicalRecord = {
-    id: string; visitDate: Date; chiefComplaint: string; diagnosis: string; treatment: string
-    notes: string | null; weight: string | null; bloodPressure: string | null
-    temperature: string | null; heartRate: string | null; prescriptions: Prescription[]
+    id: string; visitDate: Date; chiefComplaint: string | null; diagnosis: string | null; treatment: string | null
+    notes: string | null; weight: number | null; bloodPressure: string | null
+    temperature: number | null; heartRate: number | null; prescriptions: Prescription[]
 }
 type MedicalHistory = { id: string; condition: string; since: string | null; status: string; notes: string | null }
 

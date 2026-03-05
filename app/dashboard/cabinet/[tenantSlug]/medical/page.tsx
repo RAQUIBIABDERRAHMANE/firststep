@@ -1,7 +1,6 @@
 import { getMedicalRecords } from '@/app/actions/medical'
 import { getCabinetClients } from '@/app/actions/cabinet'
 import { getWebsiteBySlug } from '@/app/actions/tenant'
-import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import MedicalClient from './MedicalClient'

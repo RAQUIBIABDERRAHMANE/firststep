@@ -49,25 +49,7 @@ export async function createCampaign(prevState: any, formData: FormData) {
                 path: path.join(process.cwd(), 'public', a.url)
             }))
 
-            const htmlContent = `
-                <!DOCTYPE html>
-                <html>
-                <body style="font-family: sans-serif; color: #333; line-height: 1.6;">
-                    <div style="background: #f0f9ff; padding: 10px; text-align: center; border-bottom: 1px solid #bae6fd; color: #0369a1; font-size: 14px;">
-                        <strong>TEST EMAIL</strong> - This is a preview of your campaign.
-                    </div>
-                    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                        ${personalizedContent.replace(/\n/g, '<br>')}
-                        <hr style="margin-top: 40px; border: none; border-top: 1px solid #eee;">
-                        <p style="font-size: 12px; color: #999;">
-                            You are receiving this email because you are subscribed to updates from FirstStep SaaS.
-                        </p>
-                    </div>
-                </body>
-                </html>
-            `
-
-            await sendHtmlEmail(testRecipient, `[TEST] ${personalizedSubject}`, htmlContent, attachments)
+            await sendHtmlEmail(testRecipient, `[TEST] ${personalizedSubject}`, personalizedContent, attachments)
             return { message: `Test email sent to ${testRecipient}` }
         } catch (error) {
             console.error('Error sending test email:', error)
@@ -140,25 +122,7 @@ export async function updateCampaign(id: string, prevState: any, formData: FormD
                 path: path.join(process.cwd(), 'public', a.url)
             }))
 
-            const htmlContent = `
-                <!DOCTYPE html>
-                <html>
-                <body style="font-family: sans-serif; color: #333; line-height: 1.6;">
-                    <div style="background: #f0f9ff; padding: 10px; text-align: center; border-bottom: 1px solid #bae6fd; color: #0369a1; font-size: 14px;">
-                        <strong>TEST EMAIL</strong> - This is a preview of your campaign.
-                    </div>
-                    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                        ${personalizedContent.replace(/\n/g, '<br>')}
-                        <hr style="margin-top: 40px; border: none; border-top: 1px solid #eee;">
-                        <p style="font-size: 12px; color: #999;">
-                            You are receiving this email because you are subscribed to updates from FirstStep SaaS.
-                        </p>
-                    </div>
-                </body>
-                </html>
-            `
-
-            await sendHtmlEmail(testRecipient, `[TEST] ${personalizedSubject}`, htmlContent, attachments)
+            await sendHtmlEmail(testRecipient, `[TEST] ${personalizedSubject}`, personalizedContent, attachments)
             return { message: `Test email sent to ${testRecipient}` }
         } catch (error) {
             console.error('Error sending test email:', error)
@@ -411,27 +375,8 @@ export async function sendCampaign(id: string) {
             const personalizedSubject = replaceVariables(campaign.subject, userData)
             const personalizedContent = replaceVariables(campaign.content, userData)
 
-            // Wrap in HTML template
-            const htmlContent = `
-                <!DOCTYPE html>
-                <html>
-                <body style="font-family: sans-serif; color: #333; line-height: 1.6;">
-                    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                        ${personalizedContent.replace(/\n/g, '<br>')}
-                        
-                        <hr style="margin-top: 40px; border: none; border-top: 1px solid #eee;">
-                        <p style="font-size: 12px; color: #999;">
-                            You are receiving this email because you are subscribed to updates from FirstStep SaaS.
-                            <br>
-                            <a href="${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/unsubscribe?email=${recipient.email}" style="color: #999; text-decoration: underline;">Unsubscribe</a>
-                        </p>
-                    </div>
-                </body>
-                </html>
-            `
-
             try {
-                const result = await sendHtmlEmail(recipient.email, personalizedSubject, htmlContent, attachments)
+                const result = await sendHtmlEmail(recipient.email, personalizedSubject, personalizedContent, attachments)
                 if (result.success) {
                     successCount++
                 } else {

@@ -2,255 +2,110 @@
 
 import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
-import { ArrowRight, Sparkles, Zap, Play, ChevronRight, Star } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { ArrowRight, CheckCircle, TrendingUp, Users, Zap } from 'lucide-react'
 
-interface Particle {
-    id: number
-    x: number
-    y: number
-    size: number
-    speedX: number
-    speedY: number
-    opacity: number
-    color: string
-}
+const stats = [
+    { value: '500+', label: 'Entreprises actives' },
+    { value: '99.9%', label: 'Disponibilité' },
+    { value: '< 5min', label: 'Configuration' },
+    { value: '24/7', label: 'Support dédié' },
+]
 
-function ParticleBackground() {
-    const canvasRef = useRef<HTMLCanvasElement>(null)
-    const mouseRef = useRef({ x: 0, y: 0 })
-    const particlesRef = useRef<Particle[]>([])
-    const animationRef = useRef<number | undefined>(undefined)
-
-    useEffect(() => {
-        const canvas = canvasRef.current
-        if (!canvas) return
-
-        const ctx = canvas.getContext('2d')
-        if (!ctx) return
-
-        const resizeCanvas = () => {
-            canvas.width = window.innerWidth
-            canvas.height = window.innerHeight
-        }
-        resizeCanvas()
-        window.addEventListener('resize', resizeCanvas)
-
-        // Initialize particles
-        const colors = ['#8B5CF6', '#A78BFA', '#C4B5FD', '#7C3AED', '#6D28D9']
-        const particleCount = 80
-
-        for (let i = 0; i < particleCount; i++) {
-            particlesRef.current.push({
-                id: i,
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                size: Math.random() * 4 + 1,
-                speedX: (Math.random() - 0.5) * 0.5,
-                speedY: (Math.random() - 0.5) * 0.5,
-                opacity: Math.random() * 0.5 + 0.2,
-                color: colors[Math.floor(Math.random() * colors.length)]
-            })
-        }
-
-        const handleMouseMove = (e: MouseEvent) => {
-            mouseRef.current = { x: e.clientX, y: e.clientY }
-        }
-        window.addEventListener('mousemove', handleMouseMove)
-
-        const animate = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-            particlesRef.current.forEach((particle) => {
-                // Calculate distance from mouse
-                const dx = mouseRef.current.x - particle.x
-                const dy = mouseRef.current.y - particle.y
-                const distance = Math.sqrt(dx * dx + dy * dy)
-                const maxDistance = 200
-
-                // Move particles away from mouse
-                if (distance < maxDistance) {
-                    const force = (maxDistance - distance) / maxDistance
-                    particle.x -= (dx / distance) * force * 3
-                    particle.y -= (dy / distance) * force * 3
-                }
-
-                // Update position
-                particle.x += particle.speedX
-                particle.y += particle.speedY
-
-                // Bounce off edges
-                if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1
-                if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1
-
-                // Keep in bounds
-                particle.x = Math.max(0, Math.min(canvas.width, particle.x))
-                particle.y = Math.max(0, Math.min(canvas.height, particle.y))
-
-                // Draw particle
-                ctx.beginPath()
-                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-                ctx.fillStyle = particle.color
-                ctx.globalAlpha = particle.opacity
-                ctx.fill()
-
-                // Draw connections
-                particlesRef.current.forEach((otherParticle) => {
-                    const dx2 = particle.x - otherParticle.x
-                    const dy2 = particle.y - otherParticle.y
-                    const dist = Math.sqrt(dx2 * dx2 + dy2 * dy2)
-
-                    if (dist < 120) {
-                        ctx.beginPath()
-                        ctx.strokeStyle = particle.color
-                        ctx.globalAlpha = (1 - dist / 120) * 0.15
-                        ctx.lineWidth = 1
-                        ctx.moveTo(particle.x, particle.y)
-                        ctx.lineTo(otherParticle.x, otherParticle.y)
-                        ctx.stroke()
-                    }
-                })
-            })
-
-            ctx.globalAlpha = 1
-            animationRef.current = requestAnimationFrame(animate)
-        }
-
-        animate()
-
-        return () => {
-            window.removeEventListener('resize', resizeCanvas)
-            window.removeEventListener('mousemove', handleMouseMove)
-            if (animationRef.current) {
-                cancelAnimationFrame(animationRef.current)
-            }
-        }
-    }, [])
-
-    return (
-        <canvas
-            ref={canvasRef}
-            className="absolute inset-0 pointer-events-none"
-            style={{ zIndex: 1 }}
-        />
-    )
-}
+const badges = [
+    'Gestion des rendez-vous',
+    'Facturation intelligente',
+    'Dossiers médicaux',
+    'Commandes restaurant',
+]
 
 export default function HeroSection() {
-    const [isHovered, setIsHovered] = useState(false)
-
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950">
-            {/* Deep gradient background */}
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" />
-            
-            {/* Radial glow effects */}
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-violet-600/20 rounded-full blur-[120px]" />
-            <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-indigo-600/15 rounded-full blur-[100px]" />
-            <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[80px]" />
-
-            {/* Interactive Particles */}
-            <ParticleBackground />
-
-            {/* Grid pattern overlay */}
-            <div 
-                className="absolute inset-0 opacity-[0.03]"
+        <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#050914]">
+            {/* Grid background */}
+            <div className="absolute inset-0"
                 style={{
-                    backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-                                     linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-                    backgroundSize: '50px 50px'
-                }}
-            />
+                    backgroundImage: `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`,
+                    backgroundSize: '72px 72px',
+                }} />
 
-            {/* Content */}
-            <div className="container mx-auto px-6 relative z-10 pt-20 pb-32">
-                <div className="max-w-5xl mx-auto text-center">
-                    
-                    {/* Floating Badge */}
-                    <div className="mb-8 animate-fade-in">
-                        <span className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm text-sm font-medium text-violet-300 shadow-lg">
-                            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                            Plateforme SaaS Nouvelle Génération
-                            <ChevronRight className="h-4 w-4 text-violet-400" />
-                        </span>
+            {/* Radial fade on grid */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(37,99,235,0.15),transparent)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_80%_80%,rgba(124,58,237,0.08),transparent)]" />
+
+            {/* Top glow line */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-blue-500/50 to-transparent" />
+
+            <div className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20">
+                <div className="text-center max-w-4xl mx-auto">
+                    {/* Badge */}
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400 uppercase tracking-wider mb-8">
+                        <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse" />
+                        Plateforme SaaS B2B — Maroc
                     </div>
 
-                    {/* Main Headline */}
-                    <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-8 animate-fade-in leading-[1.05]">
-                        Développez votre
-                        <br />
-                        <span className="relative inline-block mt-2">
-                            <span className="relative z-10 bg-gradient-to-r from-violet-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
-                                business digital
+                    {/* Headline */}
+                    <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6">
+                        Gérez votre{' '}
+                        <span className="relative inline-block">
+                            <span className="bg-linear-to-r from-blue-400 via-blue-300 to-violet-400 bg-clip-text text-transparent">
+                                entreprise
                             </span>
-                            {/* Glow effect behind text */}
-                            <span className="absolute -inset-2 bg-gradient-to-r from-violet-600/30 to-indigo-600/30 blur-2xl rounded-full" />
-                        </span>
+                            <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 9C50 3 100 1 150 3C200 5 250 8 298 6" stroke="url(#underline-grad)" strokeWidth="3" strokeLinecap="round" />
+                                <defs>
+                                    <linearGradient id="underline-grad" x1="0" y1="0" x2="300" y2="0">
+                                        <stop stopColor="#3b82f6" />
+                                        <stop offset="1" stopColor="#8b5cf6" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </span>{' '}
+                        avec un seul outil
                     </h1>
 
                     {/* Subtitle */}
-                    <p className="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-in font-medium">
-                        Arrêtez de jongler entre différents outils. FirstStep vous offre une plateforme unifiée pour gérer votre activité sans friction. Transformez le chaos en clarté.
+                    <p className="text-lg md:text-xl text-slate-400 leading-relaxed max-w-2xl mx-auto mb-10">
+                        FirstStep centralise la gestion de votre cabinet, restaurant ou commerce. Activez uniquement ce dont vous avez besoin.
                     </p>
 
-                    {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-in">
+                    {/* Feature pills */}
+                    <div className="flex flex-wrap gap-2 justify-center mb-10">
+                        {badges.map((b, i) => (
+                            <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/4 border border-white/8 text-sm text-slate-300">
+                                <CheckCircle className="h-3.5 w-3.5 text-blue-400" />
+                                {b}
+                            </span>
+                        ))}
+                    </div>
+
+                    {/* CTAs */}
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
                         <Link href="#signup">
-                            <Button 
-                                size="lg" 
-                                className="h-14 px-8 text-base font-semibold bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 border-0 shadow-lg shadow-violet-500/25 transition-all hover:shadow-violet-500/40 hover:-translate-y-0.5 group"
-                                onMouseEnter={() => setIsHovered(true)}
-                                onMouseLeave={() => setIsHovered(false)}
-                            >
-                                <Sparkles className="h-5 w-5 mr-2" />
-                                Commencer gratuitement
-                                <ArrowRight className={`h-5 w-5 ml-2 transition-transform duration-300 ${isHovered ? 'translate-x-1' : ''}`} />
+                            <Button size="lg" className="w-full sm:w-auto gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 h-13 rounded-xl shadow-2xl shadow-blue-600/30 text-base">
+                                Démarrer gratuitement
+                                <ArrowRight className="h-5 w-5" />
                             </Button>
                         </Link>
-                        <Link href="/services">
-                            <Button 
-                                variant="outline" 
-                                size="lg" 
-                                className="h-14 px-8 text-base font-semibold bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-white/20 backdrop-blur-sm"
-                            >
-                                <Play className="h-4 w-4 mr-2 fill-current" />
+                        <Link href="#services">
+                            <Button variant="outline" size="lg" className="w-full sm:w-auto font-semibold px-8 h-13 rounded-xl border-white/10 bg-white/3 hover:bg-white/[7%] text-white text-base">
                                 Voir les solutions
                             </Button>
                         </Link>
                     </div>
 
-                    {/* Stats Row */}
-                    <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 animate-fade-in">
-                        <div className="text-center">
-                            <div className="text-3xl sm:text-4xl font-bold text-white mb-1">500+</div>
-                            <div className="text-sm text-slate-500 font-medium">Entreprises</div>
-                        </div>
-                        <div className="h-12 w-px bg-white/10 hidden sm:block" />
-                        <div className="text-center">
-                            <div className="text-3xl sm:text-4xl font-bold text-white mb-1">99.9%</div>
-                            <div className="text-sm text-slate-500 font-medium">Disponibilité</div>
-                        </div>
-                        <div className="h-12 w-px bg-white/10 hidden sm:block" />
-                        <div className="text-center">
-                            <div className="flex items-center justify-center gap-1 text-3xl sm:text-4xl font-bold text-white mb-1">
-                                4.9
-                                <Star className="h-6 w-6 text-amber-400 fill-amber-400" />
-                            </div>
-                            <div className="text-sm text-slate-500 font-medium">Satisfaction</div>
-                        </div>
-                    </div>
+                    <p className="text-xs text-slate-600">Aucune carte bancaire requise • Configuration en 5 minutes</p>
+                </div>
 
+                {/* Stats bar */}
+                <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-px bg-white/6 rounded-2xl overflow-hidden border border-white/6">
+                    {stats.map((stat, i) => (
+                        <div key={i} className="flex flex-col items-center justify-center py-8 px-6 bg-[#050914] hover:bg-white/2 transition-colors">
+                            <span className="text-3xl md:text-4xl font-black text-white mb-1">{stat.value}</span>
+                            <span className="text-sm text-slate-500 font-medium">{stat.label}</span>
+                        </div>
+                    ))}
                 </div>
             </div>
-
-            {/* Bottom gradient fade */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
-            
-            {/* Decorative elements */}
-            <div className="absolute bottom-20 left-10 w-20 h-20 border border-white/5 rounded-2xl rotate-12 animate-pulse" />
-            <div className="absolute top-32 right-16 w-16 h-16 border border-violet-500/20 rounded-full animate-bounce" style={{ animationDuration: '3s' }} />
-            <div className="absolute top-1/2 left-8 w-2 h-2 bg-violet-400 rounded-full animate-ping" />
-            <div className="absolute top-1/3 right-12 w-3 h-3 bg-indigo-400 rounded-full animate-ping" style={{ animationDelay: '1s' }} />
         </section>
     )
 }

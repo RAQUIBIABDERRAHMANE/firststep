@@ -4,211 +4,133 @@ import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
 import { signUp } from '@/app/actions/auth'
-import { Loader2, CheckCircle2, Sparkles, ArrowRight, Shield, Zap, HeartHandshake } from 'lucide-react'
+import { Loader2, ArrowRight, Shield, Zap, HeartHandshake, Star, Eye, EyeOff } from 'lucide-react'
 
-type Service = {
-    id: string
-    name: string
-    status: string
-}
-
-interface SignupSectionProps {
-    services: Service[]
-}
-
-export default function SignupSection({ services }: SignupSectionProps) {
-    const [selectedServices, setSelectedServices] = useState<string[]>([])
+export default function SignupSection() {
     const [isPending, startTransition] = useTransition()
     const [error, setError] = useState<string | null>(null)
+    const [showPassword, setShowPassword] = useState(false)
     const router = useRouter()
-
-    const toggleService = (id: string) => {
-        setSelectedServices(prev =>
-            prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]
-        )
-    }
 
     async function handleSubmit(formData: FormData) {
         setError(null)
-
-        // Add selected services to formData
-        selectedServices.forEach(id => formData.append('services', id))
-
         startTransition(async () => {
             const result = await signUp(null, formData)
-            if (result?.error) {
-                setError(result.error)
-            } else {
-                router.push('/dashboard')
-            }
+            if (result?.error) setError(result.error)
+            else router.push('/dashboard')
         })
     }
 
     const benefits = [
-        { icon: <Shield className="h-5 w-5" />, text: 'Aucune carte requise' },
-        { icon: <Zap className="h-5 w-5" />, text: 'Configuration en 5 minutes' },
-        { icon: <HeartHandshake className="h-5 w-5" />, text: 'Support dédié' },
+        { icon: Shield, label: 'Aucune carte bancaire requise' },
+        { icon: Zap, label: 'Configuration en moins de 5 min' },
+        { icon: HeartHandshake, label: 'Support dédié en français' },
+        { icon: Star, label: 'Essai gratuit sans engagement' },
     ]
 
     return (
-        <section id="signup" className="py-32 relative overflow-hidden bg-slate-950">
-            {/* Background Effects */}
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900 to-slate-950" />
-            <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[150px]" />
-            <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px]" />
+        <section id="signup" className="relative py-32 bg-[#050914] overflow-hidden">
+            {/* Top separator */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-white/7 to-transparent" />
+            {/* Background glow */}
+            <div className="absolute top-1/3 right-0 w-125 h-125 rounded-full bg-blue-600/10 blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-1/3 left-0 w-100 h-100 rounded-full bg-violet-600/8 blur-[100px] pointer-events-none" />
 
-            <div className="container mx-auto px-6 max-w-6xl relative z-10">
+            <div className="max-w-7xl mx-auto px-6">
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
-                    {/* Left Content */}
-                    <div className="space-y-8">
-                        <div>
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-sm font-medium text-violet-300 mb-6">
-                                <Sparkles className="h-4 w-4" />
-                                Rejoignez-nous
-                            </div>
-                            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight tracking-tight">
-                                Prêt à faire le{' '}
-                                <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
-                                    premier pas ?
-                                </span>
-                            </h2>
-                            <p className="text-lg text-slate-400 leading-relaxed">
-                                Rejoignez des centaines d'entreprises qui ont transformé leurs opérations. Créez votre compte et sélectionnez vos modules pour commencer.
-                            </p>
+                    {/* Left — Benefits */}
+                    <div>
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400 uppercase tracking-wider mb-8">
+                            <span className="h-1.5 w-1.5 rounded-full bg-blue-400 animate-pulse" />
+                            Inscription gratuite
                         </div>
+                        <h2 className="text-4xl md:text-5xl font-black text-white leading-tight mb-6">
+                            Rejoignez les
+                            <br />
+                            <span className="text-blue-400">entreprises qui
+                            <br />avancent</span>
+                        </h2>
+                        <p className="text-slate-400 text-lg leading-relaxed mb-10">
+                            Créez votre compte en quelques secondes et gérez votre business de manière professionnelle dès aujourd&apos;hui.
+                        </p>
 
-                        {/* Benefits */}
-                        <div className="space-y-4">
-                            {benefits.map((benefit, i) => (
-                                <div 
-                                    key={i} 
-                                    className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.05]"
-                                >
-                                    <div className="h-10 w-10 rounded-lg bg-violet-500/20 flex items-center justify-center text-violet-400">
-                                        {benefit.icon}
+                        <div className="space-y-3">
+                            {benefits.map((b, i) => {
+                                const Icon = b.icon
+                                return (
+                                    <div key={i} className="flex items-center gap-4">
+                                        <div className="h-9 w-9 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0">
+                                            <Icon className="h-4.5 w-4.5" />
+                                        </div>
+                                        <span className="text-slate-300 font-medium text-sm">{b.label}</span>
                                     </div>
-                                    <span className="text-slate-300 font-medium">{benefit.text}</span>
-                                </div>
-                            ))}
+                                )
+                            })}
                         </div>
                     </div>
 
-                    {/* Right - Form Card */}
+                    {/* Right — Form */}
                     <div className="relative">
-                        {/* Glow behind card */}
-                        <div className="absolute -inset-4 bg-gradient-to-r from-violet-600/20 to-indigo-600/20 rounded-3xl blur-2xl opacity-50" />
+                        {/* Glow */}
+                        <div className="absolute -inset-px rounded-2xl bg-linear-to-br from-blue-500/20 via-transparent to-violet-500/20 blur-sm" />
                         
-                        <Card className="relative bg-slate-900/80 backdrop-blur-xl border-white/10 shadow-2xl rounded-2xl overflow-hidden">
-                            {/* Top accent */}
-                            <div className="h-1 bg-gradient-to-r from-violet-600 via-indigo-600 to-violet-600" />
-                            
-                            <CardHeader className="pb-4">
-                                <CardTitle className="text-2xl font-bold text-white">Créer un compte</CardTitle>
-                                <CardDescription className="text-slate-400">
-                                    Configurez votre profil entreprise en quelques minutes.
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <form action={handleSubmit} className="space-y-5">
-                                    <div className="space-y-4">
-                                        <div className="space-y-2">
-                                            <label htmlFor="companyName" className="text-sm font-medium text-slate-300">
-                                                Nom de l'entreprise
-                                            </label>
-                                            <Input
-                                                id="companyName"
-                                                name="companyName"
-                                                placeholder="Mon Entreprise"
-                                                required
-                                                className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 focus:border-violet-500/50 focus:ring-violet-500/20 rounded-xl"
-                                            />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <label htmlFor="email" className="text-sm font-medium text-slate-300">
-                                                Adresse email
-                                            </label>
-                                            <Input
-                                                id="email"
-                                                name="email"
-                                                type="email"
-                                                placeholder="nom@entreprise.com"
-                                                required
-                                                className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 focus:border-violet-500/50 focus:ring-violet-500/20 rounded-xl"
-                                            />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <label htmlFor="password" className="text-sm font-medium text-slate-300">
-                                                Mot de passe
-                                            </label>
-                                            <Input
-                                                id="password"
-                                                name="password"
-                                                type="password"
-                                                placeholder="••••••••"
-                                                required
-                                                className="h-12 bg-white/5 border-white/10 text-white placeholder:text-slate-600 focus:border-violet-500/50 focus:ring-violet-500/20 rounded-xl"
-                                            />
-                                        </div>
-                                    </div>
+                        <div className="relative bg-[#0a1628] border border-white/8 rounded-2xl overflow-hidden">
+                            {/* Top accent bar */}
+                            <div className="h-1 bg-linear-to-r from-blue-500 via-blue-400 to-violet-500" />
 
-                                    <div className="space-y-3">
-                                        <label className="text-sm font-medium text-slate-300">
-                                            Services qui vous intéressent
-                                        </label>
-                                        <div className="grid gap-2 max-h-40 overflow-y-auto pr-2">
-                                            {services.map(service => (
-                                                <div
-                                                    key={service.id}
-                                                    onClick={() => toggleService(service.id)}
-                                                    className={`
-                                                        flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-all
-                                                        ${selectedServices.includes(service.id)
-                                                            ? 'bg-violet-500/20 border-violet-500/50 text-white'
-                                                            : 'bg-white/[0.02] border-white/10 text-slate-400 hover:border-white/20 hover:bg-white/[0.04]'}
-                                                    `}
-                                                >
-                                                    <span className="text-sm font-medium">{service.name}</span>
-                                                    {selectedServices.includes(service.id) && (
-                                                        <CheckCircle2 className="h-4 w-4 text-violet-400" />
-                                                    )}
-                                                </div>
-                                            ))}
+                            <div className="p-8">
+                                <h3 className="text-xl font-bold text-white mb-1">Créer un compte</h3>
+                                <p className="text-sm text-slate-500 mb-7">Configurez votre profil en quelques minutes.</p>
+
+                                <form action={handleSubmit} className="space-y-4">
+                                    <div>
+                                        <label htmlFor="companyName" className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Nom de l&apos;entreprise</label>
+                                        <Input id="companyName" name="companyName" placeholder="Mon Entreprise" required
+                                            className="h-11 bg-white/4 border-white/8 text-white focus:text-black  placeholder:text-slate-600 focus:border-blue-500/50 rounded-xl" />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="email" className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Email professionnel</label>
+                                        <Input id="email" name="email" type="email" placeholder="nom@entreprise.com" required
+                                            className="h-11 bg-white/4 border-white/8 text-white focus:text-black  placeholder:text-slate-600 focus:border-blue-500/50 rounded-xl" />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="password" className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Mot de passe</label>
+                                        <div className="relative">
+                                            <Input id="password" name="password" type={showPassword ? 'text' : 'password'} placeholder="••••••••" required
+                                                className="h-11 bg-white/4 border-white/8 text-white focus:text-black placeholder:text-slate-600 focus:border-blue-500/50 rounded-xl pr-11" />
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowPassword(v => !v)}
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors"
+                                            >
+                                                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                                            </button>
                                         </div>
                                     </div>
 
                                     {error && (
-                                        <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20">
+                                        <div className="px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20">
                                             <p className="text-sm text-red-400">{error}</p>
                                         </div>
                                     )}
 
-                                    <Button 
-                                        type="submit" 
-                                        className="w-full h-12 text-base font-semibold bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 shadow-lg shadow-violet-500/25 rounded-xl group" 
-                                        disabled={isPending}
-                                    >
+                                    <Button type="submit" disabled={isPending}
+                                        className="w-full h-12 font-bold text-base bg-blue-600 hover:bg-blue-500 text-white rounded-xl shadow-lg shadow-blue-600/25 gap-2">
                                         {isPending ? (
-                                            <>
-                                                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                                                Création en cours...
-                                            </>
+                                            <><Loader2 className="h-4 w-4 animate-spin" />Création...</>
                                         ) : (
-                                            <>
-                                                Commencer gratuitement
-                                                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                                            </>
+                                            <>Démarrer gratuitement<ArrowRight className="h-4 w-4" /></>
                                         )}
                                     </Button>
 
                                     <p className="text-center text-xs text-slate-600">
-                                        En créant un compte, vous acceptez nos{' '}
-                                        <a href="#" className="text-violet-400 hover:underline">conditions d'utilisation</a>
+                                        En vous inscrivant, vous acceptez nos{' '}
+                                        <span className="text-slate-500 underline underline-offset-2 cursor-pointer">conditions d&apos;utilisation</span>
                                     </p>
                                 </form>
-                            </CardContent>
-                        </Card>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

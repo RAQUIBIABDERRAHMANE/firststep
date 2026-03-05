@@ -25,20 +25,18 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined)
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-    const [items, setItems] = useState<CartItem[]>([])
+    const [items, setItems] = useState<CartItem[]>(() => {
+        if (typeof window === 'undefined') return []
+        try {
+            const saved = localStorage.getItem('fs_restaurant_cart')
+            return saved ? JSON.parse(saved) : []
+        } catch {
+            return []
+        }
+    })
     const [tableId, setTableId] = useState<string | null>(null)
 
     // Load cart from local storage if needed (optional)
-    useEffect(() => {
-        const saved = localStorage.getItem('fs_restaurant_cart')
-        if (saved) {
-            try {
-                setItems(JSON.parse(saved))
-            } catch (e) {
-                console.error('Failed to parse cart')
-            }
-        }
-    }, [])
 
     useEffect(() => {
         localStorage.setItem('fs_restaurant_cart', JSON.stringify(items))

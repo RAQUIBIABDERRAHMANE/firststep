@@ -12,11 +12,11 @@ import {
 } from 'lucide-react'
 import { saveMedicalRecord, deleteMedicalRecord } from '@/app/actions/medical'
 
-type Prescription = { id: string; medication: string; dosage: string; frequency: string; duration: string; instructions: string | null }
+type Prescription = { id: string; medication: string; dosage: string | null; frequency: string | null; duration: string | null; instructions: string | null }
 type MedicalRecord = {
-    id: string; visitDate: Date; chiefComplaint: string; diagnosis: string; treatment: string
-    notes: string | null; weight: string | null; bloodPressure: string | null
-    temperature: string | null; heartRate: string | null
+    id: string; visitDate: Date; chiefComplaint: string | null; diagnosis: string | null; treatment: string | null
+    notes: string | null; weight: number | null; bloodPressure: string | null
+    temperature: number | null; heartRate: number | null
     prescriptions: Prescription[]; client: { id: string; name: string }
 }
 type Client = { id: string; name: string; email: string | null }

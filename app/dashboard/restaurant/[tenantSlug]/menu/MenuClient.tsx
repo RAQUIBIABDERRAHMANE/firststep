@@ -14,8 +14,7 @@ import {
     Check,
     X,
     Eye,
-    EyeOff,
-    MoreVertical
+    EyeOff
 } from 'lucide-react'
 import {
     createCategory,
@@ -27,10 +26,28 @@ import {
 } from '@/app/actions/restaurant'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { translations, Language } from '@/lib/translations'
 import { ChevronLeft, Globe } from 'lucide-react'
 
-export default function MenuClient({ initialCategories, tenantSlug }: { initialCategories: any[], tenantSlug: string }) {
+type Dish = {
+    id: string
+    name: string
+    description?: string | null
+    price: number
+    image?: string | null
+    isActive: boolean
+    categoryId: string
+}
+
+type Category = {
+    id: string
+    name: string
+    isActive: boolean
+    dishes?: Dish[]
+}
+
+export default function MenuClient({ initialCategories, tenantSlug }: { initialCategories: Category[], tenantSlug: string }) {
     const router = useRouter()
     const [lang, setLang] = useState<Language>('fr')
     const t = translations[lang].admin
@@ -56,7 +73,7 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
             const res = await createCategory(newCatName, tenantSlug)
             if (res?.error) alert(res.error)
             else setNewCatName('')
-        } catch (e) {
+        } catch {
             alert('A system error occurred. Please try again.')
         } finally {
             setLoading(false)
@@ -71,7 +88,7 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
             const res = await updateCategory(id, { name: tempCatName }, tenantSlug)
             if (res?.error) alert(res.error)
             else setEditingCat(null)
-        } catch (e) {
+        } catch {
             alert('Failed to update category')
         } finally {
             setLoading(false)
@@ -84,7 +101,7 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
         try {
             const res = await updateCategory(id, { isActive: !currentStatus }, tenantSlug)
             if (res?.error) alert(res.error)
-        } catch (e) {
+        } catch {
             alert('Failed to toggle status')
         } finally {
             setLoading(false)
@@ -97,7 +114,7 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
         try {
             const res = await deleteCategory(id, tenantSlug)
             if (res?.error) alert(res.error)
-        } catch (e) {
+        } catch {
             alert('Failed to delete category')
         } finally {
             router.refresh()
@@ -128,7 +145,7 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
                 setAddingDishTo(null)
                 setEditingDish(null)
             }
-        } catch (e) {
+        } catch {
             alert('Failed to save dish')
         } finally {
             setLoading(false)
@@ -136,7 +153,7 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
         }
     }
 
-    const handleEditDish = (dish: any) => {
+    const handleEditDish = (dish: Dish) => {
         setDishForm({
             name: dish.name,
             description: dish.description || '',
@@ -152,7 +169,7 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
         try {
             const res = await updateDish(id, { isActive: !currentStatus }, tenantSlug)
             if (res?.error) alert(res.error)
-        } catch (e) {
+        } catch {
             alert('Failed to update item availability')
         } finally {
             router.refresh()
@@ -164,7 +181,7 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
         try {
             const res = await deleteDish(id, tenantSlug)
             if (res?.error) alert(res.error)
-        } catch (e) {
+        } catch {
             alert('Failed to delete item')
         } finally {
             router.refresh()
@@ -224,7 +241,7 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
                         </div>
                     ) : (
                         initialCategories.map((cat) => (
-                            <Card key={cat.id} className={`overflow-hidden border-slate-200/60 shadow-none rounded-[2rem] transition-all ${!cat.isActive ? 'opacity-60 bg-slate-50' : 'bg-white'}`}>
+                            <Card key={cat.id} className={`overflow-hidden border-slate-200/60 shadow-none rounded-4xl transition-all ${!cat.isActive ? 'opacity-60 bg-slate-50' : 'bg-white'}`}>
                                 <CardHeader className="bg-slate-50/50 backdrop-blur-sm flex flex-row items-center justify-between py-6 px-8 border-b border-slate-100">
                                     <div className="flex items-center gap-4 flex-1">
                                         <div className={`h-12 w-12 rounded-2xl flex items-center justify-center shadow-sm ring-1 ring-slate-200/50 ${cat.isActive ? 'bg-white text-blue-600' : 'bg-slate-200 text-slate-400'}`}>
@@ -281,12 +298,12 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
 
                                 <CardContent className="p-0">
                                     <div className="divide-y divide-slate-100">
-                                        {cat.dishes?.map((dish: any) => (
+                                        {cat.dishes?.map((dish: Dish) => (
                                             <div key={dish.id} className={`p-6 flex items-center justify-between group transition-all ${!dish.isActive ? 'bg-slate-50/50 grayscale-[0.5]' : 'hover:bg-slate-50/30'}`}>
                                                 <div className="flex items-center gap-6">
-                                                    <div className="h-20 w-20 rounded-3xl bg-white flex items-center justify-center overflow-hidden ring-1 ring-slate-100 shadow-sm flex-shrink-0 relative">
+                                                    <div className="h-20 w-20 rounded-3xl bg-white flex items-center justify-center overflow-hidden ring-1 ring-slate-100 shadow-sm shrink-0 relative">
                                                         {dish.image ? (
-                                                            <img src={dish.image} className="object-cover h-full w-full" alt={dish.name} />
+                                                            <Image src={dish.image} fill sizes="80px" className="object-cover" alt={dish.name} />
                                                         ) : (
                                                             <Utensils size={28} className="text-slate-100" />
                                                         )}

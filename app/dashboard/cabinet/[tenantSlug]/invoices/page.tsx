@@ -28,7 +28,7 @@ export default async function InvoicesPage({ params }: { params: Promise<{ tenan
         <InvoicesClient
             invoices={invoicesResult.success ? invoicesResult.invoices ?? [] : []}
             clients={clientsResult.success ? clientsResult.clients ?? [] : []}
-            settings={settingsResult.success ? settingsResult.settings : null}
+            settings={settingsResult.success ? settingsResult.settings ?? null : null}
             tenantId={website.id}
             tenantSlug={tenantSlug}
         />

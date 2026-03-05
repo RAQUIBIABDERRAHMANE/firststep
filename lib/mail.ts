@@ -26,7 +26,7 @@ export async function sendWelcomeEmail(email: string, companyName: string) {
         const html = getWelcomeEmailTemplate(companyName);
 
         await transporter.sendMail({
-            from: `"FirstStep SaaS" <${process.env.EMAIL_USER}>`,
+            from: `"FirstStep" <${process.env.EMAIL_USER}>`,
             to: email,
             subject: 'Welcome to FirstStep - Your Authority System is Ready',
             html: html,
@@ -39,7 +39,7 @@ export async function sendWelcomeEmail(email: string, companyName: string) {
     }
 }
 
-export async function sendHtmlEmail(to: string, subject: string, html: string, attachments?: any[]) {
+export async function sendHtmlEmail(to: string, subject: string, html: string, attachments?: nodemailer.SendMailOptions['attachments']) {
     if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
         console.warn('[MAILER] WARNING: Email credentials missing in environment variables.');
         return { success: false, error: 'Configuration missing' };
@@ -47,7 +47,7 @@ export async function sendHtmlEmail(to: string, subject: string, html: string, a
 
     try {
         await transporter.sendMail({
-            from: `"FirstStep SaaS" <${process.env.EMAIL_USER}>`,
+            from: `"FirstStep" <${process.env.EMAIL_USER}>`,
             to,
             subject,
             html,
@@ -74,7 +74,7 @@ export async function sendResetCodeEmail(email: string, code: string) {
         const html = getResetCodeTemplate(code);
 
         await transporter.sendMail({
-            from: `"FirstStep SaaS" <${process.env.EMAIL_USER}>`,
+            from: `"FirstStep" <${process.env.EMAIL_USER}>`,
             to: email,
             subject: 'Your Password Verification Code',
             html: html,
@@ -126,7 +126,7 @@ export async function sendPaymentRequestEmail(
         const html = getPaymentRequestTemplate(companyName, serviceName, amount, bankDetails);
 
         await transporter.sendMail({
-            from: `"FirstStep SaaS" <${process.env.EMAIL_USER}>`,
+            from: `"FirstStep" <${process.env.EMAIL_USER}>`,
             to: email,
             subject: `Demande de Paiement - ${serviceName}`,
             html: html,
@@ -163,7 +163,7 @@ export async function sendPaymentApprovedEmail(
         const html = getPaymentApprovedTemplate(companyName, serviceName, amount);
 
         await transporter.sendMail({
-            from: `"FirstStep SaaS" <${process.env.EMAIL_USER}>`,
+            from: `"FirstStep" <${process.env.EMAIL_USER}>`,
             to: email,
             subject: `✓ Paiement Approuvé - ${serviceName}`,
             html: html,
@@ -200,7 +200,7 @@ export async function sendPaymentDeclinedEmail(
         const html = getPaymentDeclinedTemplate(companyName, serviceName, amount);
 
         await transporter.sendMail({
-            from: `"FirstStep SaaS" <${process.env.EMAIL_USER}>`,
+            from: `"FirstStep" <${process.env.EMAIL_USER}>`,
             to: email,
             subject: `Demande de Paiement - ${serviceName}`,
             html: html,

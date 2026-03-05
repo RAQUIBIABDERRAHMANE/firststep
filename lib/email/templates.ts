@@ -90,7 +90,7 @@ export const getWelcomeEmailTemplate = (companyName: string) => {
             <p>Ready to get started? Access your dashboard to configure your services and monitor your system status.</p>
             <a href="https://firststepco.com/dashboard" class="cta-button">Go to Dashboard</a>
             <div class="footer">
-                &copy; 2025 FirstStep SaaS. All rights reserved.<br>
+                &copy; 2025 FirstStep. All rights reserved.<br>
                 Empowering businesses with authoritative systems.
             </div>
         </div>
@@ -210,7 +210,7 @@ export const getResetCodeTemplate = (code: string) => {
             <p>If you didn't request a password reset, you can safely ignore this email. Your password will remain unchanged.</p>
             
             <div class="footer">
-                &copy; 2025 FirstStep SaaS. All rights reserved.<br>
+                &copy; 2025 FirstStep. All rights reserved.<br>
                 Secure operations for modern businesses.
             </div>
         </div>
@@ -400,7 +400,7 @@ export const getPaymentRequestTemplate = (
             <p>Une fois le paiement vérifié par notre équipe, votre service sera automatiquement activé.</p>
             
             <div class="footer">
-                &copy; 2026 FirstStep SaaS. Tous droits réservés.<br>
+                &copy; 2026 FirstStep. Tous droits réservés.<br>
                 Des systèmes fiables pour votre entreprise.
             </div>
         </div>
@@ -549,7 +549,7 @@ export const getPaymentApprovedTemplate = (
             <p>Merci de votre confiance. Notre équipe reste à votre disposition pour toute question.</p>
             
             <div class="footer">
-                &copy; 2026 FirstStep SaaS. Tous droits réservés.<br>
+                &copy; 2026 FirstStep. Tous droits réservés.<br>
                 Des systèmes fiables pour votre entreprise.
             </div>
         </div>
@@ -695,7 +695,7 @@ export const getPaymentDeclinedTemplate = (
             <p>Vous pouvez créer une nouvelle demande de paiement depuis votre espace client si vous souhaitez réessayer.</p>
             
             <div class="footer">
-                &copy; 2026 FirstStep SaaS. Tous droits réservés.<br>
+                &copy; 2026 FirstStep. Tous droits réservés.<br>
                 Des systèmes fiables pour votre entreprise.
             </div>
         </div>

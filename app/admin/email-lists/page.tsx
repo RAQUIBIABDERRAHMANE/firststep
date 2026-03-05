@@ -4,8 +4,9 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
-import { Plus, Mail, Users, Trash2, Edit, ChevronRight } from 'lucide-react'
+import { Plus, Mail, Users, Trash2, Edit, ChevronRight, Zap } from 'lucide-react'
 import { deleteEmailList } from '@/app/actions/email-lists'
+import SyncButton from './SyncButton'
 
 export default async function EmailListsPage() {
     const user = await getCurrentUser()
@@ -38,12 +39,15 @@ export default async function EmailListsPage() {
                     </p>
                 </div>
 
-                <Link href="/admin/email-lists/new">
-                    <Button className="w-full md:w-auto">
-                        <Plus className="mr-2 h-4 w-4" />
-                        Create New List
-                    </Button>
-                </Link>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                    <SyncButton />
+                    <Link href="/admin/email-lists/new">
+                        <Button className="w-full md:w-auto">
+                            <Plus className="mr-2 h-4 w-4" />
+                            Create New List
+                        </Button>
+                    </Link>
+                </div>
             </div>
 
             {lists.length === 0 ? (
@@ -64,12 +68,23 @@ export default async function EmailListsPage() {
                 </Card>
             ) : (
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {lists.map((list) => (
+                    {lists.map((list) => {
+                        const isAuto = list.name.startsWith('[AUTO]')
+                        const displayName = isAuto ? list.name.replace(/^\[AUTO\]\s*/, '') : list.name
+                        return (
                         <Card key={list.id} className="shadow-sm hover:shadow-md transition-shadow">
                             <CardHeader>
                                 <div className="flex items-start justify-between">
                                     <div className="flex-1">
-                                        <CardTitle className="text-lg">{list.name}</CardTitle>
+                                        <div className="flex items-center gap-2 flex-wrap">
+                                            <CardTitle className="text-lg">{displayName}</CardTitle>
+                                            {isAuto && (
+                                                <span className="inline-flex items-center gap-1 text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full font-medium">
+                                                    <Zap className="h-3 w-3" />
+                                                    Auto
+                                                </span>
+                                            )}
+                                        </div>
                                         {list.description && (
                                             <CardDescription className="mt-1">
                                                 {list.description}
@@ -82,7 +97,7 @@ export default async function EmailListsPage() {
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center text-sm text-gray-600">
                                         <Users className="h-4 w-4 mr-1" />
-                                        <span>{list._count.members} members</span>
+                                        <span>{list._count.members} membres</span>
                                     </div>
 
                                     <div className="flex gap-2">
@@ -91,6 +106,7 @@ export default async function EmailListsPage() {
                                                 <Edit className="h-4 w-4" />
                                             </Button>
                                         </Link>
+                                        {!isAuto && (
                                         <form action={async () => {
                                             'use server'
                                             await deleteEmailList(list.id)
@@ -99,18 +115,20 @@ export default async function EmailListsPage() {
                                                 <Trash2 className="h-4 w-4 text-red-600" />
                                             </Button>
                                         </form>
+                                        )}
                                     </div>
                                 </div>
 
                                 <Link href={`/admin/email-lists/${list.id}`} className="block mt-4">
                                     <Button variant="outline" className="w-full" size="sm">
-                                        View Details
+                                        Voir les détails
                                         <ChevronRight className="ml-2 h-4 w-4" />
                                     </Button>
                                 </Link>
                             </CardContent>
                         </Card>
-                    ))}
+                        )
+                    })}
                 </div>
             )}
 
