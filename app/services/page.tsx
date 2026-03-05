@@ -1,5 +1,4 @@
 import { getServices, getUserServices } from '@/app/actions/services'
-import { getBankAccount } from '@/app/actions/payments'
 import { getCurrentUser } from '@/app/actions/auth'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
@@ -114,15 +113,15 @@ export default async function ServicesPage() {
     const comingSoonCount = services.filter(s => s.status === 'COMING_SOON').length;
 
     return (
-        <div className="min-h-screen bg-slate-950">
-            <Navbar />
+        <div className="min-h-screen bg-[#050914]">
+            <Navbar user={user} />
             
             {/* Hero Section */}
             <section className="relative pt-32 pb-20 overflow-hidden">
                 {/* Background Effects */}
-                <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950" />
-                <div className="absolute top-20 left-1/4 w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[120px]" />
-                <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[100px]" />
+                <div className="absolute inset-0 bg-linear-to-b from-slate-950 via-slate-900 to-slate-950" />
+                <div className="absolute top-20 left-1/4 w-150 h-150 bg-violet-600/10 rounded-full blur-[120px]" />
+                <div className="absolute bottom-0 right-1/4 w-125 h-125 bg-indigo-600/10 rounded-full blur-[100px]" />
                 
                 {/* Grid pattern */}
                 <div 
@@ -143,7 +142,7 @@ export default async function ServicesPage() {
                         
                         <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tight leading-tight">
                             Toutes nos{' '}
-                            <span className="bg-gradient-to-r from-violet-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
+                            <span className="bg-linear-to-r from-violet-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent">
                                 solutions
                             </span>
                         </h1>
@@ -194,15 +193,15 @@ export default async function ServicesPage() {
                                     key={service.id}
                                     className={`
                                         group relative overflow-hidden rounded-3xl p-8
-                                        bg-white/[0.02] backdrop-blur-sm border border-white/[0.05]
-                                        hover:bg-white/[0.05] hover:border-violet-500/30
+                                        bg-white/2 backdrop-blur-sm border border-white/5
+                                        hover:bg-white/5 hover:border-violet-500/30
                                         transition-all duration-500
                                     `}
                                 >
                                     {/* Hover glow effect */}
                                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
-                                        <div className="absolute inset-0 bg-gradient-to-b from-violet-500/5 to-transparent" />
+                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-linear-to-r from-transparent via-violet-500 to-transparent" />
+                                        <div className="absolute inset-0 bg-linear-to-b from-violet-500/5 to-transparent" />
                                     </div>
 
                                     <div className="relative z-10">
@@ -252,7 +251,7 @@ export default async function ServicesPage() {
                                         {/* Features List */}
                                         <div className="mb-8">
                                             <div className="flex items-center gap-2 mb-4">
-                                                <div className="h-px w-8 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full" />
+                                                <div className="h-px w-8 bg-linear-to-r from-violet-500 to-indigo-500 rounded-full" />
                                                 <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">
                                                     Fonctionnalités
                                                 </h4>
@@ -280,36 +279,24 @@ export default async function ServicesPage() {
                                         {/* Price & CTA */}
                                         {isAvailable ? (
                                             <div className="space-y-5">
-                                                <div className="flex items-center justify-between p-5 rounded-2xl bg-white/[0.03] border border-white/[0.05]">
+                                                <div className="flex items-center justify-between p-5 rounded-2xl bg-white/3 border border-white/5">
                                                     <div>
                                                         <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest mb-1">
                                                             À partir de
                                                         </p>
                                                         <div className="flex items-baseline gap-2">
                                                             <span className="text-4xl font-bold text-white">
-                                                                {(() => {
-                                                                    const prices: Record<string, number> = {
-                                                                        'restaurant': 2990,
-                                                                        'professional-services': 1990,
-                                                                        'inventory': 1490,
-                                                                        'rental': 2490,
-                                                                        'hospitality': 3990,
-                                                                        'healthcare': 4490,
-                                                                    }
-                                                                    return prices[service.category || ''] || 990
-                                                                })()
-                                                                .toFixed(0)
-                                                                }
+                                                                {service.price?.toFixed(0) ?? '0'}
                                                             </span>
                                                             <span className="text-lg text-slate-500">MAD</span>
                                                             <span className="text-xs text-slate-600 ml-1">
-                                                                paiement unique
+                                                                / mois
                                                             </span>
                                                         </div>
                                                     </div>
                                                     <Badge className="bg-emerald-500/20 text-emerald-400 border-0 text-xs font-bold">
                                                         <Sparkles className="h-3 w-3 mr-1" />
-                                                        À vie
+                                                        Actif
                                                     </Badge>
                                                 </div>
 
@@ -320,7 +307,7 @@ export default async function ServicesPage() {
                                                     />
                                                 ) : (
                                                     <Link href="/login" className="block">
-                                                        <Button className="w-full h-14 font-bold text-base bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white border-0 gap-2 group/btn">
+                                                        <Button className="w-full h-14 font-bold text-base bg-linear-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white border-0 gap-2 group/btn">
                                                             <Sparkles className="h-5 w-5" />
                                                             Se connecter pour acheter
                                                             <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
@@ -330,7 +317,7 @@ export default async function ServicesPage() {
                                             </div>
                                         ) : (
                                             <div className="space-y-4">
-                                                <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+                                                <div className="p-4 rounded-xl bg-white/2 border border-white/5">
                                                     <p className="text-sm text-slate-500 text-center">
                                                         Ce service sera bientôt disponible.
                                                     </p>
@@ -362,8 +349,8 @@ export default async function ServicesPage() {
 
             {/* CTA Section */}
             <section className="relative py-24 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-violet-950/20 to-slate-950" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-violet-600/10 rounded-full blur-[120px]" />
+                <div className="absolute inset-0 bg-linear-to-b from-slate-950 via-violet-950/20 to-slate-950" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-100 bg-violet-600/10 rounded-full blur-[120px]" />
                 
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="max-w-3xl mx-auto text-center">
@@ -376,7 +363,7 @@ export default async function ServicesPage() {
                         <Link href="/#signup">
                             <Button 
                                 size="lg" 
-                                className="px-10 h-14 text-base font-bold bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white border-0 gap-2"
+                                className="px-10 h-14 text-base font-bold bg-linear-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white border-0 gap-2"
                             >
                                 <Sparkles className="h-5 w-5" />
                                 Commencer gratuitement
@@ -388,7 +375,7 @@ export default async function ServicesPage() {
             </section>
 
             {/* Footer */}
-            <footer className="border-t border-white/[0.05] py-8 bg-slate-950">
+            <footer className="border-t border-white/5 py-8 bg-[#050914]">
                 <div className="container mx-auto px-6">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                         <p className="text-slate-500 text-sm">

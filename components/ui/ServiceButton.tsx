@@ -41,7 +41,7 @@ export default function ServiceButton({ service, userHasService }: ServiceButton
 
         setLoading(true)
         const result = await addUserService(service.id)
-        
+
         if (result.error) {
             alert(result.error)
             setLoading(false)
@@ -108,7 +108,7 @@ export default function ServiceButton({ service, userHasService }: ServiceButton
             'hospitality': 399.00,
             'healthcare': 349.00,
         }
-        
+
         return prices[category || ''] || 99.00
     }
 
@@ -120,27 +120,16 @@ export default function ServiceButton({ service, userHasService }: ServiceButton
                     disabled={loading || userHasService}
                     className={`
                         flex items-center gap-2 w-full
-                        ${userHasService 
-                            ? 'bg-green-600 hover:bg-green-700 cursor-default' 
+                        ${userHasService
+                            ? 'bg-green-600 hover:bg-green-700 cursor-default'
                             : service.status === 'COMING_SOON'
-                            ? 'bg-yellow-600 hover:bg-yellow-700'
-                            : 'bg-blue-600 hover:bg-blue-700'
+                                ? 'bg-yellow-600 hover:bg-yellow-700'
+                                : 'bg-blue-600 hover:bg-blue-700'
                         }
                     `}
                 >
                     {loading ? 'Chargement...' : getButtonContent()}
                 </Button>
-                
-                {service.status === 'AVAILABLE' && !userHasService && (
-                    <div className="text-center">
-                        <span className="text-lg font-bold text-blue-600">
-                            {getServicePrice(service.category).toFixed(0)} MAD
-                        </span>
-                        <div className="text-xs text-gray-500">
-                            Paiement unique
-                        </div>
-                    </div>
-                )}
             </div>
 
             {showPaymentModal && paymentData && (
