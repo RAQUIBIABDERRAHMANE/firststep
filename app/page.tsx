@@ -58,7 +58,7 @@ export default async function Home() {
               <ul className="space-y-3 text-sm text-slate-500">
                 <li><Link href="/login" className="hover:text-white transition-colors">Connexion</Link></li>
                 <li><a href="#" className="hover:text-white transition-colors">Confidentialité</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">CGU</a></li>
+                <li><Link href="/terms" className="hover:text-white transition-colors">CGU</Link></li>
                 <li><a href="mailto:contact@firststep.ma" className="hover:text-white transition-colors">Contact</a></li>
               </ul>
             </div>
