@@ -16,6 +16,10 @@ module.exports = {
             },
         },
         extend: {
+            fontFamily: {
+                syne: ['var(--font-syne)', 'Syne', 'sans-serif'],
+                figtree: ['var(--font-figtree)', 'Figtree', 'sans-serif'],
+            },
             colors: {
                 border: "hsl(var(--border))",
                 input: "hsl(var(--input))",

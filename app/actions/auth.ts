@@ -238,3 +238,61 @@ export async function resetPassword(prevState: any, formData: FormData) {
         return { error: 'Failed to reset password. Please try again.' }
     }
 }
+
+export async function updateProfile(_prev: any, formData: FormData) {
+    const user = await getCurrentUser()
+    if (!user) return { error: 'Non authentifié.' }
+
+    const companyName = formData.get('companyName') as string
+    if (!companyName || companyName.trim().length < 2) {
+        return { error: 'Le nom de l\'entreprise doit contenir au moins 2 caractères.' }
+    }
+
+    try {
+        await prisma.user.update({
+            where: { id: user.id },
+            data: { companyName: companyName.trim() },
+        })
+        return { success: true, message: 'Profil mis à jour avec succès.' }
+    } catch (error) {
+        console.error('Update profile error:', error)
+        return { error: 'Échec de la mise à jour du profil.' }
+    }
+}
+
+export async function updatePassword(_prev: any, formData: FormData) {
+    const user = await getCurrentUser()
+    if (!user) return { error: 'Non authentifié.' }
+
+    const currentPassword = formData.get('currentPassword') as string
+    const newPassword = formData.get('newPassword') as string
+    const confirmPassword = formData.get('confirmPassword') as string
+
+    if (!currentPassword || !newPassword || !confirmPassword) {
+        return { error: 'Tous les champs sont requis.' }
+    }
+    if (newPassword.length < 6) {
+        return { error: 'Le nouveau mot de passe doit contenir au moins 6 caractères.' }
+    }
+    if (newPassword !== confirmPassword) {
+        return { error: 'Les mots de passe ne correspondent pas.' }
+    }
+
+    try {
+        const dbUser = await prisma.user.findUnique({ where: { id: user.id } })
+        if (!dbUser) return { error: 'Utilisateur introuvable.' }
+
+        const valid = await verifyPassword(currentPassword, dbUser.password)
+        if (!valid) return { error: 'Mot de passe actuel incorrect.' }
+
+        const hashed = await hashPassword(newPassword)
+        await prisma.user.update({
+            where: { id: user.id },
+            data: { password: hashed },
+        })
+        return { success: true, message: 'Mot de passe mis à jour avec succès.' }
+    } catch (error) {
+        console.error('Update password error:', error)
+        return { error: 'Échec de la mise à jour du mot de passe.' }
+    }
+}

@@ -1,36 +1,48 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Syne, Figtree } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const inter = Inter({ subsets: ["latin"] });
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-syne",
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const figtree = Figtree({
+  subsets: ["latin"],
+  variable: "--font-figtree",
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "FirstStep - Modular SaaS Platform",
-  description: "All your business systems in one platform.",
+  title: "FirstStep — Plateforme SaaS B2B pour le Maroc",
+  description: "Centralisez la gestion de votre entreprise avec FirstStep. Cabinet, restaurant, commerce — un seul outil, zéro friction.",
   icons: {
     icon: "/logo.ico",
   },
   openGraph: {
-    title: "FirstStep - Modular SaaS Platform",
-    description: "All your business systems in one platform.",
-    url: "https://firststep.com", // Keeping it generic as requested or based on project inference
+    title: "FirstStep — Plateforme SaaS B2B pour le Maroc",
+    description: "Centralisez la gestion de votre entreprise avec FirstStep.",
+    url: "https://firststep.ma",
     siteName: "FirstStep",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "FirstStep Logo",
+        alt: "FirstStep Platform",
       },
     ],
-    locale: "en_US",
+    locale: "fr_MA",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "FirstStep - Modular SaaS Platform",
-    description: "All your business systems in one platform.",
+    title: "FirstStep — Plateforme SaaS B2B pour le Maroc",
+    description: "Centralisez la gestion de votre entreprise avec FirstStep.",
     images: ["/og-image.png"],
   },
 };
@@ -41,8 +53,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={cn(inter.className, "min-h-screen bg-background font-sans antialiased animate-fade-in")} suppressHydrationWarning>
+    <html lang="fr" suppressHydrationWarning>
+      <body
+        className={cn(
+          syne.variable,
+          figtree.variable,
+          "min-h-screen bg-[#030712] font-figtree antialiased"
+        )}
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>
