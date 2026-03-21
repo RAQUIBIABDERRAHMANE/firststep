@@ -1,29 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, ChevronRight, Activity, TrendingUp, Calendar, FileText } from 'lucide-react'
+import { ArrowRight, ChevronRight, Activity, TrendingUp, Calendar, FileText, Zap, Shield, BarChart3, Users } from 'lucide-react'
 import { useEffect, useRef } from 'react'
-
-const stats = [
-    { value: '500+', label: 'Entreprises' },
-    { value: '99.9%', label: 'Disponibilité' },
-    { value: '5 min', label: 'Configuration' },
-    { value: '24/7', label: 'Support' },
-]
-
-const features = [
-    { label: 'Rendez-vous', icon: Calendar },
-    { label: 'Facturation', icon: FileText },
-    { label: 'Dossiers médicaux', icon: Activity },
-    { label: 'Commandes', icon: TrendingUp },
-]
 
 // Custom element interface for spline-viewer
 interface SplineViewerElement extends HTMLElement {
     url: string;
 }
 
-// Spline Viewer Component (for earth background)
+// Spline Viewer Component (earth background)
 const SplineViewer = ({ url, className }: { url: string; className?: string }) => {
     const viewerRef = useRef<HTMLDivElement>(null);
 
@@ -33,7 +19,6 @@ const SplineViewer = ({ url, className }: { url: string; className?: string }) =
             splineViewer.setAttribute('url', url);
             splineViewer.style.width = '100%';
             splineViewer.style.height = '100%';
-
             viewerRef.current.innerHTML = '';
             viewerRef.current.appendChild(splineViewer);
         }
@@ -42,137 +27,244 @@ const SplineViewer = ({ url, className }: { url: string; className?: string }) =
     return <div ref={viewerRef} className={className} />;
 };
 
+const ticker = [
+    { icon: Calendar, label: 'Rendez-vous' },
+    { icon: FileText, label: 'Facturation' },
+    { icon: Activity, label: 'Dossiers médicaux' },
+    { icon: TrendingUp, label: 'Commandes' },
+    { icon: Zap, label: 'Automatisation' },
+    { icon: Shield, label: 'Sécurité' },
+    { icon: BarChart3, label: 'Analytiques' },
+    { icon: Users, label: 'Multi-équipes' },
+    // duplicated for seamless loop
+    { icon: Calendar, label: 'Rendez-vous' },
+    { icon: FileText, label: 'Facturation' },
+    { icon: Activity, label: 'Dossiers médicaux' },
+    { icon: TrendingUp, label: 'Commandes' },
+    { icon: Zap, label: 'Automatisation' },
+    { icon: Shield, label: 'Sécurité' },
+    { icon: BarChart3, label: 'Analytiques' },
+    { icon: Users, label: 'Multi-équipes' },
+]
+
+const stats = [
+    { value: '500+', label: 'Entreprises actives' },
+    { value: '99.9%', label: 'Disponibilité' },
+    { value: '5 min', label: 'Pour démarrer' },
+    { value: '24/7', label: 'Support dédié' },
+]
+
 export default function HeroSection() {
     return (
-        <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#030712]">
+        <>
+            <style>{`
+                @keyframes hero-fade-up {
+                    from { opacity: 0; transform: translateY(32px); }
+                    to   { opacity: 1; transform: translateY(0); }
+                }
+                @keyframes ticker-scroll {
+                    from { transform: translateX(0); }
+                    to   { transform: translateX(-50%); }
+                }
+                @keyframes shimmer-sweep {
+                    0%   { background-position: -200% center; }
+                    100% { background-position:  200% center; }
+                }
+                @keyframes border-spin {
+                    from { --angle: 0deg; }
+                    to   { --angle: 360deg; }
+                }
+                .hero-fade-up { animation: hero-fade-up 0.8s cubic-bezier(.22,1,.36,1) both; }
+                .delay-100  { animation-delay: 100ms; }
+                .delay-200  { animation-delay: 200ms; }
+                .delay-300  { animation-delay: 300ms; }
+                .delay-400  { animation-delay: 400ms; }
+                .delay-500  { animation-delay: 500ms; }
+                .delay-600  { animation-delay: 600ms; }
+                .delay-700  { animation-delay: 700ms; }
 
-            {/* Earth 3D Background */}
-            <div className="absolute inset-0 z-0">
-                <SplineViewer
-                    url="https://prod.spline.design/od8-AWHzyTVZSddI/scene.splinecode"
-                    className="w-full h-full"
+                .ticker-track { animation: ticker-scroll 28s linear infinite; }
+                .ticker-track:hover { animation-play-state: paused; }
+
+                .shimmer-text {
+                    background: linear-gradient(
+                        105deg,
+                        #67e8f9 0%,
+                        #22d3ee 30%,
+                        #fff    48%,
+                        #22d3ee 65%,
+                        #2dd4bf 100%
+                    );
+                    background-size: 200% auto;
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    animation: shimmer-sweep 4s linear infinite;
+                    animation-delay: 1.2s;
+                }
+
+                .glow-btn {
+                    position: relative;
+                    isolation: isolate;
+                }
+                .glow-btn::before {
+                    content: '';
+                    position: absolute;
+                    inset: -1px;
+                    border-radius: inherit;
+                    background: linear-gradient(135deg, #22d3ee, #2dd4bf, #0e7490);
+                    z-index: -1;
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                }
+                .glow-btn:hover::before { opacity: 1; }
+
+                .stat-card {
+                    position: relative;
+                    overflow: hidden;
+                }
+                .stat-card::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    background: radial-gradient(ellipse at 50% 0%, rgba(34,211,238,0.08), transparent 70%);
+                    opacity: 0;
+                    transition: opacity 0.4s;
+                }
+                .stat-card:hover::before { opacity: 1; }
+            `}</style>
+
+            <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#030712]">
+
+                {/* ── Earth 3D background ── */}
+                <div className="absolute inset-0 z-0 opacity-70">
+                    <SplineViewer
+                        url="https://prod.spline.design/od8-AWHzyTVZSddI/scene.splinecode"
+                        className="w-full h-full"
+                    />
+                </div>
+
+                {/* ── Layered atmospheric overlays ── */}
+                <div className="absolute inset-0 z-[1] bg-[#030712]/55" />
+                {/* Top vignette */}
+                <div className="absolute inset-0 z-[2] bg-[radial-gradient(ellipse_80%_55%_at_50%_-10%,rgba(6,182,212,0.13),transparent)]" />
+                {/* Bottom fade */}
+                <div className="absolute bottom-0 left-0 right-0 h-2/5 z-[2] bg-linear-to-t from-[#030712] to-transparent" />
+                {/* Dot matrix */}
+                <div
+                    className="absolute inset-0 z-[2] opacity-[0.22]"
+                    style={{
+                        backgroundImage: 'radial-gradient(rgba(34,211,238,0.35) 1px, transparent 1px)',
+                        backgroundSize: '44px 44px',
+                    }}
                 />
-            </div>
 
-            {/* Background overlay for better text readability */}
-            <div className="absolute inset-0 z-5 bg-[#030712]/40" />
+                {/* ── Ambient orbs ── */}
+                <div className="absolute top-[18%] left-[12%] w-96 h-96 rounded-full bg-cyan-500/6 blur-[120px] pointer-events-none z-[2] animate-float" style={{ animationDuration: '11s' }} />
+                <div className="absolute bottom-[20%] right-[8%] w-72 h-72 rounded-full bg-teal-400/5 blur-[100px] pointer-events-none z-[2] animate-float" style={{ animationDuration: '15s', animationDirection: 'reverse' }} />
+                <div className="absolute top-[50%] left-[45%] w-56 h-56 rounded-full bg-cyan-600/4 blur-[80px] pointer-events-none z-[2] animate-float" style={{ animationDuration: '8s' }} />
 
-            {/* Dot grid background */}
-            <div className="absolute inset-0 opacity-[0.35] z-5"
-                style={{
-                    backgroundImage: 'radial-gradient(rgba(34,211,238,0.3) 1px, transparent 1px)',
-                    backgroundSize: '40px 40px',
-                }} />
+                {/* ── Top beam ── */}
+                <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-500/50 to-transparent z-[3]" />
 
-            {/* Atmospheric radial glows */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,rgba(6,182,212,0.09),transparent)] z-5" />
-            <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-linear-to-t from-[#030712] to-transparent z-5" />
+                {/* ════════════════════════════════
+                    HERO CONTENT
+                ════════════════════════════════ */}
+                <div className="relative z-20 max-w-5xl mx-auto px-6 pt-32 pb-20 flex flex-col items-center text-center">
 
-            {/* Floating orbs */}
-            <div
-                className="absolute top-[20%] right-[10%] w-105 h-105 rounded-full bg-cyan-500/5 blur-[110px] pointer-events-none animate-float z-5"
-                style={{ animationDuration: '9s' }}
-            />
-            <div
-                className="absolute bottom-[15%] left-[5%] w-70 h-70 rounded-full bg-teal-400/4 blur-[90px] pointer-events-none animate-float z-5"
-                style={{ animationDuration: '13s', animationDirection: 'reverse' }}
-            />
-
-            {/* Top beam line */}
-            <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-500/40 to-transparent z-5" />
-
-            <div className="relative z-20 max-w-7xl mx-auto px-6 pt-28 pb-16">
-                <div className="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
-
-                    {/* ——— Left: Text ——— */}
-                    <div>
-                        {/* Eyebrow */}
-                        <div className="flex items-center gap-3 mb-9">
-                            <div className="h-px w-10 bg-cyan-400" />
-                            <span className="font-figtree text-[11px] font-semibold text-cyan-400 uppercase tracking-[0.25em]">
-                                Plateforme SaaS B2B · Maroc
-                            </span>
-                        </div>
-
-                        {/* Headline */}
-                        <h1 className="font-syne font-black leading-[0.9] tracking-tight mb-8 drop-shadow-lg">
-                            <span className="block text-5xl md:text-6xl xl:text-[72px] text-white">GÉREZ</span>
-                            <span className="block text-5xl md:text-6xl xl:text-[72px] bg-linear-to-r from-cyan-300 via-cyan-400 to-teal-300 bg-clip-text text-transparent">
-                                VOTRE
-                            </span>
-                            <span className="block text-5xl md:text-6xl xl:text-[72px] text-white">BUSINESS</span>
-                        </h1>
-
-                        {/* Subtext */}
-                        <p className="font-figtree text-[17px] text-slate-400 leading-relaxed max-w-105 mb-9 drop-shadow-sm">
-                            FirstStep centralise la gestion de votre entreprise — cabinet, restaurant, commerce. Un seul outil, zéro friction.
-                        </p>
-
-                        {/* Feature tags */}
-                        <div className="flex flex-wrap gap-2 mb-10">
-                            {features.map((f, i) => {
-                                const Icon = f.icon
-                                return (
-                                    <span key={i} className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-cyan-800/50 bg-cyan-950/40 text-[12px] font-figtree font-medium text-cyan-300">
-                                        <Icon className="h-3 w-3" />
-                                        {f.label}
-                                    </span>
-                                )
-                            })}
-                        </div>
-
-                        {/* CTAs */}
-                        <div className="flex flex-col sm:flex-row gap-3 items-start mb-5">
-                            <Link href="#signup">
-                                <button className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-cyan-400 hover:bg-cyan-300 text-black font-syne font-bold text-[14px] rounded-xl transition-all duration-300 shadow-[0_0_35px_rgba(34,211,238,0.28)] hover:shadow-[0_0_50px_rgba(34,211,238,0.45)]">
-                                    Démarrer gratuitement
-                                    <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform duration-200" />
-                                </button>
-                            </Link>
-                            <Link href="#services">
-                                <button className="inline-flex items-center gap-2 px-7 py-3.5 font-figtree font-semibold text-[14px] text-slate-300 hover:text-white border border-white/8 hover:border-cyan-800/60 rounded-xl transition-all duration-300 hover:bg-cyan-950/20">
-                                    Voir les solutions
-                                    <ChevronRight className="h-4 w-4" />
-                                </button>
-                            </Link>
-                        </div>
-                        <p className="font-figtree text-[11px] text-slate-600">Aucune carte bancaire · Configuration en 5 minutes</p>
+                    {/* Eyebrow pill */}
+                    <div className="hero-fade-up delay-100 inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-cyan-700/40 bg-cyan-950/35 backdrop-blur-sm mb-10">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                        <span className="font-figtree text-[11px] font-semibold text-cyan-300 uppercase tracking-[0.22em]">
+                            Plateforme SaaS B2B · Maroc
+                        </span>
                     </div>
 
-                    {/* ——— Right: 3D FIRST STEP Scene ——— */}
-                    <div className="relative hidden lg:block">
-                        <div className="relative rounded-2xl overflow-hidden h-[500px]">
-                            <iframe
-                                src="https://my.spline.design/zoomglasscopycopy-2Z8PrzwTZzjttqKQsMeELYLM-c6s/"
-                                frameBorder="0"
-                                width="100%"
-                                height="100%"
-                                className="absolute inset-0 w-full h-full"
-                                style={{ border: 'none' }}
-                                allow="autoplay"
-                            />
-                        </div>
+                    {/* ── Headline ── */}
+                    <h1 className="hero-fade-up delay-200 font-syne font-black leading-[0.88] tracking-tight mb-8 drop-shadow-xl">
+                        {/* Line 1 */}
+                        <span className="block text-[clamp(3.2rem,9vw,7rem)] text-white">
+                            GÉREZ
+                        </span>
+                        {/* Line 2 — shimmer */}
+                        <span className="block text-[clamp(3.2rem,9vw,7rem)] shimmer-text">
+                            VOTRE
+                        </span>
+                        {/* Line 3 */}
+                        <span className="block text-[clamp(3.2rem,9vw,7rem)] text-white">
+                            BUSINESS.
+                        </span>
+                    </h1>
+
+                    {/* Subheading */}
+                    <p className="hero-fade-up delay-300 font-figtree text-[17px] md:text-[19px] text-slate-400 leading-relaxed max-w-2xl mb-10">
+                        FirstStep centralise la gestion de votre entreprise —{' '}
+                        <span className="text-slate-300">cabinet, restaurant, commerce</span>.
+                        Un seul outil, zéro friction.
+                    </p>
+
+                    {/* CTAs */}
+                    <div className="hero-fade-up delay-400 flex flex-col sm:flex-row gap-3 items-center justify-center mb-4">
+                        <Link href="#signup">
+                            <button className="glow-btn group inline-flex items-center gap-2.5 px-8 py-4 bg-cyan-400 hover:bg-cyan-300 text-black font-syne font-bold text-[14px] rounded-xl transition-all duration-300 shadow-[0_0_40px_rgba(34,211,238,0.32)] hover:shadow-[0_0_60px_rgba(34,211,238,0.5)] hover:scale-[1.02]">
+                                Démarrer gratuitement
+                                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+                            </button>
+                        </Link>
+                        <Link href="#services">
+                            <button className="inline-flex items-center gap-2 px-8 py-4 font-figtree font-semibold text-[14px] text-slate-300 hover:text-white border border-white/10 hover:border-cyan-700/60 rounded-xl transition-all duration-300 hover:bg-cyan-950/25 backdrop-blur-sm">
+                                Voir les solutions
+                                <ChevronRight className="h-4 w-4" />
+                            </button>
+                        </Link>
+                    </div>
+                    <p className="hero-fade-up delay-500 font-figtree text-[11px] text-slate-600 mb-16">
+                        Aucune carte bancaire · Configuration en 5 minutes
+                    </p>
+
+                    {/* ── Stats bar ── */}
+                    <div className="hero-fade-up delay-600 w-full grid grid-cols-2 md:grid-cols-4 overflow-hidden rounded-2xl border border-cyan-900/30 bg-[#060c18]/75 backdrop-blur-md">
+                        {stats.map((stat, i) => (
+                            <div
+                                key={i}
+                                className={`stat-card flex flex-col items-center justify-center py-7 px-6 transition-colors duration-300 group cursor-default
+                                    ${i < 3 ? 'md:border-r border-cyan-900/20' : ''}
+                                    ${i < 2 ? 'border-b md:border-b-0 border-cyan-900/20' : ''}
+                                `}
+                            >
+                                <span className="font-syne text-3xl font-black text-white mb-0.5 group-hover:text-cyan-300 transition-colors duration-300">
+                                    {stat.value}
+                                </span>
+                                <span className="font-figtree text-[11px] text-slate-500 uppercase tracking-wider">
+                                    {stat.label}
+                                </span>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
-                {/* ——— Stats bar ——— */}
-                <div className="relative z-20 mt-20 grid grid-cols-2 md:grid-cols-4 overflow-hidden rounded-2xl border border-cyan-900/30 bg-[#060c18]/80 backdrop-blur-sm">
-                    {stats.map((stat, i) => (
-                        <div
-                            key={i}
-                            className={`flex flex-col items-center justify-center py-7 px-6 hover:bg-cyan-950/30 transition-colors duration-300 group
-                                ${i < 3 ? 'md:border-r border-cyan-900/20' : ''}
-                                ${i < 2 ? 'border-b md:border-b-0 border-cyan-900/20' : ''}
-                            `}
-                        >
-                            <span className="font-syne text-3xl font-black text-white mb-0.5 group-hover:text-cyan-300 transition-colors duration-300">
-                                {stat.value}
-                            </span>
-                            <span className="font-figtree text-[11px] text-slate-500 uppercase tracking-wider">{stat.label}</span>
-                        </div>
-                    ))}
+                {/* ══════════════════════════════════
+                    FEATURE TICKER (bottom strip)
+                ══════════════════════════════════ */}
+                <div className="relative z-20 border-t border-cyan-900/25 bg-[#020810]/60 backdrop-blur-sm overflow-hidden py-4">
+                    {/* fade masks */}
+                    <div className="absolute left-0 top-0 bottom-0 w-24 bg-linear-to-r from-[#020810] to-transparent z-10 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-24 bg-linear-to-l from-[#020810] to-transparent z-10 pointer-events-none" />
+
+                    <div className="ticker-track flex items-center gap-0 whitespace-nowrap will-change-transform">
+                        {ticker.map((item, i) => {
+                            const Icon = item.icon
+                            return (
+                                <span key={i} className="inline-flex items-center gap-2 px-7 text-[12px] font-figtree font-medium text-slate-500 uppercase tracking-widest border-r border-cyan-900/20 hover:text-cyan-400 transition-colors duration-200 cursor-default">
+                                    <Icon className="h-3.5 w-3.5 text-cyan-700 shrink-0" />
+                                    {item.label}
+                                </span>
+                            )
+                        })}
+                    </div>
                 </div>
-            </div>
-        </section>
+
+            </section>
+        </>
     )
 }
