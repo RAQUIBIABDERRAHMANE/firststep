@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Syne, Figtree } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -54,6 +55,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
+      <style>
+        .spline-watermark{
+          display:hidden
+        }
+      </style>
       <body
         className={cn(
           syne.variable,
@@ -62,6 +68,11 @@ export default function RootLayout({
         )}
         suppressHydrationWarning
       >
+        <Script
+          type="module"
+          src="https://unpkg.com/@splinetool/viewer@1.12.69/build/spline-viewer.js"
+          strategy="beforeInteractive"
+        />
         {children}
       </body>
     </html>

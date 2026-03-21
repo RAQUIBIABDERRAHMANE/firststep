@@ -116,7 +116,7 @@ export default function SignupSection() {
                                             name="companyName"
                                             placeholder="Mon Entreprise SARL"
                                             required
-                                            className="h-11 bg-white/4 border-white/8 text-white placeholder:text-slate-600 focus:border-cyan-500/40 focus:ring-0 rounded-xl font-figtree text-[14px]"
+                                            className="h-11 bg-white/4 border-white/8 text-white focus:text-black placeholder:text-slate-600 focus:border-cyan-500/40 focus:ring-0 rounded-xl font-figtree text-[14px]"
                                         />
                                     </div>
                                     <div>
@@ -129,7 +129,7 @@ export default function SignupSection() {
                                             type="email"
                                             placeholder="nom@entreprise.com"
                                             required
-                                            className="h-11 bg-white/4 border-white/8 text-white placeholder:text-slate-600 focus:border-cyan-500/40 focus:ring-0 rounded-xl font-figtree text-[14px]"
+                                            className="h-11 bg-white/4 border-white/8 text-white focus:text-black placeholder:text-slate-600 focus:border-cyan-500/40 focus:ring-0 rounded-xl font-figtree text-[14px]"
                                         />
                                     </div>
                                     <div>
@@ -143,7 +143,7 @@ export default function SignupSection() {
                                                 type={showPassword ? 'text' : 'password'}
                                                 placeholder="••••••••"
                                                 required
-                                                className="h-11 bg-white/4 border-white/8 text-white placeholder:text-slate-600 focus:border-cyan-500/40 focus:ring-0 rounded-xl pr-11 font-figtree text-[14px]"
+                                                className="h-11 bg-white/4 border-white/8 text-white focus:text-black placeholder:text-slate-600 focus:border-cyan-500/40 focus:ring-0 rounded-xl pr-11 font-figtree text-[14px]"
                                             />
                                             <button
                                                 type="button"

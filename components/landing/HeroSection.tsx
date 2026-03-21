@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, CheckCircle, ChevronRight, Activity, TrendingUp, Calendar, FileText } from 'lucide-react'
+import { ArrowRight, ChevronRight, Activity, TrendingUp, Calendar, FileText } from 'lucide-react'
+import { useEffect, useRef } from 'react'
 
 const stats = [
     { value: '500+', label: 'Entreprises' },
@@ -17,35 +18,70 @@ const features = [
     { label: 'Commandes', icon: TrendingUp },
 ]
 
+// Custom element interface for spline-viewer
+interface SplineViewerElement extends HTMLElement {
+    url: string;
+}
+
+// Spline Viewer Component (for earth background)
+const SplineViewer = ({ url, className }: { url: string; className?: string }) => {
+    const viewerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (viewerRef.current && typeof window !== 'undefined') {
+            const splineViewer = document.createElement('spline-viewer') as SplineViewerElement;
+            splineViewer.setAttribute('url', url);
+            splineViewer.style.width = '100%';
+            splineViewer.style.height = '100%';
+
+            viewerRef.current.innerHTML = '';
+            viewerRef.current.appendChild(splineViewer);
+        }
+    }, [url]);
+
+    return <div ref={viewerRef} className={className} />;
+};
+
 export default function HeroSection() {
     return (
         <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#030712]">
 
+            {/* Earth 3D Background */}
+            <div className="absolute inset-0 z-0">
+                <SplineViewer
+                    url="https://prod.spline.design/od8-AWHzyTVZSddI/scene.splinecode"
+                    className="w-full h-full"
+                />
+            </div>
+
+            {/* Background overlay for better text readability */}
+            <div className="absolute inset-0 z-5 bg-[#030712]/40" />
+
             {/* Dot grid background */}
-            <div className="absolute inset-0 opacity-[0.35]"
+            <div className="absolute inset-0 opacity-[0.35] z-5"
                 style={{
                     backgroundImage: 'radial-gradient(rgba(34,211,238,0.3) 1px, transparent 1px)',
                     backgroundSize: '40px 40px',
                 }} />
 
             {/* Atmospheric radial glows */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,rgba(6,182,212,0.09),transparent)]" />
-            <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-linear-to-t from-[#030712] to-transparent" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_0%,rgba(6,182,212,0.09),transparent)] z-5" />
+            <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-linear-to-t from-[#030712] to-transparent z-5" />
 
             {/* Floating orbs */}
             <div
-                className="absolute top-[20%] right-[10%] w-105 h-105 rounded-full bg-cyan-500/5 blur-[110px] pointer-events-none animate-float"
+                className="absolute top-[20%] right-[10%] w-105 h-105 rounded-full bg-cyan-500/5 blur-[110px] pointer-events-none animate-float z-5"
                 style={{ animationDuration: '9s' }}
             />
             <div
-                className="absolute bottom-[15%] left-[5%] w-70 h-70 rounded-full bg-teal-400/4 blur-[90px] pointer-events-none animate-float"
+                className="absolute bottom-[15%] left-[5%] w-70 h-70 rounded-full bg-teal-400/4 blur-[90px] pointer-events-none animate-float z-5"
                 style={{ animationDuration: '13s', animationDirection: 'reverse' }}
             />
 
             {/* Top beam line */}
-            <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-500/40 to-transparent" />
+            <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-500/40 to-transparent z-5" />
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-16">
+            <div className="relative z-20 max-w-7xl mx-auto px-6 pt-28 pb-16">
                 <div className="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
 
                     {/* ——— Left: Text ——— */}
@@ -59,7 +95,7 @@ export default function HeroSection() {
                         </div>
 
                         {/* Headline */}
-                        <h1 className="font-syne font-black leading-[0.9] tracking-tight mb-8">
+                        <h1 className="font-syne font-black leading-[0.9] tracking-tight mb-8 drop-shadow-lg">
                             <span className="block text-5xl md:text-6xl xl:text-[72px] text-white">GÉREZ</span>
                             <span className="block text-5xl md:text-6xl xl:text-[72px] bg-linear-to-r from-cyan-300 via-cyan-400 to-teal-300 bg-clip-text text-transparent">
                                 VOTRE
@@ -68,7 +104,7 @@ export default function HeroSection() {
                         </h1>
 
                         {/* Subtext */}
-                        <p className="font-figtree text-[17px] text-slate-400 leading-relaxed max-w-105 mb-9">
+                        <p className="font-figtree text-[17px] text-slate-400 leading-relaxed max-w-105 mb-9 drop-shadow-sm">
                             FirstStep centralise la gestion de votre entreprise — cabinet, restaurant, commerce. Un seul outil, zéro friction.
                         </p>
 
@@ -103,116 +139,24 @@ export default function HeroSection() {
                         <p className="font-figtree text-[11px] text-slate-600">Aucune carte bancaire · Configuration en 5 minutes</p>
                     </div>
 
-                    {/* ——— Right: Dashboard mockup (pure CSS) ——— */}
+                    {/* ——— Right: 3D FIRST STEP Scene ——— */}
                     <div className="relative hidden lg:block">
-                        {/* Outer glow */}
-                        <div className="absolute -inset-6 rounded-3xl bg-cyan-500/5 blur-2xl" />
-
-                        {/* Main card */}
-                        <div className="relative rounded-2xl border border-cyan-900/40 bg-[#060f1e]/95 backdrop-blur-sm overflow-hidden shadow-[0_0_80px_rgba(34,211,238,0.05)]">
-
-                            {/* Browser top bar */}
-                            <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/5 bg-[#030a14]">
-                                <div className="flex gap-1.5">
-                                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
-                                    <div className="w-2.5 h-2.5 rounded-full bg-amber-500/50" />
-                                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/50" />
-                                </div>
-                                <div className="flex-1 mx-3 h-5 rounded-md bg-white/4 flex items-center px-3">
-                                    <span className="font-figtree text-[10px] text-slate-600">firststepco.com/dashboard</span>
-                                </div>
-                                <div className="flex items-center gap-1.5">
-                                    <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                                    <span className="font-figtree text-[10px] text-emerald-400">Live</span>
-                                </div>
-                            </div>
-
-                            {/* Dashboard content */}
-                            <div className="p-5 space-y-4">
-
-                                {/* Stat cards */}
-                                <div className="grid grid-cols-3 gap-3">
-                                    {[
-                                        { label: 'Revenus', value: '48 250', unit: 'MAD', color: 'text-cyan-400', trend: '+12%' },
-                                        { label: 'Rendez-vous', value: '127', unit: 'cette semaine', color: 'text-emerald-400', trend: '+8%' },
-                                        { label: 'Clients', value: '1 842', unit: 'actifs', color: 'text-violet-400', trend: '+5%' },
-                                    ].map((card, i) => (
-                                        <div key={i} className="rounded-xl bg-white/3 border border-white/5 p-3">
-                                            <div className="font-figtree text-[10px] text-slate-500 mb-1.5">{card.label}</div>
-                                            <div className={`font-syne font-bold text-[15px] ${card.color}`}>{card.value}</div>
-                                            <div className="font-figtree text-[9px] text-slate-600 mt-0.5">{card.unit}</div>
-                                            <div className="font-figtree text-[9px] text-emerald-400 mt-1.5">↑ {card.trend}</div>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {/* Bar chart */}
-                                <div className="rounded-xl bg-white/3 border border-white/5 p-4">
-                                    <div className="flex justify-between items-center mb-3">
-                                        <span className="font-figtree text-[11px] font-medium text-slate-400">Activité mensuelle</span>
-                                        <span className="font-syne text-[10px] font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-full">2026</span>
-                                    </div>
-                                    <div className="flex items-end gap-1 h-16">
-                                        {[35, 58, 42, 75, 50, 88, 65, 80, 55, 92, 70, 95].map((h, i) => (
-                                            <div key={i} className="flex-1" style={{ height: '100%', display: 'flex', alignItems: 'flex-end' }}>
-                                                <div
-                                                    className="w-full rounded-t-[2px]"
-                                                    style={{
-                                                        height: `${h}%`,
-                                                        background: i === 11
-                                                            ? 'linear-gradient(to top, rgba(34,211,238,0.9), rgba(34,211,238,0.4))'
-                                                            : i >= 9
-                                                            ? 'rgba(34,211,238,0.15)'
-                                                            : 'rgba(255,255,255,0.05)',
-                                                    }}
-                                                />
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Activity feed */}
-                                <div className="rounded-xl bg-white/3 border border-white/5 p-4">
-                                    <div className="flex justify-between items-center mb-3">
-                                        <span className="font-figtree text-[11px] font-medium text-slate-400">Activité récente</span>
-                                        <span className="font-figtree text-[10px] text-slate-600">Temps réel</span>
-                                    </div>
-                                    <div className="space-y-2.5">
-                                        {[
-                                            { name: 'RDV — Dr. Amrani', time: '2 min', status: 'Confirmé', cls: 'text-emerald-400 bg-emerald-500/10 border-emerald-800/40' },
-                                            { name: 'Facture #1042 émise', time: '18 min', status: 'Payée', cls: 'text-cyan-400 bg-cyan-500/10 border-cyan-800/40' },
-                                            { name: 'Commande Table 5', time: '41 min', status: 'En cours', cls: 'text-amber-400 bg-amber-500/10 border-amber-800/40' },
-                                        ].map((item, i) => (
-                                            <div key={i} className="flex items-center justify-between">
-                                                <div>
-                                                    <div className="font-figtree text-[11px] text-slate-300 font-medium">{item.name}</div>
-                                                    <div className="font-figtree text-[10px] text-slate-600">Il y a {item.time}</div>
-                                                </div>
-                                                <span className={`font-figtree text-[10px] font-semibold px-2 py-0.5 rounded-full border ${item.cls}`}>
-                                                    {item.status}
-                                                </span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
+                        <div className="relative rounded-2xl overflow-hidden h-[500px]">
+                            <iframe
+                                src="https://my.spline.design/zoomglasscopycopy-2Z8PrzwTZzjttqKQsMeELYLM-c6s/"
+                                frameBorder="0"
+                                width="100%"
+                                height="100%"
+                                className="absolute inset-0 w-full h-full"
+                                style={{ border: 'none' }}
+                                allow="autoplay"
+                            />
                         </div>
-
-                        {/* Floating status badge */}
-                        <div className="absolute -top-4 -right-5 rounded-xl border border-cyan-800/50 bg-[#060f1e] px-4 py-2.5 shadow-xl shadow-black/50">
-                            <div className="flex items-center gap-2">
-                                <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                                <span className="font-figtree text-[11px] font-semibold text-white">Système opérationnel</span>
-                            </div>
-                        </div>
-
-                        {/* Bottom decorative line */}
-                        <div className="absolute -bottom-5 left-8 right-8 h-px bg-linear-to-r from-transparent via-cyan-500/25 to-transparent" />
                     </div>
                 </div>
 
                 {/* ——— Stats bar ——— */}
-                <div className="mt-20 grid grid-cols-2 md:grid-cols-4 overflow-hidden rounded-2xl border border-cyan-900/30 bg-[#060c18]/50">
+                <div className="relative z-20 mt-20 grid grid-cols-2 md:grid-cols-4 overflow-hidden rounded-2xl border border-cyan-900/30 bg-[#060c18]/80 backdrop-blur-sm">
                     {stats.map((stat, i) => (
                         <div
                             key={i}

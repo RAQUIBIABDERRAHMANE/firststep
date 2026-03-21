@@ -50,6 +50,16 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
                     backgroundSize: '64px 64px',
                 }} />
 
+            {/* Floating orbs */}
+            <div
+                className="absolute top-[30%] right-[20%] w-32 h-32 rounded-full bg-cyan-500/5 blur-[60px] pointer-events-none animate-float"
+                style={{ animationDuration: '12s' }}
+            />
+            <div
+                className="absolute bottom-[25%] left-[15%] w-24 h-24 rounded-full bg-teal-400/4 blur-[50px] pointer-events-none animate-float"
+                style={{ animationDuration: '15s', animationDirection: 'reverse' }}
+            />
+
             <div className="relative max-w-7xl mx-auto px-6">
 
                 {/* Header */}
@@ -77,7 +87,7 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
                         return (
                             <div
                                 key={service.id}
-                                className="group relative rounded-xl border border-white/5 bg-[#060c18] hover:border-cyan-800/50 transition-all duration-300 overflow-hidden"
+                                className="group relative rounded-xl border border-white/5 bg-[#060c18] hover:border-cyan-800/50 transition-all duration-300 overflow-hidden hover:transform hover:scale-105 hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(34,211,238,0.15)]"
                             >
                                 {/* Hover top accent */}
                                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
