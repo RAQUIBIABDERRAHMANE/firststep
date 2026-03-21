@@ -13,16 +13,79 @@ import {
     Timer,
     AlertCircle,
     MoreVertical,
-    Check
+    Check,
+    Volume2,
+    VolumeX
 } from 'lucide-react'
 import { updateOrderStatus } from '@/app/actions/restaurant'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
+const playNotificationSound = () => {
+    try {
+        const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+
+        const playTone = (freq: number, startTime: number, duration: number) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.value = freq;
+
+            gain.gain.setValueAtTime(0, startTime);
+            gain.gain.linearRampToValueAtTime(0.2, startTime + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+
+            osc.start(startTime);
+            osc.stop(startTime + duration);
+        };
+
+        // Double chime: C6 (1046.5Hz) then E6 (1318.5Hz)
+        playTone(1046.50, ctx.currentTime, 0.4);
+        playTone(1318.51, ctx.currentTime + 0.15, 0.6);
+    } catch (e) {
+        console.error("Audio play failed", e);
+    }
+}
+
 export default function OrdersClient({ initialOrders, tenantSlug }: { initialOrders: any[], tenantSlug: string }) {
     const router = useRouter()
     const [loading, setLoading] = useState<string | null>(null)
     const [lastUpdated, setLastUpdated] = useState<Date>(new Date())
+    const [isSoundEnabled, setIsSoundEnabled] = useState(false)
+    const previousOrderIds = React.useRef<Set<string>>(new Set())
+
+    // Track new orders and play sound
+    useEffect(() => {
+        const currentIds = new Set(initialOrders.map(o => o.id));
+        let hasNewOrder = false;
+        
+        if (previousOrderIds.current.size > 0) {
+            for (const id of currentIds) {
+                if (!previousOrderIds.current.has(id)) {
+                    hasNewOrder = true;
+                    break;
+                }
+            }
+        } else {
+            // Initial load, just populate the ref without ringing
+            previousOrderIds.current = currentIds;
+            return;
+        }
+
+        if (hasNewOrder) {
+            if (isSoundEnabled) {
+                playNotificationSound();
+            }
+        }
+        
+        previousOrderIds.current = currentIds;
+    }, [initialOrders, isSoundEnabled])
 
     // Polling for new orders (simplified real-time)
     useEffect(() => {
@@ -67,11 +130,26 @@ export default function OrdersClient({ initialOrders, tenantSlug }: { initialOrd
 
     return (
         <div className="space-y-8">
-            <div className="flex items-center gap-3 px-4 py-2 bg-slate-900 rounded-full w-fit">
-                <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                    Live Monitor Active — Last Sync: {lastUpdated.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
-                </span>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="flex items-center gap-3 px-4 py-2 bg-slate-900 rounded-full w-fit">
+                    <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                        Live Monitor Active — Last Sync: {lastUpdated.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                    </span>
+                </div>
+                
+                <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={() => setIsSoundEnabled(!isSoundEnabled)}
+                    className={cn(
+                        "rounded-full px-4 h-9 gap-2 text-xs font-bold border transition-colors",
+                        isSoundEnabled ? "bg-emerald-50 text-emerald-600 border-emerald-200 hover:bg-emerald-100" : "bg-slate-50 text-slate-500 border-slate-200 hover:bg-slate-100"
+                    )}
+                >
+                    {isSoundEnabled ? <Volume2 size={14} /> : <VolumeX size={14} />}
+                    {isSoundEnabled ? "Sound On" : "Enable Sound"}
+                </Button>
             </div>
 
             {initialOrders.length === 0 ? (
