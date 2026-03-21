@@ -55,11 +55,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" suppressHydrationWarning>
-      <style>
-        .spline-watermark{
-          display:hidden
-        }
-      </style>
       <body
         className={cn(
           syne.variable,
