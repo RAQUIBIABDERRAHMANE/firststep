@@ -238,6 +238,35 @@ export async function deleteTable(id: string, slug?: string) {
     }
 }
 
+export async function createBulkTables(count: number, prefix: string, startNumber: number, capacity?: number, slug?: string) {
+    const tenant = await getTenant(slug)
+    if (!tenant) return { error: 'Not authenticated' }
+
+    if (count <= 0 || count > 500) {
+        return { error: 'Please specify a valid quantity (1-500)' }
+    }
+
+    try {
+        const tablesToCreate = Array.from({ length: count }).map((_, i) => ({
+            tenantId: tenant.id,
+            number: `${prefix}${startNumber + i}`.trim(),
+            capacity: capacity || null,
+            isActive: true
+        }))
+
+        // SQLite createMany is supported in newer Prisma versions, but skipDuplicates is not supported for SQLite
+        await prisma.restaurantTable.createMany({
+            data: tablesToCreate
+        })
+
+        revalidatePath('/dashboard/restaurant', 'layout')
+        return { success: true }
+    } catch (e) {
+        console.error('[Restaurant Action] createBulkTables Error:', e)
+        return { error: 'Failed to bulk create tables' }
+    }
+}
+
 // --- Orders ---
 
 export async function createOrder(tableNumber: string, items: { id: string, name: string, price: number, quantity: number }[]) {

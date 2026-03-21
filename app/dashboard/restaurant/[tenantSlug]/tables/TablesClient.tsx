@@ -15,9 +15,10 @@ import {
     X,
     Eye,
     EyeOff,
-    Users
+    Users,
+    Layers
 } from 'lucide-react'
-import { createTable, updateTable, deleteTable } from '@/app/actions/restaurant'
+import { createTable, updateTable, deleteTable, createBulkTables } from '@/app/actions/restaurant'
 import { signTableIdBrowser } from '@/lib/crypto-client'
 import { useRouter } from 'next/navigation'
 import QRCode from 'qrcode'
@@ -31,6 +32,12 @@ export default function TablesClient({ initialTables, tenantSlug }: { initialTab
     const [editingTable, setEditingTable] = useState<string | null>(null)
     const [tempName, setTempName] = useState('')
     const [tempCapacity, setTempCapacity] = useState('')
+
+    // Bulk Add State
+    const [mode, setMode] = useState<'single' | 'bulk'>('single')
+    const [bulkQuantity, setBulkQuantity] = useState('100')
+    const [bulkPrefix, setBulkPrefix] = useState('Table ')
+    const [bulkCapacity, setBulkCapacity] = useState('')
 
     // Generate QR code data URLs for each table
     useEffect(() => {
@@ -68,6 +75,35 @@ export default function TablesClient({ initialTables, tenantSlug }: { initialTab
             else setNewTableName('')
         } catch (e) {
             alert('A system error occurred while adding the table.')
+        } finally {
+            setLoading(false)
+            router.refresh()
+        }
+    }
+
+    const handleBulkAdd = async () => {
+        const count = parseInt(bulkQuantity)
+        if (isNaN(count) || count <= 0 || count > 500) {
+            alert('Please enter a valid quantity between 1 and 500.')
+            return
+        }
+        
+        setLoading(true)
+        try {
+            // Calculate start number based on existing tables
+            const existingCount = initialTables.length
+            const defaultStart = existingCount + 1
+            
+            const capacity = bulkCapacity ? parseInt(bulkCapacity) : undefined
+            
+            const res = await createBulkTables(count, bulkPrefix, defaultStart, capacity, tenantSlug)
+            if (res?.error) alert(res.error)
+            else {
+                setBulkQuantity('100')
+                setMode('single')
+            }
+        } catch (e) {
+            alert('A system error occurred while bulk adding tables.')
         } finally {
             setLoading(false)
             router.refresh()
@@ -117,23 +153,91 @@ export default function TablesClient({ initialTables, tenantSlug }: { initialTab
     return (
         <div className="space-y-8">
             {/* Table Creator */}
-            <Card className="glass-card bg-indigo-50/50 border-indigo-100 shadow-none rounded-[2.5rem]">
+            <Card className="glass-card bg-indigo-50/50 border-indigo-100 shadow-none rounded-[2.5rem] overflow-hidden">
+                <div className="flex border-b border-indigo-100/50">
+                    <button 
+                        className={`flex-1 py-4 font-bold text-sm transition-colors ${mode === 'single' ? 'bg-indigo-600 text-white' : 'hover:bg-indigo-100/50 text-indigo-900/60'}`}
+                        onClick={() => setMode('single')}
+                    >
+                        Single Add
+                    </button>
+                    <button 
+                        className={`flex-1 py-4 font-bold text-sm transition-colors ${mode === 'bulk' ? 'bg-indigo-600 text-white' : 'hover:bg-indigo-100/50 text-indigo-900/60'}`}
+                        onClick={() => setMode('bulk')}
+                    >
+                        Bulk Generate
+                    </button>
+                </div>
                 <CardContent className="pt-6">
-                    <div className="flex flex-col md:flex-row gap-4">
-                        <div className="relative flex-1">
-                            <MapPin size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-400" />
-                            <Input
-                                placeholder="Identifier (e.g., Table 1, Terrace-A...)"
-                                value={newTableName}
-                                onChange={(e) => setNewTableName(e.target.value)}
-                                disabled={loading}
-                                className="bg-white border-indigo-100 pl-11 h-12 rounded-2xl text-lg font-medium"
-                            />
+                    {mode === 'single' ? (
+                        <div className="flex flex-col md:flex-row gap-4 animate-in fade-in slide-in-from-bottom-2">
+                            <div className="relative flex-1">
+                                <MapPin size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-400" />
+                                <Input
+                                    placeholder="Identifier (e.g., Table 1, Terrace-A...)"
+                                    value={newTableName}
+                                    onChange={(e) => setNewTableName(e.target.value)}
+                                    disabled={loading}
+                                    className="bg-white border-indigo-100 pl-11 h-12 rounded-2xl text-lg font-medium"
+                                />
+                            </div>
+                            <Button onClick={handleAddTable} disabled={loading || !newTableName.trim()} className="shrink-0 gap-2 h-12 px-10 rounded-2xl shadow-xl shadow-indigo-500/10 bg-indigo-600 hover:bg-indigo-700 font-black tracking-tight">
+                                <Plus size={22} /> Add Physical Point
+                            </Button>
                         </div>
-                        <Button onClick={handleAddTable} disabled={loading || !newTableName.trim()} className="shrink-0 gap-2 h-12 px-10 rounded-2xl shadow-xl shadow-indigo-500/10 bg-indigo-600 hover:bg-indigo-700 font-black tracking-tight">
-                            <Plus size={22} /> Add Physical Point
-                        </Button>
-                    </div>
+                    ) : (
+                        <div className="flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-2">
+                            <div className="flex flex-col md:flex-row gap-4">
+                                <div className="space-y-1.5 flex-[2]">
+                                    <label className="text-xs font-bold text-indigo-900/60 uppercase tracking-widest pl-2">Quantity</label>
+                                    <div className="relative">
+                                        <Layers size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-400" />
+                                        <Input
+                                            type="number"
+                                            placeholder="e.g. 100"
+                                            value={bulkQuantity}
+                                            onChange={(e) => setBulkQuantity(e.target.value)}
+                                            disabled={loading}
+                                            className="bg-white border-indigo-100 pl-11 h-12 rounded-2xl text-lg font-medium"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="space-y-1.5 flex-[3]">
+                                    <label className="text-xs font-bold text-indigo-900/60 uppercase tracking-widest pl-2">Prefix (Optional)</label>
+                                    <Input
+                                        placeholder="e.g. Table "
+                                        value={bulkPrefix}
+                                        onChange={(e) => setBulkPrefix(e.target.value)}
+                                        disabled={loading}
+                                        className="bg-white border-indigo-100 px-4 h-12 rounded-2xl text-lg font-medium"
+                                    />
+                                </div>
+                                <div className="space-y-1.5 flex-[2]">
+                                    <label className="text-xs font-bold text-indigo-900/60 uppercase tracking-widest pl-2">Capacity (Optional)</label>
+                                    <div className="relative">
+                                        <Users size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-indigo-400" />
+                                        <Input
+                                            type="number"
+                                            placeholder="Seats auto-applied"
+                                            value={bulkCapacity}
+                                            onChange={(e) => setBulkCapacity(e.target.value)}
+                                            disabled={loading}
+                                            className="bg-white border-indigo-100 pl-11 h-12 rounded-2xl text-lg font-medium"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div className="flex items-center justify-between mt-2 p-4 bg-indigo-100/50 rounded-2xl border border-indigo-100">
+                                <span className="text-sm font-semibold text-indigo-900/70">
+                                    Will generate tables numbered <strong className="text-indigo-700">{initialTables.length + 1}</strong> to <strong className="text-indigo-700">{initialTables.length + (parseInt(bulkQuantity) || 0)}</strong>.
+                                </span>
+                                <Button onClick={handleBulkAdd} disabled={loading || !bulkQuantity} className="shrink-0 gap-2 h-10 px-8 rounded-xl shadow-lg shadow-indigo-500/10 bg-indigo-600 hover:bg-indigo-700 font-bold">
+                                    <Plus size={18} /> Generate {bulkQuantity || 0} Tables
+                                </Button>
+                            </div>
+                        </div>
+                    )}
                 </CardContent>
             </Card>
 

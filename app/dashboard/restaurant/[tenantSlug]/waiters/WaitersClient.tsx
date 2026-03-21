@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Badge } from '@/components/ui/Badge'
-import { Loader2, Plus, Trash2, User, KeyRound, MapPin, Users } from 'lucide-react'
+import { Loader2, Plus, Trash2, User, KeyRound, MapPin, Users, Copy, Check, Link as LinkIcon } from 'lucide-react'
 import { createWaiter, deleteWaiter } from '@/app/actions/waiter'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
@@ -20,6 +20,7 @@ export default function WaitersClient({ initialWaiters, initialTables, tenantSlu
     const router = useRouter()
     const [isCreating, setIsCreating] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const [copied, setCopied] = useState(false)
 
     const [newName, setNewName] = useState('')
     const [newPin, setNewPin] = useState('')
@@ -60,6 +61,35 @@ export default function WaitersClient({ initialWaiters, initialTables, tenantSlu
 
     return (
         <div className="space-y-8">
+            {/* Portal Link Banner */}
+            <div className="flex flex-col sm:flex-row items-center justify-between p-4 bg-indigo-50/50 border border-indigo-100 rounded-[2rem] gap-4">
+                <div className="flex items-center gap-4 w-full">
+                    <div className="h-12 w-12 bg-white rounded-[1.25rem] flex items-center justify-center text-indigo-500 shadow-sm border border-indigo-100 flex-shrink-0">
+                        <LinkIcon size={20} />
+                    </div>
+                    <div className="flex-1">
+                        <h4 className="font-bold text-slate-800">Waiter Portal Link</h4>
+                        <p className="text-sm text-slate-500 mt-0.5">Share this specific link with your staff so they can access their assigned tables.</p>
+                    </div>
+                </div>
+                <Button 
+                    variant="outline" 
+                    className={cn(
+                        "rounded-xl h-12 px-6 shadow-sm border-indigo-200 transition-all font-bold tracking-tight w-full sm:w-auto flex-shrink-0",
+                        copied ? "bg-emerald-50 text-emerald-600 border-emerald-200 hover:bg-emerald-100" : "bg-white text-indigo-600 hover:bg-indigo-50"
+                    )}
+                    onClick={() => {
+                        const url = `${window.location.origin}/${tenantSlug}/waiter`;
+                        navigator.clipboard.writeText(url);
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 2000);
+                    }}
+                >
+                    {copied ? <Check size={18} className="mr-2" /> : <Copy size={18} className="mr-2" />}
+                    {copied ? 'Copied to Clipboard!' : 'Copy Portal Link'}
+                </Button>
+            </div>
+
             {/* Create Actions */}
             {!isCreating ? (
                 <Card className="border-dashed bg-slate-50/50 hover:bg-slate-50 transition-colors cursor-pointer" onClick={() => setIsCreating(true)}>
