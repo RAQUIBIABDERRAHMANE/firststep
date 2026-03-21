@@ -433,6 +433,27 @@ h3 {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-.spline-watermark{
-  display:none;
+/* Hide Spline watermark – targets both shadow DOM and any exposed element */
+.spline-watermark {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Cover the watermark injected inside spline-viewer's shadow DOM */
+spline-viewer {
+  position: relative;
+}
+
+spline-viewer::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 150px;
+  height: 40px;
+  background: #030712;
+  z-index: 9999;
+  pointer-events: none;
 }
