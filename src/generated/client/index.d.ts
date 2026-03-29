@@ -84,6 +84,11 @@ export type RestaurantOrder = $Result.DefaultSelection<Prisma.$RestaurantOrderPa
  */
 export type RestaurantOrderItem = $Result.DefaultSelection<Prisma.$RestaurantOrderItemPayload>
 /**
+ * Model RestaurantReport
+ * 
+ */
+export type RestaurantReport = $Result.DefaultSelection<Prisma.$RestaurantReportPayload>
+/**
  * Model CabinetService
  * 
  */
@@ -410,6 +415,16 @@ export class PrismaClient<
     * ```
     */
   get restaurantOrderItem(): Prisma.RestaurantOrderItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.restaurantReport`: Exposes CRUD operations for the **RestaurantReport** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RestaurantReports
+    * const restaurantReports = await prisma.restaurantReport.findMany()
+    * ```
+    */
+  get restaurantReport(): Prisma.RestaurantReportDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.cabinetService`: Exposes CRUD operations for the **CabinetService** model.
@@ -998,6 +1013,7 @@ export namespace Prisma {
     RestaurantWaiter: 'RestaurantWaiter',
     RestaurantOrder: 'RestaurantOrder',
     RestaurantOrderItem: 'RestaurantOrderItem',
+    RestaurantReport: 'RestaurantReport',
     CabinetService: 'CabinetService',
     CabinetClient: 'CabinetClient',
     CabinetAppointment: 'CabinetAppointment',
@@ -1027,7 +1043,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "chatSession" | "chatMessage" | "notification" | "service" | "userService" | "passwordReset" | "tenantWebsite" | "restaurantCategory" | "restaurantDish" | "restaurantTable" | "restaurantWaiter" | "restaurantOrder" | "restaurantOrderItem" | "cabinetService" | "cabinetClient" | "cabinetAppointment" | "paymentRequest" | "bankAccount" | "campaign" | "emailList" | "emailListMember" | "invoiceSettings" | "invoice" | "invoiceItem" | "medicalRecord" | "prescription" | "medicalHistory"
+      modelProps: "user" | "chatSession" | "chatMessage" | "notification" | "service" | "userService" | "passwordReset" | "tenantWebsite" | "restaurantCategory" | "restaurantDish" | "restaurantTable" | "restaurantWaiter" | "restaurantOrder" | "restaurantOrderItem" | "restaurantReport" | "cabinetService" | "cabinetClient" | "cabinetAppointment" | "paymentRequest" | "bankAccount" | "campaign" | "emailList" | "emailListMember" | "invoiceSettings" | "invoice" | "invoiceItem" | "medicalRecord" | "prescription" | "medicalHistory"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2064,6 +2080,80 @@ export namespace Prisma {
           count: {
             args: Prisma.RestaurantOrderItemCountArgs<ExtArgs>
             result: $Utils.Optional<RestaurantOrderItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      RestaurantReport: {
+        payload: Prisma.$RestaurantReportPayload<ExtArgs>
+        fields: Prisma.RestaurantReportFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RestaurantReportFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RestaurantReportPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RestaurantReportFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RestaurantReportPayload>
+          }
+          findFirst: {
+            args: Prisma.RestaurantReportFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RestaurantReportPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RestaurantReportFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RestaurantReportPayload>
+          }
+          findMany: {
+            args: Prisma.RestaurantReportFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RestaurantReportPayload>[]
+          }
+          create: {
+            args: Prisma.RestaurantReportCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RestaurantReportPayload>
+          }
+          createMany: {
+            args: Prisma.RestaurantReportCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RestaurantReportCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RestaurantReportPayload>[]
+          }
+          delete: {
+            args: Prisma.RestaurantReportDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RestaurantReportPayload>
+          }
+          update: {
+            args: Prisma.RestaurantReportUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RestaurantReportPayload>
+          }
+          deleteMany: {
+            args: Prisma.RestaurantReportDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RestaurantReportUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RestaurantReportUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RestaurantReportPayload>[]
+          }
+          upsert: {
+            args: Prisma.RestaurantReportUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RestaurantReportPayload>
+          }
+          aggregate: {
+            args: Prisma.RestaurantReportAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRestaurantReport>
+          }
+          groupBy: {
+            args: Prisma.RestaurantReportGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RestaurantReportGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RestaurantReportCountArgs<ExtArgs>
+            result: $Utils.Optional<RestaurantReportCountAggregateOutputType> | number
           }
         }
       }
@@ -3225,6 +3315,7 @@ export namespace Prisma {
     restaurantWaiter?: RestaurantWaiterOmit
     restaurantOrder?: RestaurantOrderOmit
     restaurantOrderItem?: RestaurantOrderItemOmit
+    restaurantReport?: RestaurantReportOmit
     cabinetService?: CabinetServiceOmit
     cabinetClient?: CabinetClientOmit
     cabinetAppointment?: CabinetAppointmentOmit
@@ -3481,6 +3572,7 @@ export namespace Prisma {
     categories: number
     tables: number
     waiters: number
+    reports: number
     invoices: number
   }
 
@@ -3491,6 +3583,7 @@ export namespace Prisma {
     categories?: boolean | TenantWebsiteCountOutputTypeCountCategoriesArgs
     tables?: boolean | TenantWebsiteCountOutputTypeCountTablesArgs
     waiters?: boolean | TenantWebsiteCountOutputTypeCountWaitersArgs
+    reports?: boolean | TenantWebsiteCountOutputTypeCountReportsArgs
     invoices?: boolean | TenantWebsiteCountOutputTypeCountInvoicesArgs
   }
 
@@ -3545,6 +3638,13 @@ export namespace Prisma {
    */
   export type TenantWebsiteCountOutputTypeCountWaitersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RestaurantWaiterWhereInput
+  }
+
+  /**
+   * TenantWebsiteCountOutputType without action
+   */
+  export type TenantWebsiteCountOutputTypeCountReportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RestaurantReportWhereInput
   }
 
   /**
@@ -11832,6 +11932,7 @@ export namespace Prisma {
     categories?: boolean | TenantWebsite$categoriesArgs<ExtArgs>
     tables?: boolean | TenantWebsite$tablesArgs<ExtArgs>
     waiters?: boolean | TenantWebsite$waitersArgs<ExtArgs>
+    reports?: boolean | TenantWebsite$reportsArgs<ExtArgs>
     invoices?: boolean | TenantWebsite$invoicesArgs<ExtArgs>
     invoiceSettings?: boolean | TenantWebsite$invoiceSettingsArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
@@ -11902,6 +12003,7 @@ export namespace Prisma {
     categories?: boolean | TenantWebsite$categoriesArgs<ExtArgs>
     tables?: boolean | TenantWebsite$tablesArgs<ExtArgs>
     waiters?: boolean | TenantWebsite$waitersArgs<ExtArgs>
+    reports?: boolean | TenantWebsite$reportsArgs<ExtArgs>
     invoices?: boolean | TenantWebsite$invoicesArgs<ExtArgs>
     invoiceSettings?: boolean | TenantWebsite$invoiceSettingsArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
@@ -11926,6 +12028,7 @@ export namespace Prisma {
       categories: Prisma.$RestaurantCategoryPayload<ExtArgs>[]
       tables: Prisma.$RestaurantTablePayload<ExtArgs>[]
       waiters: Prisma.$RestaurantWaiterPayload<ExtArgs>[]
+      reports: Prisma.$RestaurantReportPayload<ExtArgs>[]
       invoices: Prisma.$InvoicePayload<ExtArgs>[]
       invoiceSettings: Prisma.$InvoiceSettingsPayload<ExtArgs> | null
       service: Prisma.$ServicePayload<ExtArgs>
@@ -12346,6 +12449,7 @@ export namespace Prisma {
     categories<T extends TenantWebsite$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tables<T extends TenantWebsite$tablesArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$tablesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantTablePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     waiters<T extends TenantWebsite$waitersArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$waitersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantWaiterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reports<T extends TenantWebsite$reportsArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     invoices<T extends TenantWebsite$invoicesArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     invoiceSettings<T extends TenantWebsite$invoiceSettingsArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsite$invoiceSettingsArgs<ExtArgs>>): Prisma__InvoiceSettingsClient<$Result.GetResult<Prisma.$InvoiceSettingsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     service<T extends ServiceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ServiceDefaultArgs<ExtArgs>>): Prisma__ServiceClient<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -12928,6 +13032,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RestaurantWaiterScalarFieldEnum | RestaurantWaiterScalarFieldEnum[]
+  }
+
+  /**
+   * TenantWebsite.reports
+   */
+  export type TenantWebsite$reportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RestaurantReport
+     */
+    select?: RestaurantReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RestaurantReport
+     */
+    omit?: RestaurantReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RestaurantReportInclude<ExtArgs> | null
+    where?: RestaurantReportWhereInput
+    orderBy?: RestaurantReportOrderByWithRelationInput | RestaurantReportOrderByWithRelationInput[]
+    cursor?: RestaurantReportWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RestaurantReportScalarFieldEnum | RestaurantReportScalarFieldEnum[]
   }
 
   /**
@@ -19741,6 +19869,1139 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: RestaurantOrderItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model RestaurantReport
+   */
+
+  export type AggregateRestaurantReport = {
+    _count: RestaurantReportCountAggregateOutputType | null
+    _avg: RestaurantReportAvgAggregateOutputType | null
+    _sum: RestaurantReportSumAggregateOutputType | null
+    _min: RestaurantReportMinAggregateOutputType | null
+    _max: RestaurantReportMaxAggregateOutputType | null
+  }
+
+  export type RestaurantReportAvgAggregateOutputType = {
+    month: number | null
+    year: number | null
+  }
+
+  export type RestaurantReportSumAggregateOutputType = {
+    month: number | null
+    year: number | null
+  }
+
+  export type RestaurantReportMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    month: number | null
+    year: number | null
+    status: string | null
+    language: string | null
+    data: string | null
+    createdAt: Date | null
+  }
+
+  export type RestaurantReportMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    month: number | null
+    year: number | null
+    status: string | null
+    language: string | null
+    data: string | null
+    createdAt: Date | null
+  }
+
+  export type RestaurantReportCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    month: number
+    year: number
+    status: number
+    language: number
+    data: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type RestaurantReportAvgAggregateInputType = {
+    month?: true
+    year?: true
+  }
+
+  export type RestaurantReportSumAggregateInputType = {
+    month?: true
+    year?: true
+  }
+
+  export type RestaurantReportMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    month?: true
+    year?: true
+    status?: true
+    language?: true
+    data?: true
+    createdAt?: true
+  }
+
+  export type RestaurantReportMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    month?: true
+    year?: true
+    status?: true
+    language?: true
+    data?: true
+    createdAt?: true
+  }
+
+  export type RestaurantReportCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    month?: true
+    year?: true
+    status?: true
+    language?: true
+    data?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type RestaurantReportAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RestaurantReport to aggregate.
+     */
+    where?: RestaurantReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RestaurantReports to fetch.
+     */
+    orderBy?: RestaurantReportOrderByWithRelationInput | RestaurantReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RestaurantReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RestaurantReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RestaurantReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RestaurantReports
+    **/
+    _count?: true | RestaurantReportCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RestaurantReportAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RestaurantReportSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RestaurantReportMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RestaurantReportMaxAggregateInputType
+  }
+
+  export type GetRestaurantReportAggregateType<T extends RestaurantReportAggregateArgs> = {
+        [P in keyof T & keyof AggregateRestaurantReport]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRestaurantReport[P]>
+      : GetScalarType<T[P], AggregateRestaurantReport[P]>
+  }
+
+
+
+
+  export type RestaurantReportGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RestaurantReportWhereInput
+    orderBy?: RestaurantReportOrderByWithAggregationInput | RestaurantReportOrderByWithAggregationInput[]
+    by: RestaurantReportScalarFieldEnum[] | RestaurantReportScalarFieldEnum
+    having?: RestaurantReportScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RestaurantReportCountAggregateInputType | true
+    _avg?: RestaurantReportAvgAggregateInputType
+    _sum?: RestaurantReportSumAggregateInputType
+    _min?: RestaurantReportMinAggregateInputType
+    _max?: RestaurantReportMaxAggregateInputType
+  }
+
+  export type RestaurantReportGroupByOutputType = {
+    id: string
+    tenantId: string
+    month: number
+    year: number
+    status: string
+    language: string
+    data: string
+    createdAt: Date
+    _count: RestaurantReportCountAggregateOutputType | null
+    _avg: RestaurantReportAvgAggregateOutputType | null
+    _sum: RestaurantReportSumAggregateOutputType | null
+    _min: RestaurantReportMinAggregateOutputType | null
+    _max: RestaurantReportMaxAggregateOutputType | null
+  }
+
+  type GetRestaurantReportGroupByPayload<T extends RestaurantReportGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RestaurantReportGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RestaurantReportGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RestaurantReportGroupByOutputType[P]>
+            : GetScalarType<T[P], RestaurantReportGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RestaurantReportSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    month?: boolean
+    year?: boolean
+    status?: boolean
+    language?: boolean
+    data?: boolean
+    createdAt?: boolean
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["restaurantReport"]>
+
+  export type RestaurantReportSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    month?: boolean
+    year?: boolean
+    status?: boolean
+    language?: boolean
+    data?: boolean
+    createdAt?: boolean
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["restaurantReport"]>
+
+  export type RestaurantReportSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    month?: boolean
+    year?: boolean
+    status?: boolean
+    language?: boolean
+    data?: boolean
+    createdAt?: boolean
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["restaurantReport"]>
+
+  export type RestaurantReportSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    month?: boolean
+    year?: boolean
+    status?: boolean
+    language?: boolean
+    data?: boolean
+    createdAt?: boolean
+  }
+
+  export type RestaurantReportOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "month" | "year" | "status" | "language" | "data" | "createdAt", ExtArgs["result"]["restaurantReport"]>
+  export type RestaurantReportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+  }
+  export type RestaurantReportIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+  }
+  export type RestaurantReportIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantWebsiteDefaultArgs<ExtArgs>
+  }
+
+  export type $RestaurantReportPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RestaurantReport"
+    objects: {
+      tenant: Prisma.$TenantWebsitePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      month: number
+      year: number
+      status: string
+      language: string
+      data: string
+      createdAt: Date
+    }, ExtArgs["result"]["restaurantReport"]>
+    composites: {}
+  }
+
+  type RestaurantReportGetPayload<S extends boolean | null | undefined | RestaurantReportDefaultArgs> = $Result.GetResult<Prisma.$RestaurantReportPayload, S>
+
+  type RestaurantReportCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RestaurantReportFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RestaurantReportCountAggregateInputType | true
+    }
+
+  export interface RestaurantReportDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RestaurantReport'], meta: { name: 'RestaurantReport' } }
+    /**
+     * Find zero or one RestaurantReport that matches the filter.
+     * @param {RestaurantReportFindUniqueArgs} args - Arguments to find a RestaurantReport
+     * @example
+     * // Get one RestaurantReport
+     * const restaurantReport = await prisma.restaurantReport.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RestaurantReportFindUniqueArgs>(args: SelectSubset<T, RestaurantReportFindUniqueArgs<ExtArgs>>): Prisma__RestaurantReportClient<$Result.GetResult<Prisma.$RestaurantReportPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RestaurantReport that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RestaurantReportFindUniqueOrThrowArgs} args - Arguments to find a RestaurantReport
+     * @example
+     * // Get one RestaurantReport
+     * const restaurantReport = await prisma.restaurantReport.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RestaurantReportFindUniqueOrThrowArgs>(args: SelectSubset<T, RestaurantReportFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RestaurantReportClient<$Result.GetResult<Prisma.$RestaurantReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RestaurantReport that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RestaurantReportFindFirstArgs} args - Arguments to find a RestaurantReport
+     * @example
+     * // Get one RestaurantReport
+     * const restaurantReport = await prisma.restaurantReport.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RestaurantReportFindFirstArgs>(args?: SelectSubset<T, RestaurantReportFindFirstArgs<ExtArgs>>): Prisma__RestaurantReportClient<$Result.GetResult<Prisma.$RestaurantReportPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RestaurantReport that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RestaurantReportFindFirstOrThrowArgs} args - Arguments to find a RestaurantReport
+     * @example
+     * // Get one RestaurantReport
+     * const restaurantReport = await prisma.restaurantReport.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RestaurantReportFindFirstOrThrowArgs>(args?: SelectSubset<T, RestaurantReportFindFirstOrThrowArgs<ExtArgs>>): Prisma__RestaurantReportClient<$Result.GetResult<Prisma.$RestaurantReportPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RestaurantReports that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RestaurantReportFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RestaurantReports
+     * const restaurantReports = await prisma.restaurantReport.findMany()
+     * 
+     * // Get first 10 RestaurantReports
+     * const restaurantReports = await prisma.restaurantReport.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const restaurantReportWithIdOnly = await prisma.restaurantReport.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RestaurantReportFindManyArgs>(args?: SelectSubset<T, RestaurantReportFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RestaurantReport.
+     * @param {RestaurantReportCreateArgs} args - Arguments to create a RestaurantReport.
+     * @example
+     * // Create one RestaurantReport
+     * const RestaurantReport = await prisma.restaurantReport.create({
+     *   data: {
+     *     // ... data to create a RestaurantReport
+     *   }
+     * })
+     * 
+     */
+    create<T extends RestaurantReportCreateArgs>(args: SelectSubset<T, RestaurantReportCreateArgs<ExtArgs>>): Prisma__RestaurantReportClient<$Result.GetResult<Prisma.$RestaurantReportPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RestaurantReports.
+     * @param {RestaurantReportCreateManyArgs} args - Arguments to create many RestaurantReports.
+     * @example
+     * // Create many RestaurantReports
+     * const restaurantReport = await prisma.restaurantReport.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RestaurantReportCreateManyArgs>(args?: SelectSubset<T, RestaurantReportCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RestaurantReports and returns the data saved in the database.
+     * @param {RestaurantReportCreateManyAndReturnArgs} args - Arguments to create many RestaurantReports.
+     * @example
+     * // Create many RestaurantReports
+     * const restaurantReport = await prisma.restaurantReport.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RestaurantReports and only return the `id`
+     * const restaurantReportWithIdOnly = await prisma.restaurantReport.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RestaurantReportCreateManyAndReturnArgs>(args?: SelectSubset<T, RestaurantReportCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantReportPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RestaurantReport.
+     * @param {RestaurantReportDeleteArgs} args - Arguments to delete one RestaurantReport.
+     * @example
+     * // Delete one RestaurantReport
+     * const RestaurantReport = await prisma.restaurantReport.delete({
+     *   where: {
+     *     // ... filter to delete one RestaurantReport
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RestaurantReportDeleteArgs>(args: SelectSubset<T, RestaurantReportDeleteArgs<ExtArgs>>): Prisma__RestaurantReportClient<$Result.GetResult<Prisma.$RestaurantReportPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RestaurantReport.
+     * @param {RestaurantReportUpdateArgs} args - Arguments to update one RestaurantReport.
+     * @example
+     * // Update one RestaurantReport
+     * const restaurantReport = await prisma.restaurantReport.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RestaurantReportUpdateArgs>(args: SelectSubset<T, RestaurantReportUpdateArgs<ExtArgs>>): Prisma__RestaurantReportClient<$Result.GetResult<Prisma.$RestaurantReportPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RestaurantReports.
+     * @param {RestaurantReportDeleteManyArgs} args - Arguments to filter RestaurantReports to delete.
+     * @example
+     * // Delete a few RestaurantReports
+     * const { count } = await prisma.restaurantReport.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RestaurantReportDeleteManyArgs>(args?: SelectSubset<T, RestaurantReportDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RestaurantReports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RestaurantReportUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RestaurantReports
+     * const restaurantReport = await prisma.restaurantReport.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RestaurantReportUpdateManyArgs>(args: SelectSubset<T, RestaurantReportUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RestaurantReports and returns the data updated in the database.
+     * @param {RestaurantReportUpdateManyAndReturnArgs} args - Arguments to update many RestaurantReports.
+     * @example
+     * // Update many RestaurantReports
+     * const restaurantReport = await prisma.restaurantReport.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RestaurantReports and only return the `id`
+     * const restaurantReportWithIdOnly = await prisma.restaurantReport.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RestaurantReportUpdateManyAndReturnArgs>(args: SelectSubset<T, RestaurantReportUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantReportPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RestaurantReport.
+     * @param {RestaurantReportUpsertArgs} args - Arguments to update or create a RestaurantReport.
+     * @example
+     * // Update or create a RestaurantReport
+     * const restaurantReport = await prisma.restaurantReport.upsert({
+     *   create: {
+     *     // ... data to create a RestaurantReport
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RestaurantReport we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RestaurantReportUpsertArgs>(args: SelectSubset<T, RestaurantReportUpsertArgs<ExtArgs>>): Prisma__RestaurantReportClient<$Result.GetResult<Prisma.$RestaurantReportPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RestaurantReports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RestaurantReportCountArgs} args - Arguments to filter RestaurantReports to count.
+     * @example
+     * // Count the number of RestaurantReports
+     * const count = await prisma.restaurantReport.count({
+     *   where: {
+     *     // ... the filter for the RestaurantReports we want to count
+     *   }
+     * })
+    **/
+    count<T extends RestaurantReportCountArgs>(
+      args?: Subset<T, RestaurantReportCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RestaurantReportCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RestaurantReport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RestaurantReportAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RestaurantReportAggregateArgs>(args: Subset<T, RestaurantReportAggregateArgs>): Prisma.PrismaPromise<GetRestaurantReportAggregateType<T>>
+
+    /**
+     * Group by RestaurantReport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RestaurantReportGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RestaurantReportGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RestaurantReportGroupByArgs['orderBy'] }
+        : { orderBy?: RestaurantReportGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RestaurantReportGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRestaurantReportGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RestaurantReport model
+   */
+  readonly fields: RestaurantReportFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RestaurantReport.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RestaurantReportClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantWebsiteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantWebsiteDefaultArgs<ExtArgs>>): Prisma__TenantWebsiteClient<$Result.GetResult<Prisma.$TenantWebsitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RestaurantReport model
+   */
+  interface RestaurantReportFieldRefs {
+    readonly id: FieldRef<"RestaurantReport", 'String'>
+    readonly tenantId: FieldRef<"RestaurantReport", 'String'>
+    readonly month: FieldRef<"RestaurantReport", 'Int'>
+    readonly year: FieldRef<"RestaurantReport", 'Int'>
+    readonly status: FieldRef<"RestaurantReport", 'String'>
+    readonly language: FieldRef<"RestaurantReport", 'String'>
+    readonly data: FieldRef<"RestaurantReport", 'String'>
+    readonly createdAt: FieldRef<"RestaurantReport", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RestaurantReport findUnique
+   */
+  export type RestaurantReportFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RestaurantReport
+     */
+    select?: RestaurantReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RestaurantReport
+     */
+    omit?: RestaurantReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RestaurantReportInclude<ExtArgs> | null
+    /**
+     * Filter, which RestaurantReport to fetch.
+     */
+    where: RestaurantReportWhereUniqueInput
+  }
+
+  /**
+   * RestaurantReport findUniqueOrThrow
+   */
+  export type RestaurantReportFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RestaurantReport
+     */
+    select?: RestaurantReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RestaurantReport
+     */
+    omit?: RestaurantReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RestaurantReportInclude<ExtArgs> | null
+    /**
+     * Filter, which RestaurantReport to fetch.
+     */
+    where: RestaurantReportWhereUniqueInput
+  }
+
+  /**
+   * RestaurantReport findFirst
+   */
+  export type RestaurantReportFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RestaurantReport
+     */
+    select?: RestaurantReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RestaurantReport
+     */
+    omit?: RestaurantReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RestaurantReportInclude<ExtArgs> | null
+    /**
+     * Filter, which RestaurantReport to fetch.
+     */
+    where?: RestaurantReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RestaurantReports to fetch.
+     */
+    orderBy?: RestaurantReportOrderByWithRelationInput | RestaurantReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RestaurantReports.
+     */
+    cursor?: RestaurantReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RestaurantReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RestaurantReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RestaurantReports.
+     */
+    distinct?: RestaurantReportScalarFieldEnum | RestaurantReportScalarFieldEnum[]
+  }
+
+  /**
+   * RestaurantReport findFirstOrThrow
+   */
+  export type RestaurantReportFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RestaurantReport
+     */
+    select?: RestaurantReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RestaurantReport
+     */
+    omit?: RestaurantReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RestaurantReportInclude<ExtArgs> | null
+    /**
+     * Filter, which RestaurantReport to fetch.
+     */
+    where?: RestaurantReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RestaurantReports to fetch.
+     */
+    orderBy?: RestaurantReportOrderByWithRelationInput | RestaurantReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RestaurantReports.
+     */
+    cursor?: RestaurantReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RestaurantReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RestaurantReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RestaurantReports.
+     */
+    distinct?: RestaurantReportScalarFieldEnum | RestaurantReportScalarFieldEnum[]
+  }
+
+  /**
+   * RestaurantReport findMany
+   */
+  export type RestaurantReportFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RestaurantReport
+     */
+    select?: RestaurantReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RestaurantReport
+     */
+    omit?: RestaurantReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RestaurantReportInclude<ExtArgs> | null
+    /**
+     * Filter, which RestaurantReports to fetch.
+     */
+    where?: RestaurantReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RestaurantReports to fetch.
+     */
+    orderBy?: RestaurantReportOrderByWithRelationInput | RestaurantReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RestaurantReports.
+     */
+    cursor?: RestaurantReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RestaurantReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RestaurantReports.
+     */
+    skip?: number
+    distinct?: RestaurantReportScalarFieldEnum | RestaurantReportScalarFieldEnum[]
+  }
+
+  /**
+   * RestaurantReport create
+   */
+  export type RestaurantReportCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RestaurantReport
+     */
+    select?: RestaurantReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RestaurantReport
+     */
+    omit?: RestaurantReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RestaurantReportInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RestaurantReport.
+     */
+    data: XOR<RestaurantReportCreateInput, RestaurantReportUncheckedCreateInput>
+  }
+
+  /**
+   * RestaurantReport createMany
+   */
+  export type RestaurantReportCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RestaurantReports.
+     */
+    data: RestaurantReportCreateManyInput | RestaurantReportCreateManyInput[]
+  }
+
+  /**
+   * RestaurantReport createManyAndReturn
+   */
+  export type RestaurantReportCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RestaurantReport
+     */
+    select?: RestaurantReportSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RestaurantReport
+     */
+    omit?: RestaurantReportOmit<ExtArgs> | null
+    /**
+     * The data used to create many RestaurantReports.
+     */
+    data: RestaurantReportCreateManyInput | RestaurantReportCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RestaurantReportIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RestaurantReport update
+   */
+  export type RestaurantReportUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RestaurantReport
+     */
+    select?: RestaurantReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RestaurantReport
+     */
+    omit?: RestaurantReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RestaurantReportInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RestaurantReport.
+     */
+    data: XOR<RestaurantReportUpdateInput, RestaurantReportUncheckedUpdateInput>
+    /**
+     * Choose, which RestaurantReport to update.
+     */
+    where: RestaurantReportWhereUniqueInput
+  }
+
+  /**
+   * RestaurantReport updateMany
+   */
+  export type RestaurantReportUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RestaurantReports.
+     */
+    data: XOR<RestaurantReportUpdateManyMutationInput, RestaurantReportUncheckedUpdateManyInput>
+    /**
+     * Filter which RestaurantReports to update
+     */
+    where?: RestaurantReportWhereInput
+    /**
+     * Limit how many RestaurantReports to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RestaurantReport updateManyAndReturn
+   */
+  export type RestaurantReportUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RestaurantReport
+     */
+    select?: RestaurantReportSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RestaurantReport
+     */
+    omit?: RestaurantReportOmit<ExtArgs> | null
+    /**
+     * The data used to update RestaurantReports.
+     */
+    data: XOR<RestaurantReportUpdateManyMutationInput, RestaurantReportUncheckedUpdateManyInput>
+    /**
+     * Filter which RestaurantReports to update
+     */
+    where?: RestaurantReportWhereInput
+    /**
+     * Limit how many RestaurantReports to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RestaurantReportIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RestaurantReport upsert
+   */
+  export type RestaurantReportUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RestaurantReport
+     */
+    select?: RestaurantReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RestaurantReport
+     */
+    omit?: RestaurantReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RestaurantReportInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RestaurantReport to update in case it exists.
+     */
+    where: RestaurantReportWhereUniqueInput
+    /**
+     * In case the RestaurantReport found by the `where` argument doesn't exist, create a new RestaurantReport with this data.
+     */
+    create: XOR<RestaurantReportCreateInput, RestaurantReportUncheckedCreateInput>
+    /**
+     * In case the RestaurantReport was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RestaurantReportUpdateInput, RestaurantReportUncheckedUpdateInput>
+  }
+
+  /**
+   * RestaurantReport delete
+   */
+  export type RestaurantReportDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RestaurantReport
+     */
+    select?: RestaurantReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RestaurantReport
+     */
+    omit?: RestaurantReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RestaurantReportInclude<ExtArgs> | null
+    /**
+     * Filter which RestaurantReport to delete.
+     */
+    where: RestaurantReportWhereUniqueInput
+  }
+
+  /**
+   * RestaurantReport deleteMany
+   */
+  export type RestaurantReportDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RestaurantReports to delete
+     */
+    where?: RestaurantReportWhereInput
+    /**
+     * Limit how many RestaurantReports to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RestaurantReport without action
+   */
+  export type RestaurantReportDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RestaurantReport
+     */
+    select?: RestaurantReportSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RestaurantReport
+     */
+    omit?: RestaurantReportOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RestaurantReportInclude<ExtArgs> | null
   }
 
 
@@ -36137,6 +37398,20 @@ export namespace Prisma {
   export type RestaurantOrderItemScalarFieldEnum = (typeof RestaurantOrderItemScalarFieldEnum)[keyof typeof RestaurantOrderItemScalarFieldEnum]
 
 
+  export const RestaurantReportScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    month: 'month',
+    year: 'year',
+    status: 'status',
+    language: 'language',
+    data: 'data',
+    createdAt: 'createdAt'
+  };
+
+  export type RestaurantReportScalarFieldEnum = (typeof RestaurantReportScalarFieldEnum)[keyof typeof RestaurantReportScalarFieldEnum]
+
+
   export const CabinetServiceScalarFieldEnum: {
     id: 'id',
     tenantId: 'tenantId',
@@ -36898,6 +38173,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryListRelationFilter
     tables?: RestaurantTableListRelationFilter
     waiters?: RestaurantWaiterListRelationFilter
+    reports?: RestaurantReportListRelationFilter
     invoices?: InvoiceListRelationFilter
     invoiceSettings?: XOR<InvoiceSettingsNullableScalarRelationFilter, InvoiceSettingsWhereInput> | null
     service?: XOR<ServiceScalarRelationFilter, ServiceWhereInput>
@@ -36925,6 +38201,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryOrderByRelationAggregateInput
     tables?: RestaurantTableOrderByRelationAggregateInput
     waiters?: RestaurantWaiterOrderByRelationAggregateInput
+    reports?: RestaurantReportOrderByRelationAggregateInput
     invoices?: InvoiceOrderByRelationAggregateInput
     invoiceSettings?: InvoiceSettingsOrderByWithRelationInput
     service?: ServiceOrderByWithRelationInput
@@ -36955,6 +38232,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryListRelationFilter
     tables?: RestaurantTableListRelationFilter
     waiters?: RestaurantWaiterListRelationFilter
+    reports?: RestaurantReportListRelationFilter
     invoices?: InvoiceListRelationFilter
     invoiceSettings?: XOR<InvoiceSettingsNullableScalarRelationFilter, InvoiceSettingsWhereInput> | null
     service?: XOR<ServiceScalarRelationFilter, ServiceWhereInput>
@@ -37390,6 +38668,79 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"RestaurantOrderItem"> | string
     price?: FloatWithAggregatesFilter<"RestaurantOrderItem"> | number
     quantity?: IntWithAggregatesFilter<"RestaurantOrderItem"> | number
+  }
+
+  export type RestaurantReportWhereInput = {
+    AND?: RestaurantReportWhereInput | RestaurantReportWhereInput[]
+    OR?: RestaurantReportWhereInput[]
+    NOT?: RestaurantReportWhereInput | RestaurantReportWhereInput[]
+    id?: StringFilter<"RestaurantReport"> | string
+    tenantId?: StringFilter<"RestaurantReport"> | string
+    month?: IntFilter<"RestaurantReport"> | number
+    year?: IntFilter<"RestaurantReport"> | number
+    status?: StringFilter<"RestaurantReport"> | string
+    language?: StringFilter<"RestaurantReport"> | string
+    data?: StringFilter<"RestaurantReport"> | string
+    createdAt?: DateTimeFilter<"RestaurantReport"> | Date | string
+    tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
+  }
+
+  export type RestaurantReportOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    month?: SortOrder
+    year?: SortOrder
+    status?: SortOrder
+    language?: SortOrder
+    data?: SortOrder
+    createdAt?: SortOrder
+    tenant?: TenantWebsiteOrderByWithRelationInput
+  }
+
+  export type RestaurantReportWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_month_year?: RestaurantReportTenantIdMonthYearCompoundUniqueInput
+    AND?: RestaurantReportWhereInput | RestaurantReportWhereInput[]
+    OR?: RestaurantReportWhereInput[]
+    NOT?: RestaurantReportWhereInput | RestaurantReportWhereInput[]
+    tenantId?: StringFilter<"RestaurantReport"> | string
+    month?: IntFilter<"RestaurantReport"> | number
+    year?: IntFilter<"RestaurantReport"> | number
+    status?: StringFilter<"RestaurantReport"> | string
+    language?: StringFilter<"RestaurantReport"> | string
+    data?: StringFilter<"RestaurantReport"> | string
+    createdAt?: DateTimeFilter<"RestaurantReport"> | Date | string
+    tenant?: XOR<TenantWebsiteScalarRelationFilter, TenantWebsiteWhereInput>
+  }, "id" | "tenantId_month_year">
+
+  export type RestaurantReportOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    month?: SortOrder
+    year?: SortOrder
+    status?: SortOrder
+    language?: SortOrder
+    data?: SortOrder
+    createdAt?: SortOrder
+    _count?: RestaurantReportCountOrderByAggregateInput
+    _avg?: RestaurantReportAvgOrderByAggregateInput
+    _max?: RestaurantReportMaxOrderByAggregateInput
+    _min?: RestaurantReportMinOrderByAggregateInput
+    _sum?: RestaurantReportSumOrderByAggregateInput
+  }
+
+  export type RestaurantReportScalarWhereWithAggregatesInput = {
+    AND?: RestaurantReportScalarWhereWithAggregatesInput | RestaurantReportScalarWhereWithAggregatesInput[]
+    OR?: RestaurantReportScalarWhereWithAggregatesInput[]
+    NOT?: RestaurantReportScalarWhereWithAggregatesInput | RestaurantReportScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RestaurantReport"> | string
+    tenantId?: StringWithAggregatesFilter<"RestaurantReport"> | string
+    month?: IntWithAggregatesFilter<"RestaurantReport"> | number
+    year?: IntWithAggregatesFilter<"RestaurantReport"> | number
+    status?: StringWithAggregatesFilter<"RestaurantReport"> | string
+    language?: StringWithAggregatesFilter<"RestaurantReport"> | string
+    data?: StringWithAggregatesFilter<"RestaurantReport"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"RestaurantReport"> | Date | string
   }
 
   export type CabinetServiceWhereInput = {
@@ -39073,6 +40424,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportCreateNestedManyWithoutTenantInput
     invoices?: InvoiceCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
@@ -39100,6 +40452,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportUncheckedCreateNestedManyWithoutTenantInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
@@ -39123,6 +40476,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
@@ -39150,6 +40504,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUncheckedUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
@@ -39595,6 +40950,82 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type RestaurantReportCreateInput = {
+    id?: string
+    month: number
+    year: number
+    status?: string
+    language?: string
+    data: string
+    createdAt?: Date | string
+    tenant: TenantWebsiteCreateNestedOneWithoutReportsInput
+  }
+
+  export type RestaurantReportUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    month: number
+    year: number
+    status?: string
+    language?: string
+    data: string
+    createdAt?: Date | string
+  }
+
+  export type RestaurantReportUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    data?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantWebsiteUpdateOneRequiredWithoutReportsNestedInput
+  }
+
+  export type RestaurantReportUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    data?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RestaurantReportCreateManyInput = {
+    id?: string
+    tenantId: string
+    month: number
+    year: number
+    status?: string
+    language?: string
+    data: string
+    createdAt?: Date | string
+  }
+
+  export type RestaurantReportUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    data?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RestaurantReportUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    data?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CabinetServiceCreateInput = {
@@ -41359,6 +42790,12 @@ export namespace Prisma {
     none?: RestaurantWaiterWhereInput
   }
 
+  export type RestaurantReportListRelationFilter = {
+    every?: RestaurantReportWhereInput
+    some?: RestaurantReportWhereInput
+    none?: RestaurantReportWhereInput
+  }
+
   export type InvoiceListRelationFilter = {
     every?: InvoiceWhereInput
     some?: InvoiceWhereInput
@@ -41391,6 +42828,10 @@ export namespace Prisma {
   }
 
   export type RestaurantWaiterOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RestaurantReportOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -41797,6 +43238,55 @@ export namespace Prisma {
   export type RestaurantOrderItemSumOrderByAggregateInput = {
     price?: SortOrder
     quantity?: SortOrder
+  }
+
+  export type RestaurantReportTenantIdMonthYearCompoundUniqueInput = {
+    tenantId: string
+    month: number
+    year: number
+  }
+
+  export type RestaurantReportCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    month?: SortOrder
+    year?: SortOrder
+    status?: SortOrder
+    language?: SortOrder
+    data?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RestaurantReportAvgOrderByAggregateInput = {
+    month?: SortOrder
+    year?: SortOrder
+  }
+
+  export type RestaurantReportMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    month?: SortOrder
+    year?: SortOrder
+    status?: SortOrder
+    language?: SortOrder
+    data?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RestaurantReportMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    month?: SortOrder
+    year?: SortOrder
+    status?: SortOrder
+    language?: SortOrder
+    data?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RestaurantReportSumOrderByAggregateInput = {
+    month?: SortOrder
+    year?: SortOrder
   }
 
   export type CabinetServiceCountOrderByAggregateInput = {
@@ -43108,6 +44598,13 @@ export namespace Prisma {
     connect?: RestaurantWaiterWhereUniqueInput | RestaurantWaiterWhereUniqueInput[]
   }
 
+  export type RestaurantReportCreateNestedManyWithoutTenantInput = {
+    create?: XOR<RestaurantReportCreateWithoutTenantInput, RestaurantReportUncheckedCreateWithoutTenantInput> | RestaurantReportCreateWithoutTenantInput[] | RestaurantReportUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: RestaurantReportCreateOrConnectWithoutTenantInput | RestaurantReportCreateOrConnectWithoutTenantInput[]
+    createMany?: RestaurantReportCreateManyTenantInputEnvelope
+    connect?: RestaurantReportWhereUniqueInput | RestaurantReportWhereUniqueInput[]
+  }
+
   export type InvoiceCreateNestedManyWithoutTenantInput = {
     create?: XOR<InvoiceCreateWithoutTenantInput, InvoiceUncheckedCreateWithoutTenantInput> | InvoiceCreateWithoutTenantInput[] | InvoiceUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: InvoiceCreateOrConnectWithoutTenantInput | InvoiceCreateOrConnectWithoutTenantInput[]
@@ -43173,6 +44670,13 @@ export namespace Prisma {
     connectOrCreate?: RestaurantWaiterCreateOrConnectWithoutTenantInput | RestaurantWaiterCreateOrConnectWithoutTenantInput[]
     createMany?: RestaurantWaiterCreateManyTenantInputEnvelope
     connect?: RestaurantWaiterWhereUniqueInput | RestaurantWaiterWhereUniqueInput[]
+  }
+
+  export type RestaurantReportUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<RestaurantReportCreateWithoutTenantInput, RestaurantReportUncheckedCreateWithoutTenantInput> | RestaurantReportCreateWithoutTenantInput[] | RestaurantReportUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: RestaurantReportCreateOrConnectWithoutTenantInput | RestaurantReportCreateOrConnectWithoutTenantInput[]
+    createMany?: RestaurantReportCreateManyTenantInputEnvelope
+    connect?: RestaurantReportWhereUniqueInput | RestaurantReportWhereUniqueInput[]
   }
 
   export type InvoiceUncheckedCreateNestedManyWithoutTenantInput = {
@@ -43270,6 +44774,20 @@ export namespace Prisma {
     update?: RestaurantWaiterUpdateWithWhereUniqueWithoutTenantInput | RestaurantWaiterUpdateWithWhereUniqueWithoutTenantInput[]
     updateMany?: RestaurantWaiterUpdateManyWithWhereWithoutTenantInput | RestaurantWaiterUpdateManyWithWhereWithoutTenantInput[]
     deleteMany?: RestaurantWaiterScalarWhereInput | RestaurantWaiterScalarWhereInput[]
+  }
+
+  export type RestaurantReportUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<RestaurantReportCreateWithoutTenantInput, RestaurantReportUncheckedCreateWithoutTenantInput> | RestaurantReportCreateWithoutTenantInput[] | RestaurantReportUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: RestaurantReportCreateOrConnectWithoutTenantInput | RestaurantReportCreateOrConnectWithoutTenantInput[]
+    upsert?: RestaurantReportUpsertWithWhereUniqueWithoutTenantInput | RestaurantReportUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: RestaurantReportCreateManyTenantInputEnvelope
+    set?: RestaurantReportWhereUniqueInput | RestaurantReportWhereUniqueInput[]
+    disconnect?: RestaurantReportWhereUniqueInput | RestaurantReportWhereUniqueInput[]
+    delete?: RestaurantReportWhereUniqueInput | RestaurantReportWhereUniqueInput[]
+    connect?: RestaurantReportWhereUniqueInput | RestaurantReportWhereUniqueInput[]
+    update?: RestaurantReportUpdateWithWhereUniqueWithoutTenantInput | RestaurantReportUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: RestaurantReportUpdateManyWithWhereWithoutTenantInput | RestaurantReportUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: RestaurantReportScalarWhereInput | RestaurantReportScalarWhereInput[]
   }
 
   export type InvoiceUpdateManyWithoutTenantNestedInput = {
@@ -43394,6 +44912,20 @@ export namespace Prisma {
     update?: RestaurantWaiterUpdateWithWhereUniqueWithoutTenantInput | RestaurantWaiterUpdateWithWhereUniqueWithoutTenantInput[]
     updateMany?: RestaurantWaiterUpdateManyWithWhereWithoutTenantInput | RestaurantWaiterUpdateManyWithWhereWithoutTenantInput[]
     deleteMany?: RestaurantWaiterScalarWhereInput | RestaurantWaiterScalarWhereInput[]
+  }
+
+  export type RestaurantReportUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<RestaurantReportCreateWithoutTenantInput, RestaurantReportUncheckedCreateWithoutTenantInput> | RestaurantReportCreateWithoutTenantInput[] | RestaurantReportUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: RestaurantReportCreateOrConnectWithoutTenantInput | RestaurantReportCreateOrConnectWithoutTenantInput[]
+    upsert?: RestaurantReportUpsertWithWhereUniqueWithoutTenantInput | RestaurantReportUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: RestaurantReportCreateManyTenantInputEnvelope
+    set?: RestaurantReportWhereUniqueInput | RestaurantReportWhereUniqueInput[]
+    disconnect?: RestaurantReportWhereUniqueInput | RestaurantReportWhereUniqueInput[]
+    delete?: RestaurantReportWhereUniqueInput | RestaurantReportWhereUniqueInput[]
+    connect?: RestaurantReportWhereUniqueInput | RestaurantReportWhereUniqueInput[]
+    update?: RestaurantReportUpdateWithWhereUniqueWithoutTenantInput | RestaurantReportUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: RestaurantReportUpdateManyWithWhereWithoutTenantInput | RestaurantReportUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: RestaurantReportScalarWhereInput | RestaurantReportScalarWhereInput[]
   }
 
   export type InvoiceUncheckedUpdateManyWithoutTenantNestedInput = {
@@ -43710,6 +45242,20 @@ export namespace Prisma {
     upsert?: RestaurantOrderUpsertWithoutItemsInput
     connect?: RestaurantOrderWhereUniqueInput
     update?: XOR<XOR<RestaurantOrderUpdateToOneWithWhereWithoutItemsInput, RestaurantOrderUpdateWithoutItemsInput>, RestaurantOrderUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type TenantWebsiteCreateNestedOneWithoutReportsInput = {
+    create?: XOR<TenantWebsiteCreateWithoutReportsInput, TenantWebsiteUncheckedCreateWithoutReportsInput>
+    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutReportsInput
+    connect?: TenantWebsiteWhereUniqueInput
+  }
+
+  export type TenantWebsiteUpdateOneRequiredWithoutReportsNestedInput = {
+    create?: XOR<TenantWebsiteCreateWithoutReportsInput, TenantWebsiteUncheckedCreateWithoutReportsInput>
+    connectOrCreate?: TenantWebsiteCreateOrConnectWithoutReportsInput
+    upsert?: TenantWebsiteUpsertWithoutReportsInput
+    connect?: TenantWebsiteWhereUniqueInput
+    update?: XOR<XOR<TenantWebsiteUpdateToOneWithWhereWithoutReportsInput, TenantWebsiteUpdateWithoutReportsInput>, TenantWebsiteUncheckedUpdateWithoutReportsInput>
   }
 
   export type CabinetAppointmentCreateNestedManyWithoutServiceInput = {
@@ -44644,6 +46190,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportCreateNestedManyWithoutTenantInput
     invoices?: InvoiceCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
@@ -44669,6 +46216,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportUncheckedCreateNestedManyWithoutTenantInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
@@ -45192,6 +46740,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportCreateNestedManyWithoutTenantInput
     invoices?: InvoiceCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     user: UserCreateNestedOneWithoutWebsitesInput
@@ -45217,6 +46766,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportUncheckedCreateNestedManyWithoutTenantInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
@@ -45633,6 +47183,35 @@ export namespace Prisma {
     data: RestaurantWaiterCreateManyTenantInput | RestaurantWaiterCreateManyTenantInput[]
   }
 
+  export type RestaurantReportCreateWithoutTenantInput = {
+    id?: string
+    month: number
+    year: number
+    status?: string
+    language?: string
+    data: string
+    createdAt?: Date | string
+  }
+
+  export type RestaurantReportUncheckedCreateWithoutTenantInput = {
+    id?: string
+    month: number
+    year: number
+    status?: string
+    language?: string
+    data: string
+    createdAt?: Date | string
+  }
+
+  export type RestaurantReportCreateOrConnectWithoutTenantInput = {
+    where: RestaurantReportWhereUniqueInput
+    create: XOR<RestaurantReportCreateWithoutTenantInput, RestaurantReportUncheckedCreateWithoutTenantInput>
+  }
+
+  export type RestaurantReportCreateManyTenantInputEnvelope = {
+    data: RestaurantReportCreateManyTenantInput | RestaurantReportCreateManyTenantInput[]
+  }
+
   export type InvoiceCreateWithoutTenantInput = {
     id?: string
     number: string
@@ -45971,6 +47550,36 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"RestaurantWaiter"> | Date | string
   }
 
+  export type RestaurantReportUpsertWithWhereUniqueWithoutTenantInput = {
+    where: RestaurantReportWhereUniqueInput
+    update: XOR<RestaurantReportUpdateWithoutTenantInput, RestaurantReportUncheckedUpdateWithoutTenantInput>
+    create: XOR<RestaurantReportCreateWithoutTenantInput, RestaurantReportUncheckedCreateWithoutTenantInput>
+  }
+
+  export type RestaurantReportUpdateWithWhereUniqueWithoutTenantInput = {
+    where: RestaurantReportWhereUniqueInput
+    data: XOR<RestaurantReportUpdateWithoutTenantInput, RestaurantReportUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type RestaurantReportUpdateManyWithWhereWithoutTenantInput = {
+    where: RestaurantReportScalarWhereInput
+    data: XOR<RestaurantReportUpdateManyMutationInput, RestaurantReportUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type RestaurantReportScalarWhereInput = {
+    AND?: RestaurantReportScalarWhereInput | RestaurantReportScalarWhereInput[]
+    OR?: RestaurantReportScalarWhereInput[]
+    NOT?: RestaurantReportScalarWhereInput | RestaurantReportScalarWhereInput[]
+    id?: StringFilter<"RestaurantReport"> | string
+    tenantId?: StringFilter<"RestaurantReport"> | string
+    month?: IntFilter<"RestaurantReport"> | number
+    year?: IntFilter<"RestaurantReport"> | number
+    status?: StringFilter<"RestaurantReport"> | string
+    language?: StringFilter<"RestaurantReport"> | string
+    data?: StringFilter<"RestaurantReport"> | string
+    createdAt?: DateTimeFilter<"RestaurantReport"> | Date | string
+  }
+
   export type InvoiceUpsertWithWhereUniqueWithoutTenantInput = {
     where: InvoiceWhereUniqueInput
     update: XOR<InvoiceUpdateWithoutTenantInput, InvoiceUncheckedUpdateWithoutTenantInput>
@@ -46156,6 +47765,7 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportCreateNestedManyWithoutTenantInput
     invoices?: InvoiceCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
@@ -46182,6 +47792,7 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportUncheckedCreateNestedManyWithoutTenantInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
@@ -46249,6 +47860,7 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
@@ -46275,6 +47887,7 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUncheckedUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
@@ -46425,6 +48038,7 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportCreateNestedManyWithoutTenantInput
     invoices?: InvoiceCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
@@ -46451,6 +48065,7 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportUncheckedCreateNestedManyWithoutTenantInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
@@ -46546,6 +48161,7 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
@@ -46572,6 +48188,7 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUncheckedUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
@@ -46621,6 +48238,7 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportCreateNestedManyWithoutTenantInput
     invoices?: InvoiceCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
@@ -46647,6 +48265,7 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportUncheckedCreateNestedManyWithoutTenantInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
@@ -46701,6 +48320,7 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
@@ -46727,6 +48347,7 @@ export namespace Prisma {
     cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUncheckedUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
@@ -46888,6 +48509,122 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type TenantWebsiteCreateWithoutReportsInput = {
+    id?: string
+    slug: string
+    siteName: string
+    description?: string | null
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceCreateNestedManyWithoutTenantInput
+    categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
+    tables?: RestaurantTableCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
+    service: ServiceCreateNestedOneWithoutWebsitesInput
+    user: UserCreateNestedOneWithoutWebsitesInput
+  }
+
+  export type TenantWebsiteUncheckedCreateWithoutReportsInput = {
+    id?: string
+    slug: string
+    userId: string
+    serviceId: string
+    siteName: string
+    description?: string | null
+    logo?: string | null
+    coverImage?: string | null
+    primaryColor?: string
+    config?: string
+    designTemplate?: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedCreateNestedManyWithoutTenantInput
+    cabinetClients?: CabinetClientUncheckedCreateNestedManyWithoutTenantInput
+    cabinetServices?: CabinetServiceUncheckedCreateNestedManyWithoutTenantInput
+    categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
+    tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
+    waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
+  }
+
+  export type TenantWebsiteCreateOrConnectWithoutReportsInput = {
+    where: TenantWebsiteWhereUniqueInput
+    create: XOR<TenantWebsiteCreateWithoutReportsInput, TenantWebsiteUncheckedCreateWithoutReportsInput>
+  }
+
+  export type TenantWebsiteUpsertWithoutReportsInput = {
+    update: XOR<TenantWebsiteUpdateWithoutReportsInput, TenantWebsiteUncheckedUpdateWithoutReportsInput>
+    create: XOR<TenantWebsiteCreateWithoutReportsInput, TenantWebsiteUncheckedCreateWithoutReportsInput>
+    where?: TenantWebsiteWhereInput
+  }
+
+  export type TenantWebsiteUpdateToOneWithWhereWithoutReportsInput = {
+    where?: TenantWebsiteWhereInput
+    data: XOR<TenantWebsiteUpdateWithoutReportsInput, TenantWebsiteUncheckedUpdateWithoutReportsInput>
+  }
+
+  export type TenantWebsiteUpdateWithoutReportsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUpdateManyWithoutTenantNestedInput
+    categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
+    tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
+    service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
+    user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
+  }
+
+  export type TenantWebsiteUncheckedUpdateWithoutReportsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    serviceId?: StringFieldUpdateOperationsInput | string
+    siteName?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    primaryColor?: StringFieldUpdateOperationsInput | string
+    config?: StringFieldUpdateOperationsInput | string
+    designTemplate?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cabinetAppointments?: CabinetAppointmentUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetClients?: CabinetClientUncheckedUpdateManyWithoutTenantNestedInput
+    cabinetServices?: CabinetServiceUncheckedUpdateManyWithoutTenantNestedInput
+    categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
+    waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
+  }
+
   export type CabinetAppointmentCreateWithoutServiceInput = {
     id?: string
     appointmentDate: Date | string
@@ -46937,6 +48674,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportCreateNestedManyWithoutTenantInput
     invoices?: InvoiceCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
@@ -46963,6 +48701,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportUncheckedCreateNestedManyWithoutTenantInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
@@ -47017,6 +48756,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
@@ -47043,6 +48783,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUncheckedUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
@@ -47221,6 +48962,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportCreateNestedManyWithoutTenantInput
     invoices?: InvoiceCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
@@ -47247,6 +48989,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportUncheckedCreateNestedManyWithoutTenantInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
@@ -47382,6 +49125,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
@@ -47408,6 +49152,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUncheckedUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
@@ -47430,6 +49175,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportCreateNestedManyWithoutTenantInput
     invoices?: InvoiceCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
@@ -47456,6 +49202,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportUncheckedCreateNestedManyWithoutTenantInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
@@ -47558,6 +49305,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
@@ -47584,6 +49332,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUncheckedUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
@@ -47998,6 +49747,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportCreateNestedManyWithoutTenantInput
     invoices?: InvoiceCreateNestedManyWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
     user: UserCreateNestedOneWithoutWebsitesInput
@@ -48024,6 +49774,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportUncheckedCreateNestedManyWithoutTenantInput
     invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
   }
 
@@ -48062,6 +49813,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUpdateManyWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
     user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
@@ -48088,6 +49840,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUncheckedUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
   }
 
@@ -48110,6 +49863,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsCreateNestedOneWithoutTenantInput
     service: ServiceCreateNestedOneWithoutWebsitesInput
     user: UserCreateNestedOneWithoutWebsitesInput
@@ -48136,6 +49890,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedCreateNestedManyWithoutTenantInput
     tables?: RestaurantTableUncheckedCreateNestedManyWithoutTenantInput
     waiters?: RestaurantWaiterUncheckedCreateNestedManyWithoutTenantInput
+    reports?: RestaurantReportUncheckedCreateNestedManyWithoutTenantInput
     invoiceSettings?: InvoiceSettingsUncheckedCreateNestedOneWithoutTenantInput
   }
 
@@ -48236,6 +49991,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
     user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
@@ -48262,6 +50018,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUncheckedUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
 
@@ -48940,6 +50697,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     service?: ServiceUpdateOneRequiredWithoutWebsitesNestedInput
@@ -48965,6 +50723,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUncheckedUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
@@ -49132,6 +50891,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUpdateOneWithoutTenantNestedInput
     user?: UserUpdateOneRequiredWithoutWebsitesNestedInput
@@ -49157,6 +50917,7 @@ export namespace Prisma {
     categories?: RestaurantCategoryUncheckedUpdateManyWithoutTenantNestedInput
     tables?: RestaurantTableUncheckedUpdateManyWithoutTenantNestedInput
     waiters?: RestaurantWaiterUncheckedUpdateManyWithoutTenantNestedInput
+    reports?: RestaurantReportUncheckedUpdateManyWithoutTenantNestedInput
     invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
     invoiceSettings?: InvoiceSettingsUncheckedUpdateOneWithoutTenantNestedInput
   }
@@ -49254,6 +51015,16 @@ export namespace Prisma {
     name: string
     pin: string
     isActive?: boolean
+    createdAt?: Date | string
+  }
+
+  export type RestaurantReportCreateManyTenantInput = {
+    id?: string
+    month: number
+    year: number
+    status?: string
+    language?: string
+    data: string
     createdAt?: Date | string
   }
 
@@ -49460,6 +51231,36 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     pin?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RestaurantReportUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    data?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RestaurantReportUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    data?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RestaurantReportUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    month?: IntFieldUpdateOperationsInput | number
+    year?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    language?: StringFieldUpdateOperationsInput | string
+    data?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

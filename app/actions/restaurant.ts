@@ -3,6 +3,8 @@
 import prisma from '@/lib/prisma'
 import { getCurrentUser } from '@/app/actions/auth'
 import { revalidatePath } from 'next/cache'
+import { computeMonthlyAnalytics, generateReportPdf, type ReportLanguage } from '@/lib/restaurant-report'
+import { sendMonthlyReportEmail } from '@/lib/mail'
 
 export async function getTenant(slug?: string) {
     const user = await getCurrentUser()
@@ -451,5 +453,161 @@ export async function updateRestaurantConfig(data: {
     } catch (e) {
         console.error('[Restaurant Action] updateRestaurantConfig Error:', e)
         return { error: 'Failed to update configuration' }
+    }
+}
+
+// ─── Reports ────────────────────────────────────────────────────────────────
+
+export async function getReports(slug?: string) {
+    const tenant = await getTenant(slug)
+    if (!tenant) return []
+
+    return await prisma.restaurantReport.findMany({
+        where: { tenantId: tenant.id },
+        orderBy: [{ year: 'desc' }, { month: 'desc' }],
+    })
+}
+
+export async function generateMonthlyReport(
+    month: number,
+    year: number,
+    language: ReportLanguage = 'fr',
+    slug?: string
+) {
+    const user = await getCurrentUser()
+    if (!user) return { error: 'Not authenticated' }
+
+    const tenant = await getTenant(slug)
+    if (!tenant) return { error: 'Tenant not found' }
+
+    try {
+        const data = await computeMonthlyAnalytics(tenant.id, month, year, tenant.siteName, language)
+        const pdfBytes = await generateReportPdf(data)
+
+        // Upsert the report
+        const report = await prisma.restaurantReport.upsert({
+            where: { tenantId_month_year: { tenantId: tenant.id, month, year } },
+            update: {
+                status: 'GENERATED',
+                language,
+                data: JSON.stringify(data),
+            },
+            create: {
+                tenantId: tenant.id,
+                month,
+                year,
+                language,
+                status: 'GENERATED',
+                data: JSON.stringify(data),
+            },
+        })
+
+        // Send email
+        await prisma.restaurantReport.update({
+            where: { id: report.id },
+            data: { status: 'SENDING' },
+        })
+
+        const emailResult = await sendMonthlyReportEmail(
+            user.email,
+            tenant.siteName,
+            month,
+            year,
+            language,
+            data,
+            pdfBytes
+        )
+
+        await prisma.restaurantReport.update({
+            where: { id: report.id },
+            data: { status: emailResult.success ? 'SENT' : 'GENERATED' },
+        })
+
+        revalidatePath(`/dashboard/restaurant/${slug}/reports`)
+        console.info(`[Report] Generated report for ${tenant.siteName} — ${month}/${year}`)
+        return { success: true, reportId: report.id }
+    } catch (e) {
+        console.error('[Report] generateMonthlyReport Error:', e)
+        return { error: 'Failed to generate report' }
+    }
+}
+
+export async function resendReportEmail(reportId: string, slug?: string) {
+    const user = await getCurrentUser()
+    if (!user) return { error: 'Not authenticated' }
+
+    const tenant = await getTenant(slug)
+    if (!tenant) return { error: 'Tenant not found' }
+
+    try {
+        const report = await prisma.restaurantReport.findFirst({
+            where: { id: reportId, tenantId: tenant.id },
+        })
+        if (!report) return { error: 'Report not found' }
+
+        const data = JSON.parse(report.data)
+        const pdfBytes = await generateReportPdf(data)
+
+        await sendMonthlyReportEmail(
+            user.email,
+            tenant.siteName,
+            report.month,
+            report.year,
+            report.language as ReportLanguage,
+            data,
+            pdfBytes
+        )
+
+        await prisma.restaurantReport.update({
+            where: { id: reportId },
+            data: { status: 'SENT' },
+        })
+
+        revalidatePath(`/dashboard/restaurant/${slug}/reports`)
+        return { success: true }
+    } catch (e) {
+        console.error('[Report] resendReportEmail Error:', e)
+        return { error: 'Failed to resend email' }
+    }
+}
+
+export async function downloadReportPdf(reportId: string, slug?: string): Promise<{ error: string } | { pdfBase64: string; filename: string }> {
+    const user = await getCurrentUser()
+    if (!user) return { error: 'Not authenticated' }
+
+    const tenant = await getTenant(slug)
+    if (!tenant) return { error: 'Tenant not found' }
+
+    try {
+        const report = await prisma.restaurantReport.findFirst({
+            where: { id: reportId, tenantId: tenant.id },
+        })
+        if (!report) return { error: 'Report not found' }
+
+        const data = JSON.parse(report.data)
+        const pdfBytes = await generateReportPdf(data)
+        const pdfBase64 = Buffer.from(pdfBytes).toString('base64')
+        const filename = `rapport-${report.year}-${String(report.month).padStart(2, '0')}-${tenant.siteName.toLowerCase().replace(/\s+/g, '-')}.pdf`
+
+        return { pdfBase64, filename }
+    } catch (e) {
+        console.error('[Report] downloadReportPdf Error:', e)
+        return { error: 'Failed to generate PDF' }
+    }
+}
+
+export async function deleteReport(reportId: string, slug?: string) {
+    const tenant = await getTenant(slug)
+    if (!tenant) return { error: 'Not authenticated' }
+
+    try {
+        await prisma.restaurantReport.delete({
+            where: { id: reportId, tenantId: tenant.id },
+        })
+        revalidatePath(`/dashboard/restaurant/${slug}/reports`)
+        return { success: true }
+    } catch (e) {
+        console.error('[Report] deleteReport Error:', e)
+        return { error: 'Failed to delete report' }
     }
 }

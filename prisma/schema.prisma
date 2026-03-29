@@ -116,6 +116,7 @@ model TenantWebsite {
   categories          RestaurantCategory[]
   tables              RestaurantTable[]
   waiters             RestaurantWaiter[]
+  reports             RestaurantReport[]
   invoices            Invoice[]
   invoiceSettings     InvoiceSettings?
   service             Service              @relation(fields: [serviceId], references: [id])
@@ -203,6 +204,21 @@ model RestaurantOrderItem {
   order    RestaurantOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
   @@index([orderId])
+}
+
+model RestaurantReport {
+  id        String        @id @default(cuid())
+  tenantId  String
+  month     Int
+  year      Int
+  status    String        @default("GENERATED")
+  language  String        @default("fr")
+  data      String
+  createdAt DateTime      @default(now())
+  tenant    TenantWebsite @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, month, year])
+  @@index([tenantId])
 }
 
 model CabinetService {

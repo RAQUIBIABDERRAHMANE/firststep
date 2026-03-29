@@ -13,7 +13,8 @@ import {
     Users,
     LayoutDashboard,
     Paintbrush,
-    UserCheck
+    UserCheck,
+    BarChart3
 } from 'lucide-react'
 import { getWebsiteBySlug } from '@/app/actions/tenant'
 import AutoRefresh from '@/components/dashboard/AutoRefresh'
@@ -211,6 +212,28 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                             <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 h-16 px-10 rounded-2xl text-xl font-black shadow-xl shadow-emerald-500/20 active:scale-95">
                                 Launch Monitor
                             </Button>
+                        </div>
+                    </Card>
+                </Link>
+
+                <Link href={`/dashboard/restaurant/${tenantSlug}/reports`} className="md:col-span-2">
+                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-violet-500/50 hover:bg-violet-50/10 transition-all group p-6">
+                        <div className="flex flex-col md:flex-row gap-6 items-center">
+                            <div className="h-16 w-16 rounded-2xl bg-violet-100 flex items-center justify-center text-violet-600 shadow-sm shrink-0 transition-transform duration-500 group-hover:scale-110">
+                                <BarChart3 size={32} />
+                            </div>
+                            <div className="flex-1 text-center md:text-left">
+                                <h3 className="text-xl font-black mb-2 flex items-center justify-center md:justify-start gap-2">
+                                    Rapports Mensuels <ChevronRight size={18} className="text-slate-300 group-hover:text-violet-500 transition-colors" />
+                                </h3>
+                                <p className="text-slate-500 text-sm">
+                                    Rapports PDF automatiques avec chiffre d'affaires, plats populaires, et activité journalière. Envoyés par email le 1er de chaque mois.
+                                </p>
+                            </div>
+                            <div className="flex items-center gap-2 shrink-0">
+                                <span className="text-xs font-bold text-violet-600 bg-violet-50 border border-violet-200 px-3 py-1.5 rounded-full">🇫🇷 FR / 🇬🇧 EN</span>
+                                <span className="text-xs font-bold text-slate-500 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-full">PDF + Email</span>
+                            </div>
                         </div>
                     </Card>
                 </Link>

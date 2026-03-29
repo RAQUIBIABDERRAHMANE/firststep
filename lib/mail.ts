@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import { getWelcomeEmailTemplate, getPaymentRequestTemplate, getPaymentApprovedTemplate, getPaymentDeclinedTemplate, getInvoiceEmailTemplate } from './email/templates';
+import { getWelcomeEmailTemplate, getPaymentRequestTemplate, getPaymentApprovedTemplate, getPaymentDeclinedTemplate, getInvoiceEmailTemplate, getMonthlyReportEmailTemplate } from './email/templates';
 
 const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
@@ -268,5 +268,63 @@ export async function sendInvoiceEmail(
     } catch (error) {
         console.error('❌ [MAILER] Error sending invoice email:', error);
         return { success: false, error };
+    }
+}
+
+export async function sendMonthlyReportEmail(
+    to: string,
+    restaurantName: string,
+    month: number,
+    year: number,
+    language: 'fr' | 'en',
+    data: {
+        totalRevenue: number
+        totalOrders: number
+        averageOrderValue: number
+        paidOrders: number
+        topDishes: { name: string; count: number; revenue: number }[]
+    },
+    pdfBytes: Uint8Array
+) {
+    const months_fr = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre']
+    const months_en = ['January','February','March','April','May','June','July','August','September','October','November','December']
+    const monthName = (language === 'fr' ? months_fr : months_en)[month - 1]
+    const subject = language === 'fr'
+        ? `📊 Rapport Mensuel — ${monthName} ${year} | ${restaurantName}`
+        : `📊 Monthly Report — ${monthName} ${year} | ${restaurantName}`
+
+    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
+        console.log('--------------------------------------------------');
+        console.log(`[MAILER] MONTHLY REPORT EMAIL (no email config — logging only)`);
+        console.log(`[MAILER] TO: ${to}`);
+        console.log(`[MAILER] Restaurant: ${restaurantName} — ${monthName} ${year}`);
+        console.log(`[MAILER] Stats: ${data.totalOrders} orders, ${data.totalRevenue.toFixed(0)} MAD`);
+        console.log('--------------------------------------------------');
+        return { success: true, logged: true };
+    }
+
+    try {
+        const html = getMonthlyReportEmailTemplate(restaurantName, month, year, language, data)
+        const filename = `rapport-${year}-${String(month).padStart(2, '0')}-${restaurantName.toLowerCase().replace(/\s+/g, '-')}.pdf`
+
+        await transporter.sendMail({
+            from: `"FirstStep Analytics" <${process.env.EMAIL_USER}>`,
+            to,
+            subject,
+            html,
+            attachments: [
+                {
+                    filename,
+                    content: Buffer.from(pdfBytes),
+                    contentType: 'application/pdf',
+                },
+            ],
+        })
+
+        console.log(`✅ [MAILER] Monthly report sent to ${to} for ${restaurantName} — ${monthName} ${year}`)
+        return { success: true }
+    } catch (error) {
+        console.error('❌ [MAILER] Error sending monthly report email:', error)
+        return { success: false, error }
     }
 }

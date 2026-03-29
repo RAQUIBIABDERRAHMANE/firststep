@@ -832,3 +832,142 @@ export const getInvoiceEmailTemplate = (invoice: {
 </body>
 </html>`
 }
+
+export const getMonthlyReportEmailTemplate = (
+    restaurantName: string,
+    month: number,
+    year: number,
+    language: 'fr' | 'en',
+    data: {
+        totalRevenue: number
+        totalOrders: number
+        averageOrderValue: number
+        paidOrders: number
+        topDishes: { name: string; count: number; revenue: number }[]
+    }
+) => {
+    const primaryColor = '#2563eb'
+    const borderColor = '#e5e5e5'
+    const mutedColor = '#6b7280'
+    const textColor = '#111827'
+
+    const months_fr = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre']
+    const months_en = ['January','February','March','April','May','June','July','August','September','October','November','December']
+    const monthName = (language === 'fr' ? months_fr : months_en)[month - 1]
+
+    const t = language === 'fr' ? {
+        subject: `Rapport Mensuel — ${monthName} ${year}`,
+        greeting: `Bonjour,`,
+        intro: `Votre rapport mensuel pour <strong>${restaurantName}</strong> est disponible. Vous trouverez ci-dessous un résumé de l'activité du mois de <strong>${monthName} ${year}</strong>. Le rapport complet en PDF est joint à cet email.`,
+        summaryTitle: "Résumé du Mois",
+        totalRevenue: "Chiffre d'Affaires",
+        totalOrders: 'Commandes',
+        avgOrder: 'Panier Moyen',
+        paidOrders: 'Payées',
+        topDishes: 'Plats les Plus Vendus',
+        noOrders: 'Aucune commande ce mois-ci.',
+        cta: 'Voir le Tableau de Bord',
+        ctaNote: "Vous pouvez consulter l'historique de tous vos rapports dans l'onglet <strong>Rapports</strong> de votre tableau de bord.",
+        footer: '© 2026 FirstStep. Tous droits réservés.',
+        currency: 'MAD',
+    } : {
+        subject: `Monthly Report — ${monthName} ${year}`,
+        greeting: `Hello,`,
+        intro: `Your monthly report for <strong>${restaurantName}</strong> is ready. Below is a summary of activity for <strong>${monthName} ${year}</strong>. The full PDF report is attached to this email.`,
+        summaryTitle: 'Monthly Summary',
+        totalRevenue: 'Total Revenue',
+        totalOrders: 'Orders',
+        avgOrder: 'Avg. Order',
+        paidOrders: 'Paid',
+        topDishes: 'Top Selling Dishes',
+        noOrders: 'No orders this month.',
+        cta: 'View Dashboard',
+        ctaNote: 'You can view all past reports in the <strong>Reports</strong> tab of your dashboard.',
+        footer: '© 2026 FirstStep. All rights reserved.',
+        currency: 'MAD',
+    }
+
+    const fmt = (n: number) => `${n.toFixed(0)} ${t.currency}`
+    const fmtDec = (n: number) => `${n.toFixed(2)} ${t.currency}`
+
+    const topDishesRows = data.topDishes.length === 0
+        ? `<tr><td colspan="3" style="padding:12px;text-align:center;color:${mutedColor};font-size:13px;">${t.noOrders}</td></tr>`
+        : data.topDishes.slice(0, 5).map((d, i) => `
+            <tr style="background:${i % 2 === 0 ? '#f9fafb' : '#ffffff'}">
+                <td style="padding:10px 12px;font-size:13px;color:${textColor};">${d.name}</td>
+                <td style="padding:10px 12px;font-size:13px;color:${mutedColor};text-align:center;">${d.count}</td>
+                <td style="padding:10px 12px;font-size:13px;font-weight:700;color:#059669;text-align:right;">${fmt(d.revenue)}</td>
+            </tr>`).join('')
+
+    return `<!DOCTYPE html>
+<html lang="${language}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${t.subject}</title>
+</head>
+<body style="margin:0;padding:0;background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;">
+    <div style="max-width:600px;margin:32px auto;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid ${borderColor};">
+        <div style="background:#111827;padding:32px 40px;">
+            <img src="https://firststepco.com/og-image.png" alt="FirstStep" style="height:40px;width:auto;" />
+            <div style="margin-top:16px;">
+                <span style="background:rgba(37,99,235,0.25);color:#93c5fd;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;">
+                    📊 ${t.subject}
+                </span>
+            </div>
+        </div>
+        <div style="padding:32px 40px;">
+            <p style="font-size:16px;color:${textColor};margin:0 0 8px;">${t.greeting}</p>
+            <p style="font-size:14px;color:${mutedColor};line-height:1.7;margin:0 0 28px;">${t.intro}</p>
+            <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:${primaryColor};margin:0 0 12px;">${t.summaryTitle}</p>
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
+                <tr>
+                    <td style="width:25%;padding:4px;">
+                        <div style="background:#eff6ff;border-radius:10px;padding:16px 12px;text-align:center;">
+                            <div style="font-size:10px;color:${mutedColor};font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">${t.totalRevenue}</div>
+                            <div style="font-size:18px;font-weight:800;color:#1d4ed8;">${fmt(data.totalRevenue)}</div>
+                        </div>
+                    </td>
+                    <td style="width:25%;padding:4px;">
+                        <div style="background:#f0fdf4;border-radius:10px;padding:16px 12px;text-align:center;">
+                            <div style="font-size:10px;color:${mutedColor};font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">${t.totalOrders}</div>
+                            <div style="font-size:18px;font-weight:800;color:#059669;">${data.totalOrders}</div>
+                        </div>
+                    </td>
+                    <td style="width:25%;padding:4px;">
+                        <div style="background:#faf5ff;border-radius:10px;padding:16px 12px;text-align:center;">
+                            <div style="font-size:10px;color:${mutedColor};font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">${t.avgOrder}</div>
+                            <div style="font-size:18px;font-weight:800;color:#7c3aed;">${fmtDec(data.averageOrderValue)}</div>
+                        </div>
+                    </td>
+                    <td style="width:25%;padding:4px;">
+                        <div style="background:#fff7ed;border-radius:10px;padding:16px 12px;text-align:center;">
+                            <div style="font-size:10px;color:${mutedColor};font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">${t.paidOrders}</div>
+                            <div style="font-size:18px;font-weight:800;color:#ea580c;">${data.paidOrders}</div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:${primaryColor};margin:0 0 12px;">${t.topDishes}</p>
+            <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid ${borderColor};border-radius:8px;overflow:hidden;margin-bottom:28px;">
+                <thead>
+                    <tr style="background:#f9fafb;">
+                        <th style="padding:10px 12px;font-size:10px;font-weight:700;color:${mutedColor};text-transform:uppercase;text-align:left;letter-spacing:0.05em;">Plat / Dish</th>
+                        <th style="padding:10px 12px;font-size:10px;font-weight:700;color:${mutedColor};text-transform:uppercase;text-align:center;letter-spacing:0.05em;">Qté</th>
+                        <th style="padding:10px 12px;font-size:10px;font-weight:700;color:${mutedColor};text-transform:uppercase;text-align:right;letter-spacing:0.05em;">Revenus</th>
+                    </tr>
+                </thead>
+                <tbody>${topDishesRows}</tbody>
+            </table>
+            <div style="background:#f8fafc;border-radius:10px;padding:20px;margin-bottom:24px;text-align:center;">
+                <p style="font-size:13px;color:${mutedColor};margin:0 0 14px;">${t.ctaNote}</p>
+                <a href="https://firststepco.com/dashboard" style="display:inline-block;background:${primaryColor};color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;">${t.cta}</a>
+            </div>
+        </div>
+        <div style="background:#111827;padding:20px 40px;text-align:center;">
+            <p style="font-size:12px;color:#6b7280;margin:0;">${t.footer}</p>
+        </div>
+    </div>
+</body>
+</html>`
+}
