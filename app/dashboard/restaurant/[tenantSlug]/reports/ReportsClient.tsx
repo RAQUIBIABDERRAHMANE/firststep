@@ -56,7 +56,7 @@ type Report = {
     status: string
     language: string
     data: string
-    createdAt: string
+    createdAt: Date
 }
 
 type Props = {
