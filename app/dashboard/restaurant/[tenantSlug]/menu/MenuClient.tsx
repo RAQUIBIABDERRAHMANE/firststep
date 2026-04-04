@@ -386,10 +386,14 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
                                                             <DollarSign size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
                                                             <Input
                                                                 placeholder="0.00"
-                                                                type="number"
+                                                                type="text"
+                                                                inputMode="decimal"
                                                                 className="pl-10 h-12 rounded-xl text-lg font-bold"
                                                                 value={dishForm.price}
-                                                                onChange={(e) => setDishForm({ ...dishForm, price: e.target.value })}
+                                                                onChange={(e) => {
+                                                                    const val = e.target.value.replace(/[^0-9.]/g, '');
+                                                                    setDishForm({ ...dishForm, price: val });
+                                                                }}
                                                             />
                                                         </div>
                                                     </div>

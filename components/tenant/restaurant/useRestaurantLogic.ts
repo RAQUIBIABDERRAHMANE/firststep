@@ -16,22 +16,31 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
     const [activeOrderId, setActiveOrderId] = useState<string | null>(null)
     const [orderStatus, setOrderStatus] = useState<string | null>(null)
 
-    // Load active order from storage
+    // Load active order from storage when tableId changes
     useEffect(() => {
-        const storedOrder = localStorage.getItem('active_restaurant_order_id')
-        if (storedOrder) setActiveOrderId(storedOrder)
-    }, [])
+        if (!tableId) return
+        const storedOrder = localStorage.getItem(`active_order_${tableId}`)
+        if (storedOrder) {
+            setActiveOrderId(storedOrder)
+        } else {
+            setActiveOrderId(null)
+            setOrderStatus(null)
+        }
+    }, [tableId])
 
     // Poll for order status
     useEffect(() => {
-        if (!activeOrderId) return
+        if (!activeOrderId || !tableId) return
 
         const checkStatus = async () => {
             const res = await getOrderStatus(activeOrderId)
             if (res.success && res.status) {
                 setOrderStatus(res.status)
-                if (res.status === 'COMPLETED' || res.status === 'PAID') {
-                    // Stop tracking eventually? Keep showing for now.
+                if (res.status === 'COMPLETED' || res.status === 'PAID' || res.status === 'CANCELED') {
+                    // Reset the order tracking for this table allowing fresh orders
+                    localStorage.removeItem(`active_order_${tableId}`)
+                    setActiveOrderId(null)
+                    setOrderComplete(false)
                 }
             }
         }
@@ -39,7 +48,7 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
         checkStatus()
         const interval = setInterval(checkStatus, 5000)
         return () => clearInterval(interval)
-    }, [activeOrderId])
+    }, [activeOrderId, tableId])
 
     // Table identification logic
     useEffect(() => {
@@ -89,7 +98,7 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
             if (result.success && result.orderId) {
                 setOrderComplete(true)
                 setActiveOrderId(result.orderId)
-                localStorage.setItem('active_restaurant_order_id', result.orderId)
+                localStorage.setItem(`active_order_${tableId}`, result.orderId)
                 clearCart()
             } else {
                 console.error('Order placement failed:', result.error)

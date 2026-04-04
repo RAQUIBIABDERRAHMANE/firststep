@@ -45,7 +45,7 @@ export default function TablesClient({ initialTables, tenantSlug }: { initialTab
             const codes: Record<string, string> = {}
             for (const table of initialTables) {
                 try {
-                    const token = await signTableIdBrowser(table.number)
+                    const token = await signTableIdBrowser(table.id)
                     const baseUrl = window.location.origin
                     const url = `${baseUrl}/${tenantSlug}?table=${token}`
                     const dataUrl = await QRCode.toDataURL(url, {

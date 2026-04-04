@@ -16,6 +16,7 @@ export default function WaiterDashboard() {
     const [waiterName, setWaiterName] = useState('')
     const [waiterId, setWaiterId] = useState('')
     const [orders, setOrders] = useState([])
+    const [tables, setTables] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
@@ -38,7 +39,9 @@ export default function WaiterDashboard() {
         try {
             const data = await getWaiterOrders(id)
             // @ts-ignore
-            setOrders(data)
+            setOrders(data.orders || [])
+            // @ts-ignore
+            setTables(data.tables || [])
         } catch (e) {
             console.error('Failed to fetch orders')
         } finally {
@@ -82,9 +85,41 @@ export default function WaiterDashboard() {
 
             {/* Content */}
             <div className="p-4 md:p-6 flex-1 overflow-y-auto">
-                <div className="max-w-4xl mx-auto">
-                    <h2 className="text-xl font-bold mb-4 text-slate-800">My Tables</h2>
-                    <OrdersClient initialOrders={orders} tenantSlug={tenantSlug} />
+                <div className="max-w-5xl mx-auto space-y-8">
+                    {/* Tables Overview */}
+                    <div>
+                        <h2 className="text-xl font-bold mb-4 text-slate-800 flex items-center gap-2">
+                            Assigned Tables
+                        </h2>
+                        <div className="flex flex-wrap gap-3">
+                            {tables.map((table: any) => {
+                                const hasActiveOrder = orders.some((o: any) => o.tableId === table.id)
+                                return (
+                                    <div 
+                                        key={table.id} 
+                                        className={`px-6 py-4 min-w-[5rem] flex items-center justify-center font-black text-xl rounded-2xl shadow-sm border-2 transition-all ${
+                                            hasActiveOrder 
+                                                ? 'bg-amber-100 border-amber-200 text-amber-900 ring-2 ring-amber-400/20' 
+                                                : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50'
+                                        }`}
+                                    >
+                                        {table.number}
+                                    </div>
+                                )
+                            })}
+                            {tables.length === 0 && (
+                                <div className="w-full text-center py-8 text-slate-400 bg-white rounded-2xl border-2 border-dashed border-slate-200">
+                                    No tables currently assigned to you.
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Orders */}
+                    <div>
+                        <h2 className="text-xl font-bold mb-4 text-slate-800">Active Orders</h2>
+                        <OrdersClient initialOrders={orders} tenantSlug={tenantSlug} />
+                    </div>
                 </div>
             </div>
         </div>

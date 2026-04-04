@@ -47,6 +47,38 @@ export async function createWaiter(name: string, pin: string, tableIds: string[]
     }
 }
 
+export async function updateWaiter(id: string, name: string, pin: string, tableIds: string[], slug?: string) {
+    const tenant = await getTenant(slug)
+    if (!tenant) return { error: 'Not authenticated' }
+
+    if (!name || (pin !== '' && pin.length !== 4)) return { error: 'Invalid name or PIN' }
+
+    try {
+        const updateData: any = {
+            name,
+            tables: {
+                set: tableIds.map(tableId => ({ id: tableId }))
+            }
+        }
+        
+        if (pin && pin.length === 4) {
+            updateData.pin = pin
+        }
+
+        // @ts-ignore
+        await prisma.restaurantWaiter.update({
+            where: { id, tenantId: tenant.id },
+            data: updateData
+        })
+
+        revalidatePath('/dashboard/restaurant/[tenantSlug]/waiters', 'page')
+        return { success: true }
+    } catch (e) {
+        console.error('Error updating waiter:', e)
+        return { error: 'Failed to update waiter' }
+    }
+}
+
 export async function deleteWaiter(id: string, slug?: string) {
     const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
@@ -91,16 +123,15 @@ export async function getWaiterOrders(waiterId: string) {
         // @ts-ignore
         const waiter = await prisma.restaurantWaiter.findUnique({
             where: { id: waiterId },
-            include: { tables: { select: { id: true } } }
+            include: { tables: true }
         })
 
-        if (!waiter) return []
+        if (!waiter) return { orders: [], tables: [] }
 
         const tableIds = waiter.tables.map((t: { id: string }) => t.id)
 
         // Find orders for these tables
-        // Also include waiters for context if needed
-        return await prisma.restaurantOrder.findMany({
+        const orders = await prisma.restaurantOrder.findMany({
             where: {
                 tableId: { in: tableIds },
                 status: { not: 'PAID' } // Show active orders
@@ -111,8 +142,10 @@ export async function getWaiterOrders(waiterId: string) {
             },
             orderBy: { createdAt: 'desc' }
         })
+        
+        return { orders, tables: waiter.tables }
     } catch (e) {
         console.error('Error fetching waiter orders:', e)
-        return []
+        return { orders: [], tables: [] }
     }
 }

@@ -15,7 +15,8 @@ import {
     MoreVertical,
     Check,
     Volume2,
-    VolumeX
+    VolumeX,
+    XCircle
 } from 'lucide-react'
 import { updateOrderStatus } from '@/app/actions/restaurant'
 import { useRouter } from 'next/navigation'
@@ -115,6 +116,7 @@ export default function OrdersClient({ initialOrders, tenantSlug }: { initialOrd
             case 'PREPARING': return 'bg-blue-100 text-blue-700 border-blue-200'
             case 'READY': return 'bg-emerald-100 text-emerald-700 border-emerald-200'
             case 'PAID': return 'bg-slate-100 text-slate-700 border-slate-200'
+            case 'CANCELED': return 'bg-red-100 text-red-700 border-red-200'
             default: return 'bg-slate-100 text-slate-700'
         }
     }
@@ -124,6 +126,7 @@ export default function OrdersClient({ initialOrders, tenantSlug }: { initialOrd
             case 'PENDING': return <AlertCircle size={14} />
             case 'PREPARING': return <ChefHat size={14} />
             case 'READY': return <CheckCircle2 size={14} />
+            case 'CANCELED': return <XCircle size={14} />
             default: return <Check size={14} />
         }
     }
@@ -234,7 +237,7 @@ export default function OrdersClient({ initialOrders, tenantSlug }: { initialOrd
                                             <span className="text-3xl font-black tracking-tighter text-blue-600">{order.totalAmount.toFixed(0)} MAD</span>
                                         </div>
 
-                                        <div className="pt-6 grid grid-cols-2 md:grid-cols-4 gap-3">
+                                        <div className="pt-6 grid grid-cols-2 lg:grid-cols-5 gap-3">
                                             <Button
                                                 variant={order.status === 'PREPARING' ? 'default' : 'outline'}
                                                 className="rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-none"
@@ -266,6 +269,21 @@ export default function OrdersClient({ initialOrders, tenantSlug }: { initialOrd
                                                 onClick={() => handleUpdateStatus(order.id, 'PAID')}
                                             >
                                                 Paid
+                                            </Button>
+                                            <Button
+                                                variant={order.status === 'CANCELED' ? 'destructive' : 'outline'}
+                                                className={cn(
+                                                    "rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-none",
+                                                    order.status !== 'CANCELED' && "border-red-100 text-red-500 hover:bg-red-50 hover:text-red-600"
+                                                )}
+                                                disabled={loading === order.id}
+                                                onClick={() => {
+                                                    if (confirm("Are you sure you want to cancel this order?")) {
+                                                        handleUpdateStatus(order.id, 'CANCELED');
+                                                    }
+                                                }}
+                                            >
+                                                Cancel
                                             </Button>
                                         </div>
                                     </div>

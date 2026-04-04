@@ -20,7 +20,7 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
     const {
         showScanner, setShowScanner, showCart, setShowCart, activeCategory, setActiveCategory,
         isPlacingOrder, orderComplete, setOrderComplete, items, addItem, updateQuantity,
-        totalPrice, totalItems, tableId, categoryNames, filteredItems, handleScan, handlePlaceOrder, handleCallWaiter
+        totalPrice, totalItems, tableId, categoryNames, filteredItems, handleScan, handlePlaceOrder, handleCallWaiter, removeItem
     } = defaultData
 
     const [lang, setLang] = useState<Language>('fr')
@@ -209,10 +209,15 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                             <h4 className="font-serif font-black text-xl text-slate-950">{item.name}</h4>
                                             <span className="text-slate-400 font-bold text-sm tracking-tight">{item.price} {CURRENCY}</span>
                                         </div>
-                                        <div className="flex items-center gap-3 bg-slate-950 text-white px-4 py-2.5 rounded-2xl shadow-xl">
-                                            <button onClick={() => updateQuantity(item.id, -1)} className="hover:text-amber-500 transition-colors"><Minus size={14} strokeWidth={3} /></button>
-                                            <span className="font-black text-sm w-6 text-center">{item.quantity}</span>
-                                            <button onClick={() => updateQuantity(item.id, 1)} className="hover:text-amber-500 transition-colors"><Plus size={14} strokeWidth={3} /></button>
+                                        <div className="flex flex-col gap-2 items-end">
+                                            <button onClick={() => removeItem(item.id)} className="text-slate-300 hover:text-red-500 transition-colors p-1" title="Remove item">
+                                                <Trash2 size={16} />
+                                            </button>
+                                            <div className="flex items-center gap-3 bg-slate-950 text-white px-4 py-2.5 rounded-2xl shadow-xl">
+                                                <button onClick={() => updateQuantity(item.id, -1)} className="hover:text-amber-500 transition-colors"><Minus size={14} strokeWidth={3} /></button>
+                                                <span className="font-black text-sm w-6 text-center">{item.quantity}</span>
+                                                <button onClick={() => updateQuantity(item.id, 1)} className="hover:text-amber-500 transition-colors"><Plus size={14} strokeWidth={3} /></button>
+                                            </div>
                                         </div>
                                     </div>
                                 ))

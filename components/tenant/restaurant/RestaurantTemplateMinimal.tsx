@@ -6,7 +6,7 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useRestaurantLogic } from './useRestaurantLogic'
 import { RestaurantTemplateProps } from './RestaurantTemplate'
-import { ArrowRight, Bell, ChevronLeft, Minus, Plus, QrCode, ShoppingCart, X, Check, Loader2, Sparkles } from 'lucide-react'
+import { ArrowRight, Bell, ChevronLeft, Minus, Plus, QrCode, ShoppingCart, X, Check, Loader2, Sparkles, Trash2 } from 'lucide-react'
 
 const QRScanner = dynamic(() => import('./QRScanner'), { ssr: false })
 
@@ -319,10 +319,15 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                                 <h4 className="font-serif text-lg text-slate-900">{item.name}</h4>
                                                 <span className="font-medium text-slate-600">{item.price} {CURRENCY}</span>
                                             </div>
-                                            <div className="flex items-center gap-4 mt-2">
-                                                <button onClick={() => updateQuantity(item.id, -1)} className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors"><Minus size={14} /></button>
-                                                <span className="font-medium w-4 text-center">{item.quantity}</span>
-                                                <button onClick={() => updateQuantity(item.id, 1)} className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors"><Plus size={14} /></button>
+                                            <div className="flex items-center justify-between mt-2">
+                                                <button onClick={() => removeItem(item.id)} className="text-slate-300 hover:text-red-500 transition-colors p-2" title="Remove item">
+                                                    <Trash2 size={16} />
+                                                </button>
+                                                <div className="flex items-center gap-4">
+                                                    <button onClick={() => updateQuantity(item.id, -1)} className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors"><Minus size={14} /></button>
+                                                    <span className="font-medium w-4 text-center">{item.quantity}</span>
+                                                    <button onClick={() => updateQuantity(item.id, 1)} className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors"><Plus size={14} /></button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

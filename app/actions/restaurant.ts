@@ -271,14 +271,14 @@ export async function createBulkTables(count: number, prefix: string, startNumbe
 
 // --- Orders ---
 
-export async function createOrder(tableNumber: string, items: { id: string, name: string, price: number, quantity: number }[]) {
-    // This is a public action - table is identified by its number from the QR code
-    const table = await prisma.restaurantTable.findFirst({
-        where: { number: tableNumber }
+export async function createOrder(tableId: string, items: { id: string, name: string, price: number, quantity: number }[]) {
+    // This is a public action - table is identified by its persistent CUID from the QR code
+    const table = await prisma.restaurantTable.findUnique({
+        where: { id: tableId }
     })
 
     if (!table || !(table as any).isActive) {
-        console.error('[Restaurant Action] createOrder: Invalid table number:', tableNumber)
+        console.error('[Restaurant Action] createOrder: Invalid table ID:', tableId)
         return { error: 'Invalid or inactive table' }
     }
 
@@ -309,10 +309,10 @@ export async function createOrder(tableNumber: string, items: { id: string, name
     }
 }
 
-export async function callWaiter(tableNumber: string) {
+export async function callWaiter(tableId: string) {
     try {
-        const table = await prisma.restaurantTable.findFirst({
-            where: { number: tableNumber }
+        const table = await prisma.restaurantTable.findUnique({
+            where: { id: tableId }
         })
 
         if (!table) return { error: 'Invalid table' }

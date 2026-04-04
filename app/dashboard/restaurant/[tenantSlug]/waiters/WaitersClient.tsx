@@ -5,8 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Badge } from '@/components/ui/Badge'
-import { Loader2, Plus, Trash2, User, KeyRound, MapPin, Users, Copy, Check, Link as LinkIcon } from 'lucide-react'
-import { createWaiter, deleteWaiter } from '@/app/actions/waiter'
+import { Loader2, Plus, Trash2, User, KeyRound, MapPin, Copy, Check, Link as LinkIcon, Pencil } from 'lucide-react'
+import { createWaiter, deleteWaiter, updateWaiter } from '@/app/actions/waiter'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
@@ -18,7 +18,8 @@ interface WaitersClientProps {
 
 export default function WaitersClient({ initialWaiters, initialTables, tenantSlug }: WaitersClientProps) {
     const router = useRouter()
-    const [isCreating, setIsCreating] = useState(false)
+    const [isFormOpen, setIsFormOpen] = useState(false)
+    const [editingId, setEditingId] = useState<string | null>(null)
     const [isLoading, setIsLoading] = useState(false)
     const [copied, setCopied] = useState(false)
 
@@ -26,19 +27,51 @@ export default function WaitersClient({ initialWaiters, initialTables, tenantSlu
     const [newPin, setNewPin] = useState('')
     const [selectedTables, setSelectedTables] = useState<string[]>([])
 
-    const handleCreate = async (e: React.FormEvent) => {
+    const openCreateForm = () => {
+        setEditingId(null)
+        setNewName('')
+        setNewPin('')
+        setSelectedTables([])
+        setIsFormOpen(true)
+    }
+
+    const openEditForm = (waiter: any) => {
+        setEditingId(waiter.id)
+        setNewName(waiter.name)
+        setNewPin('') // We don't populate the PIN for security, leave blank unless changing
+        setSelectedTables(waiter.tables.map((t: any) => t.id))
+        setIsFormOpen(true)
+    }
+
+    const closeForm = () => {
+        setIsFormOpen(false)
+        setEditingId(null)
+        setNewName('')
+        setNewPin('')
+        setSelectedTables([])
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        if (!newName || newPin.length !== 4) return
+        if (!newName) return
+        
+        // For new waiters, PIN is required. For editing, it's optional.
+        if (!editingId && newPin.length !== 4) return
+        if (editingId && newPin.length > 0 && newPin.length !== 4) return
 
         setIsLoading(true)
-        const res = await createWaiter(newName, newPin, selectedTables, tenantSlug)
+        
+        let res
+        if (editingId) {
+            res = await updateWaiter(editingId, newName, newPin, selectedTables, tenantSlug)
+        } else {
+            res = await createWaiter(newName, newPin, selectedTables, tenantSlug)
+        }
+        
         setIsLoading(false)
 
         if (res.success) {
-            setIsCreating(false)
-            setNewName('')
-            setNewPin('')
-            setSelectedTables([])
+            closeForm()
             router.refresh()
         } else {
             alert(res.error)
@@ -90,9 +123,9 @@ export default function WaitersClient({ initialWaiters, initialTables, tenantSlu
                 </Button>
             </div>
 
-            {/* Create Actions */}
-            {!isCreating ? (
-                <Card className="border-dashed bg-slate-50/50 hover:bg-slate-50 transition-colors cursor-pointer" onClick={() => setIsCreating(true)}>
+            {/* Create / Edit Actions */}
+            {!isFormOpen ? (
+                <Card className="border-dashed bg-slate-50/50 hover:bg-slate-50 transition-colors cursor-pointer" onClick={openCreateForm}>
                     <CardContent className="flex flex-col items-center justify-center py-12 text-center">
                         <div className="h-12 w-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center mb-4">
                             <Plus size={24} />
@@ -104,11 +137,11 @@ export default function WaitersClient({ initialWaiters, initialTables, tenantSlu
             ) : (
                 <Card className="border-indigo-200 shadow-lg ring-4 ring-indigo-500/10 animate-in slide-in-from-top-4">
                     <CardHeader>
-                        <CardTitle>New Waiter Profile</CardTitle>
-                        <CardDescription>Enter details and select assigned tables.</CardDescription>
+                        <CardTitle>{editingId ? 'Edit Waiter Profile' : 'New Waiter Profile'}</CardTitle>
+                        <CardDescription>{editingId ? 'Update details or modify assigned tables.' : 'Enter details and select assigned tables.'}</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <form onSubmit={handleCreate} className="space-y-6">
+                        <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                     <label className="text-sm font-medium">Full Name</label>
@@ -124,7 +157,9 @@ export default function WaitersClient({ initialWaiters, initialTables, tenantSlu
                                     </div>
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium">Access PIN (4 Digits)</label>
+                                    <label className="text-sm font-medium">
+                                        Access PIN (4 Digits) {editingId && <span className="text-xs text-muted-foreground font-normal ml-1">(Leave empty to keep current)</span>}
+                                    </label>
                                     <div className="relative">
                                         <KeyRound className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
                                         <Input
@@ -133,7 +168,7 @@ export default function WaitersClient({ initialWaiters, initialTables, tenantSlu
                                             className="pl-9 font-mono tracking-widest"
                                             value={newPin}
                                             onChange={(e) => setNewPin(e.target.value.replace(/\D/g, '').slice(0, 4))}
-                                            required
+                                            required={!editingId}
                                         />
                                     </div>
                                 </div>
@@ -163,10 +198,10 @@ export default function WaitersClient({ initialWaiters, initialTables, tenantSlu
                             </div>
 
                             <div className="flex justify-end gap-3 pt-4">
-                                <Button type="button" variant="ghost" onClick={() => setIsCreating(false)}>Cancel</Button>
-                                <Button type="submit" disabled={isLoading || !newName || newPin.length !== 4}>
-                                    {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Plus className="mr-2 h-4 w-4" />}
-                                    Create Waiter
+                                <Button type="button" variant="ghost" onClick={closeForm}>Cancel</Button>
+                                <Button type="submit" disabled={isLoading || !newName || (!editingId && newPin.length !== 4) || (!!editingId && newPin.length > 0 && newPin.length !== 4)}>
+                                    {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : (editingId ? <Check className="mr-2 h-4 w-4" /> : <Plus className="mr-2 h-4 w-4" />)}
+                                    {editingId ? 'Save Changes' : 'Create Waiter'}
                                 </Button>
                             </div>
                         </form>
@@ -192,9 +227,14 @@ export default function WaitersClient({ initialWaiters, initialTables, tenantSlu
                                     </div>
                                 </div>
                             </div>
-                            <Button variant="ghost" size="icon" className="text-slate-400 hover:text-red-500" onClick={() => handleDelete(waiter.id)}>
-                                <Trash2 size={16} />
-                            </Button>
+                            <div className="flex items-center gap-1">
+                                <Button variant="ghost" size="icon" className="text-slate-400 hover:text-indigo-600 h-8 w-8" onClick={() => openEditForm(waiter)}>
+                                    <Pencil size={16} />
+                                </Button>
+                                <Button variant="ghost" size="icon" className="text-slate-400 hover:text-red-500 h-8 w-8" onClick={() => handleDelete(waiter.id)}>
+                                    <Trash2 size={16} />
+                                </Button>
+                            </div>
                         </CardHeader>
                         <CardContent>
                             <div className="flex items-center gap-2 mb-3 text-xs font-medium text-slate-500 uppercase tracking-wider">

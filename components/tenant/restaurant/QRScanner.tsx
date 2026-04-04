@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { Html5QrcodeScanner } from 'html5-qrcode'
+import { useEffect, useState, useRef } from 'react'
+import { Html5Qrcode } from 'html5-qrcode'
 import { Button } from '@/components/ui/Button'
 import { X, Camera } from 'lucide-react'
 
@@ -11,41 +11,64 @@ interface QRScannerProps {
 }
 
 export default function QRScanner({ onScan, onClose }: QRScannerProps) {
+    const scannerRef = useRef<Html5Qrcode | null>(null)
+    const [error, setError] = useState<string | null>(null)
+
     useEffect(() => {
-        // Timeout to ensure the DOM element is ready
-        const timer = setTimeout(() => {
-            const scanner = new Html5QrcodeScanner(
-                'qr-reader',
-                {
-                    fps: 10,
-                    qrbox: { width: 250, height: 250 },
-                    aspectRatio: 1.0
-                },
-                false
-            )
+        let isComponentMounted = true;
+        
+        const startScanner = async () => {
+            try {
+                // Ensure DOM element is fully rendered before mounting
+                await new Promise(resolve => setTimeout(resolve, 100))
+                
+                if (!isComponentMounted) return;
 
-            scanner.render(
-                (decodedText) => {
-                    scanner.clear().then(() => {
-                        onScan(decodedText)
-                    }).catch(err => {
-                        console.error('Failed to clear scanner', err)
-                        onScan(decodedText)
-                    })
-                },
-                (err) => {
-                    // Ignored for performance
+                if (!scannerRef.current) {
+                    scannerRef.current = new Html5Qrcode('qr-reader')
                 }
-            )
 
-            return () => {
-                scanner.clear().catch(err => {
-                    // Sometimes clear fails if already cleared or not rendered
-                })
+                await scannerRef.current.start(
+                    { facingMode: 'environment' },
+                    {
+                        fps: 10,
+                        qrbox: { width: 250, height: 250 },
+                        aspectRatio: 1.0
+                    },
+                    (decodedText) => {
+                        if (scannerRef.current) {
+                            scannerRef.current.stop().then(() => {
+                                onScan(decodedText)
+                            }).catch(() => {
+                                onScan(decodedText)
+                            })
+                        } else {
+                            onScan(decodedText)
+                        }
+                    },
+                    (err) => {
+                        // Ignored for performance
+                    }
+                )
+            } catch (err) {
+                console.error("Error starting scanner:", err)
+                if (isComponentMounted) {
+                    setError("Could not access the back camera. Please ensure you have granted camera permissions.")
+                }
             }
-        }, 100)
+        }
 
-        return () => clearTimeout(timer)
+        startScanner()
+
+        return () => {
+            isComponentMounted = false;
+            if (scannerRef.current) {
+                if (scannerRef.current.isScanning) {
+                    scannerRef.current.stop().catch(() => {})
+                }
+                scannerRef.current.clear()
+            }
+        }
     }, [onScan])
 
     return (
@@ -67,10 +90,16 @@ export default function QRScanner({ onScan, onClose }: QRScannerProps) {
                         Please scan the QR code located on your table to start ordering.
                     </p>
 
-                    <div
-                        id="qr-reader"
-                        className="overflow-hidden rounded-[2rem] border-4 border-slate-50 bg-slate-50"
-                    ></div>
+                    {error ? (
+                        <div className="p-4 bg-red-50 text-red-600 rounded-2xl text-sm border border-red-100 mb-6 font-medium">
+                            {error}
+                        </div>
+                    ) : (
+                        <div
+                            id="qr-reader"
+                            className="overflow-hidden rounded-[2rem] border-4 border-slate-50 bg-slate-50"
+                        ></div>
+                    )}
 
                     <div className="mt-10">
                         <Button variant="outline" onClick={onClose} className="w-full h-14 rounded-2xl text-lg font-semibold">

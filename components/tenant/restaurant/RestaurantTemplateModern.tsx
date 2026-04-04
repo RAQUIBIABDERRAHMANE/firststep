@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 import { useRestaurantLogic } from './useRestaurantLogic'
 import { RestaurantTemplateProps } from './RestaurantTemplate'
 import {
-    ShoppingCart, QrCode, MapPin, Plus, Minus, X,
+    ShoppingCart, QrCode, MapPin, Plus, Minus, X, Trash2,
     ChevronLeft, ChevronRight, LayoutDashboard, Bell, Check
 } from 'lucide-react'
 
@@ -20,7 +20,7 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
     const {
         showScanner, setShowScanner, showCart, setShowCart, activeCategory, setActiveCategory,
         isPlacingOrder, orderComplete, setOrderComplete, items, addItem, updateQuantity,
-        totalPrice, totalItems, tableId, categoryNames, filteredItems, handleScan, handlePlaceOrder, handleCallWaiter
+        totalPrice, totalItems, tableId, categoryNames, filteredItems, handleScan, handlePlaceOrder, handleCallWaiter, removeItem
     } = defaultData
 
     const [lang, setLang] = useState<Language>('fr')
@@ -283,14 +283,19 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                                             <h4 className="font-medium">{item.name}</h4>
                                             <span className="text-[var(--primary)]">{item.price} MAD</span>
                                         </div>
-                                        <div className="flex items-center gap-2 bg-black/30 rounded-lg p-1">
-                                            <button onClick={() => updateQuantity(item.id, -1)} className="p-2 hover:text-[var(--primary)]">
-                                                <Minus size={14} />
+                                        <div className="flex flex-col gap-2 items-end">
+                                            <button onClick={() => removeItem(item.id)} className="text-zinc-600 hover:text-red-500 transition-colors p-1" title="Remove item">
+                                                <Trash2 size={14} />
                                             </button>
-                                            <span className="w-6 text-center font-mono">{item.quantity}</span>
-                                            <button onClick={() => updateQuantity(item.id, 1)} className="p-2 hover:text-[var(--primary)]">
-                                                <Plus size={14} />
-                                            </button>
+                                            <div className="flex items-center gap-2 bg-black/30 rounded-lg p-1">
+                                                <button onClick={() => updateQuantity(item.id, -1)} className="p-2 hover:text-[var(--primary)]">
+                                                    <Minus size={14} />
+                                                </button>
+                                                <span className="w-6 text-center font-mono">{item.quantity}</span>
+                                                <button onClick={() => updateQuantity(item.id, 1)} className="p-2 hover:text-[var(--primary)]">
+                                                    <Plus size={14} />
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 ))
