@@ -104,16 +104,36 @@ async function getCabinetContext() {
         const [servicesRes, clientsRes, appointmentsRes] = await Promise.all([
             prisma.cabinetService.findMany({ where: { tenantId: tenant.id } }),
             prisma.cabinetClient.findMany({ where: { tenantId: tenant.id } }),
-            prisma.cabinetAppointment.findMany({ where: { tenantId: tenant.id } })
+            prisma.cabinetAppointment.findMany({ 
+                where: { tenantId: tenant.id },
+                include: { client: true, service: true }
+            })
         ])
+
+        const completedAppts = appointmentsRes.filter((a: any) => a.status === 'COMPLETED')
+        const totalCabinetRevenue = completedAppts.reduce((sum: number, a: any) => sum + ((a.service?.price || 0)), 0)
+        
+        const upcomingAppts = appointmentsRes
+            .filter((a: any) => a.status === 'SCHEDULED' && new Date(a.appointmentDate) >= new Date())
+            .sort((a: any, b: any) => new Date(a.appointmentDate).getTime() - new Date(b.appointmentDate).getTime())
+            .slice(0, 3)
+            .map((a: any) => `${a.client?.name || 'Inconnu'} - ${a.service?.name} le ${new Date(a.appointmentDate).toLocaleDateString('fr-FR', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'})}`)
+            .join(' | ')
 
         return {
             serviceSummary: servicesRes.map((s: any) => `${s.name} (${s.price} MAD)`).join(', '),
+            serviceCount: servicesRes.length,
             clientCount: clientsRes.length,
             appointmentStats: {
                 total: appointmentsRes.length,
                 upcoming: appointmentsRes.filter((a: any) => a.status === 'SCHEDULED').length,
-                completed: appointmentsRes.filter((a: any) => a.status === 'COMPLETED').length
+                completed: completedAppts.length,
+                cancelled: appointmentsRes.filter((a: any) => a.status === 'CANCELLED').length
+            },
+            analytics: {
+                revenue: totalCabinetRevenue.toFixed(2) + ' MAD',
+                nextAppointments: upcomingAppts || 'Aucun rdv prévu',
+                avgRevenuePerClient: clientsRes.length > 0 ? (totalCabinetRevenue / clientsRes.length).toFixed(0) + ' MAD' : '0 MAD'
             }
         }
     } catch (e) {
@@ -239,9 +259,13 @@ Restaurant Context:
             if (cabContext) {
                 contextMessage += `
 Professional Cabinet Context:
-- Services: ${cabContext.serviceSummary || 'None set'}
+- Services (${cabContext.serviceCount} total): ${cabContext.serviceSummary || 'None set'}
 - Clients: ${cabContext.clientCount} total
-- Appointments: ${cabContext.appointmentStats.total} total (${cabContext.appointmentStats.upcoming} upcoming)
+- Appointments: ${cabContext.appointmentStats.total} total (${cabContext.appointmentStats.upcoming} upcoming, ${cabContext.appointmentStats.completed} completed, ${cabContext.appointmentStats.cancelled} cancelled)
+- Analytical Insights:
+   * Total Cabinet Revenue: ${cabContext.analytics.revenue}
+   * Average Rev. per Client: ${cabContext.analytics.avgRevenuePerClient}
+- Next 3 Upcoming Appointments: ${cabContext.analytics.nextAppointments}
 `
             }
         }
