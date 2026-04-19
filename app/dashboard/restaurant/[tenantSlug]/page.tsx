@@ -216,7 +216,7 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                     </Card>
                 </Link>
 
-                <Link href={`/dashboard/restaurant/${tenantSlug}/reports`} className="md:col-span-2">
+                <Link href={`/dashboard/restaurant/${tenantSlug}/reports`} className="md:col-span-1">
                     <Card className="glass-card shadow-none border-slate-200/60 hover:border-violet-500/50 hover:bg-violet-50/10 transition-all group p-6">
                         <div className="flex flex-col md:flex-row gap-6 items-center">
                             <div className="h-16 w-16 rounded-2xl bg-violet-100 flex items-center justify-center text-violet-600 shadow-sm shrink-0 transition-transform duration-500 group-hover:scale-110">
@@ -227,12 +227,26 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                                     Rapports Mensuels <ChevronRight size={18} className="text-slate-300 group-hover:text-violet-500 transition-colors" />
                                 </h3>
                                 <p className="text-slate-500 text-sm">
-                                    Rapports PDF automatiques avec chiffre d'affaires, plats populaires, et activité journalière. Envoyés par email le 1er de chaque mois.
+                                    Rapports PDF envoyés par email le 1er de chaque mois.
                                 </p>
                             </div>
-                            <div className="flex items-center gap-2 shrink-0">
-                                <span className="text-xs font-bold text-violet-600 bg-violet-50 border border-violet-200 px-3 py-1.5 rounded-full">🇫🇷 FR / 🇬🇧 EN</span>
-                                <span className="text-xs font-bold text-slate-500 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-full">PDF + Email</span>
+                        </div>
+                    </Card>
+                </Link>
+
+                <Link href={`/dashboard/restaurant/${tenantSlug}/analytics`} className="md:col-span-1">
+                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-cyan-500/50 hover:bg-cyan-50/10 transition-all group p-6">
+                        <div className="flex flex-col md:flex-row gap-6 items-center">
+                            <div className="h-16 w-16 rounded-2xl bg-cyan-100 flex items-center justify-center text-cyan-600 shadow-sm shrink-0 transition-transform duration-500 group-hover:scale-110">
+                                <TrendingUp size={32} />
+                            </div>
+                            <div className="flex-1 text-center md:text-left">
+                                <h3 className="text-xl font-black mb-2 flex items-center justify-center md:justify-start gap-2">
+                                    Analytique Live <ChevronRight size={18} className="text-slate-300 group-hover:text-cyan-500 transition-colors" />
+                                </h3>
+                                <p className="text-slate-500 text-sm">
+                                    Explorez vos revenus, ventes par tranche avec filtre jour, mois, année.
+                                </p>
                             </div>
                         </div>
                     </Card>

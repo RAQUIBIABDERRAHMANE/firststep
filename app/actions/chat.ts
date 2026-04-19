@@ -44,14 +44,42 @@ async function getRestaurantContext() {
             total: orders.length,
             pending: orders.filter((o: any) => o.status === 'PENDING').length,
             completed: orders.filter((o: any) => o.status === 'COMPLETED').length,
-            totalRevenue: orders.reduce((sum: number, o: any) => sum + (o.totalAmount || 0), 0)
+            cancelled: orders.filter((o: any) => o.status === 'CANCELLED').length,
+            totalRevenue: orders.reduce((sum: number, o: any) => sum + ((o.status === 'COMPLETED' || o.status === 'PAID') ? (o.totalAmount || 0) : 0), 0)
         }
+        
+        // Compute last 30 days analytics
+        const thirtyDaysAgo = new Date()
+        thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
+        
+        const recentOrders = orders.filter((o: any) => new Date(o.createdAt) >= thirtyDaysAgo && (o.status === 'PAID' || o.status === 'COMPLETED'))
+        const cancelledRecentOrders = orders.filter((o: any) => new Date(o.createdAt) >= thirtyDaysAgo && o.status === 'CANCELLED')
+        
+        const successRate = recentOrders.length > 0 ? (recentOrders.length / (recentOrders.length + cancelledRecentOrders.length)) * 100 : 0
+        const recentRevenue = recentOrders.reduce((sum: number, o: any) => sum + o.totalAmount, 0)
+        const avgTicket = recentOrders.length > 0 ? recentRevenue / recentOrders.length : 0
+        
+        // Rush hours
+        const rushHours: Record<string, number> = {}
+        recentOrders.forEach((o: any) => {
+            const hour = new Date(o.createdAt).getHours()
+            rushHours[hour] = (rushHours[hour] || 0) + 1
+        })
+        const sortedHours = Object.entries(rushHours).sort((a,b) => b[1] - a[1])
+        const peakHour = sortedHours.length > 0 ? `${sortedHours[0][0]}:00` : 'N/A'
 
         return {
             menuSummary,
             tableCount: tables.length,
             activeTables: tables.filter((t: any) => t.isActive).length,
-            orderStats
+            orderStats,
+            analytics: {
+                successRate: successRate.toFixed(1) + '%',
+                recentRevenue: recentRevenue.toFixed(2) + ' MAD',
+                avgTicket: avgTicket.toFixed(2) + ' MAD',
+                peakHour,
+                totalRecentOrders: recentOrders.length
+            }
         }
     } catch (e) {
         return null
@@ -196,6 +224,12 @@ Restaurant Context:
 - Menu: ${restContext.menuSummary || 'No items'}
 - Tables: ${restContext.activeTables}/${restContext.tableCount}
 - Orders: ${restContext.orderStats.total} total (${restContext.orderStats.totalRevenue.toFixed(0)} MAD)
+- Last 30 Days Analytics: 
+   * Revenue: ${restContext.analytics.recentRevenue} 
+   * Success Rate: ${restContext.analytics.successRate}
+   * Average Ticket: ${restContext.analytics.avgTicket}
+   * Peak Rush Hour: ${restContext.analytics.peakHour}
+   * Total Recent Orders: ${restContext.analytics.totalRecentOrders}
 `
             }
         }
