@@ -96,20 +96,20 @@ model PasswordReset {
 }
 
 model TenantWebsite {
-  id                  String               @id @default(cuid())
-  slug                String               @unique
+  id                  String                  @id @default(cuid())
+  slug                String                  @unique
   userId              String
   serviceId           String
   siteName            String
   description         String?
   logo                String?
   coverImage          String?
-  primaryColor        String               @default("#3B82F6")
-  config              String               @default("{}")
-  designTemplate      String               @default("classic")
-  isActive            Boolean              @default(false)
-  createdAt           DateTime             @default(now())
-  updatedAt           DateTime             @updatedAt
+  primaryColor        String                  @default("#3B82F6")
+  config              String                  @default("{}")
+  designTemplate      String                  @default("classic")
+  isActive            Boolean                 @default(false)
+  createdAt           DateTime                @default(now())
+  updatedAt           DateTime                @updatedAt
   cabinetAppointments CabinetAppointment[]
   cabinetClients      CabinetClient[]
   cabinetServices     CabinetService[]
@@ -117,10 +117,11 @@ model TenantWebsite {
   tables              RestaurantTable[]
   waiters             RestaurantWaiter[]
   reports             RestaurantReport[]
+  reservations        RestaurantReservation[]
   invoices            Invoice[]
   invoiceSettings     InvoiceSettings?
-  service             Service              @relation(fields: [serviceId], references: [id])
-  user                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  service             Service                 @relation(fields: [serviceId], references: [id])
+  user                User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([slug])
   @@index([userId])
@@ -219,6 +220,24 @@ model RestaurantReport {
 
   @@unique([tenantId, month, year])
   @@index([tenantId])
+}
+
+model RestaurantReservation {
+  id        String        @id @default(cuid())
+  tenantId  String
+  name      String
+  phone     String
+  email     String?
+  date      DateTime
+  time      String
+  partySize Int
+  notes     String?
+  status    String        @default("PENDING")
+  createdAt DateTime      @default(now())
+  tenant    TenantWebsite @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([date])
 }
 
 model CabinetService {

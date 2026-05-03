@@ -14,7 +14,8 @@ import {
     LayoutDashboard,
     Paintbrush,
     UserCheck,
-    BarChart3
+    BarChart3,
+    CalendarCheck
 } from 'lucide-react'
 import { getWebsiteBySlug } from '@/app/actions/tenant'
 import AutoRefresh from '@/components/dashboard/AutoRefresh'
@@ -49,6 +50,9 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
     })
     // @ts-ignore
     const waiterCount = await prisma.restaurantWaiter.count({ where: { tenantId: tenant.id } })
+    const pendingReservations = await prisma.restaurantReservation.count({
+        where: { tenantId: tenant.id, status: 'PENDING' }
+    })
 
     return (
         <div className="space-y-8 animate-fade-in max-w-6xl">
@@ -116,6 +120,18 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                         <div className="text-4xl font-black text-foreground">{waiterCount}</div>
                         <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1 font-bold">
                             <TrendingUp size={12} className="text-emerald-500" /> Staff members
+                        </p>
+                    </CardContent>
+                </Card>
+                <Card className="glass-card shadow-none border-slate-200/60 overflow-hidden group">
+                    <CardHeader className="flex flex-row items-center justify-between pb-2">
+                        <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-widest">Reservations</CardTitle>
+                        <CalendarCheck size={18} className="text-pink-500" />
+                    </CardHeader>
+                    <CardContent>
+                        <div className="text-4xl font-black text-foreground">{pendingReservations}</div>
+                        <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1 font-bold">
+                            <TrendingUp size={12} className="text-pink-500" /> Pending requests
                         </p>
                     </CardContent>
                 </Card>
@@ -189,6 +205,24 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                                 </h3>
                                 <p className="text-slate-500 text-sm leading-relaxed">
                                     Create staff accounts with PINs and assign tables so waiters can manage their own orders.
+                                </p>
+                            </div>
+                        </div>
+                    </Card>
+                </Link>
+
+                <Link href={`/dashboard/restaurant/${tenantSlug}/reservations`}>
+                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-pink-500/50 hover:bg-pink-50/10 transition-all group p-6 h-full">
+                        <div className="flex gap-6 items-start">
+                            <div className="h-14 w-14 rounded-2xl bg-pink-100 flex items-center justify-center text-pink-600 shadow-sm transition-transform duration-500 group-hover:scale-110">
+                                <CalendarCheck size={28} />
+                            </div>
+                            <div className="flex-1">
+                                <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
+                                    Table Reservations <ChevronRight size={18} className="text-slate-300 group-hover:text-pink-500 transition-colors" />
+                                </h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">
+                                    Manage incoming booking requests from your customers. Approve or cancel reservations.
                                 </p>
                             </div>
                         </div>

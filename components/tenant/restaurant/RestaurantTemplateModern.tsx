@@ -14,6 +14,7 @@ import {
 import { translations, Language, CURRENCY } from '@/lib/translations'
 
 const QRScanner = dynamic(() => import('./QRScanner'), { ssr: false })
+const ReservationModal = dynamic(() => import('./ReservationModal'), { ssr: false })
 
 export default function RestaurantTemplateModern({ siteName, description, coverImage, logo, config, categories, isOwner, primaryColor }: RestaurantTemplateProps) {
     const defaultData = useRestaurantLogic(categories, isOwner)
@@ -25,6 +26,7 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
 
     const [lang, setLang] = useState<Language>('fr')
     const t = translations[lang].restaurant
+    const [showReservation, setShowReservation] = useState(false)
 
     const [currentItemIndex, setCurrentItemIndex] = useState(0)
     const currentItem = filteredItems[currentItemIndex] || null
@@ -46,22 +48,25 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
         setCurrentItemIndex(0)
     }, [activeCategory])
 
-    // Use CSS variable for the primary color
+    // Use CSS variable for the primary color and custom theme colors
     const containerStyle = {
-        '--primary': primaryColor || '#e11d48' // Default rose-600
+        '--primary': primaryColor || '#e11d48', // Default rose-600
+        '--bg-main': config?.backgroundColor || '#050505',
+        '--text-main': config?.textColor || '#ffffff',
+        '--card-bg': config?.cardColor || '#0a0a0a',
     } as React.CSSProperties
 
     return (
-        <div style={containerStyle} className="flex h-screen overflow-hidden bg-[#050505] text-white font-sans selection:bg-[var(--primary)] selection:text-white">
+        <div style={containerStyle} className="flex h-screen overflow-hidden bg-[var(--bg-main,#050505)] text-[var(--text-main,#ffffff)] font-sans selection:bg-[var(--primary)] selection:text-[var(--text-main,#ffffff)]">
             {/* Left Sidebar - Categories */}
-            <aside className="w-20 md:w-80 bg-[#0a0a0a] border-r border-white/5 flex flex-col shrink-0 relative z-30 shadow-[10px_0_50px_rgba(0,0,0,0.5)]">
+            <aside className="w-20 md:w-80 bg-[var(--card-bg,#0a0a0a)] border-r border-white/5 flex flex-col shrink-0 relative z-30 shadow-[10px_0_50px_rgba(0,0,0,0.5)]">
                 {/* Logo Section */}
                 <div className="p-6 md:p-10 border-b border-white/5">
                     <div className="flex items-center gap-5 group cursor-pointer">
                         {logo ? (
                             <img src={logo} alt={siteName} className="h-12 w-12 md:h-14 md:w-14 object-contain transition-transform group-hover:scale-110" />
                         ) : (
-                            <div className="h-12 w-12 md:h-14 md:w-14 bg-white text-black rounded-2xl flex items-center justify-center font-black text-2xl shadow-xl shadow-white/10">
+                            <div className="h-12 w-12 md:h-14 md:w-14 bg-[var(--card-bg,white)] text-[var(--text-main,#000)] rounded-2xl flex items-center justify-center font-black text-2xl shadow-xl shadow-white/10">
                                 {siteName[0]}
                             </div>
                         )}
@@ -82,8 +87,8 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
                             className={`w-full text-left px-4 md:px-6 py-5 rounded-2xl transition-all relative group overflow-hidden ${activeCategory === cat
-                                ? 'bg-white/5 text-white'
-                                : 'text-zinc-500 hover:text-white hover:bg-white/[0.02]'
+                                ? 'bg-[var(--card-bg,white)]/5 text-white'
+                                : 'text-zinc-500 hover:text-white hover:bg-[var(--card-bg,white)]/[0.02]'
                                 }`}
                         >
                             {activeCategory === cat && (
@@ -99,7 +104,7 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                 <div className="p-6 md:p-8 border-t border-white/5 space-y-4">
                     {isOwner && (
                         <Link href="/dashboard/restaurant" className="block">
-                            <Button variant="ghost" className="w-full justify-start gap-4 h-12 rounded-xl text-zinc-500 hover:text-white hover:bg-white/5 font-black text-[10px] uppercase tracking-widest">
+                            <Button variant="ghost" className="w-full justify-start gap-4 h-12 rounded-xl text-zinc-500 hover:text-white hover:bg-[var(--card-bg,white)]/5 font-black text-[10px] uppercase tracking-widest">
                                 <LayoutDashboard size={18} />
                                 <span className="hidden md:inline">Dashboard</span>
                             </Button>
@@ -107,7 +112,7 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                     )}
                     <button
                         onClick={() => setShowScanner(true)}
-                        className="w-full flex items-center justify-center md:justify-start gap-4 px-4 py-4 bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 rounded-2xl transition-all border border-white/5 active:scale-95"
+                        className="w-full flex items-center justify-center md:justify-start gap-4 px-4 py-4 bg-[var(--card-bg,white)]/5 text-zinc-400 hover:text-white hover:bg-[var(--card-bg,white)]/10 rounded-2xl transition-all border border-white/5 active:scale-95"
                     >
                         <QrCode size={18} strokeWidth={2.5} />
                         <span className="hidden md:inline text-[10px] font-black uppercase tracking-widest">Scan Table QR</span>
@@ -119,7 +124,7 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
             <main className="flex-1 flex flex-col relative overflow-hidden">
                 {/* Decorative Ambient Glows */}
                 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[var(--primary)]/10 rounded-full blur-[200px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
-                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-white/2 rounded-full blur-[150px] pointer-events-none translate-y-1/2 -translate-x-1/4" />
+                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[var(--card-bg,white)]/2 rounded-full blur-[150px] pointer-events-none translate-y-1/2 -translate-x-1/4" />
 
                 {/* Top Nav Overlay */}
                 <div className="absolute top-0 inset-x-0 h-32 px-10 flex items-center justify-between z-20 pointer-events-none">
@@ -131,29 +136,36 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                             {lang === 'fr' ? 'FR' : 'EN'}
                         </button>
                         {tableId && (
-                            <div className="h-10 px-6 rounded-full bg-white/5 border border-white/5 backdrop-blur-xl flex items-center gap-3">
+                            <div className="h-10 px-6 rounded-full bg-[var(--card-bg,white)]/5 border border-white/5 backdrop-blur-xl flex items-center gap-3">
                                 <span className="text-[10px] font-black uppercase tracking-widest text-emerald-500 animate-pulse">Table {tableId}</span>
                             </div>
                         )}
                     </div>
-
-                    <button
-                        onClick={() => setShowCart(true)}
-                        className="pointer-events-auto h-16 px-8 flex items-center gap-6 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-3xl hover:bg-white/10 transition-all shadow-2xl active:scale-95"
-                    >
-                        <div className="text-right">
-                            <p className="text-[9px] font-black uppercase tracking-widest text-zinc-500 mb-0.5">Order Total</p>
-                            <p className="text-xl font-black text-white leading-none">{totalPrice.toFixed(2)} <span className="text-[10px]">{CURRENCY}</span></p>
-                        </div>
-                        <div className="relative">
-                            <ShoppingCart size={22} strokeWidth={2.5} />
-                            {totalItems > 0 && (
-                                <div className="absolute -top-2.5 -right-2.5 bg-[var(--primary)] text-white text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center border-4 border-[#050505] shadow-lg">
-                                    {totalItems}
-                                </div>
-                            )}
-                        </div>
-                    </button>
+                    <div className="flex items-center gap-4">
+                        <button
+                            onClick={() => setShowReservation(true)}
+                            className="pointer-events-auto h-16 px-8 flex items-center gap-3 bg-[var(--primary)] text-white backdrop-blur-3xl border border-white/10 rounded-3xl hover:brightness-110 transition-all shadow-[0_0_40px_var(--primary)] shadow-rose-500/20 active:scale-95"
+                        >
+                            <span className="text-[10px] font-black uppercase tracking-widest">Reserve</span>
+                        </button>
+                        <button
+                            onClick={() => setShowCart(true)}
+                            className="pointer-events-auto h-16 px-8 flex items-center gap-6 bg-[var(--card-bg,white)]/5 backdrop-blur-3xl border border-white/10 rounded-3xl hover:bg-[var(--card-bg,white)]/10 transition-all shadow-2xl active:scale-95"
+                        >
+                            <div className="text-right">
+                                <p className="text-[9px] font-black uppercase tracking-widest text-zinc-500 mb-0.5">Order Total</p>
+                                <p className="text-xl font-black text-white leading-none">{totalPrice.toFixed(2)} <span className="text-[10px]">{CURRENCY}</span></p>
+                            </div>
+                            <div className="relative">
+                                <ShoppingCart size={22} strokeWidth={2.5} />
+                                {totalItems > 0 && (
+                                    <div className="absolute -top-2.5 -right-2.5 bg-[var(--primary)] text-white text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center border-4 border-[#050505] shadow-lg">
+                                        {totalItems}
+                                    </div>
+                                )}
+                            </div>
+                        </button>
+                    </div>
                 </div>
 
                 {/* Big Item Presentation */}
@@ -192,7 +204,7 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                                     </div>
                                     <Button
                                         onClick={() => addItem({ id: currentItem.id, name: currentItem.name, price: currentItem.price, image: currentItem.image })}
-                                        className="h-20 px-16 rounded-[40px] bg-white text-black hover:bg-zinc-200 transition-all font-black text-lg uppercase tracking-[0.3em] shadow-[0_20px_50px_rgba(255,255,255,0.1)] active:scale-95"
+                                        className="h-20 px-16 rounded-[40px] bg-[var(--card-bg,white)] text-[var(--text-main,#000)] hover:bg-zinc-200 transition-all font-black text-lg uppercase tracking-[0.3em] shadow-[0_20px_50px_rgba(255,255,255,0.1)] active:scale-95"
                                     >
                                         {t.add_to_order}
                                     </Button>
@@ -231,14 +243,14 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                         <button
                             onClick={prevItem}
                             disabled={currentItemIndex === 0}
-                            className="h-16 w-16 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/5 flex items-center justify-center text-white hover:bg-white/10 disabled:opacity-10 disabled:cursor-not-allowed transition-all active:scale-90"
+                            className="h-16 w-16 rounded-3xl bg-[var(--card-bg,white)]/5 backdrop-blur-xl border border-white/5 flex items-center justify-center text-white hover:bg-[var(--card-bg,white)]/10 disabled:opacity-10 disabled:cursor-not-allowed transition-all active:scale-90"
                         >
                             <ChevronLeft size={24} strokeWidth={2.5} />
                         </button>
                         <button
                             onClick={nextItem}
                             disabled={currentItemIndex === filteredItems.length - 1}
-                            className="h-16 w-16 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/5 flex items-center justify-center text-white hover:bg-white/10 disabled:opacity-10 disabled:cursor-not-allowed transition-all active:scale-90"
+                            className="h-16 w-16 rounded-3xl bg-[var(--card-bg,white)]/5 backdrop-blur-xl border border-white/5 flex items-center justify-center text-white hover:bg-[var(--card-bg,white)]/10 disabled:opacity-10 disabled:cursor-not-allowed transition-all active:scale-90"
                         >
                             <ChevronRight size={24} strokeWidth={2.5} />
                         </button>
@@ -251,7 +263,7 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                         <button
                             key={idx}
                             onClick={() => setCurrentItemIndex(idx)}
-                            className={`h-1.5 transition-all duration-500 rounded-full ${idx === currentItemIndex ? 'w-12 bg-white' : 'w-4 bg-white/10 hover:bg-white/20'
+                            className={`h-1.5 transition-all duration-500 rounded-full ${idx === currentItemIndex ? 'w-12 bg-[var(--card-bg,white)]' : 'w-4 bg-[var(--card-bg,white)]/10 hover:bg-[var(--card-bg,white)]/20'
                                 }`}
                         />
                     ))}
@@ -277,7 +289,7 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                                 </div>
                             ) : (
                                 items.map((item) => (
-                                    <div key={item.id} className="flex gap-4 items-center bg-white/5 rounded-xl p-4">
+                                    <div key={item.id} className="flex gap-4 items-center bg-[var(--card-bg,white)]/5 rounded-xl p-4">
                                         <img src={item.image || ''} className="h-16 w-16 rounded-lg object-cover" alt="" />
                                         <div className="flex-1">
                                             <h4 className="font-medium">{item.name}</h4>
@@ -336,6 +348,15 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
             )}
 
             {showScanner && <QRScanner onScan={handleScan} onClose={() => setShowScanner(false)} />}
+            {/* Reservation Modal */}
+            <ReservationModal
+                isOpen={showReservation}
+                onClose={() => setShowReservation(false)}
+                tenantId={categories[0]?.tenantId}
+                siteName={siteName}
+                primaryColor="var(--primary)"
+                config={config}
+            />
         </div>
     )
 }

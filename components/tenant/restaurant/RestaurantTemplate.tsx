@@ -4,6 +4,7 @@ import React, { Suspense } from 'react'
 import RestaurantTemplateClassic from './RestaurantTemplateClassic'
 import RestaurantTemplateModern from './RestaurantTemplateModern'
 import RestaurantTemplateMinimal from './RestaurantTemplateMinimal'
+import RestaurantTemplateMoroccan from './RestaurantTemplateMoroccan'
 
 export interface RestaurantTemplateProps {
     siteName: string
@@ -25,6 +26,8 @@ function RestaurantTemplateSwitcher(props: RestaurantTemplateProps) {
             return <RestaurantTemplateModern {...props} />
         case 'minimal':
             return <RestaurantTemplateMinimal {...props} />
+        case 'moroccan':
+            return <RestaurantTemplateMoroccan {...props} />
         case 'classic':
         default:
             return <RestaurantTemplateClassic {...props} />

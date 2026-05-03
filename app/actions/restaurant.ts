@@ -392,7 +392,7 @@ export async function updateRestaurantDesign(designTemplate: string, slug?: stri
     const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
-    if (!['classic', 'modern', 'minimal'].includes(designTemplate)) {
+    if (!['classic', 'modern', 'minimal', 'moroccan'].includes(designTemplate)) {
         return { error: 'Invalid design template' }
     }
 
@@ -420,6 +420,11 @@ export async function updateRestaurantConfig(data: {
     phone?: string;
     hours?: string;
     pageTitle?: string;
+    backgroundColor?: string;
+    textColor?: string;
+    cardColor?: string;
+    reservationOpenTime?: string;
+    reservationCloseTime?: string;
 }, slug?: string) {
     const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
@@ -434,6 +439,11 @@ export async function updateRestaurantConfig(data: {
             ...(data.phone !== undefined && { phone: data.phone }),
             ...(data.hours !== undefined && { hours: data.hours }),
             ...(data.pageTitle !== undefined && { pageTitle: data.pageTitle }),
+            ...(data.backgroundColor !== undefined && { backgroundColor: data.backgroundColor }),
+            ...(data.textColor !== undefined && { textColor: data.textColor }),
+            ...(data.cardColor !== undefined && { cardColor: data.cardColor }),
+            ...(data.reservationOpenTime !== undefined && { reservationOpenTime: data.reservationOpenTime }),
+            ...(data.reservationCloseTime !== undefined && { reservationCloseTime: data.reservationCloseTime }),
         }
 
         await prisma.tenantWebsite.update({

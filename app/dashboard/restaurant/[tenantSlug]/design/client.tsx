@@ -50,7 +50,12 @@ export default function DesignSelectionClient({ initialData }: Props) {
                 address: config.address,
                 phone: config.phone,
                 hours: config.hours,
-                pageTitle: config.pageTitle
+                pageTitle: config.pageTitle,
+                backgroundColor: config.backgroundColor,
+                textColor: config.textColor,
+                cardColor: config.cardColor,
+                reservationOpenTime: config.reservationOpenTime,
+                reservationCloseTime: config.reservationCloseTime
             })
 
             if (res.success) {
@@ -87,6 +92,13 @@ export default function DesignSelectionClient({ initialData }: Props) {
             description: 'Focus on your food with typography-first design. Great for upscale modern spots.',
             features: ['Monochrome', 'Big Imagery', 'Elegant Spacing'],
             color: 'bg-stone-50 border-stone-200'
+        },
+        {
+            id: 'moroccan',
+            name: 'Riad Marocain',
+            description: 'A rich traditional Moroccan aesthetic with zellige patterns, terracotta and gold accents.',
+            features: ['Terracotta & Gold', 'Geometric Patterns', 'Arch-Styled Cards'],
+            color: 'bg-amber-50 border-amber-300 text-amber-900'
         }
     ]
 
@@ -120,7 +132,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
             </div>
 
             {activeTab === 'themes' ? (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
                     {designs.map((design) => (
                         <div
                             key={design.id}
@@ -244,6 +256,68 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 <p className="text-xs text-muted-foreground">Used for buttons, links, and important accents.</p>
                             </div>
 
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">Background Color</label>
+                                    <div className="flex items-center gap-3">
+                                        <input
+                                            type="color"
+                                            value={config.backgroundColor || '#ffffff'}
+                                            onChange={(e) => setConfig({ ...config, backgroundColor: e.target.value })}
+                                            className="h-10 w-10 p-1 rounded-lg cursor-pointer"
+                                        />
+                                        <input
+                                            type="text"
+                                            value={config.backgroundColor || ''}
+                                            onChange={(e) => setConfig({ ...config, backgroundColor: e.target.value })}
+                                            className="flex-1 p-2 rounded-xl border bg-background font-mono text-sm uppercase"
+                                            placeholder="#FFFFFF"
+                                            maxLength={7}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">Text Color</label>
+                                    <div className="flex items-center gap-3">
+                                        <input
+                                            type="color"
+                                            value={config.textColor || '#0f172a'}
+                                            onChange={(e) => setConfig({ ...config, textColor: e.target.value })}
+                                            className="h-10 w-10 p-1 rounded-lg cursor-pointer"
+                                        />
+                                        <input
+                                            type="text"
+                                            value={config.textColor || ''}
+                                            onChange={(e) => setConfig({ ...config, textColor: e.target.value })}
+                                            className="flex-1 p-2 rounded-xl border bg-background font-mono text-sm uppercase"
+                                            placeholder="#0F172A"
+                                            maxLength={7}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium">Card / Secondary Color</label>
+                                <div className="flex items-center gap-3">
+                                    <input
+                                        type="color"
+                                        value={config.cardColor || '#f8fafc'}
+                                        onChange={(e) => setConfig({ ...config, cardColor: e.target.value })}
+                                        className="h-10 w-10 p-1 rounded-lg cursor-pointer"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={config.cardColor || ''}
+                                        onChange={(e) => setConfig({ ...config, cardColor: e.target.value })}
+                                        className="flex-1 p-2 rounded-xl border bg-background font-mono text-sm uppercase"
+                                        placeholder="#F8FAFC"
+                                        maxLength={7}
+                                    />
+                                </div>
+                                <p className="text-xs text-muted-foreground">Background for cards, headers, or contrast sections.</p>
+                            </div>
+
                             <div className="space-y-2">
                                 <label className="text-sm font-medium">Logo URL</label>
                                 <input
@@ -303,13 +377,36 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <label className="text-sm font-medium">Opening Hours</label>
+                                <label className="text-sm font-medium">Opening Hours (Text for footer)</label>
                                 <textarea
                                     value={config.hours || ''}
                                     onChange={(e) => setConfig({ ...config, hours: e.target.value })}
                                     placeholder="Mon-Fri: 9am - 10pm"
                                     className="w-full p-3 rounded-xl border bg-background min-h-[80px]"
                                 />
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-6 mt-2">
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-[var(--primary)] flex items-center gap-2">Reservation Open Time</label>
+                                    <input
+                                        type="time"
+                                        value={config.reservationOpenTime || '08:00'}
+                                        onChange={(e) => setConfig({ ...config, reservationOpenTime: e.target.value })}
+                                        className="w-full p-3 rounded-xl border bg-background text-sm"
+                                    />
+                                    <p className="text-xs text-muted-foreground">The earliest time customers can book.</p>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-[var(--primary)] flex items-center gap-2">Reservation Close Time</label>
+                                    <input
+                                        type="time"
+                                        value={config.reservationCloseTime || '23:30'}
+                                        onChange={(e) => setConfig({ ...config, reservationCloseTime: e.target.value })}
+                                        className="w-full p-3 rounded-xl border bg-background text-sm"
+                                    />
+                                    <p className="text-xs text-muted-foreground">The latest time customers can book.</p>
+                                </div>
                             </div>
                         </CardContent>
                     </Card>

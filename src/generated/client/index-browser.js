@@ -264,6 +264,20 @@ exports.Prisma.RestaurantReportScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.RestaurantReservationScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  date: 'date',
+  time: 'time',
+  partySize: 'partySize',
+  notes: 'notes',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.CabinetServiceScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
@@ -475,6 +489,7 @@ exports.Prisma.ModelName = {
   RestaurantOrder: 'RestaurantOrder',
   RestaurantOrderItem: 'RestaurantOrderItem',
   RestaurantReport: 'RestaurantReport',
+  RestaurantReservation: 'RestaurantReservation',
   CabinetService: 'CabinetService',
   CabinetClient: 'CabinetClient',
   CabinetAppointment: 'CabinetAppointment',

@@ -14,6 +14,7 @@ import {
 import { translations, Language, CURRENCY } from '@/lib/translations'
 
 const QRScanner = dynamic(() => import('./QRScanner'), { ssr: false })
+const ReservationModal = dynamic(() => import('./ReservationModal'), { ssr: false })
 
 export default function RestaurantTemplateClassic({ siteName, description, coverImage, logo, config, categories, isOwner, primaryColor }: RestaurantTemplateProps) {
     const defaultData = useRestaurantLogic(categories, isOwner)
@@ -25,14 +26,18 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
 
     const [lang, setLang] = useState<Language>('fr')
     const t = translations[lang as Language].restaurant
+    const [showReservation, setShowReservation] = useState(false)
 
-    // Use CSS variable for the primary color
+    // Use CSS variable for the primary color and custom theme colors
     const containerStyle = {
-        '--primary': primaryColor || '#2563eb'
+        '--primary': primaryColor || '#2563eb',
+        '--bg-main': config?.backgroundColor || '#ffffff',
+        '--text-main': config?.textColor || '#0f172a',
+        '--card-bg': config?.cardColor || '#ffffff',
     } as React.CSSProperties
 
     return (
-        <div style={containerStyle} className="flex flex-col min-h-screen bg-white font-sans text-slate-900 selection:bg-[var(--primary)] selection:text-white">
+        <div style={containerStyle} className="flex flex-col min-h-screen bg-[var(--bg-main,#ffffff)] font-sans text-[var(--text-main,#0f172a)] selection:bg-[var(--primary)] selection:text-[var(--card-bg,white)]">
             {/* Call Waiter Button */}
             {tableId && !isOwner && (
                 <Button onClick={handleCallWaiter} className="fixed bottom-10 left-10 h-16 w-16 rounded-full shadow-2xl bg-[var(--primary)] hover:brightness-110 text-white z-50 flex items-center justify-center animate-bounce-slow active:scale-95 transition-all border-4 border-white">
@@ -41,7 +46,7 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
             )}
 
             {/* Header - Elegant Classic */}
-            <header className="sticky top-0 z-40 w-full border-b border-slate-100 bg-white/80 backdrop-blur-2xl">
+            <header className="sticky top-0 z-40 w-full border-b border-slate-100 bg-[var(--card-bg,white)]/80 backdrop-blur-2xl">
                 <div className="container mx-auto flex h-24 items-center justify-between px-6 lg:px-12">
                     <div className="flex items-center gap-5">
                         {logo ? (
@@ -75,6 +80,12 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                             <QrCode size={20} />
                         </button>
                         <button
+                            onClick={() => setShowReservation(true)}
+                            className="h-12 px-6 rounded-2xl bg-[var(--primary)] text-white shadow-xl hover:brightness-110 transition-all active:scale-95 flex items-center gap-2"
+                        >
+                            <span className="text-[10px] font-black uppercase tracking-widest">Reserve</span>
+                        </button>
+                        <button
                             onClick={() => setShowCart(true)}
                             className="group relative h-12 px-6 rounded-2xl bg-slate-950 text-white shadow-2xl hover:bg-slate-800 transition-all active:scale-95 flex items-center gap-3"
                         >
@@ -101,9 +112,9 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                     <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
                     <div className="container relative z-10 px-6 max-w-5xl animate-in fade-in zoom-in-95 duration-1000">
                         <div className="inline-flex items-center gap-4 mb-10">
-                            <div className="h-px w-12 bg-white/20" />
+                            <div className="h-px w-12 bg-[var(--card-bg,white)]/20" />
                             <span className="text-[11px] font-black uppercase tracking-[0.6em] text-white/50">Culinary Heritage</span>
-                            <div className="h-px w-12 bg-white/20" />
+                            <div className="h-px w-12 bg-[var(--card-bg,white)]/20" />
                         </div>
                         <h1 className="text-6xl md:text-9xl font-serif font-black text-white mb-10 leading-[0.85] tracking-tighter">
                             {config.heroTitle || "Delicious moments, served fresh."}
@@ -114,13 +125,13 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                     </div>
                     {/* Decorative Scroll indicator */}
                     <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-30 animate-pulse">
-                        <div className="h-10 w-[1px] bg-white" />
+                        <div className="h-10 w-[1px] bg-[var(--card-bg,white)]" />
                         <span className="text-[8px] font-black uppercase tracking-[0.5em] text-white">Scroll</span>
                     </div>
                 </section>
 
                 {/* Categories - Sticky & Refined */}
-                <div className="sticky top-24 z-30 bg-white/95 backdrop-blur-md border-b border-slate-100 py-6 overflow-x-auto no-scrollbar shadow-sm">
+                <div className="sticky top-24 z-30 bg-[var(--card-bg,white)]/95 backdrop-blur-md border-b border-slate-100 py-6 overflow-x-auto no-scrollbar shadow-sm">
                     <div className="container mx-auto px-6 lg:px-12 flex gap-4 min-w-max">
                         {categoryNames.map((cat) => (
                             <button
@@ -128,7 +139,7 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                 onClick={() => setActiveCategory(cat)}
                                 className={`px-8 py-4 rounded-full font-serif font-black text-xs uppercase tracking-[0.2em] transition-all duration-300 border ${activeCategory === cat
                                     ? 'bg-slate-950 text-white border-slate-950 shadow-2xl translate-y-[-2px]'
-                                    : 'bg-white text-slate-400 border-slate-100 hover:text-slate-950 hover:bg-slate-50'}`}
+                                    : 'bg-[var(--card-bg,white)] text-slate-400 border-slate-100 hover:text-slate-950 hover:bg-slate-50'}`}
                             >
                                 {cat}
                             </button>
@@ -140,14 +151,14 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                 <section className="py-24 container mx-auto px-6 lg:px-12">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
                         {filteredItems.length > 0 ? filteredItems.map((item: any) => (
-                            <div key={item.id} className="group bg-white rounded-[40px] border border-transparent hover:border-slate-100 overflow-hidden hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 flex flex-col">
+                            <div key={item.id} className="group bg-[var(--card-bg,white)] rounded-[40px] border border-transparent hover:border-slate-100 overflow-hidden hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 flex flex-col">
                                 <div className="relative aspect-square overflow-hidden bg-slate-50">
                                     <img
                                         src={item.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=1000'}
                                         className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
                                         alt={item.name}
                                     />
-                                    <div className="absolute top-6 right-6 px-5 py-2.5 bg-white/90 backdrop-blur-xl rounded-2xl font-serif font-black text-slate-950 shadow-2xl border border-white/50 text-xl tracking-tight">
+                                    <div className="absolute top-6 right-6 px-5 py-2.5 bg-[var(--card-bg,white)]/90 backdrop-blur-xl rounded-2xl font-serif font-black text-slate-950 shadow-2xl border border-white/50 text-xl tracking-tight">
                                         {item.price} <span className="text-xs">{CURRENCY}</span>
                                     </div>
                                 </div>
@@ -182,7 +193,7 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
             {/* Cart Drawer - Premium Sidebar */}
             {showCart && (
                 <div className="fixed inset-0 z-[60] bg-slate-950/60 backdrop-blur-sm animate-in fade-in duration-500">
-                    <div className="absolute right-0 top-0 bottom-0 w-full max-w-lg bg-white shadow-3xl animate-in slide-in-from-right duration-700 outline-none flex flex-col">
+                    <div className="absolute right-0 top-0 bottom-0 w-full max-w-lg bg-[var(--card-bg,white)] shadow-3xl animate-in slide-in-from-right duration-700 outline-none flex flex-col">
                         <div className="p-12 border-b flex items-center justify-between">
                             <div className="space-y-1">
                                 <h2 className="text-3xl font-serif font-black tracking-tight text-slate-950">Your Selection</h2>
@@ -248,7 +259,7 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                             </div>
                         )}
                         {orderComplete && (
-                            <div className="absolute inset-0 bg-white z-[70] flex flex-col items-center justify-center p-12 text-center animate-in fade-in duration-700">
+                            <div className="absolute inset-0 bg-[var(--card-bg,white)] z-[70] flex flex-col items-center justify-center p-12 text-center animate-in fade-in duration-700">
                                 <div className="h-24 w-24 bg-emerald-50 rounded-full flex items-center justify-center mb-10">
                                     <CheckCircle2 size={40} className="text-emerald-500 animate-bounce" />
                                 </div>
@@ -273,9 +284,9 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                 "Commitment to culinary excellence and the preservation of traditional gastronomic arts."
                             </p>
                             <div className="flex justify-center gap-6 pt-4">
-                                <div className="h-10 w-10 rounded-full border border-white/5 flex items-center justify-center hover:bg-white/5 transition-colors cursor-pointer"><Mail size={14} /></div>
-                                <div className="h-10 w-10 rounded-full border border-white/5 flex items-center justify-center hover:bg-white/5 transition-colors cursor-pointer"><Phone size={14} /></div>
-                                <div className="h-10 w-10 rounded-full border border-white/5 flex items-center justify-center hover:bg-white/5 transition-colors cursor-pointer"><MapPin size={14} /></div>
+                                <div className="h-10 w-10 rounded-full border border-white/5 flex items-center justify-center hover:bg-[var(--card-bg,white)]/5 transition-colors cursor-pointer"><Mail size={14} /></div>
+                                <div className="h-10 w-10 rounded-full border border-white/5 flex items-center justify-center hover:bg-[var(--card-bg,white)]/5 transition-colors cursor-pointer"><Phone size={14} /></div>
+                                <div className="h-10 w-10 rounded-full border border-white/5 flex items-center justify-center hover:bg-[var(--card-bg,white)]/5 transition-colors cursor-pointer"><MapPin size={14} /></div>
                             </div>
                         </div>
                         <div className="space-y-8">
@@ -303,6 +314,16 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                     </div>
                 </div>
             </footer>
+
+            {/* Reservation Modal */}
+            <ReservationModal
+                isOpen={showReservation}
+                onClose={() => setShowReservation(false)}
+                tenantId={categories[0]?.tenantId}
+                siteName={siteName}
+                primaryColor="var(--primary)"
+                config={config}
+            />
         </div>
     )
 }
