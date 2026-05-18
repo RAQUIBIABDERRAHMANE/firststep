@@ -176,7 +176,7 @@ export default function HeroSection() {
                     <div className="hero-fade-up delay-100 inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-cyan-700/40 bg-cyan-950/35 backdrop-blur-sm mb-10">
                         <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                         <span className="font-figtree text-[11px] font-semibold text-cyan-300 uppercase tracking-[0.22em]">
-                            Plateforme SaaS B2B · Maroc
+                            Business Os
                         </span>
                     </div>
 
