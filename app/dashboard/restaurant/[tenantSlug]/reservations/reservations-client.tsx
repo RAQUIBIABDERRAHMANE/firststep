@@ -424,7 +424,7 @@ export default function ReservationsClient({
                                 className="flex gap-2 overflow-x-auto pb-1"
                                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                             >
-                                {dateStripco.comp((date) => {
+                                {dateStrip.map((date) => {
                                     const isSelected = date.toDateString() === selectedDate.toDateString()
                                     const isToday = date.toDateString() === new Date().toDateString()
                                     const count = reservations.filter(r => {
