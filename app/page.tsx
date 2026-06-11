@@ -76,6 +76,7 @@ export default async function Home() {
               <h4 className="font-syne text-[11px] font-bold text-slate-400 uppercase tracking-widest">L&eacute;gal</h4>
               <ul className="space-y-3">
                 {[
+                  { href: '/about', label: 'À propos' },
                   { href: '/login', label: 'Connexion' },
                   { href: '#', label: 'Confidentialité' },
                   { href: '/terms', label: 'CGU' },

@@ -17,9 +17,10 @@ export default function Navbar({ user }: { user?: any }) {
     }, [])
 
     const navLinks = [
-        { href: '#services', label: 'Solutions' },
-        { href: '#how-it-works', label: 'Comment ça marche' },
-        { href: '#signup', label: 'Tarifs' },
+        { href: '/#services', label: 'Solutions' },
+        { href: '/#how-it-works', label: 'Comment ça marche' },
+        { href: '/#signup', label: 'Tarifs' },
+        { href: '/about', label: 'À propos' },
     ]
 
     return (
