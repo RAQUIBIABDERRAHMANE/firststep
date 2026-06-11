@@ -16,7 +16,7 @@ export default async function RestaurantLayout({
     const tenant = await getWebsiteBySlug(tenantSlug)
 
     return (
-        <div className="-mt-6 -mx-4 sm:-mx-6 lg:-mx-8 flex flex-col min-h-full">
+        <div className="-mt-6 -mx-4 sm:-mx-6 lg:-mx-8 flex flex-col min-h-full min-w-0">
             {/* Tab bar — sits flush, outside the content padding */}
             <RestaurantSubNav
                 tenantSlug={tenantSlug}

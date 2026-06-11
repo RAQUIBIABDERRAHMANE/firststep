@@ -90,7 +90,7 @@ export default async function DashboardLayout({
             </aside>
 
             {/* ── Right column: mobile header + content ── */}
-            <div className="flex flex-col flex-1 lg:pl-[272px] min-h-screen">
+            <div className="flex flex-col flex-1 lg:pl-[272px] min-h-screen min-w-0">
 
                 {/* Mobile header (injected as a client component) */}
                 <DashboardHeader
@@ -101,7 +101,7 @@ export default async function DashboardLayout({
                 />
 
                 {/* Page content */}
-                <main className="flex-1 overflow-y-auto">
+                <main className="flex-1 overflow-y-auto min-w-0">
                     <div className="flex flex-col gap-6 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full">
                         {children}
                     </div>

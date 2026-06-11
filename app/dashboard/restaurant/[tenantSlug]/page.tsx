@@ -74,7 +74,7 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
             </div>
 
             {/* Stats Overview */}
-            <div className="grid gap-6 md:grid-cols-4">
+            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                 <Card className="glass-card shadow-none border-slate-200/60 overflow-hidden group">
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-widest">Active Tables</CardTitle>
@@ -229,6 +229,24 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                     </Card>
                 </Link>
 
+                <Link href={`/dashboard/restaurant/${tenantSlug}/reports`}>
+                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-violet-500/50 hover:bg-violet-50/10 transition-all group p-6 h-full">
+                        <div className="flex gap-6 items-start">
+                            <div className="h-14 w-14 rounded-2xl bg-violet-100 flex items-center justify-center text-violet-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
+                                <BarChart3 size={28} />
+                            </div>
+                            <div className="flex-1">
+                                <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
+                                    Rapports Mensuels <ChevronRight size={18} className="text-slate-300 group-hover:text-violet-500 transition-colors" />
+                                </h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">
+                                    Rapports PDF envoyés par email le 1er de chaque mois.
+                                </p>
+                            </div>
+                        </div>
+                    </Card>
+                </Link>
+
                 <Link href={`/dashboard/restaurant/${tenantSlug}/orders`} className="md:col-span-2">
                     <Card className="glass-card shadow-none border-slate-200/60 hover:border-emerald-500/50 hover:bg-emerald-50/10 transition-all group p-8">
                         <div className="flex flex-col md:flex-row gap-8 items-center">
@@ -250,38 +268,23 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                     </Card>
                 </Link>
 
-                <Link href={`/dashboard/restaurant/${tenantSlug}/reports`} className="md:col-span-1">
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-violet-500/50 hover:bg-violet-50/10 transition-all group p-6">
-                        <div className="flex flex-col md:flex-row gap-6 items-center">
-                            <div className="h-16 w-16 rounded-2xl bg-violet-100 flex items-center justify-center text-violet-600 shadow-sm shrink-0 transition-transform duration-500 group-hover:scale-110">
-                                <BarChart3 size={32} />
+                <Link href={`/dashboard/restaurant/${tenantSlug}/analytics`} className="md:col-span-2">
+                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-cyan-500/50 hover:bg-cyan-50/10 transition-all group p-8">
+                        <div className="flex flex-col md:flex-row gap-8 items-center">
+                            <div className="h-20 w-20 rounded-3xl bg-cyan-100 flex items-center justify-center text-cyan-600 shadow-sm shrink-0 transition-transform duration-500 group-hover:scale-110">
+                                <TrendingUp size={40} />
                             </div>
                             <div className="flex-1 text-center md:text-left">
-                                <h3 className="text-xl font-black mb-2 flex items-center justify-center md:justify-start gap-2">
-                                    Rapports Mensuels <ChevronRight size={18} className="text-slate-300 group-hover:text-violet-500 transition-colors" />
+                                <h3 className="text-2xl font-black mb-3 flex items-center justify-center md:justify-start gap-3">
+                                    Analytique Live <ChevronRight size={24} className="text-slate-300 group-hover:text-cyan-500 transition-colors" />
                                 </h3>
-                                <p className="text-slate-500 text-sm">
-                                    Rapports PDF envoyés par email le 1er de chaque mois.
-                                </p>
-                            </div>
-                        </div>
-                    </Card>
-                </Link>
-
-                <Link href={`/dashboard/restaurant/${tenantSlug}/analytics`} className="md:col-span-1">
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-cyan-500/50 hover:bg-cyan-50/10 transition-all group p-6">
-                        <div className="flex flex-col md:flex-row gap-6 items-center">
-                            <div className="h-16 w-16 rounded-2xl bg-cyan-100 flex items-center justify-center text-cyan-600 shadow-sm shrink-0 transition-transform duration-500 group-hover:scale-110">
-                                <TrendingUp size={32} />
-                            </div>
-                            <div className="flex-1 text-center md:text-left">
-                                <h3 className="text-xl font-black mb-2 flex items-center justify-center md:justify-start gap-2">
-                                    Analytique Live <ChevronRight size={18} className="text-slate-300 group-hover:text-cyan-500 transition-colors" />
-                                </h3>
-                                <p className="text-slate-500 text-sm">
+                                <p className="text-slate-500 text-lg">
                                     Explorez vos revenus, ventes par tranche avec filtre jour, mois, année.
                                 </p>
                             </div>
+                            <Button size="lg" className="bg-cyan-600 hover:bg-cyan-700 h-16 px-10 rounded-2xl text-xl font-black shadow-xl shadow-cyan-500/20 active:scale-95">
+                                Voir Rapports
+                            </Button>
                         </div>
                     </Card>
                 </Link>
