@@ -64,9 +64,9 @@ const TIMESLOTS = [
 ]
 
 const STATUS_META = {
-    PENDING:   { label: 'Pending',   ringCls: 'ring-amber-400/30',   dotCls: 'bg-amber-400',   textCls: 'text-amber-600',   bgCls: 'bg-amber-50',   borderCls: 'border-amber-200' },
+    PENDING: { label: 'Pending', ringCls: 'ring-amber-400/30', dotCls: 'bg-amber-400', textCls: 'text-amber-600', bgCls: 'bg-amber-50', borderCls: 'border-amber-200' },
     CONFIRMED: { label: 'Confirmed', ringCls: 'ring-emerald-400/30', dotCls: 'bg-emerald-500', textCls: 'text-emerald-700', bgCls: 'bg-emerald-50', borderCls: 'border-emerald-200' },
-    CANCELLED: { label: 'Cancelled', ringCls: 'ring-rose-400/30',   dotCls: 'bg-rose-400',    textCls: 'text-rose-600',   bgCls: 'bg-rose-50',   borderCls: 'border-rose-200' },
+    CANCELLED: { label: 'Cancelled', ringCls: 'ring-rose-400/30', dotCls: 'bg-rose-400', textCls: 'text-rose-600', bgCls: 'bg-rose-50', borderCls: 'border-rose-200' },
 } as const
 
 function StatusBadge({ status }: { status: string }) {
@@ -90,9 +90,9 @@ export default function ReservationsClient({
     initialTables: Table[]
 }) {
     const [reservations, setReservations] = useState<Reservation[]>(initialReservations)
-    const [searchTerm, setSearchTerm]     = useState('')
-    const [loading, setLoading]           = useState<string | null>(null)
-    const [activeTab, setActiveTab]       = useState<'list' | 'calendar'>('list')
+    const [searchTerm, setSearchTerm] = useState('')
+    const [loading, setLoading] = useState<string | null>(null)
+    const [activeTab, setActiveTab] = useState<'list' | 'calendar'>('list')
     const [selectedResId, setSelectedResId] = useState<string | null>(null)
     const dateStripRef = useRef<HTMLDivElement>(null)
 
@@ -201,7 +201,7 @@ export default function ReservationsClient({
         })
     }, [selectedRes, reservations, initialTables])
 
-    const pendingCount   = reservations.filter(r => r.status === 'PENDING').length
+    const pendingCount = reservations.filter(r => r.status === 'PENDING').length
     const confirmedCount = reservations.filter(r => r.status === 'CONFIRMED').length
 
     /* ── Render ── */
@@ -302,7 +302,7 @@ export default function ReservationsClient({
                                         <div className={cn(
                                             'absolute left-0 top-0 bottom-0 w-[3px]',
                                             res.status === 'CONFIRMED' ? 'bg-emerald-400' :
-                                            res.status === 'CANCELLED' ? 'bg-rose-400' : 'bg-amber-400'
+                                                res.status === 'CANCELLED' ? 'bg-rose-400' : 'bg-amber-400'
                                         )} />
 
                                         <div className="pl-5 pr-5 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
@@ -424,10 +424,10 @@ export default function ReservationsClient({
                                 className="flex gap-2 overflow-x-auto pb-1"
                                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                             >
-                                {dateStrip.map((date) => {
+                                {dateStripco.comp((date) => {
                                     const isSelected = date.toDateString() === selectedDate.toDateString()
-                                    const isToday    = date.toDateString() === new Date().toDateString()
-                                    const count      = reservations.filter(r => {
+                                    const isToday = date.toDateString() === new Date().toDateString()
+                                    const count = reservations.filter(r => {
                                         const rd = new Date(r.date); rd.setHours(0, 0, 0, 0)
                                         return rd.toDateString() === date.toDateString()
                                     }).length
@@ -517,7 +517,7 @@ export default function ReservationsClient({
                                                     {slotRes.length === 0 ? (
                                                         <span className="text-xs text-slate-200 italic self-center">No bookings</span>
                                                     ) : slotRes.map(res => {
-                                                        const isSelected    = selectedResId === res.id
+                                                        const isSelected = selectedResId === res.id
                                                         const assignedTable = initialTables.find(t => t.id === res.tableId)
                                                         return (
                                                             <button
@@ -546,8 +546,8 @@ export default function ReservationsClient({
                                                                 <span className={cn(
                                                                     'w-1.5 h-1.5 rounded-full shrink-0',
                                                                     res.status === 'CONFIRMED' ? (isSelected ? 'bg-emerald-300' : 'bg-emerald-400') :
-                                                                    res.status === 'CANCELLED' ? (isSelected ? 'bg-rose-200' : 'bg-rose-400') :
-                                                                    'bg-amber-400 animate-pulse'
+                                                                        res.status === 'CANCELLED' ? (isSelected ? 'bg-rose-200' : 'bg-rose-400') :
+                                                                            'bg-amber-400 animate-pulse'
                                                                 )} />
                                                             </button>
                                                         )
@@ -584,7 +584,7 @@ export default function ReservationsClient({
                                     <div className="grid grid-cols-2 gap-2">
                                         {[
                                             { icon: <Users size={13} />, label: 'Party', value: `${selectedRes.partySize} guests` },
-                                            { icon: <Clock size={13} />, label: 'Time',  value: selectedRes.time },
+                                            { icon: <Clock size={13} />, label: 'Time', value: selectedRes.time },
                                             { icon: <CalendarDays size={13} />, label: 'Date', value: new Date(selectedRes.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) },
                                             { icon: <Phone size={13} />, label: 'Phone', value: selectedRes.phone },
                                         ].map(item => (

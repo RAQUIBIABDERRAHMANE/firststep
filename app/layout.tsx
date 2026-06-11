@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "FirstStep — Plateforme SaaS B2B pour le Maroc",
     description: "Centralisez la gestion de votre entreprise avec FirstStep.",
-    url: "https://firststep.ma",
+    url: "https://firststepco.com",
     siteName: "FirstStep",
     images: [
       {

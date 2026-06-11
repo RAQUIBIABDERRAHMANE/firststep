@@ -21,4 +21,4 @@ Disallow: /
 # Content signals
 Content-Signal: ai-train=no, search=yes, ai-input=no
 
-Sitemap: https://firststep.ma/sitemap.xml
+Sitemap: https://firststepco.com/sitemap.xml

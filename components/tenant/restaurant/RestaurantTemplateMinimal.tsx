@@ -231,7 +231,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                                 let tagsList: string[] = []
                                                 try {
                                                     tagsList = typeof item.tags === 'string' ? JSON.parse(item.tags || '[]') : (item.tags || [])
-                                                } catch {}
+                                                } catch { }
                                                 if (tagsList.length === 0) return null
                                                 return (
                                                     <div className="flex flex-wrap gap-1.5 justify-start mb-4">
@@ -293,7 +293,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                             <div className="space-y-4 text-[var(--text-main,#0f172a)] font-medium leading-relaxed">
                                 <p className="hover:text-[var(--primary)] transition-all cursor-pointer">{config.address}</p>
                                 <p className="hover:text-[var(--primary)] transition-all cursor-pointer font-black text-xl">{config.phone || "0522XXXXXX"}</p>
-                                <p className="hover:text-[var(--primary)] transition-all cursor-pointer text-slate-400">{config.email || "hello@firststep.ma"}</p>
+                                <p className="hover:text-[var(--primary)] transition-all cursor-pointer text-slate-400">{config.email || "hello@firststepco.com"}</p>
                             </div>
                         </div>
                     </div>

@@ -80,7 +80,7 @@ export default async function Home() {
                   { href: '/login', label: 'Connexion' },
                   { href: '#', label: 'Confidentialité' },
                   { href: '/terms', label: 'CGU' },
-                  { href: 'mailto:contact@firststep.ma', label: 'Contact' },
+                  { href: 'mailto:contact@firststepco.com', label: 'Contact' },
                 ].map((l) => (
                   <li key={l.href}>
                     <Link href={l.href} className="font-figtree text-[13px] text-slate-500 hover:text-cyan-400 transition-colors duration-200">

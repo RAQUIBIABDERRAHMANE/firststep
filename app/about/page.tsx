@@ -38,7 +38,7 @@ export default async function AboutPage() {
 
       {/* Main Content & Core Pillars */}
       <section className="relative max-w-7xl mx-auto w-full px-6 pb-24 grid grid-cols-1 lg:grid-cols-3 gap-10">
-        
+
         {/* Platform Overview */}
         <div className="lg:col-span-3 bg-white/[0.02] border border-white/5 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] relative overflow-hidden group hover:border-cyan-500/20 transition-all duration-500">
           <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-cyan-500/5 blur-3xl pointer-events-none" />
@@ -131,7 +131,7 @@ export default async function AboutPage() {
 
         <div className="bg-gradient-to-br from-indigo-950/20 to-cyan-950/20 border border-white/5 p-8 md:p-16 rounded-[3rem] relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 blur-3xl pointer-events-none" />
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center relative z-10">
             {/* Avatar representation */}
             <div className="flex justify-center">
@@ -149,7 +149,7 @@ export default async function AboutPage() {
                 <h2 className="font-syne text-3xl md:text-4xl font-bold text-white tracking-tight">Abderrahmane Raquibi</h2>
                 <p className="text-cyan-400 font-medium font-figtree text-sm">Full-Stack Software Engineer & Founder</p>
               </div>
-              
+
               <p className="font-figtree text-slate-400 leading-relaxed text-base">
                 FirstStep was founded by Abderrahmane Raquibi, a full-stack software engineer specializing in scalable web architectures and SaaS product development. With a strong focus on system design and operational efficiency, he aims to build robust digital ecosystems that transform traditional business workflows into streamlined, technology-driven processes.
               </p>
@@ -225,7 +225,7 @@ export default async function AboutPage() {
                   { href: '/login', label: 'Connexion' },
                   { href: '#', label: 'Confidentialité' },
                   { href: '/terms', label: 'CGU' },
-                  { href: 'mailto:contact@firststep.ma', label: 'Contact' },
+                  { href: 'mailto:contact@firststepco.com', label: 'Contact' },
                 ].map((l) => (
                   <li key={l.href}>
                     <Link href={l.href} className="font-figtree text-[13px] text-slate-500 hover:text-cyan-400 transition-colors duration-200">

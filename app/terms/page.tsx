@@ -76,7 +76,7 @@ export default function TermsPage() {
                                 "Ne pas tenter de pirater, decompiler ou alterer la Plateforme ou ses donnees.",
                                 "Ne pas diffuser de contenu illegal, offensant ou trompeur.",
                                 "Ne pas partager ses identifiants avec des tiers non autorises.",
-                                "Signaler toute faille de securite a contact@firststep.ma.",
+                                "Signaler toute faille de securite a contact@firststepco.com.",
                             ].map((item, i) => (
                                 <li key={i} className="flex items-start gap-3">
                                     <span className="mt-1 h-1.5 w-1.5 rounded-full bg-blue-400 shrink-0" />
@@ -101,7 +101,7 @@ export default function TermsPage() {
                             </p>
                             <p>
                                 Les donnees ne sont jamais vendues a des tiers. Pour toute demande :{' '}
-                                <a href="mailto:contact@firststep.ma" className="text-blue-400 hover:underline">contact@firststep.ma</a>.
+                                <a href="mailto:contact@firststepco.com" className="text-blue-400 hover:underline">contact@firststepco.com</a>.
                             </p>
                         </div>
                     </Section>
@@ -137,7 +137,7 @@ export default function TermsPage() {
                     <Section num="12" title="Contact">
                         <p className="text-slate-400">
                             Pour toute question :{' '}
-                            <a href="mailto:contact@firststep.ma" className="text-blue-400 hover:underline">contact@firststep.ma</a>
+                            <a href="mailto:contact@firststepco.com" className="text-blue-400 hover:underline">contact@firststepco.com</a>
                         </p>
                     </Section>
 

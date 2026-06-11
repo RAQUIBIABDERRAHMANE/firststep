@@ -95,15 +95,15 @@ export default function PrintRequestsClient({ initialRequests }: { initialReques
             <div className="space-y-6">
                 {/* Print Control Bar - Hidden during printing */}
                 <div className="flex justify-between items-center bg-slate-50 p-4 border border-slate-200 rounded-2xl print:hidden">
-                    <Button 
-                        variant="ghost" 
+                    <Button
+                        variant="ghost"
                         onClick={() => { setPrintingRequest(null); setQrCodes({}); }}
                         className="rounded-xl flex items-center gap-2"
                     >
                         <ArrowLeft size={16} /> Back to Requests
                     </Button>
                     <div className="flex gap-3">
-                        <Button 
+                        <Button
                             onClick={() => window.print()}
                             className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl flex items-center gap-2"
                         >
@@ -120,7 +120,7 @@ export default function PrintRequestsClient({ initialRequests }: { initialReques
                 {/* Print area */}
                 <div id="print-area" className="grid grid-cols-1 sm:grid-cols-2 gap-8 p-4">
                     {printingRequest.tablesInfo.map((table) => (
-                        <div 
+                        <div
                             key={table.id}
                             className="border-4 border-double border-slate-800 rounded-[2rem] p-8 flex flex-col items-center justify-between bg-white text-slate-900 w-[300px] h-[400px] mx-auto shadow-sm page-break-inside-avoid"
                             style={{ breakInside: 'avoid' }}
@@ -152,7 +152,7 @@ export default function PrintRequestsClient({ initialRequests }: { initialReques
                                     TABLE {table.number}
                                 </span>
                                 <p className="text-[8px] text-slate-400 mt-2 font-mono">
-                                    firststep.ma/{printingRequest.tenant.slug}
+                                    firststepco.com/{printingRequest.tenant.slug}
                                 </p>
                             </div>
                         </div>
@@ -260,8 +260,8 @@ export default function PrintRequestsClient({ initialRequests }: { initialReques
                                     </td>
                                     <td className="px-6 py-4 text-right">
                                         <div className="flex gap-2 justify-end">
-                                            <Button 
-                                                size="sm" 
+                                            <Button
+                                                size="sm"
                                                 variant="outline"
                                                 onClick={() => handleTriggerPrint(req)}
                                                 className="rounded-xl h-9 px-3 text-xs font-bold border-slate-200 hover:border-indigo-400 hover:text-indigo-600 flex items-center gap-1.5"
@@ -269,8 +269,8 @@ export default function PrintRequestsClient({ initialRequests }: { initialReques
                                                 <Printer size={13} /> Imprimer QRs
                                             </Button>
                                             {req.status === 'PENDING' && (
-                                                <Button 
-                                                    size="sm" 
+                                                <Button
+                                                    size="sm"
                                                     disabled={loading === req.id}
                                                     onClick={() => handleMarkCompleted(req.id)}
                                                     className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl h-9 px-3 text-xs font-bold flex items-center gap-1.5"
