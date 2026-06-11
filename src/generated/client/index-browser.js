@@ -214,7 +214,10 @@ exports.Prisma.RestaurantDishScalarFieldEnum = {
   price: 'price',
   image: 'image',
   isActive: 'isActive',
-  order: 'order'
+  order: 'order',
+  options: 'options',
+  addons: 'addons',
+  tags: 'tags'
 };
 
 exports.Prisma.RestaurantTableScalarFieldEnum = {
@@ -250,7 +253,9 @@ exports.Prisma.RestaurantOrderItemScalarFieldEnum = {
   dishId: 'dishId',
   name: 'name',
   price: 'price',
-  quantity: 'quantity'
+  quantity: 'quantity',
+  selectedOptions: 'selectedOptions',
+  selectedAddons: 'selectedAddons'
 };
 
 exports.Prisma.RestaurantReportScalarFieldEnum = {
@@ -275,6 +280,7 @@ exports.Prisma.RestaurantReservationScalarFieldEnum = {
   partySize: 'partySize',
   notes: 'notes',
   status: 'status',
+  tableId: 'tableId',
   createdAt: 'createdAt'
 };
 
@@ -462,6 +468,15 @@ exports.Prisma.MedicalHistoryScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.TablePrintRequestScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  tableIds: 'tableIds',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -503,7 +518,8 @@ exports.Prisma.ModelName = {
   InvoiceItem: 'InvoiceItem',
   MedicalRecord: 'MedicalRecord',
   Prescription: 'Prescription',
-  MedicalHistory: 'MedicalHistory'
+  MedicalHistory: 'MedicalHistory',
+  TablePrintRequest: 'TablePrintRequest'
 };
 
 /**

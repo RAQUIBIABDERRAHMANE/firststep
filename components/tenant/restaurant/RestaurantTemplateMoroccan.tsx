@@ -6,11 +6,13 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useRestaurantLogic } from './useRestaurantLogic'
 import { RestaurantTemplateProps } from './RestaurantTemplate'
-import { ShoppingCart, QrCode, MapPin, Phone, Mail, Plus, Minus, Trash2, ChevronRight, Utensils, CheckCircle2, LayoutDashboard, Bell, X } from 'lucide-react'
+import { ShoppingCart, QrCode, MapPin, Phone, Mail, Plus, Minus, Trash2, ChevronRight, Utensils, CheckCircle2, LayoutDashboard, Bell, X, Receipt } from 'lucide-react'
 import { translations, Language, CURRENCY } from '@/lib/translations'
 
 const QRScanner = dynamic(() => import('./QRScanner'), { ssr: false })
 const ReservationModal = dynamic(() => import('./ReservationModal'), { ssr: false })
+
+import DishCustomizationModal from './DishCustomizationModal'
 
 /* ── Decorative SVG Components ── */
 function ZelligePattern({ opacity = 0.08 }: { opacity?: number }) {
@@ -68,7 +70,8 @@ export default function RestaurantTemplateMoroccan({
     const {
         showScanner, setShowScanner, showCart, setShowCart, activeCategory, setActiveCategory,
         isPlacingOrder, orderComplete, setOrderComplete, items, addItem, updateQuantity,
-        totalPrice, totalItems, tableId, categoryNames, filteredItems, handleScan, handlePlaceOrder, handleCallWaiter, removeItem
+        totalPrice, totalItems, tableId, categoryNames, filteredItems, handleScan, handlePlaceOrder, handleCallWaiter, handleRequestBill, removeItem,
+        customizingDish, setCustomizingDish, handleConfirmCustomization
     } = logic
 
     const [showReservation, setShowReservation] = useState(false)
@@ -99,15 +102,24 @@ export default function RestaurantTemplateMoroccan({
                 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
             `}</style>
 
-            {/* Call Waiter */}
+            {/* Call Waiter & Request Bill Logic */}
             {tableId && !isOwner && (
-                <Button
-                    onClick={handleCallWaiter}
-                    className="fixed bottom-10 left-10 h-16 w-16 rounded-full shadow-2xl z-50 flex items-center justify-center animate-bounce border-4 border-amber-300 active:scale-95 transition-all"
-                    style={{ background: primary, color: 'white' }}
-                >
-                    <Bell className="h-7 w-7" />
-                </Button>
+                <div className="fixed bottom-10 left-10 z-50 flex flex-col gap-3">
+                    <button
+                        onClick={handleRequestBill}
+                        className="h-14 w-14 rounded-full bg-amber-500 hover:bg-amber-600 text-white shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-white"
+                        title="Request Bill"
+                    >
+                        <Receipt size={22} />
+                    </button>
+                    <button
+                        onClick={handleCallWaiter}
+                        className="h-14 w-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-white"
+                        title="Call Waiter"
+                    >
+                        <Bell size={22} />
+                    </button>
+                </div>
             )}
 
             {/* ── HEADER ── */}
@@ -270,11 +282,28 @@ export default function RestaurantTemplateMoroccan({
                                     <h3 className="font-amiri text-xl font-bold mb-2 transition-colors" style={{ color: textColor }}>
                                         {item.name}
                                     </h3>
+                                    {/* Dietary tags */}
+                                    {(() => {
+                                        let tagsList: string[] = []
+                                        try {
+                                            tagsList = typeof item.tags === 'string' ? JSON.parse(item.tags || '[]') : (item.tags || [])
+                                        } catch {}
+                                        if (tagsList.length === 0) return null
+                                        return (
+                                            <div className="flex flex-wrap gap-1.5 justify-center mb-4">
+                                                {tagsList.map(tag => (
+                                                    <span key={tag} className="px-2.5 py-1 bg-amber-400/10 text-amber-700 text-[9px] font-black uppercase tracking-wider rounded-md border border-amber-200/30">
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )
+                                    })()}
                                     <p className="text-sm leading-relaxed mb-6 flex-1 font-amiri italic" style={{ color: '#8B7355' }}>
                                         {item.description || "Préparé avec des épices authentiques marocaines."}
                                     </p>
                                     <button
-                                        onClick={() => addItem({ id: item.id, name: item.name, price: item.price, image: item.image })}
+                                        onClick={() => addItem(item)}
                                         className="w-full py-3 rounded-full font-bold text-xs uppercase tracking-widest transition-all hover:brightness-110 active:scale-95 shadow-lg"
                                         style={{ background: primary, color: 'white' }}
                                     >
@@ -324,23 +353,33 @@ export default function RestaurantTemplateMoroccan({
                                     <p className="text-sm" style={{ color: '#8B7355' }}>Ajoutez des plats pour commencer votre commande.</p>
                                 </div>
                             ) : items.map((item) => (
-                                <div key={item.id} className="flex gap-4 items-center rounded-2xl p-4 border border-amber-100 bg-white/60">
+                                <div key={item.cartItemId} className="flex gap-4 items-center rounded-2xl p-4 border border-amber-100 bg-white/60">
                                     <div className="h-16 w-16 rounded-xl overflow-hidden flex-shrink-0 border border-amber-200">
                                         <img src={item.image || ''} className="h-full w-full object-cover" alt="" />
                                     </div>
-                                    <div className="flex-1">
+                                    <div className="flex-1 text-left">
                                         <h4 className="font-amiri font-bold text-base" style={{ color: textColor }}>{item.name}</h4>
-                                        <span className="text-sm font-bold" style={{ color: '#D4A017' }}>{item.price} {CURRENCY}</span>
+                                        {item.selectedOptions && item.selectedOptions.length > 0 && (
+                                            <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-1">
+                                                {item.selectedOptions.map(o => `${o.group}: ${o.choice}`).join(', ')}
+                                            </div>
+                                        )}
+                                        {item.selectedAddons && item.selectedAddons.length > 0 && (
+                                            <div className="text-[9px] text-emerald-600 font-black uppercase tracking-widest mt-0.5">
+                                                + {item.selectedAddons.map(a => `${a.name} (+${a.price} MAD)`).join(', ')}
+                                            </div>
+                                        )}
+                                        <span className="text-sm font-bold block mt-1" style={{ color: '#D4A017' }}>{item.price} {CURRENCY}</span>
                                     </div>
                                     <div className="flex flex-col gap-2 items-end">
-                                        <button onClick={() => removeItem(item.id)} className="text-red-300 hover:text-red-500 transition-colors">
+                                        <button onClick={() => removeItem(item.cartItemId)} className="text-red-300 hover:text-red-500 transition-colors">
                                             <Trash2 size={14} />
                                         </button>
                                         <div className="flex items-center gap-2 rounded-full px-3 py-1.5 text-white text-sm"
                                             style={{ background: '#1A2340' }}>
-                                            <button onClick={() => updateQuantity(item.id, -1)} className="hover:text-amber-400 transition-colors"><Minus size={12} strokeWidth={3} /></button>
+                                            <button onClick={() => updateQuantity(item.cartItemId, -1)} className="hover:text-amber-400 transition-colors"><Minus size={12} strokeWidth={3} /></button>
                                             <span className="font-black w-4 text-center">{item.quantity}</span>
-                                            <button onClick={() => updateQuantity(item.id, 1)} className="hover:text-amber-400 transition-colors"><Plus size={12} strokeWidth={3} /></button>
+                                            <button onClick={() => updateQuantity(item.cartItemId, 1)} className="hover:text-amber-400 transition-colors"><Plus size={12} strokeWidth={3} /></button>
                                         </div>
                                     </div>
                                 </div>
@@ -384,7 +423,10 @@ export default function RestaurantTemplateMoroccan({
                                     "Notre équipe prépare votre repas avec soin et tradition."
                                 </p>
                                 <button
-                                    onClick={() => setOrderComplete(false)}
+                                    onClick={() => {
+                                        setOrderComplete(false)
+                                        setShowCart(false)
+                                    }}
                                     className="rounded-full px-10 py-4 font-bold uppercase tracking-widest text-sm text-white transition-all hover:brightness-110"
                                     style={{ background: primary }}
                                 >
@@ -405,6 +447,14 @@ export default function RestaurantTemplateMoroccan({
                 primaryColor={primaryColor}
                 config={config}
                 onClose={() => setShowReservation(false)}
+            />
+
+            <DishCustomizationModal
+                isOpen={!!customizingDish}
+                dish={customizingDish}
+                onClose={() => setCustomizingDish(null)}
+                onConfirm={handleConfirmCustomization}
+                primaryColor={primaryColor}
             />
 
             {/* ── FOOTER ── */}

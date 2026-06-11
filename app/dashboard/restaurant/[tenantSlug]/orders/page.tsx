@@ -1,12 +1,12 @@
-'use server'
-
 import { getOrders } from '@/app/actions/restaurant'
+import { getWebsiteBySlug } from '@/app/actions/tenant'
 import OrdersClient from './OrdersClient'
 import Link from 'next/link'
 import { ChevronLeft, ClipboardList } from 'lucide-react'
 
 export default async function OrdersPage({ params }: { params: Promise<{ tenantSlug: string }> }) {
     const { tenantSlug } = await params
+    const tenant = await getWebsiteBySlug(tenantSlug)
     const orders = await getOrders(tenantSlug)
 
     return (
@@ -25,7 +25,7 @@ export default async function OrdersPage({ params }: { params: Promise<{ tenantS
                 </div>
             </div>
 
-            <OrdersClient initialOrders={orders} tenantSlug={tenantSlug} />
+            <OrdersClient initialOrders={orders} tenantSlug={tenantSlug} initialConfig={tenant?.config} />
         </div>
     )
 }

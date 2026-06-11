@@ -32,6 +32,7 @@ export default async function TableManagementPage({ params }: { params: Promise<
             <TablesClient
                 initialTables={tables}
                 tenantSlug={tenantSlug}
+                initialConfig={tenant.config}
             />
         </div>
     )

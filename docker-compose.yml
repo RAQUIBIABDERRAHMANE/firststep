@@ -1,0 +1,20 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: firststep-web
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      # If your Prisma schema requires DATABASE_URL, you can set it here or in .env
+      - DATABASE_URL=file:./dev.db
+    volumes:
+      # Mount the local SQLite database if using Prisma with SQLite in Docker
+      # You can comment this out if you're using LibSQL/Turso remote database
+      - ./prisma/dev.db:/app/prisma/dev.db
+    restart: unless-stopped

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { verifyTableTokenBrowser } from '@/lib/crypto-client'
-import { useCart } from '@/lib/contexts/CartContext'
-import { createOrder, callWaiter, getOrderStatus } from '@/app/actions/restaurant'
+import { useCart, SelectedOption, SelectedAddon } from '@/lib/contexts/CartContext'
+import { createOrder, callWaiter, getOrderStatus, requestBill } from '@/app/actions/restaurant'
 
 export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
     const searchParams = useSearchParams()
@@ -15,6 +15,9 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
     const [orderComplete, setOrderComplete] = useState(false)
     const [activeOrderId, setActiveOrderId] = useState<string | null>(null)
     const [orderStatus, setOrderStatus] = useState<string | null>(null)
+
+    // Customize Modal State
+    const [customizingDish, setCustomizingDish] = useState<any | null>(null)
 
     // Load active order from storage when tableId changes
     useEffect(() => {
@@ -80,6 +83,53 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
         }
     }
 
+    const handleAddItem = (dish: any) => {
+        let opts = []
+        let ads = []
+        try {
+            opts = typeof dish.options === 'string' ? JSON.parse(dish.options || '[]') : (dish.options || [])
+        } catch {}
+        try {
+            ads = typeof dish.addons === 'string' ? JSON.parse(dish.addons || '[]') : (dish.addons || [])
+        } catch {}
+
+        if (opts.length > 0 || ads.length > 0) {
+            setCustomizingDish(dish)
+        } else {
+            addItem({
+                cartItemId: `${dish.id}-default`,
+                id: dish.id,
+                name: dish.name,
+                basePrice: dish.price,
+                price: dish.price,
+                image: dish.image,
+                selectedOptions: [],
+                selectedAddons: []
+            })
+        }
+    }
+
+    const handleConfirmCustomization = (selectedOptions: SelectedOption[], selectedAddons: SelectedAddon[], calculatedPrice: number) => {
+        if (!customizingDish) return
+
+        const optionsKey = selectedOptions.map(o => `${o.group}:${o.choice}`).sort().join('|')
+        const addonsKey = selectedAddons.map(a => a.name).sort().join('|')
+        const cartItemId = `${customizingDish.id}-${optionsKey}-${addonsKey}`
+
+        addItem({
+            cartItemId,
+            id: customizingDish.id,
+            name: customizingDish.name,
+            basePrice: customizingDish.price,
+            price: calculatedPrice,
+            image: customizingDish.image,
+            selectedOptions,
+            selectedAddons
+        })
+        
+        setCustomizingDish(null)
+    }
+
     const handlePlaceOrder = async () => {
         if (!tableId || items.length === 0) return
 
@@ -91,7 +141,9 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
                     id: i.id,
                     name: i.name,
                     price: i.price,
-                    quantity: i.quantity
+                    quantity: i.quantity,
+                    selectedOptions: i.selectedOptions,
+                    selectedAddons: i.selectedAddons
                 }))
             )
 
@@ -124,6 +176,18 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
         }
     }
 
+    const handleRequestBill = async () => {
+        if (!tableId) return
+        if (!confirm("Request the bill for your table?")) return
+
+        const res = await requestBill(tableId)
+        if (res.success) {
+            alert("Bill request sent! A waiter will bring your bill shortly. 🔔")
+        } else {
+            alert("Failed: " + res.error)
+        }
+    }
+
     // Filter menu items by category
     const categoryNames = ['All', ...categories.map((c: any) => c.name)]
     const menuItems = categories.flatMap((c: any) =>
@@ -144,9 +208,10 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
         isPlacingOrder,
         orderComplete, setOrderComplete,
         activeOrderId, orderStatus,
+        customizingDish, setCustomizingDish,
 
         // Cart Context
-        items, addItem, removeItem, updateQuantity, totalPrice, totalItems, tableId,
+        items, addItem: handleAddItem, removeItem, updateQuantity, totalPrice, totalItems, tableId,
 
         // Data
         categoryNames,
@@ -155,6 +220,8 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
         // Handlers
         handleScan,
         handlePlaceOrder,
-        handleCallWaiter
+        handleCallWaiter,
+        handleRequestBill,
+        handleConfirmCustomization
     }
 }

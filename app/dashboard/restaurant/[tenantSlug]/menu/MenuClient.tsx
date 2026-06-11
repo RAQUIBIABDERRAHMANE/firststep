@@ -61,6 +61,80 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
 
     // Dish form state
     const [dishForm, setDishForm] = useState({ name: '', description: '', price: '', image: '', isActive: true })
+    const [selectedTags, setSelectedTags] = useState<string[]>([])
+    const [optionGroups, setOptionGroups] = useState<any[]>([])
+    const [addonsList, setAddonsList] = useState<any[]>([])
+
+    // Addon adding input state
+    const [newAddonName, setNewAddonName] = useState('')
+    const [newAddonPrice, setNewAddonPrice] = useState('')
+
+    const AVAILABLE_TAGS = ['Vegan', 'Gluten-Free', 'Spicy 🌶️', 'Halal', 'Vegetarian']
+
+    const toggleTag = (tag: string) => {
+        setSelectedTags(prev => prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag])
+    }
+
+    const handleAddAddon = () => {
+        if (!newAddonName.trim() || !newAddonPrice) return
+        setAddonsList(prev => [...prev, { name: newAddonName.trim(), price: parseFloat(newAddonPrice) }])
+        setNewAddonName('')
+        setNewAddonPrice('')
+    }
+
+    const handleRemoveAddon = (index: number) => {
+        setAddonsList(prev => prev.filter((_, i) => i !== index))
+    }
+
+    const handleAddOptionGroup = () => {
+        setOptionGroups(prev => [...prev, {
+            name: 'Option Group',
+            required: false,
+            choices: [{ name: 'Regular', priceModifier: 0 }]
+        }])
+    }
+
+    const handleRemoveOptionGroup = (groupIndex: number) => {
+        setOptionGroups(prev => prev.filter((_, i) => i !== groupIndex))
+    }
+
+    const handleUpdateGroupName = (groupIndex: number, name: string) => {
+        setOptionGroups(prev => prev.map((g, i) => i === groupIndex ? { ...g, name } : g))
+    }
+
+    const handleToggleGroupRequired = (groupIndex: number) => {
+        setOptionGroups(prev => prev.map((g, i) => i === groupIndex ? { ...g, required: !g.required } : g))
+    }
+
+    const handleAddChoice = (groupIndex: number) => {
+        setOptionGroups(prev => prev.map((g, i) => i === groupIndex ? {
+            ...g,
+            choices: [...(g.choices || []), { name: '', priceModifier: 0 }]
+        } : g))
+    }
+
+    const handleRemoveChoice = (groupIndex: number, choiceIndex: number) => {
+        setOptionGroups(prev => prev.map((g, i) => i === groupIndex ? {
+            ...g,
+            choices: g.choices.filter((_: any, ci: number) => ci !== choiceIndex)
+        } : g))
+    }
+
+    const handleUpdateChoiceChoice = (groupIndex: number, choiceIndex: number, key: string, value: any) => {
+        setOptionGroups(prev => prev.map((g, i) => i === groupIndex ? {
+            ...g,
+            choices: g.choices.map((c: any, ci: number) => ci === choiceIndex ? { ...c, [key]: value } : c)
+        } : g))
+    }
+
+    const resetDishForm = () => {
+        setDishForm({ name: '', description: '', price: '', image: '', isActive: true })
+        setSelectedTags([])
+        setOptionGroups([])
+        setAddonsList([])
+        setAddingDishTo(null)
+        setEditingDish(null)
+    }
 
     const toggleLanguage = () => {
         setLang(current => current === 'fr' ? 'en' : 'fr')
@@ -125,25 +199,25 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
         if (!dishForm.name || !dishForm.price) return
         setLoading(true)
 
+        const payload = {
+            ...dishForm,
+            price: parseFloat(dishForm.price),
+            tags: JSON.stringify(selectedTags),
+            options: JSON.stringify(optionGroups),
+            addons: JSON.stringify(addonsList)
+        }
+
         try {
             let res;
             if (editingDish) {
-                res = await updateDish(editingDish, {
-                    ...dishForm,
-                    price: parseFloat(dishForm.price)
-                }, tenantSlug)
+                res = await updateDish(editingDish, payload, tenantSlug)
             } else {
-                res = await createDish(categoryId, {
-                    ...dishForm,
-                    price: parseFloat(dishForm.price)
-                }, tenantSlug)
+                res = await createDish(categoryId, payload, tenantSlug)
             }
 
             if (res?.error) alert(res.error)
             else {
-                setDishForm({ name: '', description: '', price: '', image: '', isActive: true })
-                setAddingDishTo(null)
-                setEditingDish(null)
+                resetDishForm()
             }
         } catch {
             alert('Failed to save dish')
@@ -161,6 +235,19 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
             image: dish.image || '',
             isActive: dish.isActive
         })
+
+        let tags: string[] = []
+        try { tags = JSON.parse((dish as any).tags || '[]') } catch {}
+        setSelectedTags(tags)
+
+        let options: any[] = []
+        try { options = JSON.parse((dish as any).options || '[]') } catch {}
+        setOptionGroups(options)
+
+        let addons: any[] = []
+        try { addons = JSON.parse((dish as any).addons || '[]') } catch {}
+        setAddonsList(addons)
+
         setEditingDish(dish.id)
         setAddingDishTo(dish.categoryId)
     }
@@ -416,10 +503,184 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
                                                         className="h-12 rounded-xl"
                                                     />
                                                 </div>
-                                                <div className="flex gap-4 justify-end pt-4">
+
+                                                {/* Dietary Tags */}
+                                                <div className="space-y-3 pt-2">
+                                                    <label className="text-xs font-black text-slate-400 uppercase ml-1">Dietary & Allergen Tags</label>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {AVAILABLE_TAGS.map(tag => {
+                                                            const isSelected = selectedTags.includes(tag)
+                                                            return (
+                                                                <button
+                                                                    key={tag}
+                                                                    type="button"
+                                                                    onClick={() => toggleTag(tag)}
+                                                                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border ${
+                                                                        isSelected
+                                                                            ? 'bg-blue-600 border-blue-600 text-white shadow-md shadow-blue-500/10'
+                                                                            : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                                                                    }`}
+                                                                >
+                                                                    {tag}
+                                                                </button>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                </div>
+
+                                                {/* Option Groups */}
+                                                <div className="space-y-4 pt-4 border-t border-slate-100">
+                                                    <div className="flex items-center justify-between">
+                                                        <label className="text-xs font-black text-slate-400 uppercase ml-1">Option Groups (e.g., Size, Doneness)</label>
+                                                        <Button
+                                                            type="button"
+                                                            variant="outline"
+                                                            size="sm"
+                                                            onClick={handleAddOptionGroup}
+                                                            className="h-8 rounded-lg text-xs font-bold text-blue-600 border-blue-100 hover:bg-blue-50"
+                                                        >
+                                                            <Plus size={14} className="mr-1" /> Add Group
+                                                        </Button>
+                                                    </div>
+
+                                                    {optionGroups.map((group, gIndex) => (
+                                                        <div key={gIndex} className="p-5 bg-white border border-slate-200/80 rounded-2xl space-y-4 shadow-sm relative">
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => handleRemoveOptionGroup(gIndex)}
+                                                                className="absolute top-4 right-4 text-slate-300 hover:text-rose-500 transition-colors p-1 animate-all duration-300"
+                                                                title="Remove group"
+                                                            >
+                                                                <Trash2 size={16} />
+                                                            </button>
+
+                                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mr-6">
+                                                                <div className="space-y-1">
+                                                                    <span className="text-[10px] font-black text-slate-400 uppercase ml-0.5">Group Name</span>
+                                                                    <Input
+                                                                        value={group.name}
+                                                                        onChange={(e) => handleUpdateGroupName(gIndex, e.target.value)}
+                                                                        className="h-9 text-sm rounded-lg"
+                                                                        placeholder="e.g. Size"
+                                                                    />
+                                                                </div>
+                                                                <div className="flex items-center gap-2 pt-5">
+                                                                    <input
+                                                                        type="checkbox"
+                                                                        id={`req-${gIndex}`}
+                                                                        checked={group.required}
+                                                                        onChange={() => handleToggleGroupRequired(gIndex)}
+                                                                        className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                                                                    />
+                                                                    <label htmlFor={`req-${gIndex}`} className="text-xs font-bold text-slate-600 cursor-pointer">
+                                                                        Required selection
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                            {/* Choices */}
+                                                            <div className="space-y-2.5">
+                                                                <div className="flex items-center justify-between">
+                                                                    <span className="text-[10px] font-black text-slate-400 uppercase ml-0.5">Choices & Price Modifiers</span>
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() => handleAddChoice(gIndex)}
+                                                                        className="text-xs font-bold text-blue-600 hover:underline flex items-center gap-0.5"
+                                                                    >
+                                                                        <Plus size={12} /> Add Choice
+                                                                    </button>
+                                                                </div>
+
+                                                                <div className="space-y-2">
+                                                                    {group.choices?.map((choice: any, cIndex: number) => (
+                                                                        <div key={cIndex} className="flex gap-3 items-center">
+                                                                            <Input
+                                                                                value={choice.name}
+                                                                                onChange={(e) => handleUpdateChoiceChoice(gIndex, cIndex, 'name', e.target.value)}
+                                                                                placeholder="Choice name (e.g. Large)"
+                                                                                className="h-9 text-sm rounded-lg flex-1"
+                                                                            />
+                                                                            <div className="relative w-32">
+                                                                                <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-slate-400">+</span>
+                                                                                <Input
+                                                                                    value={choice.priceModifier}
+                                                                                    onChange={(e) => {
+                                                                                        const val = parseFloat(e.target.value) || 0
+                                                                                        handleUpdateChoiceChoice(gIndex, cIndex, 'priceModifier', val)
+                                                                                    }}
+                                                                                    placeholder="0.00"
+                                                                                    type="number"
+                                                                                    className="pl-6 h-9 text-sm rounded-lg text-right pr-2 font-bold text-slate-700"
+                                                                                />
+                                                                            </div>
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => handleRemoveChoice(gIndex, cIndex)}
+                                                                                disabled={group.choices.length <= 1}
+                                                                                className="text-slate-300 hover:text-rose-500 disabled:opacity-30 transition-colors p-1"
+                                                                            >
+                                                                                <X size={16} />
+                                                                            </button>
+                                                                        </div>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+
+                                                {/* Add-ons */}
+                                                <div className="space-y-4 pt-4 border-t border-slate-100">
+                                                    <label className="text-xs font-black text-slate-400 uppercase ml-1">Extra Add-ons (e.g. Extra Cheese, Avocado)</label>
+                                                    
+                                                    {addonsList.length > 0 && (
+                                                        <div className="flex flex-wrap gap-2.5 p-4 bg-white border border-slate-100 rounded-2xl">
+                                                            {addonsList.map((addon, index) => (
+                                                                <div key={index} className="inline-flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl py-1.5 pl-3 pr-2 text-xs font-bold text-slate-700">
+                                                                    <span>{addon.name} (+{addon.price} MAD)</span>
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() => handleRemoveAddon(index)}
+                                                                        className="text-slate-400 hover:text-rose-500 rounded p-0.5"
+                                                                    >
+                                                                        <X size={12} />
+                                                                    </button>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    )}
+
+                                                    <div className="flex gap-3 items-center">
+                                                        <Input
+                                                            value={newAddonName}
+                                                            onChange={(e) => setNewAddonName(e.target.value)}
+                                                            placeholder="Addon name (e.g. Extra Cheese)"
+                                                            className="h-10 text-sm rounded-xl flex-1 bg-white"
+                                                        />
+                                                        <div className="relative w-36">
+                                                            <DollarSign size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                                                            <Input
+                                                                value={newAddonPrice}
+                                                                onChange={(e) => setNewAddonPrice(e.target.value.replace(/[^0-9.]/g, ''))}
+                                                                placeholder="Price (MAD)"
+                                                                className="pl-8 h-10 text-sm rounded-xl bg-white font-bold"
+                                                            />
+                                                        </div>
+                                                        <Button
+                                                            type="button"
+                                                            variant="outline"
+                                                            onClick={handleAddAddon}
+                                                            className="h-10 rounded-xl font-bold text-xs border-blue-100 text-blue-600 bg-white"
+                                                        >
+                                                            Add Addon
+                                                        </Button>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex gap-4 justify-end pt-4 border-t border-slate-100">
                                                     <Button
                                                         variant="ghost"
-                                                        onClick={() => { setAddingDishTo(null); setEditingDish(null); setDishForm({ name: '', description: '', price: '', image: '', isActive: true }); }}
+                                                        onClick={resetDishForm}
                                                         className="rounded-xl h-12 px-8 font-bold text-slate-500"
                                                     >
                                                         {t.cancel}

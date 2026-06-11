@@ -6,25 +6,28 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useRestaurantLogic } from './useRestaurantLogic'
 import { RestaurantTemplateProps } from './RestaurantTemplate'
-import { ArrowRight, Bell, ChevronLeft, Minus, Plus, QrCode, ShoppingCart, X, Check, Loader2, Sparkles, Trash2 } from 'lucide-react'
+import { ArrowRight, Bell, ChevronLeft, Minus, Plus, QrCode, ShoppingCart, X, Check, Loader2, Sparkles, Trash2, Receipt } from 'lucide-react'
 
 const QRScanner = dynamic(() => import('./QRScanner'), { ssr: false })
 const ReservationModal = dynamic(() => import('./ReservationModal'), { ssr: false })
 
 import { translations, Language, CURRENCY } from '@/lib/translations'
 
+import DishCustomizationModal from './DishCustomizationModal'
+
 export default function RestaurantTemplateMinimal({ siteName, description, coverImage, logo, config, categories, isOwner, primaryColor }: RestaurantTemplateProps) {
     const defaultData = useRestaurantLogic(categories, isOwner)
     const {
         showScanner, setShowScanner, showCart, setShowCart,
         isPlacingOrder, orderComplete, setOrderComplete, items, addItem, updateQuantity, removeItem,
-        totalPrice, totalItems, tableId, filteredItems, categoryNames, handleScan, handlePlaceOrder, handleCallWaiter,
-        activeOrderId, orderStatus
+        totalPrice, totalItems, tableId, filteredItems, categoryNames, handleScan, handlePlaceOrder, handleCallWaiter, handleRequestBill,
+        activeOrderId, orderStatus, customizingDish, setCustomizingDish, handleConfirmCustomization
     } = defaultData
 
     const [lang, setLang] = useState<Language>('fr')
     const t = translations[lang].restaurant
     const [showReservation, setShowReservation] = useState(false)
+    const [showOrderTracking, setShowOrderTracking] = useState(false)
 
     const [activeSection, setActiveSection] = useState(categoryNames[0])
 
@@ -94,7 +97,10 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                             Reserve
                         </button>
                         <button
-                            onClick={() => setShowCart(true)}
+                            onClick={() => {
+                                setShowCart(true)
+                                setShowOrderTracking(false)
+                            }}
                             className="relative flex items-center justify-center h-12 w-12 bg-black hover:bg-slate-800 text-white rounded-2xl transition-all shadow-xl shadow-black/10 active:scale-95"
                         >
                             <ShoppingCart size={20} strokeWidth={2.5} />
@@ -215,16 +221,33 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
 
                                         {/* Item Details */}
                                         <div className="flex-1 min-w-0 py-2">
-                                            <div className="flex justify-between items-baseline mb-4">
+                                            <div className="flex justify-between items-baseline mb-2">
                                                 <h4 className="font-serif text-3xl font-medium text-[var(--text-main,#0f172a)] group-hover:text-[var(--primary)] transition-colors">{item.name}</h4>
                                                 <div className="h-px flex-1 mx-6 bg-slate-100 hidden sm:block" />
                                                 <span className="font-black text-xl text-[var(--text-main,#0f172a)]">{item.price} <span className="text-[10px] uppercase ml-1">{CURRENCY}</span></span>
                                             </div>
+                                            {/* Dietary tags */}
+                                            {(() => {
+                                                let tagsList: string[] = []
+                                                try {
+                                                    tagsList = typeof item.tags === 'string' ? JSON.parse(item.tags || '[]') : (item.tags || [])
+                                                } catch {}
+                                                if (tagsList.length === 0) return null
+                                                return (
+                                                    <div className="flex flex-wrap gap-1.5 justify-start mb-4">
+                                                        {tagsList.map(tag => (
+                                                            <span key={tag} className="px-2.5 py-1 bg-slate-100 text-slate-600 text-[9px] font-black uppercase tracking-wider rounded-md">
+                                                                {tag}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                )
+                                            })()}
                                             <p className="text-slate-500 text-base leading-relaxed mb-8 font-medium line-clamp-2">
                                                 {item.description || "A masterfully balanced composition of premium ingredients and delicate execution."}
                                             </p>
                                             <button
-                                                onClick={() => addItem({ id: item.id, name: item.name, price: item.price, image: item.image })}
+                                                onClick={() => addItem(item)}
                                                 className="group/btn flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] text-[var(--text-main,#000)] pr-12 transition-all"
                                             >
                                                 <div className="h-10 w-10 bg-slate-100 group-hover/btn:bg-black group-hover/btn:text-white rounded-full flex items-center justify-center transition-all">
@@ -288,14 +311,23 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
             </footer>
 
             {/* Call Waiter Logic (unchanged same as other templates) */}
+            {/* Call Waiter & Request Bill Logic */}
             {tableId && !isOwner && (
-                <div className="fixed bottom-6 right-6 z-50">
-                    <Button
-                        onClick={handleCallWaiter}
-                        className="h-16 w-16 rounded-full bg-[var(--primary)] text-white shadow-2xl hover:brightness-110"
+                <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+                    <button
+                        onClick={handleRequestBill}
+                        className="h-14 w-14 rounded-full bg-amber-500 hover:bg-amber-600 text-white shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95"
+                        title="Request Bill"
                     >
-                        <Bell size={24} />
-                    </Button>
+                        <Receipt size={22} />
+                    </button>
+                    <button
+                        onClick={handleCallWaiter}
+                        className="h-14 w-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95"
+                        title="Call Waiter"
+                    >
+                        <Bell size={22} />
+                    </button>
                 </div>
             )}
 
@@ -321,23 +353,33 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                 </div>
                             ) : (
                                 items.map((item) => (
-                                    <div key={item.id} className="flex gap-4">
+                                    <div key={item.cartItemId} className="flex gap-4">
                                         <div className="w-20 h-20 rounded-xl bg-slate-100 overflow-hidden shrink-0">
                                             <img src={item.image || ''} className="w-full h-full object-cover" alt="" />
                                         </div>
                                         <div className="flex-1">
                                             <div className="flex justify-between items-start mb-1">
-                                                <h4 className="font-serif text-lg text-[var(--text-main,#0f172a)]">{item.name}</h4>
-                                                <span className="font-medium text-slate-600">{item.price} {CURRENCY}</span>
+                                                <h4 className="font-serif text-lg text-[var(--text-main,#0f172a)] leading-tight">{item.name}</h4>
+                                                <span className="font-medium text-slate-600 shrink-0 ml-2">{item.price} {CURRENCY}</span>
                                             </div>
+                                            {item.selectedOptions && item.selectedOptions.length > 0 && (
+                                                <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-1">
+                                                    {item.selectedOptions.map(o => `${o.group}: ${o.choice}`).join(', ')}
+                                                </div>
+                                            )}
+                                            {item.selectedAddons && item.selectedAddons.length > 0 && (
+                                                <div className="text-[9px] text-emerald-600 font-black uppercase tracking-widest mb-1">
+                                                    + {item.selectedAddons.map(a => `${a.name} (+${a.price} MAD)`).join(', ')}
+                                                </div>
+                                            )}
                                             <div className="flex items-center justify-between mt-2">
-                                                <button onClick={() => removeItem(item.id)} className="text-slate-300 hover:text-red-500 transition-colors p-2" title="Remove item">
+                                                <button onClick={() => removeItem(item.cartItemId)} className="text-slate-300 hover:text-red-500 transition-colors p-2" title="Remove item">
                                                     <Trash2 size={16} />
                                                 </button>
                                                 <div className="flex items-center gap-4">
-                                                    <button onClick={() => updateQuantity(item.id, -1)} className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors"><Minus size={14} /></button>
+                                                    <button onClick={() => updateQuantity(item.cartItemId, -1)} className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors"><Minus size={14} /></button>
                                                     <span className="font-medium w-4 text-center">{item.quantity}</span>
-                                                    <button onClick={() => updateQuantity(item.id, 1)} className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors"><Plus size={14} /></button>
+                                                    <button onClick={() => updateQuantity(item.cartItemId, 1)} className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors"><Plus size={14} /></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -366,7 +408,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                 )}
                             </div>
                         )}
-                        {orderComplete || activeOrderId ? (
+                        {orderComplete || (activeOrderId && showOrderTracking) ? (
                             <div className="absolute inset-0 bg-[var(--card-bg,white)]/95 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center animate-in fade-in z-50">
                                 <div className={`w-24 h-24 rounded-full flex items-center justify-center mb-6 ${orderStatus === 'READY' || orderStatus === 'SERVED' ? 'bg-green-100 text-green-600' :
                                     orderStatus === 'PREPARING' || orderStatus === 'COOKING' ? 'bg-orange-100 text-orange-600 animate-pulse' :
@@ -395,7 +437,15 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                 <div className="inline-block px-4 py-2 bg-slate-100 rounded-full text-xs font-bold uppercase tracking-widest text-slate-500 mb-8">
                                     Status: {orderStatus || 'PENDING'}
                                 </div>
-                                <Button onClick={() => setOrderComplete(false)} variant="outline" className="border-slate-200 text-[var(--text-main,#0f172a)]">
+                                <Button
+                                    onClick={() => {
+                                        setOrderComplete(false)
+                                        setShowOrderTracking(false)
+                                        setShowCart(false)
+                                    }}
+                                    variant="outline"
+                                    className="border-slate-200 text-[var(--text-main,#0f172a)]"
+                                >
                                     Continue Browsing
                                 </Button>
                             </div>
@@ -407,7 +457,10 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
             {activeOrderId && !showCart && !showScanner && !orderComplete && (
                 <div className="fixed bottom-24 right-6 z-40 animate-in slide-in-from-bottom duration-500">
                     <button
-                        onClick={() => setShowCart(true)}
+                        onClick={() => {
+                            setShowCart(true)
+                            setShowOrderTracking(true)
+                        }}
                         className="bg-[var(--card-bg,white)]/90 backdrop-blur border border-slate-200 shadow-xl px-4 py-3 rounded-full flex items-center gap-3 transition-transform hover:scale-105"
                     >
                         <div className={`w-2 h-2 rounded-full ${orderStatus === 'READY' ? 'bg-green-500' : 'bg-[var(--primary)] animate-pulse'}`}></div>
@@ -428,6 +481,14 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                 siteName={siteName}
                 primaryColor="var(--primary)"
                 config={config}
+            />
+
+            <DishCustomizationModal
+                isOpen={!!customizingDish}
+                dish={customizingDish}
+                onClose={() => setCustomizingDish(null)}
+                onConfirm={handleConfirmCustomization}
+                primaryColor={primaryColor}
             />
         </div>
     )

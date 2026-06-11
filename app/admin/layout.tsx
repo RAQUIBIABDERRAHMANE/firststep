@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { getCurrentUser, signOut } from '@/app/actions/auth'
 import { redirect } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
-import { LayoutDashboard, Users, Layers, LogOut, ShieldCheck, ChevronRight, CreditCard, Globe, ExternalLink, Mail } from 'lucide-react'
+import { LayoutDashboard, Users, Layers, LogOut, ShieldCheck, ChevronRight, CreditCard, Globe, ExternalLink, Mail, QrCode } from 'lucide-react'
 
 export default async function AdminLayout({
     children,
@@ -23,6 +23,7 @@ export default async function AdminLayout({
         { label: 'Client Access', href: '/admin/access', icon: ExternalLink },
         { label: 'Payments', href: '/admin/payments', icon: CreditCard },
         { label: 'Campaigns', href: '/admin/campaigns', icon: Mail },
+        { label: 'Print Requests', href: '/admin/print-requests', icon: QrCode },
     ]
 
     return (

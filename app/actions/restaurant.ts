@@ -105,7 +105,19 @@ export async function deleteCategory(id: string, slug?: string) {
 
 // --- Dishes ---
 
-export async function createDish(categoryId: string, data: { name: string, description: string, price: number, image?: string }, slug?: string) {
+export async function createDish(
+    categoryId: string, 
+    data: { 
+        name: string, 
+        description: string, 
+        price: number, 
+        image?: string,
+        options?: string,
+        addons?: string,
+        tags?: string
+    }, 
+    slug?: string
+) {
     const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
@@ -126,7 +138,22 @@ export async function createDish(categoryId: string, data: { name: string, descr
     }
 }
 
-export async function updateDish(id: string, data: { name?: string, description?: string, price?: number, image?: string, isActive?: boolean, categoryId?: string, order?: number }, slug?: string) {
+export async function updateDish(
+    id: string, 
+    data: { 
+        name?: string, 
+        description?: string, 
+        price?: number, 
+        image?: string, 
+        isActive?: boolean, 
+        categoryId?: string, 
+        order?: number,
+        options?: string,
+        addons?: string,
+        tags?: string
+    }, 
+    slug?: string
+) {
     const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
@@ -271,37 +298,104 @@ export async function createBulkTables(count: number, prefix: string, startNumbe
 
 // --- Orders ---
 
-export async function createOrder(tableId: string, items: { id: string, name: string, price: number, quantity: number }[]) {
+export async function createOrder(
+    tableId: string, 
+    items: { 
+        id: string, 
+        name: string, 
+        price: number, 
+        quantity: number,
+        selectedOptions?: { group: string, choice: string, priceModifier: number }[],
+        selectedAddons?: { name: string, price: number }[]
+    }[]
+) {
     // This is a public action - table is identified by its persistent CUID from the QR code
     const table = await prisma.restaurantTable.findUnique({
         where: { id: tableId }
     })
 
-    if (!table || !(table as any).isActive) {
+    if (!table || !table.isActive) {
         console.error('[Restaurant Action] createOrder: Invalid table ID:', tableId)
         return { error: 'Invalid or inactive table' }
     }
 
-    const totalAmount = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    // Secure price computation:
+    // Load all unique dishes in the order to check their base price, options, and addons.
+    const dishIds = [...new Set(items.map(i => i.id))]
+    const dbDishes = await prisma.restaurantDish.findMany({
+        where: { id: { in: dishIds } }
+    })
+    const dishMap = new Map(dbDishes.map(d => [d.id, d]))
+
+    let calculatedTotalAmount = 0
+    const orderItemsData = []
+
+    for (const item of items) {
+        const dbDish = dishMap.get(item.id)
+        if (!dbDish) {
+            return { error: `Dish not found: ${item.name}` }
+        }
+
+        // Calculate item unit price securely
+        let unitPrice = dbDish.price
+
+        const selectedOptions = item.selectedOptions || []
+        const selectedAddons = item.selectedAddons || []
+
+        // Verify options price modifiers
+        let allowedOptions = []
+        try {
+            allowedOptions = JSON.parse(dbDish.options || '[]')
+        } catch {}
+
+        for (const selOpt of selectedOptions) {
+            const group = allowedOptions.find((g: any) => g.name === selOpt.group)
+            if (group) {
+                const choice = group.choices?.find((c: any) => c.name === selOpt.choice)
+                if (choice) {
+                    unitPrice += choice.priceModifier || 0
+                }
+            }
+        }
+
+        // Verify addons prices
+        let allowedAddons = []
+        try {
+            allowedAddons = JSON.parse(dbDish.addons || '[]')
+        } catch {}
+
+        for (const selAddon of selectedAddons) {
+            const addon = allowedAddons.find((a: any) => a.name === selAddon.name)
+            if (addon) {
+                unitPrice += addon.price || 0
+            }
+        }
+
+        calculatedTotalAmount += unitPrice * item.quantity
+
+        orderItemsData.push({
+            dishId: item.id,
+            name: item.name,
+            price: unitPrice, // Save final computed price
+            quantity: item.quantity,
+            selectedOptions: JSON.stringify(selectedOptions),
+            selectedAddons: JSON.stringify(selectedAddons)
+        })
+    }
 
     try {
         const order = await prisma.restaurantOrder.create({
             data: {
-                tableId: table.id, // Use the actual table ID from the lookup
-                totalAmount,
+                tableId: table.id,
+                totalAmount: calculatedTotalAmount,
                 status: 'PENDING',
                 items: {
-                    create: items.map(item => ({
-                        dishId: item.id,
-                        name: item.name,
-                        price: item.price,
-                        quantity: item.quantity
-                    }))
+                    create: orderItemsData
                 }
             }
         })
 
-        // In a real app, we'd trigger a websocket or notification here
+        revalidatePath('/dashboard/restaurant/orders')
         return { success: true, orderId: order.id }
     } catch (e) {
         console.error(e)
@@ -621,3 +715,90 @@ export async function deleteReport(reportId: string, slug?: string) {
         return { error: 'Failed to delete report' }
     }
 }
+
+export async function requestBill(tableId: string) {
+    try {
+        const table = await prisma.restaurantTable.findUnique({
+            where: { id: tableId }
+        })
+
+        if (!table) return { error: 'Invalid table' }
+
+        // Create a special 0-amount order representing a bill request
+        await prisma.restaurantOrder.create({
+            data: {
+                tableId: table.id,
+                totalAmount: 0,
+                status: 'PENDING',
+                items: {
+                    create: [{
+                        dishId: 'request-bill', // Dummy ID
+                        name: '🔔 REQUEST BILL',
+                        price: 0,
+                        quantity: 1
+                    }]
+                }
+            }
+        })
+
+        revalidatePath('/dashboard/restaurant/orders')
+        return { success: true }
+    } catch (e) {
+        console.error('[Restaurant Action] requestBill Error:', e)
+        return { error: 'Failed to request bill' }
+    }
+}
+
+export async function saveFloorPlanLayout(slug: string, layoutJson: string) {
+    const tenant = await getTenant(slug)
+    if (!tenant) return { error: 'Not authenticated' }
+
+    try {
+        const currentConfig = tenant.config ? JSON.parse(tenant.config) : {}
+        const newConfig = {
+            ...currentConfig,
+            floorPlan: JSON.parse(layoutJson)
+        }
+
+        await prisma.tenantWebsite.update({
+            where: { id: tenant.id },
+            data: {
+                config: JSON.stringify(newConfig)
+            }
+        })
+
+        revalidatePath(`/${tenant.slug}`)
+        revalidatePath(`/dashboard/restaurant/${tenant.slug}/tables`)
+        revalidatePath(`/dashboard/restaurant/${tenant.slug}/orders`)
+        return { success: true }
+    } catch (e) {
+        console.error('[Restaurant Action] saveFloorPlanLayout Error:', e)
+        return { error: 'Failed to save floor plan layout' }
+    }
+}
+
+export async function createPrintRequest(tableIds: string[], slug?: string) {
+    const tenant = await getTenant(slug)
+    if (!tenant) return { error: 'Not authenticated' }
+
+    if (!tableIds || tableIds.length === 0) {
+        return { error: 'No tables selected' }
+    }
+
+    try {
+        const req = await prisma.tablePrintRequest.create({
+            data: {
+                tenantId: tenant.id,
+                tableIds: tableIds.join(','),
+                status: 'PENDING'
+            }
+        })
+        
+        revalidatePath(`/dashboard/restaurant/${tenant.slug}/tables`)
+        return { success: true, requestId: req.id }
+    } catch (e) {
+        console.error('[Restaurant Action] createPrintRequest Error:', e)
+        return { error: 'Failed to submit print request' }
+    }
+}
+

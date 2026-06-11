@@ -17,6 +17,7 @@ export default function WaiterDashboard() {
     const [waiterId, setWaiterId] = useState('')
     const [orders, setOrders] = useState([])
     const [tables, setTables] = useState([])
+    const [initialConfig, setInitialConfig] = useState('')
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
@@ -42,6 +43,8 @@ export default function WaiterDashboard() {
             setOrders(data.orders || [])
             // @ts-ignore
             setTables(data.tables || [])
+            // @ts-ignore
+            setInitialConfig(data.config || '')
         } catch (e) {
             console.error('Failed to fetch orders')
         } finally {
@@ -118,7 +121,7 @@ export default function WaiterDashboard() {
                     {/* Orders */}
                     <div>
                         <h2 className="text-xl font-bold mb-4 text-slate-800">Active Orders</h2>
-                        <OrdersClient initialOrders={orders} tenantSlug={tenantSlug} />
+                        <OrdersClient initialOrders={orders} tenantSlug={tenantSlug} initialConfig={initialConfig} />
                     </div>
                 </div>
             </div>

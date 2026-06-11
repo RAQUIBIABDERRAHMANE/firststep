@@ -8,7 +8,7 @@ import { useRestaurantLogic } from './useRestaurantLogic'
 import { RestaurantTemplateProps } from './RestaurantTemplate'
 import {
     ShoppingCart, QrCode, MapPin, Phone, Mail, Plus, Minus, Trash2,
-    ChevronRight, Utensils, CheckCircle2, LayoutDashboard, Bell
+    ChevronRight, Utensils, CheckCircle2, LayoutDashboard, Bell, Receipt
 } from 'lucide-react'
 
 import { translations, Language, CURRENCY } from '@/lib/translations'
@@ -16,12 +16,15 @@ import { translations, Language, CURRENCY } from '@/lib/translations'
 const QRScanner = dynamic(() => import('./QRScanner'), { ssr: false })
 const ReservationModal = dynamic(() => import('./ReservationModal'), { ssr: false })
 
+import DishCustomizationModal from './DishCustomizationModal'
+
 export default function RestaurantTemplateClassic({ siteName, description, coverImage, logo, config, categories, isOwner, primaryColor }: RestaurantTemplateProps) {
     const defaultData = useRestaurantLogic(categories, isOwner)
     const {
         showScanner, setShowScanner, showCart, setShowCart, activeCategory, setActiveCategory,
         isPlacingOrder, orderComplete, setOrderComplete, items, addItem, updateQuantity,
-        totalPrice, totalItems, tableId, categoryNames, filteredItems, handleScan, handlePlaceOrder, handleCallWaiter, removeItem
+        totalPrice, totalItems, tableId, categoryNames, filteredItems, handleScan, handlePlaceOrder, handleCallWaiter, handleRequestBill, removeItem,
+        customizingDish, setCustomizingDish, handleConfirmCustomization
     } = defaultData
 
     const [lang, setLang] = useState<Language>('fr')
@@ -38,11 +41,24 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
 
     return (
         <div style={containerStyle} className="flex flex-col min-h-screen bg-[var(--bg-main,#ffffff)] font-sans text-[var(--text-main,#0f172a)] selection:bg-[var(--primary)] selection:text-[var(--card-bg,white)]">
-            {/* Call Waiter Button */}
+            {/* Call Waiter & Request Bill Logic */}
             {tableId && !isOwner && (
-                <Button onClick={handleCallWaiter} className="fixed bottom-10 left-10 h-16 w-16 rounded-full shadow-2xl bg-[var(--primary)] hover:brightness-110 text-white z-50 flex items-center justify-center animate-bounce-slow active:scale-95 transition-all border-4 border-white">
-                    <Bell className="h-7 w-7" />
-                </Button>
+                <div className="fixed bottom-10 left-10 z-50 flex flex-col gap-3">
+                    <button
+                        onClick={handleRequestBill}
+                        className="h-14 w-14 rounded-full bg-amber-500 hover:bg-amber-600 text-white shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-white"
+                        title="Request Bill"
+                    >
+                        <Receipt size={22} />
+                    </button>
+                    <button
+                        onClick={handleCallWaiter}
+                        className="h-14 w-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-white"
+                        title="Call Waiter"
+                    >
+                        <Bell size={22} />
+                    </button>
+                </div>
             )}
 
             {/* Header - Elegant Classic */}
@@ -163,14 +179,31 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                     </div>
                                 </div>
                                 <div className="p-10 flex-1 flex flex-col text-center">
-                                    <h3 className="text-2xl font-serif font-black text-slate-950 mb-4 group-hover:text-[var(--primary)] transition-colors leading-tight">
+                                    <h3 className="text-2xl font-serif font-black text-slate-950 mb-2 group-hover:text-[var(--primary)] transition-colors leading-tight">
                                         {item.name}
                                     </h3>
+                                    {/* Dietary tags */}
+                                    {(() => {
+                                        let tagsList: string[] = []
+                                        try {
+                                            tagsList = typeof item.tags === 'string' ? JSON.parse(item.tags || '[]') : (item.tags || [])
+                                        } catch {}
+                                        if (tagsList.length === 0) return null
+                                        return (
+                                            <div className="flex flex-wrap gap-1.5 justify-center mb-4">
+                                                {tagsList.map(tag => (
+                                                    <span key={tag} className="px-2.5 py-1 bg-slate-100 text-slate-600 text-[9px] font-black uppercase tracking-wider rounded-md">
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )
+                                    })()}
                                     <p className="text-slate-400 font-serif italic text-sm leading-relaxed mb-10 flex-1 px-4">
                                         {item.description || "Prepared using traditional methods with hand-picked seasonal ingredients."}
                                     </p>
                                     <Button
-                                        onClick={() => addItem({ id: item.id, name: item.name, price: item.price, image: item.image })}
+                                        onClick={() => addItem(item)}
                                         className="w-full h-16 rounded-[24px] text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl transition-all bg-slate-950 hover:bg-slate-800 text-white active:scale-95 border-2 border-transparent hover:border-slate-800"
                                     >
                                         {t.add_to_order}
@@ -212,22 +245,32 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                 </div>
                             ) : (
                                 items.map((item) => (
-                                    <div key={item.id} className="flex gap-8 items-center group">
+                                    <div key={item.cartItemId} className="flex gap-8 items-center group">
                                         <div className="h-24 w-24 rounded-3xl overflow-hidden bg-slate-50 flex-shrink-0 shadow-lg border border-slate-100">
                                             <img src={item.image || ''} className="h-full w-full object-cover transition-transform group-hover:scale-110" alt="" />
                                         </div>
                                         <div className="flex-1 space-y-1">
-                                            <h4 className="font-serif font-black text-xl text-slate-950">{item.name}</h4>
-                                            <span className="text-slate-400 font-bold text-sm tracking-tight">{item.price} {CURRENCY}</span>
+                                            <h4 className="font-serif font-black text-xl text-slate-950 leading-tight">{item.name}</h4>
+                                            {item.selectedOptions && item.selectedOptions.length > 0 && (
+                                                <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+                                                    {item.selectedOptions.map(o => `${o.group}: ${o.choice}`).join(', ')}
+                                                </div>
+                                            )}
+                                            {item.selectedAddons && item.selectedAddons.length > 0 && (
+                                                <div className="text-[9px] text-emerald-600 font-black uppercase tracking-widest">
+                                                    + {item.selectedAddons.map(a => `${a.name} (+${a.price} MAD)`).join(', ')}
+                                                </div>
+                                            )}
+                                            <span className="text-slate-400 font-bold text-sm tracking-tight block mt-1">{item.price} {CURRENCY}</span>
                                         </div>
                                         <div className="flex flex-col gap-2 items-end">
-                                            <button onClick={() => removeItem(item.id)} className="text-slate-300 hover:text-red-500 transition-colors p-1" title="Remove item">
+                                            <button onClick={() => removeItem(item.cartItemId)} className="text-slate-300 hover:text-red-500 transition-colors p-1" title="Remove item">
                                                 <Trash2 size={16} />
                                             </button>
                                             <div className="flex items-center gap-3 bg-slate-950 text-white px-4 py-2.5 rounded-2xl shadow-xl">
-                                                <button onClick={() => updateQuantity(item.id, -1)} className="hover:text-amber-500 transition-colors"><Minus size={14} strokeWidth={3} /></button>
+                                                <button onClick={() => updateQuantity(item.cartItemId, -1)} className="hover:text-amber-500 transition-colors"><Minus size={14} strokeWidth={3} /></button>
                                                 <span className="font-black text-sm w-6 text-center">{item.quantity}</span>
-                                                <button onClick={() => updateQuantity(item.id, 1)} className="hover:text-amber-500 transition-colors"><Plus size={14} strokeWidth={3} /></button>
+                                                <button onClick={() => updateQuantity(item.cartItemId, 1)} className="hover:text-amber-500 transition-colors"><Plus size={14} strokeWidth={3} /></button>
                                             </div>
                                         </div>
                                     </div>
@@ -265,7 +308,15 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                 </div>
                                 <h2 className="text-4xl font-serif font-black mb-6 text-slate-950">Received with Thanks</h2>
                                 <p className="text-slate-400 text-lg mb-12 italic font-serif">"Our culinary team is now attending to your selection with the utmost care."</p>
-                                <Button onClick={() => setOrderComplete(false)} className="rounded-full h-16 px-12 bg-slate-950 text-white hover:bg-slate-800 font-black uppercase tracking-widest text-[10px]">Return to Menu</Button>
+                                <Button
+                                    onClick={() => {
+                                        setOrderComplete(false)
+                                        setShowCart(false)
+                                    }}
+                                    className="rounded-full h-16 px-12 bg-slate-950 text-white hover:bg-slate-800 font-black uppercase tracking-widest text-[10px]"
+                                >
+                                    Return to Menu
+                                </Button>
                             </div>
                         )}
                     </div>
@@ -323,6 +374,14 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                 siteName={siteName}
                 primaryColor="var(--primary)"
                 config={config}
+            />
+
+            <DishCustomizationModal
+                isOpen={!!customizingDish}
+                dish={customizingDish}
+                onClose={() => setCustomizingDish(null)}
+                onConfirm={handleConfirmCustomization}
+                primaryColor={primaryColor}
             />
         </div>
     )

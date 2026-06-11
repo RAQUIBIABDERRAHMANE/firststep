@@ -123,10 +123,13 @@ export async function getWaiterOrders(waiterId: string) {
         // @ts-ignore
         const waiter = await prisma.restaurantWaiter.findUnique({
             where: { id: waiterId },
-            include: { tables: true }
+            include: { 
+                tables: true,
+                tenant: true
+            }
         })
 
-        if (!waiter) return { orders: [], tables: [] }
+        if (!waiter) return { orders: [], tables: [], config: null }
 
         const tableIds = waiter.tables.map((t: { id: string }) => t.id)
 
@@ -143,9 +146,9 @@ export async function getWaiterOrders(waiterId: string) {
             orderBy: { createdAt: 'desc' }
         })
         
-        return { orders, tables: waiter.tables }
+        return { orders, tables: waiter.tables, config: waiter.tenant?.config || null }
     } catch (e) {
         console.error('Error fetching waiter orders:', e)
-        return { orders: [], tables: [] }
+        return { orders: [], tables: [], config: null }
     }
 }

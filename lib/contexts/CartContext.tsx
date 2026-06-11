@@ -2,19 +2,34 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react'
 
-interface CartItem {
-    id: string
+export interface SelectedOption {
+    group: string
+    choice: string
+    priceModifier: number
+}
+
+export interface SelectedAddon {
     name: string
     price: number
+}
+
+export interface CartItem {
+    cartItemId: string // Unique identifier for this configuration (e.g. hash or baseId-options-addons)
+    id: string         // Original dish ID
+    name: string
+    basePrice: number  // Original dish price
+    price: number      // Calculated price including options/addons
     quantity: number
     image?: string | null
+    selectedOptions: SelectedOption[]
+    selectedAddons: SelectedAddon[]
 }
 
 interface CartContextType {
     items: CartItem[]
     addItem: (item: Omit<CartItem, 'quantity'>) => void
-    removeItem: (id: string) => void
-    updateQuantity: (id: string, delta: number) => void
+    removeItem: (cartItemId: string) => void
+    updateQuantity: (cartItemId: string, delta: number) => void
     clearCart: () => void
     totalItems: number
     totalPrice: number
@@ -44,21 +59,21 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
     const addItem = (item: Omit<CartItem, 'quantity'>) => {
         setItems((prev) => {
-            const existing = prev.find((i) => i.id === item.id)
+            const existing = prev.find((i) => i.cartItemId === item.cartItemId)
             if (existing) {
-                return prev.map((i) => i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i)
+                return prev.map((i) => i.cartItemId === item.cartItemId ? { ...i, quantity: i.quantity + 1 } : i)
             }
             return [...prev, { ...item, quantity: 1 }]
         })
     }
 
-    const removeItem = (id: string) => {
-        setItems((prev) => prev.filter((i) => i.id !== id))
+    const removeItem = (cartItemId: string) => {
+        setItems((prev) => prev.filter((i) => i.cartItemId !== cartItemId))
     }
 
-    const updateQuantity = (id: string, delta: number) => {
+    const updateQuantity = (cartItemId: string, delta: number) => {
         setItems((prev) => prev.map((i) => {
-            if (i.id === id) {
+            if (i.cartItemId === cartItemId) {
                 const newQty = Math.max(1, i.quantity + delta)
                 return { ...i, quantity: newQty }
             }

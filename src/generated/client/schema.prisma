@@ -120,6 +120,7 @@ model TenantWebsite {
   reservations        RestaurantReservation[]
   invoices            Invoice[]
   invoiceSettings     InvoiceSettings?
+  printRequests       TablePrintRequest[]
   service             Service                 @relation(fields: [serviceId], references: [id])
   user                User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -148,21 +149,25 @@ model RestaurantDish {
   image       String?
   isActive    Boolean            @default(true)
   order       Int                @default(0)
+  options     String             @default("[]")
+  addons      String             @default("[]")
+  tags        String             @default("[]")
   category    RestaurantCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
   @@index([categoryId])
 }
 
 model RestaurantTable {
-  id       String            @id @default(cuid())
-  tenantId String
-  number   String
-  capacity Int?
-  isActive Boolean           @default(true)
-  waiterId String?
-  orders   RestaurantOrder[]
-  waiter   RestaurantWaiter? @relation(fields: [waiterId], references: [id])
-  tenant   TenantWebsite     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  id           String                  @id @default(cuid())
+  tenantId     String
+  number       String
+  capacity     Int?
+  isActive     Boolean                 @default(true)
+  waiterId     String?
+  orders       RestaurantOrder[]
+  waiter       RestaurantWaiter?       @relation(fields: [waiterId], references: [id])
+  tenant       TenantWebsite           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  reservations RestaurantReservation[]
 
   @@unique([tenantId, number])
   @@index([tenantId])
@@ -196,13 +201,15 @@ model RestaurantOrder {
 }
 
 model RestaurantOrderItem {
-  id       String          @id @default(cuid())
-  orderId  String
-  dishId   String
-  name     String
-  price    Float
-  quantity Int
-  order    RestaurantOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  id              String          @id @default(cuid())
+  orderId         String
+  dishId          String
+  name            String
+  price           Float
+  quantity        Int
+  selectedOptions String          @default("[]")
+  selectedAddons  String          @default("[]")
+  order           RestaurantOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
   @@index([orderId])
 }
@@ -223,7 +230,7 @@ model RestaurantReport {
 }
 
 model RestaurantReservation {
-  id        String        @id @default(cuid())
+  id        String           @id @default(cuid())
   tenantId  String
   name      String
   phone     String
@@ -232,12 +239,15 @@ model RestaurantReservation {
   time      String
   partySize Int
   notes     String?
-  status    String        @default("PENDING")
-  createdAt DateTime      @default(now())
-  tenant    TenantWebsite @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  status    String           @default("PENDING")
+  tableId   String?
+  table     RestaurantTable? @relation(fields: [tableId], references: [id], onDelete: SetNull)
+  createdAt DateTime         @default(now())
+  tenant    TenantWebsite    @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
   @@index([tenantId])
   @@index([date])
+  @@index([tableId])
 }
 
 model CabinetService {
@@ -478,4 +488,16 @@ model MedicalHistory {
   client    CabinetClient @relation(fields: [clientId], references: [id], onDelete: Cascade)
 
   @@index([clientId])
+}
+
+model TablePrintRequest {
+  id        String        @id @default(cuid())
+  tenantId  String
+  tenant    TenantWebsite @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  tableIds  String // Comma-separated list of table IDs
+  status    String        @default("PENDING") // PENDING, PRINTED, COMPLETED
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([tenantId])
 }

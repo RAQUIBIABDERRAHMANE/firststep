@@ -8,7 +8,7 @@ import { useRestaurantLogic } from './useRestaurantLogic'
 import { RestaurantTemplateProps } from './RestaurantTemplate'
 import {
     ShoppingCart, QrCode, MapPin, Plus, Minus, X, Trash2,
-    ChevronLeft, ChevronRight, LayoutDashboard, Bell, Check
+    ChevronLeft, ChevronRight, LayoutDashboard, Bell, Check, Receipt
 } from 'lucide-react'
 
 import { translations, Language, CURRENCY } from '@/lib/translations'
@@ -16,12 +16,15 @@ import { translations, Language, CURRENCY } from '@/lib/translations'
 const QRScanner = dynamic(() => import('./QRScanner'), { ssr: false })
 const ReservationModal = dynamic(() => import('./ReservationModal'), { ssr: false })
 
+import DishCustomizationModal from './DishCustomizationModal'
+
 export default function RestaurantTemplateModern({ siteName, description, coverImage, logo, config, categories, isOwner, primaryColor }: RestaurantTemplateProps) {
     const defaultData = useRestaurantLogic(categories, isOwner)
     const {
         showScanner, setShowScanner, showCart, setShowCart, activeCategory, setActiveCategory,
         isPlacingOrder, orderComplete, setOrderComplete, items, addItem, updateQuantity,
-        totalPrice, totalItems, tableId, categoryNames, filteredItems, handleScan, handlePlaceOrder, handleCallWaiter, removeItem
+        totalPrice, totalItems, tableId, categoryNames, filteredItems, handleScan, handlePlaceOrder, handleCallWaiter, handleRequestBill, removeItem,
+        customizingDish, setCustomizingDish, handleConfirmCustomization
     } = defaultData
 
     const [lang, setLang] = useState<Language>('fr')
@@ -194,6 +197,23 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                                 <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-black mb-10 leading-[0.8] tracking-tighter transition-all hover:tracking-[-0.05em] cursor-default">
                                     {currentItem.name}
                                 </h1>
+                                {/* Dietary tags */}
+                                {(() => {
+                                    let tagsList: string[] = []
+                                    try {
+                                        tagsList = typeof currentItem.tags === 'string' ? JSON.parse(currentItem.tags || '[]') : (currentItem.tags || [])
+                                    } catch {}
+                                    if (tagsList.length === 0) return null
+                                    return (
+                                        <div className="flex flex-wrap gap-1.5 justify-start mb-6">
+                                            {tagsList.map(tag => (
+                                                <span key={tag} className="px-2.5 py-1 bg-white/10 text-white text-[9px] font-black uppercase tracking-wider rounded-md">
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )
+                                })()}
                                 <p className="text-xl md:text-2xl text-zinc-400 font-medium leading-relaxed mb-16 max-w-xl">
                                     {currentItem.description || 'An extraordinary culinary composition crafted with precision using curated ingredients from our local partners.'}
                                 </p>
@@ -203,7 +223,7 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                                         <span className="text-5xl font-black text-white tabular-nums">{currentItem.price}<span className="text-xl ml-2 font-light opacity-50">{CURRENCY}</span></span>
                                     </div>
                                     <Button
-                                        onClick={() => addItem({ id: currentItem.id, name: currentItem.name, price: currentItem.price, image: currentItem.image })}
+                                        onClick={() => addItem(currentItem)}
                                         className="h-20 px-16 rounded-[40px] bg-[var(--card-bg,white)] text-[var(--text-main,#000)] hover:bg-zinc-200 transition-all font-black text-lg uppercase tracking-[0.3em] shadow-[0_20px_50px_rgba(255,255,255,0.1)] active:scale-95"
                                     >
                                         {t.add_to_order}
@@ -289,22 +309,32 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                                 </div>
                             ) : (
                                 items.map((item) => (
-                                    <div key={item.id} className="flex gap-4 items-center bg-[var(--card-bg,white)]/5 rounded-xl p-4">
+                                    <div key={item.cartItemId} className="flex gap-4 items-center bg-[var(--card-bg,white)]/5 rounded-xl p-4">
                                         <img src={item.image || ''} className="h-16 w-16 rounded-lg object-cover" alt="" />
                                         <div className="flex-1">
-                                            <h4 className="font-medium">{item.name}</h4>
-                                            <span className="text-[var(--primary)]">{item.price} MAD</span>
+                                            <h4 className="font-medium leading-tight">{item.name}</h4>
+                                            {item.selectedOptions && item.selectedOptions.length > 0 && (
+                                                <div className="text-[10px] text-zinc-500 font-bold uppercase tracking-wider mt-0.5">
+                                                    {item.selectedOptions.map(o => `${o.group}: ${o.choice}`).join(', ')}
+                                                </div>
+                                            )}
+                                            {item.selectedAddons && item.selectedAddons.length > 0 && (
+                                                <div className="text-[9px] text-emerald-500 font-bold uppercase tracking-widest mt-0.5">
+                                                    + {item.selectedAddons.map(a => `${a.name} (+${a.price} MAD)`).join(', ')}
+                                                </div>
+                                            )}
+                                            <span className="text-[var(--primary)] block mt-1">{item.price} MAD</span>
                                         </div>
                                         <div className="flex flex-col gap-2 items-end">
-                                            <button onClick={() => removeItem(item.id)} className="text-zinc-600 hover:text-red-500 transition-colors p-1" title="Remove item">
+                                            <button onClick={() => removeItem(item.cartItemId)} className="text-zinc-600 hover:text-red-500 transition-colors p-1" title="Remove item">
                                                 <Trash2 size={14} />
                                             </button>
                                             <div className="flex items-center gap-2 bg-black/30 rounded-lg p-1">
-                                                <button onClick={() => updateQuantity(item.id, -1)} className="p-2 hover:text-[var(--primary)]">
+                                                <button onClick={() => updateQuantity(item.cartItemId, -1)} className="p-2 hover:text-[var(--primary)]">
                                                     <Minus size={14} />
                                                 </button>
                                                 <span className="w-6 text-center font-mono">{item.quantity}</span>
-                                                <button onClick={() => updateQuantity(item.id, 1)} className="p-2 hover:text-[var(--primary)]">
+                                                <button onClick={() => updateQuantity(item.cartItemId, 1)} className="p-2 hover:text-[var(--primary)]">
                                                     <Plus size={14} />
                                                 </button>
                                             </div>
@@ -338,7 +368,14 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                                 </div>
                                 <h2 className="text-3xl font-bold mb-2">Order Confirmed</h2>
                                 <p className="text-zinc-400 mb-8">Your order is being prepared</p>
-                                <Button onClick={() => setOrderComplete(false)} variant="outline" className="border-white/20">
+                                <Button
+                                    onClick={() => {
+                                        setOrderComplete(false)
+                                        setShowCart(false)
+                                    }}
+                                    variant="outline"
+                                    className="border-white/20"
+                                >
                                     Continue
                                 </Button>
                             </div>
@@ -347,6 +384,25 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                 </div>
             )}
 
+            {/* Call Waiter & Request Bill Logic */}
+            {tableId && !isOwner && (
+                <div className="fixed bottom-6 left-24 z-50 flex flex-col gap-3">
+                    <button
+                        onClick={handleRequestBill}
+                        className="h-14 w-14 rounded-full bg-amber-500 hover:bg-amber-600 text-white shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-white/10"
+                        title="Request Bill"
+                    >
+                        <Receipt size={22} />
+                    </button>
+                    <button
+                        onClick={handleCallWaiter}
+                        className="h-14 w-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-white/10"
+                        title="Call Waiter"
+                    >
+                        <Bell size={22} />
+                    </button>
+                </div>
+            )}
             {showScanner && <QRScanner onScan={handleScan} onClose={() => setShowScanner(false)} />}
             {/* Reservation Modal */}
             <ReservationModal
@@ -356,6 +412,14 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                 siteName={siteName}
                 primaryColor="var(--primary)"
                 config={config}
+            />
+
+            <DishCustomizationModal
+                isOpen={!!customizingDish}
+                dish={customizingDish}
+                onClose={() => setCustomizingDish(null)}
+                onConfirm={handleConfirmCustomization}
+                primaryColor={primaryColor}
             />
         </div>
     )

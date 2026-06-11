@@ -207,3 +207,51 @@ export async function toggleServiceStatus(serviceId: string) {
         return { error: 'Failed to update service status' }
     }
 }
+
+export async function getPrintRequests() {
+    const user = await getCurrentUser()
+
+    if (!user || user.role !== 'ADMIN') {
+        throw new Error('Unauthorized')
+    }
+
+    try {
+        return await prisma.tablePrintRequest.findMany({
+            include: {
+                tenant: {
+                    include: {
+                        user: true,
+                        tables: true
+                    }
+                }
+            },
+            orderBy: {
+                createdAt: 'desc'
+            }
+        })
+    } catch (error) {
+        console.error('Failed to fetch print requests:', error)
+        return []
+    }
+}
+
+export async function updatePrintRequestStatus(requestId: string, status: string) {
+    const user = await getCurrentUser()
+
+    if (!user || user.role !== 'ADMIN') {
+        throw new Error('Unauthorized')
+    }
+
+    try {
+        await prisma.tablePrintRequest.update({
+            where: { id: requestId },
+            data: { status }
+        })
+
+        revalidatePath('/admin/print-requests')
+        return { success: true }
+    } catch (error) {
+        console.error('Failed to update print request status:', error)
+        return { error: 'Failed to update request' }
+    }
+}
