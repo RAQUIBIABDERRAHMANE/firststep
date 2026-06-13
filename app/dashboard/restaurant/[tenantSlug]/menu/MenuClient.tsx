@@ -22,13 +22,14 @@ import {
     updateCategory,
     createDish,
     deleteDish,
-    updateDish
+    updateDish,
+    uploadDishImage
 } from '@/app/actions/restaurant'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { translations, Language } from '@/lib/translations'
-import { ChevronLeft, Globe } from 'lucide-react'
+import { ChevronLeft, Globe, Loader2, Upload } from 'lucide-react'
 
 type Dish = {
     id: string
@@ -64,6 +65,7 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
     const [selectedTags, setSelectedTags] = useState<string[]>([])
     const [optionGroups, setOptionGroups] = useState<any[]>([])
     const [addonsList, setAddonsList] = useState<any[]>([])
+    const [uploading, setUploading] = useState(false)
 
     // Addon adding input state
     const [newAddonName, setNewAddonName] = useState('')
@@ -134,6 +136,29 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
         setAddonsList([])
         setAddingDishTo(null)
         setEditingDish(null)
+        setUploading(false)
+    }
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+
+        setUploading(true)
+        const formData = new FormData()
+        formData.append('imageFile', file)
+
+        try {
+            const res = await uploadDishImage(formData)
+            if (res?.error) {
+                alert(res.error)
+            } else if (res?.url) {
+                setDishForm(prev => ({ ...prev, image: res.url }))
+            }
+        } catch (err) {
+            alert('Failed to upload image')
+        } finally {
+            setUploading(false)
+        }
     }
 
     const toggleLanguage = () => {
@@ -494,14 +519,72 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
                                                         className="h-12 rounded-xl"
                                                     />
                                                 </div>
-                                                <div className="space-y-2">
-                                                    <label className="text-xs font-black text-slate-400 uppercase ml-1">{t.image_url}</label>
-                                                    <Input
-                                                        placeholder="https://images.unsplash.com/..."
-                                                        value={dishForm.image}
-                                                        onChange={(e) => setDishForm({ ...dishForm, image: e.target.value })}
-                                                        className="h-12 rounded-xl"
-                                                    />
+                                                <div className="space-y-3">
+                                                    <label className="text-xs font-black text-slate-400 uppercase ml-1">
+                                                        {lang === 'fr' ? 'Image du plat' : 'Dish Image'}
+                                                    </label>
+                                                    
+                                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+                                                        {/* Image Preview & File Upload */}
+                                                        <div className="flex flex-col gap-3">
+                                                            <div className="relative h-32 w-full rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 flex flex-col items-center justify-center overflow-hidden group">
+                                                                {dishForm.image ? (
+                                                                    <>
+                                                                        <Image src={dishForm.image} fill className="object-cover" alt="Dish Preview" />
+                                                                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all">
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={() => setDishForm(prev => ({ ...prev, image: '' }))}
+                                                                                className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-bold transition-all shadow-md"
+                                                                            >
+                                                                                {lang === 'fr' ? 'Supprimer' : 'Remove'}
+                                                                            </button>
+                                                                        </div>
+                                                                    </>
+                                                                ) : uploading ? (
+                                                                    <div className="flex flex-col items-center gap-2">
+                                                                        <Loader2 className="h-6 w-6 text-blue-600 animate-spin" />
+                                                                        <span className="text-xs text-slate-500 font-bold">
+                                                                            {lang === 'fr' ? 'Téléversement...' : 'Uploading...'}
+                                                                        </span>
+                                                                    </div>
+                                                                ) : (
+                                                                    <label className="cursor-pointer w-full h-full flex flex-col items-center justify-center gap-2 hover:bg-slate-100/50 transition-colors">
+                                                                        <Upload className="h-6 w-6 text-slate-400" />
+                                                                        <span className="text-xs text-slate-500 font-bold text-center px-4">
+                                                                            {lang === 'fr' ? 'Téléverser un fichier' : 'Upload Image File'}
+                                                                        </span>
+                                                                        <input
+                                                                            type="file"
+                                                                            accept="image/*"
+                                                                            className="hidden"
+                                                                            onChange={handleImageUpload}
+                                                                            disabled={uploading}
+                                                                        />
+                                                                    </label>
+                                                                )}
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Manual URL Input fallback */}
+                                                        <div className="space-y-2">
+                                                            <span className="text-[10px] font-black text-slate-400 uppercase ml-1">
+                                                                {lang === 'fr' ? "Ou coller l'URL d'une image" : "Or paste image URL"}
+                                                            </span>
+                                                            <Input
+                                                                placeholder="https://images.unsplash.com/..."
+                                                                value={dishForm.image}
+                                                                onChange={(e) => setDishForm({ ...dishForm, image: e.target.value })}
+                                                                className="h-12 rounded-xl text-sm"
+                                                                disabled={uploading}
+                                                            />
+                                                            <p className="text-[10px] text-slate-400 ml-1 leading-normal">
+                                                                {lang === 'fr' 
+                                                                    ? "Sélectionnez un fichier pour l'héberger localement ou entrez directement l'URL d'une image en ligne."
+                                                                    : "Select an image file to host it locally or enter a web URL directly."}
+                                                            </p>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                                 {/* Dietary Tags */}

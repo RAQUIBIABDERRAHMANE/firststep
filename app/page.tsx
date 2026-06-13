@@ -14,6 +14,7 @@ export default async function Home() {
 
   return (
     <main className="flex min-h-screen flex-col bg-[#030712]">
+      {/* Navbar is hidden on hero — shown on scroll for sub-sections */}
       <Navbar user={user} />
       <HeroSection />
       <ServicesOverview services={services} />
@@ -21,9 +22,12 @@ export default async function Home() {
       <SignupSection />
 
       {/* Footer */}
-      <footer className="relative bg-[#030712] border-t border-cyan-900/25 overflow-hidden">
+      <footer className="relative bg-[#030712] overflow-hidden">
+
+        {/* Top border glow */}
+        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(0, 102, 255,0.3), transparent)' }} />
         {/* Atmospheric glow */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] rounded-full bg-cyan-950/40 blur-[80px] pointer-events-none" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[250px] rounded-full blur-[100px] pointer-events-none" style={{ backgroundColor: 'rgba(0, 102, 255,0.03)' }} />
 
         <div className="relative max-w-7xl mx-auto px-6 py-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-14">
@@ -31,7 +35,9 @@ export default async function Home() {
             {/* Brand */}
             <div className="md:col-span-2 space-y-5">
               <div className="flex items-center gap-3">
-                <div className="relative h-9 w-9 shrink-0 rounded-lg overflow-hidden ring-1 ring-white/10">
+                <div className="relative h-9 w-9 shrink-0 rounded-lg overflow-hidden"
+                  style={{ boxShadow: '0 0 0 1px rgba(0, 102, 255,0.2), 0 0 12px rgba(0, 102, 255,0.08)' }}
+                >
                   <Image
                     src="/Untitled design (13).png"
                     alt="FirstStep Logo"
@@ -40,21 +46,21 @@ export default async function Home() {
                   />
                 </div>
                 <span className="font-syne font-black text-[18px] tracking-tight text-white">
-                  First<span className="text-cyan-400">Step</span>
+                  First<span style={{ color: '#0066FF' }}>Step</span>
                 </span>
               </div>
               <p className="font-figtree text-[13px] text-slate-500 leading-relaxed max-w-xs">
                 La plateforme SaaS B2B qui centralise la gestion de votre entreprise au Maroc.
               </p>
               <div className="flex items-center gap-2 text-[12px] font-figtree text-slate-600">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                Tous les syst&egrave;mes op&eacute;rationnels
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(52,211,153,0.6)]" />
+                Tous les systèmes opérationnels
               </div>
             </div>
 
             {/* Product */}
             <div className="space-y-4">
-              <h4 className="font-syne text-[11px] font-bold text-slate-400 uppercase tracking-widest">Produit</h4>
+              <h4 className="font-syne text-[11px] font-bold uppercase tracking-widest" style={{ color: 'rgba(0, 102, 255,0.5)' }}>Produit</h4>
               <ul className="space-y-3">
                 {[
                   { href: '#services', label: 'Solutions' },
@@ -63,7 +69,7 @@ export default async function Home() {
                   { href: '#signup', label: 'Tarifs' },
                 ].map((l) => (
                   <li key={l.href}>
-                    <Link href={l.href} className="font-figtree text-[13px] text-slate-500 hover:text-cyan-400 transition-colors duration-200">
+                    <Link href={l.href} className="font-figtree text-[13px] text-slate-500 hover:text-white transition-colors duration-200">
                       {l.label}
                     </Link>
                   </li>
@@ -73,7 +79,7 @@ export default async function Home() {
 
             {/* Legal */}
             <div className="space-y-4">
-              <h4 className="font-syne text-[11px] font-bold text-slate-400 uppercase tracking-widest">L&eacute;gal</h4>
+              <h4 className="font-syne text-[11px] font-bold uppercase tracking-widest" style={{ color: 'rgba(0, 102, 255,0.5)' }}>Légal</h4>
               <ul className="space-y-3">
                 {[
                   { href: '/about', label: 'À propos' },
@@ -83,7 +89,7 @@ export default async function Home() {
                   { href: 'mailto:contact@firststepco.com', label: 'Contact' },
                 ].map((l) => (
                   <li key={l.href}>
-                    <Link href={l.href} className="font-figtree text-[13px] text-slate-500 hover:text-cyan-400 transition-colors duration-200">
+                    <Link href={l.href} className="font-figtree text-[13px] text-slate-500 hover:text-white transition-colors duration-200">
                       {l.label}
                     </Link>
                   </li>
@@ -93,7 +99,7 @@ export default async function Home() {
           </div>
 
           {/* Bottom bar */}
-          <div className="pt-8 border-t border-white/4 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4" style={{ borderTop: '1px solid rgba(0, 102, 255,0.1)' }}>
             <p className="font-figtree text-[12px] text-slate-600">
               &copy; 2026 FirstStep Platform. Tous droits réservés.
             </p>

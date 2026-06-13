@@ -445,10 +445,6 @@ h3 {
 }
 
 /* Cover the watermark injected inside spline-viewer's shadow DOM */
-spline-viewer {
-  position: relative;
-}
-
 spline-viewer::after {
   content: '';
   position: absolute;
@@ -460,3 +456,4 @@ spline-viewer::after {
   z-index: 9999;
   pointer-events: none;
 }
+/* Recompile trigger comment v2 */

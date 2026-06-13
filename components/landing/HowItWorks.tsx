@@ -2,129 +2,167 @@
 
 import { Settings, Rocket, TrendingUp } from 'lucide-react'
 
+const C = '0, 102, 255'
+
 const steps = [
     {
         number: '01',
         icon: Settings,
         title: 'Choisissez vos modules',
         description: 'Sélectionnez les solutions adaptées à votre activité. Chaque module est indépendant et activable en un clic depuis votre tableau de bord.',
-        accent: 'cyan',
     },
     {
         number: '02',
         icon: Rocket,
         title: 'Configurez en 5 minutes',
         description: "Interface intuitive, zéro code. Notre équipe vous accompagne pour une intégration sans friction dans votre flux de travail.",
-        accent: 'teal',
     },
     {
         number: '03',
         icon: TrendingUp,
         title: 'Scalez votre activité',
         description: 'Suivez vos performances en temps réel. Activez de nouveaux modules au fur et à mesure de la croissance de votre entreprise.',
-        accent: 'sky',
     },
 ]
 
-const tokens: Record<string, { icon: string; title: string; border: string; bg: string; num: string; line: string }> = {
-    cyan: {
-        icon: 'text-cyan-400',
-        title: 'group-hover:text-cyan-300',
-        border: 'group-hover:border-cyan-800/50',
-        bg: 'bg-cyan-500/8 border-cyan-800/30',
-        num: 'text-cyan-950/80',
-        line: 'from-cyan-800/50',
-    },
-    teal: {
-        icon: 'text-teal-400',
-        title: 'group-hover:text-teal-300',
-        border: 'group-hover:border-teal-800/50',
-        bg: 'bg-teal-500/8 border-teal-800/30',
-        num: 'text-teal-950/80',
-        line: 'from-teal-800/50',
-    },
-    sky: {
-        icon: 'text-sky-400',
-        title: 'group-hover:text-sky-300',
-        border: 'group-hover:border-sky-800/50',
-        bg: 'bg-sky-500/8 border-sky-800/30',
-        num: 'text-sky-950/80',
-        line: 'from-sky-800/50',
-    },
-}
+const styles = `
+    .how-glass {
+        background: rgba(6,12,24,0.65);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .how-glass::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        padding: 1px;
+        border-radius: inherit;
+        background: linear-gradient(180deg, rgba(${C},0.4) 0%, rgba(${C},0.1) 25%, transparent 50%, rgba(${C},0.05) 100%);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+        transition: background 0.35s ease;
+    }
+    .how-glass:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 60px rgba(${C},0.1), 0 24px 48px rgba(0,0,0,0.35);
+    }
+    .how-glass:hover::before {
+        background: linear-gradient(180deg, rgba(${C},0.6) 0%, rgba(${C},0.2) 25%, transparent 55%, rgba(${C},0.1) 100%);
+    }
+
+    @keyframes how-up {
+        from { opacity: 0; transform: translateY(28px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    .how-r { animation: how-up 0.8s cubic-bezier(.22,1,.36,1) both; }
+    .how-d1 { animation-delay: 100ms; }
+    .how-d2 { animation-delay: 220ms; }
+    .how-d3 { animation-delay: 340ms; }
+
+    @keyframes travel {
+        0%   { left: 0%; opacity: 0; }
+        10%  { opacity: 1; }
+        90%  { opacity: 1; }
+        100% { left: 100%; opacity: 0; }
+    }
+`
 
 export default function HowItWorks() {
     return (
-        <section id="how-it-works" className="relative py-32 bg-[#030712] overflow-hidden">
+        <>
+            <style>{styles}</style>
 
-            {/* Top separator */}
-            <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-900/50 to-transparent" />
+            <section id="how-it-works" className="relative py-32 bg-[#030712] overflow-hidden">
 
-            {/* Center atmospheric glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-175 h-[350px] rounded-full bg-cyan-950/60 blur-[130px] pointer-events-none" />
+                {/* Top separator */}
+                <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, rgba(${C},0.3), transparent)` }} />
 
-            <div className="relative max-w-7xl mx-auto px-6">
+                {/* Orbs */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full blur-[140px] pointer-events-none" style={{ backgroundColor: 'rgba(0,30,50,0.5)' }} />
+                <div className="absolute top-[20%] right-[5%] w-56 h-56 rounded-full blur-[100px] pointer-events-none" style={{ backgroundColor: `rgba(${C},0.03)` }} />
+                <div className="absolute bottom-[20%] left-[5%] w-48 h-48 rounded-full blur-[90px] pointer-events-none" style={{ backgroundColor: `rgba(${C},0.03)` }} />
 
-                {/* Header */}
-                <div className="text-center max-w-2xl mx-auto mb-20">
-                    <div className="flex items-center justify-center gap-3 mb-5">
-                        <div className="h-px w-10 bg-cyan-400" />
-                        <span className="font-figtree text-[11px] font-semibold text-cyan-400 uppercase tracking-[0.25em]">Comment ça marche</span>
-                        <div className="h-px w-10 bg-cyan-400" />
-                    </div>
-                    <h2 className="font-syne font-black text-white leading-tight mb-4">
-                        <span className="block text-4xl md:text-5xl">Opérationnel en</span>
-                        <span className="block text-4xl md:text-5xl text-cyan-400">quelques minutes</span>
-                    </h2>
-                    <p className="font-figtree text-[16px] text-slate-400 leading-relaxed">
-                        Pas de formation longue, pas de DSI nécessaire.
-                        <br />Démarrez aujourd&apos;hui et gérez tout depuis un tableau de bord unifié.
-                    </p>
-                </div>
+                <div className="relative max-w-7xl mx-auto px-6">
 
-                {/* Steps */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 relative">
-
-                    {/* Horizontal connector line (desktop only) */}
-                    <div className="hidden md:block absolute top-13 left-[calc(16.67%+28px)] right-[calc(16.67%+28px)] h-px">
-                        <div className="absolute inset-0 bg-linear-to-r from-cyan-800/60 via-teal-800/40 to-sky-800/60" />
+                    {/* Header */}
+                    <div className="how-r text-center max-w-2xl mx-auto mb-20">
+                        <div className="flex items-center justify-center gap-3 mb-5">
+                            <div className="h-px w-10" style={{ background: `linear-gradient(90deg, transparent, #0066FF)` }} />
+                            <span className="font-figtree text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: '#0066FF' }}>Comment ça marche</span>
+                            <div className="h-px w-10" style={{ background: `linear-gradient(90deg, #0066FF, transparent)` }} />
+                        </div>
+                        <h2 className="font-syne font-black text-white leading-tight mb-4">
+                            <span className="block text-4xl md:text-5xl">Opérationnel en</span>
+                            <span className="block text-4xl md:text-5xl" style={{ color: '#0066FF' }}>quelques minutes</span>
+                        </h2>
+                        <p className="font-figtree text-[15px] text-slate-400 leading-relaxed">
+                            Pas de formation longue, pas de DSI nécessaire.
+                            <br />Démarrez aujourd&apos;hui et gérez tout depuis un tableau de bord unifié.
+                        </p>
                     </div>
 
-                    {steps.map((step, i) => {
-                        const c = tokens[step.accent]
-                        const Icon = step.icon
-                        return (
-                            <div key={i} className="group relative">
-                                <div className={`relative rounded-xl border border-white/5 ${c.border} bg-[#060c18] transition-all duration-300 p-8 h-full overflow-hidden hover:-translate-y-1`}>
+                    {/* Steps */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 relative">
 
-                                    {/* Large background number */}
-                                    <div className={`absolute -bottom-2 right-3 font-syne font-black text-[110px] leading-none select-none pointer-events-none ${c.num}`}>
-                                        {step.number}
+                        {/* Connector line (desktop) */}
+                        <div className="hidden md:block absolute top-[52px] left-[calc(16.67%+32px)] right-[calc(16.67%+32px)] h-px">
+                            <div className="absolute inset-0" style={{ background: `linear-gradient(90deg, rgba(${C},0.35), rgba(${C},0.15), rgba(${C},0.35))` }} />
+                            <div
+                                className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full"
+                                style={{
+                                    backgroundColor: '#0066FF',
+                                    boxShadow: `0 0 8px rgba(${C},0.8)`,
+                                    animation: 'travel 3s ease-in-out infinite',
+                                }}
+                            />
+                        </div>
+
+                        {steps.map((step, i) => {
+                            const Icon = step.icon
+                            const delays = ['how-d1', 'how-d2', 'how-d3']
+                            return (
+                                <div key={i} className={`how-r ${delays[i]}`}>
+                                    <div className="how-glass rounded-2xl p-8 h-full">
+
+                                        {/* Big background number */}
+                                        <div className="absolute -bottom-2 right-3 font-syne font-black text-[110px] leading-none select-none pointer-events-none" style={{ color: `rgba(${C},0.04)` }}>
+                                            {step.number}
+                                        </div>
+
+                                        {/* Icon */}
+                                        <div className="relative z-10 inline-flex items-center justify-center h-12 w-12 rounded-xl mb-6"
+                                            style={{
+                                                backgroundColor: `rgba(${C},0.07)`,
+                                                boxShadow: `0 0 20px rgba(${C},0.08), inset 0 1px 1px rgba(${C},0.12)`,
+                                            }}
+                                        >
+                                            <Icon className="h-5 w-5" style={{ color: '#0066FF' }} />
+                                        </div>
+
+                                        {/* Step label */}
+                                        <div className="font-syne text-[11px] font-black tracking-wider mb-3" style={{ color: `rgba(${C},0.5)` }}>
+                                            STEP {step.number}
+                                        </div>
+
+                                        <h3 className="font-syne font-bold text-[19px] text-white mb-3 relative z-10">
+                                            {step.title}
+                                        </h3>
+                                        <p className="font-figtree text-[13px] text-slate-500 leading-relaxed relative z-10">
+                                            {step.description}
+                                        </p>
                                     </div>
-
-                                    {/* Icon */}
-                                    <div className={`relative z-10 inline-flex items-center justify-center h-12 w-12 rounded-xl border mb-6 ${c.bg}`}>
-                                        <Icon className={`h-5 w-5 ${c.icon}`} />
-                                    </div>
-
-                                    {/* Step number label */}
-                                    <div className={`font-syne text-[12px] font-black tracking-wider mb-3 ${c.icon}`}>
-                                        STEP {step.number}
-                                    </div>
-
-                                    <h3 className={`font-syne font-bold text-[19px] text-white mb-3 ${c.title} transition-colors duration-300`}>
-                                        {step.title}
-                                    </h3>
-                                    <p className="font-figtree text-[13px] text-slate-500 leading-relaxed relative z-10">
-                                        {step.description}
-                                    </p>
                                 </div>
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     )
 }
-

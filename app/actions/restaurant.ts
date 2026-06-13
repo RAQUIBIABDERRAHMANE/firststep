@@ -5,6 +5,7 @@ import { getCurrentUser } from '@/app/actions/auth'
 import { revalidatePath } from 'next/cache'
 import { computeMonthlyAnalytics, generateReportPdf, type ReportLanguage } from '@/lib/restaurant-report'
 import { sendMonthlyReportEmail } from '@/lib/mail'
+import { uploadImage } from '@/lib/r2'
 
 export async function getTenant(slug?: string) {
     const user = await getCurrentUser()
@@ -799,6 +800,28 @@ export async function createPrintRequest(tableIds: string[], slug?: string) {
     } catch (e) {
         console.error('[Restaurant Action] createPrintRequest Error:', e)
         return { error: 'Failed to submit print request' }
+    }
+}
+
+export async function uploadDishImage(formData: FormData) {
+    const file = formData.get('imageFile') as File
+    if (!file || file.size === 0) return { error: 'No file uploaded' }
+
+    try {
+        const arrayBuffer = await file.arrayBuffer()
+        const buffer = Buffer.from(arrayBuffer)
+        
+        const path = require('path')
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9)
+        const fileExt = path.extname(file.name) || '.jpg'
+        const filename = `dish-${uniqueSuffix}${fileExt}`
+        const contentType = file.type || 'image/jpeg'
+        
+        const publicUrl = await uploadImage(buffer, filename, contentType)
+        return { success: true, url: publicUrl }
+    } catch (e) {
+        console.error('[Restaurant Action] uploadDishImage Error:', e)
+        return { error: 'Failed to save uploaded image' }
     }
 }
 
