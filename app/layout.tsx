@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Syne, Figtree } from "next/font/google";
+import { Syne, Figtree, Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -15,6 +15,20 @@ const figtree = Figtree({
   subsets: ["latin"],
   variable: "--font-figtree",
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-jakarta",
+  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -59,6 +73,8 @@ export default function RootLayout({
         className={cn(
           syne.variable,
           figtree.variable,
+          playfair.variable,
+          jakarta.variable,
           "min-h-screen bg-[#030712] font-figtree antialiased"
         )}
         suppressHydrationWarning

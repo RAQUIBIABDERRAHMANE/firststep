@@ -91,19 +91,21 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
             
             {/* Dark Luxury Header */}
             <header className="w-full bg-[#180f0c]/90 sticky top-0 z-50 border-b border-[#2d1b15]/60 backdrop-blur-md">
-                <div className="max-w-3xl mx-auto px-5 h-16 flex items-center justify-between">
+                <div className="max-w-3xl mx-auto px-5 h-16 flex items-center justify-between relative">
+                    {/* Left dummy/logo space */}
+                    <div className="w-10 h-10" />
+
                     {/* Centered Brand Name */}
-                    <div className="flex-1 flex justify-center pl-8">
-                        <span className="font-serif text-2xl tracking-wide font-medium text-[#f3b182] hover:opacity-90 cursor-pointer">
-                            {siteName}
-                        </span>
-                    </div>
+                    <span className="absolute left-1/2 -translate-x-1/2 font-serif text-2xl tracking-wide font-medium text-[#f3b182] hover:opacity-90 cursor-pointer">
+                        {siteName}
+                    </span>
+
                     {/* Hamburger Menu Icon */}
-                    <button className="text-stone-300 hover:text-white transition-colors p-1 shrink-0">
-                        <div className="w-6 h-5 flex flex-col justify-between items-end">
-                            <span className="w-6 h-0.5 bg-stone-300 rounded-full" />
-                            <span className="w-4 h-0.5 bg-stone-300 rounded-full" />
-                            <span className="w-5 h-0.5 bg-stone-300 rounded-full" />
+                    <button className="text-stone-300 hover:text-white transition-colors p-1 shrink-0 w-10 h-10 flex items-center justify-end">
+                        <div className="w-6 h-4.5 flex flex-col justify-between items-end">
+                            <span className="w-6 h-0.5 bg-[#f3b182] rounded-full animate-pulse-slow" />
+                            <span className="w-4 h-0.5 bg-[#f3b182] rounded-full animate-pulse-slow" />
+                            <span className="w-5 h-0.5 bg-[#f3b182] rounded-full animate-pulse-slow" />
                         </div>
                     </button>
                 </div>
@@ -111,16 +113,18 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
 
             <main className="max-w-3xl mx-auto px-5 pt-4">
                 {/* Hero / Cover Image Banner */}
-                <div className="w-full aspect-[16/10] rounded-[28px] overflow-hidden bg-stone-900 shadow-[0_15px_30px_rgba(0,0,0,0.5)] border border-[#2d1b15] mb-6 relative">
+                <div className="w-full aspect-[16/10] rounded-[28px] overflow-hidden bg-stone-900 shadow-[0_15px_35px_rgba(0,0,0,0.6)] border border-[#2d1b15] mb-6 relative group">
                     <img
                         src={coverImage || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=1000'}
                         alt={siteName}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-103"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#180f0c] via-[#180f0c]/20 to-transparent" />
-                    <div className="absolute bottom-5 left-5 right-5">
-                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#e27355]">L'Expérience Chocolatée</span>
-                        <h2 className="font-serif text-3xl font-light text-white mt-1">{config.heroTitle || "Delicious moments, served fresh."}</h2>
+                    
+                    {/* Glass Overlay text badge */}
+                    <div className="absolute bottom-5 left-5 right-5 bg-black/40 backdrop-blur-md border border-white/10 p-5 rounded-[22px] shadow-lg animate-fade-in">
+                        <span className="text-[9px] font-black uppercase tracking-[0.3em] text-[#f3b182]">L'Expérience Chocolatée</span>
+                        <h2 className="font-serif text-2xl font-light text-white mt-1 leading-snug">{config.heroTitle || "Delicious moments, served fresh."}</h2>
                     </div>
                 </div>
 
@@ -132,7 +136,7 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
                             onClick={() => scrollToCategory(cat)}
                             className={`whitespace-nowrap px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 ${activeSection === cat
                                 ? 'bg-transparent border border-[#f3b182] text-[#f3b182] shadow-[0_0_15px_rgba(243,177,130,0.35)]'
-                                : 'bg-[#201511]/60 border border-stone-900 text-stone-400 hover:text-stone-300'
+                                : 'bg-[#201511]/60 border border-[#2d1b15]/40 text-stone-400 hover:text-stone-300'
                                 }`}
                         >
                             {cat}
@@ -148,54 +152,70 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
 
                         return (
                             <section id={`cat-${cat}`} key={cat} className="scroll-mt-32">
-                                <h3 className="font-serif text-xl font-light text-[#f3b182] mb-6 flex items-center gap-3">
-                                    <span className="h-1.5 w-1.5 rounded-full bg-[#e27355]" />
-                                    {cat}
-                                </h3>
+                                <div className="flex items-center gap-4 mb-6">
+                                    <h3 className="font-serif text-lg tracking-wider font-medium text-[#f3b182] whitespace-nowrap">
+                                        {cat}
+                                    </h3>
+                                    <div className="h-[1px] flex-1 bg-gradient-to-r from-[#e27355]/40 to-transparent" />
+                                </div>
 
                                 {/* 2-column grid of elegant card components */}
                                 <div className="grid grid-cols-2 gap-4">
-                                    {categoryItems.map((item: any) => (
-                                        <div
-                                            key={item.id}
-                                            className="group bg-[#201511]/90 backdrop-blur-md border border-[#2d1b15]/60 rounded-[24px] p-3.5 flex flex-col justify-between transition-all duration-300 hover:border-[#f3b182]/30 shadow-lg"
-                                        >
-                                            <div className="space-y-3">
-                                                {/* Dish Image */}
-                                                <div className="w-full aspect-video rounded-[18px] overflow-hidden bg-stone-950 relative border border-[#2d1b15]/20">
-                                                    <img
-                                                        src={item.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=1000'}
-                                                        alt={item.name}
-                                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                                    />
+                                    {categoryItems.map((item: any) => {
+                                        const cartItem = items.find((i: any) => i.id === item.id)
+                                        const quantity = cartItem ? cartItem.quantity : 0
+
+                                        return (
+                                            <div
+                                                key={item.id}
+                                                className="group bg-gradient-to-b from-[#201511]/90 to-[#1b100d]/95 backdrop-blur-md border border-[#2d1b15]/60 rounded-[22px] p-3 flex flex-col justify-between transition-all duration-500 hover:border-[#f3b182]/30 shadow-lg hover:shadow-[0_15px_30px_rgba(0,0,0,0.5),0_0_15px_rgba(243,177,130,0.1)] hover:-translate-y-1"
+                                            >
+                                                <div className="space-y-3">
+                                                    {/* Dish Image */}
+                                                    <div className="w-full aspect-[4/3] rounded-[16px] overflow-hidden bg-stone-950 relative border border-[#2d1b15]/20">
+                                                        {quantity > 0 && (
+                                                            <div className="absolute top-2.5 right-2.5 bg-gradient-to-r from-[#f3b182] to-[#e27355] text-stone-950 font-extrabold text-[10px] w-6 h-6 rounded-full flex items-center justify-center shadow-lg border border-[#2d1b15]/40 animate-scale-in z-10">
+                                                                {quantity}
+                                                            </div>
+                                                        )}
+                                                        <img
+                                                            src={item.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=1000'}
+                                                            alt={item.name}
+                                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                                        />
+                                                    </div>
+
+                                                    {/* Meta Info */}
+                                                    <div className="space-y-1 px-1">
+                                                        <h4 className="font-semibold text-stone-100 text-sm leading-snug group-hover:text-[#f3b182] transition-colors duration-300">
+                                                            {item.name}
+                                                        </h4>
+                                                        <p className="text-stone-400 text-[11px] font-light leading-relaxed line-clamp-2 mt-0.5">
+                                                            {item.description || "Un délice haut de gamme pour égayer vos papilles."}
+                                                        </p>
+                                                    </div>
                                                 </div>
 
-                                                {/* Meta Info */}
-                                                <div className="space-y-1">
-                                                    <h4 className="font-medium text-stone-100 text-sm leading-snug group-hover:text-[#f3b182] transition-colors duration-300">
-                                                        {item.name}
-                                                    </h4>
-                                                    <p className="text-stone-400 text-[11px] font-light leading-relaxed line-clamp-2">
-                                                        {item.description || "Un délice haut de gamme pour égayer vos papilles."}
-                                                    </p>
+                                                {/* Price and Add button */}
+                                                <div className="pt-3 mt-2 border-t border-[#2d1b15]/40 flex items-center justify-between px-1">
+                                                    <span className="font-bold text-sm text-[#f3b182]">
+                                                        {item.price} <span className="text-[9px] font-normal uppercase">{CURRENCY}</span>
+                                                    </span>
+                                                    <button
+                                                        onClick={() => addItem(item)}
+                                                        className={`h-8 w-8 rounded-full flex items-center justify-center transition-all duration-300 shadow-md active:scale-90 ${
+                                                            quantity > 0
+                                                                ? 'bg-transparent border-2 border-[#f3b182] text-[#f3b182] hover:bg-[#f3b182]/10'
+                                                                : 'bg-[#f3b182] hover:bg-[#e27355] text-stone-950'
+                                                        }`}
+                                                        title={t.add_to_order}
+                                                    >
+                                                        {quantity > 0 ? <Check size={14} strokeWidth={3} /> : <Plus size={16} strokeWidth={2.5} />}
+                                                    </button>
                                                 </div>
                                             </div>
-
-                                            {/* Price and Add button */}
-                                            <div className="pt-3 mt-2 border-t border-[#2d1b15]/40 flex items-center justify-between">
-                                                <span className="font-bold text-sm text-[#f3b182]">
-                                                    {item.price} <span className="text-[9px] font-normal uppercase">{CURRENCY}</span>
-                                                </span>
-                                                <button
-                                                    onClick={() => addItem(item)}
-                                                    className="h-8 w-8 bg-[#f3b182] hover:bg-[#e27355] text-stone-950 rounded-full flex items-center justify-center transition-all duration-300 shadow-md active:scale-90"
-                                                    title={t.add_to_order}
-                                                >
-                                                    <Plus size={16} strokeWidth={2.5} />
-                                                </button>
-                                            </div>
-                                        </div>
-                                    ))}
+                                        )
+                                    })}
                                 </div>
                             </section>
                         )

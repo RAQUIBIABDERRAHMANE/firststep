@@ -468,4 +468,19 @@ spline-viewer::after {
 .animate-shake {
   animation: shake 0.5s ease-in-out;
 }
-/* Recompile trigger comment v2 */
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Map Next.js font variables on the body element */
+body {
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
+}
+/* Recompile trigger comment v4 */
