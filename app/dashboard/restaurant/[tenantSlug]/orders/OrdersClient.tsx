@@ -118,11 +118,13 @@ function ItemCustomizations({ selectedOptions, selectedAddons }: { selectedOptio
 export default function OrdersClient({ 
     initialOrders, 
     tenantSlug, 
-    initialConfig 
+    initialConfig,
+    onOrderUpdate
 }: { 
     initialOrders: any[]
     tenantSlug: string
     initialConfig?: string 
+    onOrderUpdate?: () => void | Promise<void>
 }) {
     const router = useRouter()
     const [activeTab, setActiveTab] = useState<'list' | 'floorplan'>('list')
@@ -207,6 +209,9 @@ export default function OrdersClient({
         try {
             await updateOrderStatus(orderId, status, tenantSlug)
             toast.success(`Order marked as ${status.toLowerCase()}`)
+            if (onOrderUpdate) {
+                await onOrderUpdate()
+            }
         } catch (e) {
             toast.error('Failed to update order status')
         } finally {
@@ -234,6 +239,9 @@ export default function OrdersClient({
                 await updateOrderStatus(order.id, 'PAID', tenantSlug)
             }
             toast.success('All orders at table marked as paid')
+            if (onOrderUpdate) {
+                await onOrderUpdate()
+            }
         } catch (e) {
             toast.error('Error settling table orders')
         } finally {

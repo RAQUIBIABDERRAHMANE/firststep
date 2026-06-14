@@ -121,7 +121,12 @@ export default function WaiterDashboard() {
                     {/* Orders */}
                     <div>
                         <h2 className="text-xl font-bold mb-4 text-slate-800">Active Orders</h2>
-                        <OrdersClient initialOrders={orders} tenantSlug={tenantSlug} initialConfig={initialConfig} />
+                        <OrdersClient 
+                            initialOrders={orders} 
+                            tenantSlug={tenantSlug} 
+                            initialConfig={initialConfig} 
+                            onOrderUpdate={() => fetchOrders(waiterId)}
+                        />
                     </div>
                 </div>
             </div>
