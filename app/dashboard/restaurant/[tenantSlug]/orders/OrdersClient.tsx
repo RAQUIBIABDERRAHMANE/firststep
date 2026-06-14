@@ -128,7 +128,7 @@ export default function OrdersClient({
     const [activeTab, setActiveTab] = useState<'list' | 'floorplan'>('list')
     const [loading, setLoading] = useState<string | null>(null)
     const [lastUpdated, setLastUpdated] = useState<Date>(new Date())
-    const [isSoundEnabled, setIsSoundEnabled] = useState(false)
+    const [isSoundEnabled, setIsSoundEnabled] = useState(true)
     const previousOrderIds = React.useRef<Set<string>>(new Set())
     const [dismissedOrders, setDismissedOrders] = useState<Set<string>>(new Set())
 
