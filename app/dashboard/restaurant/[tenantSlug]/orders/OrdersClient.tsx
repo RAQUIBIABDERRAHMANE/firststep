@@ -369,7 +369,16 @@ export default function OrdersClient({
                     <Button 
                         variant="outline" 
                         size="sm" 
-                        onClick={() => setIsSoundEnabled(!isSoundEnabled)}
+                        onClick={() => {
+                            const nextVal = !isSoundEnabled;
+                            setIsSoundEnabled(nextVal);
+                            if (nextVal) {
+                                playNotificationSound();
+                                if (typeof window !== 'undefined' && navigator.vibrate) {
+                                    navigator.vibrate([100, 50, 100]);
+                                }
+                            }
+                        }}
                         className={cn(
                             "rounded-full px-4 h-9 gap-2 text-xs font-bold border transition-colors",
                             isSoundEnabled ? "bg-emerald-50 text-emerald-600 border-emerald-200 hover:bg-emerald-100" : "bg-slate-50 text-slate-500 border-slate-200 hover:bg-slate-100"
@@ -407,7 +416,7 @@ export default function OrdersClient({
                                         <div 
                                             key={order.id} 
                                             className={cn(
-                                                "col-span-1 lg:col-span-2 border rounded-2xl p-4 flex items-center justify-between shadow-sm animate-in slide-in-from-top-2 animate-shake",
+                                                "col-span-1 lg:col-span-2 border rounded-2xl p-4 flex items-center justify-between shadow-sm animate-in slide-in-from-top-2",
                                                 isCallWaiter ? "bg-orange-50 border-orange-200" : "bg-amber-50 border-amber-200"
                                             )}
                                         >

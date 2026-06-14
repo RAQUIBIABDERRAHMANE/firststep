@@ -164,27 +164,9 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
         }
     }
 
-    const triggerVibrationAndShake = () => {
-        // 1. Physical vibration (Android/Chrome) - synchronous with user gesture
-        if (typeof window !== 'undefined' && navigator.vibrate) {
-            navigator.vibrate([200, 100, 200]);
-        }
-
-        // 2. Visual viewport shake fallback (all devices, including iOS Safari)
-        if (typeof document !== 'undefined') {
-            document.body.classList.add('animate-shake');
-            setTimeout(() => {
-                document.body.classList.remove('animate-shake');
-            }, 500);
-        }
-    }
-
     const handleCallWaiter = async () => {
         if (!tableId) return
         if (!confirm("Call the waiter to your table?")) return
-
-        // Trigger vibration/shake synchronously inside the click handler to comply with browser gesture policies
-        triggerVibrationAndShake()
 
         const res = await callWaiter(tableId)
         if (res.success) {
@@ -197,9 +179,6 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
     const handleRequestBill = async () => {
         if (!tableId) return
         if (!confirm("Request the bill for your table?")) return
-
-        // Trigger vibration/shake synchronously inside the click handler to comply with browser gesture policies
-        triggerVibrationAndShake()
 
         const res = await requestBill(tableId)
         if (res.success) {
