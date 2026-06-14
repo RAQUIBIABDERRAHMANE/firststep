@@ -33,6 +33,7 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
     const [showReservation, setShowReservation] = useState(false)
     const [showOrderTracking, setShowOrderTracking] = useState(false)
     const [activeSection, setActiveSection] = useState(categoryNames[0] || '')
+    const [showInfoDrawer, setShowInfoDrawer] = useState(false)
 
     // Handle scroll categories mapping
     useEffect(() => {
@@ -101,7 +102,11 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
                     </span>
 
                     {/* Hamburger Menu Icon */}
-                    <button className="text-stone-300 hover:text-white transition-colors p-1 shrink-0 w-10 h-10 flex items-center justify-end">
+                    <button 
+                        onClick={() => setShowInfoDrawer(true)}
+                        className="text-stone-300 hover:text-white transition-colors p-1 shrink-0 w-10 h-10 flex items-center justify-end"
+                        aria-label="Informations"
+                    >
                         <div className="w-6 h-4.5 flex flex-col justify-between items-end">
                             <span className="w-6 h-0.5 bg-[#f3b182] rounded-full animate-pulse-slow" />
                             <span className="w-4 h-0.5 bg-[#f3b182] rounded-full animate-pulse-slow" />
@@ -400,6 +405,132 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
                                 </Button>
                             </div>
                         ) : null}
+                    </div>
+                </div>
+            )}
+
+            {/* Info Drawer */}
+            {showInfoDrawer && (
+                <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm transition-all" onClick={() => setShowInfoDrawer(false)}>
+                    <div
+                        className="absolute right-0 top-0 bottom-0 w-full max-w-md bg-gradient-to-b from-[#180f0c] via-[#221612] to-[#140b09] shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col border-l border-[#2d1b15]/80 text-stone-200"
+                        onClick={e => e.stopPropagation()}
+                    >
+                        {/* Header */}
+                        <div className="p-6 border-b border-[#2d1b15]/60 flex items-center justify-between">
+                            <h2 className="font-serif text-2xl text-[#f3b182]">Informations</h2>
+                            <button onClick={() => setShowInfoDrawer(false)} className="text-stone-400 hover:text-white p-2 rounded-full hover:bg-[#201511] transition-colors">
+                                <X size={20} />
+                            </button>
+                        </div>
+
+                        {/* Content */}
+                        <div className="flex-1 overflow-y-auto p-6 space-y-8">
+                            {/* About / Description */}
+                            <div className="space-y-3">
+                                <h3 className="font-serif text-lg text-[#f3b182] border-b border-[#2d1b15]/40 pb-2">{siteName}</h3>
+                                <p className="text-stone-400 text-sm font-light leading-relaxed">
+                                    {description || "Bienvenue dans notre établissement. Découvrez notre sélection exclusive de desserts et chocolats belges de qualité supérieure, conçue pour vous offrir une expérience gustative inoubliable."}
+                                </p>
+                            </div>
+
+                            {/* Table Session Info */}
+                            <div className="bg-[#201511]/40 border border-[#2d1b15]/60 rounded-[20px] p-5 space-y-4">
+                                <h4 className="font-serif text-sm text-[#f3b182] uppercase tracking-wider">Votre Session</h4>
+                                {tableId ? (
+                                    <div className="flex items-center gap-3">
+                                        <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                                        <span className="text-sm font-medium text-stone-200">Table Active : <span className="font-black text-[#f3b182]">Table {tableId}</span></span>
+                                    </div>
+                                ) : (
+                                    <div className="space-y-3">
+                                        <div className="flex items-center gap-3 text-stone-400 text-xs">
+                                            <div className="h-2 w-2 rounded-full bg-amber-500" />
+                                            <span>Aucune table connectée.</span>
+                                        </div>
+                                        <Button
+                                            onClick={() => {
+                                                setShowScanner(true)
+                                                setShowInfoDrawer(false)
+                                            }}
+                                            className="w-full h-10 rounded-full bg-gradient-to-r from-[#f3b182] to-[#e27355] text-stone-950 font-bold text-xs uppercase tracking-widest hover:brightness-110 shadow-md"
+                                        >
+                                            Scanner une Table
+                                        </Button>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Language Switcher */}
+                            <div className="space-y-3">
+                                <h4 className="font-serif text-sm text-[#f3b182] uppercase tracking-wider">Langue / Language</h4>
+                                <div className="flex gap-3">
+                                    <button
+                                        onClick={() => setLang('fr')}
+                                        className={`flex-1 py-2.5 rounded-full text-xs font-bold transition-all ${
+                                            lang === 'fr'
+                                                ? 'bg-[#f3b182] text-stone-950 shadow-md'
+                                                : 'bg-[#201511] border border-[#2d1b15]/60 text-stone-400 hover:text-stone-300'
+                                        }`}
+                                    >
+                                        Français
+                                    </button>
+                                    <button
+                                        onClick={() => setLang('en')}
+                                        className={`flex-1 py-2.5 rounded-full text-xs font-bold transition-all ${
+                                            lang === 'en'
+                                                ? 'bg-[#f3b182] text-stone-950 shadow-md'
+                                                : 'bg-[#201511] border border-[#2d1b15]/60 text-stone-400 hover:text-stone-300'
+                                        }`}
+                                    >
+                                        English
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Contact Details */}
+                            <div className="space-y-4 text-sm font-light text-stone-300">
+                                <h4 className="font-serif text-sm text-[#f3b182] uppercase tracking-wider border-b border-[#2d1b15]/40 pb-2">Horaires & Contact</h4>
+                                
+                                {config?.hours && (
+                                    <div className="flex gap-3 items-start">
+                                        <span className="font-bold text-[#f3b182] shrink-0 w-16">Horaires:</span>
+                                        <span className="text-stone-400 whitespace-pre-line">{config.hours}</span>
+                                    </div>
+                                )}
+                                <div className="flex gap-3 items-center">
+                                    <span className="font-bold text-[#f3b182] shrink-0 w-16">Téléphone:</span>
+                                    <a href={`tel:${config?.phone || '0528212173'}`} className="text-stone-400 hover:text-[#f3b182] transition-colors">
+                                        {config?.phone || '05 28 21 21 73'}
+                                    </a>
+                                </div>
+                                {(config?.phone2 || '0773422026') && (
+                                    <div className="flex gap-3 items-center">
+                                        <span className="font-bold text-[#f3b182] shrink-0 w-16">WhatsApp:</span>
+                                        <a href={`https://wa.me/${(config?.phone2 || '0773422026').replace(/\s+/g, '')}`} target="_blank" rel="noopener noreferrer" className="text-stone-400 hover:text-[#f3b182] transition-colors">
+                                            {config?.phone2 || '07 73 42 20 26'}
+                                        </a>
+                                    </div>
+                                )}
+                                <div className="flex gap-3 items-start">
+                                    <span className="font-bold text-[#f3b182] shrink-0 w-16">Adresse:</span>
+                                    <span className="text-stone-400">{config?.address || 'Agadir Bay, Agadir, Maroc'}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Footer (Reservation Button) */}
+                        <div className="p-6 border-t border-[#2d1b15]/60 bg-[#140b09]">
+                            <Button
+                                onClick={() => {
+                                    setShowReservation(true)
+                                    setShowInfoDrawer(false)
+                                }}
+                                className="w-full h-12 rounded-full bg-gradient-to-r from-[#f3b182] to-[#e27355] text-stone-950 font-bold text-sm shadow-md hover:brightness-110"
+                            >
+                                Réserver une Table
+                            </Button>
+                        </div>
                     </div>
                 </div>
             )}
