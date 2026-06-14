@@ -5,6 +5,43 @@ import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
 import path from 'path'
 import helper from 'better-sqlite3'
 
+function withRetry(client: PrismaClient): PrismaClient {
+    return client.$extends({
+        query: {
+            $allModels: {
+                async $allOperations({ model, operation, args, query }) {
+                    let retries = 4;
+                    let delay = 200; // ms
+                    while (retries > 0) {
+                        try {
+                            return await query(args);
+                        } catch (err: any) {
+                            const errStr = String(err?.message || err || '');
+                            const isNetworkError = 
+                                errStr.includes('fetch failed') || 
+                                errStr.includes('ECONNRESET') || 
+                                errStr.includes('timeout') ||
+                                errStr.includes('ConnectTimeoutError') ||
+                                errStr.includes('undici') ||
+                                err?.code === 'P2024' || // Connection timeout
+                                err?.name === 'DriverAdapterError';
+
+                            if (isNetworkError && retries > 1) {
+                                console.warn(`⚠️ [Prisma Retry] Network error on ${model}.${operation}: ${errStr.slice(0, 120)}. Retrying in ${delay}ms... (${retries - 1} attempts left)`);
+                                await new Promise(resolve => setTimeout(resolve, delay));
+                                retries--;
+                                delay *= 2; // Exponential backoff
+                            } else {
+                                throw err;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }) as any;
+}
+
 function createPrismaClient() {
     const tursoUrl = process.env.TURSO_DATABASE_URL;
     const authToken = process.env.TURSO_AUTH_TOKEN;
@@ -20,7 +57,7 @@ function createPrismaClient() {
             authToken: authToken,
         });
 
-        return new PrismaClient({ adapter });
+        return withRetry(new PrismaClient({ adapter }));
     }
 
     const url = process.env.DATABASE_URL || 'file:./dev.db';
@@ -49,7 +86,7 @@ function createPrismaClient() {
     return new PrismaClient();
 }
 
-const PRISMA_DEV_KEY = 'prisma_v20_restaurant_reports'
+const PRISMA_DEV_KEY = 'prisma_v21_restaurant_reports'
 const g = globalThis as any
 let prisma: PrismaClient;
 

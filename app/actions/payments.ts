@@ -237,19 +237,81 @@ export async function confirmPayment(paymentId: string) {
             },
         })
 
-        // Send approval email to the client
+        // Generate facture PDF
+        let facturePdf: Uint8Array | undefined
+        let factureNumber: string | undefined
+
+        try {
+            const { generateFacturePdf, generateNextFactureNumber } = await import('@/lib/facture-pdf')
+
+            factureNumber = await generateNextFactureNumber()
+
+            const factureData = {
+                factureNumber,
+                date: new Date().toLocaleDateString('fr-FR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                }),
+                clientName: paymentRequest.user.companyName || 'Client',
+                clientEmail: paymentRequest.user.email,
+                clientCompany: paymentRequest.user.companyName || '',
+                serviceName: paymentRequest.service.name,
+                servicePrice: `${paymentRequest.amount.toLocaleString('fr-FR', { minimumFractionDigits: 2 })} MAD`,
+                subtotal: `${paymentRequest.amount.toLocaleString('fr-FR', { minimumFractionDigits: 2 })} MAD`,
+                total: `${paymentRequest.amount.toLocaleString('fr-FR', { minimumFractionDigits: 2 })} MAD`,
+            }
+
+            facturePdf = await generateFacturePdf(factureData)
+
+            // Upload PDF to Cloudflare R2
+            let pdfUrl: string | undefined
+            if (facturePdf) {
+                try {
+                    const { uploadImage } = await import('@/lib/r2')
+                    const filename = `factures/${factureNumber}.pdf`
+                    pdfUrl = await uploadImage(Buffer.from(facturePdf), filename, 'application/pdf')
+                    console.log(`[PAYMENT] Facture PDF uploaded to R2: ${pdfUrl}`)
+                } catch (uploadError) {
+                    console.error('[PAYMENT] Failed to upload facture PDF to R2:', uploadError)
+                }
+            }
+
+            // Save facture record with R2 URL
+            await prisma.factureRecord.create({
+                data: {
+                    number: factureNumber,
+                    paymentId: paymentRequest.id,
+                    userId: paymentRequest.userId,
+                    serviceName: paymentRequest.service.name,
+                    clientName: paymentRequest.user.companyName || 'Client',
+                    clientEmail: paymentRequest.user.email,
+                    amount: paymentRequest.amount,
+                    pdfUrl: pdfUrl || null,
+                },
+            })
+
+            console.log(`[PAYMENT] Facture ${factureNumber} generated for payment ${paymentId}`)
+        } catch (factureError) {
+            console.error('[PAYMENT] Failed to generate facture PDF:', factureError)
+            // Continue without facture - don't block payment confirmation
+        }
+
+        // Send approval email to the client (with facture PDF if generated)
         console.log('[PAYMENT] Sending approval email to:', paymentRequest.user.email)
         const approvalResult = await sendPaymentApprovedEmail(
             paymentRequest.user.email,
             paymentRequest.user.companyName || 'Client',
             paymentRequest.service.name,
-            paymentRequest.amount
+            paymentRequest.amount,
+            facturePdf,
+            factureNumber
         )
         console.log('[PAYMENT] Approval email result:', approvalResult)
 
         revalidatePath('/admin')
         revalidatePath('/dashboard')
-        return { success: true }
+        return { success: true, factureNumber }
     } catch (error) {
         console.error('Failed to confirm payment:', error)
         return { error: 'Failed to confirm payment' }

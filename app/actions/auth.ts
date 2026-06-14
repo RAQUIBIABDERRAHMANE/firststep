@@ -152,6 +152,7 @@ export async function getCurrentUser() {
         })
         return user
     } catch (error) {
+        console.error('[Auth] Error in getCurrentUser:', error)
         return null
     }
 }

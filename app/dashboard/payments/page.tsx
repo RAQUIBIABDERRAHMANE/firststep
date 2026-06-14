@@ -1,13 +1,23 @@
 import { getCurrentUser } from '@/app/actions/auth'
 import { getUserPaymentRequests } from '@/app/actions/payments'
 import { redirect } from 'next/navigation'
-import { CheckCircle2, Clock, XCircle, CreditCard, TrendingUp, AlertCircle, type LucideIcon } from 'lucide-react'
+import { CheckCircle2, Clock, XCircle, CreditCard, TrendingUp, AlertCircle, Download, type LucideIcon } from 'lucide-react'
+import prisma from '@/lib/prisma'
+import Link from 'next/link'
+
+export const dynamic = 'force-dynamic'
 
 export default async function PaymentsPage() {
     const user = await getCurrentUser()
     if (!user) redirect('/login')
 
     const payments = await getUserPaymentRequests()
+    const factures = await prisma.factureRecord.findMany({
+        where: { userId: user.id },
+    })
+
+    // Map payment ID to facture record for quick lookup
+    const factureMap = new Map(factures.map(f => [f.paymentId, f]))
 
     const totalPaid = payments
         .filter(p => p.status === 'PAID')
@@ -76,12 +86,15 @@ export default async function PaymentsPage() {
                                     <th className="text-left px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Statut</th>
                                     <th className="text-left px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Référence</th>
                                     <th className="text-left px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Date</th>
+                                    <th className="text-right px-6 py-3 text-xs font-medium text-slate-500 uppercase tracking-wider">Facture</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-100">
                                 {payments.map((payment) => {
                                     const config = statusConfig[payment.status] || statusConfig.PENDING
                                     const StatusIcon = config.icon
+                                    const facture = factureMap.get(payment.id)
+
                                     return (
                                         <tr key={payment.id} className="hover:bg-slate-50/50 transition-colors">
                                             <td className="px-6 py-4 font-medium text-slate-900">
@@ -103,6 +116,20 @@ export default async function PaymentsPage() {
                                                 {new Date(payment.createdAt).toLocaleDateString('fr-FR', {
                                                     day: 'numeric', month: 'short', year: 'numeric'
                                                 })}
+                                            </td>
+                                            <td className="px-6 py-4 text-right">
+                                                {facture ? (
+                                                    <Link
+                                                        href={`/api/admin/factures/${facture.id}/download`}
+                                                        target="_blank"
+                                                        className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 text-blue-700 hover:bg-blue-100 font-medium rounded-xl text-xs transition-colors border border-blue-100"
+                                                    >
+                                                        <Download className="h-3.5 w-3.5" />
+                                                        PDF
+                                                    </Link>
+                                                ) : (
+                                                    <span className="text-slate-400 text-xs">—</span>
+                                                )}
                                             </td>
                                         </tr>
                                     )

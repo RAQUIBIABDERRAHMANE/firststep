@@ -477,6 +477,96 @@ exports.Prisma.TablePrintRequestScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.FactureTemplateScalarFieldEnum = {
+  id: 'id',
+  dateX: 'dateX',
+  dateY: 'dateY',
+  clientNameX: 'clientNameX',
+  clientNameY: 'clientNameY',
+  clientEmailX: 'clientEmailX',
+  clientEmailY: 'clientEmailY',
+  clientCompanyX: 'clientCompanyX',
+  clientCompanyY: 'clientCompanyY',
+  serviceNameX: 'serviceNameX',
+  serviceNameY: 'serviceNameY',
+  subtotalX: 'subtotalX',
+  subtotalY: 'subtotalY',
+  totalX: 'totalX',
+  totalY: 'totalY',
+  factureNumberX: 'factureNumberX',
+  factureNumberY: 'factureNumberY',
+  fontSize: 'fontSize',
+  fontColor: 'fontColor',
+  factureNumberFontFamily: 'factureNumberFontFamily',
+  dateFontFamily: 'dateFontFamily',
+  clientCompanyFontFamily: 'clientCompanyFontFamily',
+  clientNameFontFamily: 'clientNameFontFamily',
+  clientEmailFontFamily: 'clientEmailFontFamily',
+  serviceNameFontFamily: 'serviceNameFontFamily',
+  servicePriceFontFamily: 'servicePriceFontFamily',
+  subtotalFontFamily: 'subtotalFontFamily',
+  totalFontFamily: 'totalFontFamily',
+  servicePriceX: 'servicePriceX',
+  servicePriceY: 'servicePriceY',
+  factureNumberFontSize: 'factureNumberFontSize',
+  factureNumberFontColor: 'factureNumberFontColor',
+  factureNumberIsBold: 'factureNumberIsBold',
+  factureNumberIsItalic: 'factureNumberIsItalic',
+  dateFontSize: 'dateFontSize',
+  dateFontColor: 'dateFontColor',
+  dateIsBold: 'dateIsBold',
+  dateIsItalic: 'dateIsItalic',
+  clientCompanyFontSize: 'clientCompanyFontSize',
+  clientCompanyFontColor: 'clientCompanyFontColor',
+  clientCompanyIsBold: 'clientCompanyIsBold',
+  clientCompanyIsItalic: 'clientCompanyIsItalic',
+  clientNameFontSize: 'clientNameFontSize',
+  clientNameFontColor: 'clientNameFontColor',
+  clientNameIsBold: 'clientNameIsBold',
+  clientNameIsItalic: 'clientNameIsItalic',
+  clientEmailFontSize: 'clientEmailFontSize',
+  clientEmailFontColor: 'clientEmailFontColor',
+  clientEmailIsBold: 'clientEmailIsBold',
+  clientEmailIsItalic: 'clientEmailIsItalic',
+  serviceNameFontSize: 'serviceNameFontSize',
+  serviceNameFontColor: 'serviceNameFontColor',
+  serviceNameIsBold: 'serviceNameIsBold',
+  serviceNameIsItalic: 'serviceNameIsItalic',
+  servicePriceFontSize: 'servicePriceFontSize',
+  servicePriceFontColor: 'servicePriceFontColor',
+  servicePriceIsBold: 'servicePriceIsBold',
+  servicePriceIsItalic: 'servicePriceIsItalic',
+  subtotalFontSize: 'subtotalFontSize',
+  subtotalFontColor: 'subtotalFontColor',
+  subtotalIsBold: 'subtotalIsBold',
+  subtotalIsItalic: 'subtotalIsItalic',
+  totalFontSize: 'totalFontSize',
+  totalFontColor: 'totalFontColor',
+  totalIsBold: 'totalIsBold',
+  totalIsItalic: 'totalIsItalic',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FactureRecordScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  paymentId: 'paymentId',
+  userId: 'userId',
+  serviceName: 'serviceName',
+  clientName: 'clientName',
+  clientEmail: 'clientEmail',
+  amount: 'amount',
+  pdfUrl: 'pdfUrl',
+  generatedAt: 'generatedAt'
+};
+
+exports.Prisma.FactureCounterScalarFieldEnum = {
+  id: 'id',
+  year: 'year',
+  nextNumber: 'nextNumber'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -519,7 +609,10 @@ exports.Prisma.ModelName = {
   MedicalRecord: 'MedicalRecord',
   Prescription: 'Prescription',
   MedicalHistory: 'MedicalHistory',
-  TablePrintRequest: 'TablePrintRequest'
+  TablePrintRequest: 'TablePrintRequest',
+  FactureTemplate: 'FactureTemplate',
+  FactureRecord: 'FactureRecord',
+  FactureCounter: 'FactureCounter'
 };
 
 /**

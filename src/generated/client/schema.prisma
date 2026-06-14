@@ -501,3 +501,110 @@ model TablePrintRequest {
 
   @@index([tenantId])
 }
+
+model FactureTemplate {
+  id             String @id @default(cuid())
+  dateX          Float  @default(400)
+  dateY          Float  @default(700)
+  clientNameX    Float  @default(80)
+  clientNameY    Float  @default(620)
+  clientEmailX   Float  @default(80)
+  clientEmailY   Float  @default(600)
+  clientCompanyX Float  @default(80)
+  clientCompanyY Float  @default(640)
+  serviceNameX   Float  @default(80)
+  serviceNameY   Float  @default(480)
+  subtotalX      Float  @default(450)
+  subtotalY      Float  @default(200)
+  totalX         Float  @default(450)
+  totalY         Float  @default(170)
+  factureNumberX Float  @default(400)
+  factureNumberY Float  @default(730)
+  fontSize       Float  @default(12)
+  fontColor      String @default("#000000")
+
+  factureNumberFontFamily String @default("Helvetica")
+  dateFontFamily          String @default("Helvetica")
+  clientCompanyFontFamily String @default("Helvetica")
+  clientNameFontFamily    String @default("Helvetica")
+  clientEmailFontFamily   String @default("Helvetica")
+  serviceNameFontFamily   String @default("Helvetica")
+  servicePriceFontFamily  String @default("Helvetica")
+  subtotalFontFamily      String @default("Helvetica")
+  totalFontFamily         String @default("Helvetica")
+
+  // Service Price (Montant Service) positioning
+  servicePriceX Float @default(450)
+  servicePriceY Float @default(480)
+
+  // Independent styles for each field
+  factureNumberFontSize  Float   @default(12)
+  factureNumberFontColor String  @default("#000000")
+  factureNumberIsBold    Boolean @default(true)
+  factureNumberIsItalic  Boolean @default(false)
+
+  dateFontSize  Float   @default(12)
+  dateFontColor String  @default("#000000")
+  dateIsBold    Boolean @default(false)
+  dateIsItalic  Boolean @default(false)
+
+  clientCompanyFontSize  Float   @default(12)
+  clientCompanyFontColor String  @default("#000000")
+  clientCompanyIsBold    Boolean @default(true)
+  clientCompanyIsItalic  Boolean @default(false)
+
+  clientNameFontSize  Float   @default(12)
+  clientNameFontColor String  @default("#000000")
+  clientNameIsBold    Boolean @default(false)
+  clientNameIsItalic  Boolean @default(false)
+
+  clientEmailFontSize  Float   @default(12)
+  clientEmailFontColor String  @default("#000000")
+  clientEmailIsBold    Boolean @default(false)
+  clientEmailIsItalic  Boolean @default(false)
+
+  serviceNameFontSize  Float   @default(12)
+  serviceNameFontColor String  @default("#000000")
+  serviceNameIsBold    Boolean @default(false)
+  serviceNameIsItalic  Boolean @default(false)
+
+  servicePriceFontSize  Float   @default(12)
+  servicePriceFontColor String  @default("#000000")
+  servicePriceIsBold    Boolean @default(false)
+  servicePriceIsItalic  Boolean @default(false)
+
+  subtotalFontSize  Float   @default(12)
+  subtotalFontColor String  @default("#000000")
+  subtotalIsBold    Boolean @default(false)
+  subtotalIsItalic  Boolean @default(false)
+
+  totalFontSize  Float   @default(14)
+  totalFontColor String  @default("#000000")
+  totalIsBold    Boolean @default(true)
+  totalIsItalic  Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FactureRecord {
+  id          String   @id @default(cuid())
+  number      String   @unique
+  paymentId   String   @unique
+  userId      String
+  serviceName String
+  clientName  String
+  clientEmail String
+  amount      Float
+  pdfUrl      String?
+  generatedAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([paymentId])
+}
+
+model FactureCounter {
+  id         String @id @default(cuid())
+  year       Int    @unique
+  nextNumber Int    @default(1)
+}

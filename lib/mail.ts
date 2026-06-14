@@ -144,7 +144,9 @@ export async function sendPaymentApprovedEmail(
     email: string,
     companyName: string,
     serviceName: string,
-    amount: number
+    amount: number,
+    facturePdf?: Uint8Array,
+    factureNumber?: string
 ) {
     if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
         console.log('⚠️  [MAILER] Email configuration missing (Approved)');
@@ -152,21 +154,33 @@ export async function sendPaymentApprovedEmail(
         console.log(`[MAILER] PAYMENT APPROVED EMAIL`);
         console.log(`[MAILER] TO: ${email}`);
         console.log(`[MAILER] Service: ${serviceName} - ${amount} MAD`);
+        console.log(`[MAILER] Facture attached: ${facturePdf ? 'Yes' : 'No'}`);
         console.log('--------------------------------------------------');
         return { success: true, logged: true };
     }
 
     console.log('📧 [MAILER] Sending payment approved email...');
     console.log(`   To: ${email}`);
+    if (facturePdf) console.log(`   With facture PDF: ${factureNumber}`);
 
     try {
         const html = getPaymentApprovedTemplate(companyName, serviceName, amount);
 
+        const attachments: nodemailer.SendMailOptions['attachments'] = []
+        if (facturePdf) {
+            attachments.push({
+                filename: `facture-${factureNumber || 'invoice'}.pdf`,
+                content: Buffer.from(facturePdf),
+                contentType: 'application/pdf',
+            })
+        }
+
         await transporter.sendMail({
             from: `"FirstStep" <${process.env.EMAIL_USER}>`,
             to: email,
-            subject: `✓ Paiement Approuvé - ${serviceName}`,
+            subject: `✓ Paiement Approuvé - ${serviceName}${factureNumber ? ` | Facture ${factureNumber}` : ''}`,
             html: html,
+            attachments,
         });
 
         console.log('✅ [MAILER] Payment approved email sent successfully!');

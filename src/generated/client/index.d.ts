@@ -168,6 +168,21 @@ export type MedicalHistory = $Result.DefaultSelection<Prisma.$MedicalHistoryPayl
  * 
  */
 export type TablePrintRequest = $Result.DefaultSelection<Prisma.$TablePrintRequestPayload>
+/**
+ * Model FactureTemplate
+ * 
+ */
+export type FactureTemplate = $Result.DefaultSelection<Prisma.$FactureTemplatePayload>
+/**
+ * Model FactureRecord
+ * 
+ */
+export type FactureRecord = $Result.DefaultSelection<Prisma.$FactureRecordPayload>
+/**
+ * Model FactureCounter
+ * 
+ */
+export type FactureCounter = $Result.DefaultSelection<Prisma.$FactureCounterPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -595,6 +610,36 @@ export class PrismaClient<
     * ```
     */
   get tablePrintRequest(): Prisma.TablePrintRequestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.factureTemplate`: Exposes CRUD operations for the **FactureTemplate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FactureTemplates
+    * const factureTemplates = await prisma.factureTemplate.findMany()
+    * ```
+    */
+  get factureTemplate(): Prisma.FactureTemplateDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.factureRecord`: Exposes CRUD operations for the **FactureRecord** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FactureRecords
+    * const factureRecords = await prisma.factureRecord.findMany()
+    * ```
+    */
+  get factureRecord(): Prisma.FactureRecordDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.factureCounter`: Exposes CRUD operations for the **FactureCounter** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FactureCounters
+    * const factureCounters = await prisma.factureCounter.findMany()
+    * ```
+    */
+  get factureCounter(): Prisma.FactureCounterDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1059,7 +1104,10 @@ export namespace Prisma {
     MedicalRecord: 'MedicalRecord',
     Prescription: 'Prescription',
     MedicalHistory: 'MedicalHistory',
-    TablePrintRequest: 'TablePrintRequest'
+    TablePrintRequest: 'TablePrintRequest',
+    FactureTemplate: 'FactureTemplate',
+    FactureRecord: 'FactureRecord',
+    FactureCounter: 'FactureCounter'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1075,7 +1123,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "chatSession" | "chatMessage" | "notification" | "service" | "userService" | "passwordReset" | "tenantWebsite" | "restaurantCategory" | "restaurantDish" | "restaurantTable" | "restaurantWaiter" | "restaurantOrder" | "restaurantOrderItem" | "restaurantReport" | "restaurantReservation" | "cabinetService" | "cabinetClient" | "cabinetAppointment" | "paymentRequest" | "bankAccount" | "campaign" | "emailList" | "emailListMember" | "invoiceSettings" | "invoice" | "invoiceItem" | "medicalRecord" | "prescription" | "medicalHistory" | "tablePrintRequest"
+      modelProps: "user" | "chatSession" | "chatMessage" | "notification" | "service" | "userService" | "passwordReset" | "tenantWebsite" | "restaurantCategory" | "restaurantDish" | "restaurantTable" | "restaurantWaiter" | "restaurantOrder" | "restaurantOrderItem" | "restaurantReport" | "restaurantReservation" | "cabinetService" | "cabinetClient" | "cabinetAppointment" | "paymentRequest" | "bankAccount" | "campaign" | "emailList" | "emailListMember" | "invoiceSettings" | "invoice" | "invoiceItem" | "medicalRecord" | "prescription" | "medicalHistory" | "tablePrintRequest" | "factureTemplate" | "factureRecord" | "factureCounter"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3373,6 +3421,228 @@ export namespace Prisma {
           }
         }
       }
+      FactureTemplate: {
+        payload: Prisma.$FactureTemplatePayload<ExtArgs>
+        fields: Prisma.FactureTemplateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FactureTemplateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureTemplatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FactureTemplateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureTemplatePayload>
+          }
+          findFirst: {
+            args: Prisma.FactureTemplateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureTemplatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FactureTemplateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureTemplatePayload>
+          }
+          findMany: {
+            args: Prisma.FactureTemplateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureTemplatePayload>[]
+          }
+          create: {
+            args: Prisma.FactureTemplateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureTemplatePayload>
+          }
+          createMany: {
+            args: Prisma.FactureTemplateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FactureTemplateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureTemplatePayload>[]
+          }
+          delete: {
+            args: Prisma.FactureTemplateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureTemplatePayload>
+          }
+          update: {
+            args: Prisma.FactureTemplateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureTemplatePayload>
+          }
+          deleteMany: {
+            args: Prisma.FactureTemplateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FactureTemplateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FactureTemplateUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureTemplatePayload>[]
+          }
+          upsert: {
+            args: Prisma.FactureTemplateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureTemplatePayload>
+          }
+          aggregate: {
+            args: Prisma.FactureTemplateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFactureTemplate>
+          }
+          groupBy: {
+            args: Prisma.FactureTemplateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FactureTemplateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FactureTemplateCountArgs<ExtArgs>
+            result: $Utils.Optional<FactureTemplateCountAggregateOutputType> | number
+          }
+        }
+      }
+      FactureRecord: {
+        payload: Prisma.$FactureRecordPayload<ExtArgs>
+        fields: Prisma.FactureRecordFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FactureRecordFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureRecordPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FactureRecordFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureRecordPayload>
+          }
+          findFirst: {
+            args: Prisma.FactureRecordFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureRecordPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FactureRecordFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureRecordPayload>
+          }
+          findMany: {
+            args: Prisma.FactureRecordFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureRecordPayload>[]
+          }
+          create: {
+            args: Prisma.FactureRecordCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureRecordPayload>
+          }
+          createMany: {
+            args: Prisma.FactureRecordCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FactureRecordCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureRecordPayload>[]
+          }
+          delete: {
+            args: Prisma.FactureRecordDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureRecordPayload>
+          }
+          update: {
+            args: Prisma.FactureRecordUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureRecordPayload>
+          }
+          deleteMany: {
+            args: Prisma.FactureRecordDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FactureRecordUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FactureRecordUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureRecordPayload>[]
+          }
+          upsert: {
+            args: Prisma.FactureRecordUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureRecordPayload>
+          }
+          aggregate: {
+            args: Prisma.FactureRecordAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFactureRecord>
+          }
+          groupBy: {
+            args: Prisma.FactureRecordGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FactureRecordGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FactureRecordCountArgs<ExtArgs>
+            result: $Utils.Optional<FactureRecordCountAggregateOutputType> | number
+          }
+        }
+      }
+      FactureCounter: {
+        payload: Prisma.$FactureCounterPayload<ExtArgs>
+        fields: Prisma.FactureCounterFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FactureCounterFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureCounterPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FactureCounterFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureCounterPayload>
+          }
+          findFirst: {
+            args: Prisma.FactureCounterFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureCounterPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FactureCounterFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureCounterPayload>
+          }
+          findMany: {
+            args: Prisma.FactureCounterFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureCounterPayload>[]
+          }
+          create: {
+            args: Prisma.FactureCounterCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureCounterPayload>
+          }
+          createMany: {
+            args: Prisma.FactureCounterCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FactureCounterCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureCounterPayload>[]
+          }
+          delete: {
+            args: Prisma.FactureCounterDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureCounterPayload>
+          }
+          update: {
+            args: Prisma.FactureCounterUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureCounterPayload>
+          }
+          deleteMany: {
+            args: Prisma.FactureCounterDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FactureCounterUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FactureCounterUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureCounterPayload>[]
+          }
+          upsert: {
+            args: Prisma.FactureCounterUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FactureCounterPayload>
+          }
+          aggregate: {
+            args: Prisma.FactureCounterAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFactureCounter>
+          }
+          groupBy: {
+            args: Prisma.FactureCounterGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FactureCounterGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FactureCounterCountArgs<ExtArgs>
+            result: $Utils.Optional<FactureCounterCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3512,6 +3782,9 @@ export namespace Prisma {
     prescription?: PrescriptionOmit
     medicalHistory?: MedicalHistoryOmit
     tablePrintRequest?: TablePrintRequestOmit
+    factureTemplate?: FactureTemplateOmit
+    factureRecord?: FactureRecordOmit
+    factureCounter?: FactureCounterOmit
   }
 
   /* Types for Logging */
@@ -39845,6 +40118,4057 @@ export namespace Prisma {
 
 
   /**
+   * Model FactureTemplate
+   */
+
+  export type AggregateFactureTemplate = {
+    _count: FactureTemplateCountAggregateOutputType | null
+    _avg: FactureTemplateAvgAggregateOutputType | null
+    _sum: FactureTemplateSumAggregateOutputType | null
+    _min: FactureTemplateMinAggregateOutputType | null
+    _max: FactureTemplateMaxAggregateOutputType | null
+  }
+
+  export type FactureTemplateAvgAggregateOutputType = {
+    dateX: number | null
+    dateY: number | null
+    clientNameX: number | null
+    clientNameY: number | null
+    clientEmailX: number | null
+    clientEmailY: number | null
+    clientCompanyX: number | null
+    clientCompanyY: number | null
+    serviceNameX: number | null
+    serviceNameY: number | null
+    subtotalX: number | null
+    subtotalY: number | null
+    totalX: number | null
+    totalY: number | null
+    factureNumberX: number | null
+    factureNumberY: number | null
+    fontSize: number | null
+    servicePriceX: number | null
+    servicePriceY: number | null
+    factureNumberFontSize: number | null
+    dateFontSize: number | null
+    clientCompanyFontSize: number | null
+    clientNameFontSize: number | null
+    clientEmailFontSize: number | null
+    serviceNameFontSize: number | null
+    servicePriceFontSize: number | null
+    subtotalFontSize: number | null
+    totalFontSize: number | null
+  }
+
+  export type FactureTemplateSumAggregateOutputType = {
+    dateX: number | null
+    dateY: number | null
+    clientNameX: number | null
+    clientNameY: number | null
+    clientEmailX: number | null
+    clientEmailY: number | null
+    clientCompanyX: number | null
+    clientCompanyY: number | null
+    serviceNameX: number | null
+    serviceNameY: number | null
+    subtotalX: number | null
+    subtotalY: number | null
+    totalX: number | null
+    totalY: number | null
+    factureNumberX: number | null
+    factureNumberY: number | null
+    fontSize: number | null
+    servicePriceX: number | null
+    servicePriceY: number | null
+    factureNumberFontSize: number | null
+    dateFontSize: number | null
+    clientCompanyFontSize: number | null
+    clientNameFontSize: number | null
+    clientEmailFontSize: number | null
+    serviceNameFontSize: number | null
+    servicePriceFontSize: number | null
+    subtotalFontSize: number | null
+    totalFontSize: number | null
+  }
+
+  export type FactureTemplateMinAggregateOutputType = {
+    id: string | null
+    dateX: number | null
+    dateY: number | null
+    clientNameX: number | null
+    clientNameY: number | null
+    clientEmailX: number | null
+    clientEmailY: number | null
+    clientCompanyX: number | null
+    clientCompanyY: number | null
+    serviceNameX: number | null
+    serviceNameY: number | null
+    subtotalX: number | null
+    subtotalY: number | null
+    totalX: number | null
+    totalY: number | null
+    factureNumberX: number | null
+    factureNumberY: number | null
+    fontSize: number | null
+    fontColor: string | null
+    factureNumberFontFamily: string | null
+    dateFontFamily: string | null
+    clientCompanyFontFamily: string | null
+    clientNameFontFamily: string | null
+    clientEmailFontFamily: string | null
+    serviceNameFontFamily: string | null
+    servicePriceFontFamily: string | null
+    subtotalFontFamily: string | null
+    totalFontFamily: string | null
+    servicePriceX: number | null
+    servicePriceY: number | null
+    factureNumberFontSize: number | null
+    factureNumberFontColor: string | null
+    factureNumberIsBold: boolean | null
+    factureNumberIsItalic: boolean | null
+    dateFontSize: number | null
+    dateFontColor: string | null
+    dateIsBold: boolean | null
+    dateIsItalic: boolean | null
+    clientCompanyFontSize: number | null
+    clientCompanyFontColor: string | null
+    clientCompanyIsBold: boolean | null
+    clientCompanyIsItalic: boolean | null
+    clientNameFontSize: number | null
+    clientNameFontColor: string | null
+    clientNameIsBold: boolean | null
+    clientNameIsItalic: boolean | null
+    clientEmailFontSize: number | null
+    clientEmailFontColor: string | null
+    clientEmailIsBold: boolean | null
+    clientEmailIsItalic: boolean | null
+    serviceNameFontSize: number | null
+    serviceNameFontColor: string | null
+    serviceNameIsBold: boolean | null
+    serviceNameIsItalic: boolean | null
+    servicePriceFontSize: number | null
+    servicePriceFontColor: string | null
+    servicePriceIsBold: boolean | null
+    servicePriceIsItalic: boolean | null
+    subtotalFontSize: number | null
+    subtotalFontColor: string | null
+    subtotalIsBold: boolean | null
+    subtotalIsItalic: boolean | null
+    totalFontSize: number | null
+    totalFontColor: string | null
+    totalIsBold: boolean | null
+    totalIsItalic: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FactureTemplateMaxAggregateOutputType = {
+    id: string | null
+    dateX: number | null
+    dateY: number | null
+    clientNameX: number | null
+    clientNameY: number | null
+    clientEmailX: number | null
+    clientEmailY: number | null
+    clientCompanyX: number | null
+    clientCompanyY: number | null
+    serviceNameX: number | null
+    serviceNameY: number | null
+    subtotalX: number | null
+    subtotalY: number | null
+    totalX: number | null
+    totalY: number | null
+    factureNumberX: number | null
+    factureNumberY: number | null
+    fontSize: number | null
+    fontColor: string | null
+    factureNumberFontFamily: string | null
+    dateFontFamily: string | null
+    clientCompanyFontFamily: string | null
+    clientNameFontFamily: string | null
+    clientEmailFontFamily: string | null
+    serviceNameFontFamily: string | null
+    servicePriceFontFamily: string | null
+    subtotalFontFamily: string | null
+    totalFontFamily: string | null
+    servicePriceX: number | null
+    servicePriceY: number | null
+    factureNumberFontSize: number | null
+    factureNumberFontColor: string | null
+    factureNumberIsBold: boolean | null
+    factureNumberIsItalic: boolean | null
+    dateFontSize: number | null
+    dateFontColor: string | null
+    dateIsBold: boolean | null
+    dateIsItalic: boolean | null
+    clientCompanyFontSize: number | null
+    clientCompanyFontColor: string | null
+    clientCompanyIsBold: boolean | null
+    clientCompanyIsItalic: boolean | null
+    clientNameFontSize: number | null
+    clientNameFontColor: string | null
+    clientNameIsBold: boolean | null
+    clientNameIsItalic: boolean | null
+    clientEmailFontSize: number | null
+    clientEmailFontColor: string | null
+    clientEmailIsBold: boolean | null
+    clientEmailIsItalic: boolean | null
+    serviceNameFontSize: number | null
+    serviceNameFontColor: string | null
+    serviceNameIsBold: boolean | null
+    serviceNameIsItalic: boolean | null
+    servicePriceFontSize: number | null
+    servicePriceFontColor: string | null
+    servicePriceIsBold: boolean | null
+    servicePriceIsItalic: boolean | null
+    subtotalFontSize: number | null
+    subtotalFontColor: string | null
+    subtotalIsBold: boolean | null
+    subtotalIsItalic: boolean | null
+    totalFontSize: number | null
+    totalFontColor: string | null
+    totalIsBold: boolean | null
+    totalIsItalic: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type FactureTemplateCountAggregateOutputType = {
+    id: number
+    dateX: number
+    dateY: number
+    clientNameX: number
+    clientNameY: number
+    clientEmailX: number
+    clientEmailY: number
+    clientCompanyX: number
+    clientCompanyY: number
+    serviceNameX: number
+    serviceNameY: number
+    subtotalX: number
+    subtotalY: number
+    totalX: number
+    totalY: number
+    factureNumberX: number
+    factureNumberY: number
+    fontSize: number
+    fontColor: number
+    factureNumberFontFamily: number
+    dateFontFamily: number
+    clientCompanyFontFamily: number
+    clientNameFontFamily: number
+    clientEmailFontFamily: number
+    serviceNameFontFamily: number
+    servicePriceFontFamily: number
+    subtotalFontFamily: number
+    totalFontFamily: number
+    servicePriceX: number
+    servicePriceY: number
+    factureNumberFontSize: number
+    factureNumberFontColor: number
+    factureNumberIsBold: number
+    factureNumberIsItalic: number
+    dateFontSize: number
+    dateFontColor: number
+    dateIsBold: number
+    dateIsItalic: number
+    clientCompanyFontSize: number
+    clientCompanyFontColor: number
+    clientCompanyIsBold: number
+    clientCompanyIsItalic: number
+    clientNameFontSize: number
+    clientNameFontColor: number
+    clientNameIsBold: number
+    clientNameIsItalic: number
+    clientEmailFontSize: number
+    clientEmailFontColor: number
+    clientEmailIsBold: number
+    clientEmailIsItalic: number
+    serviceNameFontSize: number
+    serviceNameFontColor: number
+    serviceNameIsBold: number
+    serviceNameIsItalic: number
+    servicePriceFontSize: number
+    servicePriceFontColor: number
+    servicePriceIsBold: number
+    servicePriceIsItalic: number
+    subtotalFontSize: number
+    subtotalFontColor: number
+    subtotalIsBold: number
+    subtotalIsItalic: number
+    totalFontSize: number
+    totalFontColor: number
+    totalIsBold: number
+    totalIsItalic: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type FactureTemplateAvgAggregateInputType = {
+    dateX?: true
+    dateY?: true
+    clientNameX?: true
+    clientNameY?: true
+    clientEmailX?: true
+    clientEmailY?: true
+    clientCompanyX?: true
+    clientCompanyY?: true
+    serviceNameX?: true
+    serviceNameY?: true
+    subtotalX?: true
+    subtotalY?: true
+    totalX?: true
+    totalY?: true
+    factureNumberX?: true
+    factureNumberY?: true
+    fontSize?: true
+    servicePriceX?: true
+    servicePriceY?: true
+    factureNumberFontSize?: true
+    dateFontSize?: true
+    clientCompanyFontSize?: true
+    clientNameFontSize?: true
+    clientEmailFontSize?: true
+    serviceNameFontSize?: true
+    servicePriceFontSize?: true
+    subtotalFontSize?: true
+    totalFontSize?: true
+  }
+
+  export type FactureTemplateSumAggregateInputType = {
+    dateX?: true
+    dateY?: true
+    clientNameX?: true
+    clientNameY?: true
+    clientEmailX?: true
+    clientEmailY?: true
+    clientCompanyX?: true
+    clientCompanyY?: true
+    serviceNameX?: true
+    serviceNameY?: true
+    subtotalX?: true
+    subtotalY?: true
+    totalX?: true
+    totalY?: true
+    factureNumberX?: true
+    factureNumberY?: true
+    fontSize?: true
+    servicePriceX?: true
+    servicePriceY?: true
+    factureNumberFontSize?: true
+    dateFontSize?: true
+    clientCompanyFontSize?: true
+    clientNameFontSize?: true
+    clientEmailFontSize?: true
+    serviceNameFontSize?: true
+    servicePriceFontSize?: true
+    subtotalFontSize?: true
+    totalFontSize?: true
+  }
+
+  export type FactureTemplateMinAggregateInputType = {
+    id?: true
+    dateX?: true
+    dateY?: true
+    clientNameX?: true
+    clientNameY?: true
+    clientEmailX?: true
+    clientEmailY?: true
+    clientCompanyX?: true
+    clientCompanyY?: true
+    serviceNameX?: true
+    serviceNameY?: true
+    subtotalX?: true
+    subtotalY?: true
+    totalX?: true
+    totalY?: true
+    factureNumberX?: true
+    factureNumberY?: true
+    fontSize?: true
+    fontColor?: true
+    factureNumberFontFamily?: true
+    dateFontFamily?: true
+    clientCompanyFontFamily?: true
+    clientNameFontFamily?: true
+    clientEmailFontFamily?: true
+    serviceNameFontFamily?: true
+    servicePriceFontFamily?: true
+    subtotalFontFamily?: true
+    totalFontFamily?: true
+    servicePriceX?: true
+    servicePriceY?: true
+    factureNumberFontSize?: true
+    factureNumberFontColor?: true
+    factureNumberIsBold?: true
+    factureNumberIsItalic?: true
+    dateFontSize?: true
+    dateFontColor?: true
+    dateIsBold?: true
+    dateIsItalic?: true
+    clientCompanyFontSize?: true
+    clientCompanyFontColor?: true
+    clientCompanyIsBold?: true
+    clientCompanyIsItalic?: true
+    clientNameFontSize?: true
+    clientNameFontColor?: true
+    clientNameIsBold?: true
+    clientNameIsItalic?: true
+    clientEmailFontSize?: true
+    clientEmailFontColor?: true
+    clientEmailIsBold?: true
+    clientEmailIsItalic?: true
+    serviceNameFontSize?: true
+    serviceNameFontColor?: true
+    serviceNameIsBold?: true
+    serviceNameIsItalic?: true
+    servicePriceFontSize?: true
+    servicePriceFontColor?: true
+    servicePriceIsBold?: true
+    servicePriceIsItalic?: true
+    subtotalFontSize?: true
+    subtotalFontColor?: true
+    subtotalIsBold?: true
+    subtotalIsItalic?: true
+    totalFontSize?: true
+    totalFontColor?: true
+    totalIsBold?: true
+    totalIsItalic?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FactureTemplateMaxAggregateInputType = {
+    id?: true
+    dateX?: true
+    dateY?: true
+    clientNameX?: true
+    clientNameY?: true
+    clientEmailX?: true
+    clientEmailY?: true
+    clientCompanyX?: true
+    clientCompanyY?: true
+    serviceNameX?: true
+    serviceNameY?: true
+    subtotalX?: true
+    subtotalY?: true
+    totalX?: true
+    totalY?: true
+    factureNumberX?: true
+    factureNumberY?: true
+    fontSize?: true
+    fontColor?: true
+    factureNumberFontFamily?: true
+    dateFontFamily?: true
+    clientCompanyFontFamily?: true
+    clientNameFontFamily?: true
+    clientEmailFontFamily?: true
+    serviceNameFontFamily?: true
+    servicePriceFontFamily?: true
+    subtotalFontFamily?: true
+    totalFontFamily?: true
+    servicePriceX?: true
+    servicePriceY?: true
+    factureNumberFontSize?: true
+    factureNumberFontColor?: true
+    factureNumberIsBold?: true
+    factureNumberIsItalic?: true
+    dateFontSize?: true
+    dateFontColor?: true
+    dateIsBold?: true
+    dateIsItalic?: true
+    clientCompanyFontSize?: true
+    clientCompanyFontColor?: true
+    clientCompanyIsBold?: true
+    clientCompanyIsItalic?: true
+    clientNameFontSize?: true
+    clientNameFontColor?: true
+    clientNameIsBold?: true
+    clientNameIsItalic?: true
+    clientEmailFontSize?: true
+    clientEmailFontColor?: true
+    clientEmailIsBold?: true
+    clientEmailIsItalic?: true
+    serviceNameFontSize?: true
+    serviceNameFontColor?: true
+    serviceNameIsBold?: true
+    serviceNameIsItalic?: true
+    servicePriceFontSize?: true
+    servicePriceFontColor?: true
+    servicePriceIsBold?: true
+    servicePriceIsItalic?: true
+    subtotalFontSize?: true
+    subtotalFontColor?: true
+    subtotalIsBold?: true
+    subtotalIsItalic?: true
+    totalFontSize?: true
+    totalFontColor?: true
+    totalIsBold?: true
+    totalIsItalic?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type FactureTemplateCountAggregateInputType = {
+    id?: true
+    dateX?: true
+    dateY?: true
+    clientNameX?: true
+    clientNameY?: true
+    clientEmailX?: true
+    clientEmailY?: true
+    clientCompanyX?: true
+    clientCompanyY?: true
+    serviceNameX?: true
+    serviceNameY?: true
+    subtotalX?: true
+    subtotalY?: true
+    totalX?: true
+    totalY?: true
+    factureNumberX?: true
+    factureNumberY?: true
+    fontSize?: true
+    fontColor?: true
+    factureNumberFontFamily?: true
+    dateFontFamily?: true
+    clientCompanyFontFamily?: true
+    clientNameFontFamily?: true
+    clientEmailFontFamily?: true
+    serviceNameFontFamily?: true
+    servicePriceFontFamily?: true
+    subtotalFontFamily?: true
+    totalFontFamily?: true
+    servicePriceX?: true
+    servicePriceY?: true
+    factureNumberFontSize?: true
+    factureNumberFontColor?: true
+    factureNumberIsBold?: true
+    factureNumberIsItalic?: true
+    dateFontSize?: true
+    dateFontColor?: true
+    dateIsBold?: true
+    dateIsItalic?: true
+    clientCompanyFontSize?: true
+    clientCompanyFontColor?: true
+    clientCompanyIsBold?: true
+    clientCompanyIsItalic?: true
+    clientNameFontSize?: true
+    clientNameFontColor?: true
+    clientNameIsBold?: true
+    clientNameIsItalic?: true
+    clientEmailFontSize?: true
+    clientEmailFontColor?: true
+    clientEmailIsBold?: true
+    clientEmailIsItalic?: true
+    serviceNameFontSize?: true
+    serviceNameFontColor?: true
+    serviceNameIsBold?: true
+    serviceNameIsItalic?: true
+    servicePriceFontSize?: true
+    servicePriceFontColor?: true
+    servicePriceIsBold?: true
+    servicePriceIsItalic?: true
+    subtotalFontSize?: true
+    subtotalFontColor?: true
+    subtotalIsBold?: true
+    subtotalIsItalic?: true
+    totalFontSize?: true
+    totalFontColor?: true
+    totalIsBold?: true
+    totalIsItalic?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type FactureTemplateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FactureTemplate to aggregate.
+     */
+    where?: FactureTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FactureTemplates to fetch.
+     */
+    orderBy?: FactureTemplateOrderByWithRelationInput | FactureTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FactureTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FactureTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FactureTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FactureTemplates
+    **/
+    _count?: true | FactureTemplateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FactureTemplateAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FactureTemplateSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FactureTemplateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FactureTemplateMaxAggregateInputType
+  }
+
+  export type GetFactureTemplateAggregateType<T extends FactureTemplateAggregateArgs> = {
+        [P in keyof T & keyof AggregateFactureTemplate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFactureTemplate[P]>
+      : GetScalarType<T[P], AggregateFactureTemplate[P]>
+  }
+
+
+
+
+  export type FactureTemplateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FactureTemplateWhereInput
+    orderBy?: FactureTemplateOrderByWithAggregationInput | FactureTemplateOrderByWithAggregationInput[]
+    by: FactureTemplateScalarFieldEnum[] | FactureTemplateScalarFieldEnum
+    having?: FactureTemplateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FactureTemplateCountAggregateInputType | true
+    _avg?: FactureTemplateAvgAggregateInputType
+    _sum?: FactureTemplateSumAggregateInputType
+    _min?: FactureTemplateMinAggregateInputType
+    _max?: FactureTemplateMaxAggregateInputType
+  }
+
+  export type FactureTemplateGroupByOutputType = {
+    id: string
+    dateX: number
+    dateY: number
+    clientNameX: number
+    clientNameY: number
+    clientEmailX: number
+    clientEmailY: number
+    clientCompanyX: number
+    clientCompanyY: number
+    serviceNameX: number
+    serviceNameY: number
+    subtotalX: number
+    subtotalY: number
+    totalX: number
+    totalY: number
+    factureNumberX: number
+    factureNumberY: number
+    fontSize: number
+    fontColor: string
+    factureNumberFontFamily: string
+    dateFontFamily: string
+    clientCompanyFontFamily: string
+    clientNameFontFamily: string
+    clientEmailFontFamily: string
+    serviceNameFontFamily: string
+    servicePriceFontFamily: string
+    subtotalFontFamily: string
+    totalFontFamily: string
+    servicePriceX: number
+    servicePriceY: number
+    factureNumberFontSize: number
+    factureNumberFontColor: string
+    factureNumberIsBold: boolean
+    factureNumberIsItalic: boolean
+    dateFontSize: number
+    dateFontColor: string
+    dateIsBold: boolean
+    dateIsItalic: boolean
+    clientCompanyFontSize: number
+    clientCompanyFontColor: string
+    clientCompanyIsBold: boolean
+    clientCompanyIsItalic: boolean
+    clientNameFontSize: number
+    clientNameFontColor: string
+    clientNameIsBold: boolean
+    clientNameIsItalic: boolean
+    clientEmailFontSize: number
+    clientEmailFontColor: string
+    clientEmailIsBold: boolean
+    clientEmailIsItalic: boolean
+    serviceNameFontSize: number
+    serviceNameFontColor: string
+    serviceNameIsBold: boolean
+    serviceNameIsItalic: boolean
+    servicePriceFontSize: number
+    servicePriceFontColor: string
+    servicePriceIsBold: boolean
+    servicePriceIsItalic: boolean
+    subtotalFontSize: number
+    subtotalFontColor: string
+    subtotalIsBold: boolean
+    subtotalIsItalic: boolean
+    totalFontSize: number
+    totalFontColor: string
+    totalIsBold: boolean
+    totalIsItalic: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: FactureTemplateCountAggregateOutputType | null
+    _avg: FactureTemplateAvgAggregateOutputType | null
+    _sum: FactureTemplateSumAggregateOutputType | null
+    _min: FactureTemplateMinAggregateOutputType | null
+    _max: FactureTemplateMaxAggregateOutputType | null
+  }
+
+  type GetFactureTemplateGroupByPayload<T extends FactureTemplateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FactureTemplateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FactureTemplateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FactureTemplateGroupByOutputType[P]>
+            : GetScalarType<T[P], FactureTemplateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FactureTemplateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dateX?: boolean
+    dateY?: boolean
+    clientNameX?: boolean
+    clientNameY?: boolean
+    clientEmailX?: boolean
+    clientEmailY?: boolean
+    clientCompanyX?: boolean
+    clientCompanyY?: boolean
+    serviceNameX?: boolean
+    serviceNameY?: boolean
+    subtotalX?: boolean
+    subtotalY?: boolean
+    totalX?: boolean
+    totalY?: boolean
+    factureNumberX?: boolean
+    factureNumberY?: boolean
+    fontSize?: boolean
+    fontColor?: boolean
+    factureNumberFontFamily?: boolean
+    dateFontFamily?: boolean
+    clientCompanyFontFamily?: boolean
+    clientNameFontFamily?: boolean
+    clientEmailFontFamily?: boolean
+    serviceNameFontFamily?: boolean
+    servicePriceFontFamily?: boolean
+    subtotalFontFamily?: boolean
+    totalFontFamily?: boolean
+    servicePriceX?: boolean
+    servicePriceY?: boolean
+    factureNumberFontSize?: boolean
+    factureNumberFontColor?: boolean
+    factureNumberIsBold?: boolean
+    factureNumberIsItalic?: boolean
+    dateFontSize?: boolean
+    dateFontColor?: boolean
+    dateIsBold?: boolean
+    dateIsItalic?: boolean
+    clientCompanyFontSize?: boolean
+    clientCompanyFontColor?: boolean
+    clientCompanyIsBold?: boolean
+    clientCompanyIsItalic?: boolean
+    clientNameFontSize?: boolean
+    clientNameFontColor?: boolean
+    clientNameIsBold?: boolean
+    clientNameIsItalic?: boolean
+    clientEmailFontSize?: boolean
+    clientEmailFontColor?: boolean
+    clientEmailIsBold?: boolean
+    clientEmailIsItalic?: boolean
+    serviceNameFontSize?: boolean
+    serviceNameFontColor?: boolean
+    serviceNameIsBold?: boolean
+    serviceNameIsItalic?: boolean
+    servicePriceFontSize?: boolean
+    servicePriceFontColor?: boolean
+    servicePriceIsBold?: boolean
+    servicePriceIsItalic?: boolean
+    subtotalFontSize?: boolean
+    subtotalFontColor?: boolean
+    subtotalIsBold?: boolean
+    subtotalIsItalic?: boolean
+    totalFontSize?: boolean
+    totalFontColor?: boolean
+    totalIsBold?: boolean
+    totalIsItalic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["factureTemplate"]>
+
+  export type FactureTemplateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dateX?: boolean
+    dateY?: boolean
+    clientNameX?: boolean
+    clientNameY?: boolean
+    clientEmailX?: boolean
+    clientEmailY?: boolean
+    clientCompanyX?: boolean
+    clientCompanyY?: boolean
+    serviceNameX?: boolean
+    serviceNameY?: boolean
+    subtotalX?: boolean
+    subtotalY?: boolean
+    totalX?: boolean
+    totalY?: boolean
+    factureNumberX?: boolean
+    factureNumberY?: boolean
+    fontSize?: boolean
+    fontColor?: boolean
+    factureNumberFontFamily?: boolean
+    dateFontFamily?: boolean
+    clientCompanyFontFamily?: boolean
+    clientNameFontFamily?: boolean
+    clientEmailFontFamily?: boolean
+    serviceNameFontFamily?: boolean
+    servicePriceFontFamily?: boolean
+    subtotalFontFamily?: boolean
+    totalFontFamily?: boolean
+    servicePriceX?: boolean
+    servicePriceY?: boolean
+    factureNumberFontSize?: boolean
+    factureNumberFontColor?: boolean
+    factureNumberIsBold?: boolean
+    factureNumberIsItalic?: boolean
+    dateFontSize?: boolean
+    dateFontColor?: boolean
+    dateIsBold?: boolean
+    dateIsItalic?: boolean
+    clientCompanyFontSize?: boolean
+    clientCompanyFontColor?: boolean
+    clientCompanyIsBold?: boolean
+    clientCompanyIsItalic?: boolean
+    clientNameFontSize?: boolean
+    clientNameFontColor?: boolean
+    clientNameIsBold?: boolean
+    clientNameIsItalic?: boolean
+    clientEmailFontSize?: boolean
+    clientEmailFontColor?: boolean
+    clientEmailIsBold?: boolean
+    clientEmailIsItalic?: boolean
+    serviceNameFontSize?: boolean
+    serviceNameFontColor?: boolean
+    serviceNameIsBold?: boolean
+    serviceNameIsItalic?: boolean
+    servicePriceFontSize?: boolean
+    servicePriceFontColor?: boolean
+    servicePriceIsBold?: boolean
+    servicePriceIsItalic?: boolean
+    subtotalFontSize?: boolean
+    subtotalFontColor?: boolean
+    subtotalIsBold?: boolean
+    subtotalIsItalic?: boolean
+    totalFontSize?: boolean
+    totalFontColor?: boolean
+    totalIsBold?: boolean
+    totalIsItalic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["factureTemplate"]>
+
+  export type FactureTemplateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dateX?: boolean
+    dateY?: boolean
+    clientNameX?: boolean
+    clientNameY?: boolean
+    clientEmailX?: boolean
+    clientEmailY?: boolean
+    clientCompanyX?: boolean
+    clientCompanyY?: boolean
+    serviceNameX?: boolean
+    serviceNameY?: boolean
+    subtotalX?: boolean
+    subtotalY?: boolean
+    totalX?: boolean
+    totalY?: boolean
+    factureNumberX?: boolean
+    factureNumberY?: boolean
+    fontSize?: boolean
+    fontColor?: boolean
+    factureNumberFontFamily?: boolean
+    dateFontFamily?: boolean
+    clientCompanyFontFamily?: boolean
+    clientNameFontFamily?: boolean
+    clientEmailFontFamily?: boolean
+    serviceNameFontFamily?: boolean
+    servicePriceFontFamily?: boolean
+    subtotalFontFamily?: boolean
+    totalFontFamily?: boolean
+    servicePriceX?: boolean
+    servicePriceY?: boolean
+    factureNumberFontSize?: boolean
+    factureNumberFontColor?: boolean
+    factureNumberIsBold?: boolean
+    factureNumberIsItalic?: boolean
+    dateFontSize?: boolean
+    dateFontColor?: boolean
+    dateIsBold?: boolean
+    dateIsItalic?: boolean
+    clientCompanyFontSize?: boolean
+    clientCompanyFontColor?: boolean
+    clientCompanyIsBold?: boolean
+    clientCompanyIsItalic?: boolean
+    clientNameFontSize?: boolean
+    clientNameFontColor?: boolean
+    clientNameIsBold?: boolean
+    clientNameIsItalic?: boolean
+    clientEmailFontSize?: boolean
+    clientEmailFontColor?: boolean
+    clientEmailIsBold?: boolean
+    clientEmailIsItalic?: boolean
+    serviceNameFontSize?: boolean
+    serviceNameFontColor?: boolean
+    serviceNameIsBold?: boolean
+    serviceNameIsItalic?: boolean
+    servicePriceFontSize?: boolean
+    servicePriceFontColor?: boolean
+    servicePriceIsBold?: boolean
+    servicePriceIsItalic?: boolean
+    subtotalFontSize?: boolean
+    subtotalFontColor?: boolean
+    subtotalIsBold?: boolean
+    subtotalIsItalic?: boolean
+    totalFontSize?: boolean
+    totalFontColor?: boolean
+    totalIsBold?: boolean
+    totalIsItalic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["factureTemplate"]>
+
+  export type FactureTemplateSelectScalar = {
+    id?: boolean
+    dateX?: boolean
+    dateY?: boolean
+    clientNameX?: boolean
+    clientNameY?: boolean
+    clientEmailX?: boolean
+    clientEmailY?: boolean
+    clientCompanyX?: boolean
+    clientCompanyY?: boolean
+    serviceNameX?: boolean
+    serviceNameY?: boolean
+    subtotalX?: boolean
+    subtotalY?: boolean
+    totalX?: boolean
+    totalY?: boolean
+    factureNumberX?: boolean
+    factureNumberY?: boolean
+    fontSize?: boolean
+    fontColor?: boolean
+    factureNumberFontFamily?: boolean
+    dateFontFamily?: boolean
+    clientCompanyFontFamily?: boolean
+    clientNameFontFamily?: boolean
+    clientEmailFontFamily?: boolean
+    serviceNameFontFamily?: boolean
+    servicePriceFontFamily?: boolean
+    subtotalFontFamily?: boolean
+    totalFontFamily?: boolean
+    servicePriceX?: boolean
+    servicePriceY?: boolean
+    factureNumberFontSize?: boolean
+    factureNumberFontColor?: boolean
+    factureNumberIsBold?: boolean
+    factureNumberIsItalic?: boolean
+    dateFontSize?: boolean
+    dateFontColor?: boolean
+    dateIsBold?: boolean
+    dateIsItalic?: boolean
+    clientCompanyFontSize?: boolean
+    clientCompanyFontColor?: boolean
+    clientCompanyIsBold?: boolean
+    clientCompanyIsItalic?: boolean
+    clientNameFontSize?: boolean
+    clientNameFontColor?: boolean
+    clientNameIsBold?: boolean
+    clientNameIsItalic?: boolean
+    clientEmailFontSize?: boolean
+    clientEmailFontColor?: boolean
+    clientEmailIsBold?: boolean
+    clientEmailIsItalic?: boolean
+    serviceNameFontSize?: boolean
+    serviceNameFontColor?: boolean
+    serviceNameIsBold?: boolean
+    serviceNameIsItalic?: boolean
+    servicePriceFontSize?: boolean
+    servicePriceFontColor?: boolean
+    servicePriceIsBold?: boolean
+    servicePriceIsItalic?: boolean
+    subtotalFontSize?: boolean
+    subtotalFontColor?: boolean
+    subtotalIsBold?: boolean
+    subtotalIsItalic?: boolean
+    totalFontSize?: boolean
+    totalFontColor?: boolean
+    totalIsBold?: boolean
+    totalIsItalic?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type FactureTemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dateX" | "dateY" | "clientNameX" | "clientNameY" | "clientEmailX" | "clientEmailY" | "clientCompanyX" | "clientCompanyY" | "serviceNameX" | "serviceNameY" | "subtotalX" | "subtotalY" | "totalX" | "totalY" | "factureNumberX" | "factureNumberY" | "fontSize" | "fontColor" | "factureNumberFontFamily" | "dateFontFamily" | "clientCompanyFontFamily" | "clientNameFontFamily" | "clientEmailFontFamily" | "serviceNameFontFamily" | "servicePriceFontFamily" | "subtotalFontFamily" | "totalFontFamily" | "servicePriceX" | "servicePriceY" | "factureNumberFontSize" | "factureNumberFontColor" | "factureNumberIsBold" | "factureNumberIsItalic" | "dateFontSize" | "dateFontColor" | "dateIsBold" | "dateIsItalic" | "clientCompanyFontSize" | "clientCompanyFontColor" | "clientCompanyIsBold" | "clientCompanyIsItalic" | "clientNameFontSize" | "clientNameFontColor" | "clientNameIsBold" | "clientNameIsItalic" | "clientEmailFontSize" | "clientEmailFontColor" | "clientEmailIsBold" | "clientEmailIsItalic" | "serviceNameFontSize" | "serviceNameFontColor" | "serviceNameIsBold" | "serviceNameIsItalic" | "servicePriceFontSize" | "servicePriceFontColor" | "servicePriceIsBold" | "servicePriceIsItalic" | "subtotalFontSize" | "subtotalFontColor" | "subtotalIsBold" | "subtotalIsItalic" | "totalFontSize" | "totalFontColor" | "totalIsBold" | "totalIsItalic" | "createdAt" | "updatedAt", ExtArgs["result"]["factureTemplate"]>
+
+  export type $FactureTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FactureTemplate"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      dateX: number
+      dateY: number
+      clientNameX: number
+      clientNameY: number
+      clientEmailX: number
+      clientEmailY: number
+      clientCompanyX: number
+      clientCompanyY: number
+      serviceNameX: number
+      serviceNameY: number
+      subtotalX: number
+      subtotalY: number
+      totalX: number
+      totalY: number
+      factureNumberX: number
+      factureNumberY: number
+      fontSize: number
+      fontColor: string
+      factureNumberFontFamily: string
+      dateFontFamily: string
+      clientCompanyFontFamily: string
+      clientNameFontFamily: string
+      clientEmailFontFamily: string
+      serviceNameFontFamily: string
+      servicePriceFontFamily: string
+      subtotalFontFamily: string
+      totalFontFamily: string
+      servicePriceX: number
+      servicePriceY: number
+      factureNumberFontSize: number
+      factureNumberFontColor: string
+      factureNumberIsBold: boolean
+      factureNumberIsItalic: boolean
+      dateFontSize: number
+      dateFontColor: string
+      dateIsBold: boolean
+      dateIsItalic: boolean
+      clientCompanyFontSize: number
+      clientCompanyFontColor: string
+      clientCompanyIsBold: boolean
+      clientCompanyIsItalic: boolean
+      clientNameFontSize: number
+      clientNameFontColor: string
+      clientNameIsBold: boolean
+      clientNameIsItalic: boolean
+      clientEmailFontSize: number
+      clientEmailFontColor: string
+      clientEmailIsBold: boolean
+      clientEmailIsItalic: boolean
+      serviceNameFontSize: number
+      serviceNameFontColor: string
+      serviceNameIsBold: boolean
+      serviceNameIsItalic: boolean
+      servicePriceFontSize: number
+      servicePriceFontColor: string
+      servicePriceIsBold: boolean
+      servicePriceIsItalic: boolean
+      subtotalFontSize: number
+      subtotalFontColor: string
+      subtotalIsBold: boolean
+      subtotalIsItalic: boolean
+      totalFontSize: number
+      totalFontColor: string
+      totalIsBold: boolean
+      totalIsItalic: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["factureTemplate"]>
+    composites: {}
+  }
+
+  type FactureTemplateGetPayload<S extends boolean | null | undefined | FactureTemplateDefaultArgs> = $Result.GetResult<Prisma.$FactureTemplatePayload, S>
+
+  type FactureTemplateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FactureTemplateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FactureTemplateCountAggregateInputType | true
+    }
+
+  export interface FactureTemplateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FactureTemplate'], meta: { name: 'FactureTemplate' } }
+    /**
+     * Find zero or one FactureTemplate that matches the filter.
+     * @param {FactureTemplateFindUniqueArgs} args - Arguments to find a FactureTemplate
+     * @example
+     * // Get one FactureTemplate
+     * const factureTemplate = await prisma.factureTemplate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FactureTemplateFindUniqueArgs>(args: SelectSubset<T, FactureTemplateFindUniqueArgs<ExtArgs>>): Prisma__FactureTemplateClient<$Result.GetResult<Prisma.$FactureTemplatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FactureTemplate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FactureTemplateFindUniqueOrThrowArgs} args - Arguments to find a FactureTemplate
+     * @example
+     * // Get one FactureTemplate
+     * const factureTemplate = await prisma.factureTemplate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FactureTemplateFindUniqueOrThrowArgs>(args: SelectSubset<T, FactureTemplateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FactureTemplateClient<$Result.GetResult<Prisma.$FactureTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FactureTemplate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureTemplateFindFirstArgs} args - Arguments to find a FactureTemplate
+     * @example
+     * // Get one FactureTemplate
+     * const factureTemplate = await prisma.factureTemplate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FactureTemplateFindFirstArgs>(args?: SelectSubset<T, FactureTemplateFindFirstArgs<ExtArgs>>): Prisma__FactureTemplateClient<$Result.GetResult<Prisma.$FactureTemplatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FactureTemplate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureTemplateFindFirstOrThrowArgs} args - Arguments to find a FactureTemplate
+     * @example
+     * // Get one FactureTemplate
+     * const factureTemplate = await prisma.factureTemplate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FactureTemplateFindFirstOrThrowArgs>(args?: SelectSubset<T, FactureTemplateFindFirstOrThrowArgs<ExtArgs>>): Prisma__FactureTemplateClient<$Result.GetResult<Prisma.$FactureTemplatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FactureTemplates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureTemplateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FactureTemplates
+     * const factureTemplates = await prisma.factureTemplate.findMany()
+     * 
+     * // Get first 10 FactureTemplates
+     * const factureTemplates = await prisma.factureTemplate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const factureTemplateWithIdOnly = await prisma.factureTemplate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FactureTemplateFindManyArgs>(args?: SelectSubset<T, FactureTemplateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FactureTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FactureTemplate.
+     * @param {FactureTemplateCreateArgs} args - Arguments to create a FactureTemplate.
+     * @example
+     * // Create one FactureTemplate
+     * const FactureTemplate = await prisma.factureTemplate.create({
+     *   data: {
+     *     // ... data to create a FactureTemplate
+     *   }
+     * })
+     * 
+     */
+    create<T extends FactureTemplateCreateArgs>(args: SelectSubset<T, FactureTemplateCreateArgs<ExtArgs>>): Prisma__FactureTemplateClient<$Result.GetResult<Prisma.$FactureTemplatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FactureTemplates.
+     * @param {FactureTemplateCreateManyArgs} args - Arguments to create many FactureTemplates.
+     * @example
+     * // Create many FactureTemplates
+     * const factureTemplate = await prisma.factureTemplate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FactureTemplateCreateManyArgs>(args?: SelectSubset<T, FactureTemplateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FactureTemplates and returns the data saved in the database.
+     * @param {FactureTemplateCreateManyAndReturnArgs} args - Arguments to create many FactureTemplates.
+     * @example
+     * // Create many FactureTemplates
+     * const factureTemplate = await prisma.factureTemplate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FactureTemplates and only return the `id`
+     * const factureTemplateWithIdOnly = await prisma.factureTemplate.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FactureTemplateCreateManyAndReturnArgs>(args?: SelectSubset<T, FactureTemplateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FactureTemplatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FactureTemplate.
+     * @param {FactureTemplateDeleteArgs} args - Arguments to delete one FactureTemplate.
+     * @example
+     * // Delete one FactureTemplate
+     * const FactureTemplate = await prisma.factureTemplate.delete({
+     *   where: {
+     *     // ... filter to delete one FactureTemplate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FactureTemplateDeleteArgs>(args: SelectSubset<T, FactureTemplateDeleteArgs<ExtArgs>>): Prisma__FactureTemplateClient<$Result.GetResult<Prisma.$FactureTemplatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FactureTemplate.
+     * @param {FactureTemplateUpdateArgs} args - Arguments to update one FactureTemplate.
+     * @example
+     * // Update one FactureTemplate
+     * const factureTemplate = await prisma.factureTemplate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FactureTemplateUpdateArgs>(args: SelectSubset<T, FactureTemplateUpdateArgs<ExtArgs>>): Prisma__FactureTemplateClient<$Result.GetResult<Prisma.$FactureTemplatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FactureTemplates.
+     * @param {FactureTemplateDeleteManyArgs} args - Arguments to filter FactureTemplates to delete.
+     * @example
+     * // Delete a few FactureTemplates
+     * const { count } = await prisma.factureTemplate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FactureTemplateDeleteManyArgs>(args?: SelectSubset<T, FactureTemplateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FactureTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureTemplateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FactureTemplates
+     * const factureTemplate = await prisma.factureTemplate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FactureTemplateUpdateManyArgs>(args: SelectSubset<T, FactureTemplateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FactureTemplates and returns the data updated in the database.
+     * @param {FactureTemplateUpdateManyAndReturnArgs} args - Arguments to update many FactureTemplates.
+     * @example
+     * // Update many FactureTemplates
+     * const factureTemplate = await prisma.factureTemplate.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FactureTemplates and only return the `id`
+     * const factureTemplateWithIdOnly = await prisma.factureTemplate.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FactureTemplateUpdateManyAndReturnArgs>(args: SelectSubset<T, FactureTemplateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FactureTemplatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FactureTemplate.
+     * @param {FactureTemplateUpsertArgs} args - Arguments to update or create a FactureTemplate.
+     * @example
+     * // Update or create a FactureTemplate
+     * const factureTemplate = await prisma.factureTemplate.upsert({
+     *   create: {
+     *     // ... data to create a FactureTemplate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FactureTemplate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FactureTemplateUpsertArgs>(args: SelectSubset<T, FactureTemplateUpsertArgs<ExtArgs>>): Prisma__FactureTemplateClient<$Result.GetResult<Prisma.$FactureTemplatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FactureTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureTemplateCountArgs} args - Arguments to filter FactureTemplates to count.
+     * @example
+     * // Count the number of FactureTemplates
+     * const count = await prisma.factureTemplate.count({
+     *   where: {
+     *     // ... the filter for the FactureTemplates we want to count
+     *   }
+     * })
+    **/
+    count<T extends FactureTemplateCountArgs>(
+      args?: Subset<T, FactureTemplateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FactureTemplateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FactureTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureTemplateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FactureTemplateAggregateArgs>(args: Subset<T, FactureTemplateAggregateArgs>): Prisma.PrismaPromise<GetFactureTemplateAggregateType<T>>
+
+    /**
+     * Group by FactureTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureTemplateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FactureTemplateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FactureTemplateGroupByArgs['orderBy'] }
+        : { orderBy?: FactureTemplateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FactureTemplateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFactureTemplateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FactureTemplate model
+   */
+  readonly fields: FactureTemplateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FactureTemplate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FactureTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FactureTemplate model
+   */
+  interface FactureTemplateFieldRefs {
+    readonly id: FieldRef<"FactureTemplate", 'String'>
+    readonly dateX: FieldRef<"FactureTemplate", 'Float'>
+    readonly dateY: FieldRef<"FactureTemplate", 'Float'>
+    readonly clientNameX: FieldRef<"FactureTemplate", 'Float'>
+    readonly clientNameY: FieldRef<"FactureTemplate", 'Float'>
+    readonly clientEmailX: FieldRef<"FactureTemplate", 'Float'>
+    readonly clientEmailY: FieldRef<"FactureTemplate", 'Float'>
+    readonly clientCompanyX: FieldRef<"FactureTemplate", 'Float'>
+    readonly clientCompanyY: FieldRef<"FactureTemplate", 'Float'>
+    readonly serviceNameX: FieldRef<"FactureTemplate", 'Float'>
+    readonly serviceNameY: FieldRef<"FactureTemplate", 'Float'>
+    readonly subtotalX: FieldRef<"FactureTemplate", 'Float'>
+    readonly subtotalY: FieldRef<"FactureTemplate", 'Float'>
+    readonly totalX: FieldRef<"FactureTemplate", 'Float'>
+    readonly totalY: FieldRef<"FactureTemplate", 'Float'>
+    readonly factureNumberX: FieldRef<"FactureTemplate", 'Float'>
+    readonly factureNumberY: FieldRef<"FactureTemplate", 'Float'>
+    readonly fontSize: FieldRef<"FactureTemplate", 'Float'>
+    readonly fontColor: FieldRef<"FactureTemplate", 'String'>
+    readonly factureNumberFontFamily: FieldRef<"FactureTemplate", 'String'>
+    readonly dateFontFamily: FieldRef<"FactureTemplate", 'String'>
+    readonly clientCompanyFontFamily: FieldRef<"FactureTemplate", 'String'>
+    readonly clientNameFontFamily: FieldRef<"FactureTemplate", 'String'>
+    readonly clientEmailFontFamily: FieldRef<"FactureTemplate", 'String'>
+    readonly serviceNameFontFamily: FieldRef<"FactureTemplate", 'String'>
+    readonly servicePriceFontFamily: FieldRef<"FactureTemplate", 'String'>
+    readonly subtotalFontFamily: FieldRef<"FactureTemplate", 'String'>
+    readonly totalFontFamily: FieldRef<"FactureTemplate", 'String'>
+    readonly servicePriceX: FieldRef<"FactureTemplate", 'Float'>
+    readonly servicePriceY: FieldRef<"FactureTemplate", 'Float'>
+    readonly factureNumberFontSize: FieldRef<"FactureTemplate", 'Float'>
+    readonly factureNumberFontColor: FieldRef<"FactureTemplate", 'String'>
+    readonly factureNumberIsBold: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly factureNumberIsItalic: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly dateFontSize: FieldRef<"FactureTemplate", 'Float'>
+    readonly dateFontColor: FieldRef<"FactureTemplate", 'String'>
+    readonly dateIsBold: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly dateIsItalic: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly clientCompanyFontSize: FieldRef<"FactureTemplate", 'Float'>
+    readonly clientCompanyFontColor: FieldRef<"FactureTemplate", 'String'>
+    readonly clientCompanyIsBold: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly clientCompanyIsItalic: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly clientNameFontSize: FieldRef<"FactureTemplate", 'Float'>
+    readonly clientNameFontColor: FieldRef<"FactureTemplate", 'String'>
+    readonly clientNameIsBold: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly clientNameIsItalic: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly clientEmailFontSize: FieldRef<"FactureTemplate", 'Float'>
+    readonly clientEmailFontColor: FieldRef<"FactureTemplate", 'String'>
+    readonly clientEmailIsBold: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly clientEmailIsItalic: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly serviceNameFontSize: FieldRef<"FactureTemplate", 'Float'>
+    readonly serviceNameFontColor: FieldRef<"FactureTemplate", 'String'>
+    readonly serviceNameIsBold: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly serviceNameIsItalic: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly servicePriceFontSize: FieldRef<"FactureTemplate", 'Float'>
+    readonly servicePriceFontColor: FieldRef<"FactureTemplate", 'String'>
+    readonly servicePriceIsBold: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly servicePriceIsItalic: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly subtotalFontSize: FieldRef<"FactureTemplate", 'Float'>
+    readonly subtotalFontColor: FieldRef<"FactureTemplate", 'String'>
+    readonly subtotalIsBold: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly subtotalIsItalic: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly totalFontSize: FieldRef<"FactureTemplate", 'Float'>
+    readonly totalFontColor: FieldRef<"FactureTemplate", 'String'>
+    readonly totalIsBold: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly totalIsItalic: FieldRef<"FactureTemplate", 'Boolean'>
+    readonly createdAt: FieldRef<"FactureTemplate", 'DateTime'>
+    readonly updatedAt: FieldRef<"FactureTemplate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FactureTemplate findUnique
+   */
+  export type FactureTemplateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureTemplate
+     */
+    select?: FactureTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureTemplate
+     */
+    omit?: FactureTemplateOmit<ExtArgs> | null
+    /**
+     * Filter, which FactureTemplate to fetch.
+     */
+    where: FactureTemplateWhereUniqueInput
+  }
+
+  /**
+   * FactureTemplate findUniqueOrThrow
+   */
+  export type FactureTemplateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureTemplate
+     */
+    select?: FactureTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureTemplate
+     */
+    omit?: FactureTemplateOmit<ExtArgs> | null
+    /**
+     * Filter, which FactureTemplate to fetch.
+     */
+    where: FactureTemplateWhereUniqueInput
+  }
+
+  /**
+   * FactureTemplate findFirst
+   */
+  export type FactureTemplateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureTemplate
+     */
+    select?: FactureTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureTemplate
+     */
+    omit?: FactureTemplateOmit<ExtArgs> | null
+    /**
+     * Filter, which FactureTemplate to fetch.
+     */
+    where?: FactureTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FactureTemplates to fetch.
+     */
+    orderBy?: FactureTemplateOrderByWithRelationInput | FactureTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FactureTemplates.
+     */
+    cursor?: FactureTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FactureTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FactureTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FactureTemplates.
+     */
+    distinct?: FactureTemplateScalarFieldEnum | FactureTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * FactureTemplate findFirstOrThrow
+   */
+  export type FactureTemplateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureTemplate
+     */
+    select?: FactureTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureTemplate
+     */
+    omit?: FactureTemplateOmit<ExtArgs> | null
+    /**
+     * Filter, which FactureTemplate to fetch.
+     */
+    where?: FactureTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FactureTemplates to fetch.
+     */
+    orderBy?: FactureTemplateOrderByWithRelationInput | FactureTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FactureTemplates.
+     */
+    cursor?: FactureTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FactureTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FactureTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FactureTemplates.
+     */
+    distinct?: FactureTemplateScalarFieldEnum | FactureTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * FactureTemplate findMany
+   */
+  export type FactureTemplateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureTemplate
+     */
+    select?: FactureTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureTemplate
+     */
+    omit?: FactureTemplateOmit<ExtArgs> | null
+    /**
+     * Filter, which FactureTemplates to fetch.
+     */
+    where?: FactureTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FactureTemplates to fetch.
+     */
+    orderBy?: FactureTemplateOrderByWithRelationInput | FactureTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FactureTemplates.
+     */
+    cursor?: FactureTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FactureTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FactureTemplates.
+     */
+    skip?: number
+    distinct?: FactureTemplateScalarFieldEnum | FactureTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * FactureTemplate create
+   */
+  export type FactureTemplateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureTemplate
+     */
+    select?: FactureTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureTemplate
+     */
+    omit?: FactureTemplateOmit<ExtArgs> | null
+    /**
+     * The data needed to create a FactureTemplate.
+     */
+    data: XOR<FactureTemplateCreateInput, FactureTemplateUncheckedCreateInput>
+  }
+
+  /**
+   * FactureTemplate createMany
+   */
+  export type FactureTemplateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FactureTemplates.
+     */
+    data: FactureTemplateCreateManyInput | FactureTemplateCreateManyInput[]
+  }
+
+  /**
+   * FactureTemplate createManyAndReturn
+   */
+  export type FactureTemplateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureTemplate
+     */
+    select?: FactureTemplateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureTemplate
+     */
+    omit?: FactureTemplateOmit<ExtArgs> | null
+    /**
+     * The data used to create many FactureTemplates.
+     */
+    data: FactureTemplateCreateManyInput | FactureTemplateCreateManyInput[]
+  }
+
+  /**
+   * FactureTemplate update
+   */
+  export type FactureTemplateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureTemplate
+     */
+    select?: FactureTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureTemplate
+     */
+    omit?: FactureTemplateOmit<ExtArgs> | null
+    /**
+     * The data needed to update a FactureTemplate.
+     */
+    data: XOR<FactureTemplateUpdateInput, FactureTemplateUncheckedUpdateInput>
+    /**
+     * Choose, which FactureTemplate to update.
+     */
+    where: FactureTemplateWhereUniqueInput
+  }
+
+  /**
+   * FactureTemplate updateMany
+   */
+  export type FactureTemplateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FactureTemplates.
+     */
+    data: XOR<FactureTemplateUpdateManyMutationInput, FactureTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which FactureTemplates to update
+     */
+    where?: FactureTemplateWhereInput
+    /**
+     * Limit how many FactureTemplates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FactureTemplate updateManyAndReturn
+   */
+  export type FactureTemplateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureTemplate
+     */
+    select?: FactureTemplateSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureTemplate
+     */
+    omit?: FactureTemplateOmit<ExtArgs> | null
+    /**
+     * The data used to update FactureTemplates.
+     */
+    data: XOR<FactureTemplateUpdateManyMutationInput, FactureTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which FactureTemplates to update
+     */
+    where?: FactureTemplateWhereInput
+    /**
+     * Limit how many FactureTemplates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FactureTemplate upsert
+   */
+  export type FactureTemplateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureTemplate
+     */
+    select?: FactureTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureTemplate
+     */
+    omit?: FactureTemplateOmit<ExtArgs> | null
+    /**
+     * The filter to search for the FactureTemplate to update in case it exists.
+     */
+    where: FactureTemplateWhereUniqueInput
+    /**
+     * In case the FactureTemplate found by the `where` argument doesn't exist, create a new FactureTemplate with this data.
+     */
+    create: XOR<FactureTemplateCreateInput, FactureTemplateUncheckedCreateInput>
+    /**
+     * In case the FactureTemplate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FactureTemplateUpdateInput, FactureTemplateUncheckedUpdateInput>
+  }
+
+  /**
+   * FactureTemplate delete
+   */
+  export type FactureTemplateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureTemplate
+     */
+    select?: FactureTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureTemplate
+     */
+    omit?: FactureTemplateOmit<ExtArgs> | null
+    /**
+     * Filter which FactureTemplate to delete.
+     */
+    where: FactureTemplateWhereUniqueInput
+  }
+
+  /**
+   * FactureTemplate deleteMany
+   */
+  export type FactureTemplateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FactureTemplates to delete
+     */
+    where?: FactureTemplateWhereInput
+    /**
+     * Limit how many FactureTemplates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FactureTemplate without action
+   */
+  export type FactureTemplateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureTemplate
+     */
+    select?: FactureTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureTemplate
+     */
+    omit?: FactureTemplateOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FactureRecord
+   */
+
+  export type AggregateFactureRecord = {
+    _count: FactureRecordCountAggregateOutputType | null
+    _avg: FactureRecordAvgAggregateOutputType | null
+    _sum: FactureRecordSumAggregateOutputType | null
+    _min: FactureRecordMinAggregateOutputType | null
+    _max: FactureRecordMaxAggregateOutputType | null
+  }
+
+  export type FactureRecordAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type FactureRecordSumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type FactureRecordMinAggregateOutputType = {
+    id: string | null
+    number: string | null
+    paymentId: string | null
+    userId: string | null
+    serviceName: string | null
+    clientName: string | null
+    clientEmail: string | null
+    amount: number | null
+    pdfUrl: string | null
+    generatedAt: Date | null
+  }
+
+  export type FactureRecordMaxAggregateOutputType = {
+    id: string | null
+    number: string | null
+    paymentId: string | null
+    userId: string | null
+    serviceName: string | null
+    clientName: string | null
+    clientEmail: string | null
+    amount: number | null
+    pdfUrl: string | null
+    generatedAt: Date | null
+  }
+
+  export type FactureRecordCountAggregateOutputType = {
+    id: number
+    number: number
+    paymentId: number
+    userId: number
+    serviceName: number
+    clientName: number
+    clientEmail: number
+    amount: number
+    pdfUrl: number
+    generatedAt: number
+    _all: number
+  }
+
+
+  export type FactureRecordAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type FactureRecordSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type FactureRecordMinAggregateInputType = {
+    id?: true
+    number?: true
+    paymentId?: true
+    userId?: true
+    serviceName?: true
+    clientName?: true
+    clientEmail?: true
+    amount?: true
+    pdfUrl?: true
+    generatedAt?: true
+  }
+
+  export type FactureRecordMaxAggregateInputType = {
+    id?: true
+    number?: true
+    paymentId?: true
+    userId?: true
+    serviceName?: true
+    clientName?: true
+    clientEmail?: true
+    amount?: true
+    pdfUrl?: true
+    generatedAt?: true
+  }
+
+  export type FactureRecordCountAggregateInputType = {
+    id?: true
+    number?: true
+    paymentId?: true
+    userId?: true
+    serviceName?: true
+    clientName?: true
+    clientEmail?: true
+    amount?: true
+    pdfUrl?: true
+    generatedAt?: true
+    _all?: true
+  }
+
+  export type FactureRecordAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FactureRecord to aggregate.
+     */
+    where?: FactureRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FactureRecords to fetch.
+     */
+    orderBy?: FactureRecordOrderByWithRelationInput | FactureRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FactureRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FactureRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FactureRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FactureRecords
+    **/
+    _count?: true | FactureRecordCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FactureRecordAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FactureRecordSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FactureRecordMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FactureRecordMaxAggregateInputType
+  }
+
+  export type GetFactureRecordAggregateType<T extends FactureRecordAggregateArgs> = {
+        [P in keyof T & keyof AggregateFactureRecord]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFactureRecord[P]>
+      : GetScalarType<T[P], AggregateFactureRecord[P]>
+  }
+
+
+
+
+  export type FactureRecordGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FactureRecordWhereInput
+    orderBy?: FactureRecordOrderByWithAggregationInput | FactureRecordOrderByWithAggregationInput[]
+    by: FactureRecordScalarFieldEnum[] | FactureRecordScalarFieldEnum
+    having?: FactureRecordScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FactureRecordCountAggregateInputType | true
+    _avg?: FactureRecordAvgAggregateInputType
+    _sum?: FactureRecordSumAggregateInputType
+    _min?: FactureRecordMinAggregateInputType
+    _max?: FactureRecordMaxAggregateInputType
+  }
+
+  export type FactureRecordGroupByOutputType = {
+    id: string
+    number: string
+    paymentId: string
+    userId: string
+    serviceName: string
+    clientName: string
+    clientEmail: string
+    amount: number
+    pdfUrl: string | null
+    generatedAt: Date
+    _count: FactureRecordCountAggregateOutputType | null
+    _avg: FactureRecordAvgAggregateOutputType | null
+    _sum: FactureRecordSumAggregateOutputType | null
+    _min: FactureRecordMinAggregateOutputType | null
+    _max: FactureRecordMaxAggregateOutputType | null
+  }
+
+  type GetFactureRecordGroupByPayload<T extends FactureRecordGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FactureRecordGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FactureRecordGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FactureRecordGroupByOutputType[P]>
+            : GetScalarType<T[P], FactureRecordGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FactureRecordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    number?: boolean
+    paymentId?: boolean
+    userId?: boolean
+    serviceName?: boolean
+    clientName?: boolean
+    clientEmail?: boolean
+    amount?: boolean
+    pdfUrl?: boolean
+    generatedAt?: boolean
+  }, ExtArgs["result"]["factureRecord"]>
+
+  export type FactureRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    number?: boolean
+    paymentId?: boolean
+    userId?: boolean
+    serviceName?: boolean
+    clientName?: boolean
+    clientEmail?: boolean
+    amount?: boolean
+    pdfUrl?: boolean
+    generatedAt?: boolean
+  }, ExtArgs["result"]["factureRecord"]>
+
+  export type FactureRecordSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    number?: boolean
+    paymentId?: boolean
+    userId?: boolean
+    serviceName?: boolean
+    clientName?: boolean
+    clientEmail?: boolean
+    amount?: boolean
+    pdfUrl?: boolean
+    generatedAt?: boolean
+  }, ExtArgs["result"]["factureRecord"]>
+
+  export type FactureRecordSelectScalar = {
+    id?: boolean
+    number?: boolean
+    paymentId?: boolean
+    userId?: boolean
+    serviceName?: boolean
+    clientName?: boolean
+    clientEmail?: boolean
+    amount?: boolean
+    pdfUrl?: boolean
+    generatedAt?: boolean
+  }
+
+  export type FactureRecordOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "number" | "paymentId" | "userId" | "serviceName" | "clientName" | "clientEmail" | "amount" | "pdfUrl" | "generatedAt", ExtArgs["result"]["factureRecord"]>
+
+  export type $FactureRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FactureRecord"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      number: string
+      paymentId: string
+      userId: string
+      serviceName: string
+      clientName: string
+      clientEmail: string
+      amount: number
+      pdfUrl: string | null
+      generatedAt: Date
+    }, ExtArgs["result"]["factureRecord"]>
+    composites: {}
+  }
+
+  type FactureRecordGetPayload<S extends boolean | null | undefined | FactureRecordDefaultArgs> = $Result.GetResult<Prisma.$FactureRecordPayload, S>
+
+  type FactureRecordCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FactureRecordFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FactureRecordCountAggregateInputType | true
+    }
+
+  export interface FactureRecordDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FactureRecord'], meta: { name: 'FactureRecord' } }
+    /**
+     * Find zero or one FactureRecord that matches the filter.
+     * @param {FactureRecordFindUniqueArgs} args - Arguments to find a FactureRecord
+     * @example
+     * // Get one FactureRecord
+     * const factureRecord = await prisma.factureRecord.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FactureRecordFindUniqueArgs>(args: SelectSubset<T, FactureRecordFindUniqueArgs<ExtArgs>>): Prisma__FactureRecordClient<$Result.GetResult<Prisma.$FactureRecordPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FactureRecord that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FactureRecordFindUniqueOrThrowArgs} args - Arguments to find a FactureRecord
+     * @example
+     * // Get one FactureRecord
+     * const factureRecord = await prisma.factureRecord.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FactureRecordFindUniqueOrThrowArgs>(args: SelectSubset<T, FactureRecordFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FactureRecordClient<$Result.GetResult<Prisma.$FactureRecordPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FactureRecord that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureRecordFindFirstArgs} args - Arguments to find a FactureRecord
+     * @example
+     * // Get one FactureRecord
+     * const factureRecord = await prisma.factureRecord.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FactureRecordFindFirstArgs>(args?: SelectSubset<T, FactureRecordFindFirstArgs<ExtArgs>>): Prisma__FactureRecordClient<$Result.GetResult<Prisma.$FactureRecordPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FactureRecord that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureRecordFindFirstOrThrowArgs} args - Arguments to find a FactureRecord
+     * @example
+     * // Get one FactureRecord
+     * const factureRecord = await prisma.factureRecord.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FactureRecordFindFirstOrThrowArgs>(args?: SelectSubset<T, FactureRecordFindFirstOrThrowArgs<ExtArgs>>): Prisma__FactureRecordClient<$Result.GetResult<Prisma.$FactureRecordPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FactureRecords that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureRecordFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FactureRecords
+     * const factureRecords = await prisma.factureRecord.findMany()
+     * 
+     * // Get first 10 FactureRecords
+     * const factureRecords = await prisma.factureRecord.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const factureRecordWithIdOnly = await prisma.factureRecord.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FactureRecordFindManyArgs>(args?: SelectSubset<T, FactureRecordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FactureRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FactureRecord.
+     * @param {FactureRecordCreateArgs} args - Arguments to create a FactureRecord.
+     * @example
+     * // Create one FactureRecord
+     * const FactureRecord = await prisma.factureRecord.create({
+     *   data: {
+     *     // ... data to create a FactureRecord
+     *   }
+     * })
+     * 
+     */
+    create<T extends FactureRecordCreateArgs>(args: SelectSubset<T, FactureRecordCreateArgs<ExtArgs>>): Prisma__FactureRecordClient<$Result.GetResult<Prisma.$FactureRecordPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FactureRecords.
+     * @param {FactureRecordCreateManyArgs} args - Arguments to create many FactureRecords.
+     * @example
+     * // Create many FactureRecords
+     * const factureRecord = await prisma.factureRecord.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FactureRecordCreateManyArgs>(args?: SelectSubset<T, FactureRecordCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FactureRecords and returns the data saved in the database.
+     * @param {FactureRecordCreateManyAndReturnArgs} args - Arguments to create many FactureRecords.
+     * @example
+     * // Create many FactureRecords
+     * const factureRecord = await prisma.factureRecord.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FactureRecords and only return the `id`
+     * const factureRecordWithIdOnly = await prisma.factureRecord.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FactureRecordCreateManyAndReturnArgs>(args?: SelectSubset<T, FactureRecordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FactureRecordPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FactureRecord.
+     * @param {FactureRecordDeleteArgs} args - Arguments to delete one FactureRecord.
+     * @example
+     * // Delete one FactureRecord
+     * const FactureRecord = await prisma.factureRecord.delete({
+     *   where: {
+     *     // ... filter to delete one FactureRecord
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FactureRecordDeleteArgs>(args: SelectSubset<T, FactureRecordDeleteArgs<ExtArgs>>): Prisma__FactureRecordClient<$Result.GetResult<Prisma.$FactureRecordPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FactureRecord.
+     * @param {FactureRecordUpdateArgs} args - Arguments to update one FactureRecord.
+     * @example
+     * // Update one FactureRecord
+     * const factureRecord = await prisma.factureRecord.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FactureRecordUpdateArgs>(args: SelectSubset<T, FactureRecordUpdateArgs<ExtArgs>>): Prisma__FactureRecordClient<$Result.GetResult<Prisma.$FactureRecordPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FactureRecords.
+     * @param {FactureRecordDeleteManyArgs} args - Arguments to filter FactureRecords to delete.
+     * @example
+     * // Delete a few FactureRecords
+     * const { count } = await prisma.factureRecord.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FactureRecordDeleteManyArgs>(args?: SelectSubset<T, FactureRecordDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FactureRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureRecordUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FactureRecords
+     * const factureRecord = await prisma.factureRecord.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FactureRecordUpdateManyArgs>(args: SelectSubset<T, FactureRecordUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FactureRecords and returns the data updated in the database.
+     * @param {FactureRecordUpdateManyAndReturnArgs} args - Arguments to update many FactureRecords.
+     * @example
+     * // Update many FactureRecords
+     * const factureRecord = await prisma.factureRecord.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FactureRecords and only return the `id`
+     * const factureRecordWithIdOnly = await prisma.factureRecord.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FactureRecordUpdateManyAndReturnArgs>(args: SelectSubset<T, FactureRecordUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FactureRecordPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FactureRecord.
+     * @param {FactureRecordUpsertArgs} args - Arguments to update or create a FactureRecord.
+     * @example
+     * // Update or create a FactureRecord
+     * const factureRecord = await prisma.factureRecord.upsert({
+     *   create: {
+     *     // ... data to create a FactureRecord
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FactureRecord we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FactureRecordUpsertArgs>(args: SelectSubset<T, FactureRecordUpsertArgs<ExtArgs>>): Prisma__FactureRecordClient<$Result.GetResult<Prisma.$FactureRecordPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FactureRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureRecordCountArgs} args - Arguments to filter FactureRecords to count.
+     * @example
+     * // Count the number of FactureRecords
+     * const count = await prisma.factureRecord.count({
+     *   where: {
+     *     // ... the filter for the FactureRecords we want to count
+     *   }
+     * })
+    **/
+    count<T extends FactureRecordCountArgs>(
+      args?: Subset<T, FactureRecordCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FactureRecordCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FactureRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureRecordAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FactureRecordAggregateArgs>(args: Subset<T, FactureRecordAggregateArgs>): Prisma.PrismaPromise<GetFactureRecordAggregateType<T>>
+
+    /**
+     * Group by FactureRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureRecordGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FactureRecordGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FactureRecordGroupByArgs['orderBy'] }
+        : { orderBy?: FactureRecordGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FactureRecordGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFactureRecordGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FactureRecord model
+   */
+  readonly fields: FactureRecordFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FactureRecord.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FactureRecordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FactureRecord model
+   */
+  interface FactureRecordFieldRefs {
+    readonly id: FieldRef<"FactureRecord", 'String'>
+    readonly number: FieldRef<"FactureRecord", 'String'>
+    readonly paymentId: FieldRef<"FactureRecord", 'String'>
+    readonly userId: FieldRef<"FactureRecord", 'String'>
+    readonly serviceName: FieldRef<"FactureRecord", 'String'>
+    readonly clientName: FieldRef<"FactureRecord", 'String'>
+    readonly clientEmail: FieldRef<"FactureRecord", 'String'>
+    readonly amount: FieldRef<"FactureRecord", 'Float'>
+    readonly pdfUrl: FieldRef<"FactureRecord", 'String'>
+    readonly generatedAt: FieldRef<"FactureRecord", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FactureRecord findUnique
+   */
+  export type FactureRecordFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureRecord
+     */
+    select?: FactureRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureRecord
+     */
+    omit?: FactureRecordOmit<ExtArgs> | null
+    /**
+     * Filter, which FactureRecord to fetch.
+     */
+    where: FactureRecordWhereUniqueInput
+  }
+
+  /**
+   * FactureRecord findUniqueOrThrow
+   */
+  export type FactureRecordFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureRecord
+     */
+    select?: FactureRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureRecord
+     */
+    omit?: FactureRecordOmit<ExtArgs> | null
+    /**
+     * Filter, which FactureRecord to fetch.
+     */
+    where: FactureRecordWhereUniqueInput
+  }
+
+  /**
+   * FactureRecord findFirst
+   */
+  export type FactureRecordFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureRecord
+     */
+    select?: FactureRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureRecord
+     */
+    omit?: FactureRecordOmit<ExtArgs> | null
+    /**
+     * Filter, which FactureRecord to fetch.
+     */
+    where?: FactureRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FactureRecords to fetch.
+     */
+    orderBy?: FactureRecordOrderByWithRelationInput | FactureRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FactureRecords.
+     */
+    cursor?: FactureRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FactureRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FactureRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FactureRecords.
+     */
+    distinct?: FactureRecordScalarFieldEnum | FactureRecordScalarFieldEnum[]
+  }
+
+  /**
+   * FactureRecord findFirstOrThrow
+   */
+  export type FactureRecordFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureRecord
+     */
+    select?: FactureRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureRecord
+     */
+    omit?: FactureRecordOmit<ExtArgs> | null
+    /**
+     * Filter, which FactureRecord to fetch.
+     */
+    where?: FactureRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FactureRecords to fetch.
+     */
+    orderBy?: FactureRecordOrderByWithRelationInput | FactureRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FactureRecords.
+     */
+    cursor?: FactureRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FactureRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FactureRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FactureRecords.
+     */
+    distinct?: FactureRecordScalarFieldEnum | FactureRecordScalarFieldEnum[]
+  }
+
+  /**
+   * FactureRecord findMany
+   */
+  export type FactureRecordFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureRecord
+     */
+    select?: FactureRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureRecord
+     */
+    omit?: FactureRecordOmit<ExtArgs> | null
+    /**
+     * Filter, which FactureRecords to fetch.
+     */
+    where?: FactureRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FactureRecords to fetch.
+     */
+    orderBy?: FactureRecordOrderByWithRelationInput | FactureRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FactureRecords.
+     */
+    cursor?: FactureRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FactureRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FactureRecords.
+     */
+    skip?: number
+    distinct?: FactureRecordScalarFieldEnum | FactureRecordScalarFieldEnum[]
+  }
+
+  /**
+   * FactureRecord create
+   */
+  export type FactureRecordCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureRecord
+     */
+    select?: FactureRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureRecord
+     */
+    omit?: FactureRecordOmit<ExtArgs> | null
+    /**
+     * The data needed to create a FactureRecord.
+     */
+    data: XOR<FactureRecordCreateInput, FactureRecordUncheckedCreateInput>
+  }
+
+  /**
+   * FactureRecord createMany
+   */
+  export type FactureRecordCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FactureRecords.
+     */
+    data: FactureRecordCreateManyInput | FactureRecordCreateManyInput[]
+  }
+
+  /**
+   * FactureRecord createManyAndReturn
+   */
+  export type FactureRecordCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureRecord
+     */
+    select?: FactureRecordSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureRecord
+     */
+    omit?: FactureRecordOmit<ExtArgs> | null
+    /**
+     * The data used to create many FactureRecords.
+     */
+    data: FactureRecordCreateManyInput | FactureRecordCreateManyInput[]
+  }
+
+  /**
+   * FactureRecord update
+   */
+  export type FactureRecordUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureRecord
+     */
+    select?: FactureRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureRecord
+     */
+    omit?: FactureRecordOmit<ExtArgs> | null
+    /**
+     * The data needed to update a FactureRecord.
+     */
+    data: XOR<FactureRecordUpdateInput, FactureRecordUncheckedUpdateInput>
+    /**
+     * Choose, which FactureRecord to update.
+     */
+    where: FactureRecordWhereUniqueInput
+  }
+
+  /**
+   * FactureRecord updateMany
+   */
+  export type FactureRecordUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FactureRecords.
+     */
+    data: XOR<FactureRecordUpdateManyMutationInput, FactureRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which FactureRecords to update
+     */
+    where?: FactureRecordWhereInput
+    /**
+     * Limit how many FactureRecords to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FactureRecord updateManyAndReturn
+   */
+  export type FactureRecordUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureRecord
+     */
+    select?: FactureRecordSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureRecord
+     */
+    omit?: FactureRecordOmit<ExtArgs> | null
+    /**
+     * The data used to update FactureRecords.
+     */
+    data: XOR<FactureRecordUpdateManyMutationInput, FactureRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which FactureRecords to update
+     */
+    where?: FactureRecordWhereInput
+    /**
+     * Limit how many FactureRecords to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FactureRecord upsert
+   */
+  export type FactureRecordUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureRecord
+     */
+    select?: FactureRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureRecord
+     */
+    omit?: FactureRecordOmit<ExtArgs> | null
+    /**
+     * The filter to search for the FactureRecord to update in case it exists.
+     */
+    where: FactureRecordWhereUniqueInput
+    /**
+     * In case the FactureRecord found by the `where` argument doesn't exist, create a new FactureRecord with this data.
+     */
+    create: XOR<FactureRecordCreateInput, FactureRecordUncheckedCreateInput>
+    /**
+     * In case the FactureRecord was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FactureRecordUpdateInput, FactureRecordUncheckedUpdateInput>
+  }
+
+  /**
+   * FactureRecord delete
+   */
+  export type FactureRecordDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureRecord
+     */
+    select?: FactureRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureRecord
+     */
+    omit?: FactureRecordOmit<ExtArgs> | null
+    /**
+     * Filter which FactureRecord to delete.
+     */
+    where: FactureRecordWhereUniqueInput
+  }
+
+  /**
+   * FactureRecord deleteMany
+   */
+  export type FactureRecordDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FactureRecords to delete
+     */
+    where?: FactureRecordWhereInput
+    /**
+     * Limit how many FactureRecords to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FactureRecord without action
+   */
+  export type FactureRecordDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureRecord
+     */
+    select?: FactureRecordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureRecord
+     */
+    omit?: FactureRecordOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model FactureCounter
+   */
+
+  export type AggregateFactureCounter = {
+    _count: FactureCounterCountAggregateOutputType | null
+    _avg: FactureCounterAvgAggregateOutputType | null
+    _sum: FactureCounterSumAggregateOutputType | null
+    _min: FactureCounterMinAggregateOutputType | null
+    _max: FactureCounterMaxAggregateOutputType | null
+  }
+
+  export type FactureCounterAvgAggregateOutputType = {
+    year: number | null
+    nextNumber: number | null
+  }
+
+  export type FactureCounterSumAggregateOutputType = {
+    year: number | null
+    nextNumber: number | null
+  }
+
+  export type FactureCounterMinAggregateOutputType = {
+    id: string | null
+    year: number | null
+    nextNumber: number | null
+  }
+
+  export type FactureCounterMaxAggregateOutputType = {
+    id: string | null
+    year: number | null
+    nextNumber: number | null
+  }
+
+  export type FactureCounterCountAggregateOutputType = {
+    id: number
+    year: number
+    nextNumber: number
+    _all: number
+  }
+
+
+  export type FactureCounterAvgAggregateInputType = {
+    year?: true
+    nextNumber?: true
+  }
+
+  export type FactureCounterSumAggregateInputType = {
+    year?: true
+    nextNumber?: true
+  }
+
+  export type FactureCounterMinAggregateInputType = {
+    id?: true
+    year?: true
+    nextNumber?: true
+  }
+
+  export type FactureCounterMaxAggregateInputType = {
+    id?: true
+    year?: true
+    nextNumber?: true
+  }
+
+  export type FactureCounterCountAggregateInputType = {
+    id?: true
+    year?: true
+    nextNumber?: true
+    _all?: true
+  }
+
+  export type FactureCounterAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FactureCounter to aggregate.
+     */
+    where?: FactureCounterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FactureCounters to fetch.
+     */
+    orderBy?: FactureCounterOrderByWithRelationInput | FactureCounterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FactureCounterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FactureCounters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FactureCounters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FactureCounters
+    **/
+    _count?: true | FactureCounterCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FactureCounterAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FactureCounterSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FactureCounterMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FactureCounterMaxAggregateInputType
+  }
+
+  export type GetFactureCounterAggregateType<T extends FactureCounterAggregateArgs> = {
+        [P in keyof T & keyof AggregateFactureCounter]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFactureCounter[P]>
+      : GetScalarType<T[P], AggregateFactureCounter[P]>
+  }
+
+
+
+
+  export type FactureCounterGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FactureCounterWhereInput
+    orderBy?: FactureCounterOrderByWithAggregationInput | FactureCounterOrderByWithAggregationInput[]
+    by: FactureCounterScalarFieldEnum[] | FactureCounterScalarFieldEnum
+    having?: FactureCounterScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FactureCounterCountAggregateInputType | true
+    _avg?: FactureCounterAvgAggregateInputType
+    _sum?: FactureCounterSumAggregateInputType
+    _min?: FactureCounterMinAggregateInputType
+    _max?: FactureCounterMaxAggregateInputType
+  }
+
+  export type FactureCounterGroupByOutputType = {
+    id: string
+    year: number
+    nextNumber: number
+    _count: FactureCounterCountAggregateOutputType | null
+    _avg: FactureCounterAvgAggregateOutputType | null
+    _sum: FactureCounterSumAggregateOutputType | null
+    _min: FactureCounterMinAggregateOutputType | null
+    _max: FactureCounterMaxAggregateOutputType | null
+  }
+
+  type GetFactureCounterGroupByPayload<T extends FactureCounterGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FactureCounterGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FactureCounterGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FactureCounterGroupByOutputType[P]>
+            : GetScalarType<T[P], FactureCounterGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FactureCounterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    year?: boolean
+    nextNumber?: boolean
+  }, ExtArgs["result"]["factureCounter"]>
+
+  export type FactureCounterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    year?: boolean
+    nextNumber?: boolean
+  }, ExtArgs["result"]["factureCounter"]>
+
+  export type FactureCounterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    year?: boolean
+    nextNumber?: boolean
+  }, ExtArgs["result"]["factureCounter"]>
+
+  export type FactureCounterSelectScalar = {
+    id?: boolean
+    year?: boolean
+    nextNumber?: boolean
+  }
+
+  export type FactureCounterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "year" | "nextNumber", ExtArgs["result"]["factureCounter"]>
+
+  export type $FactureCounterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FactureCounter"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      year: number
+      nextNumber: number
+    }, ExtArgs["result"]["factureCounter"]>
+    composites: {}
+  }
+
+  type FactureCounterGetPayload<S extends boolean | null | undefined | FactureCounterDefaultArgs> = $Result.GetResult<Prisma.$FactureCounterPayload, S>
+
+  type FactureCounterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FactureCounterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FactureCounterCountAggregateInputType | true
+    }
+
+  export interface FactureCounterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FactureCounter'], meta: { name: 'FactureCounter' } }
+    /**
+     * Find zero or one FactureCounter that matches the filter.
+     * @param {FactureCounterFindUniqueArgs} args - Arguments to find a FactureCounter
+     * @example
+     * // Get one FactureCounter
+     * const factureCounter = await prisma.factureCounter.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FactureCounterFindUniqueArgs>(args: SelectSubset<T, FactureCounterFindUniqueArgs<ExtArgs>>): Prisma__FactureCounterClient<$Result.GetResult<Prisma.$FactureCounterPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FactureCounter that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FactureCounterFindUniqueOrThrowArgs} args - Arguments to find a FactureCounter
+     * @example
+     * // Get one FactureCounter
+     * const factureCounter = await prisma.factureCounter.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FactureCounterFindUniqueOrThrowArgs>(args: SelectSubset<T, FactureCounterFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FactureCounterClient<$Result.GetResult<Prisma.$FactureCounterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FactureCounter that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureCounterFindFirstArgs} args - Arguments to find a FactureCounter
+     * @example
+     * // Get one FactureCounter
+     * const factureCounter = await prisma.factureCounter.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FactureCounterFindFirstArgs>(args?: SelectSubset<T, FactureCounterFindFirstArgs<ExtArgs>>): Prisma__FactureCounterClient<$Result.GetResult<Prisma.$FactureCounterPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FactureCounter that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureCounterFindFirstOrThrowArgs} args - Arguments to find a FactureCounter
+     * @example
+     * // Get one FactureCounter
+     * const factureCounter = await prisma.factureCounter.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FactureCounterFindFirstOrThrowArgs>(args?: SelectSubset<T, FactureCounterFindFirstOrThrowArgs<ExtArgs>>): Prisma__FactureCounterClient<$Result.GetResult<Prisma.$FactureCounterPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FactureCounters that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureCounterFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FactureCounters
+     * const factureCounters = await prisma.factureCounter.findMany()
+     * 
+     * // Get first 10 FactureCounters
+     * const factureCounters = await prisma.factureCounter.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const factureCounterWithIdOnly = await prisma.factureCounter.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FactureCounterFindManyArgs>(args?: SelectSubset<T, FactureCounterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FactureCounterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FactureCounter.
+     * @param {FactureCounterCreateArgs} args - Arguments to create a FactureCounter.
+     * @example
+     * // Create one FactureCounter
+     * const FactureCounter = await prisma.factureCounter.create({
+     *   data: {
+     *     // ... data to create a FactureCounter
+     *   }
+     * })
+     * 
+     */
+    create<T extends FactureCounterCreateArgs>(args: SelectSubset<T, FactureCounterCreateArgs<ExtArgs>>): Prisma__FactureCounterClient<$Result.GetResult<Prisma.$FactureCounterPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FactureCounters.
+     * @param {FactureCounterCreateManyArgs} args - Arguments to create many FactureCounters.
+     * @example
+     * // Create many FactureCounters
+     * const factureCounter = await prisma.factureCounter.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FactureCounterCreateManyArgs>(args?: SelectSubset<T, FactureCounterCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FactureCounters and returns the data saved in the database.
+     * @param {FactureCounterCreateManyAndReturnArgs} args - Arguments to create many FactureCounters.
+     * @example
+     * // Create many FactureCounters
+     * const factureCounter = await prisma.factureCounter.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FactureCounters and only return the `id`
+     * const factureCounterWithIdOnly = await prisma.factureCounter.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FactureCounterCreateManyAndReturnArgs>(args?: SelectSubset<T, FactureCounterCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FactureCounterPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FactureCounter.
+     * @param {FactureCounterDeleteArgs} args - Arguments to delete one FactureCounter.
+     * @example
+     * // Delete one FactureCounter
+     * const FactureCounter = await prisma.factureCounter.delete({
+     *   where: {
+     *     // ... filter to delete one FactureCounter
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FactureCounterDeleteArgs>(args: SelectSubset<T, FactureCounterDeleteArgs<ExtArgs>>): Prisma__FactureCounterClient<$Result.GetResult<Prisma.$FactureCounterPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FactureCounter.
+     * @param {FactureCounterUpdateArgs} args - Arguments to update one FactureCounter.
+     * @example
+     * // Update one FactureCounter
+     * const factureCounter = await prisma.factureCounter.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FactureCounterUpdateArgs>(args: SelectSubset<T, FactureCounterUpdateArgs<ExtArgs>>): Prisma__FactureCounterClient<$Result.GetResult<Prisma.$FactureCounterPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FactureCounters.
+     * @param {FactureCounterDeleteManyArgs} args - Arguments to filter FactureCounters to delete.
+     * @example
+     * // Delete a few FactureCounters
+     * const { count } = await prisma.factureCounter.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FactureCounterDeleteManyArgs>(args?: SelectSubset<T, FactureCounterDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FactureCounters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureCounterUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FactureCounters
+     * const factureCounter = await prisma.factureCounter.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FactureCounterUpdateManyArgs>(args: SelectSubset<T, FactureCounterUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FactureCounters and returns the data updated in the database.
+     * @param {FactureCounterUpdateManyAndReturnArgs} args - Arguments to update many FactureCounters.
+     * @example
+     * // Update many FactureCounters
+     * const factureCounter = await prisma.factureCounter.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FactureCounters and only return the `id`
+     * const factureCounterWithIdOnly = await prisma.factureCounter.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FactureCounterUpdateManyAndReturnArgs>(args: SelectSubset<T, FactureCounterUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FactureCounterPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FactureCounter.
+     * @param {FactureCounterUpsertArgs} args - Arguments to update or create a FactureCounter.
+     * @example
+     * // Update or create a FactureCounter
+     * const factureCounter = await prisma.factureCounter.upsert({
+     *   create: {
+     *     // ... data to create a FactureCounter
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FactureCounter we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FactureCounterUpsertArgs>(args: SelectSubset<T, FactureCounterUpsertArgs<ExtArgs>>): Prisma__FactureCounterClient<$Result.GetResult<Prisma.$FactureCounterPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FactureCounters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureCounterCountArgs} args - Arguments to filter FactureCounters to count.
+     * @example
+     * // Count the number of FactureCounters
+     * const count = await prisma.factureCounter.count({
+     *   where: {
+     *     // ... the filter for the FactureCounters we want to count
+     *   }
+     * })
+    **/
+    count<T extends FactureCounterCountArgs>(
+      args?: Subset<T, FactureCounterCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FactureCounterCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FactureCounter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureCounterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FactureCounterAggregateArgs>(args: Subset<T, FactureCounterAggregateArgs>): Prisma.PrismaPromise<GetFactureCounterAggregateType<T>>
+
+    /**
+     * Group by FactureCounter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FactureCounterGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FactureCounterGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FactureCounterGroupByArgs['orderBy'] }
+        : { orderBy?: FactureCounterGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FactureCounterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFactureCounterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FactureCounter model
+   */
+  readonly fields: FactureCounterFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FactureCounter.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FactureCounterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FactureCounter model
+   */
+  interface FactureCounterFieldRefs {
+    readonly id: FieldRef<"FactureCounter", 'String'>
+    readonly year: FieldRef<"FactureCounter", 'Int'>
+    readonly nextNumber: FieldRef<"FactureCounter", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FactureCounter findUnique
+   */
+  export type FactureCounterFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureCounter
+     */
+    select?: FactureCounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureCounter
+     */
+    omit?: FactureCounterOmit<ExtArgs> | null
+    /**
+     * Filter, which FactureCounter to fetch.
+     */
+    where: FactureCounterWhereUniqueInput
+  }
+
+  /**
+   * FactureCounter findUniqueOrThrow
+   */
+  export type FactureCounterFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureCounter
+     */
+    select?: FactureCounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureCounter
+     */
+    omit?: FactureCounterOmit<ExtArgs> | null
+    /**
+     * Filter, which FactureCounter to fetch.
+     */
+    where: FactureCounterWhereUniqueInput
+  }
+
+  /**
+   * FactureCounter findFirst
+   */
+  export type FactureCounterFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureCounter
+     */
+    select?: FactureCounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureCounter
+     */
+    omit?: FactureCounterOmit<ExtArgs> | null
+    /**
+     * Filter, which FactureCounter to fetch.
+     */
+    where?: FactureCounterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FactureCounters to fetch.
+     */
+    orderBy?: FactureCounterOrderByWithRelationInput | FactureCounterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FactureCounters.
+     */
+    cursor?: FactureCounterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FactureCounters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FactureCounters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FactureCounters.
+     */
+    distinct?: FactureCounterScalarFieldEnum | FactureCounterScalarFieldEnum[]
+  }
+
+  /**
+   * FactureCounter findFirstOrThrow
+   */
+  export type FactureCounterFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureCounter
+     */
+    select?: FactureCounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureCounter
+     */
+    omit?: FactureCounterOmit<ExtArgs> | null
+    /**
+     * Filter, which FactureCounter to fetch.
+     */
+    where?: FactureCounterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FactureCounters to fetch.
+     */
+    orderBy?: FactureCounterOrderByWithRelationInput | FactureCounterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FactureCounters.
+     */
+    cursor?: FactureCounterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FactureCounters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FactureCounters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FactureCounters.
+     */
+    distinct?: FactureCounterScalarFieldEnum | FactureCounterScalarFieldEnum[]
+  }
+
+  /**
+   * FactureCounter findMany
+   */
+  export type FactureCounterFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureCounter
+     */
+    select?: FactureCounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureCounter
+     */
+    omit?: FactureCounterOmit<ExtArgs> | null
+    /**
+     * Filter, which FactureCounters to fetch.
+     */
+    where?: FactureCounterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FactureCounters to fetch.
+     */
+    orderBy?: FactureCounterOrderByWithRelationInput | FactureCounterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FactureCounters.
+     */
+    cursor?: FactureCounterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FactureCounters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FactureCounters.
+     */
+    skip?: number
+    distinct?: FactureCounterScalarFieldEnum | FactureCounterScalarFieldEnum[]
+  }
+
+  /**
+   * FactureCounter create
+   */
+  export type FactureCounterCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureCounter
+     */
+    select?: FactureCounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureCounter
+     */
+    omit?: FactureCounterOmit<ExtArgs> | null
+    /**
+     * The data needed to create a FactureCounter.
+     */
+    data: XOR<FactureCounterCreateInput, FactureCounterUncheckedCreateInput>
+  }
+
+  /**
+   * FactureCounter createMany
+   */
+  export type FactureCounterCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FactureCounters.
+     */
+    data: FactureCounterCreateManyInput | FactureCounterCreateManyInput[]
+  }
+
+  /**
+   * FactureCounter createManyAndReturn
+   */
+  export type FactureCounterCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureCounter
+     */
+    select?: FactureCounterSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureCounter
+     */
+    omit?: FactureCounterOmit<ExtArgs> | null
+    /**
+     * The data used to create many FactureCounters.
+     */
+    data: FactureCounterCreateManyInput | FactureCounterCreateManyInput[]
+  }
+
+  /**
+   * FactureCounter update
+   */
+  export type FactureCounterUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureCounter
+     */
+    select?: FactureCounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureCounter
+     */
+    omit?: FactureCounterOmit<ExtArgs> | null
+    /**
+     * The data needed to update a FactureCounter.
+     */
+    data: XOR<FactureCounterUpdateInput, FactureCounterUncheckedUpdateInput>
+    /**
+     * Choose, which FactureCounter to update.
+     */
+    where: FactureCounterWhereUniqueInput
+  }
+
+  /**
+   * FactureCounter updateMany
+   */
+  export type FactureCounterUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FactureCounters.
+     */
+    data: XOR<FactureCounterUpdateManyMutationInput, FactureCounterUncheckedUpdateManyInput>
+    /**
+     * Filter which FactureCounters to update
+     */
+    where?: FactureCounterWhereInput
+    /**
+     * Limit how many FactureCounters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FactureCounter updateManyAndReturn
+   */
+  export type FactureCounterUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureCounter
+     */
+    select?: FactureCounterSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureCounter
+     */
+    omit?: FactureCounterOmit<ExtArgs> | null
+    /**
+     * The data used to update FactureCounters.
+     */
+    data: XOR<FactureCounterUpdateManyMutationInput, FactureCounterUncheckedUpdateManyInput>
+    /**
+     * Filter which FactureCounters to update
+     */
+    where?: FactureCounterWhereInput
+    /**
+     * Limit how many FactureCounters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FactureCounter upsert
+   */
+  export type FactureCounterUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureCounter
+     */
+    select?: FactureCounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureCounter
+     */
+    omit?: FactureCounterOmit<ExtArgs> | null
+    /**
+     * The filter to search for the FactureCounter to update in case it exists.
+     */
+    where: FactureCounterWhereUniqueInput
+    /**
+     * In case the FactureCounter found by the `where` argument doesn't exist, create a new FactureCounter with this data.
+     */
+    create: XOR<FactureCounterCreateInput, FactureCounterUncheckedCreateInput>
+    /**
+     * In case the FactureCounter was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FactureCounterUpdateInput, FactureCounterUncheckedUpdateInput>
+  }
+
+  /**
+   * FactureCounter delete
+   */
+  export type FactureCounterDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureCounter
+     */
+    select?: FactureCounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureCounter
+     */
+    omit?: FactureCounterOmit<ExtArgs> | null
+    /**
+     * Filter which FactureCounter to delete.
+     */
+    where: FactureCounterWhereUniqueInput
+  }
+
+  /**
+   * FactureCounter deleteMany
+   */
+  export type FactureCounterDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FactureCounters to delete
+     */
+    where?: FactureCounterWhereInput
+    /**
+     * Limit how many FactureCounters to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FactureCounter without action
+   */
+  export type FactureCounterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FactureCounter
+     */
+    select?: FactureCounterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FactureCounter
+     */
+    omit?: FactureCounterOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -40306,6 +44630,105 @@ export namespace Prisma {
   };
 
   export type TablePrintRequestScalarFieldEnum = (typeof TablePrintRequestScalarFieldEnum)[keyof typeof TablePrintRequestScalarFieldEnum]
+
+
+  export const FactureTemplateScalarFieldEnum: {
+    id: 'id',
+    dateX: 'dateX',
+    dateY: 'dateY',
+    clientNameX: 'clientNameX',
+    clientNameY: 'clientNameY',
+    clientEmailX: 'clientEmailX',
+    clientEmailY: 'clientEmailY',
+    clientCompanyX: 'clientCompanyX',
+    clientCompanyY: 'clientCompanyY',
+    serviceNameX: 'serviceNameX',
+    serviceNameY: 'serviceNameY',
+    subtotalX: 'subtotalX',
+    subtotalY: 'subtotalY',
+    totalX: 'totalX',
+    totalY: 'totalY',
+    factureNumberX: 'factureNumberX',
+    factureNumberY: 'factureNumberY',
+    fontSize: 'fontSize',
+    fontColor: 'fontColor',
+    factureNumberFontFamily: 'factureNumberFontFamily',
+    dateFontFamily: 'dateFontFamily',
+    clientCompanyFontFamily: 'clientCompanyFontFamily',
+    clientNameFontFamily: 'clientNameFontFamily',
+    clientEmailFontFamily: 'clientEmailFontFamily',
+    serviceNameFontFamily: 'serviceNameFontFamily',
+    servicePriceFontFamily: 'servicePriceFontFamily',
+    subtotalFontFamily: 'subtotalFontFamily',
+    totalFontFamily: 'totalFontFamily',
+    servicePriceX: 'servicePriceX',
+    servicePriceY: 'servicePriceY',
+    factureNumberFontSize: 'factureNumberFontSize',
+    factureNumberFontColor: 'factureNumberFontColor',
+    factureNumberIsBold: 'factureNumberIsBold',
+    factureNumberIsItalic: 'factureNumberIsItalic',
+    dateFontSize: 'dateFontSize',
+    dateFontColor: 'dateFontColor',
+    dateIsBold: 'dateIsBold',
+    dateIsItalic: 'dateIsItalic',
+    clientCompanyFontSize: 'clientCompanyFontSize',
+    clientCompanyFontColor: 'clientCompanyFontColor',
+    clientCompanyIsBold: 'clientCompanyIsBold',
+    clientCompanyIsItalic: 'clientCompanyIsItalic',
+    clientNameFontSize: 'clientNameFontSize',
+    clientNameFontColor: 'clientNameFontColor',
+    clientNameIsBold: 'clientNameIsBold',
+    clientNameIsItalic: 'clientNameIsItalic',
+    clientEmailFontSize: 'clientEmailFontSize',
+    clientEmailFontColor: 'clientEmailFontColor',
+    clientEmailIsBold: 'clientEmailIsBold',
+    clientEmailIsItalic: 'clientEmailIsItalic',
+    serviceNameFontSize: 'serviceNameFontSize',
+    serviceNameFontColor: 'serviceNameFontColor',
+    serviceNameIsBold: 'serviceNameIsBold',
+    serviceNameIsItalic: 'serviceNameIsItalic',
+    servicePriceFontSize: 'servicePriceFontSize',
+    servicePriceFontColor: 'servicePriceFontColor',
+    servicePriceIsBold: 'servicePriceIsBold',
+    servicePriceIsItalic: 'servicePriceIsItalic',
+    subtotalFontSize: 'subtotalFontSize',
+    subtotalFontColor: 'subtotalFontColor',
+    subtotalIsBold: 'subtotalIsBold',
+    subtotalIsItalic: 'subtotalIsItalic',
+    totalFontSize: 'totalFontSize',
+    totalFontColor: 'totalFontColor',
+    totalIsBold: 'totalIsBold',
+    totalIsItalic: 'totalIsItalic',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type FactureTemplateScalarFieldEnum = (typeof FactureTemplateScalarFieldEnum)[keyof typeof FactureTemplateScalarFieldEnum]
+
+
+  export const FactureRecordScalarFieldEnum: {
+    id: 'id',
+    number: 'number',
+    paymentId: 'paymentId',
+    userId: 'userId',
+    serviceName: 'serviceName',
+    clientName: 'clientName',
+    clientEmail: 'clientEmail',
+    amount: 'amount',
+    pdfUrl: 'pdfUrl',
+    generatedAt: 'generatedAt'
+  };
+
+  export type FactureRecordScalarFieldEnum = (typeof FactureRecordScalarFieldEnum)[keyof typeof FactureRecordScalarFieldEnum]
+
+
+  export const FactureCounterScalarFieldEnum: {
+    id: 'id',
+    year: 'year',
+    nextNumber: 'nextNumber'
+  };
+
+  export type FactureCounterScalarFieldEnum = (typeof FactureCounterScalarFieldEnum)[keyof typeof FactureCounterScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -42779,6 +47202,498 @@ export namespace Prisma {
     status?: StringWithAggregatesFilter<"TablePrintRequest"> | string
     createdAt?: DateTimeWithAggregatesFilter<"TablePrintRequest"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"TablePrintRequest"> | Date | string
+  }
+
+  export type FactureTemplateWhereInput = {
+    AND?: FactureTemplateWhereInput | FactureTemplateWhereInput[]
+    OR?: FactureTemplateWhereInput[]
+    NOT?: FactureTemplateWhereInput | FactureTemplateWhereInput[]
+    id?: StringFilter<"FactureTemplate"> | string
+    dateX?: FloatFilter<"FactureTemplate"> | number
+    dateY?: FloatFilter<"FactureTemplate"> | number
+    clientNameX?: FloatFilter<"FactureTemplate"> | number
+    clientNameY?: FloatFilter<"FactureTemplate"> | number
+    clientEmailX?: FloatFilter<"FactureTemplate"> | number
+    clientEmailY?: FloatFilter<"FactureTemplate"> | number
+    clientCompanyX?: FloatFilter<"FactureTemplate"> | number
+    clientCompanyY?: FloatFilter<"FactureTemplate"> | number
+    serviceNameX?: FloatFilter<"FactureTemplate"> | number
+    serviceNameY?: FloatFilter<"FactureTemplate"> | number
+    subtotalX?: FloatFilter<"FactureTemplate"> | number
+    subtotalY?: FloatFilter<"FactureTemplate"> | number
+    totalX?: FloatFilter<"FactureTemplate"> | number
+    totalY?: FloatFilter<"FactureTemplate"> | number
+    factureNumberX?: FloatFilter<"FactureTemplate"> | number
+    factureNumberY?: FloatFilter<"FactureTemplate"> | number
+    fontSize?: FloatFilter<"FactureTemplate"> | number
+    fontColor?: StringFilter<"FactureTemplate"> | string
+    factureNumberFontFamily?: StringFilter<"FactureTemplate"> | string
+    dateFontFamily?: StringFilter<"FactureTemplate"> | string
+    clientCompanyFontFamily?: StringFilter<"FactureTemplate"> | string
+    clientNameFontFamily?: StringFilter<"FactureTemplate"> | string
+    clientEmailFontFamily?: StringFilter<"FactureTemplate"> | string
+    serviceNameFontFamily?: StringFilter<"FactureTemplate"> | string
+    servicePriceFontFamily?: StringFilter<"FactureTemplate"> | string
+    subtotalFontFamily?: StringFilter<"FactureTemplate"> | string
+    totalFontFamily?: StringFilter<"FactureTemplate"> | string
+    servicePriceX?: FloatFilter<"FactureTemplate"> | number
+    servicePriceY?: FloatFilter<"FactureTemplate"> | number
+    factureNumberFontSize?: FloatFilter<"FactureTemplate"> | number
+    factureNumberFontColor?: StringFilter<"FactureTemplate"> | string
+    factureNumberIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    factureNumberIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    dateFontSize?: FloatFilter<"FactureTemplate"> | number
+    dateFontColor?: StringFilter<"FactureTemplate"> | string
+    dateIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    dateIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    clientCompanyFontSize?: FloatFilter<"FactureTemplate"> | number
+    clientCompanyFontColor?: StringFilter<"FactureTemplate"> | string
+    clientCompanyIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    clientCompanyIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    clientNameFontSize?: FloatFilter<"FactureTemplate"> | number
+    clientNameFontColor?: StringFilter<"FactureTemplate"> | string
+    clientNameIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    clientNameIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    clientEmailFontSize?: FloatFilter<"FactureTemplate"> | number
+    clientEmailFontColor?: StringFilter<"FactureTemplate"> | string
+    clientEmailIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    clientEmailIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    serviceNameFontSize?: FloatFilter<"FactureTemplate"> | number
+    serviceNameFontColor?: StringFilter<"FactureTemplate"> | string
+    serviceNameIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    serviceNameIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    servicePriceFontSize?: FloatFilter<"FactureTemplate"> | number
+    servicePriceFontColor?: StringFilter<"FactureTemplate"> | string
+    servicePriceIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    servicePriceIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    subtotalFontSize?: FloatFilter<"FactureTemplate"> | number
+    subtotalFontColor?: StringFilter<"FactureTemplate"> | string
+    subtotalIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    subtotalIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    totalFontSize?: FloatFilter<"FactureTemplate"> | number
+    totalFontColor?: StringFilter<"FactureTemplate"> | string
+    totalIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    totalIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    createdAt?: DateTimeFilter<"FactureTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"FactureTemplate"> | Date | string
+  }
+
+  export type FactureTemplateOrderByWithRelationInput = {
+    id?: SortOrder
+    dateX?: SortOrder
+    dateY?: SortOrder
+    clientNameX?: SortOrder
+    clientNameY?: SortOrder
+    clientEmailX?: SortOrder
+    clientEmailY?: SortOrder
+    clientCompanyX?: SortOrder
+    clientCompanyY?: SortOrder
+    serviceNameX?: SortOrder
+    serviceNameY?: SortOrder
+    subtotalX?: SortOrder
+    subtotalY?: SortOrder
+    totalX?: SortOrder
+    totalY?: SortOrder
+    factureNumberX?: SortOrder
+    factureNumberY?: SortOrder
+    fontSize?: SortOrder
+    fontColor?: SortOrder
+    factureNumberFontFamily?: SortOrder
+    dateFontFamily?: SortOrder
+    clientCompanyFontFamily?: SortOrder
+    clientNameFontFamily?: SortOrder
+    clientEmailFontFamily?: SortOrder
+    serviceNameFontFamily?: SortOrder
+    servicePriceFontFamily?: SortOrder
+    subtotalFontFamily?: SortOrder
+    totalFontFamily?: SortOrder
+    servicePriceX?: SortOrder
+    servicePriceY?: SortOrder
+    factureNumberFontSize?: SortOrder
+    factureNumberFontColor?: SortOrder
+    factureNumberIsBold?: SortOrder
+    factureNumberIsItalic?: SortOrder
+    dateFontSize?: SortOrder
+    dateFontColor?: SortOrder
+    dateIsBold?: SortOrder
+    dateIsItalic?: SortOrder
+    clientCompanyFontSize?: SortOrder
+    clientCompanyFontColor?: SortOrder
+    clientCompanyIsBold?: SortOrder
+    clientCompanyIsItalic?: SortOrder
+    clientNameFontSize?: SortOrder
+    clientNameFontColor?: SortOrder
+    clientNameIsBold?: SortOrder
+    clientNameIsItalic?: SortOrder
+    clientEmailFontSize?: SortOrder
+    clientEmailFontColor?: SortOrder
+    clientEmailIsBold?: SortOrder
+    clientEmailIsItalic?: SortOrder
+    serviceNameFontSize?: SortOrder
+    serviceNameFontColor?: SortOrder
+    serviceNameIsBold?: SortOrder
+    serviceNameIsItalic?: SortOrder
+    servicePriceFontSize?: SortOrder
+    servicePriceFontColor?: SortOrder
+    servicePriceIsBold?: SortOrder
+    servicePriceIsItalic?: SortOrder
+    subtotalFontSize?: SortOrder
+    subtotalFontColor?: SortOrder
+    subtotalIsBold?: SortOrder
+    subtotalIsItalic?: SortOrder
+    totalFontSize?: SortOrder
+    totalFontColor?: SortOrder
+    totalIsBold?: SortOrder
+    totalIsItalic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FactureTemplateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: FactureTemplateWhereInput | FactureTemplateWhereInput[]
+    OR?: FactureTemplateWhereInput[]
+    NOT?: FactureTemplateWhereInput | FactureTemplateWhereInput[]
+    dateX?: FloatFilter<"FactureTemplate"> | number
+    dateY?: FloatFilter<"FactureTemplate"> | number
+    clientNameX?: FloatFilter<"FactureTemplate"> | number
+    clientNameY?: FloatFilter<"FactureTemplate"> | number
+    clientEmailX?: FloatFilter<"FactureTemplate"> | number
+    clientEmailY?: FloatFilter<"FactureTemplate"> | number
+    clientCompanyX?: FloatFilter<"FactureTemplate"> | number
+    clientCompanyY?: FloatFilter<"FactureTemplate"> | number
+    serviceNameX?: FloatFilter<"FactureTemplate"> | number
+    serviceNameY?: FloatFilter<"FactureTemplate"> | number
+    subtotalX?: FloatFilter<"FactureTemplate"> | number
+    subtotalY?: FloatFilter<"FactureTemplate"> | number
+    totalX?: FloatFilter<"FactureTemplate"> | number
+    totalY?: FloatFilter<"FactureTemplate"> | number
+    factureNumberX?: FloatFilter<"FactureTemplate"> | number
+    factureNumberY?: FloatFilter<"FactureTemplate"> | number
+    fontSize?: FloatFilter<"FactureTemplate"> | number
+    fontColor?: StringFilter<"FactureTemplate"> | string
+    factureNumberFontFamily?: StringFilter<"FactureTemplate"> | string
+    dateFontFamily?: StringFilter<"FactureTemplate"> | string
+    clientCompanyFontFamily?: StringFilter<"FactureTemplate"> | string
+    clientNameFontFamily?: StringFilter<"FactureTemplate"> | string
+    clientEmailFontFamily?: StringFilter<"FactureTemplate"> | string
+    serviceNameFontFamily?: StringFilter<"FactureTemplate"> | string
+    servicePriceFontFamily?: StringFilter<"FactureTemplate"> | string
+    subtotalFontFamily?: StringFilter<"FactureTemplate"> | string
+    totalFontFamily?: StringFilter<"FactureTemplate"> | string
+    servicePriceX?: FloatFilter<"FactureTemplate"> | number
+    servicePriceY?: FloatFilter<"FactureTemplate"> | number
+    factureNumberFontSize?: FloatFilter<"FactureTemplate"> | number
+    factureNumberFontColor?: StringFilter<"FactureTemplate"> | string
+    factureNumberIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    factureNumberIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    dateFontSize?: FloatFilter<"FactureTemplate"> | number
+    dateFontColor?: StringFilter<"FactureTemplate"> | string
+    dateIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    dateIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    clientCompanyFontSize?: FloatFilter<"FactureTemplate"> | number
+    clientCompanyFontColor?: StringFilter<"FactureTemplate"> | string
+    clientCompanyIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    clientCompanyIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    clientNameFontSize?: FloatFilter<"FactureTemplate"> | number
+    clientNameFontColor?: StringFilter<"FactureTemplate"> | string
+    clientNameIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    clientNameIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    clientEmailFontSize?: FloatFilter<"FactureTemplate"> | number
+    clientEmailFontColor?: StringFilter<"FactureTemplate"> | string
+    clientEmailIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    clientEmailIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    serviceNameFontSize?: FloatFilter<"FactureTemplate"> | number
+    serviceNameFontColor?: StringFilter<"FactureTemplate"> | string
+    serviceNameIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    serviceNameIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    servicePriceFontSize?: FloatFilter<"FactureTemplate"> | number
+    servicePriceFontColor?: StringFilter<"FactureTemplate"> | string
+    servicePriceIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    servicePriceIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    subtotalFontSize?: FloatFilter<"FactureTemplate"> | number
+    subtotalFontColor?: StringFilter<"FactureTemplate"> | string
+    subtotalIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    subtotalIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    totalFontSize?: FloatFilter<"FactureTemplate"> | number
+    totalFontColor?: StringFilter<"FactureTemplate"> | string
+    totalIsBold?: BoolFilter<"FactureTemplate"> | boolean
+    totalIsItalic?: BoolFilter<"FactureTemplate"> | boolean
+    createdAt?: DateTimeFilter<"FactureTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"FactureTemplate"> | Date | string
+  }, "id">
+
+  export type FactureTemplateOrderByWithAggregationInput = {
+    id?: SortOrder
+    dateX?: SortOrder
+    dateY?: SortOrder
+    clientNameX?: SortOrder
+    clientNameY?: SortOrder
+    clientEmailX?: SortOrder
+    clientEmailY?: SortOrder
+    clientCompanyX?: SortOrder
+    clientCompanyY?: SortOrder
+    serviceNameX?: SortOrder
+    serviceNameY?: SortOrder
+    subtotalX?: SortOrder
+    subtotalY?: SortOrder
+    totalX?: SortOrder
+    totalY?: SortOrder
+    factureNumberX?: SortOrder
+    factureNumberY?: SortOrder
+    fontSize?: SortOrder
+    fontColor?: SortOrder
+    factureNumberFontFamily?: SortOrder
+    dateFontFamily?: SortOrder
+    clientCompanyFontFamily?: SortOrder
+    clientNameFontFamily?: SortOrder
+    clientEmailFontFamily?: SortOrder
+    serviceNameFontFamily?: SortOrder
+    servicePriceFontFamily?: SortOrder
+    subtotalFontFamily?: SortOrder
+    totalFontFamily?: SortOrder
+    servicePriceX?: SortOrder
+    servicePriceY?: SortOrder
+    factureNumberFontSize?: SortOrder
+    factureNumberFontColor?: SortOrder
+    factureNumberIsBold?: SortOrder
+    factureNumberIsItalic?: SortOrder
+    dateFontSize?: SortOrder
+    dateFontColor?: SortOrder
+    dateIsBold?: SortOrder
+    dateIsItalic?: SortOrder
+    clientCompanyFontSize?: SortOrder
+    clientCompanyFontColor?: SortOrder
+    clientCompanyIsBold?: SortOrder
+    clientCompanyIsItalic?: SortOrder
+    clientNameFontSize?: SortOrder
+    clientNameFontColor?: SortOrder
+    clientNameIsBold?: SortOrder
+    clientNameIsItalic?: SortOrder
+    clientEmailFontSize?: SortOrder
+    clientEmailFontColor?: SortOrder
+    clientEmailIsBold?: SortOrder
+    clientEmailIsItalic?: SortOrder
+    serviceNameFontSize?: SortOrder
+    serviceNameFontColor?: SortOrder
+    serviceNameIsBold?: SortOrder
+    serviceNameIsItalic?: SortOrder
+    servicePriceFontSize?: SortOrder
+    servicePriceFontColor?: SortOrder
+    servicePriceIsBold?: SortOrder
+    servicePriceIsItalic?: SortOrder
+    subtotalFontSize?: SortOrder
+    subtotalFontColor?: SortOrder
+    subtotalIsBold?: SortOrder
+    subtotalIsItalic?: SortOrder
+    totalFontSize?: SortOrder
+    totalFontColor?: SortOrder
+    totalIsBold?: SortOrder
+    totalIsItalic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: FactureTemplateCountOrderByAggregateInput
+    _avg?: FactureTemplateAvgOrderByAggregateInput
+    _max?: FactureTemplateMaxOrderByAggregateInput
+    _min?: FactureTemplateMinOrderByAggregateInput
+    _sum?: FactureTemplateSumOrderByAggregateInput
+  }
+
+  export type FactureTemplateScalarWhereWithAggregatesInput = {
+    AND?: FactureTemplateScalarWhereWithAggregatesInput | FactureTemplateScalarWhereWithAggregatesInput[]
+    OR?: FactureTemplateScalarWhereWithAggregatesInput[]
+    NOT?: FactureTemplateScalarWhereWithAggregatesInput | FactureTemplateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    dateX?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    dateY?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    clientNameX?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    clientNameY?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    clientEmailX?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    clientEmailY?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    clientCompanyX?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    clientCompanyY?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    serviceNameX?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    serviceNameY?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    subtotalX?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    subtotalY?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    totalX?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    totalY?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    factureNumberX?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    factureNumberY?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    fontSize?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    fontColor?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    factureNumberFontFamily?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    dateFontFamily?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    clientCompanyFontFamily?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    clientNameFontFamily?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    clientEmailFontFamily?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    serviceNameFontFamily?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    servicePriceFontFamily?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    subtotalFontFamily?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    totalFontFamily?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    servicePriceX?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    servicePriceY?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    factureNumberFontSize?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    factureNumberFontColor?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    factureNumberIsBold?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    factureNumberIsItalic?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    dateFontSize?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    dateFontColor?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    dateIsBold?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    dateIsItalic?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    clientCompanyFontSize?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    clientCompanyFontColor?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    clientCompanyIsBold?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    clientCompanyIsItalic?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    clientNameFontSize?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    clientNameFontColor?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    clientNameIsBold?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    clientNameIsItalic?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    clientEmailFontSize?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    clientEmailFontColor?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    clientEmailIsBold?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    clientEmailIsItalic?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    serviceNameFontSize?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    serviceNameFontColor?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    serviceNameIsBold?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    serviceNameIsItalic?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    servicePriceFontSize?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    servicePriceFontColor?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    servicePriceIsBold?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    servicePriceIsItalic?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    subtotalFontSize?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    subtotalFontColor?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    subtotalIsBold?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    subtotalIsItalic?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    totalFontSize?: FloatWithAggregatesFilter<"FactureTemplate"> | number
+    totalFontColor?: StringWithAggregatesFilter<"FactureTemplate"> | string
+    totalIsBold?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    totalIsItalic?: BoolWithAggregatesFilter<"FactureTemplate"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"FactureTemplate"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"FactureTemplate"> | Date | string
+  }
+
+  export type FactureRecordWhereInput = {
+    AND?: FactureRecordWhereInput | FactureRecordWhereInput[]
+    OR?: FactureRecordWhereInput[]
+    NOT?: FactureRecordWhereInput | FactureRecordWhereInput[]
+    id?: StringFilter<"FactureRecord"> | string
+    number?: StringFilter<"FactureRecord"> | string
+    paymentId?: StringFilter<"FactureRecord"> | string
+    userId?: StringFilter<"FactureRecord"> | string
+    serviceName?: StringFilter<"FactureRecord"> | string
+    clientName?: StringFilter<"FactureRecord"> | string
+    clientEmail?: StringFilter<"FactureRecord"> | string
+    amount?: FloatFilter<"FactureRecord"> | number
+    pdfUrl?: StringNullableFilter<"FactureRecord"> | string | null
+    generatedAt?: DateTimeFilter<"FactureRecord"> | Date | string
+  }
+
+  export type FactureRecordOrderByWithRelationInput = {
+    id?: SortOrder
+    number?: SortOrder
+    paymentId?: SortOrder
+    userId?: SortOrder
+    serviceName?: SortOrder
+    clientName?: SortOrder
+    clientEmail?: SortOrder
+    amount?: SortOrder
+    pdfUrl?: SortOrderInput | SortOrder
+    generatedAt?: SortOrder
+  }
+
+  export type FactureRecordWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    number?: string
+    paymentId?: string
+    AND?: FactureRecordWhereInput | FactureRecordWhereInput[]
+    OR?: FactureRecordWhereInput[]
+    NOT?: FactureRecordWhereInput | FactureRecordWhereInput[]
+    userId?: StringFilter<"FactureRecord"> | string
+    serviceName?: StringFilter<"FactureRecord"> | string
+    clientName?: StringFilter<"FactureRecord"> | string
+    clientEmail?: StringFilter<"FactureRecord"> | string
+    amount?: FloatFilter<"FactureRecord"> | number
+    pdfUrl?: StringNullableFilter<"FactureRecord"> | string | null
+    generatedAt?: DateTimeFilter<"FactureRecord"> | Date | string
+  }, "id" | "number" | "paymentId">
+
+  export type FactureRecordOrderByWithAggregationInput = {
+    id?: SortOrder
+    number?: SortOrder
+    paymentId?: SortOrder
+    userId?: SortOrder
+    serviceName?: SortOrder
+    clientName?: SortOrder
+    clientEmail?: SortOrder
+    amount?: SortOrder
+    pdfUrl?: SortOrderInput | SortOrder
+    generatedAt?: SortOrder
+    _count?: FactureRecordCountOrderByAggregateInput
+    _avg?: FactureRecordAvgOrderByAggregateInput
+    _max?: FactureRecordMaxOrderByAggregateInput
+    _min?: FactureRecordMinOrderByAggregateInput
+    _sum?: FactureRecordSumOrderByAggregateInput
+  }
+
+  export type FactureRecordScalarWhereWithAggregatesInput = {
+    AND?: FactureRecordScalarWhereWithAggregatesInput | FactureRecordScalarWhereWithAggregatesInput[]
+    OR?: FactureRecordScalarWhereWithAggregatesInput[]
+    NOT?: FactureRecordScalarWhereWithAggregatesInput | FactureRecordScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FactureRecord"> | string
+    number?: StringWithAggregatesFilter<"FactureRecord"> | string
+    paymentId?: StringWithAggregatesFilter<"FactureRecord"> | string
+    userId?: StringWithAggregatesFilter<"FactureRecord"> | string
+    serviceName?: StringWithAggregatesFilter<"FactureRecord"> | string
+    clientName?: StringWithAggregatesFilter<"FactureRecord"> | string
+    clientEmail?: StringWithAggregatesFilter<"FactureRecord"> | string
+    amount?: FloatWithAggregatesFilter<"FactureRecord"> | number
+    pdfUrl?: StringNullableWithAggregatesFilter<"FactureRecord"> | string | null
+    generatedAt?: DateTimeWithAggregatesFilter<"FactureRecord"> | Date | string
+  }
+
+  export type FactureCounterWhereInput = {
+    AND?: FactureCounterWhereInput | FactureCounterWhereInput[]
+    OR?: FactureCounterWhereInput[]
+    NOT?: FactureCounterWhereInput | FactureCounterWhereInput[]
+    id?: StringFilter<"FactureCounter"> | string
+    year?: IntFilter<"FactureCounter"> | number
+    nextNumber?: IntFilter<"FactureCounter"> | number
+  }
+
+  export type FactureCounterOrderByWithRelationInput = {
+    id?: SortOrder
+    year?: SortOrder
+    nextNumber?: SortOrder
+  }
+
+  export type FactureCounterWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    year?: number
+    AND?: FactureCounterWhereInput | FactureCounterWhereInput[]
+    OR?: FactureCounterWhereInput[]
+    NOT?: FactureCounterWhereInput | FactureCounterWhereInput[]
+    nextNumber?: IntFilter<"FactureCounter"> | number
+  }, "id" | "year">
+
+  export type FactureCounterOrderByWithAggregationInput = {
+    id?: SortOrder
+    year?: SortOrder
+    nextNumber?: SortOrder
+    _count?: FactureCounterCountOrderByAggregateInput
+    _avg?: FactureCounterAvgOrderByAggregateInput
+    _max?: FactureCounterMaxOrderByAggregateInput
+    _min?: FactureCounterMinOrderByAggregateInput
+    _sum?: FactureCounterSumOrderByAggregateInput
+  }
+
+  export type FactureCounterScalarWhereWithAggregatesInput = {
+    AND?: FactureCounterScalarWhereWithAggregatesInput | FactureCounterScalarWhereWithAggregatesInput[]
+    OR?: FactureCounterScalarWhereWithAggregatesInput[]
+    NOT?: FactureCounterScalarWhereWithAggregatesInput | FactureCounterScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"FactureCounter"> | string
+    year?: IntWithAggregatesFilter<"FactureCounter"> | number
+    nextNumber?: IntWithAggregatesFilter<"FactureCounter"> | number
   }
 
   export type UserCreateInput = {
@@ -45403,6 +50318,636 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type FactureTemplateCreateInput = {
+    id?: string
+    dateX?: number
+    dateY?: number
+    clientNameX?: number
+    clientNameY?: number
+    clientEmailX?: number
+    clientEmailY?: number
+    clientCompanyX?: number
+    clientCompanyY?: number
+    serviceNameX?: number
+    serviceNameY?: number
+    subtotalX?: number
+    subtotalY?: number
+    totalX?: number
+    totalY?: number
+    factureNumberX?: number
+    factureNumberY?: number
+    fontSize?: number
+    fontColor?: string
+    factureNumberFontFamily?: string
+    dateFontFamily?: string
+    clientCompanyFontFamily?: string
+    clientNameFontFamily?: string
+    clientEmailFontFamily?: string
+    serviceNameFontFamily?: string
+    servicePriceFontFamily?: string
+    subtotalFontFamily?: string
+    totalFontFamily?: string
+    servicePriceX?: number
+    servicePriceY?: number
+    factureNumberFontSize?: number
+    factureNumberFontColor?: string
+    factureNumberIsBold?: boolean
+    factureNumberIsItalic?: boolean
+    dateFontSize?: number
+    dateFontColor?: string
+    dateIsBold?: boolean
+    dateIsItalic?: boolean
+    clientCompanyFontSize?: number
+    clientCompanyFontColor?: string
+    clientCompanyIsBold?: boolean
+    clientCompanyIsItalic?: boolean
+    clientNameFontSize?: number
+    clientNameFontColor?: string
+    clientNameIsBold?: boolean
+    clientNameIsItalic?: boolean
+    clientEmailFontSize?: number
+    clientEmailFontColor?: string
+    clientEmailIsBold?: boolean
+    clientEmailIsItalic?: boolean
+    serviceNameFontSize?: number
+    serviceNameFontColor?: string
+    serviceNameIsBold?: boolean
+    serviceNameIsItalic?: boolean
+    servicePriceFontSize?: number
+    servicePriceFontColor?: string
+    servicePriceIsBold?: boolean
+    servicePriceIsItalic?: boolean
+    subtotalFontSize?: number
+    subtotalFontColor?: string
+    subtotalIsBold?: boolean
+    subtotalIsItalic?: boolean
+    totalFontSize?: number
+    totalFontColor?: string
+    totalIsBold?: boolean
+    totalIsItalic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FactureTemplateUncheckedCreateInput = {
+    id?: string
+    dateX?: number
+    dateY?: number
+    clientNameX?: number
+    clientNameY?: number
+    clientEmailX?: number
+    clientEmailY?: number
+    clientCompanyX?: number
+    clientCompanyY?: number
+    serviceNameX?: number
+    serviceNameY?: number
+    subtotalX?: number
+    subtotalY?: number
+    totalX?: number
+    totalY?: number
+    factureNumberX?: number
+    factureNumberY?: number
+    fontSize?: number
+    fontColor?: string
+    factureNumberFontFamily?: string
+    dateFontFamily?: string
+    clientCompanyFontFamily?: string
+    clientNameFontFamily?: string
+    clientEmailFontFamily?: string
+    serviceNameFontFamily?: string
+    servicePriceFontFamily?: string
+    subtotalFontFamily?: string
+    totalFontFamily?: string
+    servicePriceX?: number
+    servicePriceY?: number
+    factureNumberFontSize?: number
+    factureNumberFontColor?: string
+    factureNumberIsBold?: boolean
+    factureNumberIsItalic?: boolean
+    dateFontSize?: number
+    dateFontColor?: string
+    dateIsBold?: boolean
+    dateIsItalic?: boolean
+    clientCompanyFontSize?: number
+    clientCompanyFontColor?: string
+    clientCompanyIsBold?: boolean
+    clientCompanyIsItalic?: boolean
+    clientNameFontSize?: number
+    clientNameFontColor?: string
+    clientNameIsBold?: boolean
+    clientNameIsItalic?: boolean
+    clientEmailFontSize?: number
+    clientEmailFontColor?: string
+    clientEmailIsBold?: boolean
+    clientEmailIsItalic?: boolean
+    serviceNameFontSize?: number
+    serviceNameFontColor?: string
+    serviceNameIsBold?: boolean
+    serviceNameIsItalic?: boolean
+    servicePriceFontSize?: number
+    servicePriceFontColor?: string
+    servicePriceIsBold?: boolean
+    servicePriceIsItalic?: boolean
+    subtotalFontSize?: number
+    subtotalFontColor?: string
+    subtotalIsBold?: boolean
+    subtotalIsItalic?: boolean
+    totalFontSize?: number
+    totalFontColor?: string
+    totalIsBold?: boolean
+    totalIsItalic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FactureTemplateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dateX?: FloatFieldUpdateOperationsInput | number
+    dateY?: FloatFieldUpdateOperationsInput | number
+    clientNameX?: FloatFieldUpdateOperationsInput | number
+    clientNameY?: FloatFieldUpdateOperationsInput | number
+    clientEmailX?: FloatFieldUpdateOperationsInput | number
+    clientEmailY?: FloatFieldUpdateOperationsInput | number
+    clientCompanyX?: FloatFieldUpdateOperationsInput | number
+    clientCompanyY?: FloatFieldUpdateOperationsInput | number
+    serviceNameX?: FloatFieldUpdateOperationsInput | number
+    serviceNameY?: FloatFieldUpdateOperationsInput | number
+    subtotalX?: FloatFieldUpdateOperationsInput | number
+    subtotalY?: FloatFieldUpdateOperationsInput | number
+    totalX?: FloatFieldUpdateOperationsInput | number
+    totalY?: FloatFieldUpdateOperationsInput | number
+    factureNumberX?: FloatFieldUpdateOperationsInput | number
+    factureNumberY?: FloatFieldUpdateOperationsInput | number
+    fontSize?: FloatFieldUpdateOperationsInput | number
+    fontColor?: StringFieldUpdateOperationsInput | string
+    factureNumberFontFamily?: StringFieldUpdateOperationsInput | string
+    dateFontFamily?: StringFieldUpdateOperationsInput | string
+    clientCompanyFontFamily?: StringFieldUpdateOperationsInput | string
+    clientNameFontFamily?: StringFieldUpdateOperationsInput | string
+    clientEmailFontFamily?: StringFieldUpdateOperationsInput | string
+    serviceNameFontFamily?: StringFieldUpdateOperationsInput | string
+    servicePriceFontFamily?: StringFieldUpdateOperationsInput | string
+    subtotalFontFamily?: StringFieldUpdateOperationsInput | string
+    totalFontFamily?: StringFieldUpdateOperationsInput | string
+    servicePriceX?: FloatFieldUpdateOperationsInput | number
+    servicePriceY?: FloatFieldUpdateOperationsInput | number
+    factureNumberFontSize?: FloatFieldUpdateOperationsInput | number
+    factureNumberFontColor?: StringFieldUpdateOperationsInput | string
+    factureNumberIsBold?: BoolFieldUpdateOperationsInput | boolean
+    factureNumberIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    dateFontSize?: FloatFieldUpdateOperationsInput | number
+    dateFontColor?: StringFieldUpdateOperationsInput | string
+    dateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    dateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    clientCompanyFontSize?: FloatFieldUpdateOperationsInput | number
+    clientCompanyFontColor?: StringFieldUpdateOperationsInput | string
+    clientCompanyIsBold?: BoolFieldUpdateOperationsInput | boolean
+    clientCompanyIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    clientNameFontSize?: FloatFieldUpdateOperationsInput | number
+    clientNameFontColor?: StringFieldUpdateOperationsInput | string
+    clientNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    clientNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    clientEmailFontSize?: FloatFieldUpdateOperationsInput | number
+    clientEmailFontColor?: StringFieldUpdateOperationsInput | string
+    clientEmailIsBold?: BoolFieldUpdateOperationsInput | boolean
+    clientEmailIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    serviceNameFontSize?: FloatFieldUpdateOperationsInput | number
+    serviceNameFontColor?: StringFieldUpdateOperationsInput | string
+    serviceNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    serviceNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    servicePriceFontSize?: FloatFieldUpdateOperationsInput | number
+    servicePriceFontColor?: StringFieldUpdateOperationsInput | string
+    servicePriceIsBold?: BoolFieldUpdateOperationsInput | boolean
+    servicePriceIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    subtotalFontSize?: FloatFieldUpdateOperationsInput | number
+    subtotalFontColor?: StringFieldUpdateOperationsInput | string
+    subtotalIsBold?: BoolFieldUpdateOperationsInput | boolean
+    subtotalIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    totalFontSize?: FloatFieldUpdateOperationsInput | number
+    totalFontColor?: StringFieldUpdateOperationsInput | string
+    totalIsBold?: BoolFieldUpdateOperationsInput | boolean
+    totalIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FactureTemplateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dateX?: FloatFieldUpdateOperationsInput | number
+    dateY?: FloatFieldUpdateOperationsInput | number
+    clientNameX?: FloatFieldUpdateOperationsInput | number
+    clientNameY?: FloatFieldUpdateOperationsInput | number
+    clientEmailX?: FloatFieldUpdateOperationsInput | number
+    clientEmailY?: FloatFieldUpdateOperationsInput | number
+    clientCompanyX?: FloatFieldUpdateOperationsInput | number
+    clientCompanyY?: FloatFieldUpdateOperationsInput | number
+    serviceNameX?: FloatFieldUpdateOperationsInput | number
+    serviceNameY?: FloatFieldUpdateOperationsInput | number
+    subtotalX?: FloatFieldUpdateOperationsInput | number
+    subtotalY?: FloatFieldUpdateOperationsInput | number
+    totalX?: FloatFieldUpdateOperationsInput | number
+    totalY?: FloatFieldUpdateOperationsInput | number
+    factureNumberX?: FloatFieldUpdateOperationsInput | number
+    factureNumberY?: FloatFieldUpdateOperationsInput | number
+    fontSize?: FloatFieldUpdateOperationsInput | number
+    fontColor?: StringFieldUpdateOperationsInput | string
+    factureNumberFontFamily?: StringFieldUpdateOperationsInput | string
+    dateFontFamily?: StringFieldUpdateOperationsInput | string
+    clientCompanyFontFamily?: StringFieldUpdateOperationsInput | string
+    clientNameFontFamily?: StringFieldUpdateOperationsInput | string
+    clientEmailFontFamily?: StringFieldUpdateOperationsInput | string
+    serviceNameFontFamily?: StringFieldUpdateOperationsInput | string
+    servicePriceFontFamily?: StringFieldUpdateOperationsInput | string
+    subtotalFontFamily?: StringFieldUpdateOperationsInput | string
+    totalFontFamily?: StringFieldUpdateOperationsInput | string
+    servicePriceX?: FloatFieldUpdateOperationsInput | number
+    servicePriceY?: FloatFieldUpdateOperationsInput | number
+    factureNumberFontSize?: FloatFieldUpdateOperationsInput | number
+    factureNumberFontColor?: StringFieldUpdateOperationsInput | string
+    factureNumberIsBold?: BoolFieldUpdateOperationsInput | boolean
+    factureNumberIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    dateFontSize?: FloatFieldUpdateOperationsInput | number
+    dateFontColor?: StringFieldUpdateOperationsInput | string
+    dateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    dateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    clientCompanyFontSize?: FloatFieldUpdateOperationsInput | number
+    clientCompanyFontColor?: StringFieldUpdateOperationsInput | string
+    clientCompanyIsBold?: BoolFieldUpdateOperationsInput | boolean
+    clientCompanyIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    clientNameFontSize?: FloatFieldUpdateOperationsInput | number
+    clientNameFontColor?: StringFieldUpdateOperationsInput | string
+    clientNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    clientNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    clientEmailFontSize?: FloatFieldUpdateOperationsInput | number
+    clientEmailFontColor?: StringFieldUpdateOperationsInput | string
+    clientEmailIsBold?: BoolFieldUpdateOperationsInput | boolean
+    clientEmailIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    serviceNameFontSize?: FloatFieldUpdateOperationsInput | number
+    serviceNameFontColor?: StringFieldUpdateOperationsInput | string
+    serviceNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    serviceNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    servicePriceFontSize?: FloatFieldUpdateOperationsInput | number
+    servicePriceFontColor?: StringFieldUpdateOperationsInput | string
+    servicePriceIsBold?: BoolFieldUpdateOperationsInput | boolean
+    servicePriceIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    subtotalFontSize?: FloatFieldUpdateOperationsInput | number
+    subtotalFontColor?: StringFieldUpdateOperationsInput | string
+    subtotalIsBold?: BoolFieldUpdateOperationsInput | boolean
+    subtotalIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    totalFontSize?: FloatFieldUpdateOperationsInput | number
+    totalFontColor?: StringFieldUpdateOperationsInput | string
+    totalIsBold?: BoolFieldUpdateOperationsInput | boolean
+    totalIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FactureTemplateCreateManyInput = {
+    id?: string
+    dateX?: number
+    dateY?: number
+    clientNameX?: number
+    clientNameY?: number
+    clientEmailX?: number
+    clientEmailY?: number
+    clientCompanyX?: number
+    clientCompanyY?: number
+    serviceNameX?: number
+    serviceNameY?: number
+    subtotalX?: number
+    subtotalY?: number
+    totalX?: number
+    totalY?: number
+    factureNumberX?: number
+    factureNumberY?: number
+    fontSize?: number
+    fontColor?: string
+    factureNumberFontFamily?: string
+    dateFontFamily?: string
+    clientCompanyFontFamily?: string
+    clientNameFontFamily?: string
+    clientEmailFontFamily?: string
+    serviceNameFontFamily?: string
+    servicePriceFontFamily?: string
+    subtotalFontFamily?: string
+    totalFontFamily?: string
+    servicePriceX?: number
+    servicePriceY?: number
+    factureNumberFontSize?: number
+    factureNumberFontColor?: string
+    factureNumberIsBold?: boolean
+    factureNumberIsItalic?: boolean
+    dateFontSize?: number
+    dateFontColor?: string
+    dateIsBold?: boolean
+    dateIsItalic?: boolean
+    clientCompanyFontSize?: number
+    clientCompanyFontColor?: string
+    clientCompanyIsBold?: boolean
+    clientCompanyIsItalic?: boolean
+    clientNameFontSize?: number
+    clientNameFontColor?: string
+    clientNameIsBold?: boolean
+    clientNameIsItalic?: boolean
+    clientEmailFontSize?: number
+    clientEmailFontColor?: string
+    clientEmailIsBold?: boolean
+    clientEmailIsItalic?: boolean
+    serviceNameFontSize?: number
+    serviceNameFontColor?: string
+    serviceNameIsBold?: boolean
+    serviceNameIsItalic?: boolean
+    servicePriceFontSize?: number
+    servicePriceFontColor?: string
+    servicePriceIsBold?: boolean
+    servicePriceIsItalic?: boolean
+    subtotalFontSize?: number
+    subtotalFontColor?: string
+    subtotalIsBold?: boolean
+    subtotalIsItalic?: boolean
+    totalFontSize?: number
+    totalFontColor?: string
+    totalIsBold?: boolean
+    totalIsItalic?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type FactureTemplateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dateX?: FloatFieldUpdateOperationsInput | number
+    dateY?: FloatFieldUpdateOperationsInput | number
+    clientNameX?: FloatFieldUpdateOperationsInput | number
+    clientNameY?: FloatFieldUpdateOperationsInput | number
+    clientEmailX?: FloatFieldUpdateOperationsInput | number
+    clientEmailY?: FloatFieldUpdateOperationsInput | number
+    clientCompanyX?: FloatFieldUpdateOperationsInput | number
+    clientCompanyY?: FloatFieldUpdateOperationsInput | number
+    serviceNameX?: FloatFieldUpdateOperationsInput | number
+    serviceNameY?: FloatFieldUpdateOperationsInput | number
+    subtotalX?: FloatFieldUpdateOperationsInput | number
+    subtotalY?: FloatFieldUpdateOperationsInput | number
+    totalX?: FloatFieldUpdateOperationsInput | number
+    totalY?: FloatFieldUpdateOperationsInput | number
+    factureNumberX?: FloatFieldUpdateOperationsInput | number
+    factureNumberY?: FloatFieldUpdateOperationsInput | number
+    fontSize?: FloatFieldUpdateOperationsInput | number
+    fontColor?: StringFieldUpdateOperationsInput | string
+    factureNumberFontFamily?: StringFieldUpdateOperationsInput | string
+    dateFontFamily?: StringFieldUpdateOperationsInput | string
+    clientCompanyFontFamily?: StringFieldUpdateOperationsInput | string
+    clientNameFontFamily?: StringFieldUpdateOperationsInput | string
+    clientEmailFontFamily?: StringFieldUpdateOperationsInput | string
+    serviceNameFontFamily?: StringFieldUpdateOperationsInput | string
+    servicePriceFontFamily?: StringFieldUpdateOperationsInput | string
+    subtotalFontFamily?: StringFieldUpdateOperationsInput | string
+    totalFontFamily?: StringFieldUpdateOperationsInput | string
+    servicePriceX?: FloatFieldUpdateOperationsInput | number
+    servicePriceY?: FloatFieldUpdateOperationsInput | number
+    factureNumberFontSize?: FloatFieldUpdateOperationsInput | number
+    factureNumberFontColor?: StringFieldUpdateOperationsInput | string
+    factureNumberIsBold?: BoolFieldUpdateOperationsInput | boolean
+    factureNumberIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    dateFontSize?: FloatFieldUpdateOperationsInput | number
+    dateFontColor?: StringFieldUpdateOperationsInput | string
+    dateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    dateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    clientCompanyFontSize?: FloatFieldUpdateOperationsInput | number
+    clientCompanyFontColor?: StringFieldUpdateOperationsInput | string
+    clientCompanyIsBold?: BoolFieldUpdateOperationsInput | boolean
+    clientCompanyIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    clientNameFontSize?: FloatFieldUpdateOperationsInput | number
+    clientNameFontColor?: StringFieldUpdateOperationsInput | string
+    clientNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    clientNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    clientEmailFontSize?: FloatFieldUpdateOperationsInput | number
+    clientEmailFontColor?: StringFieldUpdateOperationsInput | string
+    clientEmailIsBold?: BoolFieldUpdateOperationsInput | boolean
+    clientEmailIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    serviceNameFontSize?: FloatFieldUpdateOperationsInput | number
+    serviceNameFontColor?: StringFieldUpdateOperationsInput | string
+    serviceNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    serviceNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    servicePriceFontSize?: FloatFieldUpdateOperationsInput | number
+    servicePriceFontColor?: StringFieldUpdateOperationsInput | string
+    servicePriceIsBold?: BoolFieldUpdateOperationsInput | boolean
+    servicePriceIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    subtotalFontSize?: FloatFieldUpdateOperationsInput | number
+    subtotalFontColor?: StringFieldUpdateOperationsInput | string
+    subtotalIsBold?: BoolFieldUpdateOperationsInput | boolean
+    subtotalIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    totalFontSize?: FloatFieldUpdateOperationsInput | number
+    totalFontColor?: StringFieldUpdateOperationsInput | string
+    totalIsBold?: BoolFieldUpdateOperationsInput | boolean
+    totalIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FactureTemplateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dateX?: FloatFieldUpdateOperationsInput | number
+    dateY?: FloatFieldUpdateOperationsInput | number
+    clientNameX?: FloatFieldUpdateOperationsInput | number
+    clientNameY?: FloatFieldUpdateOperationsInput | number
+    clientEmailX?: FloatFieldUpdateOperationsInput | number
+    clientEmailY?: FloatFieldUpdateOperationsInput | number
+    clientCompanyX?: FloatFieldUpdateOperationsInput | number
+    clientCompanyY?: FloatFieldUpdateOperationsInput | number
+    serviceNameX?: FloatFieldUpdateOperationsInput | number
+    serviceNameY?: FloatFieldUpdateOperationsInput | number
+    subtotalX?: FloatFieldUpdateOperationsInput | number
+    subtotalY?: FloatFieldUpdateOperationsInput | number
+    totalX?: FloatFieldUpdateOperationsInput | number
+    totalY?: FloatFieldUpdateOperationsInput | number
+    factureNumberX?: FloatFieldUpdateOperationsInput | number
+    factureNumberY?: FloatFieldUpdateOperationsInput | number
+    fontSize?: FloatFieldUpdateOperationsInput | number
+    fontColor?: StringFieldUpdateOperationsInput | string
+    factureNumberFontFamily?: StringFieldUpdateOperationsInput | string
+    dateFontFamily?: StringFieldUpdateOperationsInput | string
+    clientCompanyFontFamily?: StringFieldUpdateOperationsInput | string
+    clientNameFontFamily?: StringFieldUpdateOperationsInput | string
+    clientEmailFontFamily?: StringFieldUpdateOperationsInput | string
+    serviceNameFontFamily?: StringFieldUpdateOperationsInput | string
+    servicePriceFontFamily?: StringFieldUpdateOperationsInput | string
+    subtotalFontFamily?: StringFieldUpdateOperationsInput | string
+    totalFontFamily?: StringFieldUpdateOperationsInput | string
+    servicePriceX?: FloatFieldUpdateOperationsInput | number
+    servicePriceY?: FloatFieldUpdateOperationsInput | number
+    factureNumberFontSize?: FloatFieldUpdateOperationsInput | number
+    factureNumberFontColor?: StringFieldUpdateOperationsInput | string
+    factureNumberIsBold?: BoolFieldUpdateOperationsInput | boolean
+    factureNumberIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    dateFontSize?: FloatFieldUpdateOperationsInput | number
+    dateFontColor?: StringFieldUpdateOperationsInput | string
+    dateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    dateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    clientCompanyFontSize?: FloatFieldUpdateOperationsInput | number
+    clientCompanyFontColor?: StringFieldUpdateOperationsInput | string
+    clientCompanyIsBold?: BoolFieldUpdateOperationsInput | boolean
+    clientCompanyIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    clientNameFontSize?: FloatFieldUpdateOperationsInput | number
+    clientNameFontColor?: StringFieldUpdateOperationsInput | string
+    clientNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    clientNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    clientEmailFontSize?: FloatFieldUpdateOperationsInput | number
+    clientEmailFontColor?: StringFieldUpdateOperationsInput | string
+    clientEmailIsBold?: BoolFieldUpdateOperationsInput | boolean
+    clientEmailIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    serviceNameFontSize?: FloatFieldUpdateOperationsInput | number
+    serviceNameFontColor?: StringFieldUpdateOperationsInput | string
+    serviceNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    serviceNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    servicePriceFontSize?: FloatFieldUpdateOperationsInput | number
+    servicePriceFontColor?: StringFieldUpdateOperationsInput | string
+    servicePriceIsBold?: BoolFieldUpdateOperationsInput | boolean
+    servicePriceIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    subtotalFontSize?: FloatFieldUpdateOperationsInput | number
+    subtotalFontColor?: StringFieldUpdateOperationsInput | string
+    subtotalIsBold?: BoolFieldUpdateOperationsInput | boolean
+    subtotalIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    totalFontSize?: FloatFieldUpdateOperationsInput | number
+    totalFontColor?: StringFieldUpdateOperationsInput | string
+    totalIsBold?: BoolFieldUpdateOperationsInput | boolean
+    totalIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FactureRecordCreateInput = {
+    id?: string
+    number: string
+    paymentId: string
+    userId: string
+    serviceName: string
+    clientName: string
+    clientEmail: string
+    amount: number
+    pdfUrl?: string | null
+    generatedAt?: Date | string
+  }
+
+  export type FactureRecordUncheckedCreateInput = {
+    id?: string
+    number: string
+    paymentId: string
+    userId: string
+    serviceName: string
+    clientName: string
+    clientEmail: string
+    amount: number
+    pdfUrl?: string | null
+    generatedAt?: Date | string
+  }
+
+  export type FactureRecordUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    paymentId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    serviceName?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    generatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FactureRecordUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    paymentId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    serviceName?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    generatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FactureRecordCreateManyInput = {
+    id?: string
+    number: string
+    paymentId: string
+    userId: string
+    serviceName: string
+    clientName: string
+    clientEmail: string
+    amount: number
+    pdfUrl?: string | null
+    generatedAt?: Date | string
+  }
+
+  export type FactureRecordUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    paymentId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    serviceName?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    generatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FactureRecordUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    paymentId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    serviceName?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
+    clientEmail?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    generatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type FactureCounterCreateInput = {
+    id?: string
+    year: number
+    nextNumber?: number
+  }
+
+  export type FactureCounterUncheckedCreateInput = {
+    id?: string
+    year: number
+    nextNumber?: number
+  }
+
+  export type FactureCounterUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    nextNumber?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type FactureCounterUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    nextNumber?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type FactureCounterCreateManyInput = {
+    id?: string
+    year: number
+    nextNumber?: number
+  }
+
+  export type FactureCounterUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    nextNumber?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type FactureCounterUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    year?: IntFieldUpdateOperationsInput | number
+    nextNumber?: IntFieldUpdateOperationsInput | number
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -47231,6 +52776,356 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type FactureTemplateCountOrderByAggregateInput = {
+    id?: SortOrder
+    dateX?: SortOrder
+    dateY?: SortOrder
+    clientNameX?: SortOrder
+    clientNameY?: SortOrder
+    clientEmailX?: SortOrder
+    clientEmailY?: SortOrder
+    clientCompanyX?: SortOrder
+    clientCompanyY?: SortOrder
+    serviceNameX?: SortOrder
+    serviceNameY?: SortOrder
+    subtotalX?: SortOrder
+    subtotalY?: SortOrder
+    totalX?: SortOrder
+    totalY?: SortOrder
+    factureNumberX?: SortOrder
+    factureNumberY?: SortOrder
+    fontSize?: SortOrder
+    fontColor?: SortOrder
+    factureNumberFontFamily?: SortOrder
+    dateFontFamily?: SortOrder
+    clientCompanyFontFamily?: SortOrder
+    clientNameFontFamily?: SortOrder
+    clientEmailFontFamily?: SortOrder
+    serviceNameFontFamily?: SortOrder
+    servicePriceFontFamily?: SortOrder
+    subtotalFontFamily?: SortOrder
+    totalFontFamily?: SortOrder
+    servicePriceX?: SortOrder
+    servicePriceY?: SortOrder
+    factureNumberFontSize?: SortOrder
+    factureNumberFontColor?: SortOrder
+    factureNumberIsBold?: SortOrder
+    factureNumberIsItalic?: SortOrder
+    dateFontSize?: SortOrder
+    dateFontColor?: SortOrder
+    dateIsBold?: SortOrder
+    dateIsItalic?: SortOrder
+    clientCompanyFontSize?: SortOrder
+    clientCompanyFontColor?: SortOrder
+    clientCompanyIsBold?: SortOrder
+    clientCompanyIsItalic?: SortOrder
+    clientNameFontSize?: SortOrder
+    clientNameFontColor?: SortOrder
+    clientNameIsBold?: SortOrder
+    clientNameIsItalic?: SortOrder
+    clientEmailFontSize?: SortOrder
+    clientEmailFontColor?: SortOrder
+    clientEmailIsBold?: SortOrder
+    clientEmailIsItalic?: SortOrder
+    serviceNameFontSize?: SortOrder
+    serviceNameFontColor?: SortOrder
+    serviceNameIsBold?: SortOrder
+    serviceNameIsItalic?: SortOrder
+    servicePriceFontSize?: SortOrder
+    servicePriceFontColor?: SortOrder
+    servicePriceIsBold?: SortOrder
+    servicePriceIsItalic?: SortOrder
+    subtotalFontSize?: SortOrder
+    subtotalFontColor?: SortOrder
+    subtotalIsBold?: SortOrder
+    subtotalIsItalic?: SortOrder
+    totalFontSize?: SortOrder
+    totalFontColor?: SortOrder
+    totalIsBold?: SortOrder
+    totalIsItalic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FactureTemplateAvgOrderByAggregateInput = {
+    dateX?: SortOrder
+    dateY?: SortOrder
+    clientNameX?: SortOrder
+    clientNameY?: SortOrder
+    clientEmailX?: SortOrder
+    clientEmailY?: SortOrder
+    clientCompanyX?: SortOrder
+    clientCompanyY?: SortOrder
+    serviceNameX?: SortOrder
+    serviceNameY?: SortOrder
+    subtotalX?: SortOrder
+    subtotalY?: SortOrder
+    totalX?: SortOrder
+    totalY?: SortOrder
+    factureNumberX?: SortOrder
+    factureNumberY?: SortOrder
+    fontSize?: SortOrder
+    servicePriceX?: SortOrder
+    servicePriceY?: SortOrder
+    factureNumberFontSize?: SortOrder
+    dateFontSize?: SortOrder
+    clientCompanyFontSize?: SortOrder
+    clientNameFontSize?: SortOrder
+    clientEmailFontSize?: SortOrder
+    serviceNameFontSize?: SortOrder
+    servicePriceFontSize?: SortOrder
+    subtotalFontSize?: SortOrder
+    totalFontSize?: SortOrder
+  }
+
+  export type FactureTemplateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    dateX?: SortOrder
+    dateY?: SortOrder
+    clientNameX?: SortOrder
+    clientNameY?: SortOrder
+    clientEmailX?: SortOrder
+    clientEmailY?: SortOrder
+    clientCompanyX?: SortOrder
+    clientCompanyY?: SortOrder
+    serviceNameX?: SortOrder
+    serviceNameY?: SortOrder
+    subtotalX?: SortOrder
+    subtotalY?: SortOrder
+    totalX?: SortOrder
+    totalY?: SortOrder
+    factureNumberX?: SortOrder
+    factureNumberY?: SortOrder
+    fontSize?: SortOrder
+    fontColor?: SortOrder
+    factureNumberFontFamily?: SortOrder
+    dateFontFamily?: SortOrder
+    clientCompanyFontFamily?: SortOrder
+    clientNameFontFamily?: SortOrder
+    clientEmailFontFamily?: SortOrder
+    serviceNameFontFamily?: SortOrder
+    servicePriceFontFamily?: SortOrder
+    subtotalFontFamily?: SortOrder
+    totalFontFamily?: SortOrder
+    servicePriceX?: SortOrder
+    servicePriceY?: SortOrder
+    factureNumberFontSize?: SortOrder
+    factureNumberFontColor?: SortOrder
+    factureNumberIsBold?: SortOrder
+    factureNumberIsItalic?: SortOrder
+    dateFontSize?: SortOrder
+    dateFontColor?: SortOrder
+    dateIsBold?: SortOrder
+    dateIsItalic?: SortOrder
+    clientCompanyFontSize?: SortOrder
+    clientCompanyFontColor?: SortOrder
+    clientCompanyIsBold?: SortOrder
+    clientCompanyIsItalic?: SortOrder
+    clientNameFontSize?: SortOrder
+    clientNameFontColor?: SortOrder
+    clientNameIsBold?: SortOrder
+    clientNameIsItalic?: SortOrder
+    clientEmailFontSize?: SortOrder
+    clientEmailFontColor?: SortOrder
+    clientEmailIsBold?: SortOrder
+    clientEmailIsItalic?: SortOrder
+    serviceNameFontSize?: SortOrder
+    serviceNameFontColor?: SortOrder
+    serviceNameIsBold?: SortOrder
+    serviceNameIsItalic?: SortOrder
+    servicePriceFontSize?: SortOrder
+    servicePriceFontColor?: SortOrder
+    servicePriceIsBold?: SortOrder
+    servicePriceIsItalic?: SortOrder
+    subtotalFontSize?: SortOrder
+    subtotalFontColor?: SortOrder
+    subtotalIsBold?: SortOrder
+    subtotalIsItalic?: SortOrder
+    totalFontSize?: SortOrder
+    totalFontColor?: SortOrder
+    totalIsBold?: SortOrder
+    totalIsItalic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FactureTemplateMinOrderByAggregateInput = {
+    id?: SortOrder
+    dateX?: SortOrder
+    dateY?: SortOrder
+    clientNameX?: SortOrder
+    clientNameY?: SortOrder
+    clientEmailX?: SortOrder
+    clientEmailY?: SortOrder
+    clientCompanyX?: SortOrder
+    clientCompanyY?: SortOrder
+    serviceNameX?: SortOrder
+    serviceNameY?: SortOrder
+    subtotalX?: SortOrder
+    subtotalY?: SortOrder
+    totalX?: SortOrder
+    totalY?: SortOrder
+    factureNumberX?: SortOrder
+    factureNumberY?: SortOrder
+    fontSize?: SortOrder
+    fontColor?: SortOrder
+    factureNumberFontFamily?: SortOrder
+    dateFontFamily?: SortOrder
+    clientCompanyFontFamily?: SortOrder
+    clientNameFontFamily?: SortOrder
+    clientEmailFontFamily?: SortOrder
+    serviceNameFontFamily?: SortOrder
+    servicePriceFontFamily?: SortOrder
+    subtotalFontFamily?: SortOrder
+    totalFontFamily?: SortOrder
+    servicePriceX?: SortOrder
+    servicePriceY?: SortOrder
+    factureNumberFontSize?: SortOrder
+    factureNumberFontColor?: SortOrder
+    factureNumberIsBold?: SortOrder
+    factureNumberIsItalic?: SortOrder
+    dateFontSize?: SortOrder
+    dateFontColor?: SortOrder
+    dateIsBold?: SortOrder
+    dateIsItalic?: SortOrder
+    clientCompanyFontSize?: SortOrder
+    clientCompanyFontColor?: SortOrder
+    clientCompanyIsBold?: SortOrder
+    clientCompanyIsItalic?: SortOrder
+    clientNameFontSize?: SortOrder
+    clientNameFontColor?: SortOrder
+    clientNameIsBold?: SortOrder
+    clientNameIsItalic?: SortOrder
+    clientEmailFontSize?: SortOrder
+    clientEmailFontColor?: SortOrder
+    clientEmailIsBold?: SortOrder
+    clientEmailIsItalic?: SortOrder
+    serviceNameFontSize?: SortOrder
+    serviceNameFontColor?: SortOrder
+    serviceNameIsBold?: SortOrder
+    serviceNameIsItalic?: SortOrder
+    servicePriceFontSize?: SortOrder
+    servicePriceFontColor?: SortOrder
+    servicePriceIsBold?: SortOrder
+    servicePriceIsItalic?: SortOrder
+    subtotalFontSize?: SortOrder
+    subtotalFontColor?: SortOrder
+    subtotalIsBold?: SortOrder
+    subtotalIsItalic?: SortOrder
+    totalFontSize?: SortOrder
+    totalFontColor?: SortOrder
+    totalIsBold?: SortOrder
+    totalIsItalic?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type FactureTemplateSumOrderByAggregateInput = {
+    dateX?: SortOrder
+    dateY?: SortOrder
+    clientNameX?: SortOrder
+    clientNameY?: SortOrder
+    clientEmailX?: SortOrder
+    clientEmailY?: SortOrder
+    clientCompanyX?: SortOrder
+    clientCompanyY?: SortOrder
+    serviceNameX?: SortOrder
+    serviceNameY?: SortOrder
+    subtotalX?: SortOrder
+    subtotalY?: SortOrder
+    totalX?: SortOrder
+    totalY?: SortOrder
+    factureNumberX?: SortOrder
+    factureNumberY?: SortOrder
+    fontSize?: SortOrder
+    servicePriceX?: SortOrder
+    servicePriceY?: SortOrder
+    factureNumberFontSize?: SortOrder
+    dateFontSize?: SortOrder
+    clientCompanyFontSize?: SortOrder
+    clientNameFontSize?: SortOrder
+    clientEmailFontSize?: SortOrder
+    serviceNameFontSize?: SortOrder
+    servicePriceFontSize?: SortOrder
+    subtotalFontSize?: SortOrder
+    totalFontSize?: SortOrder
+  }
+
+  export type FactureRecordCountOrderByAggregateInput = {
+    id?: SortOrder
+    number?: SortOrder
+    paymentId?: SortOrder
+    userId?: SortOrder
+    serviceName?: SortOrder
+    clientName?: SortOrder
+    clientEmail?: SortOrder
+    amount?: SortOrder
+    pdfUrl?: SortOrder
+    generatedAt?: SortOrder
+  }
+
+  export type FactureRecordAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type FactureRecordMaxOrderByAggregateInput = {
+    id?: SortOrder
+    number?: SortOrder
+    paymentId?: SortOrder
+    userId?: SortOrder
+    serviceName?: SortOrder
+    clientName?: SortOrder
+    clientEmail?: SortOrder
+    amount?: SortOrder
+    pdfUrl?: SortOrder
+    generatedAt?: SortOrder
+  }
+
+  export type FactureRecordMinOrderByAggregateInput = {
+    id?: SortOrder
+    number?: SortOrder
+    paymentId?: SortOrder
+    userId?: SortOrder
+    serviceName?: SortOrder
+    clientName?: SortOrder
+    clientEmail?: SortOrder
+    amount?: SortOrder
+    pdfUrl?: SortOrder
+    generatedAt?: SortOrder
+  }
+
+  export type FactureRecordSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type FactureCounterCountOrderByAggregateInput = {
+    id?: SortOrder
+    year?: SortOrder
+    nextNumber?: SortOrder
+  }
+
+  export type FactureCounterAvgOrderByAggregateInput = {
+    year?: SortOrder
+    nextNumber?: SortOrder
+  }
+
+  export type FactureCounterMaxOrderByAggregateInput = {
+    id?: SortOrder
+    year?: SortOrder
+    nextNumber?: SortOrder
+  }
+
+  export type FactureCounterMinOrderByAggregateInput = {
+    id?: SortOrder
+    year?: SortOrder
+    nextNumber?: SortOrder
+  }
+
+  export type FactureCounterSumOrderByAggregateInput = {
+    year?: SortOrder
+    nextNumber?: SortOrder
   }
 
   export type ChatSessionCreateNestedManyWithoutUserInput = {
