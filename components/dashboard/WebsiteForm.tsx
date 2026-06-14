@@ -255,11 +255,14 @@ export default function WebsiteForm({ initialData, serviceId, serviceName = 'pro
 
                     <div className="space-y-4 p-4 rounded-2xl transition-all border border-transparent" id="field-template">
                         <label className="text-sm font-black uppercase tracking-widest text-slate-400">Website Template</label>
-                        <div className="grid grid-cols-3 gap-3">
+                        <div className="grid grid-cols-2 sm:grid-cols-6 gap-3">
                             {[
                                 { id: 'classic', name: 'Classic', desc: 'Professional & Trustworthy' },
                                 { id: 'modern', name: 'Modern', desc: 'Sleek & Visual' },
                                 { id: 'minimal', name: 'Minimal', desc: 'Clean & Bold' },
+                                { id: 'light', name: 'Minimalist Light', desc: 'Clean & Luxury' },
+                                { id: 'luxury', name: 'Dark Luxury', desc: 'Deep, Cozy & Premium' },
+                                { id: 'moroccan', name: 'Moroccan', desc: 'Warm & Traditional' },
                             ].map((tpl) => (
                                 <label
                                     key={tpl.id}

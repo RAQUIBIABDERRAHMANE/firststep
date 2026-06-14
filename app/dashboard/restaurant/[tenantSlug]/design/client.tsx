@@ -94,6 +94,20 @@ export default function DesignSelectionClient({ initialData }: Props) {
             color: 'bg-stone-50 border-stone-200'
         },
         {
+            id: 'light',
+            name: 'Minimalist Light',
+            description: 'A premium, clean luxury design with gold highlights, serif typography, and glassmorphism cards.',
+            features: ['Light Theme', 'Ivory & Gold Accents', 'Luxury Typography'],
+            color: 'bg-amber-50/20 border-amber-200 text-stone-900'
+        },
+        {
+            id: 'luxury',
+            name: 'Dark Luxury',
+            description: 'A deep, cozy, and cinematic chocolate theme with warm orange/gold accents and glowing category borders.',
+            features: ['Dark Theme', 'Warm Glows', 'Cinematic Layout'],
+            color: 'bg-stone-950 text-[#f3b182] border-amber-900/40'
+        },
+        {
             id: 'moroccan',
             name: 'Riad Marocain',
             description: 'A rich traditional Moroccan aesthetic with zellige patterns, terracotta and gold accents.',
@@ -132,7 +146,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
             </div>
 
             {activeTab === 'themes' ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                     {designs.map((design) => (
                         <div
                             key={design.id}

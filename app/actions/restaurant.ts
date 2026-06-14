@@ -487,7 +487,7 @@ export async function updateRestaurantDesign(designTemplate: string, slug?: stri
     const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
-    if (!['classic', 'modern', 'minimal', 'moroccan'].includes(designTemplate)) {
+    if (!['classic', 'modern', 'minimal', 'moroccan', 'light', 'luxury'].includes(designTemplate)) {
         return { error: 'Invalid design template' }
     }
 
