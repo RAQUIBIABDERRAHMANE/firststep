@@ -13,6 +13,7 @@ interface QRScannerProps {
 export default function QRScanner({ onScan, onClose }: QRScannerProps) {
     const scannerRef = useRef<Html5Qrcode | null>(null)
     const [error, setError] = useState<string | null>(null)
+    const isStoppingRef = useRef(false)
 
     useEffect(() => {
         let isComponentMounted = true;
@@ -36,13 +37,28 @@ export default function QRScanner({ onScan, onClose }: QRScannerProps) {
                         aspectRatio: 1.0
                     },
                     (decodedText) => {
-                        if (scannerRef.current) {
-                            scannerRef.current.stop().then(() => {
+                        if (scannerRef.current && !isStoppingRef.current) {
+                            isStoppingRef.current = true
+                            const scanner = scannerRef.current
+                            if (scanner.isScanning) {
+                                scanner.stop().then(() => {
+                                    try {
+                                        scanner.clear()
+                                    } catch (e) {}
+                                    onScan(decodedText)
+                                }).catch(() => {
+                                    try {
+                                        scanner.clear()
+                                    } catch (e) {}
+                                    onScan(decodedText)
+                                })
+                            } else {
+                                try {
+                                    scanner.clear()
+                                } catch (e) {}
                                 onScan(decodedText)
-                            }).catch(() => {
-                                onScan(decodedText)
-                            })
-                        } else {
+                            }
+                        } else if (!scannerRef.current) {
                             onScan(decodedText)
                         }
                     },
@@ -62,11 +78,24 @@ export default function QRScanner({ onScan, onClose }: QRScannerProps) {
 
         return () => {
             isComponentMounted = false;
-            if (scannerRef.current) {
-                if (scannerRef.current.isScanning) {
-                    scannerRef.current.stop().catch(() => {})
+            if (scannerRef.current && !isStoppingRef.current) {
+                isStoppingRef.current = true;
+                const scanner = scannerRef.current;
+                if (scanner.isScanning) {
+                    scanner.stop().then(() => {
+                        try {
+                            scanner.clear();
+                        } catch (e) {}
+                    }).catch(() => {
+                        try {
+                            scanner.clear();
+                        } catch (e) {}
+                    });
+                } else {
+                    try {
+                        scanner.clear();
+                    } catch (e) {}
                 }
-                scannerRef.current.clear()
             }
         }
     }, [onScan])
