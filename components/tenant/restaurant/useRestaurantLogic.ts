@@ -170,6 +170,9 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
 
         const res = await callWaiter(tableId)
         if (res.success) {
+            if (typeof window !== 'undefined' && navigator.vibrate) {
+                navigator.vibrate([200, 100, 200]);
+            }
             alert("Waiter has been notified! 🔔")
         } else {
             alert("Failed: " + res.error)
@@ -182,6 +185,9 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
 
         const res = await requestBill(tableId)
         if (res.success) {
+            if (typeof window !== 'undefined' && navigator.vibrate) {
+                navigator.vibrate([200, 100, 200]);
+            }
             alert("Bill request sent! A waiter will bring your bill shortly. 🔔")
         } else {
             alert("Failed: " + res.error)

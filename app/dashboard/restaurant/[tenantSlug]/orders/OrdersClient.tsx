@@ -153,7 +153,7 @@ export default function OrdersClient({
         return { tables: [], obstacles: [] }
     })
 
-    // Track new orders and play sound
+    // Track new orders and play sound / vibrate
     useEffect(() => {
         const currentIds = new Set(initialOrders.map(o => o.id));
         let hasNewOrder = false;
@@ -173,6 +173,11 @@ export default function OrdersClient({
         if (hasNewOrder) {
             if (isSoundEnabled) {
                 playNotificationSound();
+            }
+            // Trigger physical vibration feedback (shake the phone)
+            if (typeof window !== 'undefined' && navigator.vibrate) {
+                // Shake pattern: Vibrate 300ms, pause 100ms, vibrate 300ms
+                navigator.vibrate([300, 100, 300]);
             }
         }
         
@@ -402,7 +407,7 @@ export default function OrdersClient({
                                         <div 
                                             key={order.id} 
                                             className={cn(
-                                                "col-span-1 lg:col-span-2 border rounded-2xl p-4 flex items-center justify-between shadow-sm animate-in slide-in-from-top-2",
+                                                "col-span-1 lg:col-span-2 border rounded-2xl p-4 flex items-center justify-between shadow-sm animate-in slide-in-from-top-2 animate-shake",
                                                 isCallWaiter ? "bg-orange-50 border-orange-200" : "bg-amber-50 border-amber-200"
                                             )}
                                         >
