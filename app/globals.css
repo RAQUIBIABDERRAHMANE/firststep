@@ -463,4 +463,9 @@ spline-viewer::after {
   z-index: 9999;
   pointer-events: none;
 }
+
+/* Shake animation helper */
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
 /* Recompile trigger comment v2 */
