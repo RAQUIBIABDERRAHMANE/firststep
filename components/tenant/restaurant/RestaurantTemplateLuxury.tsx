@@ -220,12 +220,21 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
                     </button>
 
                     {/* Prominent floating capsule button CALL WAITER */}
-                    <button
-                        onClick={handleCallWaiter}
-                        className="bg-gradient-to-r from-[#f3b182] to-[#e27355] text-stone-950 px-6 h-12 rounded-full font-black text-xs uppercase tracking-widest transition-all duration-300 hover:brightness-110 shadow-[0_0_20px_rgba(243,177,130,0.4)] active:scale-95 shrink-0"
-                    >
-                        Call Waiter
-                    </button>
+                    {tableId ? (
+                        <button
+                            onClick={handleCallWaiter}
+                            className="bg-gradient-to-r from-[#f3b182] to-[#e27355] text-stone-950 px-6 h-12 rounded-full font-black text-xs uppercase tracking-widest transition-all duration-300 hover:brightness-110 shadow-[0_0_20px_rgba(243,177,130,0.4)] active:scale-95 shrink-0"
+                        >
+                            {lang === 'fr' ? 'Appeler Serveur' : 'Call Waiter'}
+                        </button>
+                    ) : (
+                        <button
+                            onClick={() => setShowScanner(true)}
+                            className="bg-gradient-to-r from-[#f3b182] to-[#e27355] text-stone-950 px-6 h-12 rounded-full font-black text-xs uppercase tracking-widest transition-all duration-300 hover:brightness-110 shadow-[0_0_20px_rgba(243,177,130,0.4)] active:scale-95 shrink-0"
+                        >
+                            {lang === 'fr' ? 'Scanner Table' : 'Scan Table'}
+                        </button>
+                    )}
 
                     {/* Search / Reservation Icon */}
                     <button onClick={() => setShowReservation(true)} className="flex flex-col items-center justify-center text-stone-400 hover:text-white transition-colors py-2 px-3">
