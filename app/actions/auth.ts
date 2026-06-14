@@ -85,9 +85,15 @@ export async function signIn(prevState: any, formData: FormData) {
         return { error: 'Please fill in all fields' }
     }
 
-    const user = await prisma.user.findUnique({
-        where: { email },
-    })
+    let user;
+    try {
+        user = await prisma.user.findUnique({
+            where: { email },
+        })
+    } catch (dbError) {
+        console.error('[Auth] Database error in signIn:', dbError)
+        return { error: 'Une erreur de connexion à la base de données est survenue. Veuillez réessayer.' }
+    }
 
     console.log(`[Auth] Attempting login for: ${email}`);
     if (!user) {
