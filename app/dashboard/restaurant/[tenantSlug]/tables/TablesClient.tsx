@@ -401,6 +401,67 @@ export default function TablesClient({
         setDraggingElement(null)
     }
 
+    const handleTouchStart = (e: React.TouchEvent, id: string, type: 'table' | 'obstacle', currentX: number, currentY: number) => {
+        e.stopPropagation()
+        const touch = e.touches[0]
+        const rect = e.currentTarget.parentElement?.getBoundingClientRect()
+        if (!rect) return
+        
+        const clientX = touch.clientX - rect.left
+        const clientY = touch.clientY - rect.top
+        
+        setDraggingElement({
+            id,
+            type,
+            offsetX: clientX - currentX,
+            offsetY: clientY - currentY
+        })
+        setSelectedElement({ id, type })
+    }
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        if (!draggingElement) return
+        // Prevent scroll when dragging
+        if (e.cancelable) e.preventDefault()
+        const touch = e.touches[0]
+        const rect = e.currentTarget.getBoundingClientRect()
+        if (!rect) return
+
+        const clientX = touch.clientX - rect.left
+        const clientY = touch.clientY - rect.top
+
+        let rawX = clientX - draggingElement.offsetX
+        let rawY = clientY - draggingElement.offsetY
+
+        // Snap to grid of 20px
+        const snappedX = Math.round(rawX / 20) * 20
+        const snappedY = Math.round(rawY / 20) * 20
+
+        const element = draggingElement.type === 'table'
+            ? floorPlan.tables.find(t => t.id === draggingElement.id)
+            : floorPlan.obstacles.find(o => o.id === draggingElement.id)
+        
+        if (!element) return
+        
+        const w = element.w
+        const h = element.h
+
+        const constrainedX = Math.max(0, Math.min(800 - w, snappedX))
+        const constrainedY = Math.max(0, Math.min(600 - h, snappedY))
+
+        if (draggingElement.type === 'table') {
+            setFloorPlan(prev => ({
+                ...prev,
+                tables: prev.tables.map(t => t.id === draggingElement.id ? { ...t, x: constrainedX, y: constrainedY } : t)
+            }))
+        } else {
+            setFloorPlan(prev => ({
+                ...prev,
+                obstacles: prev.obstacles.map(o => o.id === draggingElement.id ? { ...o, x: constrainedX, y: constrainedY } : o)
+            }))
+        }
+    }
+
     // Get currently selected element details
     const selectedDetails = (() => {
         if (!selectedElement) return null
@@ -484,7 +545,7 @@ export default function TablesClient({
                                             className="bg-white border-indigo-100 pl-11 h-12 rounded-2xl text-lg font-medium"
                                         />
                                     </div>
-                                    <Button onClick={handleAddTable} disabled={loading || !newTableName.trim()} className="shrink-0 gap-2 h-12 px-10 rounded-2xl shadow-xl shadow-indigo-500/10 bg-indigo-600 hover:bg-indigo-700 font-black tracking-tight">
+                                    <Button onClick={handleAddTable} disabled={loading || !newTableName.trim()} className="w-full md:w-auto shrink-0 justify-center gap-2 h-12 px-10 rounded-2xl shadow-xl shadow-indigo-500/10 bg-indigo-600 hover:bg-indigo-700 font-black tracking-tight">
                                         <Plus size={22} /> Add Physical Point
                                     </Button>
                                 </div>
@@ -531,11 +592,11 @@ export default function TablesClient({
                                         </div>
                                     </div>
                                     
-                                    <div className="flex items-center justify-between mt-2 p-4 bg-indigo-100/50 rounded-2xl border border-indigo-100">
+                                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-2 p-4 bg-indigo-100/50 rounded-2xl border border-indigo-100 gap-4">
                                         <span className="text-sm font-semibold text-indigo-900/70">
                                             Will generate tables numbered <strong className="text-indigo-700">{initialTables.length + 1}</strong> to <strong className="text-indigo-700">{initialTables.length + (parseInt(bulkQuantity) || 0)}</strong>.
                                         </span>
-                                        <Button onClick={handleBulkAdd} disabled={loading || !bulkQuantity} className="shrink-0 gap-2 h-10 px-8 rounded-xl shadow-lg shadow-indigo-500/10 bg-indigo-600 hover:bg-indigo-700 font-bold">
+                                        <Button onClick={handleBulkAdd} disabled={loading || !bulkQuantity} className="w-full sm:w-auto justify-center gap-2 h-10 px-8 rounded-xl shadow-lg shadow-indigo-500/10 bg-indigo-600 hover:bg-indigo-700 font-bold">
                                             <Plus size={18} /> Generate {bulkQuantity || 0} Tables
                                         </Button>
                                     </div>
@@ -548,7 +609,7 @@ export default function TablesClient({
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-in fade-in duration-500">
                         {initialTables.map((table) => (
                             <Card key={table.id} className={cn(
-                                "overflow-hidden border-slate-200/60 shadow-xl shadow-slate-200/20 rounded-[3rem] flex flex-col p-10 group transition-all duration-500 bg-white border",
+                                "overflow-hidden border-slate-200/60 shadow-xl shadow-slate-200/20 rounded-[3rem] flex flex-col p-5 sm:p-10 group transition-all duration-500 bg-white border",
                                 !table.isActive ? "opacity-60 bg-slate-50 grayscale-[0.5]" : "hover:border-indigo-400 hover:shadow-2xl hover:shadow-indigo-100/50"
                             )}>
                                 {/* Header actions */}
@@ -633,7 +694,7 @@ export default function TablesClient({
                                     </div>
                                 )}
 
-                                <div className="relative group/qr p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 mb-10 transition-all duration-500 group-hover:scale-105 group-hover:bg-white group-hover:shadow-2xl shadow-inner mx-auto">
+                                <div className="relative group/qr p-4 sm:p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 mb-6 sm:mb-10 transition-all duration-500 group-hover:scale-105 group-hover:bg-white group-hover:shadow-2xl shadow-inner mx-auto">
                                     {qrCodes[table.id] ? (
                                         <img src={qrCodes[table.id]} className="h-44 w-44 object-contain mix-blend-multiply" alt="Table QR" />
                                     ) : (
@@ -734,96 +795,104 @@ export default function TablesClient({
                         </div>
 
                         {/* Interactive Drag & Drop Grid Canvas */}
-                        <div 
-                            className={cn(
-                                "relative w-full h-[600px] bg-slate-50 rounded-[2.5rem] border-2 border-slate-200/80 shadow-inner overflow-hidden cursor-default select-none",
-                                draggingElement ? "cursor-grabbing" : ""
-                            )}
-                            style={{
-                                backgroundImage: showGrid ? 'radial-gradient(circle, #cbd5e1 1.5px, transparent 1.5px)' : 'none',
-                                backgroundSize: '20px 20px'
-                            }}
-                            onMouseMove={handleMouseMove}
-                            onMouseUp={handleMouseUp}
-                            onMouseLeave={handleMouseUp}
-                            onClick={() => setSelectedElement(null)}
-                        >
-                            {/* Static Entrance Label or other hints */}
-                            <div className="absolute top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-slate-200/50 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-500">
-                                Restaurant Floor Area ($800 \times 600$ px)
+                        <div className="w-full overflow-x-auto pb-4 scrollbar-thin">
+                            <div 
+                                className={cn(
+                                    "relative w-[800px] h-[600px] bg-slate-50 rounded-[2.5rem] border-2 border-slate-200/80 shadow-inner overflow-hidden cursor-default select-none shrink-0 mx-auto",
+                                    draggingElement ? "cursor-grabbing" : ""
+                                )}
+                                style={{
+                                    backgroundImage: showGrid ? 'radial-gradient(circle, #cbd5e1 1.5px, transparent 1.5px)' : 'none',
+                                    backgroundSize: '20px 20px'
+                                }}
+                                onMouseMove={handleMouseMove}
+                                onMouseUp={handleMouseUp}
+                                onMouseLeave={handleMouseUp}
+                                onTouchMove={handleTouchMove}
+                                onTouchEnd={handleMouseUp}
+                                onClick={() => setSelectedElement(null)}
+                            >
+                                {/* Static Entrance Label or other hints */}
+                                <div className="absolute top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-slate-200/50 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-500">
+                                    Restaurant Floor Area ($800 \times 600$ px)
+                                </div>
+
+                                {/* Positioned tables */}
+                                {floorPlan.tables.map((table) => {
+                                    const dbTable = initialTables.find(t => t.id === table.id)
+                                    if (!dbTable) return null
+                                    const isSelected = selectedElement?.id === table.id && selectedElement.type === 'table'
+
+                                    return (
+                                        <div
+                                            key={table.id}
+                                            className={cn(
+                                                "absolute flex flex-col items-center justify-center font-bold text-slate-800 border-2 transition-shadow select-none shadow-sm cursor-grab active:cursor-grabbing",
+                                                table.shape === 'circle' ? "rounded-full" : "rounded-2xl",
+                                                isSelected ? "border-indigo-600 bg-indigo-50 ring-4 ring-indigo-600/10 z-30 shadow-md" : "border-slate-300 bg-white hover:border-slate-400 z-10"
+                                            )}
+                                            style={{
+                                                left: `${table.x}px`,
+                                                top: `${table.y}px`,
+                                                width: `${table.w}px`,
+                                                height: `${table.h}px`,
+                                                transform: `rotate(${table.rotation}deg)`,
+                                                touchAction: 'none'
+                                            }}
+                                            onMouseDown={(e) => handleMouseDown(e, table.id, 'table', table.x, table.y)}
+                                            onTouchStart={(e) => handleTouchStart(e, table.id, 'table', table.x, table.y)}
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                setSelectedElement({ id: table.id, type: 'table' })
+                                            }}
+                                        >
+                                            <span className="text-xl font-black tracking-tighter">T-{dbTable.number}</span>
+                                            {dbTable.capacity && (
+                                                <span className="text-[9px] font-extrabold uppercase text-slate-400 flex items-center gap-0.5 mt-0.5">
+                                                    <Users size={8} /> {dbTable.capacity}
+                                                </span>
+                                            )}
+                                        </div>
+                                    )
+                                })}
+
+                                {/* Obstacles (Walls & Doors) */}
+                                {floorPlan.obstacles.map((obstacle) => {
+                                    const isSelected = selectedElement?.id === obstacle.id && selectedElement.type === 'obstacle'
+                                    const isWall = obstacle.type === 'wall'
+
+                                    return (
+                                        <div
+                                            key={obstacle.id}
+                                            className={cn(
+                                                "absolute border select-none cursor-grab active:cursor-grabbing transition-shadow",
+                                                isWall 
+                                                    ? "bg-slate-700 border-slate-800 rounded-sm" 
+                                                    : "bg-amber-100 border-amber-300 rounded-sm flex items-center justify-center",
+                                                isSelected ? "border-indigo-600 ring-4 ring-indigo-600/15 z-30 shadow-md" : "z-10 shadow-sm"
+                                            )}
+                                            style={{
+                                                left: `${obstacle.x}px`,
+                                                top: `${obstacle.y}px`,
+                                                width: `${obstacle.w}px`,
+                                                height: `${obstacle.h}px`,
+                                                transform: `rotate(${obstacle.rotation}deg)`,
+                                                touchAction: 'none'
+                                            }}
+                                            onMouseDown={(e) => handleMouseDown(e, obstacle.id, 'obstacle', obstacle.x, obstacle.y)}
+                                            onTouchStart={(e) => handleTouchStart(e, obstacle.id, 'obstacle', obstacle.x, obstacle.y)}
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                setSelectedElement({ id: obstacle.id, type: 'obstacle' })
+                                            }}
+                                        >
+                                            {!isWall && (
+                                                <span className="text-[10px] font-black text-amber-700 uppercase tracking-widest leading-none rotate-0">Door</span>
+                                            )}
+                                        </div>
+                                    )
+                                })}
                             </div>
-
-                            {/* Positioned tables */}
-                            {floorPlan.tables.map((table) => {
-                                const dbTable = initialTables.find(t => t.id === table.id)
-                                if (!dbTable) return null
-                                const isSelected = selectedElement?.id === table.id && selectedElement.type === 'table'
-
-                                return (
-                                    <div
-                                        key={table.id}
-                                        className={cn(
-                                            "absolute flex flex-col items-center justify-center font-bold text-slate-800 border-2 transition-shadow select-none shadow-sm cursor-grab active:cursor-grabbing",
-                                            table.shape === 'circle' ? "rounded-full" : "rounded-2xl",
-                                            isSelected ? "border-indigo-600 bg-indigo-50 ring-4 ring-indigo-600/10 z-30 shadow-md" : "border-slate-300 bg-white hover:border-slate-400 z-10"
-                                        )}
-                                        style={{
-                                            left: `${table.x}px`,
-                                            top: `${table.y}px`,
-                                            width: `${table.w}px`,
-                                            height: `${table.h}px`,
-                                            transform: `rotate(${table.rotation}deg)`,
-                                        }}
-                                        onMouseDown={(e) => handleMouseDown(e, table.id, 'table', table.x, table.y)}
-                                        onClick={(e) => {
-                                            e.stopPropagation()
-                                            setSelectedElement({ id: table.id, type: 'table' })
-                                        }}
-                                    >
-                                        <span className="text-xl font-black tracking-tighter">T-{dbTable.number}</span>
-                                        {dbTable.capacity && (
-                                            <span className="text-[9px] font-extrabold uppercase text-slate-400 flex items-center gap-0.5 mt-0.5">
-                                                <Users size={8} /> {dbTable.capacity}
-                                            </span>
-                                        )}
-                                    </div>
-                                )
-                            })}
-
-                            {/* Obstacles (Walls & Doors) */}
-                            {floorPlan.obstacles.map((obstacle) => {
-                                const isSelected = selectedElement?.id === obstacle.id && selectedElement.type === 'obstacle'
-                                const isWall = obstacle.type === 'wall'
-
-                                return (
-                                    <div
-                                        key={obstacle.id}
-                                        className={cn(
-                                            "absolute border select-none cursor-grab active:cursor-grabbing transition-shadow",
-                                            isWall 
-                                                ? "bg-slate-700 border-slate-800 rounded-sm" 
-                                                : "bg-amber-100 border-amber-300 rounded-sm flex items-center justify-center",
-                                            isSelected ? "border-indigo-600 ring-4 ring-indigo-600/15 z-30 shadow-md" : "z-10 shadow-sm"
-                                        )}
-                                        style={{
-                                            left: `${obstacle.x}px`,
-                                            top: `${obstacle.y}px`,
-                                            width: `${obstacle.w}px`,
-                                            height: `${obstacle.h}px`,
-                                            transform: `rotate(${obstacle.rotation}deg)`
-                                        }}
-                                        onMouseDown={(e) => handleMouseDown(e, obstacle.id, 'obstacle', obstacle.x, obstacle.y)}
-                                        onClick={(e) => {
-                                            e.stopPropagation()
-                                            setSelectedElement({ id: obstacle.id, type: 'obstacle' })
-                                        }}
-                                    >
-                                        {!isWall && (
-                                            <span className="text-[10px] font-black text-amber-700 uppercase tracking-widest leading-none rotate-0">Door</span>
-                                        )}
-                                    </div>
-                                )
-                            })}
                         </div>
                     </div>
 

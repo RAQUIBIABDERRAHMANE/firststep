@@ -134,7 +134,7 @@ export default function AnalyticsClient({ tenantSlug }: { tenantSlug: string }) 
                             <span className="sr-only">Précédent</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
                         </button>
-                        <div className="flex items-center justify-center px-4 min-w-[200px] text-sm font-bold capitalize text-white">
+                        <div className="flex items-center justify-center px-4 min-w-[140px] sm:min-w-[200px] text-xs sm:text-sm font-bold capitalize text-white text-center">
                             {getPeriodLabel()}
                         </div>
                         <button onClick={() => adjustDate(1)} className="h-10 w-12 flex items-center justify-center rounded-xl hover:bg-slate-700/80 text-slate-300 transition-all">
@@ -180,15 +180,15 @@ export default function AnalyticsClient({ tenantSlug }: { tenantSlug: string }) 
                                     <p className="text-slate-400 font-semibold text-sm mb-1">Panier Moyen</p>
                                     <p className="text-2xl font-black text-slate-800">{data.metrics.avgOrderValue.toFixed(2)} <span className="text-xs font-bold text-slate-400">MAD</span></p>
                                 </div>
-                                <div className="pl-6 border-l border-slate-100">
+                                <div className="md:pl-6 md:border-l md:border-slate-100">
                                     <p className="text-slate-400 font-semibold text-sm mb-1">Total Commandes</p>
                                     <p className="text-2xl font-black text-slate-800">{data.metrics.totalOrders}</p>
                                 </div>
-                                <div className="pl-6 border-l border-slate-100">
+                                <div className="md:pl-6 md:border-l md:border-slate-100">
                                     <p className="text-slate-400 font-semibold text-sm mb-1">Articles Vendus</p>
                                     <p className="text-2xl font-black text-slate-800">{data.metrics.totalItemsSold}</p>
                                 </div>
-                                <div className="pl-6 border-l border-slate-100">
+                                <div className="md:pl-6 md:border-l md:border-slate-100">
                                     <p className="text-slate-400 font-semibold text-sm mb-1">Articles / Commande</p>
                                     <p className="text-2xl font-black text-slate-800">{data.metrics.avgItemsPerOrder.toFixed(1)}</p>
                                 </div>
@@ -200,8 +200,8 @@ export default function AnalyticsClient({ tenantSlug }: { tenantSlug: string }) 
                             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-cyan-400 via-transparent to-transparent"></div>
                             <h3 className="text-slate-400 font-bold tracking-widest text-xs uppercase mb-6 relative z-10">Qualité Opérationnelle</h3>
                             
-                            <div className="flex h-32 items-center justify-between relative z-10">
-                                <div className="w-1/2">
+                            <div className="flex flex-col sm:flex-row h-auto sm:h-32 items-stretch sm:items-center justify-between relative z-10 gap-6 sm:gap-2">
+                                <div className="w-full sm:w-1/2">
                                     {data.metrics.totalOrders > 0 ? (
                                         <div className="flex flex-col gap-4">
                                             <div>
@@ -227,7 +227,7 @@ export default function AnalyticsClient({ tenantSlug }: { tenantSlug: string }) 
                                         <div className="text-slate-500 font-semibold text-sm">Aucune donnée</div>
                                     )}
                                 </div>
-                                <div className="w-1/2 h-full">
+                                <div className="w-full sm:w-1/2 h-32">
                                     <ResponsiveContainer width="100%" height="100%">
                                         <PieChart>
                                             <Tooltip content={<CustomPieTooltip />} />

@@ -102,6 +102,17 @@ export default function ReservationsClient({
         return d
     })
 
+    React.useEffect(() => {
+        if (selectedResId && typeof window !== 'undefined' && window.innerWidth < 1280) {
+            setTimeout(() => {
+                const el = document.getElementById('assigner-panel')
+                if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+            }, 100)
+        }
+    }, [selectedResId])
+
     /* Generate 30-day strip */
     const dateStrip = React.useMemo(() => {
         return Array.from({ length: 30 }, (_, i) => {
@@ -421,7 +432,7 @@ export default function ReservationsClient({
                             {/* Scrollable strip */}
                             <div
                                 ref={dateStripRef}
-                                className="flex gap-2 overflow-x-auto pb-1"
+                                className="flex gap-2 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden"
                                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                             >
                                 {dateStrip.map((date) => {
@@ -562,7 +573,7 @@ export default function ReservationsClient({
                     </div>
 
                     {/* ── Right: Assigner Panel ── */}
-                    <div className="xl:col-span-4">
+                    <div id="assigner-panel" className="xl:col-span-4 scroll-mt-6">
                         {selectedRes ? (
                             <div className="bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden animate-in slide-in-from-right duration-300 sticky top-6">
                                 {/* Panel Header */}
@@ -581,7 +592,7 @@ export default function ReservationsClient({
 
                                 <div className="p-5 space-y-5">
                                     {/* Info grid */}
-                                    <div className="grid grid-cols-2 gap-2">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                         {[
                                             { icon: <Users size={13} />, label: 'Party', value: `${selectedRes.partySize} guests` },
                                             { icon: <Clock size={13} />, label: 'Time', value: selectedRes.time },
@@ -598,21 +609,21 @@ export default function ReservationsClient({
                                     </div>
 
                                     {/* Status + quick actions */}
-                                    <div className="flex items-center gap-2 flex-wrap">
+                                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-2 flex-wrap">
                                         <StatusBadge status={selectedRes.status} />
                                         {selectedRes.status === 'PENDING' && (
-                                            <div className="flex gap-1.5 ml-auto">
+                                            <div className="flex gap-1.5 w-full sm:w-auto">
                                                 <button
                                                     onClick={() => handleUpdateStatus(selectedRes.id, 'CONFIRMED')}
                                                     disabled={!!loading}
-                                                    className="h-8 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-[11px] font-black flex items-center gap-1 transition-colors"
+                                                    className="flex-1 sm:flex-none h-8 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-[11px] font-black flex items-center justify-center gap-1 transition-colors"
                                                 >
                                                     <Check size={12} /> Confirm
                                                 </button>
                                                 <button
                                                     onClick={() => handleUpdateStatus(selectedRes.id, 'CANCELLED')}
                                                     disabled={!!loading}
-                                                    className="h-8 px-3 rounded-xl border border-rose-200 text-rose-500 hover:bg-rose-50 text-[11px] font-black flex items-center gap-1 transition-colors"
+                                                    className="flex-1 sm:flex-none h-8 px-3 rounded-xl border border-rose-200 text-rose-500 hover:bg-rose-50 text-[11px] font-black flex items-center justify-center gap-1 transition-colors"
                                                 >
                                                     <X size={12} /> Cancel
                                                 </button>

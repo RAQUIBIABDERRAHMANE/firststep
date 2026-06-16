@@ -58,10 +58,11 @@ export async function uploadImage(buffer: Buffer, filename: string, contentType:
     console.log(`📁 [R2 Fallback] Saving ${filename} to local public/uploads`);
     try {
         const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
-        if (!fs.existsSync(uploadsDir)) {
-            fs.mkdirSync(uploadsDir, { recursive: true });
-        }
         const filePath = path.join(uploadsDir, filename);
+        const fileDir = path.dirname(filePath);
+        if (!fs.existsSync(fileDir)) {
+            fs.mkdirSync(fileDir, { recursive: true });
+        }
         fs.writeFileSync(filePath, buffer);
         return `/uploads/${filename}`;
     } catch (fsErr) {

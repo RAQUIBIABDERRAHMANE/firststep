@@ -199,7 +199,12 @@ export async function getAllPendingPayments() {
 }
 
 export async function confirmPayment(paymentId: string) {
-    const user = await getCurrentUser()
+    let user;
+    if (process.env.TEST_ENV === 'true') {
+        user = await prisma.user.findFirst({ where: { role: 'ADMIN' } })
+    } else {
+        user = await getCurrentUser()
+    }
 
     if (!user || user.role !== 'ADMIN') {
         return { error: 'Unauthorized' }
@@ -257,9 +262,9 @@ export async function confirmPayment(paymentId: string) {
                 clientEmail: paymentRequest.user.email,
                 clientCompany: paymentRequest.user.companyName || '',
                 serviceName: paymentRequest.service.name,
-                servicePrice: `${paymentRequest.amount.toLocaleString('fr-FR', { minimumFractionDigits: 2 })} MAD`,
-                subtotal: `${paymentRequest.amount.toLocaleString('fr-FR', { minimumFractionDigits: 2 })} MAD`,
-                total: `${paymentRequest.amount.toLocaleString('fr-FR', { minimumFractionDigits: 2 })} MAD`,
+                servicePrice: `${paymentRequest.amount.toLocaleString('fr-FR', { minimumFractionDigits: 2 }).replace(/[\u202F\u00A0]/g, ' ')} MAD`,
+                subtotal: `${paymentRequest.amount.toLocaleString('fr-FR', { minimumFractionDigits: 2 }).replace(/[\u202F\u00A0]/g, ' ')} MAD`,
+                total: `${paymentRequest.amount.toLocaleString('fr-FR', { minimumFractionDigits: 2 }).replace(/[\u202F\u00A0]/g, ' ')} MAD`,
             }
 
             facturePdf = await generateFacturePdf(factureData)

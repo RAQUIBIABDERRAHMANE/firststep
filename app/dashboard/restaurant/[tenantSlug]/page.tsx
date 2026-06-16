@@ -140,14 +140,14 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
             {/* Management Portal */}
             <div className="grid gap-6 md:grid-cols-2">
                 <Link href={`/dashboard/restaurant/${tenantSlug}/menu`}>
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-blue-500/50 hover:bg-blue-50/10 transition-all group p-6 h-full">
-                        <div className="flex gap-6 items-start">
-                            <div className="h-14 w-14 rounded-2xl bg-blue-100 flex items-center justify-center text-blue-600 shadow-sm transition-transform duration-500 group-hover:scale-110">
-                                <Utensils size={28} />
+                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-blue-500/50 hover:bg-blue-50/10 transition-all group p-5 sm:p-6 h-full">
+                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
+                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-blue-100 flex items-center justify-center text-blue-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
+                                <Utensils size={24} className="sm:h-7 sm:w-7" />
                             </div>
                             <div className="flex-1">
-                                <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
-                                    Menu Management <ChevronRight size={18} className="text-slate-300 group-hover:text-blue-500 transition-colors" />
+                                <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
+                                    Menu Management <ChevronRight size={18} className="text-slate-300 group-hover:text-blue-500 transition-colors shrink-0" />
                                 </h3>
                                 <p className="text-slate-500 text-sm leading-relaxed">
                                     Edit your dishes, categories, and pricing in real-time. Changes reflect instantly on your website.
@@ -158,14 +158,14 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                 </Link>
 
                 <Link href={`/dashboard/restaurant/${tenantSlug}/tables`}>
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-blue-500/50 hover:bg-blue-50/10 transition-all group p-6 h-full">
-                        <div className="flex gap-6 items-start">
-                            <div className="h-14 w-14 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-600 shadow-sm transition-transform duration-500 group-hover:scale-110">
-                                <MapPin size={28} />
+                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-blue-500/50 hover:bg-blue-50/10 transition-all group p-5 sm:p-6 h-full">
+                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
+                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
+                                <MapPin size={24} className="sm:h-7 sm:w-7" />
                             </div>
                             <div className="flex-1">
-                                <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
-                                    Table Management <ChevronRight size={18} className="text-slate-300 group-hover:text-indigo-500 transition-colors" />
+                                <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
+                                    Table Management <ChevronRight size={18} className="text-slate-300 group-hover:text-indigo-500 transition-colors shrink-0" />
                                 </h3>
                                 <p className="text-slate-500 text-sm leading-relaxed">
                                     Assign QR codes to your physical tables so customers can scan and order directly from their phone.
@@ -176,14 +176,14 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                 </Link>
 
                 <Link href={`/dashboard/restaurant/${tenantSlug}/design`}>
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-purple-500/50 hover:bg-purple-50/10 transition-all group p-6 h-full">
-                        <div className="flex gap-6 items-start">
-                            <div className="h-14 w-14 rounded-2xl bg-purple-100 flex items-center justify-center text-purple-600 shadow-sm transition-transform duration-500 group-hover:scale-110">
-                                <Paintbrush size={28} />
+                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-purple-500/50 hover:bg-purple-50/10 transition-all group p-5 sm:p-6 h-full">
+                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
+                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-purple-100 flex items-center justify-center text-purple-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
+                                <Paintbrush size={24} className="sm:h-7 sm:w-7" />
                             </div>
                             <div className="flex-1">
-                                <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
-                                    Design Studio <ChevronRight size={18} className="text-slate-300 group-hover:text-purple-500 transition-colors" />
+                                <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
+                                    Design Studio <ChevronRight size={18} className="text-slate-300 group-hover:text-purple-500 transition-colors shrink-0" />
                                 </h3>
                                 <p className="text-slate-500 text-sm leading-relaxed">
                                     Customize your restaurant's look and feel. Choose from premium templates.
@@ -194,14 +194,14 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                 </Link>
 
                 <Link href={`/dashboard/restaurant/${tenantSlug}/waiters`}>
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-indigo-500/50 hover:bg-indigo-50/10 transition-all group p-6 h-full">
-                        <div className="flex gap-6 items-start">
-                            <div className="h-14 w-14 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-600 shadow-sm transition-transform duration-500 group-hover:scale-110">
-                                <Users size={28} />
+                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-indigo-500/50 hover:bg-indigo-50/10 transition-all group p-5 sm:p-6 h-full">
+                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
+                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
+                                <Users size={24} className="sm:h-7 sm:w-7" />
                             </div>
                             <div className="flex-1">
-                                <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
-                                    Waiter Management <ChevronRight size={18} className="text-slate-300 group-hover:text-indigo-500 transition-colors" />
+                                <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
+                                    Waiter Management <ChevronRight size={18} className="text-slate-300 group-hover:text-indigo-500 transition-colors shrink-0" />
                                 </h3>
                                 <p className="text-slate-500 text-sm leading-relaxed">
                                     Create staff accounts with PINs and assign tables so waiters can manage their own orders.
@@ -212,14 +212,14 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                 </Link>
 
                 <Link href={`/dashboard/restaurant/${tenantSlug}/reservations`}>
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-pink-500/50 hover:bg-pink-50/10 transition-all group p-6 h-full">
-                        <div className="flex gap-6 items-start">
-                            <div className="h-14 w-14 rounded-2xl bg-pink-100 flex items-center justify-center text-pink-600 shadow-sm transition-transform duration-500 group-hover:scale-110">
-                                <CalendarCheck size={28} />
+                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-pink-500/50 hover:bg-pink-50/10 transition-all group p-5 sm:p-6 h-full">
+                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
+                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-pink-100 flex items-center justify-center text-pink-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
+                                <CalendarCheck size={24} className="sm:h-7 sm:w-7" />
                             </div>
                             <div className="flex-1">
-                                <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
-                                    Table Reservations <ChevronRight size={18} className="text-slate-300 group-hover:text-pink-500 transition-colors" />
+                                <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
+                                    Table Reservations <ChevronRight size={18} className="text-slate-300 group-hover:text-pink-500 transition-colors shrink-0" />
                                 </h3>
                                 <p className="text-slate-500 text-sm leading-relaxed">
                                     Manage incoming booking requests from your customers. Approve or cancel reservations.
@@ -230,14 +230,14 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                 </Link>
 
                 <Link href={`/dashboard/restaurant/${tenantSlug}/reports`}>
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-violet-500/50 hover:bg-violet-50/10 transition-all group p-6 h-full">
-                        <div className="flex gap-6 items-start">
-                            <div className="h-14 w-14 rounded-2xl bg-violet-100 flex items-center justify-center text-violet-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
-                                <BarChart3 size={28} />
+                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-violet-500/50 hover:bg-violet-50/10 transition-all group p-5 sm:p-6 h-full">
+                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
+                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-violet-100 flex items-center justify-center text-violet-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
+                                <BarChart3 size={24} className="sm:h-7 sm:w-7" />
                             </div>
                             <div className="flex-1">
-                                <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
-                                    Rapports Mensuels <ChevronRight size={18} className="text-slate-300 group-hover:text-violet-500 transition-colors" />
+                                <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
+                                    Rapports Mensuels <ChevronRight size={18} className="text-slate-300 group-hover:text-violet-500 transition-colors shrink-0" />
                                 </h3>
                                 <p className="text-slate-500 text-sm leading-relaxed">
                                     Rapports PDF envoyés par email le 1er de chaque mois.
@@ -248,20 +248,20 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                 </Link>
 
                 <Link href={`/dashboard/restaurant/${tenantSlug}/orders`} className="md:col-span-2">
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-emerald-500/50 hover:bg-emerald-50/10 transition-all group p-8">
-                        <div className="flex flex-col md:flex-row gap-8 items-center">
-                            <div className="h-20 w-20 rounded-3xl bg-emerald-100 flex items-center justify-center text-emerald-600 shadow-sm shrink-0 transition-transform duration-500 group-hover:scale-110">
-                                <ClipboardList size={40} />
+                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-emerald-500/50 hover:bg-emerald-50/10 transition-all group p-5 sm:p-8">
+                        <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start">
+                            <div className="h-16 w-16 md:h-20 md:w-20 rounded-3xl bg-emerald-100 flex items-center justify-center text-emerald-600 shadow-sm shrink-0 transition-transform duration-500 group-hover:scale-110">
+                                <ClipboardList size={32} className="md:h-10 md:w-10" />
                             </div>
                             <div className="flex-1 text-center md:text-left">
-                                <h3 className="text-2xl font-black mb-3 flex items-center justify-center md:justify-start gap-3">
-                                    Live Orders Monitor <ChevronRight size={24} className="text-slate-300 group-hover:text-emerald-500 transition-colors" />
+                                <h3 className="text-xl md:text-2xl font-black mb-2 md:mb-3 flex items-center justify-center md:justify-start gap-2 md:gap-3">
+                                    Live Orders Monitor <ChevronRight size={24} className="text-slate-300 group-hover:text-emerald-500 transition-colors shrink-0" />
                                 </h3>
-                                <p className="text-slate-500 text-lg">
+                                <p className="text-slate-500 text-base md:text-lg">
                                     Track incoming orders across all your tables. Update statuses from cooking to served in real-time.
                                 </p>
                             </div>
-                            <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700 h-16 px-10 rounded-2xl text-xl font-black shadow-xl shadow-emerald-500/20 active:scale-95">
+                            <Button size="lg" className="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 h-12 md:h-16 px-6 md:px-10 rounded-xl md:rounded-2xl text-base md:text-xl font-black shadow-xl shadow-emerald-500/20 active:scale-95 shrink-0 mt-4 md:mt-0">
                                 Launch Monitor
                             </Button>
                         </div>
@@ -269,20 +269,20 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                 </Link>
 
                 <Link href={`/dashboard/restaurant/${tenantSlug}/analytics`} className="md:col-span-2">
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-cyan-500/50 hover:bg-cyan-50/10 transition-all group p-8">
-                        <div className="flex flex-col md:flex-row gap-8 items-center">
-                            <div className="h-20 w-20 rounded-3xl bg-cyan-100 flex items-center justify-center text-cyan-600 shadow-sm shrink-0 transition-transform duration-500 group-hover:scale-110">
-                                <TrendingUp size={40} />
+                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-cyan-500/50 hover:bg-cyan-50/10 transition-all group p-5 sm:p-8">
+                        <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start">
+                            <div className="h-16 w-16 md:h-20 md:w-20 rounded-3xl bg-cyan-100 flex items-center justify-center text-cyan-600 shadow-sm shrink-0 transition-transform duration-500 group-hover:scale-110">
+                                <TrendingUp size={32} className="md:h-10 md:w-10" />
                             </div>
                             <div className="flex-1 text-center md:text-left">
-                                <h3 className="text-2xl font-black mb-3 flex items-center justify-center md:justify-start gap-3">
-                                    Analytique Live <ChevronRight size={24} className="text-slate-300 group-hover:text-cyan-500 transition-colors" />
+                                <h3 className="text-xl md:text-2xl font-black mb-2 md:mb-3 flex items-center justify-center md:justify-start gap-2 md:gap-3">
+                                    Analytique Live <ChevronRight size={24} className="text-slate-300 group-hover:text-cyan-500 transition-colors shrink-0" />
                                 </h3>
-                                <p className="text-slate-500 text-lg">
+                                <p className="text-slate-500 text-base md:text-lg">
                                     Explorez vos revenus, ventes par tranche avec filtre jour, mois, année.
                                 </p>
                             </div>
-                            <Button size="lg" className="bg-cyan-600 hover:bg-cyan-700 h-16 px-10 rounded-2xl text-xl font-black shadow-xl shadow-cyan-500/20 active:scale-95">
+                            <Button size="lg" className="w-full md:w-auto bg-cyan-600 hover:bg-cyan-700 h-12 md:h-16 px-6 md:px-10 rounded-xl md:rounded-2xl text-base md:text-xl font-black shadow-xl shadow-cyan-500/20 active:scale-95 shrink-0 mt-4 md:mt-0">
                                 Voir Rapports
                             </Button>
                         </div>

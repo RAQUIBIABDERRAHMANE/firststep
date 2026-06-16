@@ -457,7 +457,7 @@ export default function OrdersClient({
                                         "overflow-hidden border-slate-200 shadow-xl shadow-slate-200/20 rounded-[2.5rem] bg-white transition-all duration-300",
                                         order.status === 'PENDING' ? 'ring-4 ring-amber-400/10 border-amber-200' : ''
                                     )}>
-                                        <CardHeader className="bg-slate-50/50 py-6 px-8 flex flex-row items-center justify-between border-b border-slate-100">
+                                        <CardHeader className="bg-slate-50/50 py-4 px-5 sm:py-6 sm:px-8 flex flex-row items-center justify-between border-b border-slate-100">
                                             <div className="flex items-center gap-4">
                                                 <div className="h-12 w-12 bg-white rounded-2xl flex items-center justify-center text-slate-900 font-black shadow-sm ring-1 ring-slate-100">
                                                     {order.table.number}
@@ -473,7 +473,7 @@ export default function OrdersClient({
                                                 {order.status}
                                             </Badge>
                                         </CardHeader>
-                                        <CardContent className="p-8">
+                                        <CardContent className="p-5 sm:p-8">
                                             <div className="space-y-6">
                                                 <div className="divide-y divide-slate-100">
                                                     {order.items.map((item: any) => (
@@ -498,10 +498,10 @@ export default function OrdersClient({
                                                 </div>
 
                                                 {order.status !== 'PAID' && order.status !== 'CANCELED' && (
-                                                    <div className="pt-6 grid grid-cols-2 sm:grid-cols-5 gap-3">
+                                                    <div className="pt-6 grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3">
                                                         <Button
                                                             variant={order.status === 'PREPARING' ? 'default' : 'outline'}
-                                                            className="rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-none"
+                                                            className="rounded-2xl h-11 sm:h-14 font-black text-xs uppercase tracking-widest shadow-none"
                                                             disabled={loading === order.id}
                                                             onClick={() => handleUpdateStatus(order.id, 'PREPARING')}
                                                         >
@@ -509,15 +509,15 @@ export default function OrdersClient({
                                                         </Button>
                                                         <Button
                                                             variant={order.status === 'READY' ? 'default' : 'outline'}
-                                                            className="rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-none"
+                                                            className="rounded-2xl h-11 sm:h-14 font-black text-xs uppercase tracking-widest shadow-none"
                                                             disabled={loading === order.id}
                                                             onClick={() => handleUpdateStatus(order.id, 'READY')}
                                                         >
                                                             Ready
-                                                        </Button>
+                                                         </Button>
                                                         <Button
                                                             variant={order.status === 'SERVED' ? 'default' : 'outline'}
-                                                            className="rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-none"
+                                                            className="rounded-2xl h-11 sm:h-14 font-black text-xs uppercase tracking-widest shadow-none"
                                                             disabled={loading === order.id}
                                                             onClick={() => handleUpdateStatus(order.id, 'SERVED')}
                                                         >
@@ -525,7 +525,7 @@ export default function OrdersClient({
                                                         </Button>
                                                         <Button
                                                             variant={order.status === 'PAID' ? 'default' : 'outline'}
-                                                            className="rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-none"
+                                                            className="rounded-2xl h-11 sm:h-14 font-black text-xs uppercase tracking-widest shadow-none"
                                                             disabled={loading === order.id}
                                                             onClick={() => handleUpdateStatus(order.id, 'PAID')}
                                                         >
@@ -534,7 +534,7 @@ export default function OrdersClient({
                                                         <Button
                                                             variant={order.status === 'CANCELED' ? 'destructive' : 'outline'}
                                                             className={cn(
-                                                                "rounded-2xl h-14 font-black text-xs uppercase tracking-widest shadow-none",
+                                                                "rounded-2xl h-11 sm:h-14 font-black text-xs uppercase tracking-widest shadow-none",
                                                                 order.status !== 'CANCELED' && "border-red-100 text-red-500 hover:bg-red-50"
                                                             )}
                                                             disabled={loading === order.id}
@@ -578,80 +578,82 @@ export default function OrdersClient({
                     </div>
 
                     {/* Floor Plan Display Map */}
-                    <div className="relative w-full h-[600px] bg-slate-900 rounded-[3rem] border-4 border-slate-800 shadow-2xl overflow-hidden">
-                        
-                        {/* Interactive Grid Map (unlocked layout) */}
-                        <div className="absolute inset-0 opacity-20" style={{
-                            backgroundImage: 'radial-gradient(circle, #cbd5e1 1.5px, transparent 1.5px)',
-                            backgroundSize: '20px 20px'
-                        }} />
+                    <div className="w-full overflow-x-auto pb-4 scrollbar-thin">
+                        <div className="relative w-[800px] h-[600px] bg-slate-900 rounded-[2rem] sm:rounded-[3rem] border-4 border-slate-800 shadow-2xl overflow-hidden shrink-0 mx-auto">
+                            
+                            {/* Interactive Grid Map (unlocked layout) */}
+                            <div className="absolute inset-0 opacity-20" style={{
+                                backgroundImage: 'radial-gradient(circle, #cbd5e1 1.5px, transparent 1.5px)',
+                                backgroundSize: '20px 20px'
+                            }} />
 
-                        {/* Render Obstacles */}
-                        {floorPlan.obstacles.map((obstacle) => {
-                            const isWall = obstacle.type === 'wall'
-                            return (
-                                <div
-                                    key={obstacle.id}
-                                    className={cn(
-                                        "absolute opacity-60 border select-none pointer-events-none",
-                                        isWall ? "bg-slate-500 border-slate-600" : "bg-amber-800 border-amber-900"
-                                    )}
-                                    style={{
-                                        left: `${obstacle.x}px`,
-                                        top: `${obstacle.y}px`,
-                                        width: `${obstacle.w}px`,
-                                        height: `${obstacle.h}px`,
-                                        transform: `rotate(${obstacle.rotation}deg)`
-                                    }}
-                                />
-                            )
-                        })}
+                            {/* Render Obstacles */}
+                            {floorPlan.obstacles.map((obstacle) => {
+                                const isWall = obstacle.type === 'wall'
+                                return (
+                                    <div
+                                        key={obstacle.id}
+                                        className={cn(
+                                            "absolute opacity-60 border select-none pointer-events-none",
+                                            isWall ? "bg-slate-500 border-slate-600" : "bg-amber-800 border-amber-900"
+                                        )}
+                                        style={{
+                                            left: `${obstacle.x}px`,
+                                            top: `${obstacle.y}px`,
+                                            width: `${obstacle.w}px`,
+                                            height: `${obstacle.h}px`,
+                                            transform: `rotate(${obstacle.rotation}deg)`
+                                        }}
+                                    />
+                                )
+                            })}
 
-                        {/* Render Interactive Tables with Real-time Status Colors */}
-                        {floorPlan.tables.map((table) => {
-                            // Find table name/info
-                            let displayName = `T-${table.id.substring(0, 3)}`
-                            const matchingOrder = initialOrders.find(o => o.tableId === table.id)
-                            if (matchingOrder) {
-                                displayName = matchingOrder.table.number
-                            }
+                            {/* Render Interactive Tables with Real-time Status Colors */}
+                            {floorPlan.tables.map((table) => {
+                                // Find table name/info
+                                let displayName = `T-${table.id.substring(0, 3)}`
+                                const matchingOrder = initialOrders.find(o => o.tableId === table.id)
+                                if (matchingOrder) {
+                                    displayName = matchingOrder.table.number
+                                }
 
-                            const statusInfo = getTableStatus(table.id)
-                            const colorClass = getStatusColorClass(statusInfo.type)
+                                const statusInfo = getTableStatus(table.id)
+                                const colorClass = getStatusColorClass(statusInfo.type)
 
-                            return (
-                                <div
-                                    key={table.id}
-                                    onClick={() => setMonitoredTableId(table.id)}
-                                    className={cn(
-                                        "absolute flex flex-col items-center justify-center font-black border-2 transition-all cursor-pointer shadow-lg active:scale-95 duration-200 z-10",
-                                        table.shape === 'circle' ? "rounded-full" : "rounded-2xl",
-                                        colorClass
-                                    )}
-                                    style={{
-                                        left: `${table.x}px`,
-                                        top: `${table.y}px`,
-                                        width: `${table.w}px`,
-                                        height: `${table.h}px`,
-                                        transform: `rotate(${table.rotation}deg)`
-                                    }}
-                                >
-                                    <span className="text-xl tracking-tight leading-none">T-{displayName}</span>
-                                    
-                                    {statusInfo.type === 'SERVICE' && (
-                                        <Bell size={14} className="mt-1 animate-bounce text-white" />
-                                    )}
-                                    {statusInfo.type === 'BILL' && (
-                                        <Receipt size={14} className="mt-1 animate-pulse text-white" />
-                                    )}
-                                    {statusInfo.type === 'OCCUPIED' && (
-                                        <span className="text-[9px] opacity-75 font-semibold mt-1">
-                                            {statusInfo.orders.length} Order(s)
-                                        </span>
-                                    )}
-                                </div>
-                            )
-                        })}
+                                return (
+                                    <div
+                                        key={table.id}
+                                        onClick={() => setMonitoredTableId(table.id)}
+                                        className={cn(
+                                            "absolute flex flex-col items-center justify-center font-black border-2 transition-all cursor-pointer shadow-lg active:scale-95 duration-200 z-10",
+                                            table.shape === 'circle' ? "rounded-full" : "rounded-2xl",
+                                            colorClass
+                                        )}
+                                        style={{
+                                            left: `${table.x}px`,
+                                            top: `${table.y}px`,
+                                            width: `${table.w}px`,
+                                            height: `${table.h}px`,
+                                            transform: `rotate(${table.rotation}deg)`
+                                        }}
+                                    >
+                                        <span className="text-xl tracking-tight leading-none">T-{displayName}</span>
+                                        
+                                        {statusInfo.type === 'SERVICE' && (
+                                            <Bell size={14} className="mt-1 animate-bounce text-white" />
+                                        )}
+                                        {statusInfo.type === 'BILL' && (
+                                            <Receipt size={14} className="mt-1 animate-pulse text-white" />
+                                        )}
+                                        {statusInfo.type === 'OCCUPIED' && (
+                                            <span className="text-[9px] opacity-75 font-semibold mt-1">
+                                                {statusInfo.orders.length} Order(s)
+                                            </span>
+                                        )}
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
 
                     {/* Table Details Slide Modal Overlay */}

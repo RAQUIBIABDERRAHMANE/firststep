@@ -178,7 +178,7 @@ export default function WaitersClient({ initialWaiters, initialTables, tenantSlu
                                 <label className="text-sm font-medium flex items-center gap-2">
                                     <MapPin size={14} /> Assign Tables
                                 </label>
-                                <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
+                                <div className="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-8 gap-2">
                                     {initialTables.map(table => (
                                         <div
                                             key={table.id}
@@ -197,9 +197,9 @@ export default function WaitersClient({ initialWaiters, initialTables, tenantSlu
                                 <p className="text-xs text-muted-foreground">{selectedTables.length} tables selected</p>
                             </div>
 
-                            <div className="flex justify-end gap-3 pt-4">
-                                <Button type="button" variant="ghost" onClick={closeForm}>Cancel</Button>
-                                <Button type="submit" disabled={isLoading || !newName || (!editingId && newPin.length !== 4) || (!!editingId && newPin.length > 0 && newPin.length !== 4)}>
+                            <div className="flex flex-col sm:flex-row justify-end gap-3 pt-4">
+                                <Button type="button" variant="ghost" onClick={closeForm} className="w-full sm:w-auto">Cancel</Button>
+                                <Button type="submit" className="w-full sm:w-auto" disabled={isLoading || !newName || (!editingId && newPin.length !== 4) || (!!editingId && newPin.length > 0 && newPin.length !== 4)}>
                                     {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : (editingId ? <Check className="mr-2 h-4 w-4" /> : <Plus className="mr-2 h-4 w-4" />)}
                                     {editingId ? 'Save Changes' : 'Create Waiter'}
                                 </Button>

@@ -267,6 +267,11 @@ export async function getFieldPositions(): Promise<FieldPositions> {
   }
 }
 
+function sanitizeText(text: string | null | undefined): string {
+  if (!text) return ''
+  return text.replace(/[\u202F\u00A0]/g, ' ')
+}
+
 export async function generateFacturePdf(data: FactureData): Promise<Uint8Array> {
   // Read the template PDF
   const templatePath = path.join(process.cwd(), 'public', 'facture themplate.pdf')
@@ -327,7 +332,7 @@ export async function generateFacturePdf(data: FactureData): Promise<Uint8Array>
 
   // Draw each field on the PDF
   // Facture Number
-  firstPage.drawText(data.factureNumber, {
+  firstPage.drawText(sanitizeText(data.factureNumber), {
     x: positions.factureNumberX + xOffset,
     y: positions.factureNumberY + yOffset,
     size: positions.factureNumberFontSize,
@@ -336,7 +341,7 @@ export async function generateFacturePdf(data: FactureData): Promise<Uint8Array>
   })
 
   // Date
-  firstPage.drawText(data.date, {
+  firstPage.drawText(sanitizeText(data.date), {
     x: positions.dateX + xOffset,
     y: positions.dateY + yOffset,
     size: positions.dateFontSize,
@@ -345,7 +350,7 @@ export async function generateFacturePdf(data: FactureData): Promise<Uint8Array>
   })
 
   // Client Company
-  firstPage.drawText(data.clientCompany, {
+  firstPage.drawText(sanitizeText(data.clientCompany), {
     x: positions.clientCompanyX + xOffset,
     y: positions.clientCompanyY + yOffset,
     size: positions.clientCompanyFontSize,
@@ -354,7 +359,7 @@ export async function generateFacturePdf(data: FactureData): Promise<Uint8Array>
   })
 
   // Client Name
-  firstPage.drawText(data.clientName, {
+  firstPage.drawText(sanitizeText(data.clientName), {
     x: positions.clientNameX + xOffset,
     y: positions.clientNameY + yOffset,
     size: positions.clientNameFontSize,
@@ -363,7 +368,7 @@ export async function generateFacturePdf(data: FactureData): Promise<Uint8Array>
   })
 
   // Client Email
-  firstPage.drawText(data.clientEmail, {
+  firstPage.drawText(sanitizeText(data.clientEmail), {
     x: positions.clientEmailX + xOffset,
     y: positions.clientEmailY + yOffset,
     size: positions.clientEmailFontSize,
@@ -372,7 +377,7 @@ export async function generateFacturePdf(data: FactureData): Promise<Uint8Array>
   })
 
   // Service Name
-  firstPage.drawText(data.serviceName, {
+  firstPage.drawText(sanitizeText(data.serviceName), {
     x: positions.serviceNameX + xOffset,
     y: positions.serviceNameY + yOffset,
     size: positions.serviceNameFontSize,
@@ -381,7 +386,7 @@ export async function generateFacturePdf(data: FactureData): Promise<Uint8Array>
   })
 
   // Service Price (Montant Service)
-  firstPage.drawText(data.servicePrice, {
+  firstPage.drawText(sanitizeText(data.servicePrice), {
     x: positions.servicePriceX + xOffset,
     y: positions.servicePriceY + yOffset,
     size: positions.servicePriceFontSize,
@@ -390,7 +395,7 @@ export async function generateFacturePdf(data: FactureData): Promise<Uint8Array>
   })
 
   // Subtotal
-  firstPage.drawText(data.subtotal, {
+  firstPage.drawText(sanitizeText(data.subtotal), {
     x: positions.subtotalX + xOffset,
     y: positions.subtotalY + yOffset,
     size: positions.subtotalFontSize,
@@ -399,7 +404,7 @@ export async function generateFacturePdf(data: FactureData): Promise<Uint8Array>
   })
 
   // Total
-  firstPage.drawText(data.total, {
+  firstPage.drawText(sanitizeText(data.total), {
     x: positions.totalX + xOffset,
     y: positions.totalY + yOffset,
     size: positions.totalFontSize,

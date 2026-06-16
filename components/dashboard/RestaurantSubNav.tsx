@@ -70,9 +70,7 @@ export default function RestaurantSubNav({ tenantSlug, siteName }: RestaurantSub
                             )}
                         >
                             <tab.icon size={13} />
-                            <span className="hidden sm:inline">{tab.label}</span>
-                            {/* On tiny screens, show only icon */}
-                            <span className="sm:hidden">{tab.label.slice(0, 3)}</span>
+                            <span>{tab.label}</span>
                         </Link>
                     )
                 })}
