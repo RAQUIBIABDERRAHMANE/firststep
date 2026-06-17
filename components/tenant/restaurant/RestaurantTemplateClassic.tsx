@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 import { useRestaurantLogic } from './useRestaurantLogic'
 import { RestaurantTemplateProps } from './RestaurantTemplate'
 import {
-    ShoppingCart, QrCode, MapPin, Phone, Mail, Plus, Minus, Trash2,
+    ShoppingCart, QrCode, MapPin, Phone, Mail, Plus, Minus, Trash2, X,
     ChevronRight, Utensils, CheckCircle2, LayoutDashboard, Bell, Receipt
 } from 'lucide-react'
 
@@ -251,33 +251,33 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
             {/* Cart Drawer - Premium Sidebar */}
             {showCart && (
                 <div className="fixed inset-0 z-[60] bg-slate-950/60 backdrop-blur-sm animate-in fade-in duration-500">
-                    <div className="absolute right-0 top-0 bottom-0 w-full max-w-lg bg-[var(--card-bg,white)] shadow-3xl animate-in slide-in-from-right duration-700 outline-none flex flex-col">
-                        <div className="p-12 border-b flex items-center justify-between">
+                    <div className="absolute right-0 top-0 bottom-0 w-full max-w-lg bg-[var(--card-bg,white)] shadow-3xl animate-in slide-in-from-right duration-700 outline-none flex flex-col" style={{ color: 'var(--text-main)' }}>
+                        <div className="p-12 border-b flex items-center justify-between" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
                             <div className="space-y-1">
-                                <h2 className="text-3xl font-serif font-black tracking-tight text-slate-950">Your Selection</h2>
-                                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">{totalItems} ARTISANAL ITEMS</p>
+                                <h2 className="text-3xl font-serif font-black tracking-tight">Your Selection</h2>
+                                <p className="text-[10px] font-black uppercase tracking-widest opacity-60">{totalItems} ARTISANAL ITEMS</p>
                             </div>
-                            <Button variant="ghost" size="icon" onClick={() => setShowCart(false)} className="h-12 w-12 rounded-2xl hover:bg-slate-50 text-slate-400 hover:text-slate-950 transition-colors">
-                                <Trash2 size={24} />
-                            </Button>
+                            <button onClick={() => setShowCart(false)} className="h-12 w-12 rounded-2xl hover:bg-black/5 flex items-center justify-center opacity-40 hover:opacity-100 transition-colors">
+                                <X size={24} />
+                            </button>
                         </div>
                         <div className="flex-1 overflow-y-auto p-12 space-y-10 no-scrollbar">
                             {items.length === 0 ? (
                                 <div className="h-full flex flex-col items-center justify-center text-center space-y-6">
-                                    <ShoppingCart size={48} className="text-slate-100" />
-                                    <h3 className="text-2xl font-serif font-black text-slate-950">Selection Empty</h3>
-                                    <p className="text-slate-400 text-sm max-w-xs mx-auto">Begin your culinary journey by adding signature dishes to your order.</p>
+                                    <ShoppingCart size={48} className="opacity-20" />
+                                    <h3 className="text-2xl font-serif font-black">Selection Empty</h3>
+                                    <p className="text-sm max-w-xs mx-auto opacity-60">Begin your culinary journey by adding signature dishes to your order.</p>
                                 </div>
                             ) : (
                                 items.map((item) => (
                                     <div key={item.cartItemId} className="flex gap-8 items-center group">
-                                        <div className="h-24 w-24 rounded-3xl overflow-hidden bg-slate-50 flex-shrink-0 shadow-lg border border-slate-100">
+                                        <div className="h-24 w-24 rounded-3xl overflow-hidden bg-slate-50 flex-shrink-0 shadow-lg border" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
                                             <img src={item.image || ''} className="h-full w-full object-cover transition-transform group-hover:scale-110" alt="" />
                                         </div>
                                         <div className="flex-1 space-y-1">
-                                            <h4 className="font-serif font-black text-xl text-slate-950 leading-tight">{item.name}</h4>
+                                            <h4 className="font-serif font-black text-xl leading-tight">{item.name}</h4>
                                             {item.selectedOptions && item.selectedOptions.length > 0 && (
-                                                <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+                                                <div className="text-[10px] font-bold uppercase tracking-wider opacity-60">
                                                     {item.selectedOptions.map(o => `${o.group}: ${o.choice}`).join(', ')}
                                                 </div>
                                             )}
@@ -286,11 +286,11 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                                     + {item.selectedAddons.map(a => `${a.name} (+${a.price} MAD)`).join(', ')}
                                                 </div>
                                             )}
-                                            <span className="text-slate-400 font-bold text-sm tracking-tight block mt-1" style={{ color: 'var(--price-color)' }}>{item.price} {CURRENCY}</span>
+                                            <span className="font-bold text-sm tracking-tight block mt-1" style={{ color: 'var(--price-color)' }}>{item.price} {CURRENCY}</span>
                                         </div>
                                         <div className="flex flex-col gap-2 items-end">
-                                            <button onClick={() => removeItem(item.cartItemId)} className="text-slate-300 hover:text-red-500 transition-colors p-1" title="Remove item">
-                                                <Trash2 size={16} />
+                                            <button onClick={() => removeItem(item.cartItemId)} className="opacity-30 hover:opacity-100 transition-opacity p-1" title="Remove item">
+                                                <X size={16} />
                                             </button>
                                             <div className="flex items-center gap-3 rounded-2xl shadow-xl px-4 py-2.5"
                                                  style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}>
@@ -304,13 +304,13 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                             )}
                         </div>
                         {items.length > 0 && (
-                            <div className="p-12 border-t bg-slate-50/50 space-y-10">
-                                <div className="flex justify-between items-end">
+                            <div className="p-12 border-t mt-auto" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
+                                <div className="flex justify-between items-end mb-8">
                                     <div className="space-y-1">
-                                        <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">GRAND TOTAL</span>
-                                        <p className="text-sm font-medium text-slate-500">Service Charges Included</p>
+                                        <span className="text-[10px] font-black uppercase tracking-widest opacity-60">GRAND TOTAL</span>
+                                        <p className="text-sm font-medium opacity-50">Service Charges Included</p>
                                     </div>
-                                    <span className="text-5xl font-serif font-black tracking-tighter text-slate-950">{totalPrice.toFixed(2)} <span className="text-xl font-normal opacity-30">{CURRENCY}</span></span>
+                                    <span className="text-5xl font-serif font-black tracking-tighter">{totalPrice.toFixed(2)} <span className="text-xl font-normal opacity-30">{CURRENCY}</span></span>
                                 </div>
                                 <button
                                     onClick={handlePlaceOrder}
@@ -323,7 +323,7 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                 {!tableId && (
                                     <div className="p-4 bg-rose-50 border border-rose-100 rounded-2xl text-center">
                                         <p className="text-[10px] font-black uppercase text-rose-500 tracking-widest">Interaction Required</p>
-                                        <p className="text-xs text-rose-400 font-medium mt-1">Please scan table QR code to finalize checkout.</p>
+                                        <p className="text-xs opacity-60 mt-2 font-medium">Please scan the table QR code to proceed with checkout.</p>
                                     </div>
                                 )}
                             </div>
@@ -333,8 +333,8 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                 <div className="h-24 w-24 bg-emerald-50 rounded-full flex items-center justify-center mb-10">
                                     <CheckCircle2 size={40} className="text-emerald-500 animate-bounce" />
                                 </div>
-                                <h2 className="text-4xl font-serif font-black mb-6 text-slate-950">Received with Thanks</h2>
-                                <p className="text-slate-400 text-lg mb-12 italic font-serif">"Our culinary team is now attending to your selection with the utmost care."</p>
+                                <h2 className="text-4xl font-serif font-black mb-6">Received with Thanks</h2>
+                                <p className="text-lg mb-12 italic font-serif opacity-70">"Our culinary team is now attending to your selection with the utmost care."</p>
                                 <button
                                     onClick={() => {
                                         setOrderComplete(false)
