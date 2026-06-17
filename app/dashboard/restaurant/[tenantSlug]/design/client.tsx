@@ -273,74 +273,73 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                         type="color"
                                         value={primaryColor}
                                         onChange={(e) => setPrimaryColor(e.target.value)}
-                                        className="h-12 w-28 p-1 rounded-xl cursor-pointer border border-input bg-background hover:scale-[1.02] active:scale-95 transition-all"
+                                        className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
                                         value={primaryColor}
                                         onChange={(e) => setPrimaryColor(e.target.value)}
-                                        className="flex-1 h-12 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
                                         maxLength={7}
                                     />
                                 </div>
                                 <p className="text-xs text-muted-foreground">Used for buttons, links, and important accents.</p>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium">Background Color</label>
-                                    <div className="flex items-center gap-3">
-                                        <input
-                                            type="color"
-                                            value={config.backgroundColor || '#ffffff'}
-                                            onChange={(e) => setConfig({ ...config, backgroundColor: e.target.value })}
-                                            className="h-12 w-28 p-1 rounded-xl cursor-pointer border border-input bg-background hover:scale-[1.02] active:scale-95 transition-all"
-                                        />
-                                        <input
-                                            type="text"
-                                            value={config.backgroundColor || ''}
-                                            onChange={(e) => setConfig({ ...config, backgroundColor: e.target.value })}
-                                            className="flex-1 h-12 p-3 rounded-xl border bg-background font-mono text-sm uppercase"
-                                            placeholder="#FFFFFF"
-                                            maxLength={7}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium">Text Color</label>
-                                    <div className="flex items-center gap-3">
-                                        <input
-                                            type="color"
-                                            value={config.textColor || '#0f172a'}
-                                            onChange={(e) => setConfig({ ...config, textColor: e.target.value })}
-                                            className="h-12 w-28 p-1 rounded-xl cursor-pointer border border-input bg-background hover:scale-[1.02] active:scale-95 transition-all"
-                                        />
-                                        <input
-                                            type="text"
-                                            value={config.textColor || ''}
-                                            onChange={(e) => setConfig({ ...config, textColor: e.target.value })}
-                                            className="flex-1 h-12 p-3 rounded-xl border bg-background font-mono text-sm uppercase"
-                                            placeholder="#0F172A"
-                                            maxLength={7}
-                                        />
-                                    </div>
+                            <div className="space-y-2 border-t pt-4">
+                                <label className="text-sm font-medium">Background Color</label>
+                                <div className="flex items-center gap-3">
+                                    <input
+                                        type="color"
+                                        value={config.backgroundColor || '#ffffff'}
+                                        onChange={(e) => setConfig({ ...config, backgroundColor: e.target.value })}
+                                        className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={config.backgroundColor || ''}
+                                        onChange={(e) => setConfig({ ...config, backgroundColor: e.target.value })}
+                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        placeholder="#FFFFFF"
+                                        maxLength={7}
+                                    />
                                 </div>
                             </div>
 
-                            <div className="space-y-2">
+                            <div className="space-y-2 border-t pt-4">
+                                <label className="text-sm font-medium">Text Color</label>
+                                <div className="flex items-center gap-3">
+                                    <input
+                                        type="color"
+                                        value={config.textColor || '#0f172a'}
+                                        onChange={(e) => setConfig({ ...config, textColor: e.target.value })}
+                                        className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={config.textColor || ''}
+                                        onChange={(e) => setConfig({ ...config, textColor: e.target.value })}
+                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        placeholder="#0F172A"
+                                        maxLength={7}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="space-y-2 border-t pt-4">
                                 <label className="text-sm font-medium">Card / Secondary Color</label>
                                 <div className="flex items-center gap-3">
                                     <input
                                         type="color"
                                         value={config.cardColor || '#f8fafc'}
                                         onChange={(e) => setConfig({ ...config, cardColor: e.target.value })}
-                                        className="h-12 w-28 p-1 rounded-xl cursor-pointer border border-input bg-background hover:scale-[1.02] active:scale-95 transition-all"
+                                        className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
                                         value={config.cardColor || ''}
                                         onChange={(e) => setConfig({ ...config, cardColor: e.target.value })}
-                                        className="flex-1 h-12 p-3 rounded-xl border bg-background font-mono text-sm uppercase"
+                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
                                         placeholder="#F8FAFC"
                                         maxLength={7}
                                     />
@@ -348,167 +347,163 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 <p className="text-xs text-muted-foreground">Background for cards, headers, or contrast sections.</p>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-4">
-                                <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-purple-700">Button Background Color</label>
-                                    <div className="flex items-center gap-3">
-                                        <input
-                                            type="color"
-                                            value={config.buttonBgColor || '#3B82F6'}
-                                            onChange={(e) => setConfig({ ...config, buttonBgColor: e.target.value })}
-                                            className="h-12 w-28 p-1 rounded-xl cursor-pointer border border-input bg-background hover:scale-[1.02] active:scale-95 transition-all"
-                                        />
-                                        <input
-                                            type="text"
-                                            value={config.buttonBgColor || ''}
-                                            onChange={(e) => setConfig({ ...config, buttonBgColor: e.target.value })}
-                                            className="flex-1 h-12 p-3 rounded-xl border bg-background font-mono text-sm uppercase"
-                                            placeholder="#3B82F6"
-                                            maxLength={7}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-purple-700">Button Text Color</label>
-                                    <div className="flex items-center gap-3">
-                                        <input
-                                            type="color"
-                                            value={config.buttonTextColor || '#ffffff'}
-                                            onChange={(e) => setConfig({ ...config, buttonTextColor: e.target.value })}
-                                            className="h-12 w-28 p-1 rounded-xl cursor-pointer border border-input bg-background hover:scale-[1.02] active:scale-95 transition-all"
-                                        />
-                                        <input
-                                            type="text"
-                                            value={config.buttonTextColor || ''}
-                                            onChange={(e) => setConfig({ ...config, buttonTextColor: e.target.value })}
-                                            className="flex-1 h-12 p-3 rounded-xl border bg-background font-mono text-sm uppercase"
-                                            placeholder="#FFFFFF"
-                                            maxLength={7}
-                                        />
-                                    </div>
+                            <div className="space-y-2 border-t pt-4">
+                                <label className="text-sm font-semibold text-purple-700">Button Background Color</label>
+                                <div className="flex items-center gap-3">
+                                    <input
+                                        type="color"
+                                        value={config.buttonBgColor || '#3B82F6'}
+                                        onChange={(e) => setConfig({ ...config, buttonBgColor: e.target.value })}
+                                        className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={config.buttonBgColor || ''}
+                                        onChange={(e) => setConfig({ ...config, buttonBgColor: e.target.value })}
+                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        placeholder="#3B82F6"
+                                        maxLength={7}
+                                    />
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-4">
-                                <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-emerald-700">Header Background Color</label>
-                                    <div className="flex items-center gap-3">
-                                        <input
-                                            type="color"
-                                            value={config.headerBgColor || '#ffffff'}
-                                            onChange={(e) => setConfig({ ...config, headerBgColor: e.target.value })}
-                                            className="h-12 w-28 p-1 rounded-xl cursor-pointer border border-input bg-background hover:scale-[1.02] active:scale-95 transition-all"
-                                        />
-                                        <input
-                                            type="text"
-                                            value={config.headerBgColor || ''}
-                                            onChange={(e) => setConfig({ ...config, headerBgColor: e.target.value })}
-                                            className="flex-1 h-12 p-3 rounded-xl border bg-background font-mono text-sm uppercase"
-                                            placeholder="#FFFFFF"
-                                            maxLength={7}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-emerald-700">Header Text/Link Color</label>
-                                    <div className="flex items-center gap-3">
-                                        <input
-                                            type="color"
-                                            value={config.headerTextColor || '#0f172a'}
-                                            onChange={(e) => setConfig({ ...config, headerTextColor: e.target.value })}
-                                            className="h-12 w-28 p-1 rounded-xl cursor-pointer border border-input bg-background hover:scale-[1.02] active:scale-95 transition-all"
-                                        />
-                                        <input
-                                            type="text"
-                                            value={config.headerTextColor || ''}
-                                            onChange={(e) => setConfig({ ...config, headerTextColor: e.target.value })}
-                                            className="flex-1 h-12 p-3 rounded-xl border bg-background font-mono text-sm uppercase"
-                                            placeholder="#0F172A"
-                                            maxLength={7}
-                                        />
-                                    </div>
+                            <div className="space-y-2 border-t pt-4">
+                                <label className="text-sm font-semibold text-purple-700">Button Text Color</label>
+                                <div className="flex items-center gap-3">
+                                    <input
+                                        type="color"
+                                        value={config.buttonTextColor || '#ffffff'}
+                                        onChange={(e) => setConfig({ ...config, buttonTextColor: e.target.value })}
+                                        className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={config.buttonTextColor || ''}
+                                        onChange={(e) => setConfig({ ...config, buttonTextColor: e.target.value })}
+                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        placeholder="#FFFFFF"
+                                        maxLength={7}
+                                    />
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-4">
-                                <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-amber-700">Footer Background Color</label>
-                                    <div className="flex items-center gap-3">
-                                        <input
-                                            type="color"
-                                            value={config.footerBgColor || '#1e293b'}
-                                            onChange={(e) => setConfig({ ...config, footerBgColor: e.target.value })}
-                                            className="h-12 w-28 p-1 rounded-xl cursor-pointer border border-input bg-background hover:scale-[1.02] active:scale-95 transition-all"
-                                        />
-                                        <input
-                                            type="text"
-                                            value={config.footerBgColor || ''}
-                                            onChange={(e) => setConfig({ ...config, footerBgColor: e.target.value })}
-                                            className="flex-1 h-12 p-3 rounded-xl border bg-background font-mono text-sm uppercase"
-                                            placeholder="#1E293B"
-                                            maxLength={7}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-amber-700">Footer Text/Link Color</label>
-                                    <div className="flex items-center gap-3">
-                                        <input
-                                            type="color"
-                                            value={config.footerTextColor || '#f8fafc'}
-                                            onChange={(e) => setConfig({ ...config, footerTextColor: e.target.value })}
-                                            className="h-12 w-28 p-1 rounded-xl cursor-pointer border border-input bg-background hover:scale-[1.02] active:scale-95 transition-all"
-                                        />
-                                        <input
-                                            type="text"
-                                            value={config.footerTextColor || ''}
-                                            onChange={(e) => setConfig({ ...config, footerTextColor: e.target.value })}
-                                            className="flex-1 h-12 p-3 rounded-xl border bg-background font-mono text-sm uppercase"
-                                            placeholder="#F8FAFC"
-                                            maxLength={7}
-                                        />
-                                    </div>
+                            <div className="space-y-2 border-t pt-4">
+                                <label className="text-sm font-semibold text-emerald-700">Header Background Color</label>
+                                <div className="flex items-center gap-3">
+                                    <input
+                                        type="color"
+                                        value={config.headerBgColor || '#ffffff'}
+                                        onChange={(e) => setConfig({ ...config, headerBgColor: e.target.value })}
+                                        className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={config.headerBgColor || ''}
+                                        onChange={(e) => setConfig({ ...config, headerBgColor: e.target.value })}
+                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        placeholder="#FFFFFF"
+                                        maxLength={7}
+                                    />
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-4">
-                                <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-blue-700">Category Bar Background Color</label>
-                                    <div className="flex items-center gap-3">
-                                        <input
-                                            type="color"
-                                            value={config.categoryBgColor || '#ffffff'}
-                                            onChange={(e) => setConfig({ ...config, categoryBgColor: e.target.value })}
-                                            className="h-12 w-28 p-1 rounded-xl cursor-pointer border border-input bg-background hover:scale-[1.02] active:scale-95 transition-all"
-                                        />
-                                        <input
-                                            type="text"
-                                            value={config.categoryBgColor || ''}
-                                            onChange={(e) => setConfig({ ...config, categoryBgColor: e.target.value })}
-                                            className="flex-1 h-12 p-3 rounded-xl border bg-background font-mono text-sm uppercase"
-                                            placeholder="#FFFFFF"
-                                            maxLength={7}
-                                        />
-                                    </div>
+                            <div className="space-y-2 border-t pt-4">
+                                <label className="text-sm font-semibold text-emerald-700">Header Text/Link Color</label>
+                                <div className="flex items-center gap-3">
+                                    <input
+                                        type="color"
+                                        value={config.headerTextColor || '#0f172a'}
+                                        onChange={(e) => setConfig({ ...config, headerTextColor: e.target.value })}
+                                        className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={config.headerTextColor || ''}
+                                        onChange={(e) => setConfig({ ...config, headerTextColor: e.target.value })}
+                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        placeholder="#0F172A"
+                                        maxLength={7}
+                                    />
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-semibold text-blue-700">Category Active Text/Highlight</label>
-                                    <div className="flex items-center gap-3">
-                                        <input
-                                            type="color"
-                                            value={config.categoryHighlightColor || '#3B82F6'}
-                                            onChange={(e) => setConfig({ ...config, categoryHighlightColor: e.target.value })}
-                                            className="h-12 w-28 p-1 rounded-xl cursor-pointer border border-input bg-background hover:scale-[1.02] active:scale-95 transition-all"
-                                        />
-                                        <input
-                                            type="text"
-                                            value={config.categoryHighlightColor || ''}
-                                            onChange={(e) => setConfig({ ...config, categoryHighlightColor: e.target.value })}
-                                            className="flex-1 h-12 p-3 rounded-xl border bg-background font-mono text-sm uppercase"
-                                            placeholder="#3B82F6"
-                                            maxLength={7}
-                                        />
-                                    </div>
+                            </div>
+
+                            <div className="space-y-2 border-t pt-4">
+                                <label className="text-sm font-semibold text-amber-700">Footer Background Color</label>
+                                <div className="flex items-center gap-3">
+                                    <input
+                                        type="color"
+                                        value={config.footerBgColor || '#1e293b'}
+                                        onChange={(e) => setConfig({ ...config, footerBgColor: e.target.value })}
+                                        className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={config.footerBgColor || ''}
+                                        onChange={(e) => setConfig({ ...config, footerBgColor: e.target.value })}
+                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        placeholder="#1E293B"
+                                        maxLength={7}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="space-y-2 border-t pt-4">
+                                <label className="text-sm font-semibold text-amber-700">Footer Text/Link Color</label>
+                                <div className="flex items-center gap-3">
+                                    <input
+                                        type="color"
+                                        value={config.footerTextColor || '#f8fafc'}
+                                        onChange={(e) => setConfig({ ...config, footerTextColor: e.target.value })}
+                                        className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={config.footerTextColor || ''}
+                                        onChange={(e) => setConfig({ ...config, footerTextColor: e.target.value })}
+                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        placeholder="#F8FAFC"
+                                        maxLength={7}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="space-y-2 border-t pt-4">
+                                <label className="text-sm font-semibold text-blue-700">Category Bar Background Color</label>
+                                <div className="flex items-center gap-3">
+                                    <input
+                                        type="color"
+                                        value={config.categoryBgColor || '#ffffff'}
+                                        onChange={(e) => setConfig({ ...config, categoryBgColor: e.target.value })}
+                                        className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={config.categoryBgColor || ''}
+                                        onChange={(e) => setConfig({ ...config, categoryBgColor: e.target.value })}
+                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        placeholder="#FFFFFF"
+                                        maxLength={7}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="space-y-2 border-t pt-4">
+                                <label className="text-sm font-semibold text-blue-700">Category Active Text/Highlight</label>
+                                <div className="flex items-center gap-3">
+                                    <input
+                                        type="color"
+                                        value={config.categoryHighlightColor || '#3B82F6'}
+                                        onChange={(e) => setConfig({ ...config, categoryHighlightColor: e.target.value })}
+                                        className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
+                                    />
+                                    <input
+                                        type="text"
+                                        value={config.categoryHighlightColor || ''}
+                                        onChange={(e) => setConfig({ ...config, categoryHighlightColor: e.target.value })}
+                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        placeholder="#3B82F6"
+                                        maxLength={7}
+                                    />
                                 </div>
                             </div>
 
@@ -519,13 +514,13 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                         type="color"
                                         value={config.priceColor || '#2563eb'}
                                         onChange={(e) => setConfig({ ...config, priceColor: e.target.value })}
-                                        className="h-12 w-28 p-1 rounded-xl cursor-pointer border border-input bg-background hover:scale-[1.02] active:scale-95 transition-all"
+                                        className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
                                         value={config.priceColor || ''}
                                         onChange={(e) => setConfig({ ...config, priceColor: e.target.value })}
-                                        className="flex-1 h-12 p-3 rounded-xl border bg-background font-mono text-sm uppercase"
+                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
                                         placeholder="#2563EB"
                                         maxLength={7}
                                     />
