@@ -226,13 +226,13 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                     <p className="font-serif italic text-sm leading-relaxed mb-10 flex-1 px-4 opacity-75" style={{ color: 'var(--text-main)' }}>
                                         {item.description || "Prepared using traditional methods with hand-picked seasonal ingredients."}
                                     </p>
-                                    <Button
+                                    <button
                                         onClick={() => addItem(item)}
-                                        className="w-full h-16 rounded-[24px] text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl transition-all active:scale-95 border-2 border-transparent"
+                                        className="w-full h-16 rounded-[24px] text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl transition-all active:scale-95 border-2 border-transparent flex items-center justify-center"
                                         style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                                     >
                                         {t.add_to_order}
-                                    </Button>
+                                    </button>
                                 </div>
                             </div>
                         )) : (
@@ -312,14 +312,14 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                     </div>
                                     <span className="text-5xl font-serif font-black tracking-tighter text-slate-950">{totalPrice.toFixed(2)} <span className="text-xl font-normal opacity-30">{CURRENCY}</span></span>
                                 </div>
-                                <Button
+                                <button
                                     onClick={handlePlaceOrder}
                                     disabled={!tableId || isPlacingOrder}
-                                    className="w-full h-24 rounded-[32px] text-sm font-black uppercase tracking-[0.4em] shadow-3xl disabled:opacity-20 active:scale-95 transition-all outline-none border-4 border-slate-100"
+                                    className="w-full h-24 rounded-[32px] text-sm font-black uppercase tracking-[0.4em] shadow-3xl disabled:opacity-20 active:scale-95 transition-all outline-none border-4 border-slate-100 flex items-center justify-center"
                                     style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                                 >
                                     {isPlacingOrder ? 'Transmitting...' : 'Confirm Order'} <ChevronRight className="ml-4" />
-                                </Button>
+                                </button>
                                 {!tableId && (
                                     <div className="p-4 bg-rose-50 border border-rose-100 rounded-2xl text-center">
                                         <p className="text-[10px] font-black uppercase text-rose-500 tracking-widest">Interaction Required</p>
@@ -335,16 +335,16 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                 </div>
                                 <h2 className="text-4xl font-serif font-black mb-6 text-slate-950">Received with Thanks</h2>
                                 <p className="text-slate-400 text-lg mb-12 italic font-serif">"Our culinary team is now attending to your selection with the utmost care."</p>
-                                <Button
+                                <button
                                     onClick={() => {
                                         setOrderComplete(false)
                                         setShowCart(false)
                                     }}
-                                    className="rounded-full h-16 px-12 font-black uppercase tracking-widest text-[10px]"
+                                    className="rounded-full h-16 px-12 font-black uppercase tracking-widest text-[10px] flex items-center justify-center"
                                     style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                                 >
                                     Return to Menu
-                                </Button>
+                                </button>
                             </div>
                         )}
                     </div>

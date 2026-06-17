@@ -407,14 +407,14 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
                                     <span className="text-xs font-bold uppercase tracking-wider text-stone-500">Total</span>
                                     <span className="font-serif text-2xl font-bold" style={{ color: 'var(--price-color)' }}>{totalPrice.toFixed(2)} {CURRENCY}</span>
                                 </div>
-                                <Button
+                                <button
                                     onClick={handlePlaceOrder}
                                     disabled={!tableId || isPlacingOrder}
-                                    className="w-full h-12 rounded-full text-stone-950 font-bold text-sm shadow-md hover:brightness-110"
+                                    className="w-full h-12 rounded-full text-stone-950 font-bold text-sm shadow-md hover:brightness-110 flex items-center justify-center"
                                     style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                                 >
                                     {isPlacingOrder ? 'Envoi...' : 'Passer la commande'}
-                                </Button>
+                                </button>
                                 {!tableId && (
                                     <p className="text-center text-[10px] mt-3 font-medium px-4 py-2 rounded-xl" style={{ backgroundColor: 'rgba(255,255,255,0.05)', color: 'var(--primary)', border: '1px solid var(--primary)4d' }}>
                                         Veuillez scanner le code QR de votre table pour finaliser l'envoi.
@@ -513,16 +513,16 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
                                             <div className="h-2 w-2 rounded-full bg-amber-500" />
                                             <span>Aucune table connectée.</span>
                                         </div>
-                                        <Button
+                                        <button
                                             onClick={() => {
                                                 setShowScanner(true)
                                                 setShowInfoDrawer(false)
                                             }}
-                                            className="w-full h-10 rounded-full font-bold text-xs uppercase tracking-widest hover:brightness-110 shadow-md"
+                                            className="w-full h-10 rounded-full font-bold text-xs uppercase tracking-widest hover:brightness-110 shadow-md flex items-center justify-center"
                                             style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                                         >
                                             Scanner une Table
-                                        </Button>
+                                        </button>
                                     </div>
                                 )}
                             </div>
@@ -589,16 +589,16 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
 
                         {/* Footer (Reservation Button) */}
                         <div className="p-6 border-t" style={{ backgroundColor: 'var(--footer-bg)', borderColor: 'rgba(255,255,255,0.05)' }}>
-                            <Button
+                            <button
                                 onClick={() => {
                                     setShowReservation(true)
                                     setShowInfoDrawer(false)
                                 }}
-                                className="w-full h-12 rounded-full font-bold text-sm shadow-md hover:brightness-110 animate-pulse-slow"
+                                className="w-full h-12 rounded-full font-bold text-sm shadow-md hover:brightness-110 animate-pulse-slow flex items-center justify-center"
                                 style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                             >
                                 Réserver une Table
-                            </Button>
+                            </button>
                         </div>
                     </div>
                 </div>

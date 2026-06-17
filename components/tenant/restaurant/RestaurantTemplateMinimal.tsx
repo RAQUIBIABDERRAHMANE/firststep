@@ -266,13 +266,13 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                                         {item.price} <span className="text-sm font-sans font-black opacity-30">{CURRENCY}</span>
                                                     </span>
                                                 </div>
-                                                <Button
+                                                <button
                                                     onClick={() => addItem(item)}
                                                     className="rounded-full h-12 w-12 flex items-center justify-center transition-all active:scale-95 hover:brightness-110"
                                                     style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                                                 >
                                                     <Plus size={20} strokeWidth={2.5} />
-                                                </Button>
+                                                </button>
                                             </div>
                                         </div>
                                     )
@@ -406,14 +406,14 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                     <span className="text-sm font-bold uppercase tracking-wider text-slate-500">{t.total}</span>
                                     <span className="font-serif text-3xl text-[var(--text-main,#0f172a)]">{totalPrice.toFixed(2)} {CURRENCY}</span>
                                 </div>
-                                <Button
+                                <button
                                     onClick={handlePlaceOrder}
                                     disabled={!tableId || isPlacingOrder}
-                                    className="w-full h-14 rounded-xl hover:brightness-110 font-bold text-lg shadow-xl"
+                                    className="w-full h-14 rounded-xl hover:brightness-110 font-bold text-lg shadow-xl flex items-center justify-center"
                                     style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                                 >
                                     {isPlacingOrder ? `${t.status.PENDING}...` : t.place_order}
-                                </Button>
+                                </button>
                                 {!tableId && (
                                     <p className="text-center text-xs text-red-500 mt-4 font-medium px-4 py-2 bg-red-50 rounded-lg">
                                         Please scan the table QR code to complete your order.

@@ -249,13 +249,13 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                                         <span className="text-[10px] font-black uppercase tracking-widest opacity-50 mb-2">Exclusive Price</span>
                                         <span className="text-5xl font-black tabular-nums" style={{ color: 'var(--price-color)' }}>{currentItem.price}<span className="text-xl ml-2 font-light opacity-50">{CURRENCY}</span></span>
                                     </div>
-                                    <Button
+                                    <button
                                         onClick={() => addItem(currentItem)}
-                                        className="h-20 px-16 rounded-[40px] transition-all font-black text-lg uppercase tracking-[0.3em] active:scale-95 shadow-2xl"
+                                        className="h-20 px-16 rounded-[40px] transition-all font-black text-lg uppercase tracking-[0.3em] active:scale-95 shadow-2xl flex items-center justify-center"
                                         style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                                     >
                                         {t.add_to_order}
-                                    </Button>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -384,14 +384,14 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                                     <span className="text-zinc-400">Total</span>
                                     <span className="text-3xl font-light" style={{ color: 'var(--price-color)' }}>{totalPrice.toFixed(2)} MAD</span>
                                 </div>
-                                <Button
+                                <button
                                     onClick={handlePlaceOrder}
                                     disabled={!tableId || isPlacingOrder}
-                                    className="w-full h-14 rounded-xl hover:brightness-110 font-bold shadow-xl"
+                                    className="w-full h-14 rounded-xl hover:brightness-110 font-bold shadow-xl flex items-center justify-center"
                                     style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                                 >
                                     {isPlacingOrder ? 'Processing...' : 'Place Order'}
-                                </Button>
+                                </button>
                                 {!tableId && (
                                     <p className="mt-3 text-center text-xs" style={{ color: 'var(--primary)' }}>Scan table QR to checkout</p>
                                 )}
