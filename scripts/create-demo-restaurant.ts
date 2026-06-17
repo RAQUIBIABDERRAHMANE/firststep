@@ -107,7 +107,8 @@ async function main() {
             designTemplate: 'classic',
             userId: user.id,
             serviceId: service.id,
-            config: configRaw
+            config: configRaw,
+            isActive: true
         },
         create: {
             slug: tenantSlug,
@@ -117,7 +118,8 @@ async function main() {
             description: 'Bienvenue chez FirstStep Restaurant, où la qualité rencontre le goût. Goûtez la différence !',
             primaryColor: '#0ea5e9',
             designTemplate: 'classic',
-            config: configRaw
+            config: configRaw,
+            isActive: true
         }
     })
     console.log('TenantWebsite created/updated:', tenant.slug)
