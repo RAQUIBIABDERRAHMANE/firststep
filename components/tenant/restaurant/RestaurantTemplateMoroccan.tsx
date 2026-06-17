@@ -440,6 +440,8 @@ export default function RestaurantTemplateMoroccan({
                 onClose={() => setCustomizingDish(null)}
                 onConfirm={handleConfirmCustomization}
                 primaryColor={primaryColor}
+                buttonBgColor={config?.buttonBgColor}
+                buttonTextColor={config?.buttonTextColor}
             />
 
             {/* ── FOOTER ── */}

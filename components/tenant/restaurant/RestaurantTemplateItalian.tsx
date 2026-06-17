@@ -565,6 +565,8 @@ export default function RestaurantTemplateItalian({
                 onClose={() => setCustomizingDish(null)}
                 onConfirm={handleConfirmCustomization}
                 primaryColor={primaryColor}
+                buttonBgColor={config?.buttonBgColor}
+                buttonTextColor={config?.buttonTextColor}
             />
 
             {/* ── FLOATING ACTION BUTTON ── */}

@@ -11,6 +11,8 @@ interface DishCustomizationModalProps {
     onClose: () => void
     onConfirm: (selectedOptions: SelectedOption[], selectedAddons: SelectedAddon[], calculatedPrice: number) => void
     primaryColor?: string
+    buttonBgColor?: string
+    buttonTextColor?: string
 }
 
 export default function DishCustomizationModal({
@@ -18,7 +20,9 @@ export default function DishCustomizationModal({
     dish,
     onClose,
     onConfirm,
-    primaryColor = '#3B82F6'
+    primaryColor = '#3B82F6',
+    buttonBgColor,
+    buttonTextColor
 }: DishCustomizationModalProps) {
     const [selectedOptions, setSelectedOptions] = useState<SelectedOption[]>([])
     const [selectedAddons, setSelectedAddons] = useState<SelectedAddon[]>([])
@@ -238,8 +242,8 @@ export default function DishCustomizationModal({
 
                     <Button
                         onClick={handleConfirm}
-                        className="w-full sm:w-auto h-14 px-8 rounded-2xl font-black text-xs uppercase tracking-widest text-white flex items-center justify-center gap-2 shadow-xl hover:brightness-110 active:scale-95 transition-all"
-                        style={{ backgroundColor: 'var(--primary)' }}
+                        className="w-full sm:w-auto h-14 px-8 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-xl hover:brightness-110 active:scale-95 transition-all"
+                        style={{ backgroundColor: buttonBgColor || 'var(--primary)', color: buttonTextColor || '#ffffff' }}
                     >
                         Add to Order
                     </Button>

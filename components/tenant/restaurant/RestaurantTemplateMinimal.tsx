@@ -503,6 +503,8 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                 onClose={() => setCustomizingDish(null)}
                 onConfirm={handleConfirmCustomization}
                 primaryColor={primaryColor}
+                buttonBgColor={config?.buttonBgColor}
+                buttonTextColor={config?.buttonTextColor}
             />
         </div>
     )

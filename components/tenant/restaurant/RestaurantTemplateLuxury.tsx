@@ -642,6 +642,8 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
                 onClose={() => setCustomizingDish(null)}
                 onConfirm={handleConfirmCustomization}
                 primaryColor={accentColor}
+                buttonBgColor={config?.buttonBgColor}
+                buttonTextColor={config?.buttonTextColor}
             />
         </div>
     )
