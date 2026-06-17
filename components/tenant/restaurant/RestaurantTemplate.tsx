@@ -6,6 +6,7 @@ import RestaurantTemplateModern from './RestaurantTemplateModern'
 import RestaurantTemplateMinimal from './RestaurantTemplateMinimal'
 import RestaurantTemplateMoroccan from './RestaurantTemplateMoroccan'
 import RestaurantTemplateLuxury from './RestaurantTemplateLuxury'
+import RestaurantTemplateItalian from './RestaurantTemplateItalian'
 
 export interface RestaurantTemplateProps {
     siteName: string
@@ -31,6 +32,8 @@ function RestaurantTemplateSwitcher(props: RestaurantTemplateProps) {
             return <RestaurantTemplateMoroccan {...props} />
         case 'luxury':
             return <RestaurantTemplateLuxury {...props} />
+        case 'italian':
+            return <RestaurantTemplateItalian {...props} />
         case 'classic':
         default:
             return <RestaurantTemplateClassic {...props} />

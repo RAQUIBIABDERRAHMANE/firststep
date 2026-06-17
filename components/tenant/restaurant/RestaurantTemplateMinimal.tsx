@@ -54,45 +54,59 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
         '--bg-main': config?.backgroundColor || '#ffffff',
         '--text-main': config?.textColor || '#000000',
         '--card-bg': config?.cardColor || '#f8f9fa',
+        '--button-bg': config?.buttonBgColor || primaryColor || '#0f172a',
+        '--button-text': config?.buttonTextColor || '#ffffff',
+        '--header-bg': config?.headerBgColor || config?.cardColor || '#ffffff',
+        '--header-text': config?.headerTextColor || config?.textColor || '#000000',
+        '--footer-bg': config?.footerBgColor || '#f8f9fa',
+        '--footer-text': config?.footerTextColor || '#000000',
+        '--category-bg': config?.categoryBgColor || 'transparent',
+        '--category-highlight': config?.categoryHighlightColor || primaryColor || '#0f172a',
+        '--price-color': config?.priceColor || primaryColor || '#0f172a',
     } as React.CSSProperties
 
     return (
         <div style={containerStyle} className="min-h-screen bg-[var(--bg-main,#ffffff)] font-sans text-[var(--text-main,#000000)] selection:bg-[var(--primary)] selection:text-[var(--bg-main,white)] pb-24">
             {/* Top Navigation Bar - Glassmorphism */}
-            <nav className="fixed top-0 inset-x-0 z-50 bg-[var(--card-bg,white)]/70 backdrop-blur-xl border-b border-slate-200/50 transition-all duration-500">
+            <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl border-b border-slate-200/50 transition-all duration-500"
+                 style={{ backgroundColor: 'var(--header-bg)', color: 'var(--header-text)' }}>
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
                     <div className="flex items-center gap-4 group cursor-pointer">
                         {logo ? (
                             <img src={logo} alt={siteName} className="h-12 w-12 object-contain transition-transform group-hover:scale-110" />
                         ) : (
-                            <div className="h-12 w-12 bg-black text-white flex items-center justify-center font-serif text-2xl font-black rounded-xl shadow-lg shadow-black/10">
+                            <div className="h-12 w-12 flex items-center justify-center font-serif text-2xl font-black rounded-xl shadow-lg shadow-black/10"
+                                 style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}>
                                 {siteName[0]}
                             </div>
                         )}
                         <div className="flex flex-col">
-                            <span className="font-black text-xl tracking-tight leading-none">{siteName}</span>
-                            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mt-1">Premium Dining</span>
+                            <span className="font-black text-xl tracking-tight leading-none" style={{ color: 'var(--header-text)' }}>{siteName}</span>
+                            <span className="text-[10px] font-bold uppercase tracking-[0.2em] mt-1 opacity-50" style={{ color: 'var(--header-text)' }}>Premium Dining</span>
                         </div>
                     </div>
 
                     <div className="flex items-center gap-4 md:gap-8">
                         {isOwner && (
-                            <Link href="/dashboard/restaurant" className="text-xs font-black uppercase tracking-widest text-slate-400 hover:text-[var(--primary)] transition-colors hidden md:block">
+                            <Link href="/dashboard/restaurant" className="text-xs font-black uppercase tracking-widest transition-colors hidden md:block"
+                                  style={{ color: 'var(--header-text)', opacity: 0.6 }}>
                                 Admin Dashboard
                             </Link>
                         )}
-                        <button onClick={() => setShowScanner(true)} className="p-2 text-slate-400 hover:text-[var(--text-main,#0f172a)] transition-colors">
+                        <button onClick={() => setShowScanner(true)} className="p-2 transition-colors hover:opacity-75" style={{ color: 'var(--header-text)' }}>
                             <QrCode size={22} strokeWidth={2.5} />
                         </button>
                         <button
                             onClick={() => setLang(l => l === 'en' ? 'fr' : 'en')}
-                            className="text-[10px] font-black text-slate-400 hover:text-[var(--text-main,#0f172a)] uppercase tracking-widest bg-slate-100 rounded-full px-4 py-1.5 transition-all active:scale-95"
+                            className="text-[10px] font-black uppercase tracking-widest rounded-full px-4 py-1.5 transition-all active:scale-95 bg-black/5"
+                            style={{ color: 'var(--header-text)' }}
                         >
                             {lang === 'fr' ? 'FR' : 'EN'}
                         </button>
                         <button
                             onClick={() => setShowReservation(true)}
-                            className="text-[10px] font-black uppercase tracking-widest bg-[var(--primary)] text-white hover:brightness-110 rounded-full px-5 h-10 transition-all active:scale-95 shadow-lg shadow-[var(--primary)]/20"
+                            className="text-[10px] font-black uppercase tracking-widest hover:brightness-110 rounded-full px-5 h-10 transition-all active:scale-95 shadow-lg shadow-black/5"
+                            style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         >
                             Reserve
                         </button>
@@ -101,11 +115,13 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                 setShowCart(true)
                                 setShowOrderTracking(false)
                             }}
-                            className="relative flex items-center justify-center h-12 w-12 bg-black hover:bg-slate-800 text-white rounded-2xl transition-all shadow-xl shadow-black/10 active:scale-95"
+                            className="relative flex items-center justify-center h-12 w-12 rounded-2xl transition-all shadow-xl shadow-black/10 active:scale-95"
+                            style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         >
                             <ShoppingCart size={20} strokeWidth={2.5} />
                             {totalItems > 0 && (
-                                <div className="absolute -top-1.5 -right-1.5 bg-[var(--primary)] text-white text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center border-4 border-white shadow-lg">
+                                <div className="absolute -top-1.5 -right-1.5 text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center border-4 shadow-lg"
+                                     style={{ backgroundColor: 'var(--primary)', color: 'var(--bg-main)', borderColor: 'var(--header-bg)' }}>
                                     {totalItems}
                                 </div>
                             )}
@@ -117,8 +133,8 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
             {/* Hero Section - Impactful & Clean */}
             <header className="relative pt-40 pb-20 md:pt-56 md:pb-40 px-6 overflow-hidden">
                 {/* Decorative Background Elements */}
-                <div className="absolute top-40 -left-20 w-80 h-80 bg-[var(--primary)]/5 rounded-full blur-[100px] pointer-events-none" />
-                <div className="absolute bottom-20 -right-20 w-96 h-96 bg-slate-200/20 rounded-full blur-[100px] pointer-events-none" />
+                <div className="absolute top-40 -left-20 w-80 h-80 rounded-full blur-[100px] pointer-events-none" style={{ backgroundColor: 'rgba(var(--primary-rgb, 15, 23, 42), 0.05)' }} />
+                <div className="absolute bottom-20 -right-20 w-96 h-96 rounded-full blur-[100px] pointer-events-none" style={{ backgroundColor: 'rgba(0,0,0,0.02)' }} />
 
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 items-center">
                     <div className="order-2 md:order-1 animate-in slide-in-from-bottom-10 duration-1000 fade-in">
@@ -148,182 +164,177 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                     <div className="order-1 md:order-2 relative group">
                         <div className="relative h-[450px] md:h-[650px] w-full rounded-[40px] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] animate-in fade-in zoom-in-95 duration-1000 delay-300">
                             <img
-                                src={coverImage || 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=2070'}
-                                alt="Hero"
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                                src={coverImage || 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&q=80&w=2000'}
+                                alt="Restaurant Interior"
+                                className="w-full h-full object-cover transition-transform duration-[4s] group-hover:scale-103"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                        </div>
-                        {/* Status Float */}
-                        <div className="absolute -bottom-10 -left-10 bg-[var(--card-bg,white)] p-10 shadow-3xl hidden lg:block border border-slate-100 rounded-3xl animate-float">
-                            <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Current Status</p>
-                            <div className="flex items-center gap-3">
-                                <div className="h-3 w-3 rounded-full bg-emerald-500 animate-pulse" />
-                                <p className="font-serif text-2xl text-[var(--text-main,#0f172a)] italic">Open for Table Service</p>
-                            </div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                         </div>
                     </div>
                 </div>
             </header>
 
-            {/* Category Navigation - Minimal & Sticky */}
-            <div className="sticky top-20 z-40 bg-[var(--card-bg,white)]/80 backdrop-blur-md border-b border-slate-100/50 py-6 transition-all duration-300">
-                <div className="max-w-7xl mx-auto px-6 overflow-x-auto no-scrollbar flex items-center justify-center gap-12">
-                    {categoryNames.map((cat) => (
-                        <button
-                            key={cat}
-                            onClick={() => scrollToCategory(cat)}
-                            className={`whitespace-nowrap text-[11px] font-black uppercase tracking-[0.3em] transition-all relative py-2 ${activeSection === cat
-                                ? 'text-[var(--text-main,#000)]'
-                                : 'text-slate-400 hover:text-[var(--text-main,#0f172a)]'
-                                }`}
-                        >
-                            {cat}
-                            {activeSection === cat && (
-                                <div className="absolute -bottom-1 left-0 right-0 h-1 bg-black rounded-full" />
-                            )}
-                        </button>
-                    ))}
+            {/* Sticky Category Selection Bar */}
+            <div className="sticky top-20 z-40 py-6 border-b transition-all"
+                 style={{ backgroundColor: 'var(--header-bg)', borderColor: 'rgba(0,0,0,0.05)' }}>
+                <div className="max-w-7xl mx-auto px-6" style={{ backgroundColor: 'var(--category-bg)' }}>
+                    <div className="-mx-6 px-6 overflow-x-auto no-scrollbar flex gap-8">
+                        {categoryNames.map((cat) => (
+                            <button
+                                key={cat}
+                                onClick={() => scrollToCategory(cat)}
+                                className="relative py-2 shrink-0 transition-all duration-300"
+                            >
+                                <span className="font-black text-xs uppercase tracking-widest block transition-colors"
+                                      style={{ color: activeSection === cat ? 'var(--category-highlight)' : 'var(--text-main)', opacity: activeSection === cat ? 1 : 0.4 }}>
+                                    {cat}
+                                </span>
+                                {activeSection === cat && (
+                                    <div className="w-1/2 mx-auto h-[3px] rounded-full mt-2"
+                                         style={{ backgroundColor: 'var(--category-highlight)' }} />
+                                )}
+                            </button>
+                        ))}
+                    </div>
                 </div>
             </div>
 
-            {/* Menu Sections */}
-            <div className="max-w-7xl mx-auto px-6 space-y-40 mt-32">
+            {/* Menu Items Showcase */}
+            <div className="max-w-7xl mx-auto px-6 py-20 space-y-32">
                 {categoryNames.map((cat) => {
                     const categoryItems = categories.find((c: any) => c.name === cat)?.dishes || []
                     if (categoryItems.length === 0) return null
 
                     return (
-                        <section id={`cat-${cat}`} key={cat} className="scroll-mt-48 animate-in slide-in-from-bottom-8 duration-700">
-                            <div className="max-w-3xl mb-20">
-                                <div className="flex items-center gap-4 mb-4">
-                                    <div className="h-px w-12 bg-[var(--primary)]" />
-                                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[var(--primary)]">Curated Selection</span>
-                                </div>
-                                <h3 className="font-serif text-5xl md:text-7xl text-[var(--text-main,#0f172a)] mb-6">{cat}</h3>
-                                <p className="text-slate-500 text-lg max-w-lg leading-relaxed font-medium">
-                                    A collection of our finest {cat.toLowerCase()}, prepared with exceptional care and precision.
-                                </p>
+                        <section id={`cat-${cat}`} key={cat} className="scroll-mt-36">
+                            <div className="flex items-center gap-6 mb-16">
+                                <h3 className="font-serif text-3xl md:text-4xl text-[var(--text-main,#0f172a)] font-medium">
+                                    {cat}
+                                </h3>
+                                <div className="h-px flex-1 bg-slate-100" />
+                                <span className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-300">
+                                    {categoryItems.length} Offerings
+                                </span>
                             </div>
 
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32">
-                                {categoryItems.map((item: any) => (
-                                    <div key={item.id} className="group flex flex-col sm:flex-row gap-8 items-start relative">
-                                        {/* Image Container with Hover Effect */}
-                                        <div className="w-full sm:w-48 sm:h-48 aspect-square shrink-0 overflow-hidden rounded-[32px] bg-slate-50 relative shadow-xl shadow-slate-200 transition-transform duration-500 group-hover:-translate-y-2">
-                                            <img
-                                                src={item.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=1000'}
-                                                alt={item.name}
-                                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                                            />
-                                            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                                        </div>
-
-                                        {/* Item Details */}
-                                        <div className="flex-1 min-w-0 py-2">
-                                            <div className="flex justify-between items-baseline mb-2">
-                                                <h4 className="font-serif text-3xl font-medium text-[var(--text-main,#0f172a)] group-hover:text-[var(--primary)] transition-colors">{item.name}</h4>
-                                                <div className="h-px flex-1 mx-6 bg-slate-100 hidden sm:block" />
-                                                <span className="font-black text-xl text-[var(--text-main,#0f172a)]">{item.price} <span className="text-[10px] uppercase ml-1">{CURRENCY}</span></span>
-                                            </div>
-                                            {/* Dietary tags */}
-                                            {(() => {
-                                                let tagsList: string[] = []
-                                                try {
-                                                    tagsList = typeof item.tags === 'string' ? JSON.parse(item.tags || '[]') : (item.tags || [])
-                                                } catch { }
-                                                if (tagsList.length === 0) return null
-                                                return (
-                                                    <div className="flex flex-wrap gap-1.5 justify-start mb-4">
-                                                        {tagsList.map(tag => (
-                                                            <span key={tag} className="px-2.5 py-1 bg-slate-100 text-slate-600 text-[9px] font-black uppercase tracking-wider rounded-md">
-                                                                {tag}
-                                                            </span>
-                                                        ))}
-                                                    </div>
-                                                )
-                                            })()}
-                                            <p className="text-slate-500 text-base leading-relaxed mb-8 font-medium line-clamp-2">
-                                                {item.description || "A masterfully balanced composition of premium ingredients and delicate execution."}
-                                            </p>
-                                            <button
-                                                onClick={() => addItem(item)}
-                                                className="group/btn flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] text-[var(--text-main,#000)] pr-12 transition-all"
-                                            >
-                                                <div className="h-10 w-10 bg-slate-100 group-hover/btn:bg-black group-hover/btn:text-white rounded-full flex items-center justify-center transition-all">
-                                                    <Plus size={16} />
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
+                                {categoryItems.map((item: any) => {
+                                    return (
+                                        <div key={item.id} className="group flex flex-col justify-between p-4 rounded-3xl transition-transform duration-500 hover:-translate-y-1"
+                                             style={{ backgroundColor: 'var(--card-bg)' }}>
+                                            <div className="space-y-6">
+                                                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-50">
+                                                    <img
+                                                        src={item.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=1000'}
+                                                        className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                                                        alt={item.name}
+                                                    />
                                                 </div>
-                                                <span className="group-hover/btn:translate-x-1 transition-transform">{t.add_to_order}</span>
-                                            </button>
+                                                <div className="space-y-2">
+                                                    <div className="flex justify-between items-start gap-4">
+                                                        <h4 className="font-serif text-2xl text-[var(--text-main,#0f172a)] leading-snug group-hover:opacity-85 transition-opacity">
+                                                            {item.name}
+                                                        </h4>
+                                                    </div>
+                                                    {/* Dietary tags */}
+                                                    {(() => {
+                                                        let tagsList: string[] = []
+                                                        try {
+                                                            tagsList = typeof item.tags === 'string' ? JSON.parse(item.tags || '[]') : (item.tags || [])
+                                                        } catch {}
+                                                        if (tagsList.length === 0) return null
+                                                        return (
+                                                            <div className="flex flex-wrap gap-1.5 justify-start">
+                                                                {tagsList.map(tag => (
+                                                                    <span key={tag} className="px-2.5 py-1 bg-black/5 text-[9px] font-black uppercase tracking-wider rounded-md" style={{ color: 'var(--text-main)', opacity: 0.6 }}>
+                                                                        {tag}
+                                                                    </span>
+                                                                ))}
+                                                            </div>
+                                                        )
+                                                    })()}
+                                                    <p className="text-sm text-slate-400 leading-relaxed font-medium pt-2">
+                                                        {item.description || "Fresh local ingredients, prepared and seasoned according to the chef's secret recipe."}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex justify-between items-center mt-6 border-t border-slate-100/50 pt-6">
+                                                <div className="flex flex-col">
+                                                    <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Price</span>
+                                                    <span className="font-serif text-3xl font-medium tracking-tight mt-1" style={{ color: 'var(--price-color)' }}>
+                                                        {item.price} <span className="text-sm font-sans font-black opacity-30">{CURRENCY}</span>
+                                                    </span>
+                                                </div>
+                                                <Button
+                                                    onClick={() => addItem(item)}
+                                                    className="rounded-full h-12 w-12 flex items-center justify-center transition-all active:scale-95 hover:brightness-110"
+                                                    style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
+                                                >
+                                                    <Plus size={20} strokeWidth={2.5} />
+                                                </Button>
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    )
+                                })}
                             </div>
                         </section>
                     )
                 })}
             </div>
 
-            {/* Footer - Elegant & Minimal */}
-            <footer className="mt-60 border-t border-slate-100 bg-[var(--card-bg,white)] py-32">
+            {/* Footer */}
+            <footer className="py-24 border-t" style={{ backgroundColor: 'var(--footer-bg)', color: 'var(--footer-text)', borderColor: 'rgba(0,0,0,0.05)' }}>
                 <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-20">
-                        <div className="md:col-span-2 space-y-8">
-                            <h4 className="font-serif text-4xl text-[var(--text-main,#0f172a)] leading-tight">{siteName}</h4>
-                            <p className="text-slate-500 text-lg max-w-sm leading-relaxed font-medium">
-                                Redefining the boundaries of culinary excellence, one plate at a time.
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 items-start">
+                        <div className="space-y-4 md:col-span-2">
+                            <span className="font-serif text-3xl tracking-tight block">{siteName}</span>
+                            <p className="text-slate-400 text-sm max-w-sm font-medium leading-relaxed">
+                                {description || "A culinary destination focusing on local sourcing, modern gastronomy, and premium hospitality standards."}
                             </p>
-                            <div className="flex gap-6 pt-4">
-                                <div className="h-12 w-12 border border-slate-200 rounded-full flex items-center justify-center text-slate-400 hover:text-[var(--text-main,#000)] hover:border-black transition-all cursor-pointer">
-                                    <Sparkles size={18} />
-                                </div>
-                                <div className="h-12 w-12 border border-slate-200 rounded-full flex items-center justify-center text-slate-400 hover:text-[var(--text-main,#000)] hover:border-black transition-all cursor-pointer">
-                                    <QrCode size={18} />
-                                </div>
+                        </div>
+                        <div className="space-y-4">
+                            <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">Contact</span>
+                            <div className="space-y-2 text-sm text-slate-400 font-medium">
+                                <p>{config.address || "123 Royale Avenue, Morocco"}</p>
+                                <p className="text-[var(--text-main)] font-bold">{config.phone || "+212 5XX-XXXXXX"}</p>
                             </div>
                         </div>
-                        <div className="space-y-8">
-                            <h5 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">{t.hours}</h5>
-                            <p className="text-[var(--text-main,#0f172a)] font-medium leading-loose whitespace-pre-line">
-                                {config.hours || "Tue — Sun\n12:30 — 15:30\n19:30 — 23:00"}
-                            </p>
-                        </div>
-                        <div className="space-y-8">
-                            <h5 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400">{t.contact}</h5>
-                            <div className="space-y-4 text-[var(--text-main,#0f172a)] font-medium leading-relaxed">
-                                <p className="hover:text-[var(--primary)] transition-all cursor-pointer">{config.address}</p>
-                                <p className="hover:text-[var(--primary)] transition-all cursor-pointer font-black text-xl">{config.phone || "0522XXXXXX"}</p>
-                                <p className="hover:text-[var(--primary)] transition-all cursor-pointer text-slate-400">{config.email || "hello@firststepco.com"}</p>
+                        <div className="space-y-4">
+                            <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">Timing</span>
+                            <div className="space-y-2 text-sm text-slate-400 font-medium whitespace-pre-line leading-relaxed">
+                                {config.hours || "Mon - Sun: 12:00 PM - 11:30 PM"}
                             </div>
                         </div>
                     </div>
                     <div className="mt-32 pt-12 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-8">
-                        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-300">
+                        <p className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">
                             &copy; {new Date().getFullYear()} {siteName}. Proprietary System.
                         </p>
-                        <div className="flex gap-8 text-[10px] font-black uppercase tracking-[0.3em] text-slate-300">
-                            <a href="#" className="hover:text-[var(--text-main,#000)] transition-colors">Privacy</a>
-                            <a href="#" className="hover:text-[var(--text-main,#000)] transition-colors">Safety</a>
-                            <a href="#" className="hover:text-[var(--text-main,#000)] transition-colors">Terms</a>
+                        <div className="flex gap-8 text-[10px] font-black uppercase tracking-[0.3em] opacity-40">
+                            <a href="#" className="hover:text-black transition-colors">Privacy</a>
+                            <a href="#" className="hover:text-black transition-colors">Safety</a>
+                            <a href="#" className="hover:text-black transition-colors">Terms</a>
                         </div>
                     </div>
                 </div>
             </footer>
 
-            {/* Call Waiter Logic (unchanged same as other templates) */}
             {/* Call Waiter & Request Bill Logic */}
             {tableId && !isOwner && (
                 <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
                     <button
                         onClick={handleRequestBill}
-                        className="h-14 w-14 rounded-full bg-amber-500 hover:bg-amber-600 text-white shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95"
+                        className="h-14 w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95"
+                        style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         title="Request Bill"
                     >
                         <Receipt size={22} />
                     </button>
                     <button
                         onClick={handleCallWaiter}
-                        className="h-14 w-14 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95"
+                        className="h-14 w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95"
+                        style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         title="Call Waiter"
                     >
                         <Bell size={22} />
@@ -335,10 +346,11 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
             {showCart && (
                 <div className="fixed inset-0 z-[60] bg-slate-900/20 backdrop-blur-sm transition-all" onClick={() => setShowCart(false)}>
                     <div
-                        className="absolute right-0 top-0 bottom-0 w-full max-w-md bg-[var(--card-bg,white)] shadow-2xl animate-in slide-in-from-right duration-500 flex flex-col"
+                        className="absolute right-0 top-0 bottom-0 w-full max-w-md shadow-2xl animate-in slide-in-from-right duration-500 flex flex-col"
+                        style={{ backgroundColor: 'var(--card-bg)' }}
                         onClick={e => e.stopPropagation()}
                     >
-                        <div className="p-8 border-b border-slate-100 flex items-center justify-between bg-[var(--card-bg,white)]">
+                        <div className="p-8 border-b border-slate-100 flex items-center justify-between">
                             <h2 className="font-serif text-2xl text-[var(--text-main,#0f172a)]">Your Selection</h2>
                             <button onClick={() => setShowCart(false)} className="text-slate-400 hover:text-[var(--text-main,#0f172a)]">
                                 <X size={24} />
@@ -360,7 +372,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                         <div className="flex-1">
                                             <div className="flex justify-between items-start mb-1">
                                                 <h4 className="font-serif text-lg text-[var(--text-main,#0f172a)] leading-tight">{item.name}</h4>
-                                                <span className="font-medium text-slate-600 shrink-0 ml-2">{item.price} {CURRENCY}</span>
+                                                <span className="font-medium shrink-0 ml-2" style={{ color: 'var(--price-color)' }}>{item.price} {CURRENCY}</span>
                                             </div>
                                             {item.selectedOptions && item.selectedOptions.length > 0 && (
                                                 <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-1">
@@ -389,7 +401,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                         </div>
 
                         {items.length > 0 && (
-                            <div className="p-8 border-t border-slate-100 bg-slate-50">
+                            <div className="p-8 border-t border-slate-100 bg-slate-50/50">
                                 <div className="flex justify-between items-end mb-6">
                                     <span className="text-sm font-bold uppercase tracking-wider text-slate-500">{t.total}</span>
                                     <span className="font-serif text-3xl text-[var(--text-main,#0f172a)]">{totalPrice.toFixed(2)} {CURRENCY}</span>
@@ -397,7 +409,8 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                 <Button
                                     onClick={handlePlaceOrder}
                                     disabled={!tableId || isPlacingOrder}
-                                    className="w-full h-14 rounded-xl bg-[var(--primary)] text-white hover:brightness-110 font-bold text-lg shadow-xl shadow-[var(--primary)]/20"
+                                    className="w-full h-14 rounded-xl hover:brightness-110 font-bold text-lg shadow-xl"
+                                    style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                                 >
                                     {isPlacingOrder ? `${t.status.PENDING}...` : t.place_order}
                                 </Button>
@@ -461,7 +474,8 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                             setShowCart(true)
                             setShowOrderTracking(true)
                         }}
-                        className="bg-[var(--card-bg,white)]/90 backdrop-blur border border-slate-200 shadow-xl px-4 py-3 rounded-full flex items-center gap-3 transition-transform hover:scale-105"
+                        className="backdrop-blur border border-slate-200 shadow-xl px-4 py-3 rounded-full flex items-center gap-3 transition-transform hover:scale-105"
+                        style={{ backgroundColor: 'var(--card-bg)', color: 'var(--text-main)' }}
                     >
                         <div className={`w-2 h-2 rounded-full ${orderStatus === 'READY' ? 'bg-green-500' : 'bg-[var(--primary)] animate-pulse'}`}></div>
                         <div className="text-xs font-bold uppercase tracking-wider text-slate-600">

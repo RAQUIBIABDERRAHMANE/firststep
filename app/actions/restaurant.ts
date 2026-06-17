@@ -487,7 +487,7 @@ export async function updateRestaurantDesign(designTemplate: string, slug?: stri
     const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
-    if (!['classic', 'modern', 'minimal', 'moroccan', 'light', 'luxury'].includes(designTemplate)) {
+    if (!['classic', 'modern', 'minimal', 'moroccan', 'light', 'luxury', 'italian'].includes(designTemplate)) {
         return { error: 'Invalid design template' }
     }
 
@@ -520,6 +520,15 @@ export async function updateRestaurantConfig(data: {
     cardColor?: string;
     reservationOpenTime?: string;
     reservationCloseTime?: string;
+    buttonBgColor?: string;
+    buttonTextColor?: string;
+    headerBgColor?: string;
+    headerTextColor?: string;
+    footerBgColor?: string;
+    footerTextColor?: string;
+    categoryBgColor?: string;
+    categoryHighlightColor?: string;
+    priceColor?: string;
 }, slug?: string) {
     const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
@@ -539,6 +548,15 @@ export async function updateRestaurantConfig(data: {
             ...(data.cardColor !== undefined && { cardColor: data.cardColor }),
             ...(data.reservationOpenTime !== undefined && { reservationOpenTime: data.reservationOpenTime }),
             ...(data.reservationCloseTime !== undefined && { reservationCloseTime: data.reservationCloseTime }),
+            ...(data.buttonBgColor !== undefined && { buttonBgColor: data.buttonBgColor }),
+            ...(data.buttonTextColor !== undefined && { buttonTextColor: data.buttonTextColor }),
+            ...(data.headerBgColor !== undefined && { headerBgColor: data.headerBgColor }),
+            ...(data.headerTextColor !== undefined && { headerTextColor: data.headerTextColor }),
+            ...(data.footerBgColor !== undefined && { footerBgColor: data.footerBgColor }),
+            ...(data.footerTextColor !== undefined && { footerTextColor: data.footerTextColor }),
+            ...(data.categoryBgColor !== undefined && { categoryBgColor: data.categoryBgColor }),
+            ...(data.categoryHighlightColor !== undefined && { categoryHighlightColor: data.categoryHighlightColor }),
+            ...(data.priceColor !== undefined && { priceColor: data.priceColor }),
         }
 
         await prisma.tenantWebsite.update({
