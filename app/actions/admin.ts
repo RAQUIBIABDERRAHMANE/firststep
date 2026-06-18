@@ -255,3 +255,32 @@ export async function updatePrintRequestStatus(requestId: string, status: string
         return { error: 'Failed to update request' }
     }
 }
+
+export async function deleteUser(targetUserId: string) {
+    const admin = await getCurrentUser()
+
+    if (!admin || admin.role !== 'ADMIN') {
+        return { error: 'Unauthorized' }
+    }
+
+    // Prevent self-deletion
+    if (admin.id === targetUserId) {
+        return { error: 'Cannot delete your own account' }
+    }
+
+    // Only allow deleting CLIENT accounts
+    const target = await prisma.user.findUnique({ where: { id: targetUserId } })
+    if (!target) return { error: 'User not found' }
+    if (target.role === 'ADMIN') return { error: 'Cannot delete admin accounts' }
+
+    try {
+        // Prisma cascades handle all related records (websites → tables → orders, etc.)
+        await prisma.user.delete({ where: { id: targetUserId } })
+
+        revalidatePath('/admin/users')
+        return { success: true }
+    } catch (error) {
+        console.error('Failed to delete user:', error)
+        return { error: 'Failed to delete user' }
+    }
+}

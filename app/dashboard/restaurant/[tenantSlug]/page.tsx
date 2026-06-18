@@ -15,7 +15,10 @@ import {
     Paintbrush,
     UserCheck,
     BarChart3,
-    CalendarCheck
+    CalendarCheck,
+    Rocket,
+    Sparkles,
+    Check,
 } from 'lucide-react'
 import { getWebsiteBySlug } from '@/app/actions/tenant'
 import AutoRefresh from '@/components/dashboard/AutoRefresh'
@@ -136,6 +139,65 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                     </CardContent>
                 </Card>
             </div>
+
+            {/* ── Onboarding Setup Banner (shown when not fully configured) ── */}
+            {(menuCount === 0 || tableCount === 0) && (
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-orange-500 via-amber-500 to-orange-400 p-6 sm:p-8 shadow-xl shadow-orange-200">
+                    {/* Background decoration */}
+                    <div className="absolute right-0 top-0 h-full w-48 opacity-10">
+                        <div className="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-white" />
+                        <div className="absolute -right-4 bottom-0 h-28 w-28 rounded-full bg-white" />
+                    </div>
+
+                    <div className="relative flex flex-col sm:flex-row items-start sm:items-center gap-5">
+                        <div className="h-14 w-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center shrink-0">
+                            <Rocket className="h-7 w-7 text-white" />
+                        </div>
+                        <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                                <Sparkles size={14} className="text-white/80" />
+                                <span className="text-xs font-bold text-white/80 uppercase tracking-wider">Configuration en cours</span>
+                            </div>
+                            <h3 className="text-xl font-black text-white">
+                                {menuCount === 0 && tableCount === 0
+                                    ? 'Votre restaurant n\'est pas encore configuré'
+                                    : menuCount === 0
+                                    ? 'Votre menu est vide'
+                                    : 'Aucune table n\'est encore créée'}
+                            </h3>
+                            <p className="text-white/80 text-sm mt-1">
+                                {menuCount === 0 && tableCount === 0
+                                    ? 'Utilisez le wizard d\'installation guidée pour configurer votre menu, vos tables et votre design en quelques minutes.'
+                                    : menuCount === 0
+                                    ? 'Ajoutez vos plats pour que vos clients puissent commander depuis leur téléphone.'
+                                    : 'Créez vos tables et générez leurs QR codes pour démarrer les commandes.'}
+                            </p>
+                        </div>
+                        <Link href={`/dashboard/restaurant/${tenantSlug}/onboarding`} className="shrink-0 w-full sm:w-auto">
+                            <Button className="w-full sm:w-auto bg-white text-orange-600 font-bold hover:bg-orange-50 rounded-xl px-6 py-3 h-auto shadow-lg hover:shadow-xl transition-all active:scale-95">
+                                <Rocket size={15} className="mr-2" />
+                                Lancer le wizard
+                            </Button>
+                        </Link>
+                    </div>
+
+                    {/* Progress pills */}
+                    <div className="relative flex flex-wrap gap-2 mt-5 pt-5 border-t border-white/20">
+                        <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold ${menuCount > 0 ? 'bg-white/30 text-white' : 'bg-white/10 text-white/60'}`}>
+                            {menuCount > 0 ? <Check size={11} /> : <span className="h-2 w-2 rounded-full bg-white/40" />}
+                            Menu ({menuCount} plats)
+                        </div>
+                        <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold ${tableCount > 0 ? 'bg-white/30 text-white' : 'bg-white/10 text-white/60'}`}>
+                            {tableCount > 0 ? <Check size={11} /> : <span className="h-2 w-2 rounded-full bg-white/40" />}
+                            Tables ({tableCount})
+                        </div>
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-white/30 text-white">
+                            <Check size={11} />
+                            Design configuré
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* Management Portal */}
             <div className="grid gap-6 md:grid-cols-2">
