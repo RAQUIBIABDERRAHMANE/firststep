@@ -87,46 +87,128 @@ export async function signIn(prevState: any, formData: FormData) {
 
     let user;
     try {
-        user = await prisma.user.findUnique({
-            where: { email },
-        })
+        user = await prisma.user.findUnique({ where: { email } })
     } catch (dbError) {
         console.error('[Auth] Database error in signIn:', dbError)
         return { error: 'Une erreur de connexion à la base de données est survenue. Veuillez réessayer.' }
     }
 
-    console.log(`[Auth] Attempting login for: ${email}`);
     if (!user) {
-        console.log(`[Auth] User not found: ${email}`);
         return { error: 'Invalid email or password' }
     }
 
-    const isValid = await verifyPassword(password, user.password);
-    console.log(`[Auth] Password check for ${email}: ${isValid ? 'MATCH' : 'FAIL'}`);
-
+    const isValid = await verifyPassword(password, user.password)
     if (!isValid) {
         return { error: 'Invalid email or password' }
     }
 
-    const cookieStore = await cookies()
-    cookieStore.set(SESSION_COOKIE_NAME, user.id, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        maxAge: SESSION_DURATION,
-        path: '/',
-    })
+    // ── Step 2: Send 2FA code ─────────────────────────────────────────────
+    const code = Math.floor(100000 + Math.random() * 900000).toString()
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000) // 10 minutes
+    const twoFaEmail = `2fa_${email}`
 
-    if (user.role === 'ADMIN') {
-        redirect('/admin')
+    try {
+        // Clean up any old codes for this user
+        await prisma.passwordReset.deleteMany({ where: { email: twoFaEmail } })
+
+        await prisma.passwordReset.create({
+            data: { email: twoFaEmail, code, expiresAt },
+        })
+
+        const { send2FACodeEmail } = await import('@/lib/mail')
+        await send2FACodeEmail(email, user.companyName, code)
+
+        console.log(`[Auth] 2FA code sent to ${email}`)
+    } catch (err) {
+        console.error('[Auth] Failed to send 2FA code:', err)
+        return { error: 'Failed to send verification code. Please try again.' }
     }
 
-    // Validate redirectTo to prevent open redirect vulnerabilities
-    if (redirectTo && redirectTo.startsWith('/')) {
-        redirect(redirectTo)
+    return { requires2FA: true, email, redirectTo }
+}
+
+export async function verify2FA(prevState: any, formData: FormData) {
+    const email = formData.get('email') as string
+    const code = formData.get('code') as string
+    const redirectTo = formData.get('redirectTo') as string
+
+    if (!email || !code || code.length !== 6) {
+        return { error: 'Please enter the 6-digit code.' }
     }
 
-    redirect('/dashboard')
+    const twoFaEmail = `2fa_${email}`
+
+    try {
+        const record = await prisma.passwordReset.findFirst({
+            where: {
+                email: twoFaEmail,
+                code,
+                expiresAt: { gt: new Date() },
+            },
+            orderBy: { createdAt: 'desc' },
+        })
+
+        if (!record) {
+            return { error: 'Invalid or expired code. Please try again.' }
+        }
+
+        // Clean up used code
+        await prisma.passwordReset.deleteMany({ where: { email: twoFaEmail } })
+
+        // Fetch user and create session
+        const user = await prisma.user.findUnique({ where: { email } })
+        if (!user) return { error: 'User not found.' }
+
+        const cookieStore = await cookies()
+        cookieStore.set(SESSION_COOKIE_NAME, user.id, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: SESSION_DURATION,
+            path: '/',
+        })
+
+        if (user.role === 'ADMIN') {
+            redirect('/admin')
+        }
+
+        if (redirectTo && redirectTo.startsWith('/')) {
+            redirect(redirectTo)
+        }
+
+        redirect('/dashboard')
+
+    } catch (err: any) {
+        // redirect() throws — let it propagate
+        if (err?.digest?.startsWith('NEXT_REDIRECT')) throw err
+        console.error('[Auth] verify2FA error:', err)
+        return { error: 'Verification failed. Please try again.' }
+    }
+}
+
+export async function resend2FACode(email: string) {
+    const twoFaEmail = `2fa_${email}`
+
+    const user = await prisma.user.findUnique({ where: { email } })
+    if (!user) return { error: 'User not found.' }
+
+    const code = Math.floor(100000 + Math.random() * 900000).toString()
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000)
+
+    try {
+        await prisma.passwordReset.deleteMany({ where: { email: twoFaEmail } })
+        await prisma.passwordReset.create({
+            data: { email: twoFaEmail, code, expiresAt },
+        })
+
+        const { send2FACodeEmail } = await import('@/lib/mail')
+        await send2FACodeEmail(email, user.companyName, code)
+
+        return { success: true }
+    } catch (err) {
+        console.error('[Auth] resend2FACode error:', err)
+        return { error: 'Failed to resend code.' }
+    }
 }
 
 export async function signOut() {

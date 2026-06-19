@@ -87,6 +87,79 @@ export async function sendResetCodeEmail(email: string, code: string) {
     }
 }
 
+export async function send2FACodeEmail(email: string, companyName: string, code: string) {
+    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
+        console.log('--------------------------------------------------');
+        console.log(`[MAILER] 2FA CODE: ${code}`);
+        console.log(`[MAILER] TO: ${email}`);
+        console.log('--------------------------------------------------');
+        return { success: true, logged: true };
+    }
+
+    const digits = code.split('').map(d =>
+        `<span style="display:inline-block;width:44px;height:52px;line-height:52px;text-align:center;font-size:28px;font-weight:800;color:#1e293b;background:#f1f5f9;border:2px solid #e2e8f0;border-radius:10px;margin:0 4px;font-family:monospace;">${d}</span>`
+    ).join('')
+
+    const html = `<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+  <div style="max-width:520px;margin:40px auto;background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 100%);padding:32px 40px;text-align:center;">
+      <div style="display:inline-flex;align-items:center;gap:10px;">
+        <div style="width:36px;height:36px;background:rgba(255,255,255,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:18px;">🔐</span>
+        </div>
+        <span style="font-size:22px;font-weight:800;color:#ffffff;letter-spacing:-0.5px;">FirstStep</span>
+      </div>
+      <p style="color:rgba(255,255,255,0.85);margin:10px 0 0;font-size:14px;">Vérification en deux étapes</p>
+    </div>
+
+    <!-- Body -->
+    <div style="padding:40px;">
+      <h2 style="margin:0 0 8px;font-size:22px;font-weight:700;color:#1e293b;">Bonjour, ${companyName} 👋</h2>
+      <p style="margin:0 0 28px;color:#64748b;font-size:15px;line-height:1.6;">
+        Utilisez le code ci-dessous pour compléter votre connexion à FirstStep.
+        Ce code est valable <strong>10 minutes</strong>.
+      </p>
+
+      <!-- OTP Code -->
+      <div style="text-align:center;margin:0 0 32px;">
+        <div style="margin-bottom:8px;">${digits}</div>
+        <p style="margin:12px 0 0;color:#94a3b8;font-size:12px;">Expire dans 10 minutes</p>
+      </div>
+
+      <!-- Warning -->
+      <div style="background:#fef9ec;border:1px solid #fde68a;border-radius:12px;padding:16px 20px;margin-bottom:28px;">
+        <p style="margin:0;font-size:13px;color:#92400e;line-height:1.5;">
+          ⚠️ <strong>Ne partagez jamais ce code.</strong> L'équipe FirstStep ne vous demandera jamais votre code de vérification.
+          Si vous n'avez pas tenté de vous connecter, ignorez cet email.
+        </p>
+      </div>
+
+      <p style="margin:0;color:#94a3b8;font-size:12px;text-align:center;">
+        FirstStep — Plateforme de digitalisation professionnelle
+      </p>
+    </div>
+  </div>
+</body>
+</html>`
+
+    try {
+        await transporter.sendMail({
+            from: `"FirstStep Security" <${process.env.EMAIL_USER}>`,
+            to: email,
+            subject: `🔐 ${code} — Votre code de connexion FirstStep`,
+            html,
+        });
+        return { success: true };
+    } catch (error) {
+        console.error('[MAILER] Error sending 2FA email:', error);
+        return { success: false, error };
+    }
+}
+
 export async function sendPaymentRequestEmail(
     email: string,
     companyName: string,
