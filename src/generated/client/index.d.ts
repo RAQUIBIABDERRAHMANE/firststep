@@ -4465,6 +4465,8 @@ export namespace Prisma {
     role: string | null
     createdAt: Date | null
     unsubscribed: boolean | null
+    recoveryEmail: string | null
+    recoveryCodes: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -4475,6 +4477,8 @@ export namespace Prisma {
     role: string | null
     createdAt: Date | null
     unsubscribed: boolean | null
+    recoveryEmail: string | null
+    recoveryCodes: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -4485,6 +4489,8 @@ export namespace Prisma {
     role: number
     createdAt: number
     unsubscribed: number
+    recoveryEmail: number
+    recoveryCodes: number
     _all: number
   }
 
@@ -4497,6 +4503,8 @@ export namespace Prisma {
     role?: true
     createdAt?: true
     unsubscribed?: true
+    recoveryEmail?: true
+    recoveryCodes?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -4507,6 +4515,8 @@ export namespace Prisma {
     role?: true
     createdAt?: true
     unsubscribed?: true
+    recoveryEmail?: true
+    recoveryCodes?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -4517,6 +4527,8 @@ export namespace Prisma {
     role?: true
     createdAt?: true
     unsubscribed?: true
+    recoveryEmail?: true
+    recoveryCodes?: true
     _all?: true
   }
 
@@ -4600,6 +4612,8 @@ export namespace Prisma {
     role: string
     createdAt: Date
     unsubscribed: boolean
+    recoveryEmail: string | null
+    recoveryCodes: string
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -4627,6 +4641,8 @@ export namespace Prisma {
     role?: boolean
     createdAt?: boolean
     unsubscribed?: boolean
+    recoveryEmail?: boolean
+    recoveryCodes?: boolean
     chatSessions?: boolean | User$chatSessionsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     paymentRequests?: boolean | User$paymentRequestsArgs<ExtArgs>
@@ -4644,6 +4660,8 @@ export namespace Prisma {
     role?: boolean
     createdAt?: boolean
     unsubscribed?: boolean
+    recoveryEmail?: boolean
+    recoveryCodes?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4654,6 +4672,8 @@ export namespace Prisma {
     role?: boolean
     createdAt?: boolean
     unsubscribed?: boolean
+    recoveryEmail?: boolean
+    recoveryCodes?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -4664,9 +4684,11 @@ export namespace Prisma {
     role?: boolean
     createdAt?: boolean
     unsubscribed?: boolean
+    recoveryEmail?: boolean
+    recoveryCodes?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "companyName" | "role" | "createdAt" | "unsubscribed", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "companyName" | "role" | "createdAt" | "unsubscribed" | "recoveryEmail" | "recoveryCodes", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     chatSessions?: boolean | User$chatSessionsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
@@ -4697,6 +4719,8 @@ export namespace Prisma {
       role: string
       createdAt: Date
       unsubscribed: boolean
+      recoveryEmail: string | null
+      recoveryCodes: string
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -5133,6 +5157,8 @@ export namespace Prisma {
     readonly role: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly unsubscribed: FieldRef<"User", 'Boolean'>
+    readonly recoveryEmail: FieldRef<"User", 'String'>
+    readonly recoveryCodes: FieldRef<"User", 'String'>
   }
     
 
@@ -44186,7 +44212,9 @@ export namespace Prisma {
     companyName: 'companyName',
     role: 'role',
     createdAt: 'createdAt',
-    unsubscribed: 'unsubscribed'
+    unsubscribed: 'unsubscribed',
+    recoveryEmail: 'recoveryEmail',
+    recoveryCodes: 'recoveryCodes'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -44801,6 +44829,8 @@ export namespace Prisma {
     role?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     unsubscribed?: BoolFilter<"User"> | boolean
+    recoveryEmail?: StringNullableFilter<"User"> | string | null
+    recoveryCodes?: StringFilter<"User"> | string
     chatSessions?: ChatSessionListRelationFilter
     notifications?: NotificationListRelationFilter
     paymentRequests?: PaymentRequestListRelationFilter
@@ -44817,6 +44847,8 @@ export namespace Prisma {
     role?: SortOrder
     createdAt?: SortOrder
     unsubscribed?: SortOrder
+    recoveryEmail?: SortOrderInput | SortOrder
+    recoveryCodes?: SortOrder
     chatSessions?: ChatSessionOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
     paymentRequests?: PaymentRequestOrderByRelationAggregateInput
@@ -44836,6 +44868,8 @@ export namespace Prisma {
     role?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     unsubscribed?: BoolFilter<"User"> | boolean
+    recoveryEmail?: StringNullableFilter<"User"> | string | null
+    recoveryCodes?: StringFilter<"User"> | string
     chatSessions?: ChatSessionListRelationFilter
     notifications?: NotificationListRelationFilter
     paymentRequests?: PaymentRequestListRelationFilter
@@ -44852,6 +44886,8 @@ export namespace Prisma {
     role?: SortOrder
     createdAt?: SortOrder
     unsubscribed?: SortOrder
+    recoveryEmail?: SortOrderInput | SortOrder
+    recoveryCodes?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -44868,6 +44904,8 @@ export namespace Prisma {
     role?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     unsubscribed?: BoolWithAggregatesFilter<"User"> | boolean
+    recoveryEmail?: StringNullableWithAggregatesFilter<"User"> | string | null
+    recoveryCodes?: StringWithAggregatesFilter<"User"> | string
   }
 
   export type ChatSessionWhereInput = {
@@ -47704,6 +47742,8 @@ export namespace Prisma {
     role?: string
     createdAt?: Date | string
     unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
     chatSessions?: ChatSessionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
@@ -47720,6 +47760,8 @@ export namespace Prisma {
     role?: string
     createdAt?: Date | string
     unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
     chatSessions?: ChatSessionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
@@ -47736,6 +47778,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
     chatSessions?: ChatSessionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
@@ -47752,6 +47796,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
     chatSessions?: ChatSessionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
@@ -47768,6 +47814,8 @@ export namespace Prisma {
     role?: string
     createdAt?: Date | string
     unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -47778,6 +47826,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -47788,6 +47838,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
   }
 
   export type ChatSessionCreateInput = {
@@ -50978,6 +51030,20 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type ChatSessionListRelationFilter = {
     every?: ChatSessionWhereInput
     some?: ChatSessionWhereInput
@@ -51014,6 +51080,11 @@ export namespace Prisma {
     none?: UserServiceWhereInput
   }
 
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type ChatSessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -51046,6 +51117,8 @@ export namespace Prisma {
     role?: SortOrder
     createdAt?: SortOrder
     unsubscribed?: SortOrder
+    recoveryEmail?: SortOrder
+    recoveryCodes?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -51056,6 +51129,8 @@ export namespace Prisma {
     role?: SortOrder
     createdAt?: SortOrder
     unsubscribed?: SortOrder
+    recoveryEmail?: SortOrder
+    recoveryCodes?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -51066,6 +51141,8 @@ export namespace Prisma {
     role?: SortOrder
     createdAt?: SortOrder
     unsubscribed?: SortOrder
+    recoveryEmail?: SortOrder
+    recoveryCodes?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -51107,7 +51184,7 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
     notIn?: string[] | null
@@ -51118,7 +51195,10 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type ChatMessageListRelationFilter = {
@@ -51130,11 +51210,6 @@ export namespace Prisma {
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type ChatMessageOrderByRelationAggregateInput = {
@@ -51163,23 +51238,6 @@ export namespace Prisma {
     title?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type ChatSessionScalarRelationFilter = {
@@ -53224,6 +53282,10 @@ export namespace Prisma {
     set?: boolean
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type ChatSessionUpdateManyWithoutUserNestedInput = {
     create?: XOR<ChatSessionCreateWithoutUserInput, ChatSessionUncheckedCreateWithoutUserInput> | ChatSessionCreateWithoutUserInput[] | ChatSessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChatSessionCreateOrConnectWithoutUserInput | ChatSessionCreateOrConnectWithoutUserInput[]
@@ -53410,10 +53472,6 @@ export namespace Prisma {
     connectOrCreate?: ChatMessageCreateOrConnectWithoutSessionInput | ChatMessageCreateOrConnectWithoutSessionInput[]
     createMany?: ChatMessageCreateManySessionInputEnvelope
     connect?: ChatMessageWhereUniqueInput | ChatMessageWhereUniqueInput[]
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type ChatMessageUpdateManyWithoutSessionNestedInput = {
@@ -55112,6 +55170,20 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -55160,20 +55232,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -55727,6 +55785,8 @@ export namespace Prisma {
     role?: string
     createdAt?: Date | string
     unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
     notifications?: NotificationCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
     emailListMembers?: EmailListMemberCreateNestedManyWithoutUserInput
@@ -55742,6 +55802,8 @@ export namespace Prisma {
     role?: string
     createdAt?: Date | string
     unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
     emailListMembers?: EmailListMemberUncheckedCreateNestedManyWithoutUserInput
@@ -55800,6 +55862,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
     emailListMembers?: EmailListMemberUpdateManyWithoutUserNestedInput
@@ -55815,6 +55879,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
     emailListMembers?: EmailListMemberUncheckedUpdateManyWithoutUserNestedInput
@@ -55878,6 +55944,8 @@ export namespace Prisma {
     role?: string
     createdAt?: Date | string
     unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
     chatSessions?: ChatSessionCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
     emailListMembers?: EmailListMemberCreateNestedManyWithoutUserInput
@@ -55893,6 +55961,8 @@ export namespace Prisma {
     role?: string
     createdAt?: Date | string
     unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
     chatSessions?: ChatSessionUncheckedCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
     emailListMembers?: EmailListMemberUncheckedCreateNestedManyWithoutUserInput
@@ -55924,6 +55994,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
     chatSessions?: ChatSessionUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
     emailListMembers?: EmailListMemberUpdateManyWithoutUserNestedInput
@@ -55939,6 +56011,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
     chatSessions?: ChatSessionUncheckedUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
     emailListMembers?: EmailListMemberUncheckedUpdateManyWithoutUserNestedInput
@@ -56158,6 +56232,8 @@ export namespace Prisma {
     role?: string
     createdAt?: Date | string
     unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
     chatSessions?: ChatSessionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
@@ -56173,6 +56249,8 @@ export namespace Prisma {
     role?: string
     createdAt?: Date | string
     unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
     chatSessions?: ChatSessionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
@@ -56243,6 +56321,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
     chatSessions?: ChatSessionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
@@ -56258,6 +56338,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
     chatSessions?: ChatSessionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
@@ -56675,6 +56757,8 @@ export namespace Prisma {
     role?: string
     createdAt?: Date | string
     unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
     chatSessions?: ChatSessionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
@@ -56690,6 +56774,8 @@ export namespace Prisma {
     role?: string
     createdAt?: Date | string
     unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
     chatSessions?: ChatSessionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
@@ -57115,6 +57201,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
     chatSessions?: ChatSessionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
@@ -57130,6 +57218,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
     chatSessions?: ChatSessionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
@@ -59154,6 +59244,8 @@ export namespace Prisma {
     role?: string
     createdAt?: Date | string
     unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
     chatSessions?: ChatSessionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     emailListMembers?: EmailListMemberCreateNestedManyWithoutUserInput
@@ -59169,6 +59261,8 @@ export namespace Prisma {
     role?: string
     createdAt?: Date | string
     unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
     chatSessions?: ChatSessionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     emailListMembers?: EmailListMemberUncheckedCreateNestedManyWithoutUserInput
@@ -59239,6 +59333,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
     chatSessions?: ChatSessionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     emailListMembers?: EmailListMemberUpdateManyWithoutUserNestedInput
@@ -59254,6 +59350,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
     chatSessions?: ChatSessionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     emailListMembers?: EmailListMemberUncheckedUpdateManyWithoutUserNestedInput
@@ -59333,6 +59431,8 @@ export namespace Prisma {
     role?: string
     createdAt?: Date | string
     unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
     chatSessions?: ChatSessionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
@@ -59348,6 +59448,8 @@ export namespace Prisma {
     role?: string
     createdAt?: Date | string
     unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
     chatSessions?: ChatSessionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
@@ -59406,6 +59508,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
     chatSessions?: ChatSessionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
@@ -59421,6 +59525,8 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
     chatSessions?: ChatSessionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput

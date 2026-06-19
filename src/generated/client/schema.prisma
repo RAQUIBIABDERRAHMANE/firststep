@@ -22,6 +22,8 @@ model User {
   websites         TenantWebsite[]
   services         UserService[]
   unsubscribed     Boolean           @default(false)
+  recoveryEmail    String?
+  recoveryCodes    String            @default("[]")
 }
 
 model ChatSession {

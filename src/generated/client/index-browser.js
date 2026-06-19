@@ -124,7 +124,9 @@ exports.Prisma.UserScalarFieldEnum = {
   companyName: 'companyName',
   role: 'role',
   createdAt: 'createdAt',
-  unsubscribed: 'unsubscribed'
+  unsubscribed: 'unsubscribed',
+  recoveryEmail: 'recoveryEmail',
+  recoveryCodes: 'recoveryCodes'
 };
 
 exports.Prisma.ChatSessionScalarFieldEnum = {

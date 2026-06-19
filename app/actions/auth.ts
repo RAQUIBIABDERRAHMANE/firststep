@@ -385,3 +385,197 @@ export async function updatePassword(_prev: any, formData: FormData) {
         return { error: 'Échec de la mise à jour du mot de passe.' }
     }
 }
+
+// ─── 2FA Recovery Helpers ─────────────────────────────────────────────────────
+
+function generateCode(): string {
+    // Format: XXXX-XXXX (8 hex chars, grouped)
+    const part = () => Math.random().toString(16).slice(2, 6).toUpperCase()
+    return `${part()}-${part()}`
+}
+
+/** Generate 8 fresh recovery codes and save them hashed to the DB. Returns plaintext codes for display. */
+export async function generateRecoveryCodes() {
+    const user = await getCurrentUser()
+    if (!user) return { error: 'Non authentifié.' }
+
+    const plainCodes = Array.from({ length: 8 }, generateCode)
+    // Hash each code before storing (reuse bcrypt from auth lib)
+    const { hashPassword: hashCode } = await import('@/lib/auth')
+    const hashedCodes = await Promise.all(plainCodes.map(c => hashCode(c)))
+
+    await prisma.user.update({
+        where: { id: user.id },
+        data: { recoveryCodes: JSON.stringify(hashedCodes) },
+    })
+
+    return { success: true, codes: plainCodes }
+}
+
+/** Save / update recovery email for this user. */
+export async function saveRecoveryEmail(_prev: any, formData: FormData) {
+    const user = await getCurrentUser()
+    if (!user) return { error: 'Non authentifié.' }
+
+    const recoveryEmail = (formData.get('recoveryEmail') as string)?.trim().toLowerCase()
+
+    if (!recoveryEmail) {
+        return { error: 'Veuillez saisir une adresse email de secours.' }
+    }
+    // Basic format check
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recoveryEmail)) {
+        return { error: 'Adresse email invalide.' }
+    }
+    if (recoveryEmail === user.email.toLowerCase()) {
+        return { error: 'L\'email de récupération doit être différent de votre email principal.' }
+    }
+
+    try {
+        await prisma.user.update({
+            where: { id: user.id },
+            data: { recoveryEmail },
+        })
+        return { success: true, message: 'Email de secours enregistré avec succès.' }
+    } catch (err) {
+        console.error('saveRecoveryEmail error:', err)
+        return { error: 'Erreur lors de l\'enregistrement.' }
+    }
+}
+
+/** Called from login page: use a recovery code instead of the 2FA OTP. Each code is one-time use. */
+export async function verifyWithRecoveryCode(prevState: any, formData: FormData) {
+    const email = formData.get('email') as string
+    const inputCode = (formData.get('code') as string)?.trim().toUpperCase()
+    const redirectTo = formData.get('redirectTo') as string
+
+    if (!email || !inputCode) return { error: 'Code requis.' }
+
+    try {
+        const user = await prisma.user.findUnique({ where: { email } })
+        if (!user) return { error: 'Utilisateur introuvable.' }
+
+        const storedHashes: string[] = JSON.parse(user.recoveryCodes || '[]')
+        if (storedHashes.length === 0) return { error: 'Aucun code de récupération disponible.' }
+
+        const { verifyPassword: verifyCode } = await import('@/lib/auth')
+        let matchedIndex = -1
+        for (let i = 0; i < storedHashes.length; i++) {
+            if (await verifyCode(inputCode, storedHashes[i])) {
+                matchedIndex = i
+                break
+            }
+        }
+
+        if (matchedIndex === -1) return { error: 'Code de récupération invalide.' }
+
+        // Consume the code (remove it)
+        const remaining = storedHashes.filter((_, i) => i !== matchedIndex)
+        await prisma.user.update({
+            where: { id: user.id },
+            data: { recoveryCodes: JSON.stringify(remaining) },
+        })
+
+        // Create session
+        const cookieStore = await cookies()
+        cookieStore.set(SESSION_COOKIE_NAME, user.id, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: SESSION_DURATION,
+            path: '/',
+        })
+
+        if (user.role === 'ADMIN') redirect('/admin')
+        if (redirectTo?.startsWith('/')) redirect(redirectTo)
+        redirect('/dashboard')
+
+    } catch (err: any) {
+        if (err?.digest?.startsWith('NEXT_REDIRECT')) throw err
+        console.error('verifyWithRecoveryCode error:', err)
+        return { error: 'Erreur de vérification.' }
+    }
+}
+
+/** Send OTP to recovery email and let the user verify it. */
+export async function sendRecoveryEmailCode(email: string) {
+    const user = await prisma.user.findUnique({ where: { email } })
+    if (!user || !user.recoveryEmail) {
+        return { error: 'Aucun email de secours configuré.' }
+    }
+
+    const code = Math.floor(100000 + Math.random() * 900000).toString()
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000)
+    const key = `2fa_recovery_${email}`
+
+    try {
+        await prisma.passwordReset.deleteMany({ where: { email: key } })
+        await prisma.passwordReset.create({ data: { email: key, code, expiresAt } })
+
+        const { send2FACodeEmail } = await import('@/lib/mail')
+        // Send to the recovery email (masking destination in logs)
+        await send2FACodeEmail(user.recoveryEmail, user.companyName, code)
+
+        return { success: true, maskedEmail: maskEmail(user.recoveryEmail) }
+    } catch (err) {
+        console.error('sendRecoveryEmailCode error:', err)
+        return { error: 'Impossible d\'envoyer le code de secours.' }
+    }
+}
+
+export async function verifyWithRecoveryEmail(prevState: any, formData: FormData) {
+    const email = formData.get('email') as string
+    const code = formData.get('code') as string
+    const redirectTo = formData.get('redirectTo') as string
+
+    if (!email || !code || code.length !== 6) return { error: 'Code requis (6 chiffres).' }
+
+    const key = `2fa_recovery_${email}`
+    try {
+        const record = await prisma.passwordReset.findFirst({
+            where: { email: key, code, expiresAt: { gt: new Date() } },
+            orderBy: { createdAt: 'desc' },
+        })
+        if (!record) return { error: 'Code invalide ou expiré.' }
+
+        await prisma.passwordReset.deleteMany({ where: { email: key } })
+
+        const user = await prisma.user.findUnique({ where: { email } })
+        if (!user) return { error: 'Utilisateur introuvable.' }
+
+        const cookieStore = await cookies()
+        cookieStore.set(SESSION_COOKIE_NAME, user.id, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: SESSION_DURATION,
+            path: '/',
+        })
+
+        if (user.role === 'ADMIN') redirect('/admin')
+        if (redirectTo?.startsWith('/')) redirect(redirectTo)
+        redirect('/dashboard')
+
+    } catch (err: any) {
+        if (err?.digest?.startsWith('NEXT_REDIRECT')) throw err
+        console.error('verifyWithRecoveryEmail error:', err)
+        return { error: 'Erreur de vérification.' }
+    }
+}
+
+/** Get current user's 2FA recovery settings (for settings page). */
+export async function getRecoverySettings() {
+    const user = await getCurrentUser()
+    if (!user) return null
+    const codes: string[] = JSON.parse((user as any).recoveryCodes || '[]')
+    return {
+        recoveryEmail: (user as any).recoveryEmail as string | null,
+        codesCount: codes.length,
+    }
+}
+
+// ─── Utility ──────────────────────────────────────────────────────────────────
+
+function maskEmail(email: string): string {
+    const [local, domain] = email.split('@')
+    return `${local.slice(0, 2)}${'*'.repeat(Math.max(local.length - 2, 2))}@${domain}`
+}
