@@ -22,7 +22,7 @@ async function testEmail() {
             testEmail,
             'Test Company',
             'Restaurant Website & Online Ordering',
-            2990,
+            4500,
             {
                 accountName: 'Abderrahmane Raquibi',
                 accountNumber: '0000000013350982',
@@ -38,7 +38,7 @@ async function testEmail() {
             testEmail,
             'Test Company',
             'Restaurant Website & Online Ordering',
-            2990
+            4500
         )
         console.log('Result:', result2)
         console.log('')
@@ -48,7 +48,7 @@ async function testEmail() {
             testEmail,
             'Test Company',
             'Restaurant Website & Online Ordering',
-            2990
+            4500
         )
         console.log('Result:', result3)
         console.log('')

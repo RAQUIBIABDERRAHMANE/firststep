@@ -1,13 +1,13 @@
 import prisma from '../lib/prisma'
 
 const servicePrices: Record<string, { price: number; icon: string }> = {
-    'Restaurant Website & Online Ordering': { price: 299, icon: '🍽️' },
+    'Restaurant Website & Online Ordering': { price: 450, icon: '🍽️' },
     'Restaurant POS System': { price: 399, icon: '💳' },
     'Stock Management': { price: 149, icon: '📦' },
     'Car Rental System': { price: 249, icon: '🚗' },
     'Hotel Management System': { price: 399, icon: '🏨' },
     'Hospital Management System': { price: 449, icon: '⚕️' },
-    'Cabinet System': { price: 199, icon: '💼' },
+    'Cabinet System': { price: 200, icon: '💼' },
 }
 
 async function updateServicePrices() {
@@ -18,7 +18,7 @@ async function updateServicePrices() {
 
         for (const service of services) {
             const priceInfo = servicePrices[service.name]
-            
+
             if (priceInfo) {
                 await prisma.service.update({
                     where: { id: service.id },
