@@ -11,12 +11,12 @@ interface BarChartCardProps {
 
 export default function BarChartCard({ data, title, description, color = '#3B82F6' }: BarChartCardProps) {
     return (
-        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-6">
+        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-4 sm:p-6">
             <div className="mb-4">
                 <h3 className="text-sm font-semibold text-slate-900">{title}</h3>
                 {description && <p className="text-xs text-slate-500 mt-0.5">{description}</p>}
             </div>
-            <div className="h-64">
+            <div className="h-44 sm:h-64">
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={data} margin={{ top: 5, right: 5, left: -20, bottom: 5 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />

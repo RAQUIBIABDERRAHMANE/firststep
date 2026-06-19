@@ -23,8 +23,7 @@ export default async function RestaurantLayout({
                 siteName={tenant?.siteName ?? 'Restaurant'}
             />
 
-            {/* Page content — re-apply the same padding the layout uses */}
-            <div className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
+            <div className="flex-1 p-3 sm:p-5 lg:p-8 max-w-7xl w-full mx-auto">
                 {children}
             </div>
         </div>

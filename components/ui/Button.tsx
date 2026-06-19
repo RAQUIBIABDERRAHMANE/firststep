@@ -7,14 +7,14 @@ const buttonVariants = cva(
     {
         variants: {
             variant: {
-                default: "bg-gradient-to-r from-primary via-primary to-accent text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 hover:scale-105 active:scale-100 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700",
+                default: "bg-gradient-to-r from-primary via-primary to-accent text-white shadow-lg shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 hover:scale-105 active:scale-100 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700",
                 destructive:
-                    "bg-gradient-to-r from-destructive to-red-600 text-destructive-foreground shadow-lg shadow-destructive/30 hover:shadow-xl hover:shadow-destructive/40 hover:scale-105 active:scale-100",
+                    "bg-gradient-to-r from-destructive to-red-600 text-white shadow-lg shadow-destructive/30 hover:shadow-xl hover:shadow-destructive/40 hover:scale-105 active:scale-100",
                 outline:
-                    "border-2 border-primary/30 bg-background/50 backdrop-blur-sm hover:bg-primary/10 hover:border-primary hover:scale-105 active:scale-100 text-foreground",
+                    "border border-slate-300 bg-white hover:bg-slate-50 hover:border-slate-400 hover:scale-105 active:scale-100 text-slate-700 font-medium",
                 secondary:
-                    "bg-secondary/80 text-secondary-foreground shadow-md hover:bg-secondary hover:shadow-lg hover:scale-105 active:scale-100",
-                ghost: "hover:bg-accent/10 hover:text-accent-foreground hover:scale-105 active:scale-100",
+                    "bg-blue-50 text-blue-700 font-medium shadow-sm hover:bg-blue-100 hover:shadow-md hover:scale-105 active:scale-100",
+                ghost: "text-slate-600 hover:bg-slate-100 hover:text-slate-900 hover:scale-105 active:scale-100",
                 link: "text-primary underline-offset-4 hover:underline",
             },
             size: {

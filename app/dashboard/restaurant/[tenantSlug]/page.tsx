@@ -60,80 +60,80 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
     return (
         <div className="space-y-8 animate-fade-in max-w-6xl">
             <AutoRefresh />
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-3">
-                        <LayoutDashboard className="text-blue-600" /> Restaurant Admin
+                    <h1 className="text-xl sm:text-3xl font-bold tracking-tight text-foreground flex items-center gap-2 sm:gap-3">
+                        <LayoutDashboard className="text-blue-600 h-5 w-5 sm:h-6 sm:w-6" /> Restaurant Admin
                     </h1>
-                    <p className="text-muted-foreground mt-1">
+                    <p className="text-muted-foreground mt-1 text-sm">
                         Manage your digital menu, floor plan, and incoming orders.
                     </p>
                 </div>
-                <Link href={`/${tenant.slug}`} target="_blank">
-                    <Button variant="outline" className="gap-2 rounded-xl">
+                <Link href={`/${tenant.slug}`} target="_blank" className="self-start sm:self-auto">
+                    <Button variant="outline" className="gap-2 rounded-xl text-sm h-9">
                         View Live Site <ExternalLink size={14} />
                     </Button>
                 </Link>
             </div>
 
             {/* Stats Overview */}
-            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-                <Card className="glass-card shadow-none border-slate-200/60 overflow-hidden group">
+            <div className="grid gap-3 sm:gap-4 grid-cols-2 sm:grid-cols-3 xl:grid-cols-5">
+                <Card className="shadow-none border-slate-200 overflow-hidden group">
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
-                        <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-widest">Active Tables</CardTitle>
+                        <CardTitle className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Active Tables</CardTitle>
                         <MapPin size={18} className="text-blue-500" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-4xl font-black text-foreground">{tableCount}</div>
-                        <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1 font-bold">
+                        <div className="text-4xl font-black text-slate-900">{tableCount}</div>
+                        <p className="text-xs text-slate-500 mt-2 flex items-center gap-1 font-bold">
                             <TrendingUp size={12} className="text-emerald-500" /> Managed physical points
                         </p>
                     </CardContent>
                 </Card>
-                <Card className="glass-card shadow-none border-slate-200/60 overflow-hidden group">
+                <Card className="shadow-none border-slate-200 overflow-hidden group">
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
-                        <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-widest">Menu Items</CardTitle>
+                        <CardTitle className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Menu Items</CardTitle>
                         <Utensils size={18} className="text-orange-500" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-4xl font-black text-foreground">{menuCount}</div>
-                        <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1 font-bold">
+                        <div className="text-4xl font-black text-slate-900">{menuCount}</div>
+                        <p className="text-xs text-slate-500 mt-2 flex items-center gap-1 font-bold">
                             <TrendingUp size={12} className="text-emerald-500" /> Live products
                         </p>
                     </CardContent>
                 </Card>
-                <Card className="glass-card shadow-none border-slate-200/60 overflow-hidden group">
+                <Card className="shadow-none border-slate-200 overflow-hidden group">
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
-                        <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-widest">Total Orders</CardTitle>
+                        <CardTitle className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Total Orders</CardTitle>
                         <ClipboardList size={18} className="text-emerald-500" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-4xl font-black text-foreground">{orderCount}</div>
-                        <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1 font-bold">
+                        <div className="text-4xl font-black text-slate-900">{orderCount}</div>
+                        <p className="text-xs text-slate-500 mt-2 flex items-center gap-1 font-bold">
                             <TrendingUp size={12} className="text-emerald-500" /> Transactions processed
                         </p>
                     </CardContent>
                 </Card>
-                <Card className="glass-card shadow-none border-slate-200/60 overflow-hidden group">
+                <Card className="shadow-none border-slate-200 overflow-hidden group">
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
-                        <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-widest">Waiters</CardTitle>
+                        <CardTitle className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Waiters</CardTitle>
                         <UserCheck size={18} className="text-indigo-500" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-4xl font-black text-foreground">{waiterCount}</div>
-                        <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1 font-bold">
+                        <div className="text-4xl font-black text-slate-900">{waiterCount}</div>
+                        <p className="text-xs text-slate-500 mt-2 flex items-center gap-1 font-bold">
                             <TrendingUp size={12} className="text-emerald-500" /> Staff members
                         </p>
                     </CardContent>
                 </Card>
-                <Card className="glass-card shadow-none border-slate-200/60 overflow-hidden group">
+                <Card className="shadow-none border-slate-200 overflow-hidden group">
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
-                        <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-widest">Reservations</CardTitle>
+                        <CardTitle className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Reservations</CardTitle>
                         <CalendarCheck size={18} className="text-pink-500" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-4xl font-black text-foreground">{pendingReservations}</div>
-                        <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1 font-bold">
+                        <div className="text-4xl font-black text-slate-900">{pendingReservations}</div>
+                        <p className="text-xs text-slate-500 mt-2 flex items-center gap-1 font-bold">
                             <TrendingUp size={12} className="text-pink-500" /> Pending requests
                         </p>
                     </CardContent>
@@ -199,19 +199,18 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                 </div>
             )}
 
-            {/* Management Portal */}
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-3 sm:gap-6 md:grid-cols-2">
                 <Link href={`/dashboard/restaurant/${tenantSlug}/menu`}>
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-blue-500/50 hover:bg-blue-50/10 transition-all group p-5 sm:p-6 h-full">
-                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
-                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-blue-100 flex items-center justify-center text-blue-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
-                                <Utensils size={24} className="sm:h-7 sm:w-7" />
+                    <Card className="shadow-none border-slate-200 hover:border-blue-500/50 hover:bg-blue-50/10 transition-all group p-4 sm:p-6 h-full">
+                        <div className="flex gap-3 sm:gap-6 items-start">
+                            <div className="h-10 w-10 sm:h-14 sm:w-14 rounded-2xl bg-blue-100 flex items-center justify-center text-blue-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
+                                <Utensils size={20} className="sm:h-7 sm:w-7" />
                             </div>
-                            <div className="flex-1">
-                                <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
-                                    Menu Management <ChevronRight size={18} className="text-slate-300 group-hover:text-blue-500 transition-colors shrink-0" />
+                            <div className="flex-1 min-w-0">
+                                <h3 className="text-base sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
+                                    Menu Management <ChevronRight size={16} className="text-slate-300 group-hover:text-blue-500 transition-colors shrink-0" />
                                 </h3>
-                                <p className="text-slate-500 text-sm leading-relaxed">
+                                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
                                     Edit your dishes, categories, and pricing in real-time. Changes reflect instantly on your website.
                                 </p>
                             </div>
@@ -220,16 +219,16 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                 </Link>
 
                 <Link href={`/dashboard/restaurant/${tenantSlug}/tables`}>
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-blue-500/50 hover:bg-blue-50/10 transition-all group p-5 sm:p-6 h-full">
-                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
-                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
-                                <MapPin size={24} className="sm:h-7 sm:w-7" />
+                    <Card className="shadow-none border-slate-200 hover:border-blue-500/50 hover:bg-blue-50/10 transition-all group p-4 sm:p-6 h-full">
+                        <div className="flex gap-3 sm:gap-6 items-start">
+                            <div className="h-10 w-10 sm:h-14 sm:w-14 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
+                                <MapPin size={20} className="sm:h-7 sm:w-7" />
                             </div>
-                            <div className="flex-1">
-                                <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
-                                    Table Management <ChevronRight size={18} className="text-slate-300 group-hover:text-indigo-500 transition-colors shrink-0" />
+                            <div className="flex-1 min-w-0">
+                                <h3 className="text-base sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
+                                    Table Management <ChevronRight size={16} className="text-slate-300 group-hover:text-indigo-500 transition-colors shrink-0" />
                                 </h3>
-                                <p className="text-slate-500 text-sm leading-relaxed">
+                                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
                                     Assign QR codes to your physical tables so customers can scan and order directly from their phone.
                                 </p>
                             </div>
@@ -238,17 +237,17 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                 </Link>
 
                 <Link href={`/dashboard/restaurant/${tenantSlug}/design`}>
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-purple-500/50 hover:bg-purple-50/10 transition-all group p-5 sm:p-6 h-full">
-                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
-                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-purple-100 flex items-center justify-center text-purple-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
-                                <Paintbrush size={24} className="sm:h-7 sm:w-7" />
+                    <Card className="shadow-none border-slate-200 hover:border-purple-500/50 hover:bg-purple-50/10 transition-all group p-4 sm:p-6 h-full">
+                        <div className="flex gap-3 sm:gap-6 items-start">
+                            <div className="h-10 w-10 sm:h-14 sm:w-14 rounded-2xl bg-purple-100 flex items-center justify-center text-purple-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
+                                <Paintbrush size={20} className="sm:h-7 sm:w-7" />
                             </div>
-                            <div className="flex-1">
-                                <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
-                                    Design Studio <ChevronRight size={18} className="text-slate-300 group-hover:text-purple-500 transition-colors shrink-0" />
+                            <div className="flex-1 min-w-0">
+                                <h3 className="text-base sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
+                                    Design Studio <ChevronRight size={16} className="text-slate-300 group-hover:text-purple-500 transition-colors shrink-0" />
                                 </h3>
-                                <p className="text-slate-500 text-sm leading-relaxed">
-                                    Customize your restaurant's look and feel. Choose from premium templates.
+                                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                                    Customize your restaurant&apos;s look and feel. Choose from premium templates.
                                 </p>
                             </div>
                         </div>
@@ -256,16 +255,16 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                 </Link>
 
                 <Link href={`/dashboard/restaurant/${tenantSlug}/waiters`}>
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-indigo-500/50 hover:bg-indigo-50/10 transition-all group p-5 sm:p-6 h-full">
-                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
-                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
-                                <Users size={24} className="sm:h-7 sm:w-7" />
+                    <Card className="shadow-none border-slate-200 hover:border-indigo-500/50 hover:bg-indigo-50/10 transition-all group p-4 sm:p-6 h-full">
+                        <div className="flex gap-3 sm:gap-6 items-start">
+                            <div className="h-10 w-10 sm:h-14 sm:w-14 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
+                                <Users size={20} className="sm:h-7 sm:w-7" />
                             </div>
-                            <div className="flex-1">
-                                <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
-                                    Waiter Management <ChevronRight size={18} className="text-slate-300 group-hover:text-indigo-500 transition-colors shrink-0" />
+                            <div className="flex-1 min-w-0">
+                                <h3 className="text-base sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
+                                    Waiter Management <ChevronRight size={16} className="text-slate-300 group-hover:text-indigo-500 transition-colors shrink-0" />
                                 </h3>
-                                <p className="text-slate-500 text-sm leading-relaxed">
+                                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
                                     Create staff accounts with PINs and assign tables so waiters can manage their own orders.
                                 </p>
                             </div>
@@ -274,16 +273,16 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                 </Link>
 
                 <Link href={`/dashboard/restaurant/${tenantSlug}/reservations`}>
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-pink-500/50 hover:bg-pink-50/10 transition-all group p-5 sm:p-6 h-full">
-                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
-                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-pink-100 flex items-center justify-center text-pink-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
-                                <CalendarCheck size={24} className="sm:h-7 sm:w-7" />
+                    <Card className="shadow-none border-slate-200 hover:border-pink-500/50 hover:bg-pink-50/10 transition-all group p-4 sm:p-6 h-full">
+                        <div className="flex gap-3 sm:gap-6 items-start">
+                            <div className="h-10 w-10 sm:h-14 sm:w-14 rounded-2xl bg-pink-100 flex items-center justify-center text-pink-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
+                                <CalendarCheck size={20} className="sm:h-7 sm:w-7" />
                             </div>
-                            <div className="flex-1">
-                                <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
-                                    Table Reservations <ChevronRight size={18} className="text-slate-300 group-hover:text-pink-500 transition-colors shrink-0" />
+                            <div className="flex-1 min-w-0">
+                                <h3 className="text-base sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
+                                    Table Reservations <ChevronRight size={16} className="text-slate-300 group-hover:text-pink-500 transition-colors shrink-0" />
                                 </h3>
-                                <p className="text-slate-500 text-sm leading-relaxed">
+                                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
                                     Manage incoming booking requests from your customers. Approve or cancel reservations.
                                 </p>
                             </div>
@@ -292,16 +291,16 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                 </Link>
 
                 <Link href={`/dashboard/restaurant/${tenantSlug}/reports`}>
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-violet-500/50 hover:bg-violet-50/10 transition-all group p-5 sm:p-6 h-full">
-                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start">
-                            <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl bg-violet-100 flex items-center justify-center text-violet-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
-                                <BarChart3 size={24} className="sm:h-7 sm:w-7" />
+                    <Card className="shadow-none border-slate-200 hover:border-violet-500/50 hover:bg-violet-50/10 transition-all group p-4 sm:p-6 h-full">
+                        <div className="flex gap-3 sm:gap-6 items-start">
+                            <div className="h-10 w-10 sm:h-14 sm:w-14 rounded-2xl bg-violet-100 flex items-center justify-center text-violet-600 shadow-sm transition-transform duration-500 group-hover:scale-110 shrink-0">
+                                <BarChart3 size={20} className="sm:h-7 sm:w-7" />
                             </div>
-                            <div className="flex-1">
-                                <h3 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
-                                    Rapports Mensuels <ChevronRight size={18} className="text-slate-300 group-hover:text-violet-500 transition-colors shrink-0" />
+                            <div className="flex-1 min-w-0">
+                                <h3 className="text-base sm:text-xl font-bold mb-1 sm:mb-2 flex items-center gap-2">
+                                    Rapports Mensuels <ChevronRight size={16} className="text-slate-300 group-hover:text-violet-500 transition-colors shrink-0" />
                                 </h3>
-                                <p className="text-slate-500 text-sm leading-relaxed">
+                                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
                                     Rapports PDF envoyés par email le 1er de chaque mois.
                                 </p>
                             </div>
@@ -310,20 +309,20 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                 </Link>
 
                 <Link href={`/dashboard/restaurant/${tenantSlug}/orders`} className="md:col-span-2">
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-emerald-500/50 hover:bg-emerald-50/10 transition-all group p-5 sm:p-8">
-                        <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start">
-                            <div className="h-16 w-16 md:h-20 md:w-20 rounded-3xl bg-emerald-100 flex items-center justify-center text-emerald-600 shadow-sm shrink-0 transition-transform duration-500 group-hover:scale-110">
-                                <ClipboardList size={32} className="md:h-10 md:w-10" />
+                    <Card className="shadow-none border-slate-200 hover:border-emerald-500/50 hover:bg-emerald-50/10 transition-all group p-4 sm:p-8">
+                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center">
+                            <div className="h-12 w-12 sm:h-20 sm:w-20 rounded-3xl bg-emerald-100 flex items-center justify-center text-emerald-600 shadow-sm shrink-0 transition-transform duration-500 group-hover:scale-110">
+                                <ClipboardList size={24} className="sm:h-10 sm:w-10" />
                             </div>
-                            <div className="flex-1 text-center md:text-left">
-                                <h3 className="text-xl md:text-2xl font-black mb-2 md:mb-3 flex items-center justify-center md:justify-start gap-2 md:gap-3">
-                                    Live Orders Monitor <ChevronRight size={24} className="text-slate-300 group-hover:text-emerald-500 transition-colors shrink-0" />
+                            <div className="flex-1">
+                                <h3 className="text-lg sm:text-2xl font-black mb-1 sm:mb-3 flex items-center gap-2 sm:gap-3">
+                                    Live Orders Monitor <ChevronRight size={20} className="text-slate-300 group-hover:text-emerald-500 transition-colors shrink-0" />
                                 </h3>
-                                <p className="text-slate-500 text-base md:text-lg">
+                                <p className="text-slate-500 text-sm sm:text-lg">
                                     Track incoming orders across all your tables. Update statuses from cooking to served in real-time.
                                 </p>
                             </div>
-                            <Button size="lg" className="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 h-12 md:h-16 px-6 md:px-10 rounded-xl md:rounded-2xl text-base md:text-xl font-black shadow-xl shadow-emerald-500/20 active:scale-95 shrink-0 mt-4 md:mt-0">
+                            <Button className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 h-11 sm:h-16 px-6 sm:px-10 rounded-xl sm:rounded-2xl text-base sm:text-xl font-black shadow-xl shadow-emerald-500/20 active:scale-95 shrink-0">
                                 Launch Monitor
                             </Button>
                         </div>
@@ -331,20 +330,20 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
                 </Link>
 
                 <Link href={`/dashboard/restaurant/${tenantSlug}/analytics`} className="md:col-span-2">
-                    <Card className="glass-card shadow-none border-slate-200/60 hover:border-cyan-500/50 hover:bg-cyan-50/10 transition-all group p-5 sm:p-8">
-                        <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center md:items-start">
-                            <div className="h-16 w-16 md:h-20 md:w-20 rounded-3xl bg-cyan-100 flex items-center justify-center text-cyan-600 shadow-sm shrink-0 transition-transform duration-500 group-hover:scale-110">
-                                <TrendingUp size={32} className="md:h-10 md:w-10" />
+                    <Card className="shadow-none border-slate-200 hover:border-cyan-500/50 hover:bg-cyan-50/10 transition-all group p-4 sm:p-8">
+                        <div className="flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center">
+                            <div className="h-12 w-12 sm:h-20 sm:w-20 rounded-3xl bg-cyan-100 flex items-center justify-center text-cyan-600 shadow-sm shrink-0 transition-transform duration-500 group-hover:scale-110">
+                                <TrendingUp size={24} className="sm:h-10 sm:w-10" />
                             </div>
-                            <div className="flex-1 text-center md:text-left">
-                                <h3 className="text-xl md:text-2xl font-black mb-2 md:mb-3 flex items-center justify-center md:justify-start gap-2 md:gap-3">
-                                    Analytique Live <ChevronRight size={24} className="text-slate-300 group-hover:text-cyan-500 transition-colors shrink-0" />
+                            <div className="flex-1">
+                                <h3 className="text-lg sm:text-2xl font-black mb-1 sm:mb-3 flex items-center gap-2 sm:gap-3">
+                                    Analytique Live <ChevronRight size={20} className="text-slate-300 group-hover:text-cyan-500 transition-colors shrink-0" />
                                 </h3>
-                                <p className="text-slate-500 text-base md:text-lg">
+                                <p className="text-slate-500 text-sm sm:text-lg">
                                     Explorez vos revenus, ventes par tranche avec filtre jour, mois, année.
                                 </p>
                             </div>
-                            <Button size="lg" className="w-full md:w-auto bg-cyan-600 hover:bg-cyan-700 h-12 md:h-16 px-6 md:px-10 rounded-xl md:rounded-2xl text-base md:text-xl font-black shadow-xl shadow-cyan-500/20 active:scale-95 shrink-0 mt-4 md:mt-0">
+                            <Button className="w-full sm:w-auto bg-cyan-600 hover:bg-cyan-700 h-11 sm:h-16 px-6 sm:px-10 rounded-xl sm:rounded-2xl text-base sm:text-xl font-black shadow-xl shadow-cyan-500/20 active:scale-95 shrink-0">
                                 Voir Rapports
                             </Button>
                         </div>

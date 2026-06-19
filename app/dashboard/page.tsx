@@ -110,45 +110,45 @@ export default async function DashboardPage() {
             <AutoRefresh />
             {/* Header */}
             <div>
-                <h1 className="text-2xl font-bold tracking-tight text-slate-900">{user.companyName}</h1>
+                <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">{user.companyName}</h1>
                 <p className="text-sm text-slate-500 mt-1">Vue d&apos;ensemble de vos services</p>
             </div>
 
             {/* KPI Cards */}
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
                 <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-5">
                     <div className="flex items-center justify-between mb-3">
-                        <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Services actifs</span>
+                        <span className="text-[10px] sm:text-xs font-medium text-slate-500 uppercase tracking-wider">Services actifs</span>
                         <div className="h-8 w-8 rounded-lg bg-blue-50 flex items-center justify-center">
                             <Layers className="h-4 w-4 text-blue-600" />
                         </div>
                     </div>
-                    <div className="text-3xl font-bold text-slate-900">{userServices.length}</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-slate-900">{userServices.length}</div>
                     <p className="text-xs text-slate-400 mt-1">Abonnements en cours</p>
                 </div>
                 <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-5">
                     <div className="flex items-center justify-between mb-3">
-                        <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Sites web</span>
+                        <span className="text-[10px] sm:text-xs font-medium text-slate-500 uppercase tracking-wider">Sites web</span>
                         <div className="h-8 w-8 rounded-lg bg-emerald-50 flex items-center justify-center">
                             <Globe className="h-4 w-4 text-emerald-600" />
                         </div>
                     </div>
-                    <div className="text-3xl font-bold text-slate-900">{websiteInstances.length}</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-slate-900">{websiteInstances.length}</div>
                     <p className="text-xs text-slate-400 mt-1">Instances déployées</p>
                 </div>
                 <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-5">
                     <div className="flex items-center justify-between mb-3">
-                        <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Paiements</span>
+                        <span className="text-[10px] sm:text-xs font-medium text-slate-500 uppercase tracking-wider">Paiements</span>
                         <div className="h-8 w-8 rounded-lg bg-amber-50 flex items-center justify-center">
                             <CreditCard className="h-4 w-4 text-amber-600" />
                         </div>
                     </div>
-                    <div className="text-3xl font-bold text-slate-900">{totalPaid.toLocaleString('fr-FR')} <span className="text-base font-medium text-slate-400">MAD</span></div>
+                    <div className="text-2xl sm:text-3xl font-bold text-slate-900">{totalPaid.toLocaleString('fr-FR')} <span className="text-sm font-medium text-slate-400">MAD</span></div>
                     <p className="text-xs text-slate-400 mt-1">{paidPayments.length} transactions</p>
                 </div>
-                <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-5">
+                <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-4 sm:p-5">
                     <div className="flex items-center justify-between mb-3">
-                        <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">Statut</span>
+                        <span className="text-[10px] sm:text-xs font-medium text-slate-500 uppercase tracking-wider">Statut</span>
                         <div className="h-8 w-8 rounded-lg bg-green-50 flex items-center justify-center">
                             <Activity className="h-4 w-4 text-green-600" />
                         </div>
@@ -173,15 +173,15 @@ export default async function DashboardPage() {
                         </div>
                         <h2 className="text-sm font-semibold text-slate-900">Restaurant</h2>
                     </div>
-                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-5">
-                            <div className="flex items-center gap-3 mb-3">
-                                <div className="h-9 w-9 rounded-xl bg-orange-50 flex items-center justify-center">
-                                    <ShoppingCart className="h-4.5 w-4.5 text-orange-600" />
+                    <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
+                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-3 sm:p-5">
+                            <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                                <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-orange-50 flex items-center justify-center shrink-0">
+                                    <ShoppingCart className="h-4 w-4 text-orange-600" />
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-500">Commandes</p>
-                                    <p className="text-xl font-bold text-slate-900">{restaurantOrders.length}</p>
+                                    <p className="text-[10px] sm:text-xs text-slate-500">Commandes</p>
+                                    <p className="text-lg sm:text-xl font-bold text-slate-900">{restaurantOrders.length}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-1.5 text-xs text-emerald-600">
@@ -189,36 +189,36 @@ export default async function DashboardPage() {
                                 <span>{completedOrders} complétées</span>
                             </div>
                         </div>
-                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-5">
-                            <div className="flex items-center gap-3 mb-3">
-                                <div className="h-9 w-9 rounded-xl bg-emerald-50 flex items-center justify-center">
-                                    <TrendingUp className="h-4.5 w-4.5 text-emerald-600" />
+                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-3 sm:p-5">
+                            <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                                <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0">
+                                    <TrendingUp className="h-4 w-4 text-emerald-600" />
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-500">Revenu</p>
-                                    <p className="text-xl font-bold text-slate-900">{restaurantRevenue.toLocaleString('fr-FR')} <span className="text-sm font-medium text-slate-400">MAD</span></p>
+                                    <p className="text-[10px] sm:text-xs text-slate-500">Revenu</p>
+                                    <p className="text-base sm:text-xl font-bold text-slate-900">{restaurantRevenue.toLocaleString('fr-FR')} <span className="text-xs font-medium text-slate-400">MAD</span></p>
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-5">
-                            <div className="flex items-center gap-3 mb-3">
-                                <div className="h-9 w-9 rounded-xl bg-amber-50 flex items-center justify-center">
-                                    <UtensilsCrossed className="h-4.5 w-4.5 text-amber-600" />
+                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-3 sm:p-5">
+                            <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                                <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-amber-50 flex items-center justify-center shrink-0">
+                                    <UtensilsCrossed className="h-4 w-4 text-amber-600" />
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-500">Plats</p>
-                                    <p className="text-xl font-bold text-slate-900">{restaurantDishes}</p>
+                                    <p className="text-[10px] sm:text-xs text-slate-500">Plats</p>
+                                    <p className="text-lg sm:text-xl font-bold text-slate-900">{restaurantDishes}</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-5">
-                            <div className="flex items-center gap-3 mb-3">
-                                <div className="h-9 w-9 rounded-xl bg-blue-50 flex items-center justify-center">
-                                    <Layers className="h-4.5 w-4.5 text-blue-600" />
+                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-3 sm:p-5">
+                            <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                                <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+                                    <Layers className="h-4 w-4 text-blue-600" />
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-500">Tables</p>
-                                    <p className="text-xl font-bold text-slate-900">{restaurantTables}</p>
+                                    <p className="text-[10px] sm:text-xs text-slate-500">Tables</p>
+                                    <p className="text-lg sm:text-xl font-bold text-slate-900">{restaurantTables}</p>
                                 </div>
                             </div>
                         </div>
@@ -240,26 +240,26 @@ export default async function DashboardPage() {
                         </div>
                         <h2 className="text-sm font-semibold text-slate-900">Cabinet</h2>
                     </div>
-                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-5">
-                            <div className="flex items-center gap-3 mb-3">
-                                <div className="h-9 w-9 rounded-xl bg-violet-50 flex items-center justify-center">
-                                    <Users className="h-4.5 w-4.5 text-violet-600" />
+                    <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
+                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-3 sm:p-5">
+                            <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                                <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-violet-50 flex items-center justify-center shrink-0">
+                                    <Users className="h-4 w-4 text-violet-600" />
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-500">Clients</p>
-                                    <p className="text-xl font-bold text-slate-900">{cabinetClients}</p>
+                                    <p className="text-[10px] sm:text-xs text-slate-500">Clients</p>
+                                    <p className="text-lg sm:text-xl font-bold text-slate-900">{cabinetClients}</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-5">
-                            <div className="flex items-center gap-3 mb-3">
-                                <div className="h-9 w-9 rounded-xl bg-blue-50 flex items-center justify-center">
-                                    <CalendarDays className="h-4.5 w-4.5 text-blue-600" />
+                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-3 sm:p-5">
+                            <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                                <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-blue-50 flex items-center justify-center shrink-0">
+                                    <CalendarDays className="h-4 w-4 text-blue-600" />
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-500">Rendez-vous</p>
-                                    <p className="text-xl font-bold text-slate-900">{cabinetAppointments.length}</p>
+                                    <p className="text-[10px] sm:text-xs text-slate-500">Rendez-vous</p>
+                                    <p className="text-lg sm:text-xl font-bold text-slate-900">{cabinetAppointments.length}</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-3 text-xs">
@@ -268,25 +268,25 @@ export default async function DashboardPage() {
                                 <span className="text-amber-600">{upcomingAppointments} à venir</span>
                             </div>
                         </div>
-                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-5">
-                            <div className="flex items-center gap-3 mb-3">
-                                <div className="h-9 w-9 rounded-xl bg-emerald-50 flex items-center justify-center">
-                                    <Briefcase className="h-4.5 w-4.5 text-emerald-600" />
+                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-3 sm:p-5">
+                            <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                                <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0">
+                                    <Briefcase className="h-4 w-4 text-emerald-600" />
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-500">Services</p>
-                                    <p className="text-xl font-bold text-slate-900">{cabinetServices}</p>
+                                    <p className="text-[10px] sm:text-xs text-slate-500">Services</p>
+                                    <p className="text-lg sm:text-xl font-bold text-slate-900">{cabinetServices}</p>
                                 </div>
                             </div>
                         </div>
-                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-5">
-                            <div className="flex items-center gap-3 mb-3">
-                                <div className="h-9 w-9 rounded-xl bg-green-50 flex items-center justify-center">
-                                    <Activity className="h-4.5 w-4.5 text-green-600" />
+                        <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-3 sm:p-5">
+                            <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                                <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-xl bg-green-50 flex items-center justify-center shrink-0">
+                                    <Activity className="h-4 w-4 text-green-600" />
                                 </div>
                                 <div>
-                                    <p className="text-xs text-slate-500">Taux complétion</p>
-                                    <p className="text-xl font-bold text-slate-900">{cabinetAppointments.length > 0 ? Math.round((completedAppointments / cabinetAppointments.length) * 100) : 0}%</p>
+                                    <p className="text-[10px] sm:text-xs text-slate-500">Taux complétion</p>
+                                    <p className="text-lg sm:text-xl font-bold text-slate-900">{cabinetAppointments.length > 0 ? Math.round((completedAppointments / cabinetAppointments.length) * 100) : 0}%</p>
                                 </div>
                             </div>
                         </div>
@@ -325,7 +325,7 @@ export default async function DashboardPage() {
                         </Link>
                     </div>
                 ) : (
-                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                         {websiteInstances.map((site) => (
                             <div key={site.id} className="bg-white rounded-2xl border border-slate-200/60 shadow-sm p-5 group hover:shadow-md hover:border-blue-200 transition-all">
                                 <div className="flex items-start justify-between mb-3">

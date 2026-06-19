@@ -261,11 +261,11 @@
 }
 
 .glass-card {
-  @apply bg-card/80 backdrop-blur-sm border border-border/50 shadow-lg transition-all duration-300;
+  @apply bg-white border border-slate-200 shadow-sm transition-all duration-300;
 }
 
 .glass-card:hover {
-  @apply shadow-2xl shadow-primary/10 border-primary/30 -translate-y-1;
+  @apply shadow-md -translate-y-0.5;
 }
 
 /* Gradient Backgrounds */

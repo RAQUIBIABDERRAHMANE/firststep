@@ -353,8 +353,8 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
                         </div>
                     ) : (
                         initialCategories.map((cat) => (
-                            <Card key={cat.id} className={`overflow-hidden border-slate-200/60 shadow-none rounded-4xl transition-all ${!cat.isActive ? 'opacity-60 bg-slate-50' : 'bg-white'}`}>
-                                <CardHeader className="bg-slate-50/50 backdrop-blur-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-4 sm:py-6 px-5 sm:px-8 border-b border-slate-100">
+                            <Card key={cat.id} className={`overflow-hidden border-slate-200 shadow-none rounded-4xl transition-all ${!cat.isActive ? 'opacity-60 bg-slate-50' : 'bg-white'}`}>
+                                <CardHeader className="bg-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-4 sm:py-6 px-5 sm:px-8 border-b border-slate-200">
                                     <div className="flex items-center gap-4 flex-1 w-full">
                                         <div className={`h-12 w-12 rounded-2xl flex items-center justify-center shadow-sm ring-1 ring-slate-200/50 shrink-0 ${cat.isActive ? 'bg-white text-blue-600' : 'bg-slate-200 text-slate-400'}`}>
                                             <Tag size={20} />
@@ -377,7 +377,7 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
                                                 </div>
                                             ) : (
                                                 <div className="flex items-center gap-3">
-                                                    <CardTitle className="text-xl sm:text-2xl font-black truncate">{cat.name}</CardTitle>
+                                                    <CardTitle className="text-xl sm:text-2xl font-black text-slate-900 truncate">{cat.name}</CardTitle>
                                                     <Button variant="ghost" size="icon" className="h-8 w-8 text-slate-400 hover:text-blue-600 shrink-0" onClick={() => { setEditingCat(cat.id); setTempCatName(cat.name); }}>
                                                         <Edit2 size={14} />
                                                     </Button>
@@ -427,12 +427,12 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
                                                     </div>
                                                     <div className="min-w-0 flex-1">
                                                         <div className="flex items-center gap-2 mb-1 flex-wrap">
-                                                            <h4 className="font-bold text-base sm:text-lg truncate">{dish.name}</h4>
+                                                            <h4 className="font-bold text-base sm:text-lg text-slate-900 truncate">{dish.name}</h4>
                                                             {!dish.isActive && (
                                                                 <span className="text-[9px] bg-rose-100 text-rose-600 px-1.5 py-0.5 rounded font-black uppercase shrink-0">{t.out_of_stock}</span>
                                                             )}
                                                         </div>
-                                                        <p className="text-xs sm:text-sm text-slate-500 max-w-md line-clamp-1 italic">{dish.description || 'No description.'}</p>
+                                                        <p className="text-xs sm:text-sm text-slate-600 max-w-md line-clamp-1 italic">{dish.description || 'No description.'}</p>
                                                     </div>
                                                 </div>
                                                 <div className="flex items-center justify-between sm:justify-end gap-4 sm:gap-8 w-full sm:w-auto pt-3 sm:pt-0 border-t border-slate-100 sm:border-0">

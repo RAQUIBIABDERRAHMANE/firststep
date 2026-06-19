@@ -41,9 +41,9 @@ export default function RestaurantSubNav({ tenantSlug, siteName }: RestaurantSub
 
     return (
         <div className="sticky top-14 lg:top-0 z-10 bg-white border-b border-slate-200 shadow-sm w-full">
-            <div className="flex items-center gap-1 overflow-x-auto px-4 sm:px-6 lg:px-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' } as React.CSSProperties}>
+            <div className="flex items-center gap-0 overflow-x-auto px-2 sm:px-4 lg:px-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' } as React.CSSProperties}>
                 {/* Restaurant name badge */}
-                <div className="flex items-center gap-1.5 pr-3 mr-1 border-r border-slate-200 shrink-0 py-3">
+                <div className="hidden sm:flex items-center gap-1.5 pr-3 mr-1 border-r border-slate-200 shrink-0 py-3">
                     <div className="h-6 w-6 rounded-md bg-blue-50 border border-blue-100 flex items-center justify-center">
                         <Utensils size={12} className="text-blue-500" />
                     </div>
@@ -63,7 +63,7 @@ export default function RestaurantSubNav({ tenantSlug, siteName }: RestaurantSub
                             key={tab.href}
                             href={tab.href}
                             className={cn(
-                                'flex items-center gap-1.5 px-3 py-3.5 text-[11px] font-bold uppercase tracking-wider whitespace-nowrap border-b-2 transition-all shrink-0',
+                                'flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-3 sm:py-3.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider whitespace-nowrap border-b-2 transition-all shrink-0',
                                 isActive
                                     ? 'border-blue-500 text-blue-600'
                                     : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'
