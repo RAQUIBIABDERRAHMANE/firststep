@@ -5,7 +5,7 @@ import { useState, useTransition, Suspense } from 'react'
 import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/Input'
 import { signUp } from '@/app/actions/auth'
-import Globe from './Globe'
+import { SpiralAnimation } from '@/components/ui/spiral-animation'
 import {
     Download,
     Wand2,
@@ -162,9 +162,9 @@ export default function HeroSection() {
 
             <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#030712]">
 
-                {/* ── 3D Web Experience (Cobe Globe) ── */}
-                <div className="absolute inset-0 w-full h-full flex items-center justify-center z-0 opacity-60 mix-blend-screen pointer-events-none overflow-hidden" style={{ top: '20%' }}>
-                    <Globe />
+                {/* ── 3D Web Experience (Spiral Animation) ── */}
+                <div className="absolute inset-0 w-full h-full flex items-center justify-center z-0 mix-blend-screen pointer-events-none overflow-hidden">
+                    <SpiralAnimation />
                 </div>
 
                 {/* ── Overlays ── */}
