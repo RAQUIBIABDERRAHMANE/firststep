@@ -39,13 +39,13 @@ export default function Globe() {
                 // Morocco
                 { location: [31.7917, -7.0926], size: 0.1 },
             ],
-            onRender: (state) => {
+            onRender: (state: Record<string, any>) => {
                 state.phi = phi
                 phi += 0.003
                 state.width = width * 2
                 state.height = width * 2
             },
-        })
+        } as any)
 
         return () => {
             globe.destroy()
