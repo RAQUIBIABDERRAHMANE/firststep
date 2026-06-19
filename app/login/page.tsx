@@ -139,7 +139,7 @@ function LoginForm() {
             const result = await signIn(null, formData)
             if (!result) return // redirected
             if ('error' in result) {
-                setError(result.error)
+                setError(result.error ?? null)
                 return
             }
             if (result.requires2FA) {
