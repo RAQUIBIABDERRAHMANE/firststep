@@ -1,10 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useTransition } from 'react'
+import { useState, useTransition, Suspense } from 'react'
 import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/Input'
 import { signUp } from '@/app/actions/auth'
+import Spline from '@splinetool/react-spline'
 import {
     Download,
     Wand2,
@@ -161,24 +162,20 @@ export default function HeroSection() {
 
             <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#030712]">
 
-                {/* ── Video background ── */}
-                <video
-                    src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260315_073750_51473149-4350-4920-ae24-c8214286f323.mp4"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="absolute inset-0 w-full h-full object-cover z-0"
-                    style={{ filter: 'hue-rotate(85deg) saturate(1.2) brightness(0.95)' }}
-                />
+                {/* ── 3D Web Experience (Spline) ── */}
+                <div className="absolute inset-0 w-full h-full object-cover z-0 opacity-80 mix-blend-screen">
+                    <Suspense fallback={<div className="w-full h-full bg-[#030712]" />}>
+                        <Spline scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode" />
+                    </Suspense>
+                </div>
 
                 {/* ── Overlays ── */}
-                <div className="absolute inset-0 z-[1] bg-[#030712]/60" />
-                <div className="absolute inset-0 z-[2]" style={{ background: 'radial-gradient(circle at 25% 45%, rgba(0, 102, 255, 0.15), transparent 55%)' }} />
-                <div className="absolute bottom-0 left-0 right-0 h-48 z-[2] bg-gradient-to-t from-[#030712] to-transparent" />
+                <div className="absolute inset-0 z-[1] bg-[#030712]/40 pointer-events-none" />
+                <div className="absolute inset-0 z-[2] pointer-events-none" style={{ background: 'radial-gradient(circle at 25% 45%, rgba(0, 102, 255, 0.15), transparent 55%)' }} />
+                <div className="absolute bottom-0 left-0 right-0 h-48 z-[2] bg-gradient-to-t from-[#030712] to-transparent pointer-events-none" />
 
                 {/* ── Content ── */}
-                <div className="relative z-10 max-w-4xl mx-auto px-6 pt-32 pb-24 flex flex-col items-center text-center">
+                <div className="relative z-10 max-w-4xl mx-auto px-6 pt-32 pb-24 flex flex-col items-center text-center pointer-events-auto">
                     
                     {/* Eyebrow badge */}
                     <div className="h-anim h-d1 lg-pill inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full mb-8">
