@@ -5,7 +5,7 @@ import { useState, useTransition, Suspense } from 'react'
 import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/Input'
 import { signUp } from '@/app/actions/auth'
-import { SpiralAnimation } from '@/components/ui/spiral-animation'
+import { CrystalScene } from './CrystalScene'
 import {
     Download,
     Wand2,
@@ -162,9 +162,9 @@ export default function HeroSection() {
 
             <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[#030712]">
 
-                {/* ── 3D Web Experience (Spiral Animation) ── */}
-                <div className="absolute inset-0 w-full h-full flex items-center justify-center z-0 mix-blend-screen pointer-events-none overflow-hidden">
-                    <SpiralAnimation />
+                {/* ── 3D Web Experience (Crystal & Ocean) ── */}
+                <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
+                    <CrystalScene />
                 </div>
 
                 {/* ── Overlays ── */}
