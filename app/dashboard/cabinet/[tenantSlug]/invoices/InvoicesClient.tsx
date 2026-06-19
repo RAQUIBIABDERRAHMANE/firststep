@@ -218,7 +218,7 @@ export default function InvoicesClient({ invoices, clients, settings, tenantId, 
                 <div className="space-y-3">
                     {filtered.map(inv => {
                         const sc = STATUS_CONFIG[inv.status] ?? STATUS_CONFIG.DRAFT
-                        const Icon = sc.icon
+                        const Icon = sc.icon as React.ComponentType<any>
                         return (
                             <Card key={inv.id} className="hover:shadow-md transition-shadow">
                                 <CardContent className="py-4">
@@ -227,7 +227,7 @@ export default function InvoicesClient({ invoices, clients, settings, tenantId, 
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center gap-2 flex-wrap">
                                                 <span className="font-bold text-sm">{inv.number}</span>
-                                                <Badge variant={sc.variant}><Icon className="h-3 w-3 mr-1" />{sc.label}</Badge>
+                                                <Badge variant={sc.variant as any}><Icon className="h-3 w-3 mr-1" />{sc.label}</Badge>
                                             </div>
                                             <p className="text-sm text-muted-foreground mt-0.5">{inv.clientName}</p>
                                             <p className="text-xs text-muted-foreground">

@@ -107,7 +107,7 @@ export function CrystalScene() {
         <ContactShadows position={[0, -1.9, 0]} scale={20} blur={2} far={10} opacity={0.5} />
 
         {/* Post-processing for that cinematic glow */}
-        <EffectComposer disableNormalPass>
+        <EffectComposer>
           <Bloom
             luminanceThreshold={1}
             mipmapBlur

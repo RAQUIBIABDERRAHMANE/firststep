@@ -1,6 +1,7 @@
 'use client'
 
 import { Settings, Rocket, TrendingUp } from 'lucide-react'
+import SpotlightBackground from '@/components/ui/spotlight-background'
 
 const C = '0, 102, 255'
 
@@ -78,90 +79,86 @@ export default function HowItWorks() {
         <>
             <style>{styles}</style>
 
-            <section id="how-it-works" className="relative py-32 bg-[#030712] overflow-hidden">
+            <section id="how-it-works" className="relative bg-[#030712] overflow-hidden">
+                <SpotlightBackground>
+                    {/* Top separator */}
+                    <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, rgba(${C},0.3), transparent)` }} />
 
-                {/* Top separator */}
-                <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, rgba(${C},0.3), transparent)` }} />
+                    <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-32">
 
-                {/* Orbs */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full blur-[140px] pointer-events-none" style={{ backgroundColor: 'rgba(0,30,50,0.5)' }} />
-                <div className="absolute top-[20%] right-[5%] w-56 h-56 rounded-full blur-[100px] pointer-events-none" style={{ backgroundColor: `rgba(${C},0.03)` }} />
-                <div className="absolute bottom-[20%] left-[5%] w-48 h-48 rounded-full blur-[90px] pointer-events-none" style={{ backgroundColor: `rgba(${C},0.03)` }} />
-
-                <div className="relative max-w-7xl mx-auto px-6">
-
-                    {/* Header */}
-                    <div className="how-r text-center max-w-2xl mx-auto mb-20">
-                        <div className="flex items-center justify-center gap-3 mb-5">
-                            <div className="h-px w-10" style={{ background: `linear-gradient(90deg, transparent, #0066FF)` }} />
-                            <span className="font-figtree text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: '#0066FF' }}>Comment ça marche</span>
-                            <div className="h-px w-10" style={{ background: `linear-gradient(90deg, #0066FF, transparent)` }} />
-                        </div>
-                        <h2 className="font-syne font-black text-white leading-tight mb-4">
-                            <span className="block text-4xl md:text-5xl">Opérationnel en</span>
-                            <span className="block text-4xl md:text-5xl" style={{ color: '#0066FF' }}>quelques minutes</span>
-                        </h2>
-                        <p className="font-figtree text-[15px] text-slate-400 leading-relaxed">
-                            Pas de formation longue, pas de DSI nécessaire.
-                            <br />Démarrez aujourd&apos;hui et gérez tout depuis un tableau de bord unifié.
-                        </p>
-                    </div>
-
-                    {/* Steps */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 relative">
-
-                        {/* Connector line (desktop) */}
-                        <div className="hidden md:block absolute top-[52px] left-[calc(16.67%+32px)] right-[calc(16.67%+32px)] h-px">
-                            <div className="absolute inset-0" style={{ background: `linear-gradient(90deg, rgba(${C},0.35), rgba(${C},0.15), rgba(${C},0.35))` }} />
-                            <div
-                                className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full"
-                                style={{
-                                    backgroundColor: '#0066FF',
-                                    boxShadow: `0 0 8px rgba(${C},0.8)`,
-                                    animation: 'travel 3s ease-in-out infinite',
-                                }}
-                            />
+                        {/* Header */}
+                        <div className="how-r text-center max-w-2xl mx-auto mb-12 md:mb-20">
+                            <div className="flex items-center justify-center gap-3 mb-5">
+                                <div className="h-px w-10" style={{ background: `linear-gradient(90deg, transparent, #0066FF)` }} />
+                                <span className="font-figtree text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: '#0066FF' }}>Comment ça marche</span>
+                                <div className="h-px w-10" style={{ background: `linear-gradient(90deg, #0066FF, transparent)` }} />
+                            </div>
+                            <h2 className="font-syne font-black text-white leading-tight mb-4">
+                                <span className="block text-3xl md:text-5xl">Opérationnel en</span>
+                                <span className="block text-3xl md:text-5xl" style={{ color: '#0066FF' }}>quelques minutes</span>
+                            </h2>
+                            <p className="font-figtree text-[14px] md:text-[15px] text-slate-400 leading-relaxed">
+                                Pas de formation longue, pas de DSI nécessaire.
+                                <br />Démarrez aujourd&apos;hui et gérez tout depuis un tableau de bord unifié.
+                            </p>
                         </div>
 
-                        {steps.map((step, i) => {
-                            const Icon = step.icon
-                            const delays = ['how-d1', 'how-d2', 'how-d3']
-                            return (
-                                <div key={i} className={`how-r ${delays[i]}`}>
-                                    <div className="how-glass rounded-2xl p-8 h-full">
+                        {/* Steps */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 relative">
 
-                                        {/* Big background number */}
-                                        <div className="absolute -bottom-2 right-3 font-syne font-black text-[110px] leading-none select-none pointer-events-none" style={{ color: `rgba(${C},0.04)` }}>
-                                            {step.number}
+                            {/* Connector line (desktop) */}
+                            <div className="hidden md:block absolute top-[52px] left-[calc(16.67%+32px)] right-[calc(16.67%+32px)] h-px">
+                                <div className="absolute inset-0" style={{ background: `linear-gradient(90deg, rgba(${C},0.35), rgba(${C},0.15), rgba(${C},0.35))` }} />
+                                <div
+                                    className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full"
+                                    style={{
+                                        backgroundColor: '#0066FF',
+                                        boxShadow: `0 0 8px rgba(${C},0.8)`,
+                                        animation: 'travel 3s ease-in-out infinite',
+                                    }}
+                                />
+                            </div>
+
+                            {steps.map((step, i) => {
+                                const Icon = step.icon
+                                const delays = ['how-d1', 'how-d2', 'how-d3']
+                                return (
+                                    <div key={i} className={`how-r ${delays[i]}`}>
+                                        <div className="how-glass rounded-2xl p-6 md:p-8 h-full">
+
+                                            {/* Big background number */}
+                                            <div className="absolute -bottom-2 right-3 font-syne font-black text-[80px] md:text-[110px] leading-none select-none pointer-events-none" style={{ color: `rgba(${C},0.04)` }}>
+                                                {step.number}
+                                            </div>
+
+                                            {/* Icon */}
+                                            <div className="relative z-10 inline-flex items-center justify-center h-12 w-12 rounded-xl mb-6"
+                                                style={{
+                                                    backgroundColor: `rgba(${C},0.07)`,
+                                                    boxShadow: `0 0 20px rgba(${C},0.08), inset 0 1px 1px rgba(${C},0.12)`,
+                                                }}
+                                            >
+                                                <Icon className="h-5 w-5" style={{ color: '#0066FF' }} />
+                                            </div>
+
+                                            {/* Step label */}
+                                            <div className="font-syne text-[11px] font-black tracking-wider mb-3" style={{ color: `rgba(${C},0.5)` }}>
+                                                STEP {step.number}
+                                            </div>
+
+                                            <h3 className="font-syne font-bold text-[19px] text-white mb-3 relative z-10">
+                                                {step.title}
+                                            </h3>
+                                            <p className="font-figtree text-[13px] text-slate-500 leading-relaxed relative z-10">
+                                                {step.description}
+                                            </p>
                                         </div>
-
-                                        {/* Icon */}
-                                        <div className="relative z-10 inline-flex items-center justify-center h-12 w-12 rounded-xl mb-6"
-                                            style={{
-                                                backgroundColor: `rgba(${C},0.07)`,
-                                                boxShadow: `0 0 20px rgba(${C},0.08), inset 0 1px 1px rgba(${C},0.12)`,
-                                            }}
-                                        >
-                                            <Icon className="h-5 w-5" style={{ color: '#0066FF' }} />
-                                        </div>
-
-                                        {/* Step label */}
-                                        <div className="font-syne text-[11px] font-black tracking-wider mb-3" style={{ color: `rgba(${C},0.5)` }}>
-                                            STEP {step.number}
-                                        </div>
-
-                                        <h3 className="font-syne font-bold text-[19px] text-white mb-3 relative z-10">
-                                            {step.title}
-                                        </h3>
-                                        <p className="font-figtree text-[13px] text-slate-500 leading-relaxed relative z-10">
-                                            {step.description}
-                                        </p>
                                     </div>
-                                </div>
-                            )
-                        })}
+                                )
+                            })}
+                        </div>
                     </div>
-                </div>
+                </SpotlightBackground>
             </section>
         </>
     )

@@ -2,6 +2,7 @@
 
 import { Utensils, Store, Package, Car, Hotel, Hospital, Briefcase, Clock, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { DottedSurface } from '@/components/ui/dotted-surface'
 
 type Service = {
     id: string
@@ -108,15 +109,13 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
         <>
             <style>{styles}</style>
 
-            <section id="services" className="relative py-32 bg-[#030712] overflow-hidden">
+            <section id="services" className="relative z-0 py-32 bg-[#030712] overflow-hidden">
 
                 {/* Top separator glow */}
                 <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, rgba(${C},0.3), transparent)` }} />
 
-                {/* Dot grid */}
-                <div className="absolute inset-0 opacity-[0.025]"
-                    style={{ backgroundImage: `radial-gradient(rgba(${C},0.5) 1px, transparent 1px)`, backgroundSize: '48px 48px' }}
-                />
+                {/* 3D Dotted Surface wave background */}
+                <DottedSurface className="absolute inset-0 w-full h-full opacity-[0.35] pointer-events-none" />
 
                 {/* Orbs */}
                 <div className="absolute top-[15%] right-[10%] w-72 h-72 rounded-full blur-[120px] pointer-events-none" style={{ backgroundColor: `rgba(${C},0.04)` }} />

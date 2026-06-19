@@ -3,6 +3,7 @@ import { Syne, Figtree, Playfair_Display, Plus_Jakarta_Sans } from "next/font/go
 import Script from "next/script";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Providers } from "./providers";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -84,7 +85,9 @@ export default function RootLayout({
           src="https://unpkg.com/@splinetool/viewer@1.12.69/build/spline-viewer.js"
           strategy="beforeInteractive"
         />
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );
