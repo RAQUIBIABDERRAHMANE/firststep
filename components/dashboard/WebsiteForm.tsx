@@ -191,7 +191,7 @@ export default function WebsiteForm({ initialData, serviceId, serviceName = 'pro
                     <div className="space-y-2">
                         <label className="text-sm font-medium">Website Address (Slug)</label>
                         <div className="flex items-center gap-2">
-                            <span className="text-muted-foreground bg-muted/50 px-3 py-2 rounded-l-xl border border-r-0 text-sm">
+                            <span className="text-slate-500 bg-muted/50 px-3 py-2 rounded-l-xl border border-r-0 text-sm">
                                 /
                             </span>
                             <Input

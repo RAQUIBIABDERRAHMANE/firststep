@@ -304,13 +304,13 @@ export default function MenuClient({ initialCategories, tenantSlug }: { initialC
         <div className="space-y-8 animate-fade-in max-w-5xl">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <Link href={`/dashboard/restaurant/${tenantSlug}`} className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 mb-2 transition-colors">
+                    <Link href={`/dashboard/restaurant/${tenantSlug}`} className="text-sm text-slate-500 hover:text-slate-900 flex items-center gap-1 mb-2 transition-colors">
                         <ChevronLeft size={14} /> {t.back_dashboard}
                     </Link>
-                    <h1 className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-3">
+                    <h1 className="text-3xl font-bold tracking-tight text-slate-900 flex items-center gap-3">
                         <Utensils className="text-blue-600" /> {t.menu_management}
                     </h1>
-                    <p className="text-muted-foreground mt-1">
+                    <p className="text-slate-500 mt-1">
                         {t.menu_desc}
                     </p>
                 </div>

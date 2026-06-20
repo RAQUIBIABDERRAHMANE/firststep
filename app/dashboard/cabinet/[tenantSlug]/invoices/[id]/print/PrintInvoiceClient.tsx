@@ -34,7 +34,7 @@ export default function PrintInvoiceClient({ invoice, settings }: { invoice: Inv
                     <ArrowLeft className="h-4 w-4 mr-2" /> Retour
                 </Button>
                 <div className="flex gap-2">
-                    <span className="text-sm text-muted-foreground self-center">Facture {invoice.number}</span>
+                    <span className="text-sm text-slate-500 self-center">Facture {invoice.number}</span>
                     <Button onClick={() => window.print()}>
                         <Printer className="h-4 w-4 mr-2" /> Imprimer / Télécharger PDF
                     </Button>

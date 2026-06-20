@@ -131,7 +131,7 @@ export default function WaitersClient({ initialWaiters, initialTables, tenantSlu
                             <Plus size={24} />
                         </div>
                         <h3 className="font-semibold text-lg">Add New Waiter</h3>
-                        <p className="text-muted-foreground text-sm">Create a profile and assign tables</p>
+                        <p className="text-slate-500 text-sm">Create a profile and assign tables</p>
                     </CardContent>
                 </Card>
             ) : (
@@ -158,7 +158,7 @@ export default function WaitersClient({ initialWaiters, initialTables, tenantSlu
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-sm font-medium">
-                                        Access PIN (4 Digits) {editingId && <span className="text-xs text-muted-foreground font-normal ml-1">(Leave empty to keep current)</span>}
+                                        Access PIN (4 Digits) {editingId && <span className="text-xs text-slate-500 font-normal ml-1">(Leave empty to keep current)</span>}
                                     </label>
                                     <div className="relative">
                                         <KeyRound className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
@@ -194,7 +194,7 @@ export default function WaitersClient({ initialWaiters, initialTables, tenantSlu
                                         </div>
                                     ))}
                                 </div>
-                                <p className="text-xs text-muted-foreground">{selectedTables.length} tables selected</p>
+                                <p className="text-xs text-slate-500">{selectedTables.length} tables selected</p>
                             </div>
 
                             <div className="flex flex-col sm:flex-row justify-end gap-3 pt-4">

@@ -17,8 +17,8 @@ export default async function CabinetDashboardPage({ params }: { params: Promise
             <AutoRefresh />
             <div className="flex items-center justify-between">
                 <div>
-                    <h2 className="text-2xl font-bold tracking-tight text-foreground">Welcome to Cabinet Management</h2>
-                    <p className="text-muted-foreground mt-2">
+                    <h2 className="text-2xl font-bold tracking-tight text-slate-900">Welcome to Cabinet Management</h2>
+                    <p className="text-slate-500 mt-2">
                         Get started by managing your services, clients, and appointments
                     </p>
                 </div>
@@ -46,7 +46,7 @@ export default async function CabinetDashboardPage({ params }: { params: Promise
                     <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
                         Services
                     </h3>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-slate-500">
                         Manage your professional services, pricing, and duration
                     </p>
                 </Link>
@@ -57,7 +57,7 @@ export default async function CabinetDashboardPage({ params }: { params: Promise
                     <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
                         Clients
                     </h3>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-slate-500">
                         View and manage your client records and history
                     </p>
                 </Link>
@@ -68,7 +68,7 @@ export default async function CabinetDashboardPage({ params }: { params: Promise
                     <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
                         Calendar
                     </h3>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-slate-500">
                         View upcoming appointments and manage schedules
                     </p>
                 </Link>

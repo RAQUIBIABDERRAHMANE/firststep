@@ -35,7 +35,7 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
             <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
                 <Utensils size={64} className="text-slate-200" />
                 <h2 className="text-2xl font-bold">No Website Found</h2>
-                <p className="text-muted-foreground">The requested restaurant instance was not found.</p>
+                <p className="text-slate-500">The requested restaurant instance was not found.</p>
                 <Link href="/dashboard">
                     <Button>Back to Dashboard</Button>
                 </Link>
@@ -62,10 +62,10 @@ export default async function RestaurantDashboardPage({ params }: { params: Prom
             <AutoRefresh />
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                    <h1 className="text-xl sm:text-3xl font-bold tracking-tight text-foreground flex items-center gap-2 sm:gap-3">
+                    <h1 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900 flex items-center gap-2 sm:gap-3">
                         <LayoutDashboard className="text-blue-600 h-5 w-5 sm:h-6 sm:w-6" /> Restaurant Admin
                     </h1>
-                    <p className="text-muted-foreground mt-1 text-sm">
+                    <p className="text-slate-500 mt-1 text-sm">
                         Manage your digital menu, floor plan, and incoming orders.
                     </p>
                 </div>

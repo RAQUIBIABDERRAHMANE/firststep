@@ -50,10 +50,10 @@ export default async function CabinetLayout({
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-3xl font-black tracking-tight text-foreground">
+                    <h1 className="text-3xl font-black tracking-tight text-slate-900">
                         {cabinetWebsite.siteName}
                     </h1>
-                    <p className="text-muted-foreground mt-2">
+                    <p className="text-slate-500 mt-2">
                         Gérez vos services professionnels, clients et rendez-vous
                     </p>
                 </div>
@@ -64,7 +64,7 @@ export default async function CabinetLayout({
                 {navItems.map((item) => (
                     <Link
                         key={item.href}
-                        className="flex items-center gap-2 px-6 py-3 text-sm font-medium text-muted-foreground hover:text-primary border-b-2 border-transparent hover:border-primary transition-all"
+                        className="flex items-center gap-2 px-6 py-3 text-sm font-medium text-slate-500 hover:text-primary border-b-2 border-transparent hover:border-primary transition-all"
                         href={item.href}
                     >
                         <item.icon className="h-4 w-4" />

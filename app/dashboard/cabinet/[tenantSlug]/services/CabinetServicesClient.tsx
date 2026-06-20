@@ -92,10 +92,10 @@ export default function CabinetServicesClient({ services, tenantId, tenantSlug }
                 <Card>
                     <CardContent className="flex flex-col items-center justify-center py-16">
                         <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center mb-4">
-                            <Plus className="h-8 w-8 text-muted-foreground" />
+                            <Plus className="h-8 w-8 text-slate-500" />
                         </div>
                         <h3 className="text-lg font-semibold mb-2">No services yet</h3>
-                        <p className="text-sm text-muted-foreground mb-4">
+                        <p className="text-sm text-slate-500 mb-4">
                             Get started by adding your first service
                         </p>
                         <Button onClick={handleNew}>Add Your First Service</Button>
@@ -120,14 +120,14 @@ export default function CabinetServicesClient({ services, tenantId, tenantSlug }
                             </CardHeader>
                             <CardContent className="space-y-4">
                                 <div className="flex items-center justify-between text-sm">
-                                    <div className="flex items-center gap-2 text-muted-foreground">
+                                    <div className="flex items-center gap-2 text-slate-500">
                                         <DollarSign className="h-4 w-4" />
                                         <span>Price</span>
                                     </div>
                                     <span className="font-semibold">{service.price} MAD</span>
                                 </div>
                                 <div className="flex items-center justify-between text-sm">
-                                    <div className="flex items-center gap-2 text-muted-foreground">
+                                    <div className="flex items-center gap-2 text-slate-500">
                                         <Clock className="h-4 w-4" />
                                         <span>Duration</span>
                                     </div>

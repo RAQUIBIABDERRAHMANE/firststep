@@ -36,7 +36,7 @@ export default async function CabinetSettingsPage({ params }: { params: Promise<
         <div className="space-y-8 max-w-4xl">
             <div>
                 <h1 className="text-3xl font-bold tracking-tight">Cabinet Settings</h1>
-                <p className="text-muted-foreground mt-1">
+                <p className="text-slate-500 mt-1">
                     Configure your professional presence and public booking link.
                 </p>
             </div>

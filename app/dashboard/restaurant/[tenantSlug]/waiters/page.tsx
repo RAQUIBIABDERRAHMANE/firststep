@@ -19,11 +19,11 @@ export default async function WaitersPage({ params }: { params: Promise<{ tenant
         <div className="space-y-8 animate-fade-in max-w-6xl">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <Link href={`/dashboard/restaurant/${tenantSlug}`} className="text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 mb-2 transition-colors">
+                    <Link href={`/dashboard/restaurant/${tenantSlug}`} className="text-sm text-slate-500 hover:text-slate-900 flex items-center gap-1 mb-2 transition-colors">
                         <ChevronLeft size={14} /> Back to Hub
                     </Link>
-                    <h1 className="text-3xl font-bold tracking-tight text-foreground">Waiter Management</h1>
-                    <p className="text-muted-foreground mt-1">
+                    <h1 className="text-3xl font-bold tracking-tight text-slate-900">Waiter Management</h1>
+                    <p className="text-slate-500 mt-1">
                         Create staff accounts and assign tables to them.
                     </p>
                 </div>

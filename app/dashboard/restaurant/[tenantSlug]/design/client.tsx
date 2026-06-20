@@ -86,7 +86,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
             name: 'Classic Bistro',
             description: 'The original vibrant light theme. Perfect for casual dining and cafes.',
             features: ['Light Theme', 'Colorful Accents', 'Card-based Layout'],
-            color: 'bg-white border-slate-200'
+            color: 'bg-white border-slate-200 text-slate-900'
         },
         {
             id: 'modern',
@@ -100,7 +100,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
             name: 'Clean Minimalist',
             description: 'Focus on your food with typography-first design. Great for upscale modern spots.',
             features: ['Monochrome', 'Big Imagery', 'Elegant Spacing'],
-            color: 'bg-stone-50 border-stone-200'
+            color: 'bg-stone-50 border-stone-200 text-slate-900'
         },
         {
             id: 'light',
@@ -114,7 +114,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
             name: 'Dark Luxury',
             description: 'A deep, cozy, and cinematic chocolate theme with warm orange/gold accents and glowing category borders.',
             features: ['Dark Theme', 'Warm Glows', 'Cinematic Layout'],
-            color: 'bg-stone-950 text-[#f3b182] border-amber-900/40'
+            color: 'bg-stone-950 text-orange-200 border-amber-900/40'
         },
         {
             id: 'moroccan',
@@ -128,33 +128,32 @@ export default function DesignSelectionClient({ initialData }: Props) {
             name: 'Trattoria Italiana',
             description: 'A warm, rustic Italian aesthetic with terracotta colors, olive accents, and serif typography.',
             features: ['Ivory Plaster Background', 'Olive & Terracotta Accents', 'Classic serif headers'],
-            color: 'bg-[#FDFBF7] text-[#1E3A1E] border-orange-200'
+            color: 'bg-[#FDFBF7] text-green-900 border-orange-200'
         }
     ]
 
     return (
         <div className="space-y-8 max-w-6xl animate-fade-in pb-20">
             <div>
-                <h1 className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-3">
+                <h1 className="text-3xl font-bold tracking-tight text-slate-900 flex items-center gap-3">
                     <Paintbrush className="text-purple-600" /> Design Studio
                 </h1>
-                <p className="text-muted-foreground mt-1">
+                <p className="text-slate-500 mt-1">
                     Customize your restaurant's appearance and branding.
                 </p>
             </div>
 
-            {/* Tabs */}
             <div className="flex gap-4 border-b">
                 <button
                     onClick={() => setActiveTab('themes')}
-                    className={`pb-4 px-2 font-medium transition-all border-b-2 ${activeTab === 'themes' ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground'
+                    className={`pb-4 px-2 font-medium transition-all border-b-2 ${activeTab === 'themes' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-900'
                         }`}
                 >
                     Themes
                 </button>
                 <button
                     onClick={() => setActiveTab('customize')}
-                    className={`pb-4 px-2 font-medium transition-all border-b-2 ${activeTab === 'customize' ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground'
+                    className={`pb-4 px-2 font-medium transition-all border-b-2 ${activeTab === 'customize' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-900'
                         }`}
                 >
                     Customization
@@ -237,7 +236,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                     placeholder="e.g. Best Restaurant in Town"
                                     className="w-full p-3 rounded-xl border bg-background"
                                 />
-                                <p className="text-xs text-muted-foreground">The text shown in the browser tab and search results.</p>
+                                <p className="text-xs text-slate-500">The text shown in the browser tab and search results.</p>
                             </div>
 
                             <div className="space-y-2">
@@ -249,7 +248,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                     placeholder="e.g. Delicious moments, served fresh."
                                     className="w-full p-3 rounded-xl border bg-background"
                                 />
-                                <p className="text-xs text-muted-foreground">The main big text displayed on top of your page.</p>
+                                <p className="text-xs text-slate-500">The main big text displayed on top of your page.</p>
                             </div>
 
                             {/* Add more fields as needed */}
@@ -283,7 +282,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                         maxLength={7}
                                     />
                                 </div>
-                                <p className="text-xs text-muted-foreground">Used for buttons, links, and important accents.</p>
+                                <p className="text-xs text-slate-500">Used for buttons, links, and important accents.</p>
                             </div>
 
                             <div className="space-y-2 border-t pt-4">
@@ -344,7 +343,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                         maxLength={7}
                                     />
                                 </div>
-                                <p className="text-xs text-muted-foreground">Background for cards, headers, or contrast sections.</p>
+                                <p className="text-xs text-slate-500">Background for cards, headers, or contrast sections.</p>
                             </div>
 
                             <div className="space-y-2 border-t pt-4">
@@ -536,7 +535,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                     placeholder="https://example.com/logo.png"
                                     className="w-full p-3 rounded-xl border bg-background"
                                 />
-                                <p className="text-xs text-muted-foreground">URL to your logo image. Leave empty to use site initial.</p>
+                                <p className="text-xs text-slate-500">URL to your logo image. Leave empty to use site initial.</p>
                             </div>
 
                             <div className="space-y-2">
@@ -548,7 +547,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                     placeholder="https://example.com/cover.jpg"
                                     className="w-full p-3 rounded-xl border bg-background"
                                 />
-                                <p className="text-xs text-muted-foreground">Main background image for the hero section.</p>
+                                <p className="text-xs text-slate-500">Main background image for the hero section.</p>
                             </div>
                         </CardContent>
                     </Card>
@@ -604,7 +603,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                         onChange={(e) => setConfig({ ...config, reservationOpenTime: e.target.value })}
                                         className="w-full p-3 rounded-xl border bg-background text-sm"
                                     />
-                                    <p className="text-xs text-muted-foreground">The earliest time customers can book.</p>
+                                    <p className="text-xs text-slate-500">The earliest time customers can book.</p>
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-sm font-medium text-[var(--primary)] flex items-center gap-2">Reservation Close Time</label>
@@ -614,7 +613,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                         onChange={(e) => setConfig({ ...config, reservationCloseTime: e.target.value })}
                                         className="w-full p-3 rounded-xl border bg-background text-sm"
                                     />
-                                    <p className="text-xs text-muted-foreground">The latest time customers can book.</p>
+                                    <p className="text-xs text-slate-500">The latest time customers can book.</p>
                                 </div>
                             </div>
                         </CardContent>

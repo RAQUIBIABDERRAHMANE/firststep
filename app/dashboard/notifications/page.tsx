@@ -28,7 +28,7 @@ export default async function NotificationsPage() {
                 </CardHeader>
                 <CardContent>
                     {notifications.length === 0 ? (
-                        <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
+                        <div className="flex flex-col items-center justify-center py-12 text-center text-slate-500">
                             <Bell className="h-12 w-12 mb-4 opacity-50" />
                             <p>You have no new notifications.</p>
                             <p className="text-sm">We&apos;ll notify you when your interested services become available.</p>
@@ -42,8 +42,8 @@ export default async function NotificationsPage() {
                                     </div>
                                     <div className="space-y-1">
                                         <p className="text-sm font-medium leading-none">{notification.title}</p>
-                                        <p className="text-sm text-muted-foreground">{notification.message}</p>
-                                        <p className="text-xs text-muted-foreground mt-1">
+                                        <p className="text-sm text-slate-500">{notification.message}</p>
+                                        <p className="text-xs text-slate-500 mt-1">
                                             {new Date(notification.createdAt).toLocaleDateString()}
                                         </p>
                                     </div>

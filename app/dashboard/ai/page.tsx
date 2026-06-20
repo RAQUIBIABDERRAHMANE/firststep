@@ -111,7 +111,7 @@ export default function AIPage() {
                             AI Assistant
                             <Sparkles className="h-5 w-5 text-yellow-500" />
                         </h1>
-                        <p className="text-sm text-muted-foreground">Powered by Groq • Context-aware Universal Assistant</p>
+                        <p className="text-sm text-slate-500">Powered by Groq • Context-aware Universal Assistant</p>
                     </div>
                 </div>
                 <Button variant="outline" onClick={clearChat} className="gap-2">

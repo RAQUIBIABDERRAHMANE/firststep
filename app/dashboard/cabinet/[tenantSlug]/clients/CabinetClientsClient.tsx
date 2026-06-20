@@ -95,10 +95,10 @@ export default function CabinetClientsClient({ clients, tenantId, tenantSlug }: 
                 <Card>
                     <CardContent className="flex flex-col items-center justify-center py-16">
                         <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center mb-4">
-                            <Plus className="h-8 w-8 text-muted-foreground" />
+                            <Plus className="h-8 w-8 text-slate-500" />
                         </div>
                         <h3 className="text-lg font-semibold mb-2">No clients yet</h3>
-                        <p className="text-sm text-muted-foreground mb-4">
+                        <p className="text-sm text-slate-500 mb-4">
                             Add your first client to get started
                         </p>
                         <Button onClick={handleNew}>Add Your First Client</Button>
@@ -114,25 +114,25 @@ export default function CabinetClientsClient({ clients, tenantId, tenantSlug }: 
                                         <CardTitle className="text-xl">{client.name}</CardTitle>
                                         <div className="flex gap-4 mt-2">
                                             {client.email && (
-                                                <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                                                <div className="flex items-center gap-1 text-sm text-slate-500">
                                                     <Mail className="h-3 w-3" />
                                                     {client.email}
                                                 </div>
                                             )}
                                             {client.phone && (
-                                                <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                                                <div className="flex items-center gap-1 text-sm text-slate-500">
                                                     <Phone className="h-3 w-3" />
                                                     {client.phone}
                                                 </div>
                                             )}
                                             {client.age && (
-                                                <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                                                <div className="flex items-center gap-1 text-sm text-slate-500">
                                                     <Hash className="h-3 w-3" />
                                                     {client.age} ans
                                                 </div>
                                             )}
                                             {client.cni && (
-                                                <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                                                <div className="flex items-center gap-1 text-sm text-slate-500">
                                                     <CreditCard className="h-3 w-3" />
                                                     CNI: {client.cni}
                                                 </div>
@@ -152,11 +152,11 @@ export default function CabinetClientsClient({ clients, tenantId, tenantSlug }: 
                             <CardContent className="space-y-3">
                                 {client.notes && (
                                     <div className="flex gap-2 text-sm">
-                                        <FileText className="h-4 w-4 text-muted-foreground mt-0.5" />
-                                        <p className="text-muted-foreground">{client.notes}</p>
+                                        <FileText className="h-4 w-4 text-slate-500 mt-0.5" />
+                                        <p className="text-slate-500">{client.notes}</p>
                                     </div>
                                 )}
-                                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <div className="flex items-center gap-2 text-sm text-slate-500">
                                     <Calendar className="h-4 w-4" />
                                     <span>
                                         {client.appointments.length} appointment

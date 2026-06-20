@@ -64,7 +64,7 @@ export default async function WebsiteManagementPage({
                 <h1 className="text-3xl font-bold tracking-tight">
                     {type === 'cabinet' ? 'Cabinet Setup' : 'Restaurant Website Setup'}
                 </h1>
-                <p className="text-muted-foreground mt-1 text-lg">
+                <p className="text-slate-500 mt-1 text-lg">
                     {type === 'cabinet'
                         ? 'Configure your professional clinic presence.'
                         : 'Configure your public restaurant website.'}

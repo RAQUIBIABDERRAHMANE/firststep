@@ -98,7 +98,7 @@ export default function MedicalClient({ clients, records, tenantId, tenantSlug }
             <div className="flex items-center justify-between">
                 <div>
                     <h2 className="text-2xl font-bold">Dossiers Médicaux</h2>
-                    <p className="text-sm text-muted-foreground">Consultations, prescriptions et historique médical</p>
+                    <p className="text-sm text-slate-500">Consultations, prescriptions et historique médical</p>
                 </div>
             </div>
 
@@ -123,8 +123,8 @@ export default function MedicalClient({ clients, records, tenantId, tenantSlug }
 
             {!selectedClientId ? (
                 <div className="border rounded-lg p-16 text-center">
-                    <Stethoscope className="h-16 w-16 text-muted-foreground/20 mx-auto mb-4" />
-                    <p className="text-muted-foreground font-medium">Sélectionnez un patient pour voir son dossier médical</p>
+                    <Stethoscope className="h-16 w-16 text-slate-500/20 mx-auto mb-4" />
+                    <p className="text-slate-500 font-medium">Sélectionnez un patient pour voir son dossier médical</p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -139,8 +139,8 @@ export default function MedicalClient({ clients, records, tenantId, tenantSlug }
 
                         {clientRecords.length === 0 ? (
                             <div className="border rounded-lg p-10 text-center">
-                                <FileText className="h-10 w-10 text-muted-foreground/20 mx-auto mb-3" />
-                                <p className="text-muted-foreground text-sm">Aucune consultation enregistrée</p>
+                                <FileText className="h-10 w-10 text-slate-500/20 mx-auto mb-3" />
+                                <p className="text-slate-500 text-sm">Aucune consultation enregistrée</p>
                             </div>
                         ) : (
                             <div className="space-y-3">
@@ -158,7 +158,7 @@ export default function MedicalClient({ clients, records, tenantId, tenantSlug }
                                                         )}
                                                     </div>
                                                     <p className="text-sm font-medium">{record.chiefComplaint}</p>
-                                                    <p className="text-xs text-muted-foreground mt-0.5">Diagnostic: {record.diagnosis}</p>
+                                                    <p className="text-xs text-slate-500 mt-0.5">Diagnostic: {record.diagnosis}</p>
 
                                                     {/* Vitals quick view */}
                                                     {(record.weight || record.bloodPressure || record.temperature || record.heartRate) && (
@@ -184,18 +184,18 @@ export default function MedicalClient({ clients, records, tenantId, tenantSlug }
                                             {expandedRecordId === record.id && (
                                                 <div className="mt-4 pt-4 border-t space-y-3">
                                                     <div>
-                                                        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">Traitement</p>
+                                                        <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Traitement</p>
                                                         <p className="text-sm">{record.treatment}</p>
                                                     </div>
                                                     {record.notes && (
                                                         <div>
-                                                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">Notes</p>
-                                                            <p className="text-sm text-muted-foreground">{record.notes}</p>
+                                                            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Notes</p>
+                                                            <p className="text-sm text-slate-500">{record.notes}</p>
                                                         </div>
                                                     )}
                                                     {record.prescriptions.length > 0 && (
                                                         <div>
-                                                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Ordonnances</p>
+                                                            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Ordonnances</p>
                                                             <div className="space-y-2">
                                                                 {record.prescriptions.map(p => (
                                                                     <div key={p.id} className="bg-blue-50 rounded-lg p-3 text-sm">
@@ -226,7 +226,7 @@ export default function MedicalClient({ clients, records, tenantId, tenantSlug }
                         </div>
                         <Card>
                             <CardContent className="pt-4">
-                                <p className="text-xs text-muted-foreground text-center py-4">
+                                <p className="text-xs text-slate-500 text-center py-4">
                                     Voir le profil complet pour les antécédents
                                 </p>
                                 <Button variant="outline" className="w-full" size="sm"
@@ -258,10 +258,10 @@ export default function MedicalClient({ clients, records, tenantId, tenantSlug }
                             <div>
                                 <p className="text-sm font-semibold mb-2 flex items-center gap-2"><Activity className="h-4 w-4 text-red-500" /> Signes vitaux</p>
                                 <div className="grid grid-cols-2 gap-3">
-                                    <div><label className="text-xs text-muted-foreground block mb-1">Poids (kg)</label><Input value={formWeight} onChange={e => setFormWeight(e.target.value)} placeholder="70" /></div>
-                                    <div><label className="text-xs text-muted-foreground block mb-1">Tension (ex: 120/80)</label><Input value={formBP} onChange={e => setFormBP(e.target.value)} placeholder="120/80" /></div>
-                                    <div><label className="text-xs text-muted-foreground block mb-1">Température (°C)</label><Input value={formTemp} onChange={e => setFormTemp(e.target.value)} placeholder="37.0" /></div>
-                                    <div><label className="text-xs text-muted-foreground block mb-1">Fréquence cardiaque (bpm)</label><Input value={formHR} onChange={e => setFormHR(e.target.value)} placeholder="75" /></div>
+                                    <div><label className="text-xs text-slate-500 block mb-1">Poids (kg)</label><Input value={formWeight} onChange={e => setFormWeight(e.target.value)} placeholder="70" /></div>
+                                    <div><label className="text-xs text-slate-500 block mb-1">Tension (ex: 120/80)</label><Input value={formBP} onChange={e => setFormBP(e.target.value)} placeholder="120/80" /></div>
+                                    <div><label className="text-xs text-slate-500 block mb-1">Température (°C)</label><Input value={formTemp} onChange={e => setFormTemp(e.target.value)} placeholder="37.0" /></div>
+                                    <div><label className="text-xs text-slate-500 block mb-1">Fréquence cardiaque (bpm)</label><Input value={formHR} onChange={e => setFormHR(e.target.value)} placeholder="75" /></div>
                                 </div>
                             </div>
 
@@ -295,7 +295,7 @@ export default function MedicalClient({ clients, records, tenantId, tenantSlug }
                                     {formPrescriptions.map((p, i) => (
                                         <div key={i} className="bg-muted/30 rounded-lg p-3 space-y-2">
                                             <div className="flex justify-between items-center">
-                                                <span className="text-xs font-semibold text-muted-foreground">Médicament {i + 1}</span>
+                                                <span className="text-xs font-semibold text-slate-500">Médicament {i + 1}</span>
                                                 {formPrescriptions.length > 1 && (
                                                     <button onClick={() => removePrescription(i)} className="text-red-400 hover:text-red-600"><X className="h-4 w-4" /></button>
                                                 )}

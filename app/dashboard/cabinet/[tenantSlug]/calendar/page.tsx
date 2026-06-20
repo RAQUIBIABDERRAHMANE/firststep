@@ -14,14 +14,14 @@ export default async function CabinetCalendarPage({ params }: { params: Promise<
             <div className="space-y-6">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h2 className="text-2xl font-bold tracking-tight text-foreground">Calendar</h2>
-                        <p className="text-sm text-muted-foreground">
+                        <h2 className="text-2xl font-bold tracking-tight text-slate-900">Calendar</h2>
+                        <p className="text-sm text-slate-500">
                             Website instance not found
                         </p>
                     </div>
                 </div>
                 <div className="p-8 border rounded-lg text-center flex flex-col items-center gap-4">
-                    <p className="text-muted-foreground">The requested cabinet instance was not found.</p>
+                    <p className="text-slate-500">The requested cabinet instance was not found.</p>
                     <Link href="/dashboard">
                         <Button>Back to Dashboard</Button>
                     </Link>
@@ -46,7 +46,7 @@ export default async function CabinetCalendarPage({ params }: { params: Promise<
             <div className="flex items-center justify-between">
                 <div>
                     <h2 className="text-2xl font-bold tracking-tight">Calendar</h2>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-slate-500">
                         View and manage your appointments
                     </p>
                 </div>

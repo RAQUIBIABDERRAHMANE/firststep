@@ -142,7 +142,7 @@ export default function CabinetCalendarClient({
                 <Card className="overflow-hidden border-none shadow-xl bg-card/50 backdrop-blur-sm">
                     <CardHeader className="flex flex-row items-center justify-between pb-8 bg-primary/5">
                         <div>
-                            <CardTitle className="text-2xl font-black text-foreground">
+                            <CardTitle className="text-2xl font-black text-slate-900">
                                 {MONTHS[currentMonth]} {currentYear}
                             </CardTitle>
                             <CardDescription>
@@ -165,7 +165,7 @@ export default function CabinetCalendarClient({
                         {/* Days Header */}
                         <div className="grid grid-cols-7 border-b border-border bg-muted/30">
                             {DAYS.map(day => (
-                                <div key={day} className="py-3 text-center text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                                <div key={day} className="py-3 text-center text-xs font-bold text-slate-500 uppercase tracking-wider">
                                     {day}
                                 </div>
                             ))}
@@ -190,7 +190,7 @@ export default function CabinetCalendarClient({
                                     >
                                         <span className={cn(
                                             "h-8 w-8 flex items-center justify-center rounded-full text-sm font-semibold mb-1 transition-colors",
-                                            isToday(day) ? "bg-primary text-primary-foreground" : "text-foreground group-hover:text-primary",
+                                            isToday(day) ? "bg-primary text-primary-foreground" : "text-slate-900 group-hover:text-primary",
                                             isSelected(day) && !isToday(day) && "bg-primary/20 text-primary font-bold"
                                         )}>
                                             {day.getDate()}
@@ -200,7 +200,7 @@ export default function CabinetCalendarClient({
                                             <div className="mt-auto pb-1 flex flex-wrap justify-center gap-1 w-full">
                                                 <div className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
                                                 {dayAppts.length > 1 && (
-                                                    <span className="text-[10px] text-muted-foreground font-medium">
+                                                    <span className="text-[10px] text-slate-500 font-medium">
                                                         +{dayAppts.length - 1} more
                                                     </span>
                                                 )}
@@ -248,10 +248,10 @@ export default function CabinetCalendarClient({
                             {selectedDayAppointments.length === 0 ? (
                                 <div className="flex flex-col items-center justify-center py-12 px-6 text-center">
                                     <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center mb-4">
-                                        <Clock className="h-8 w-8 text-muted-foreground" />
+                                        <Clock className="h-8 w-8 text-slate-500" />
                                     </div>
-                                    <h3 className="font-bold text-foreground">No appointments</h3>
-                                    <p className="text-sm text-muted-foreground mt-1">
+                                    <h3 className="font-bold text-slate-900">No appointments</h3>
+                                    <p className="text-sm text-slate-500 mt-1">
                                         Enjoy your free time or schedule something new.
                                     </p>
                                 </div>
@@ -271,17 +271,17 @@ export default function CabinetCalendarClient({
                                                     </div>
 
                                                     <div>
-                                                        <h4 className="font-bold text-foreground group-hover:text-primary transition-colors">
+                                                        <h4 className="font-bold text-slate-900 group-hover:text-primary transition-colors">
                                                             {appt.service.name}
                                                         </h4>
-                                                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-1">
+                                                        <div className="flex items-center gap-1.5 text-xs text-slate-500 mt-1">
                                                             <User className="h-3 w-3" />
                                                             <span className="font-medium">{appt.client.name}</span>
                                                         </div>
                                                     </div>
 
                                                     {appt.notes && (
-                                                        <div className="flex gap-1.5 p-2 rounded-lg bg-muted/50 text-[11px] text-muted-foreground italic">
+                                                        <div className="flex gap-1.5 p-2 rounded-lg bg-muted/50 text-[11px] text-slate-500 italic">
                                                             <FileText className="h-3 w-3 shrink-0" />
                                                             <span>{appt.notes}</span>
                                                         </div>

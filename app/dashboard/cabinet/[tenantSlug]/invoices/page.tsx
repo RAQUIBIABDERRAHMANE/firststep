@@ -12,7 +12,7 @@ export default async function InvoicesPage({ params }: { params: Promise<{ tenan
     if (!website) {
         return (
             <div className="p-8 border rounded-lg text-center">
-                <p className="text-muted-foreground">Cabinet introuvable.</p>
+                <p className="text-slate-500">Cabinet introuvable.</p>
                 <Link href="/dashboard"><Button className="mt-4">Retour</Button></Link>
             </div>
         )

@@ -64,7 +64,7 @@ export default function PatientProfileClient({ client, profile, tenantSlug }: {
                 </Button>
                 <div>
                     <h2 className="text-2xl font-bold">{client.name}</h2>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-slate-500">
                         {client.email && `${client.email}`}
                         {client.phone && ` · ${client.phone}`}
                         {client.age && ` · ${client.age} ans`}
@@ -80,8 +80,8 @@ export default function PatientProfileClient({ client, profile, tenantSlug }: {
                     <h3 className="font-semibold text-lg">Historique des consultations</h3>
                     {profile.records.length === 0 ? (
                         <div className="border rounded-lg p-10 text-center">
-                            <Clock className="h-10 w-10 text-muted-foreground/20 mx-auto mb-3" />
-                            <p className="text-muted-foreground text-sm">Aucune consultation enregistrée</p>
+                            <Clock className="h-10 w-10 text-slate-500/20 mx-auto mb-3" />
+                            <p className="text-slate-500 text-sm">Aucune consultation enregistrée</p>
                         </div>
                     ) : (
                         <div className="space-y-3">
@@ -99,7 +99,7 @@ export default function PatientProfileClient({ client, profile, tenantSlug }: {
                                                     )}
                                                 </div>
                                                 <p className="text-sm font-medium">{record.chiefComplaint}</p>
-                                                <p className="text-xs text-muted-foreground">Diagnostic: {record.diagnosis}</p>
+                                                <p className="text-xs text-slate-500">Diagnostic: {record.diagnosis}</p>
                                                 {(record.weight || record.bloodPressure || record.temperature || record.heartRate) && (
                                                     <div className="flex gap-2 mt-2 flex-wrap">
                                                         {record.weight && <span className="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded-full">{record.weight} kg</span>}
@@ -116,18 +116,18 @@ export default function PatientProfileClient({ client, profile, tenantSlug }: {
                                         {expandedId === record.id && (
                                             <div className="mt-4 pt-4 border-t space-y-3">
                                                 <div>
-                                                    <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">Traitement</p>
+                                                    <p className="text-xs font-semibold text-slate-500 uppercase mb-1">Traitement</p>
                                                     <p className="text-sm">{record.treatment}</p>
                                                 </div>
                                                 {record.notes && (
                                                     <div>
-                                                        <p className="text-xs font-semibold text-muted-foreground uppercase mb-1">Notes</p>
-                                                        <p className="text-sm text-muted-foreground">{record.notes}</p>
+                                                        <p className="text-xs font-semibold text-slate-500 uppercase mb-1">Notes</p>
+                                                        <p className="text-sm text-slate-500">{record.notes}</p>
                                                     </div>
                                                 )}
                                                 {record.prescriptions.length > 0 && (
                                                     <div>
-                                                        <p className="text-xs font-semibold text-muted-foreground uppercase mb-2">Ordonnances</p>
+                                                        <p className="text-xs font-semibold text-slate-500 uppercase mb-2">Ordonnances</p>
                                                         <div className="space-y-2">
                                                             {record.prescriptions.map(p => (
                                                                 <div key={p.id} className="bg-blue-50 rounded-lg p-3 text-sm">
@@ -160,7 +160,7 @@ export default function PatientProfileClient({ client, profile, tenantSlug }: {
                     {/* Active */}
                     {activeHistory.length > 0 && (
                         <div>
-                            <p className="text-xs text-muted-foreground uppercase font-semibold tracking-wide mb-2">En cours</p>
+                            <p className="text-xs text-slate-500 uppercase font-semibold tracking-wide mb-2">En cours</p>
                             <div className="space-y-2">
                                 {activeHistory.map(h => (
                                     <Card key={h.id}>
@@ -168,8 +168,8 @@ export default function PatientProfileClient({ client, profile, tenantSlug }: {
                                             <div className="flex justify-between items-start gap-2">
                                                 <div>
                                                     <p className="text-sm font-semibold">{h.condition}</p>
-                                                    {h.since && <p className="text-xs text-muted-foreground">Depuis: {h.since}</p>}
-                                                    {h.notes && <p className="text-xs text-muted-foreground mt-0.5">{h.notes}</p>}
+                                                    {h.since && <p className="text-xs text-slate-500">Depuis: {h.since}</p>}
+                                                    {h.notes && <p className="text-xs text-slate-500 mt-0.5">{h.notes}</p>}
                                                 </div>
                                                 <button onClick={() => handleDeleteHistory(h.id)} disabled={isPending} className="text-red-400 hover:text-red-600 shrink-0">
                                                     <Trash2 className="h-3.5 w-3.5" />
@@ -185,7 +185,7 @@ export default function PatientProfileClient({ client, profile, tenantSlug }: {
                     {/* Resolved */}
                     {resolvedHistory.length > 0 && (
                         <div>
-                            <p className="text-xs text-muted-foreground uppercase font-semibold tracking-wide mb-2">Résolus</p>
+                            <p className="text-xs text-slate-500 uppercase font-semibold tracking-wide mb-2">Résolus</p>
                             <div className="space-y-2">
                                 {resolvedHistory.map(h => (
                                     <Card key={h.id} className="opacity-60">
@@ -193,7 +193,7 @@ export default function PatientProfileClient({ client, profile, tenantSlug }: {
                                             <div className="flex justify-between items-start gap-2">
                                                 <div>
                                                     <p className="text-sm font-medium line-through">{h.condition}</p>
-                                                    {h.since && <p className="text-xs text-muted-foreground">Depuis: {h.since}</p>}
+                                                    {h.since && <p className="text-xs text-slate-500">Depuis: {h.since}</p>}
                                                 </div>
                                                 <button onClick={() => handleDeleteHistory(h.id)} disabled={isPending} className="text-red-400 hover:text-red-600 shrink-0">
                                                     <Trash2 className="h-3.5 w-3.5" />
@@ -208,7 +208,7 @@ export default function PatientProfileClient({ client, profile, tenantSlug }: {
 
                     {profile.history.length === 0 && (
                         <div className="border rounded-lg p-6 text-center">
-                            <p className="text-sm text-muted-foreground">Aucun antécédent enregistré</p>
+                            <p className="text-sm text-slate-500">Aucun antécédent enregistré</p>
                         </div>
                     )}
                 </div>

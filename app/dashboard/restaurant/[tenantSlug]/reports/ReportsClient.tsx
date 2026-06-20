@@ -146,12 +146,12 @@ export default function ReportsClient({ initialReports, tenantSlug, restaurantNa
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold tracking-tight text-foreground flex items-center gap-3">
+                    <h1 className="text-3xl font-bold tracking-tight text-slate-900 flex items-center gap-3">
                         <BarChart3 className="text-violet-600" />
                         Rapports Mensuels
                     </h1>
-                    <p className="text-muted-foreground mt-1">
-                        Analyses automatiques de <span className="font-semibold text-foreground">{restaurantName}</span> — envoyées à <span className="font-semibold text-foreground">{userEmail}</span>
+                    <p className="text-slate-500 mt-1">
+                        Analyses automatiques de <span className="font-semibold text-slate-900">{restaurantName}</span> — envoyées à <span className="font-semibold text-slate-900">{userEmail}</span>
                     </p>
                 </div>
                 <Button
@@ -178,7 +178,7 @@ export default function ReportsClient({ initialReports, tenantSlug, restaurantNa
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
                             {/* Month */}
                             <div className="space-y-2">
-                                <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+                                <label className="text-xs font-bold uppercase tracking-widest text-slate-500 flex items-center gap-1.5">
                                     <Calendar size={11} /> Mois
                                 </label>
                                 <div className="relative">
@@ -192,13 +192,13 @@ export default function ReportsClient({ initialReports, tenantSlug, restaurantNa
                                             <option key={i} value={i + 1}>{m} / {MONTHS_EN[i]}</option>
                                         ))}
                                     </select>
-                                    <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+                                    <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none" />
                                 </div>
                             </div>
 
                             {/* Year */}
                             <div className="space-y-2">
-                                <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+                                <label className="text-xs font-bold uppercase tracking-widest text-slate-500 flex items-center gap-1.5">
                                     <Calendar size={11} /> Année
                                 </label>
                                 <div className="relative">
@@ -210,13 +210,13 @@ export default function ReportsClient({ initialReports, tenantSlug, restaurantNa
                                     >
                                         {years.map(y => <option key={y} value={y}>{y}</option>)}
                                     </select>
-                                    <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+                                    <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none" />
                                 </div>
                             </div>
 
                             {/* Language */}
                             <div className="space-y-2">
-                                <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
+                                <label className="text-xs font-bold uppercase tracking-widest text-slate-500 flex items-center gap-1.5">
                                     <Globe size={11} /> Langue du rapport
                                 </label>
                                 <div className="flex gap-2">
@@ -305,7 +305,7 @@ export default function ReportsClient({ initialReports, tenantSlug, restaurantNa
                                                 </div>
                                                 <div className="flex items-center gap-3 mt-1 flex-wrap">
                                                     {getStatusBadge(report.status)}
-                                                    <span className="text-xs text-muted-foreground flex items-center gap-1">
+                                                    <span className="text-xs text-slate-500 flex items-center gap-1">
                                                         <Clock size={10} />
                                                         {new Date(report.createdAt).toLocaleDateString(
                                                             report.language === 'fr' ? 'fr-FR' : 'en-US',
@@ -320,19 +320,19 @@ export default function ReportsClient({ initialReports, tenantSlug, restaurantNa
                                         {parsed && (
                                             <div className="hidden lg:flex items-center gap-6 shrink-0">
                                                 <div className="text-center">
-                                                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-0.5">CA</div>
+                                                    <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-0.5">CA</div>
                                                     <div className="text-lg font-black text-blue-600">{parsed.totalRevenue?.toFixed(0)} MAD</div>
                                                 </div>
                                                 <div className="h-8 w-px bg-slate-100" />
                                                 <div className="text-center">
-                                                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-0.5 flex items-center gap-1">
+                                                    <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-0.5 flex items-center gap-1">
                                                         <ShoppingBag size={9} /> Cmd.
                                                     </div>
                                                     <div className="text-lg font-black text-slate-700">{parsed.totalOrders}</div>
                                                 </div>
                                                 <div className="h-8 w-px bg-slate-100" />
                                                 <div className="text-center">
-                                                    <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-0.5 flex items-center gap-1">
+                                                    <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-0.5 flex items-center gap-1">
                                                         <TrendingUp size={9} /> Moy.
                                                     </div>
                                                     <div className="text-lg font-black text-emerald-600">{parsed.averageOrderValue?.toFixed(0)} MAD</div>
@@ -384,17 +384,17 @@ export default function ReportsClient({ initialReports, tenantSlug, restaurantNa
                                     {parsed && (
                                         <div className="flex lg:hidden items-center gap-4 px-6 pb-5 pt-0 border-t border-slate-100 mt-0">
                                             <div>
-                                                <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">CA</div>
+                                                <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">CA</div>
                                                 <div className="text-base font-black text-blue-600">{parsed.totalRevenue?.toFixed(0)} MAD</div>
                                             </div>
                                             <div className="h-6 w-px bg-slate-100" />
                                             <div>
-                                                <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Commandes</div>
+                                                <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Commandes</div>
                                                 <div className="text-base font-black text-slate-700">{parsed.totalOrders}</div>
                                             </div>
                                             <div className="h-6 w-px bg-slate-100" />
                                             <div>
-                                                <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Panier Moy.</div>
+                                                <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Panier Moy.</div>
                                                 <div className="text-base font-black text-emerald-600">{parsed.averageOrderValue?.toFixed(0)} MAD</div>
                                             </div>
                                         </div>

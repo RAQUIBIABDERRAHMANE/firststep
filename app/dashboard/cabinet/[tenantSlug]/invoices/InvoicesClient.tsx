@@ -154,7 +154,7 @@ export default function InvoicesClient({ invoices, clients, settings, tenantId, 
             <div className="flex items-center justify-between">
                 <div>
                     <h2 className="text-2xl font-bold">Factures</h2>
-                    <p className="text-sm text-muted-foreground">Gérez vos factures et suivez vos paiements</p>
+                    <p className="text-sm text-slate-500">Gérez vos factures et suivez vos paiements</p>
                 </div>
                 <div className="flex gap-2">
                     <Button variant="outline" onClick={() => setShowSettingsModal(true)}>
@@ -172,7 +172,7 @@ export default function InvoicesClient({ invoices, clients, settings, tenantId, 
                     <CardContent className="pt-6">
                         <div className="flex items-center gap-3">
                             <div className="p-2 rounded-lg bg-green-100"><CheckCircle className="h-5 w-5 text-green-600" /></div>
-                            <div><p className="text-sm text-muted-foreground">Revenus perçus</p><p className="text-2xl font-bold">{totalRevenue.toFixed(0)} {currency}</p></div>
+                            <div><p className="text-sm text-slate-500">Revenus perçus</p><p className="text-2xl font-bold">{totalRevenue.toFixed(0)} {currency}</p></div>
                         </div>
                     </CardContent>
                 </Card>
@@ -180,7 +180,7 @@ export default function InvoicesClient({ invoices, clients, settings, tenantId, 
                     <CardContent className="pt-6">
                         <div className="flex items-center gap-3">
                             <div className="p-2 rounded-lg bg-yellow-100"><Clock className="h-5 w-5 text-yellow-600" /></div>
-                            <div><p className="text-sm text-muted-foreground">En attente</p><p className="text-2xl font-bold">{pending.toFixed(0)} {currency}</p></div>
+                            <div><p className="text-sm text-slate-500">En attente</p><p className="text-2xl font-bold">{pending.toFixed(0)} {currency}</p></div>
                         </div>
                     </CardContent>
                 </Card>
@@ -188,7 +188,7 @@ export default function InvoicesClient({ invoices, clients, settings, tenantId, 
                     <CardContent className="pt-6">
                         <div className="flex items-center gap-3">
                             <div className="p-2 rounded-lg bg-blue-100"><FileText className="h-5 w-5 text-blue-600" /></div>
-                            <div><p className="text-sm text-muted-foreground">Total factures</p><p className="text-2xl font-bold">{invoices.length}</p></div>
+                            <div><p className="text-sm text-slate-500">Total factures</p><p className="text-2xl font-bold">{invoices.length}</p></div>
                         </div>
                     </CardContent>
                 </Card>
@@ -198,7 +198,7 @@ export default function InvoicesClient({ invoices, clients, settings, tenantId, 
             <div className="flex gap-2 flex-wrap">
                 {['ALL', 'DRAFT', 'SENT', 'PAID', 'OVERDUE'].map(s => (
                     <button key={s} onClick={() => setFilterStatus(s)}
-                        className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${filterStatus === s ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}>
+                        className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${filterStatus === s ? 'bg-primary text-primary-foreground' : 'bg-muted text-slate-500 hover:bg-muted/80'}`}>
                         {s === 'ALL' ? 'Toutes' : STATUS_CONFIG[s]?.label}
                         <span className="ml-1.5 text-xs opacity-70">
                             ({s === 'ALL' ? invoices.length : invoices.filter(i => i.status === s).length})
@@ -210,8 +210,8 @@ export default function InvoicesClient({ invoices, clients, settings, tenantId, 
             {/* Invoice List */}
             {filtered.length === 0 ? (
                 <div className="border rounded-lg p-12 text-center">
-                    <FileText className="h-12 w-12 text-muted-foreground/30 mx-auto mb-4" />
-                    <p className="text-muted-foreground font-medium">Aucune facture trouvée</p>
+                    <FileText className="h-12 w-12 text-slate-500/30 mx-auto mb-4" />
+                    <p className="text-slate-500 font-medium">Aucune facture trouvée</p>
                     <Button className="mt-4" onClick={() => setShowCreateModal(true)}><Plus className="h-4 w-4 mr-2" /> Créer une facture</Button>
                 </div>
             ) : (
@@ -223,21 +223,21 @@ export default function InvoicesClient({ invoices, clients, settings, tenantId, 
                             <Card key={inv.id} className="hover:shadow-md transition-shadow">
                                 <CardContent className="py-4">
                                     <div className="flex items-center gap-4">
-                                        <div className="p-2 rounded-lg bg-muted"><FileText className="h-5 w-5 text-muted-foreground" /></div>
+                                        <div className="p-2 rounded-lg bg-muted"><FileText className="h-5 w-5 text-slate-500" /></div>
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center gap-2 flex-wrap">
                                                 <span className="font-bold text-sm">{inv.number}</span>
                                                 <Badge variant={sc.variant as any}><Icon className="h-3 w-3 mr-1" />{sc.label}</Badge>
                                             </div>
-                                            <p className="text-sm text-muted-foreground mt-0.5">{inv.clientName}</p>
-                                            <p className="text-xs text-muted-foreground">
+                                            <p className="text-sm text-slate-500 mt-0.5">{inv.clientName}</p>
+                                            <p className="text-xs text-slate-500">
                                                 Émise le {new Date(inv.issueDate).toLocaleDateString('fr-FR')}
                                                 {inv.dueDate && ` · Échéance: ${new Date(inv.dueDate).toLocaleDateString('fr-FR')}`}
                                             </p>
                                         </div>
                                         <div className="text-right">
                                             <p className="font-bold text-lg">{inv.total.toFixed(0)} {currency}</p>
-                                            <p className="text-xs text-muted-foreground">{inv.items.length} article(s)</p>
+                                            <p className="text-xs text-slate-500">{inv.items.length} article(s)</p>
                                         </div>
                                         <div className="flex items-center gap-1">
                                             <Button size="sm" variant="outline" onClick={() => window.open(`/dashboard/cabinet/${tenantSlug}/invoices/${inv.id}/print`, '_blank')}>
