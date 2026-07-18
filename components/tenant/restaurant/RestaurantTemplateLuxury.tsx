@@ -113,7 +113,14 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
     } as React.CSSProperties
 
     return (
-        <div style={{ ...containerStyle, background: backgroundStyle, color: textColor }} className="min-h-screen font-sans selection:bg-[var(--primary)] selection:text-white pb-32">
+        <div style={{ ...containerStyle, background: backgroundStyle, color: textColor }} className="min-h-screen font-mulish selection:bg-[var(--primary)] selection:text-white pb-32">
+            <style>{`
+                @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Mulish:wght@300;400;500;600;700&display=swap');
+                .font-playfair { font-family: 'Playfair Display', serif; }
+                .font-mulish { font-family: 'Mulish', sans-serif; }
+                .no-scrollbar::-webkit-scrollbar { display: none; }
+                .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+            `}</style>
             
             {/* Dark Luxury Header */}
             <header className="w-full sticky top-0 z-50 border-b backdrop-blur-md"
@@ -123,7 +130,7 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
                     <div className="w-10 h-10" />
 
                     {/* Centered Brand Name */}
-                    <span className="absolute left-1/2 -translate-x-1/2 font-serif text-2xl tracking-wide font-medium hover:opacity-90 cursor-pointer"
+                    <span className="absolute left-1/2 -translate-x-1/2 font-playfair text-2xl tracking-wide font-medium hover:opacity-90 cursor-pointer"
                           style={{ color: 'var(--header-text)' }}>
                         {siteName}
                     </span>
@@ -157,7 +164,7 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
                     {/* Glass Overlay text badge */}
                     <div className="absolute bottom-5 left-5 right-5 bg-black/40 backdrop-blur-md border border-white/10 p-5 rounded-[22px] shadow-lg animate-fade-in">
                         <span className="text-[9px] font-black uppercase tracking-[0.3em]" style={{ color: 'var(--primary)' }}>L'Expérience Chocolatée</span>
-                        <h2 className="font-serif text-2xl font-light text-white mt-1 leading-snug">{config.heroTitle || "Delicious moments, served fresh."}</h2>
+                        <h2 className="font-playfair text-2xl font-light text-white mt-1 leading-snug">{config.heroTitle || "Delicious moments, served fresh."}</h2>
                     </div>
                 </div>
 
@@ -195,7 +202,7 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
                         return (
                             <section id={`cat-${cat}`} key={cat} className="scroll-mt-32">
                                 <div className="flex items-center gap-4 mb-6">
-                                    <h3 className="font-serif text-lg tracking-wider font-medium whitespace-nowrap" style={{ color: 'var(--primary)' }}>
+                                    <h3 className="font-playfair text-lg tracking-wider font-medium whitespace-nowrap" style={{ color: 'var(--primary)' }}>
                                         {cat}
                                     </h3>
                                     <div className="h-[1px] flex-1 bg-gradient-to-r from-[#e27355]/40 to-transparent" style={{ backgroundImage: `linear-gradient(to right, var(--primary)66, transparent)` }} />

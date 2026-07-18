@@ -36,9 +36,11 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "FirstStep — Plateforme SaaS B2B pour le Maroc",
   description: "Centralisez la gestion de votre entreprise avec FirstStep. Cabinet, restaurant, commerce — un seul outil, zéro friction.",
+  manifest: "/manifest.json",
   icons: {
     icon: "/logo.ico",
   },
+
   openGraph: {
     title: "FirstStep — Plateforme SaaS B2B pour le Maroc",
     description: "Centralisez la gestion de votre entreprise avec FirstStep.",

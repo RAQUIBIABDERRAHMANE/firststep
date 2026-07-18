@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { verifyTableTokenBrowser } from '@/lib/crypto-client'
 import { useCart, SelectedOption, SelectedAddon } from '@/lib/contexts/CartContext'
-import { createOrder, callWaiter, getOrderStatus, requestBill } from '@/app/actions/restaurant'
+import { createOrder, callWaiter, getOrderStatus, requestBill, getOrderDetails } from '@/app/actions/restaurant'
 
-export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
+export function useRestaurantLogic(categories: any[], isOwner?: boolean, slug?: string) {
     const searchParams = useSearchParams()
     const { items, addItem, removeItem, updateQuantity, clearCart, totalPrice, totalItems, tableId, setTableId } = useCart()
 
@@ -15,6 +15,8 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
     const [orderComplete, setOrderComplete] = useState(false)
     const [activeOrderId, setActiveOrderId] = useState<string | null>(null)
     const [orderStatus, setOrderStatus] = useState<string | null>(null)
+    const [showSplitBill, setShowSplitBill] = useState(false)
+    const [activeOrderDetails, setActiveOrderDetails] = useState<{ items: any[], totalPrice: number } | null>(null)
 
     // Customize Modal State
     const [customizingDish, setCustomizingDish] = useState<any | null>(null)
@@ -25,33 +27,55 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
         const storedOrder = localStorage.getItem(`active_order_${tableId}`)
         if (storedOrder) {
             setActiveOrderId(storedOrder)
+            // Fetch initial status to verify if it has been paid or canceled while offline/refreshing
+            getOrderStatus(storedOrder).then(res => {
+                if (res.success && res.status) {
+                    setOrderStatus(res.status)
+                    if (['PAID', 'CANCELED'].includes(res.status)) {
+                        localStorage.removeItem(`active_order_${tableId}`)
+                        setActiveOrderId(null)
+                        setOrderStatus(null)
+                        setTableId(null)
+                    }
+                }
+            })
         } else {
             setActiveOrderId(null)
             setOrderStatus(null)
         }
-    }, [tableId])
+    }, [tableId, setTableId])
 
-    // Poll for order status
+    // Phase E: SSE order status tracking (replaces polling)
     useEffect(() => {
-        if (!activeOrderId || !tableId) return
+        if (!activeOrderId || !tableId || !slug) return
 
-        const checkStatus = async () => {
-            const res = await getOrderStatus(activeOrderId)
-            if (res.success && res.status) {
-                setOrderStatus(res.status)
-                if (res.status === 'COMPLETED' || res.status === 'PAID' || res.status === 'CANCELED') {
-                    // Reset the order tracking for this table allowing fresh orders
-                    localStorage.removeItem(`active_order_${tableId}`)
-                    setActiveOrderId(null)
-                    setOrderComplete(false)
+        const source = new EventSource(`/api/tenant/${slug}/orders/${activeOrderId}/stream`)
+
+        source.onmessage = (e) => {
+            try {
+                const { status } = JSON.parse(e.data)
+                if (status && status !== 'NOT_FOUND') {
+                    setOrderStatus(status)
+                    if (['PAID', 'CANCELED'].includes(status)) {
+                        localStorage.removeItem(`active_order_${tableId}`)
+                        setActiveOrderId(null)
+                        setOrderComplete(false)
+                        setTableId(null) // Clears QR scan when paid or canceled!
+                        source.close()
+                    } else if (status === 'SERVED') {
+                        localStorage.removeItem(`active_order_${tableId}`)
+                        setActiveOrderId(null)
+                        setOrderComplete(false)
+                        source.close()
+                    }
                 }
-            }
+            } catch {}
         }
 
-        checkStatus()
-        const interval = setInterval(checkStatus, 5000)
-        return () => clearInterval(interval)
-    }, [activeOrderId, tableId])
+        source.onerror = () => source.close()
+
+        return () => source.close()
+    }, [activeOrderId, tableId, slug])
 
     // Table identification logic
     useEffect(() => {
@@ -188,6 +212,31 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
         }
     }
 
+    const handleOpenSplitBill = async () => {
+        if (!activeOrderId) return
+        try {
+            const res = await getOrderDetails(activeOrderId)
+            if (res.success && res.order) {
+                const mappedItems = res.order.items.map((i: any) => ({
+                    cartItemId: i.id,
+                    id: i.dishId,
+                    name: i.name,
+                    price: i.price,
+                    quantity: i.quantity
+                }))
+                setActiveOrderDetails({
+                    items: mappedItems,
+                    totalPrice: res.order.totalAmount
+                })
+                setShowSplitBill(true)
+            } else {
+                alert("Error loading order details: " + res.error)
+            }
+        } catch (err) {
+            alert("Failed to load order details")
+        }
+    }
+
     // Filter menu items by category
     const categoryNames = ['All', ...categories.map((c: any) => c.name)]
     const menuItems = categories.flatMap((c: any) =>
@@ -209,6 +258,8 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
         orderComplete, setOrderComplete,
         activeOrderId, orderStatus,
         customizingDish, setCustomizingDish,
+        showSplitBill, setShowSplitBill,
+        activeOrderDetails,
 
         // Cart Context
         items, addItem: handleAddItem, removeItem, updateQuantity, totalPrice, totalItems, tableId,
@@ -222,6 +273,7 @@ export function useRestaurantLogic(categories: any[], isOwner?: boolean) {
         handlePlaceOrder,
         handleCallWaiter,
         handleRequestBill,
-        handleConfirmCustomization
+        handleConfirmCustomization,
+        handleOpenSplitBill
     }
 }

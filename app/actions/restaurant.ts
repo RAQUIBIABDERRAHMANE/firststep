@@ -7,6 +7,8 @@ import { computeMonthlyAnalytics, generateReportPdf, type ReportLanguage } from 
 import { sendMonthlyReportEmail } from '@/lib/mail'
 import { uploadImage } from '@/lib/r2'
 
+import { DEFAULT_TEMPLATE_COLORS } from '@/lib/theme-colors'
+
 export async function getTenant(slug?: string) {
     const user = await getCurrentUser()
     if (!user) return null
@@ -151,7 +153,8 @@ export async function updateDish(
         order?: number,
         options?: string,
         addons?: string,
-        tags?: string
+        tags?: string,
+        prepStation?: string
     }, 
     slug?: string
 ) {
@@ -235,7 +238,19 @@ export async function createTable(number: string, capacity?: number, slug?: stri
     }
 }
 
-export async function updateTable(id: string, data: { number?: string, capacity?: number, isActive?: boolean }, slug?: string) {
+export async function updateTable(
+    id: string, 
+    data: { 
+        number?: string, 
+        capacity?: number, 
+        isActive?: boolean,
+        xPos?: number,
+        yPos?: number,
+        rotation?: number,
+        shape?: string
+    }, 
+    slug?: string
+) {
     const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
@@ -477,6 +492,12 @@ export async function updateOrderStatus(id: string, status: string, slug?: strin
             data: { status }
         })
         revalidatePath('/dashboard/restaurant')
+
+        // Phase I: Auto-decrement inventory when an order is completed
+        if (status === 'SERVED' || status === 'PAID') {
+            await decrementInventoryForOrder(id)
+        }
+
         return { success: true }
     } catch (e) {
         return { error: 'Failed to update order' }
@@ -492,9 +513,36 @@ export async function updateRestaurantDesign(designTemplate: string, slug?: stri
     }
 
     try {
+        const currentConfig = tenant.config ? JSON.parse(tenant.config) : {}
+        const templatesConfigs = currentConfig.templatesConfigs || {}
+        
+        // Grab custom config for the selected template, or fall back to default colors
+        const templateSpecificConfig = templatesConfigs[designTemplate] || {}
+        const defaults = DEFAULT_TEMPLATE_COLORS[designTemplate] || DEFAULT_TEMPLATE_COLORS.classic
+        
+        const newConfig = {
+            ...currentConfig,
+            backgroundColor: templateSpecificConfig.backgroundColor || defaults.backgroundColor,
+            textColor: templateSpecificConfig.textColor || defaults.textColor,
+            cardColor: templateSpecificConfig.cardColor || defaults.cardColor,
+            buttonBgColor: templateSpecificConfig.buttonBgColor || defaults.buttonBgColor,
+            buttonTextColor: templateSpecificConfig.buttonTextColor || defaults.buttonTextColor,
+            headerBgColor: templateSpecificConfig.headerBgColor || defaults.headerBgColor,
+            headerTextColor: templateSpecificConfig.headerTextColor || defaults.headerTextColor,
+            footerBgColor: templateSpecificConfig.footerBgColor || defaults.footerBgColor,
+            footerTextColor: templateSpecificConfig.footerTextColor || defaults.footerTextColor,
+            categoryBgColor: templateSpecificConfig.categoryBgColor || defaults.categoryBgColor,
+            categoryHighlightColor: templateSpecificConfig.categoryHighlightColor || defaults.categoryHighlightColor,
+            priceColor: templateSpecificConfig.priceColor || defaults.priceColor,
+        }
+
         await prisma.tenantWebsite.update({
             where: { id: tenant.id },
-            data: { designTemplate } as any
+            data: { 
+                designTemplate,
+                primaryColor: templateSpecificConfig.primaryColor || defaults.primaryColor || tenant.primaryColor,
+                config: JSON.stringify(newConfig)
+            } as any
         })
         revalidatePath(`/${tenant.slug}`)
         revalidatePath('/dashboard/restaurant/design')
@@ -529,6 +577,7 @@ export async function updateRestaurantConfig(data: {
     categoryBgColor?: string;
     categoryHighlightColor?: string;
     priceColor?: string;
+    templatesConfigs?: any;
 }, slug?: string) {
     const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
@@ -557,6 +606,7 @@ export async function updateRestaurantConfig(data: {
             ...(data.categoryBgColor !== undefined && { categoryBgColor: data.categoryBgColor }),
             ...(data.categoryHighlightColor !== undefined && { categoryHighlightColor: data.categoryHighlightColor }),
             ...(data.priceColor !== undefined && { priceColor: data.priceColor }),
+            ...(data.templatesConfigs !== undefined && { templatesConfigs: data.templatesConfigs }),
         }
 
         await prisma.tenantWebsite.update({
@@ -842,4 +892,308 @@ export async function uploadDishImage(formData: FormData) {
         return { error: 'Failed to save uploaded image' }
     }
 }
+
+// ─── Phase C: KDS ─────────────────────────────────────────────────────────────
+
+/**
+ * Fetch active orders for the Kitchen Display System.
+ * Optionally filter by prepStation (dish-level field).
+ * Returns only PENDING | COOKING | READY orders.
+ */
+export async function getOrdersForKDS(slug?: string, station?: string) {
+    const tenant = await getTenant(slug)
+    if (!tenant) return []
+
+    const orders = await prisma.restaurantOrder.findMany({
+        where: {
+            table: { tenantId: tenant.id },
+            status: { in: ['PENDING', 'COOKING', 'READY'] }
+        },
+        include: {
+            table: true,
+            items: true
+        },
+        orderBy: { createdAt: 'asc' }
+    })
+
+    if (!station || station === 'ALL') return orders
+
+    // Build a station map for all relevant dish IDs
+    const dishIds = [...new Set(orders.flatMap(o => o.items.map((i: any) => i.dishId)))]
+    const dishes = await prisma.restaurantDish.findMany({
+        where: { id: { in: dishIds } },
+        select: { id: true, prepStation: true }
+    })
+    const stationMap = new Map(dishes.map(d => [d.id, d.prepStation]))
+
+    // Filter orders and their items synchronously
+    const filtered = orders
+        .map(order => ({
+            ...order,
+            items: order.items.filter((item: any) => stationMap.get(item.dishId) === station)
+        }))
+        .filter(order => order.items.length > 0)
+
+    return filtered
+}
+
+// ─── Phase D: Waiter Shifts ───────────────────────────────────────────────────
+
+export async function startWaiterShift(waiterId: string, tableIds: string[], tenantId: string) {
+    try {
+        // Close any existing active shift for this waiter
+        await prisma.waiterShift.updateMany({
+            where: { waiterId, isActive: true },
+            data: { isActive: false, endTime: new Date() }
+        })
+
+        const shift = await prisma.waiterShift.create({
+            data: {
+                waiterId,
+                tenantId,
+                tableIds: JSON.stringify(tableIds),
+                isActive: true
+            }
+        })
+        return { success: true, shift }
+    } catch (e) {
+        console.error('[Restaurant Action] startWaiterShift Error:', e)
+        return { error: 'Failed to start shift' }
+    }
+}
+
+export async function endWaiterShift(waiterId: string) {
+    try {
+        await prisma.waiterShift.updateMany({
+            where: { waiterId, isActive: true },
+            data: { isActive: false, endTime: new Date() }
+        })
+        return { success: true }
+    } catch (e) {
+        console.error('[Restaurant Action] endWaiterShift Error:', e)
+        return { error: 'Failed to end shift' }
+    }
+}
+
+export async function getActiveShift(waiterId: string) {
+    try {
+        const shift = await prisma.waiterShift.findFirst({
+            where: { waiterId, isActive: true },
+            orderBy: { startTime: 'desc' }
+        })
+        return { success: true, shift }
+    } catch (e) {
+        return { error: 'Failed to fetch shift' }
+    }
+}
+
+// ─── Phase H: Bill Split ──────────────────────────────────────────────────────
+
+export async function createBillSplit(
+    orderId: string,
+    type: 'EQUAL' | 'ITEMIZED',
+    parts?: number,
+    itemIds?: string[]
+) {
+    try {
+        const split = await prisma.billSplit.create({
+            data: {
+                orderId,
+                type,
+                parts: parts ?? 1,
+                itemsPaid: JSON.stringify(itemIds ?? []),
+                status: 'PENDING'
+            }
+        })
+        return { success: true, split }
+    } catch (e) {
+        console.error('[Restaurant Action] createBillSplit Error:', e)
+        return { error: 'Failed to create bill split' }
+    }
+}
+
+export async function getBillSplit(orderId: string) {
+    try {
+        const split = await prisma.billSplit.findFirst({
+            where: { orderId },
+            orderBy: { createdAt: 'desc' }
+        })
+        return { success: true, split }
+    } catch (e) {
+        return { error: 'Failed to fetch bill split' }
+    }
+}
+
+export async function updateBillSplitPayment(splitId: string, paidItemIds: string[], amount: number) {
+    try {
+        const split = await prisma.billSplit.update({
+            where: { id: splitId },
+            data: {
+                itemsPaid: JSON.stringify(paidItemIds),
+                paidTotal: amount,
+                status: paidItemIds.length > 0 ? 'PARTIALLY_PAID' : 'PENDING'
+            }
+        })
+        return { success: true, split }
+    } catch (e) {
+        console.error('[Restaurant Action] updateBillSplitPayment Error:', e)
+        return { error: 'Failed to update payment' }
+    }
+}
+
+export async function getOrderDetails(orderId: string) {
+    try {
+        const order = await prisma.restaurantOrder.findUnique({
+            where: { id: orderId },
+            include: { items: true }
+        })
+        if (!order) return { error: 'Order not found' }
+        return { success: true, order }
+    } catch (e) {
+        console.error('[Restaurant Action] getOrderDetails Error:', e)
+        return { error: 'Failed to fetch order details' }
+    }
+}
+
+
+// ─── Phase H: Shared Cart Sync ────────────────────────────────────────────────
+
+export async function syncCartToServer(tableId: string, cartData: any[]) {
+    try {
+        await prisma.tableCartSession.upsert({
+            where: { tableId },
+            update: { cartData: JSON.stringify(cartData) },
+            create: { tableId, cartData: JSON.stringify(cartData) }
+        })
+        return { success: true }
+    } catch (e) {
+        console.error('[Restaurant Action] syncCartToServer Error:', e)
+        return { error: 'Failed to sync cart' }
+    }
+}
+
+export async function getCartFromServer(tableId: string) {
+    try {
+        const session = await prisma.tableCartSession.findUnique({ where: { tableId } })
+        if (!session) return { success: true, cartData: [] }
+        return { success: true, cartData: JSON.parse(session.cartData) }
+    } catch (e) {
+        return { error: 'Failed to fetch cart', cartData: [] }
+    }
+}
+
+// ─── Phase I: Inventory ───────────────────────────────────────────────────────
+
+export async function getInventory(slug?: string) {
+    const tenant = await getTenant(slug)
+    if (!tenant) return []
+
+    return await prisma.ingredient.findMany({
+        where: { tenantId: tenant.id },
+        include: { recipes: { include: { dish: { select: { name: true, id: true } } } } },
+        orderBy: { name: 'asc' }
+    })
+}
+
+export async function createIngredient(
+    data: { name: string; unit: string; stock: number; minStock: number },
+    slug?: string
+) {
+    const tenant = await getTenant(slug)
+    if (!tenant) return { error: 'Not authenticated' }
+
+    try {
+        const ingredient = await prisma.ingredient.create({
+            data: { ...data, tenantId: tenant.id }
+        })
+        revalidatePath('/dashboard/restaurant', 'layout')
+        return { success: true, ingredient }
+    } catch (e) {
+        console.error('[Restaurant Action] createIngredient Error:', e)
+        return { error: 'Failed to create ingredient' }
+    }
+}
+
+export async function updateIngredient(
+    id: string,
+    data: { name?: string; unit?: string; stock?: number; minStock?: number },
+    slug?: string
+) {
+    const tenant = await getTenant(slug)
+    if (!tenant) return { error: 'Not authenticated' }
+
+    try {
+        const ingredient = await prisma.ingredient.update({
+            where: { id, tenantId: tenant.id },
+            data
+        })
+        revalidatePath('/dashboard/restaurant', 'layout')
+        return { success: true, ingredient }
+    } catch (e) {
+        console.error('[Restaurant Action] updateIngredient Error:', e)
+        return { error: 'Failed to update ingredient' }
+    }
+}
+
+export async function deleteIngredient(id: string, slug?: string) {
+    const tenant = await getTenant(slug)
+    if (!tenant) return { error: 'Not authenticated' }
+
+    try {
+        await prisma.ingredient.delete({ where: { id, tenantId: tenant.id } })
+        revalidatePath('/dashboard/restaurant', 'layout')
+        return { success: true }
+    } catch (e) {
+        console.error('[Restaurant Action] deleteIngredient Error:', e)
+        return { error: 'Failed to delete ingredient' }
+    }
+}
+
+export async function setDishRecipe(
+    dishId: string,
+    items: { ingredientId: string; quantity: number }[],
+    slug?: string
+) {
+    const tenant = await getTenant(slug)
+    if (!tenant) return { error: 'Not authenticated' }
+
+    try {
+        // Delete existing recipe items for this dish
+        await prisma.recipeItem.deleteMany({ where: { dishId } })
+
+        // Re-create with new items
+        if (items.length > 0) {
+            await prisma.recipeItem.createMany({
+                data: items.map(i => ({ dishId, ingredientId: i.ingredientId, quantity: i.quantity }))
+            })
+        }
+        return { success: true }
+    } catch (e) {
+        console.error('[Restaurant Action] setDishRecipe Error:', e)
+        return { error: 'Failed to set recipe' }
+    }
+}
+
+/**
+ * Decrement ingredient stock based on the recipe for each served item.
+ * Call this internally when an order is marked SERVED or PAID.
+ */
+async function decrementInventoryForOrder(orderId: string) {
+    try {
+        const orderItems = await prisma.restaurantOrderItem.findMany({ where: { orderId } })
+        for (const item of orderItems) {
+            const recipes = await prisma.recipeItem.findMany({ where: { dishId: item.dishId } })
+            for (const recipe of recipes) {
+                await prisma.ingredient.update({
+                    where: { id: recipe.ingredientId },
+                    data: { stock: { decrement: recipe.quantity * item.quantity } }
+                })
+            }
+        }
+    } catch (e) {
+        console.error('[Restaurant Action] decrementInventoryForOrder Error:', e)
+    }
+}
+
+
 

@@ -9,8 +9,9 @@ import { RestaurantTemplateProps } from './RestaurantTemplate'
 import { 
     ShoppingCart, QrCode, MapPin, Phone, Mail, Plus, Minus, Trash2, 
     ChevronRight, Utensils, CheckCircle2, LayoutDashboard, Bell, X, Receipt, Loader2,
-    Home, BookOpen, Calendar, User
+    Home, BookOpen, Calendar, User, Split
 } from 'lucide-react'
+import SplitBillModal from './SplitBillModal'
 import { translations, Language, CURRENCY } from '@/lib/translations'
 
 const QRScanner = dynamic(() => import('./QRScanner'), { ssr: false })
@@ -64,7 +65,8 @@ export default function RestaurantTemplateItalian({
         showScanner, setShowScanner, showCart, setShowCart, activeCategory, setActiveCategory,
         isPlacingOrder, orderComplete, setOrderComplete, items, addItem, updateQuantity,
         totalPrice, totalItems, tableId, categoryNames, filteredItems, handleScan, handlePlaceOrder, handleCallWaiter, handleRequestBill, removeItem,
-        customizingDish, setCustomizingDish, handleConfirmCustomization, activeOrderId, orderStatus
+        customizingDish, setCustomizingDish, handleConfirmCustomization, activeOrderId, orderStatus,
+        showSplitBill, setShowSplitBill, activeOrderDetails, handleOpenSplitBill
     } = logic
 
     const [showReservation, setShowReservation] = useState(false)
@@ -100,12 +102,12 @@ export default function RestaurantTemplateItalian({
             style={{ 
                 backgroundColor: bgColor, 
                 color: textColor,
-                fontFamily: "'Inter', sans-serif"
+                fontFamily: "'Plus Jakarta Sans', sans-serif"
             }}
         >
             <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;850&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500&display=swap');
-                .font-serif-italian { font-family: 'Playfair Display', serif; }
+                @import url('https://fonts.googleapis.com/css2?family=Italiana&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+                .font-serif-italian { font-family: 'Italiana', serif; }
                 .no-scrollbar::-webkit-scrollbar { display: none; }
                 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
                 
@@ -142,6 +144,16 @@ export default function RestaurantTemplateItalian({
             {/* Call Waiter & Request Bill buttons for scanned tables */}
             {tableId && !isOwner && (
                 <div className="fixed bottom-24 left-6 z-50 flex flex-col gap-3">
+                    {activeOrderId && (
+                        <button
+                            onClick={handleOpenSplitBill}
+                            className="h-12 w-12 rounded-full shadow-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-[#FAF6F0]/25"
+                            style={{ backgroundColor: buttonBg, color: buttonText }}
+                            title="Partager l'addition"
+                        >
+                            <Split size={18} />
+                        </button>
+                    )}
                     <button
                         onClick={handleRequestBill}
                         className="h-12 w-12 rounded-full shadow-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-[#FAF6F0]/25"
@@ -461,6 +473,22 @@ export default function RestaurantTemplateItalian({
                                     <Utensils size={40} className="text-[#2b2823]/30" />
                                     <h3 className="font-serif-italian text-xl font-bold">{t.cart_empty}</h3>
                                     <p className="text-xs text-[#5e5950]">{t.start_journey}</p>
+                                    
+                                    {activeOrderId && (
+                                        <div className="pt-4 border-t border-[#2b2823]/10 w-full max-w-xs mx-auto space-y-3 z-10">
+                                            <p className="text-[10px] text-stone-500 font-bold uppercase tracking-wider">Ordine attivo in corso</p>
+                                            <button
+                                                onClick={() => {
+                                                    setShowCart(false)
+                                                    handleOpenSplitBill()
+                                                }}
+                                                className="w-full py-3 rounded-lg font-bold text-[10px] uppercase tracking-widest transition-all"
+                                                style={{ backgroundColor: buttonBg, color: buttonText }}
+                                            >
+                                                Partager l'addition
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
                             ) : items.map((item) => (
                                 <div key={item.cartItemId} className="flex gap-4 items-center rounded-xl p-4 border border-[#2b2823]/10 bg-white shadow-sm">
@@ -530,18 +558,30 @@ export default function RestaurantTemplateItalian({
                                 <CheckCircle2 size={48} className="text-emerald-700 mt-4 animate-bounce" />
                                 <h2 className="font-serif-italian text-3xl font-bold mt-6 mb-3 text-[#2b2823]">{t.thanks}</h2>
                                 <p className="font-serif-italian italic text-base mb-8 text-[#5e5950] px-4">
-                                    {t.chef_preparing}
+                                     {t.chef_preparing}
                                 </p>
-                                <button
-                                    onClick={() => {
-                                        setOrderComplete(false)
-                                        setShowCart(false)
-                                    }}
-                                    className="rounded-lg px-8 py-3.5 font-bold uppercase tracking-widest text-xs transition-all hover:brightness-105"
-                                    style={{ backgroundColor: buttonBg, color: buttonText }}
-                                >
-                                    {t.back_to_menu}
-                                </button>
+                                <div className="flex flex-col sm:flex-row gap-3 w-full justify-center px-4 max-w-sm z-10">
+                                    <button
+                                        onClick={() => {
+                                            setOrderComplete(false)
+                                            setShowCart(false)
+                                        }}
+                                        className="rounded-lg px-6 py-3 font-bold uppercase tracking-widest text-[10px] transition-all border border-stone-300 text-stone-700 hover:bg-stone-50 flex-1"
+                                    >
+                                        {t.back_to_menu}
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            setOrderComplete(false)
+                                            setShowCart(false)
+                                            handleOpenSplitBill()
+                                        }}
+                                        className="rounded-lg px-6 py-3 font-bold uppercase tracking-widest text-[10px] transition-all flex-1"
+                                        style={{ backgroundColor: buttonBg, color: buttonText }}
+                                    >
+                                        Partager l'addition
+                                    </button>
+                                </div>
                             </div>
                         )}
                     </div>
@@ -568,6 +608,14 @@ export default function RestaurantTemplateItalian({
                 buttonBgColor={config?.buttonBgColor}
                 buttonTextColor={config?.buttonTextColor}
             />
+            {showSplitBill && activeOrderId && activeOrderDetails && (
+                <SplitBillModal
+                    orderId={activeOrderId}
+                    items={activeOrderDetails.items}
+                    totalPrice={activeOrderDetails.totalPrice}
+                    onClose={() => setShowSplitBill(false)}
+                />
+            )}
 
             {/* ── FLOATING ACTION BUTTON ── */}
             {!tableId ? (
@@ -593,6 +641,16 @@ export default function RestaurantTemplateItalian({
 
                     {/* Table Info and Call Actions */}
                     <div className="flex gap-2">
+                        {activeOrderId && (
+                            <button
+                                onClick={handleOpenSplitBill}
+                                className="h-11 px-4 rounded-full shadow-lg flex items-center gap-2 transition-all hover:scale-105 active:scale-95 border border-white/15 text-[10px] font-black uppercase tracking-widest"
+                                style={{ backgroundColor: buttonBg, color: buttonText }}
+                            >
+                                <Split size={14} />
+                                <span>Dividi</span>
+                            </button>
+                        )}
                         <button
                             onClick={handleRequestBill}
                             className="h-11 px-4 rounded-full shadow-lg flex items-center gap-2 transition-all hover:scale-105 active:scale-95 border border-white/15 text-[10px] font-black uppercase tracking-widest"

@@ -26,7 +26,17 @@ export default async function TenantPage({ params }: Props) {
     // Parse config safely
     let config = {}
     try {
-        config = JSON.parse(tenant.config)
+        const rawConfig = JSON.parse(tenant.config)
+        const template = tenant.designTemplate || 'classic'
+        const templateSpecificConfig = rawConfig.templatesConfigs?.[template] || {}
+        config = {
+            ...rawConfig,
+            ...templateSpecificConfig
+        }
+        console.log('[TenantPage Debug] Template:', template)
+        console.log('[TenantPage Debug] Raw Config Keys:', Object.keys(rawConfig))
+        console.log('[TenantPage Debug] Template Specific Config:', templateSpecificConfig)
+        console.log('[TenantPage Debug] Merged Config BackgroundColor:', (config as any).backgroundColor)
     } catch (e) {
         console.error('Failed to parse tenant config', e)
     }
@@ -47,7 +57,7 @@ export default async function TenantPage({ params }: Props) {
                 config={config}
                 services={(tenant as any).cabinetServices || []}
                 isOwner={isOwner}
-                primaryColor={(tenant as any).primaryColor}
+                primaryColor={(config as any).primaryColor || tenant.primaryColor}
                 designTemplate={(tenant as any).designTemplate}
                 tenantSlug={tenantSlug}
             />
@@ -65,7 +75,7 @@ export default async function TenantPage({ params }: Props) {
             categories={(tenant as any).categories || []}
             isOwner={isOwner}
             designTemplate={(tenant as any).designTemplate || 'classic'}
-            primaryColor={(tenant as any).primaryColor}
+            primaryColor={(config as any).primaryColor || tenant.primaryColor}
         />
     )
 }

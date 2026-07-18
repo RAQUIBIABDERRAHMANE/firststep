@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
 import { updateRestaurantDesign, updateRestaurantConfig } from '@/app/actions/restaurant'
+import { DEFAULT_TEMPLATE_COLORS } from '@/lib/theme-colors'
 import { Check, Loader2, Paintbrush, Save, Type, Image as ImageIcon } from 'lucide-react'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
@@ -19,6 +20,32 @@ export default function DesignSelectionClient({ initialData }: Props) {
     const [isSaving, setIsSaving] = useState(false)
     const [activeTab, setActiveTab] = useState<'themes' | 'customize'>('themes')
     const router = useRouter()
+
+    const getTemplateColor = (colorKey: string) => {
+        if (colorKey === 'primaryColor') {
+            return config.templatesConfigs?.[currentDesign]?.primaryColor || DEFAULT_TEMPLATE_COLORS[currentDesign]?.primaryColor || primaryColor
+        }
+        return config.templatesConfigs?.[currentDesign]?.[colorKey] || DEFAULT_TEMPLATE_COLORS[currentDesign]?.[colorKey] || DEFAULT_TEMPLATE_COLORS.classic[colorKey]
+    }
+
+    const setTemplateColor = (colorKey: string, value: string) => {
+        const currentTemplatesConfigs = config.templatesConfigs || {}
+        const currentDesignConfig = currentTemplatesConfigs[currentDesign] || {}
+        const updatedDesignConfig = {
+            ...currentDesignConfig,
+            [colorKey]: value
+        }
+        if (colorKey === 'primaryColor') {
+            setPrimaryColor(value)
+        }
+        setConfig({
+            ...config,
+            templatesConfigs: {
+                ...currentTemplatesConfigs,
+                [currentDesign]: updatedDesignConfig
+            }
+        })
+    }
 
     const handleSelectDesign = async (design: string) => {
         setIsSaving(true)
@@ -41,8 +68,22 @@ export default function DesignSelectionClient({ initialData }: Props) {
     const handleSaveConfig = async () => {
         setIsSaving(true)
         try {
+            const activePrimaryColor = getTemplateColor('primaryColor')
+            const activeBgColor = getTemplateColor('backgroundColor')
+            const activeTextColor = getTemplateColor('textColor')
+            const activeCardColor = getTemplateColor('cardColor')
+            const activeBtnBg = getTemplateColor('buttonBgColor')
+            const activeBtnText = getTemplateColor('buttonTextColor')
+            const activeHeaderBg = getTemplateColor('headerBgColor')
+            const activeHeaderTextColor = getTemplateColor('headerTextColor')
+            const activeFooterBg = getTemplateColor('footerBgColor')
+            const activeFooterText = getTemplateColor('footerTextColor')
+            const activeCatBg = getTemplateColor('categoryBgColor')
+            const activeCatHighlight = getTemplateColor('categoryHighlightColor')
+            const activePriceColor = getTemplateColor('priceColor')
+
             const res = await updateRestaurantConfig({
-                primaryColor,
+                primaryColor: activePrimaryColor,
                 heroTitle: config.heroTitle,
                 description: initialData.description,
                 logo: config.logo,
@@ -51,20 +92,21 @@ export default function DesignSelectionClient({ initialData }: Props) {
                 phone: config.phone,
                 hours: config.hours,
                 pageTitle: config.pageTitle,
-                backgroundColor: config.backgroundColor,
-                textColor: config.textColor,
-                cardColor: config.cardColor,
+                backgroundColor: activeBgColor,
+                textColor: activeTextColor,
+                cardColor: activeCardColor,
                 reservationOpenTime: config.reservationOpenTime,
                 reservationCloseTime: config.reservationCloseTime,
-                buttonBgColor: config.buttonBgColor,
-                buttonTextColor: config.buttonTextColor,
-                headerBgColor: config.headerBgColor,
-                headerTextColor: config.headerTextColor,
-                footerBgColor: config.footerBgColor,
-                footerTextColor: config.footerTextColor,
-                categoryBgColor: config.categoryBgColor,
-                categoryHighlightColor: config.categoryHighlightColor,
-                priceColor: config.priceColor
+                buttonBgColor: activeBtnBg,
+                buttonTextColor: activeBtnText,
+                headerBgColor: activeHeaderBg,
+                headerTextColor: activeHeaderTextColor,
+                footerBgColor: activeFooterBg,
+                footerTextColor: activeFooterText,
+                categoryBgColor: activeCatBg,
+                categoryHighlightColor: activeCatHighlight,
+                priceColor: activePriceColor,
+                templatesConfigs: config.templatesConfigs
             })
 
             if (res.success) {
@@ -234,7 +276,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                     value={config.pageTitle || ''}
                                     onChange={(e) => setConfig({ ...config, pageTitle: e.target.value })}
                                     placeholder="e.g. Best Restaurant in Town"
-                                    className="w-full p-3 rounded-xl border bg-background"
+                                    className="w-full p-3 rounded-xl border bg-background text-slate-900 dark:text-white"
                                 />
                                 <p className="text-xs text-slate-500">The text shown in the browser tab and search results.</p>
                             </div>
@@ -246,7 +288,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                     value={config.heroTitle || ''}
                                     onChange={(e) => setConfig({ ...config, heroTitle: e.target.value })}
                                     placeholder="e.g. Delicious moments, served fresh."
-                                    className="w-full p-3 rounded-xl border bg-background"
+                                    className="w-full p-3 rounded-xl border bg-background text-slate-900 dark:text-white"
                                 />
                                 <p className="text-xs text-slate-500">The main big text displayed on top of your page.</p>
                             </div>
@@ -270,15 +312,15 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 <div className="flex items-center gap-3">
                                     <input
                                         type="color"
-                                        value={primaryColor}
-                                        onChange={(e) => setPrimaryColor(e.target.value)}
+                                        value={getTemplateColor('primaryColor')}
+                                        onChange={(e) => setTemplateColor('primaryColor', e.target.value)}
                                         className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
-                                        value={primaryColor}
-                                        onChange={(e) => setPrimaryColor(e.target.value)}
-                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        value={getTemplateColor('primaryColor')}
+                                        onChange={(e) => setTemplateColor('primaryColor', e.target.value)}
+                                        className="flex-1 p-3 rounded-xl border bg-background text-slate-900 dark:text-white font-mono uppercase"
                                         maxLength={7}
                                     />
                                 </div>
@@ -290,15 +332,15 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 <div className="flex items-center gap-3">
                                     <input
                                         type="color"
-                                        value={config.backgroundColor || '#ffffff'}
-                                        onChange={(e) => setConfig({ ...config, backgroundColor: e.target.value })}
+                                        value={getTemplateColor('backgroundColor')}
+                                        onChange={(e) => setTemplateColor('backgroundColor', e.target.value)}
                                         className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
-                                        value={config.backgroundColor || ''}
-                                        onChange={(e) => setConfig({ ...config, backgroundColor: e.target.value })}
-                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        value={getTemplateColor('backgroundColor')}
+                                        onChange={(e) => setTemplateColor('backgroundColor', e.target.value)}
+                                        className="flex-1 p-3 rounded-xl border bg-background text-slate-900 dark:text-white font-mono uppercase"
                                         placeholder="#FFFFFF"
                                         maxLength={7}
                                     />
@@ -310,15 +352,15 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 <div className="flex items-center gap-3">
                                     <input
                                         type="color"
-                                        value={config.textColor || '#0f172a'}
-                                        onChange={(e) => setConfig({ ...config, textColor: e.target.value })}
+                                        value={getTemplateColor('textColor')}
+                                        onChange={(e) => setTemplateColor('textColor', e.target.value)}
                                         className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
-                                        value={config.textColor || ''}
-                                        onChange={(e) => setConfig({ ...config, textColor: e.target.value })}
-                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        value={getTemplateColor('textColor')}
+                                        onChange={(e) => setTemplateColor('textColor', e.target.value)}
+                                        className="flex-1 p-3 rounded-xl border bg-background text-slate-900 dark:text-white font-mono uppercase"
                                         placeholder="#0F172A"
                                         maxLength={7}
                                     />
@@ -330,15 +372,15 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 <div className="flex items-center gap-3">
                                     <input
                                         type="color"
-                                        value={config.cardColor || '#f8fafc'}
-                                        onChange={(e) => setConfig({ ...config, cardColor: e.target.value })}
+                                        value={getTemplateColor('cardColor')}
+                                        onChange={(e) => setTemplateColor('cardColor', e.target.value)}
                                         className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
-                                        value={config.cardColor || ''}
-                                        onChange={(e) => setConfig({ ...config, cardColor: e.target.value })}
-                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        value={getTemplateColor('cardColor')}
+                                        onChange={(e) => setTemplateColor('cardColor', e.target.value)}
+                                        className="flex-1 p-3 rounded-xl border bg-background text-slate-900 dark:text-white font-mono uppercase"
                                         placeholder="#F8FAFC"
                                         maxLength={7}
                                     />
@@ -351,15 +393,15 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 <div className="flex items-center gap-3">
                                     <input
                                         type="color"
-                                        value={config.buttonBgColor || '#3B82F6'}
-                                        onChange={(e) => setConfig({ ...config, buttonBgColor: e.target.value })}
+                                        value={getTemplateColor('buttonBgColor')}
+                                        onChange={(e) => setTemplateColor('buttonBgColor', e.target.value)}
                                         className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
-                                        value={config.buttonBgColor || ''}
-                                        onChange={(e) => setConfig({ ...config, buttonBgColor: e.target.value })}
-                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        value={getTemplateColor('buttonBgColor')}
+                                        onChange={(e) => setTemplateColor('buttonBgColor', e.target.value)}
+                                        className="flex-1 p-3 rounded-xl border bg-background text-slate-900 dark:text-white font-mono uppercase"
                                         placeholder="#3B82F6"
                                         maxLength={7}
                                     />
@@ -371,15 +413,15 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 <div className="flex items-center gap-3">
                                     <input
                                         type="color"
-                                        value={config.buttonTextColor || '#ffffff'}
-                                        onChange={(e) => setConfig({ ...config, buttonTextColor: e.target.value })}
+                                        value={getTemplateColor('buttonTextColor')}
+                                        onChange={(e) => setTemplateColor('buttonTextColor', e.target.value)}
                                         className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
-                                        value={config.buttonTextColor || ''}
-                                        onChange={(e) => setConfig({ ...config, buttonTextColor: e.target.value })}
-                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        value={getTemplateColor('buttonTextColor')}
+                                        onChange={(e) => setTemplateColor('buttonTextColor', e.target.value)}
+                                        className="flex-1 p-3 rounded-xl border bg-background text-slate-900 dark:text-white font-mono uppercase"
                                         placeholder="#FFFFFF"
                                         maxLength={7}
                                     />
@@ -391,15 +433,15 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 <div className="flex items-center gap-3">
                                     <input
                                         type="color"
-                                        value={config.headerBgColor || '#ffffff'}
-                                        onChange={(e) => setConfig({ ...config, headerBgColor: e.target.value })}
+                                        value={getTemplateColor('headerBgColor')}
+                                        onChange={(e) => setTemplateColor('headerBgColor', e.target.value)}
                                         className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
-                                        value={config.headerBgColor || ''}
-                                        onChange={(e) => setConfig({ ...config, headerBgColor: e.target.value })}
-                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        value={getTemplateColor('headerBgColor')}
+                                        onChange={(e) => setTemplateColor('headerBgColor', e.target.value)}
+                                        className="flex-1 p-3 rounded-xl border bg-background text-slate-900 dark:text-white font-mono uppercase"
                                         placeholder="#FFFFFF"
                                         maxLength={7}
                                     />
@@ -411,15 +453,15 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 <div className="flex items-center gap-3">
                                     <input
                                         type="color"
-                                        value={config.headerTextColor || '#0f172a'}
-                                        onChange={(e) => setConfig({ ...config, headerTextColor: e.target.value })}
+                                        value={getTemplateColor('headerTextColor')}
+                                        onChange={(e) => setTemplateColor('headerTextColor', e.target.value)}
                                         className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
-                                        value={config.headerTextColor || ''}
-                                        onChange={(e) => setConfig({ ...config, headerTextColor: e.target.value })}
-                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        value={getTemplateColor('headerTextColor')}
+                                        onChange={(e) => setTemplateColor('headerTextColor', e.target.value)}
+                                        className="flex-1 p-3 rounded-xl border bg-background text-slate-900 dark:text-white font-mono uppercase"
                                         placeholder="#0F172A"
                                         maxLength={7}
                                     />
@@ -431,15 +473,15 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 <div className="flex items-center gap-3">
                                     <input
                                         type="color"
-                                        value={config.footerBgColor || '#1e293b'}
-                                        onChange={(e) => setConfig({ ...config, footerBgColor: e.target.value })}
+                                        value={getTemplateColor('footerBgColor')}
+                                        onChange={(e) => setTemplateColor('footerBgColor', e.target.value)}
                                         className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
-                                        value={config.footerBgColor || ''}
-                                        onChange={(e) => setConfig({ ...config, footerBgColor: e.target.value })}
-                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        value={getTemplateColor('footerBgColor')}
+                                        onChange={(e) => setTemplateColor('footerBgColor', e.target.value)}
+                                        className="flex-1 p-3 rounded-xl border bg-background text-slate-900 dark:text-white font-mono uppercase"
                                         placeholder="#1E293B"
                                         maxLength={7}
                                     />
@@ -451,15 +493,15 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 <div className="flex items-center gap-3">
                                     <input
                                         type="color"
-                                        value={config.footerTextColor || '#f8fafc'}
-                                        onChange={(e) => setConfig({ ...config, footerTextColor: e.target.value })}
+                                        value={getTemplateColor('footerTextColor')}
+                                        onChange={(e) => setTemplateColor('footerTextColor', e.target.value)}
                                         className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
-                                        value={config.footerTextColor || ''}
-                                        onChange={(e) => setConfig({ ...config, footerTextColor: e.target.value })}
-                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        value={getTemplateColor('footerTextColor')}
+                                        onChange={(e) => setTemplateColor('footerTextColor', e.target.value)}
+                                        className="flex-1 p-3 rounded-xl border bg-background text-slate-900 dark:text-white font-mono uppercase"
                                         placeholder="#F8FAFC"
                                         maxLength={7}
                                     />
@@ -471,15 +513,15 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 <div className="flex items-center gap-3">
                                     <input
                                         type="color"
-                                        value={config.categoryBgColor || '#ffffff'}
-                                        onChange={(e) => setConfig({ ...config, categoryBgColor: e.target.value })}
+                                        value={getTemplateColor('categoryBgColor')}
+                                        onChange={(e) => setTemplateColor('categoryBgColor', e.target.value)}
                                         className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
-                                        value={config.categoryBgColor || ''}
-                                        onChange={(e) => setConfig({ ...config, categoryBgColor: e.target.value })}
-                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        value={getTemplateColor('categoryBgColor')}
+                                        onChange={(e) => setTemplateColor('categoryBgColor', e.target.value)}
+                                        className="flex-1 p-3 rounded-xl border bg-background text-slate-900 dark:text-white font-mono uppercase"
                                         placeholder="#FFFFFF"
                                         maxLength={7}
                                     />
@@ -491,15 +533,15 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 <div className="flex items-center gap-3">
                                     <input
                                         type="color"
-                                        value={config.categoryHighlightColor || '#3B82F6'}
-                                        onChange={(e) => setConfig({ ...config, categoryHighlightColor: e.target.value })}
+                                        value={getTemplateColor('categoryHighlightColor')}
+                                        onChange={(e) => setTemplateColor('categoryHighlightColor', e.target.value)}
                                         className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
-                                        value={config.categoryHighlightColor || ''}
-                                        onChange={(e) => setConfig({ ...config, categoryHighlightColor: e.target.value })}
-                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        value={getTemplateColor('categoryHighlightColor')}
+                                        onChange={(e) => setTemplateColor('categoryHighlightColor', e.target.value)}
+                                        className="flex-1 p-3 rounded-xl border bg-background text-slate-900 dark:text-white font-mono uppercase"
                                         placeholder="#3B82F6"
                                         maxLength={7}
                                     />
@@ -511,15 +553,15 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                 <div className="flex items-center gap-3">
                                     <input
                                         type="color"
-                                        value={config.priceColor || '#2563eb'}
-                                        onChange={(e) => setConfig({ ...config, priceColor: e.target.value })}
+                                        value={getTemplateColor('priceColor')}
+                                        onChange={(e) => setTemplateColor('priceColor', e.target.value)}
                                         className="h-12 w-12 p-1 rounded-lg cursor-pointer transition-transform active:scale-95"
                                     />
                                     <input
                                         type="text"
-                                        value={config.priceColor || ''}
-                                        onChange={(e) => setConfig({ ...config, priceColor: e.target.value })}
-                                        className="flex-1 p-3 rounded-xl border bg-background font-mono uppercase"
+                                        value={getTemplateColor('priceColor')}
+                                        onChange={(e) => setTemplateColor('priceColor', e.target.value)}
+                                        className="flex-1 p-3 rounded-xl border bg-background text-slate-900 dark:text-white font-mono uppercase"
                                         placeholder="#2563EB"
                                         maxLength={7}
                                     />
@@ -533,7 +575,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                     value={config.logo || initialData.logo || ''}
                                     onChange={(e) => setConfig({ ...config, logo: e.target.value })}
                                     placeholder="https://example.com/logo.png"
-                                    className="w-full p-3 rounded-xl border bg-background"
+                                    className="w-full p-3 rounded-xl border bg-background text-slate-900 dark:text-white"
                                 />
                                 <p className="text-xs text-slate-500">URL to your logo image. Leave empty to use site initial.</p>
                             </div>
@@ -545,7 +587,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                     value={config.coverImage || initialData.coverImage || ''}
                                     onChange={(e) => setConfig({ ...config, coverImage: e.target.value })}
                                     placeholder="https://example.com/cover.jpg"
-                                    className="w-full p-3 rounded-xl border bg-background"
+                                    className="w-full p-3 rounded-xl border bg-background text-slate-900 dark:text-white"
                                 />
                                 <p className="text-xs text-slate-500">Main background image for the hero section.</p>
                             </div>
@@ -570,7 +612,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                         value={config.phone || ''}
                                         onChange={(e) => setConfig({ ...config, phone: e.target.value })}
                                         placeholder="+1 234 567 890"
-                                        className="w-full p-3 rounded-xl border bg-background"
+                                        className="w-full p-3 rounded-xl border bg-background text-slate-900 dark:text-white"
                                     />
                                 </div>
                                 <div className="space-y-2">
@@ -580,7 +622,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                         value={config.address || ''}
                                         onChange={(e) => setConfig({ ...config, address: e.target.value })}
                                         placeholder="123 Main St, City"
-                                        className="w-full p-3 rounded-xl border bg-background"
+                                        className="w-full p-3 rounded-xl border bg-background text-slate-900 dark:text-white"
                                     />
                                 </div>
                             </div>
@@ -590,7 +632,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                     value={config.hours || ''}
                                     onChange={(e) => setConfig({ ...config, hours: e.target.value })}
                                     placeholder="Mon-Fri: 9am - 10pm"
-                                    className="w-full p-3 rounded-xl border bg-background min-h-[80px]"
+                                    className="w-full p-3 rounded-xl border bg-background text-slate-900 dark:text-white min-h-[80px]"
                                 />
                             </div>
 
@@ -601,7 +643,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                         type="time"
                                         value={config.reservationOpenTime || '08:00'}
                                         onChange={(e) => setConfig({ ...config, reservationOpenTime: e.target.value })}
-                                        className="w-full p-3 rounded-xl border bg-background text-sm"
+                                        className="w-full p-3 rounded-xl border bg-background text-slate-900 dark:text-white text-sm"
                                     />
                                     <p className="text-xs text-slate-500">The earliest time customers can book.</p>
                                 </div>
@@ -611,7 +653,7 @@ export default function DesignSelectionClient({ initialData }: Props) {
                                         type="time"
                                         value={config.reservationCloseTime || '23:30'}
                                         onChange={(e) => setConfig({ ...config, reservationCloseTime: e.target.value })}
-                                        className="w-full p-3 rounded-xl border bg-background text-sm"
+                                        className="w-full p-3 rounded-xl border bg-background text-slate-900 dark:text-white text-sm"
                                     />
                                     <p className="text-xs text-slate-500">The latest time customers can book.</p>
                                 </div>

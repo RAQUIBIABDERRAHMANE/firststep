@@ -18,6 +18,7 @@ export interface RestaurantTemplateProps {
     isOwner?: boolean
     designTemplate?: string
     primaryColor?: string
+    slug?: string
 }
 
 function RestaurantTemplateSwitcher(props: RestaurantTemplateProps) {

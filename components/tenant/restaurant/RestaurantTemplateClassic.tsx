@@ -8,8 +8,9 @@ import { useRestaurantLogic } from './useRestaurantLogic'
 import { RestaurantTemplateProps } from './RestaurantTemplate'
 import {
     ShoppingCart, QrCode, MapPin, Phone, Mail, Plus, Minus, Trash2, X,
-    ChevronRight, Utensils, CheckCircle2, LayoutDashboard, Bell, Receipt
+    ChevronRight, Utensils, CheckCircle2, LayoutDashboard, Bell, Receipt, Split
 } from 'lucide-react'
+import SplitBillModal from './SplitBillModal'
 
 import { translations, Language, CURRENCY } from '@/lib/translations'
 
@@ -24,7 +25,8 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
         showScanner, setShowScanner, showCart, setShowCart, activeCategory, setActiveCategory,
         isPlacingOrder, orderComplete, setOrderComplete, items, addItem, updateQuantity,
         totalPrice, totalItems, tableId, categoryNames, filteredItems, handleScan, handlePlaceOrder, handleCallWaiter, handleRequestBill, removeItem,
-        customizingDish, setCustomizingDish, handleConfirmCustomization
+        customizingDish, setCustomizingDish, handleConfirmCustomization,
+        activeOrderId, orderStatus, showSplitBill, setShowSplitBill, activeOrderDetails, handleOpenSplitBill
     } = defaultData
 
     const [lang, setLang] = useState<Language>('fr')
@@ -49,10 +51,28 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
     } as React.CSSProperties
 
     return (
-        <div style={containerStyle} className="flex flex-col min-h-screen bg-[var(--bg-main,#ffffff)] font-sans text-[var(--text-main,#0f172a)] selection:bg-[var(--primary)] selection:text-[var(--card-bg,white)]">
+        <div style={{ ...containerStyle, backgroundColor: 'var(--bg-main)', color: 'var(--text-main)' }} className="flex flex-col min-h-screen font-karla selection:bg-[var(--primary)] selection:text-[var(--card-bg,white)]">
+            <style>{`
+                @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Karla:wght@300;400;500;600;700&display=swap');
+                .font-cinzel { font-family: 'Cinzel', serif; }
+                .font-karla { font-family: 'Karla', sans-serif; }
+                .no-scrollbar::-webkit-scrollbar { display: none; }
+                .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+            `}</style>
+
             {/* Call Waiter & Request Bill Logic */}
             {tableId && !isOwner && (
                 <div className="fixed bottom-10 left-10 z-50 flex flex-col gap-3">
+                    {activeOrderId && (
+                        <button
+                            onClick={handleOpenSplitBill}
+                            className="h-14 w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-white"
+                            style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
+                            title="Partager l'addition"
+                        >
+                            <Split size={22} />
+                        </button>
+                    )}
                     <button
                         onClick={handleRequestBill}
                         className="h-14 w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-white"
@@ -79,13 +99,13 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                         {logo ? (
                             <img src={logo} alt={siteName} className="h-12 w-12 md:h-16 md:w-16 object-contain transition-transform hover:scale-110" />
                         ) : (
-                            <div className="h-12 w-12 md:h-16 md:w-16 rounded-[20px] flex items-center justify-center font-serif font-black text-2xl md:text-3xl shadow-2xl"
+                            <div className="h-12 w-12 md:h-16 md:w-16 rounded-[20px] flex items-center justify-center font-cinzel font-black text-2xl md:text-3xl shadow-2xl"
                                  style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}>
                                 {siteName[0]}
                             </div>
                         )}
                         <div>
-                            <span className="font-serif font-black text-2xl md:text-3xl tracking-tight block leading-none" style={{ color: 'var(--header-text)' }}>{siteName}</span>
+                            <span className="font-cinzel font-black text-2xl md:text-3xl tracking-tight block leading-none" style={{ color: 'var(--header-text)' }}>{siteName}</span>
                             <div className="flex items-center gap-2 mt-1">
                                 <div className="h-1 w-1 rounded-full bg-emerald-500" />
                                 <span className="text-[10px] font-black uppercase tracking-[0.2em] leading-none opacity-60" style={{ color: 'var(--header-text)' }}>Established Excellence</span>
@@ -134,31 +154,36 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
             </header>
 
             <main className="flex-1 pb-32">
-                {/* Hero - Cinematic Classic */}
-                <section className="relative h-[60vh] flex items-center justify-center text-center overflow-hidden">
-                    <img
-                        src={coverImage || 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=2070'}
-                        className="absolute inset-0 w-full h-full object-cover scale-105 transition-transform duration-[10s] hover:scale-100"
-                        alt="Banner"
-                    />
-                    <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
-                    <div className="container relative z-10 px-6 max-w-5xl animate-in fade-in zoom-in-95 duration-1000">
-                        <div className="inline-flex items-center gap-4 mb-10">
-                            <div className="h-px w-12 bg-white/20" />
-                            <span className="text-[11px] font-black uppercase tracking-[0.6em] text-white/50">Culinary Heritage</span>
-                            <div className="h-px w-12 bg-white/20" />
+                {/* Hero - Storytelling Asymmetric Layout */}
+                <section className="relative py-20 lg:py-32 overflow-hidden border-b border-black/5" style={{ backgroundColor: 'var(--card-bg)' }}>
+                    <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                        <div className="lg:col-span-7 space-y-8 text-left animate-in fade-in slide-in-from-bottom duration-1000">
+                            <div className="inline-flex items-center gap-3">
+                                <div className="h-px w-8" style={{ backgroundColor: 'var(--primary)' }} />
+                                <span className="text-[10px] font-black uppercase tracking-[0.4em] opacity-60" style={{ color: 'var(--text-main)' }}>Culinary Heritage</span>
+                            </div>
+                            <h1 className="text-5xl md:text-8xl font-cinzel font-black tracking-tight leading-[0.95] text-[var(--text-main)]">
+                                {config.heroTitle || "Delicious moments, served fresh."}
+                            </h1>
+                            <p className="text-lg md:text-xl leading-relaxed italic font-cinzel opacity-75" style={{ color: 'var(--text-main)' }}>
+                                "{description || "Explore our menu and experience the best flavors in the city."}"
+                            </p>
                         </div>
-                        <h1 className="text-6xl md:text-9xl font-serif font-black text-white mb-10 leading-[0.85] tracking-tighter">
-                            {config.heroTitle || "Delicious moments, served fresh."}
-                        </h1>
-                        <p className="text-xl md:text-2xl text-white/70 max-w-2xl mx-auto font-medium leading-relaxed italic font-serif">
-                            "{description || "Explore our menu and experience the best flavors in the city."}"
-                        </p>
-                    </div>
-                    {/* Decorative Scroll indicator */}
-                    <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-30 animate-pulse">
-                        <div className="h-10 w-[1px] bg-white" />
-                        <span className="text-[8px] font-black uppercase tracking-[0.5em] text-white">Scroll</span>
+                        <div className="lg:col-span-5 relative animate-in fade-in zoom-in duration-1000">
+                            <div className="relative aspect-[4/5] rounded-[60px] overflow-hidden shadow-2xl border-4 border-white">
+                                <img
+                                    src={coverImage || 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=2070'}
+                                    className="w-full h-full object-cover transition-transform duration-[8s] hover:scale-105"
+                                    alt="Featured dish"
+                                />
+                            </div>
+                            {/* Decorative badge */}
+                            <div className="absolute -bottom-6 -left-6 h-28 w-28 rounded-full border border-black/5 backdrop-blur-xl flex flex-col items-center justify-center text-center p-2 shadow-xl animate-bounce"
+                                 style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}>
+                                <span className="text-[9px] font-black uppercase tracking-wider">100%</span>
+                                <span className="text-[8px] font-bold uppercase tracking-wider opacity-85">Artisanal</span>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -170,7 +195,7 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                             <button
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
-                                className="px-8 py-4 rounded-full font-serif font-black text-xs uppercase tracking-[0.2em] transition-all duration-300 border"
+                                className="px-8 py-4 rounded-full font-cinzel font-black text-xs uppercase tracking-[0.2em] transition-all duration-300 border"
                                 style={{
                                     backgroundColor: activeCategory === cat ? 'var(--category-highlight)' : 'var(--card-bg)',
                                     color: activeCategory === cat ? 'var(--button-text)' : 'var(--text-main)',
@@ -190,20 +215,20 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                 <section className="py-24 container mx-auto px-6 lg:px-12">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
                         {filteredItems.length > 0 ? filteredItems.map((item: any) => (
-                            <div key={item.id} className="group bg-[var(--card-bg,white)] rounded-[40px] border border-transparent hover:border-slate-100 overflow-hidden hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.08)] transition-all duration-700 flex flex-col">
-                                <div className="relative aspect-square overflow-hidden bg-slate-50">
+                            <div key={item.id} className="group bg-[var(--card-bg)] rounded-[32px] border border-transparent hover:border-slate-100/10 overflow-hidden hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-1 flex flex-col">
+                                <div className="relative aspect-square overflow-hidden bg-slate-50 rounded-[32px] m-3 shadow-inner">
                                     <img
                                         src={item.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=1000'}
-                                        className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110"
+                                        className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
                                         alt={item.name}
                                     />
-                                    <div className="absolute top-6 right-6 px-5 py-2.5 backdrop-blur-xl rounded-2xl font-serif font-black shadow-2xl border border-white/50 text-xl tracking-tight"
+                                    <div className="absolute top-4 right-4 px-4 py-2 backdrop-blur-xl rounded-xl font-cinzel font-black shadow-lg border border-white/20 text-lg tracking-tight"
                                          style={{ backgroundColor: 'var(--card-bg)', color: 'var(--price-color)' }}>
                                         {item.price} <span className="text-xs">{CURRENCY}</span>
                                     </div>
                                 </div>
-                                <div className="p-10 flex-1 flex flex-col text-center">
-                                    <h3 className="text-2xl font-serif font-black mb-2 transition-colors leading-tight" style={{ color: 'var(--text-main)' }}>
+                                <div className="p-8 pt-4 flex-1 flex flex-col text-center">
+                                    <h3 className="text-xl font-cinzel font-black mb-2 transition-colors leading-tight" style={{ color: 'var(--text-main)' }}>
                                         {item.name}
                                     </h3>
                                     {/* Dietary tags */}
@@ -216,19 +241,19 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                         return (
                                             <div className="flex flex-wrap gap-1.5 justify-center mb-4">
                                                 {tagsList.map(tag => (
-                                                    <span key={tag} className="px-2.5 py-1 bg-black/5 text-[9px] font-black uppercase tracking-wider rounded-md" style={{ color: 'var(--text-main)' }}>
+                                                    <span key={tag} className="px-2 py-0.5 bg-black/5 text-[9px] font-black uppercase tracking-wider rounded-md" style={{ color: 'var(--text-main)', opacity: 0.7 }}>
                                                         {tag}
                                                     </span>
                                                 ))}
                                             </div>
                                         )
                                     })()}
-                                    <p className="font-serif italic text-sm leading-relaxed mb-10 flex-1 px-4 opacity-75" style={{ color: 'var(--text-main)' }}>
+                                    <p className="font-cinzel italic text-xs leading-relaxed mb-8 flex-1 px-2 opacity-70" style={{ color: 'var(--text-main)' }}>
                                         {item.description || "Prepared using traditional methods with hand-picked seasonal ingredients."}
                                     </p>
                                     <button
                                         onClick={() => addItem(item)}
-                                        className="w-full h-16 rounded-[24px] text-[10px] font-black uppercase tracking-[0.3em] shadow-2xl transition-all active:scale-95 border-2 border-transparent flex items-center justify-center"
+                                        className="w-full h-14 rounded-[20px] text-[10px] font-black uppercase tracking-[0.2em] shadow-xl transition-all active:scale-95 border-2 border-transparent flex items-center justify-center hover:brightness-110"
                                         style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                                     >
                                         {t.add_to_order}
@@ -251,7 +276,7 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
             {/* Cart Drawer - Premium Sidebar */}
             {showCart && (
                 <div className="fixed inset-0 z-[60] bg-slate-950/60 backdrop-blur-sm animate-in fade-in duration-500">
-                    <div className="absolute right-0 top-0 bottom-0 w-full max-w-lg bg-[var(--card-bg,white)] shadow-3xl animate-in slide-in-from-right duration-700 outline-none flex flex-col" style={{ color: 'var(--text-main)' }}>
+                    <div className="absolute right-0 top-0 bottom-0 w-full max-w-lg bg-[var(--card-bg)] shadow-3xl animate-in slide-in-from-right duration-700 outline-none flex flex-col" style={{ color: 'var(--text-main)' }}>
                         <div className="p-12 border-b flex items-center justify-between" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
                             <div className="space-y-1">
                                 <h2 className="text-3xl font-serif font-black tracking-tight">Your Selection</h2>
@@ -267,6 +292,22 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                     <ShoppingCart size={48} className="opacity-20" />
                                     <h3 className="text-2xl font-serif font-black">Selection Empty</h3>
                                     <p className="text-sm max-w-xs mx-auto opacity-60">Begin your culinary journey by adding signature dishes to your order.</p>
+                                    
+                                    {activeOrderId && (
+                                        <div className="pt-6 border-t border-slate-100 w-full max-w-xs mx-auto space-y-4">
+                                            <p className="text-xs opacity-60">Vous avez une commande en cours.</p>
+                                            <button
+                                                onClick={() => {
+                                                    setShowCart(false)
+                                                    handleOpenSplitBill()
+                                                }}
+                                                className="w-full py-4 rounded-full text-xs font-bold uppercase tracking-wider shadow-md hover:brightness-110 active:scale-95 transition-all"
+                                                style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
+                                            >
+                                                Partager l'addition
+                                            </button>
+                                        </div>
+                                    )}
                                 </div>
                             ) : (
                                 items.map((item) => (
@@ -329,28 +370,49 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                             </div>
                         )}
                         {orderComplete && (
-                            <div className="absolute inset-0 bg-[var(--card-bg,white)] z-[70] flex flex-col items-center justify-center p-12 text-center animate-in fade-in duration-700">
+                            <div className="absolute inset-0 bg-[var(--card-bg)] z-[70] flex flex-col items-center justify-center p-12 text-center animate-in fade-in duration-700">
                                 <div className="h-24 w-24 bg-emerald-50 rounded-full flex items-center justify-center mb-10">
                                     <CheckCircle2 size={40} className="text-emerald-500 animate-bounce" />
                                 </div>
                                 <h2 className="text-4xl font-serif font-black mb-6">Received with Thanks</h2>
                                 <p className="text-lg mb-12 italic font-serif opacity-70">"Our culinary team is now attending to your selection with the utmost care."</p>
-                                <button
-                                    onClick={() => {
-                                        setOrderComplete(false)
-                                        setShowCart(false)
-                                    }}
-                                    className="rounded-full h-16 px-12 font-black uppercase tracking-widest text-[10px] flex items-center justify-center"
-                                    style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
-                                >
-                                    Return to Menu
-                                </button>
+                                
+                                <div className="flex flex-col sm:flex-row gap-4 w-full justify-center px-6 max-w-md">
+                                    <button
+                                        onClick={() => {
+                                            setOrderComplete(false)
+                                            setShowCart(false)
+                                        }}
+                                        className="rounded-full h-16 px-8 font-black uppercase tracking-widest text-[10px] flex items-center justify-center border border-slate-200 text-slate-800 hover:bg-slate-50 transition-all flex-1"
+                                    >
+                                        Return to Menu
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            setOrderComplete(false)
+                                            setShowCart(false)
+                                            handleOpenSplitBill()
+                                        }}
+                                        className="rounded-full h-16 px-8 font-black uppercase tracking-widest text-[10px] flex items-center justify-center transition-all flex-1"
+                                        style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
+                                    >
+                                        Partager l'addition
+                                    </button>
+                                </div>
                             </div>
                         )}
                     </div>
                 </div>
             )}
-            {showScanner && <QRScanner onScan={handleScan} onClose={() => setShowScanner(false)} />}
+             {showScanner && <QRScanner onScan={handleScan} onClose={() => setShowScanner(false)} />}
+             {showSplitBill && activeOrderId && activeOrderDetails && (
+                 <SplitBillModal
+                     orderId={activeOrderId}
+                     items={activeOrderDetails.items}
+                     totalPrice={activeOrderDetails.totalPrice}
+                     onClose={() => setShowSplitBill(false)}
+                 />
+             )}
 
             {/* Footer - Sophisticated Finish */}
             <footer className="py-32 relative overflow-hidden" style={{ backgroundColor: 'var(--footer-bg)', color: 'var(--footer-text)' }}>

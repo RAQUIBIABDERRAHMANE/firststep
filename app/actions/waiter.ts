@@ -129,14 +129,45 @@ export async function getWaiterOrders(waiterId: string) {
             }
         })
 
-        if (!waiter) return { orders: [], tables: [], config: null }
+        if (!waiter) return { orders: [], tables: [], allTables: [], config: null, noActiveShift: true, menu: [] }
 
-        const tableIds = waiter.tables.map((t: { id: string }) => t.id)
+        // Fetch menu
+        const menu = await prisma.restaurantCategory.findMany({
+            where: { tenantId: waiter.tenantId, isActive: true },
+            include: {
+                dishes: {
+                    where: { isActive: true },
+                    orderBy: { order: 'asc' }
+                }
+            },
+            orderBy: { order: 'asc' }
+        })
+
+        // Check if there is an active shift
+        // @ts-ignore
+        const activeShift = await prisma.waiterShift.findFirst({
+            where: { waiterId, isActive: true },
+            orderBy: { startTime: 'desc' }
+        })
+
+        if (!activeShift) {
+            return { 
+                orders: [], 
+                tables: [], 
+                allTables: waiter.tables, 
+                config: waiter.tenant?.config || null, 
+                noActiveShift: true,
+                tenantId: waiter.tenantId,
+                menu
+            }
+        }
+
+        const shiftTableIds = JSON.parse(activeShift.tableIds || '[]') as string[]
 
         // Find orders for these tables
         const orders = await prisma.restaurantOrder.findMany({
             where: {
-                tableId: { in: tableIds },
+                tableId: { in: shiftTableIds },
                 status: { not: 'PAID' } // Show active orders
             },
             include: {
@@ -145,10 +176,26 @@ export async function getWaiterOrders(waiterId: string) {
             },
             orderBy: { createdAt: 'desc' }
         })
+
+        // Find tables assigned for this shift
+        const tables = await prisma.restaurantTable.findMany({
+            where: { id: { in: shiftTableIds } }
+        })
         
-        return { orders, tables: waiter.tables, config: waiter.tenant?.config || null }
+        return { 
+            orders, 
+            tables, 
+            allTables: waiter.tables, 
+            config: waiter.tenant?.config || null, 
+            noActiveShift: false,
+            activeShiftId: activeShift.id,
+            tenantId: waiter.tenantId,
+            menu
+        }
     } catch (e) {
         console.error('Error fetching waiter orders:', e)
-        return { orders: [], tables: [], config: null }
+        return { orders: [], tables: [], allTables: [], config: null, noActiveShift: true, menu: [] }
     }
 }
+
+

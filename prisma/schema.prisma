@@ -123,6 +123,7 @@ model TenantWebsite {
   invoices            Invoice[]
   invoiceSettings     InvoiceSettings?
   printRequests       TablePrintRequest[]
+  ingredients         Ingredient[]
   service             Service              @relation(fields: [serviceId], references: [id])
   user                User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -154,7 +155,9 @@ model RestaurantDish {
   options     String             @default("[]")
   addons      String             @default("[]")
   tags        String             @default("[]")
+  prepStation String             @default("KITCHEN") // "KITCHEN" | "BAR" | "DESSERT" | "COLD_PREP"
   category    RestaurantCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  recipeItems RecipeItem[]
 
   @@index([categoryId])
 }
@@ -166,10 +169,15 @@ model RestaurantTable {
   capacity     Int?
   isActive     Boolean                 @default(true)
   waiterId     String?
+  xPos         Float                   @default(0.0)
+  yPos         Float                   @default(0.0)
+  rotation     Float                   @default(0.0)
+  shape        String                  @default("SQUARE") // "SQUARE" | "ROUND" | "RECTANGLE"
   orders       RestaurantOrder[]
   waiter       RestaurantWaiter?       @relation(fields: [waiterId], references: [id])
   tenant       TenantWebsite           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   reservations RestaurantReservation[]
+  cartSession  TableCartSession?
 
   @@unique([tenantId, number])
   @@index([tenantId])
@@ -184,6 +192,7 @@ model RestaurantWaiter {
   isActive  Boolean           @default(true)
   createdAt DateTime          @default(now())
   tables    RestaurantTable[]
+  shifts    WaiterShift[]
   tenant    TenantWebsite     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
   @@index([tenantId])
@@ -198,6 +207,7 @@ model RestaurantOrder {
   updatedAt   DateTime              @updatedAt
   table       RestaurantTable       @relation(fields: [tableId], references: [id])
   items       RestaurantOrderItem[]
+  billSplits  BillSplit[]
 
   @@index([tableId])
 }
@@ -214,6 +224,71 @@ model RestaurantOrderItem {
   order           RestaurantOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
   @@index([orderId])
+}
+
+// ─── Phase B: New Models ────────────────────────────────────────────────────
+
+model BillSplit {
+  id        String          @id @default(cuid())
+  orderId   String
+  type      String          // "EQUAL" | "ITEMIZED"
+  parts     Int             @default(1)
+  itemsPaid String          @default("[]") // JSON array of paid item IDs
+  paidTotal Float           @default(0.0)
+  status    String          @default("PENDING") // "PENDING" | "PARTIALLY_PAID" | "PAID"
+  createdAt DateTime        @default(now())
+  order     RestaurantOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+}
+
+model TableCartSession {
+  id        String          @id @default(cuid())
+  tableId   String          @unique
+  cartData  String          @default("[]") // JSON array of CartItem
+  updatedAt DateTime        @updatedAt
+  table     RestaurantTable @relation(fields: [tableId], references: [id], onDelete: Cascade)
+}
+
+model WaiterShift {
+  id        String           @id @default(cuid())
+  waiterId  String
+  tenantId  String
+  startTime DateTime         @default(now())
+  endTime   DateTime?
+  tableIds  String           @default("[]") // JSON array of table IDs
+  isActive  Boolean          @default(true)
+  waiter    RestaurantWaiter @relation(fields: [waiterId], references: [id], onDelete: Cascade)
+
+  @@index([waiterId])
+  @@index([tenantId])
+}
+
+model Ingredient {
+  id        String        @id @default(cuid())
+  tenantId  String
+  name      String
+  stock     Float         @default(0.0)
+  unit      String        // "g" | "kg" | "pcs" | "L" | "ml"
+  minStock  Float         @default(0.0)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  tenant    TenantWebsite @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  recipes   RecipeItem[]
+
+  @@index([tenantId])
+}
+
+model RecipeItem {
+  id           String         @id @default(cuid())
+  dishId       String
+  ingredientId String
+  quantity     Float          // quantity consumed per 1 unit of the dish
+  dish         RestaurantDish @relation(fields: [dishId], references: [id], onDelete: Cascade)
+  ingredient   Ingredient     @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
+
+  @@index([dishId])
+  @@index([ingredientId])
 }
 
 model RestaurantReport {

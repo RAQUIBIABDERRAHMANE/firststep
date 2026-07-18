@@ -219,7 +219,8 @@ exports.Prisma.RestaurantDishScalarFieldEnum = {
   order: 'order',
   options: 'options',
   addons: 'addons',
-  tags: 'tags'
+  tags: 'tags',
+  prepStation: 'prepStation'
 };
 
 exports.Prisma.RestaurantTableScalarFieldEnum = {
@@ -228,7 +229,11 @@ exports.Prisma.RestaurantTableScalarFieldEnum = {
   number: 'number',
   capacity: 'capacity',
   isActive: 'isActive',
-  waiterId: 'waiterId'
+  waiterId: 'waiterId',
+  xPos: 'xPos',
+  yPos: 'yPos',
+  rotation: 'rotation',
+  shape: 'shape'
 };
 
 exports.Prisma.RestaurantWaiterScalarFieldEnum = {
@@ -258,6 +263,52 @@ exports.Prisma.RestaurantOrderItemScalarFieldEnum = {
   quantity: 'quantity',
   selectedOptions: 'selectedOptions',
   selectedAddons: 'selectedAddons'
+};
+
+exports.Prisma.BillSplitScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  type: 'type',
+  parts: 'parts',
+  itemsPaid: 'itemsPaid',
+  paidTotal: 'paidTotal',
+  status: 'status',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.TableCartSessionScalarFieldEnum = {
+  id: 'id',
+  tableId: 'tableId',
+  cartData: 'cartData',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WaiterShiftScalarFieldEnum = {
+  id: 'id',
+  waiterId: 'waiterId',
+  tenantId: 'tenantId',
+  startTime: 'startTime',
+  endTime: 'endTime',
+  tableIds: 'tableIds',
+  isActive: 'isActive'
+};
+
+exports.Prisma.IngredientScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  stock: 'stock',
+  unit: 'unit',
+  minStock: 'minStock',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RecipeItemScalarFieldEnum = {
+  id: 'id',
+  dishId: 'dishId',
+  ingredientId: 'ingredientId',
+  quantity: 'quantity'
 };
 
 exports.Prisma.RestaurantReportScalarFieldEnum = {
@@ -595,6 +646,11 @@ exports.Prisma.ModelName = {
   RestaurantWaiter: 'RestaurantWaiter',
   RestaurantOrder: 'RestaurantOrder',
   RestaurantOrderItem: 'RestaurantOrderItem',
+  BillSplit: 'BillSplit',
+  TableCartSession: 'TableCartSession',
+  WaiterShift: 'WaiterShift',
+  Ingredient: 'Ingredient',
+  RecipeItem: 'RecipeItem',
   RestaurantReport: 'RestaurantReport',
   RestaurantReservation: 'RestaurantReservation',
   CabinetService: 'CabinetService',

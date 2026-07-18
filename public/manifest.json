@@ -1,0 +1,22 @@
+{
+  "name": "FirstStep Waiter Portal",
+  "short_name": "FS Waiter",
+  "description": "Portail pour serveurs et staff de restaurant de FirstStep",
+  "start_url": "/waiter",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "/logo.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/Untitled design (13).png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

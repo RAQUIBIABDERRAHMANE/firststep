@@ -17,7 +17,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     let pageTitle = tenant.siteName
     try {
         if (tenant.config) {
-            const config = JSON.parse(tenant.config)
+            const rawConfig = JSON.parse(tenant.config)
+            const template = tenant.designTemplate || 'classic'
+            const templateSpecificConfig = rawConfig.templatesConfigs?.[template] || {}
+            const config = {
+                ...rawConfig,
+                ...templateSpecificConfig
+            }
             if (config.pageTitle) {
                 pageTitle = config.pageTitle
             }

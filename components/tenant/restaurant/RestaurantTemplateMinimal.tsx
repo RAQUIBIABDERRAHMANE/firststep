@@ -66,7 +66,14 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
     } as React.CSSProperties
 
     return (
-        <div style={containerStyle} className="min-h-screen bg-[var(--bg-main,#ffffff)] font-sans text-[var(--text-main,#000000)] selection:bg-[var(--primary)] selection:text-[var(--bg-main,white)] pb-24">
+        <div style={{ ...containerStyle, backgroundColor: 'var(--bg-main)', color: 'var(--text-main)' }} className="min-h-screen font-montserrat selection:bg-[var(--primary)] selection:text-[var(--bg-main)] pb-24">
+            <style>{`
+                @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Montserrat:wght@300;400;500;600;700;900&display=swap');
+                .font-cormorant { font-family: 'Cormorant Garamond', serif; }
+                .font-montserrat { font-family: 'Montserrat', sans-serif; }
+                .no-scrollbar::-webkit-scrollbar { display: none; }
+                .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+            `}</style>
             {/* Top Navigation Bar - Glassmorphism */}
             <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl border-b border-slate-200/50 transition-all duration-500"
                  style={{ backgroundColor: 'var(--header-bg)', color: 'var(--header-text)' }}>
@@ -144,7 +151,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                 {config.subtitle || "The Art of Gastronomy"}
                             </span>
                         </div>
-                        <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl font-medium text-[var(--text-main,#0f172a)] mb-10 leading-[0.95] tracking-tight">
+                        <h1 className="font-cormorant text-6xl md:text-8xl lg:text-9xl font-medium text-[var(--text-main)] mb-10 leading-[0.95] tracking-tight">
                             {config.heroTitle || "Simple. Fresh. Elegant."}
                         </h1>
                         <p className="text-xl text-slate-500 leading-relaxed mb-12 max-w-lg font-medium">
@@ -208,7 +215,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                     return (
                         <section id={`cat-${cat}`} key={cat} className="scroll-mt-36">
                             <div className="flex items-center gap-6 mb-16">
-                                <h3 className="font-serif text-3xl md:text-4xl text-[var(--text-main,#0f172a)] font-medium">
+                                <h3 className="font-cormorant text-3xl md:text-4xl text-[var(--text-main)] font-medium">
                                     {cat}
                                 </h3>
                                 <div className="h-px flex-1 bg-slate-100" />
@@ -220,19 +227,19 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
                                 {categoryItems.map((item: any) => {
                                     return (
-                                        <div key={item.id} className="group flex flex-col justify-between p-4 rounded-3xl transition-transform duration-500 hover:-translate-y-1"
+                                        <div key={item.id} className="group flex flex-col justify-between p-6 rounded-3xl transition-all duration-500 hover:shadow-[0_30px_60px_rgba(0,0,0,0.02)] border border-slate-100 hover:border-slate-200"
                                              style={{ backgroundColor: 'var(--card-bg)' }}>
                                             <div className="space-y-6">
                                                 <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-50">
                                                     <img
                                                         src={item.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=1000'}
-                                                        className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
+                                                        className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-103"
                                                         alt={item.name}
                                                     />
                                                 </div>
                                                 <div className="space-y-2">
                                                     <div className="flex justify-between items-start gap-4">
-                                                        <h4 className="font-serif text-2xl text-[var(--text-main,#0f172a)] leading-snug group-hover:opacity-85 transition-opacity">
+                                                        <h4 className="font-cormorant text-2xl text-[var(--text-main)] leading-snug group-hover:opacity-85 transition-opacity">
                                                             {item.name}
                                                         </h4>
                                                     </div>
@@ -268,7 +275,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                                 </div>
                                                 <button
                                                     onClick={() => addItem(item)}
-                                                    className="rounded-full h-12 w-12 flex items-center justify-center transition-all active:scale-95 hover:brightness-110"
+                                                    className="rounded-full h-12 w-12 flex items-center justify-center transition-all active:scale-95 hover:scale-105"
                                                     style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                                                 >
                                                     <Plus size={20} strokeWidth={2.5} />
@@ -288,7 +295,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 items-start">
                         <div className="space-y-4 md:col-span-2">
-                            <span className="font-serif text-3xl tracking-tight block">{siteName}</span>
+                            <span className="font-cormorant text-3xl tracking-tight block">{siteName}</span>
                             <p className="text-slate-400 text-sm max-w-sm font-medium leading-relaxed">
                                 {description || "A culinary destination focusing on local sourcing, modern gastronomy, and premium hospitality standards."}
                             </p>
@@ -351,8 +358,8 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                         onClick={e => e.stopPropagation()}
                     >
                         <div className="p-8 border-b border-slate-100 flex items-center justify-between">
-                            <h2 className="font-serif text-2xl text-[var(--text-main,#0f172a)]">Your Selection</h2>
-                            <button onClick={() => setShowCart(false)} className="text-slate-400 hover:text-[var(--text-main,#0f172a)]">
+                            <h2 className="font-cormorant text-2xl text-[var(--text-main)]">Your Selection</h2>
+                            <button onClick={() => setShowCart(false)} className="text-slate-400 hover:text-[var(--text-main)]">
                                 <X size={24} />
                             </button>
                         </div>
@@ -361,7 +368,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                             {items.length === 0 ? (
                                 <div className="h-full flex flex-col items-center justify-center text-slate-400">
                                     <ShoppingCart size={48} className="mb-4 opacity-20" />
-                                    <p className="font-serif text-lg">Your cart is empty</p>
+                                    <p className="font-cormorant text-lg">Your cart is empty</p>
                                 </div>
                             ) : (
                                 items.map((item) => (
@@ -371,7 +378,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                         </div>
                                         <div className="flex-1">
                                             <div className="flex justify-between items-start mb-1">
-                                                <h4 className="font-serif text-lg text-[var(--text-main,#0f172a)] leading-tight">{item.name}</h4>
+                                                <h4 className="font-cormorant text-lg text-[var(--text-main)] leading-tight">{item.name}</h4>
                                                 <span className="font-medium shrink-0 ml-2" style={{ color: 'var(--price-color)' }}>{item.price} {CURRENCY}</span>
                                             </div>
                                             {item.selectedOptions && item.selectedOptions.length > 0 && (
@@ -404,7 +411,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                             <div className="p-8 border-t border-slate-100 bg-slate-50/50">
                                 <div className="flex justify-between items-end mb-6">
                                     <span className="text-sm font-bold uppercase tracking-wider text-slate-500">{t.total}</span>
-                                    <span className="font-serif text-3xl text-[var(--text-main,#0f172a)]">{totalPrice.toFixed(2)} {CURRENCY}</span>
+                                    <span className="font-cormorant text-3xl text-[var(--text-main)]">{totalPrice.toFixed(2)} {CURRENCY}</span>
                                 </div>
                                 <button
                                     onClick={handlePlaceOrder}
@@ -422,7 +429,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                             </div>
                         )}
                         {orderComplete || (activeOrderId && showOrderTracking) ? (
-                            <div className="absolute inset-0 bg-[var(--card-bg,white)]/95 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center animate-in fade-in z-50">
+                            <div className="absolute inset-0 bg-[var(--card-bg)]/95 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center animate-in fade-in z-50">
                                 <div className={`w-24 h-24 rounded-full flex items-center justify-center mb-6 ${orderStatus === 'READY' || orderStatus === 'SERVED' ? 'bg-green-100 text-green-600' :
                                     orderStatus === 'PREPARING' || orderStatus === 'COOKING' ? 'bg-orange-100 text-orange-600 animate-pulse' :
                                         'bg-slate-100 text-slate-600'
@@ -431,7 +438,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                         orderStatus === 'PREPARING' || orderStatus === 'COOKING' ? <Loader2 size={48} className="animate-spin" /> :
                                             <Sparkles size={48} />}
                                 </div>
-                                <h2 className="text-3xl font-serif text-[var(--text-main,#0f172a)] mb-2">
+                                <h2 className="text-3xl font-cormorant text-[var(--text-main)] mb-2">
                                     {orderStatus === 'PENDING' && 'Order Sent!'}
                                     {orderStatus === 'PREPARING' && 'Preparing...'}
                                     {orderStatus === 'COOKING' && 'Cooking...'}
@@ -457,7 +464,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                         setShowCart(false)
                                     }}
                                     variant="outline"
-                                    className="border-slate-200 text-[var(--text-main,#0f172a)]"
+                                    className="border-slate-200 text-[var(--text-main)]"
                                 >
                                     Continue Browsing
                                 </Button>

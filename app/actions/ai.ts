@@ -295,11 +295,9 @@ export async function generateWebsiteSuggestions(type: string = 'professional ca
         if (!content) return { error: 'No response from AI' }
 
         const data = JSON.parse(content)
-        // Handle both direct array or wrapped in an object
         let suggestions = Array.isArray(data) ? data : (data.suggestions || Object.values(data)[0])
 
         if (!Array.isArray(suggestions)) {
-            // Fallback for some LLM formats
             suggestions = [data]
         }
 
@@ -307,5 +305,82 @@ export async function generateWebsiteSuggestions(type: string = 'professional ca
     } catch (error) {
         console.error('AI Generation Failed:', error)
         return { error: 'Failed to generate suggestions' }
+    }
+}
+
+// ─── Phase J: AI Menu Combo Recommendations ───────────────────────────────────
+
+import prisma from '@/lib/prisma'
+import { computeItemPairs, formatPairsForPrompt } from '@/lib/menu-analysis'
+import { getTenant } from '@/app/actions/restaurant'
+
+export async function getAIComboRecommendations(slug: string) {
+    try {
+        const tenant = await getTenant(slug)
+        if (!tenant) return { error: 'Not authenticated' }
+
+        const since = new Date()
+        since.setDate(since.getDate() - 90)
+
+        const orders = await prisma.restaurantOrder.findMany({
+            where: {
+                table: { tenantId: tenant.id },
+                createdAt: { gte: since },
+                status: { in: ['SERVED', 'PAID'] }
+            },
+            include: { items: { select: { dishId: true, name: true, quantity: true } } }
+        })
+
+        if (orders.length < 5) {
+            return { error: 'Pas assez de commandes pour générer des recommandations (minimum 5 requis).' }
+        }
+
+        const pairs = computeItemPairs(orders as any, 10)
+        const summary = formatPairsForPrompt(pairs, orders.length)
+
+        const systemPrompt = `Tu es un expert en stratégie de menu pour les restaurants marocains.
+Tu dois analyser les associations de plats et suggérer des formules/combos attractifs.
+Réponds UNIQUEMENT en JSON valide avec ce format exact :
+{
+  "combos": [
+    {
+      "name": "Nom du combo en français",
+      "dishes": ["Plat A", "Plat B"],
+      "suggestedPrice": 95,
+      "saving": 10,
+      "pitch": "Courte description marketing en français (1 phrase)",
+      "frequency": "85% des clients"
+    }
+  ]
+}
+Propose entre 3 et 5 combos. Les prix doivent être en MAD.`
+
+        const userPrompt = `Voici les données d'association de plats pour ce restaurant :\n\n${summary}\n\nPropose des combos rentables basés sur ces données.`
+
+        const completion = await groq.chat.completions.create({
+            messages: [
+                { role: 'system', content: systemPrompt },
+                { role: 'user', content: userPrompt }
+            ],
+            model: 'llama-3.3-70b-versatile',
+            temperature: 0.7,
+            max_tokens: 1024,
+            response_format: { type: 'json_object' }
+        })
+
+        const aiContent = completion.choices[0]?.message?.content
+        if (!aiContent) return { error: 'Pas de réponse du modèle IA' }
+
+        const parsed = JSON.parse(aiContent)
+        return {
+            success: true,
+            combos: parsed.combos ?? [],
+            pairsAnalyzed: pairs.length,
+            ordersAnalyzed: orders.length,
+            topPairs: pairs.slice(0, 5)
+        }
+    } catch (error) {
+        console.error('[AI] getAIComboRecommendations Error:', error)
+        return { error: 'Échec de la génération de recommandations' }
     }
 }
