@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Providers } from "./providers";
+import WebMCPInitializer from "@/components/WebMCPInitializer";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -88,6 +89,7 @@ export default function RootLayout({
           strategy="beforeInteractive"
         />
         <Providers>
+          <WebMCPInitializer />
           {children}
         </Providers>
       </body>
