@@ -62,88 +62,88 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
 
             {/* Call Waiter & Request Bill Logic */}
             {tableId && !isOwner && (
-                <div className="fixed bottom-10 left-10 z-50 flex flex-col gap-3">
+                <div className="fixed bottom-4 left-4 sm:bottom-10 sm:left-10 z-50 flex flex-col gap-2 sm:gap-3">
                     {activeOrderId && (
                         <button
                             onClick={handleOpenSplitBill}
-                            className="h-14 w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-white"
+                            className="h-11 w-11 sm:h-14 sm:w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-white"
                             style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                             title="Partager l'addition"
                         >
-                            <Split size={22} />
+                            <Split size={18} />
                         </button>
                     )}
                     <button
                         onClick={handleRequestBill}
-                        className="h-14 w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-white"
+                        className="h-11 w-11 sm:h-14 sm:w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-white"
                         style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         title="Request Bill"
                     >
-                        <Receipt size={22} />
+                        <Receipt size={18} />
                     </button>
                     <button
                         onClick={handleCallWaiter}
-                        className="h-14 w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-white"
+                        className="h-11 w-11 sm:h-14 sm:w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-white"
                         style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         title="Call Waiter"
                     >
-                        <Bell size={22} />
+                        <Bell size={18} />
                     </button>
                 </div>
             )}
 
             {/* Header - Elegant Classic */}
             <header className="sticky top-0 z-40 w-full border-b" style={{ backgroundColor: 'var(--header-bg)', borderColor: 'rgba(0,0,0,0.05)', color: 'var(--header-text)' }}>
-                <div className="container mx-auto flex h-24 items-center justify-between px-6 lg:px-12">
-                    <div className="flex items-center gap-5">
+                <div className="container mx-auto flex h-16 sm:h-20 md:h-24 items-center justify-between px-4 sm:px-6 lg:px-12">
+                    <div className="flex items-center gap-3 sm:gap-5">
                         {logo ? (
-                            <img src={logo} alt={siteName} className="h-12 w-12 md:h-16 md:w-16 object-contain transition-transform hover:scale-110" />
+                            <img src={logo} alt={siteName} className="h-9 w-9 sm:h-12 sm:w-12 md:h-14 md:w-14 object-contain transition-transform hover:scale-110" />
                         ) : (
-                            <div className="h-12 w-12 md:h-16 md:w-16 rounded-[20px] flex items-center justify-center font-cinzel font-black text-2xl md:text-3xl shadow-2xl"
+                            <div className="h-9 w-9 sm:h-12 sm:w-12 md:h-14 md:w-14 rounded-[14px] sm:rounded-[20px] flex items-center justify-center font-cinzel font-black text-lg sm:text-2xl md:text-3xl shadow-2xl"
                                  style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}>
                                 {siteName[0]}
                             </div>
                         )}
                         <div>
-                            <span className="font-cinzel font-black text-2xl md:text-3xl tracking-tight block leading-none" style={{ color: 'var(--header-text)' }}>{siteName}</span>
-                            <div className="flex items-center gap-2 mt-1">
+                            <span className="font-cinzel font-black text-lg sm:text-2xl md:text-3xl tracking-tight block leading-none" style={{ color: 'var(--header-text)' }}>{siteName}</span>
+                            <div className="hidden sm:flex items-center gap-2 mt-1">
                                 <div className="h-1 w-1 rounded-full bg-emerald-500" />
                                 <span className="text-[10px] font-black uppercase tracking-[0.2em] leading-none opacity-60" style={{ color: 'var(--header-text)' }}>Established Excellence</span>
                             </div>
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-3 md:gap-6">
+                    <div className="flex items-center gap-2 sm:gap-3 md:gap-6">
                         {isOwner && (
                             <Link href="/dashboard/restaurant">
-                                <Button variant="ghost" className="hidden md:flex gap-3 rounded-2xl text-[10px] font-black uppercase tracking-widest h-12 px-6 hover:bg-black/5" style={{ color: 'var(--header-text)' }}>
+                                <Button variant="ghost" className="hidden md:flex gap-3 rounded-2xl text-[10px] font-black uppercase tracking-widest h-10 sm:h-12 px-4 sm:px-6 hover:bg-black/5" style={{ color: 'var(--header-text)' }}>
                                     <LayoutDashboard size={14} /> Dashboard
                                 </Button>
                             </Link>
                         )}
                         <button
                             onClick={() => setShowScanner(true)}
-                            className="h-12 w-12 flex items-center justify-center rounded-2xl transition-all active:scale-95 border"
+                            className="h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center rounded-xl sm:rounded-2xl transition-all active:scale-95 border"
                             style={{ backgroundColor: 'var(--card-bg)', color: 'var(--header-text)', borderColor: 'rgba(0,0,0,0.08)' }}
                         >
-                            <QrCode size={20} />
+                            <QrCode size={17} />
                         </button>
                         <button
                             onClick={() => setShowReservation(true)}
-                            className="h-12 px-6 rounded-2xl shadow-xl hover:brightness-110 transition-all active:scale-95 flex items-center gap-2"
+                            className="hidden sm:flex h-10 sm:h-12 px-4 sm:px-6 rounded-xl sm:rounded-2xl shadow-xl hover:brightness-110 transition-all active:scale-95 items-center gap-2"
                             style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         >
                             <span className="text-[10px] font-black uppercase tracking-widest">Reserve</span>
                         </button>
                         <button
                             onClick={() => setShowCart(true)}
-                            className="group relative h-12 px-6 rounded-2xl shadow-2xl hover:brightness-110 transition-all active:scale-95 flex items-center gap-3"
+                            className="group relative h-10 sm:h-12 px-4 sm:px-6 rounded-xl sm:rounded-2xl shadow-2xl hover:brightness-110 transition-all active:scale-95 flex items-center gap-2 sm:gap-3"
                             style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         >
-                            <ShoppingCart size={20} className="transition-transform group-hover:-translate-y-0.5" />
+                            <ShoppingCart size={18} className="transition-transform group-hover:-translate-y-0.5" />
                             <span className="hidden md:inline text-[10px] font-black uppercase tracking-widest">Order</span>
                             {totalItems > 0 && (
-                                <span className="absolute -top-2 -right-2 text-[10px] h-6 w-6 rounded-full flex items-center justify-center font-black border-2 shadow-xl"
+                                <span className="absolute -top-2 -right-2 text-[10px] h-5 w-5 sm:h-6 sm:w-6 rounded-full flex items-center justify-center font-black border-2 shadow-xl"
                                       style={{ backgroundColor: 'var(--primary)', color: 'var(--card-bg)', borderColor: 'var(--card-bg)' }}>
                                     {totalItems}
                                 </span>
@@ -155,22 +155,22 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
 
             <main className="flex-1 pb-32">
                 {/* Hero - Storytelling Asymmetric Layout */}
-                <section className="relative py-20 lg:py-32 overflow-hidden border-b border-black/5" style={{ backgroundColor: 'var(--card-bg)' }}>
-                    <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-                        <div className="lg:col-span-7 space-y-8 text-left animate-in fade-in slide-in-from-bottom duration-1000">
+                <section className="relative py-10 sm:py-16 lg:py-32 overflow-hidden border-b border-black/5" style={{ backgroundColor: 'var(--card-bg)' }}>
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
+                        <div className="lg:col-span-7 space-y-5 sm:space-y-8 text-left animate-in fade-in slide-in-from-bottom duration-1000">
                             <div className="inline-flex items-center gap-3">
                                 <div className="h-px w-8" style={{ backgroundColor: 'var(--primary)' }} />
                                 <span className="text-[10px] font-black uppercase tracking-[0.4em] opacity-60" style={{ color: 'var(--text-main)' }}>Culinary Heritage</span>
                             </div>
-                            <h1 className="text-5xl md:text-8xl font-cinzel font-black tracking-tight leading-[0.95] text-[var(--text-main)]">
+                            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-cinzel font-black tracking-tight leading-[0.95] text-[var(--text-main)]">
                                 {config.heroTitle || "Delicious moments, served fresh."}
                             </h1>
-                            <p className="text-lg md:text-xl leading-relaxed italic font-cinzel opacity-75" style={{ color: 'var(--text-main)' }}>
+                            <p className="text-base sm:text-lg md:text-xl leading-relaxed italic font-cinzel opacity-75" style={{ color: 'var(--text-main)' }}>
                                 "{description || "Explore our menu and experience the best flavors in the city."}"
                             </p>
                         </div>
                         <div className="lg:col-span-5 relative animate-in fade-in zoom-in duration-1000">
-                            <div className="relative aspect-[4/5] rounded-[60px] overflow-hidden shadow-2xl border-4 border-white">
+                            <div className="relative aspect-[4/3] sm:aspect-[4/5] rounded-[32px] sm:rounded-[60px] overflow-hidden shadow-2xl border-4 border-white">
                                 <img
                                     src={coverImage || 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=2070'}
                                     className="w-full h-full object-cover transition-transform duration-[8s] hover:scale-105"
@@ -178,7 +178,7 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                 />
                             </div>
                             {/* Decorative badge */}
-                            <div className="absolute -bottom-6 -left-6 h-28 w-28 rounded-full border border-black/5 backdrop-blur-xl flex flex-col items-center justify-center text-center p-2 shadow-xl animate-bounce"
+                            <div className="hidden sm:flex absolute -bottom-6 -left-6 h-20 w-20 sm:h-28 sm:w-28 rounded-full border border-black/5 backdrop-blur-xl flex-col items-center justify-center text-center p-2 shadow-xl animate-bounce"
                                  style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}>
                                 <span className="text-[9px] font-black uppercase tracking-wider">100%</span>
                                 <span className="text-[8px] font-bold uppercase tracking-wider opacity-85">Artisanal</span>
@@ -188,20 +188,20 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                 </section>
 
                 {/* Categories - Sticky & Refined */}
-                <div className="sticky top-24 z-30 backdrop-blur-md border-b py-6 overflow-x-auto no-scrollbar shadow-sm"
+                <div className="sticky top-16 sm:top-20 md:top-24 z-30 backdrop-blur-md border-b py-3 sm:py-4 md:py-6 overflow-x-auto no-scrollbar shadow-sm"
                      style={{ backgroundColor: 'var(--category-bg)', borderColor: 'rgba(0,0,0,0.05)' }}>
-                    <div className="container mx-auto px-6 lg:px-12 flex gap-4 min-w-max">
+                    <div className="px-4 sm:px-6 lg:px-12 flex gap-2 sm:gap-4 min-w-max">
                         {categoryNames.map((cat) => (
                             <button
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
-                                className="px-8 py-4 rounded-full font-cinzel font-black text-xs uppercase tracking-[0.2em] transition-all duration-300 border"
+                                className="px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 rounded-full font-cinzel font-black text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] transition-all duration-300 border whitespace-nowrap"
                                 style={{
                                     backgroundColor: activeCategory === cat ? 'var(--category-highlight)' : 'var(--card-bg)',
                                     color: activeCategory === cat ? 'var(--button-text)' : 'var(--text-main)',
                                     borderColor: activeCategory === cat ? 'var(--category-highlight)' : 'rgba(0,0,0,0.05)',
                                     transform: activeCategory === cat ? 'translateY(-2px)' : 'none',
-                                    boxShadow: activeCategory === cat ? '0 10px 20px rgba(0,0,0,0.1)' : 'none',
+                                    boxShadow: activeCategory === cat ? '0 6px 16px rgba(0,0,0,0.1)' : 'none',
                                     opacity: activeCategory === cat ? 1 : 0.6
                                 }}
                             >
@@ -212,23 +212,23 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                 </div>
 
                 {/* Menu - Structured Elegance */}
-                <section className="py-24 container mx-auto px-6 lg:px-12">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
+                <section className="py-8 sm:py-12 md:py-16 lg:py-24 container mx-auto px-4 sm:px-6 lg:px-12">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
                         {filteredItems.length > 0 ? filteredItems.map((item: any) => (
-                            <div key={item.id} className="group bg-[var(--card-bg)] rounded-[32px] border border-transparent hover:border-slate-100/10 overflow-hidden hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-1 flex flex-col">
-                                <div className="relative aspect-square overflow-hidden bg-slate-50 rounded-[32px] m-3 shadow-inner">
+                            <div key={item.id} className="group bg-[var(--card-bg)] rounded-2xl sm:rounded-[32px] border border-transparent hover:border-slate-100/10 overflow-hidden hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.08)] sm:hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-500 hover:-translate-y-1 flex flex-col">
+                                <div className="relative aspect-[4/3] sm:aspect-square overflow-hidden bg-slate-50 rounded-xl sm:rounded-[32px] m-2 sm:m-3 shadow-inner">
                                     <img
                                         src={item.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=1000'}
                                         className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105"
                                         alt={item.name}
                                     />
-                                    <div className="absolute top-4 right-4 px-4 py-2 backdrop-blur-xl rounded-xl font-cinzel font-black shadow-lg border border-white/20 text-lg tracking-tight"
+                                    <div className="absolute top-2 sm:top-4 right-2 sm:right-4 px-2.5 sm:px-4 py-1 sm:py-2 backdrop-blur-xl rounded-lg sm:rounded-xl font-cinzel font-black shadow-lg border border-white/20 text-sm sm:text-lg tracking-tight"
                                          style={{ backgroundColor: 'var(--card-bg)', color: 'var(--price-color)' }}>
-                                        {item.price} <span className="text-xs">{CURRENCY}</span>
+                                        {item.price} <span className="text-[10px] sm:text-xs">{CURRENCY}</span>
                                     </div>
                                 </div>
-                                <div className="p-8 pt-4 flex-1 flex flex-col text-center">
-                                    <h3 className="text-xl font-cinzel font-black mb-2 transition-colors leading-tight" style={{ color: 'var(--text-main)' }}>
+                                <div className="p-4 sm:p-6 md:p-8 pt-3 sm:pt-4 flex-1 flex flex-col text-center">
+                                    <h3 className="text-base sm:text-xl font-cinzel font-black mb-2 transition-colors leading-tight" style={{ color: 'var(--text-main)' }}>
                                         {item.name}
                                     </h3>
                                     {/* Dietary tags */}
@@ -248,12 +248,12 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                                             </div>
                                         )
                                     })()}
-                                    <p className="font-cinzel italic text-xs leading-relaxed mb-8 flex-1 px-2 opacity-70" style={{ color: 'var(--text-main)' }}>
+                                    <p className="font-cinzel italic text-xs leading-relaxed mb-4 sm:mb-8 flex-1 px-1 sm:px-2 opacity-70" style={{ color: 'var(--text-main)' }}>
                                         {item.description || "Prepared using traditional methods with hand-picked seasonal ingredients."}
                                     </p>
                                     <button
                                         onClick={() => addItem(item)}
-                                        className="w-full h-14 rounded-[20px] text-[10px] font-black uppercase tracking-[0.2em] shadow-xl transition-all active:scale-95 border-2 border-transparent flex items-center justify-center hover:brightness-110"
+                                        className="w-full h-11 sm:h-14 rounded-xl sm:rounded-[20px] text-[10px] font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] shadow-xl transition-all active:scale-95 border-2 border-transparent flex items-center justify-center hover:brightness-110"
                                         style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                                     >
                                         {t.add_to_order}
@@ -276,17 +276,17 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
             {/* Cart Drawer - Premium Sidebar */}
             {showCart && (
                 <div className="fixed inset-0 z-[60] bg-slate-950/60 backdrop-blur-sm animate-in fade-in duration-500">
-                    <div className="absolute right-0 top-0 bottom-0 w-full max-w-lg bg-[var(--card-bg)] shadow-3xl animate-in slide-in-from-right duration-700 outline-none flex flex-col" style={{ color: 'var(--text-main)' }}>
-                        <div className="p-12 border-b flex items-center justify-between" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
+                    <div className="absolute right-0 top-0 bottom-0 w-full sm:max-w-lg bg-[var(--card-bg)] shadow-3xl animate-in slide-in-from-right duration-700 outline-none flex flex-col" style={{ color: 'var(--text-main)' }}>
+                        <div className="p-5 sm:p-8 md:p-12 border-b flex items-center justify-between" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
                             <div className="space-y-1">
-                                <h2 className="text-3xl font-serif font-black tracking-tight">Your Selection</h2>
+                                <h2 className="text-xl sm:text-2xl md:text-3xl font-serif font-black tracking-tight">Your Selection</h2>
                                 <p className="text-[10px] font-black uppercase tracking-widest opacity-60">{totalItems} ARTISANAL ITEMS</p>
                             </div>
-                            <button onClick={() => setShowCart(false)} className="h-12 w-12 rounded-2xl hover:bg-black/5 flex items-center justify-center opacity-40 hover:opacity-100 transition-colors">
-                                <X size={24} />
+                            <button onClick={() => setShowCart(false)} className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl hover:bg-black/5 flex items-center justify-center opacity-40 hover:opacity-100 transition-colors">
+                                <X size={22} />
                             </button>
                         </div>
-                        <div className="flex-1 overflow-y-auto p-12 space-y-10 no-scrollbar">
+                        <div className="flex-1 overflow-y-auto p-4 sm:p-8 md:p-12 space-y-6 sm:space-y-10 no-scrollbar">
                             {items.length === 0 ? (
                                 <div className="h-full flex flex-col items-center justify-center text-center space-y-6">
                                     <ShoppingCart size={48} className="opacity-20" />
@@ -345,21 +345,21 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                             )}
                         </div>
                         {items.length > 0 && (
-                            <div className="p-12 border-t mt-auto" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
-                                <div className="flex justify-between items-end mb-8">
+                            <div className="p-4 sm:p-8 md:p-12 border-t mt-auto" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
+                                <div className="flex justify-between items-end mb-5 sm:mb-8">
                                     <div className="space-y-1">
                                         <span className="text-[10px] font-black uppercase tracking-widest opacity-60">GRAND TOTAL</span>
-                                        <p className="text-sm font-medium opacity-50">Service Charges Included</p>
+                                        <p className="text-xs sm:text-sm font-medium opacity-50">Service Charges Included</p>
                                     </div>
-                                    <span className="text-5xl font-serif font-black tracking-tighter">{totalPrice.toFixed(2)} <span className="text-xl font-normal opacity-30">{CURRENCY}</span></span>
+                                    <span className="text-3xl sm:text-4xl md:text-5xl font-serif font-black tracking-tighter">{totalPrice.toFixed(2)} <span className="text-base sm:text-xl font-normal opacity-30">{CURRENCY}</span></span>
                                 </div>
                                 <button
                                     onClick={handlePlaceOrder}
                                     disabled={!tableId || isPlacingOrder}
-                                    className="w-full h-24 rounded-[32px] text-sm font-black uppercase tracking-[0.4em] shadow-3xl disabled:opacity-20 active:scale-95 transition-all outline-none border-4 border-slate-100 flex items-center justify-center"
+                                    className="w-full h-16 sm:h-20 md:h-24 rounded-2xl sm:rounded-[32px] text-sm font-black uppercase tracking-[0.2em] sm:tracking-[0.4em] shadow-3xl disabled:opacity-20 active:scale-95 transition-all outline-none border-4 border-slate-100 flex items-center justify-center"
                                     style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                                 >
-                                    {isPlacingOrder ? 'Transmitting...' : 'Confirm Order'} <ChevronRight className="ml-4" />
+                                    {isPlacingOrder ? 'Transmitting...' : 'Confirm Order'} <ChevronRight className="ml-2 sm:ml-4" />
                                 </button>
                                 {!tableId && (
                                     <div className="p-4 bg-rose-50 border border-rose-100 rounded-2xl text-center">
@@ -415,10 +415,10 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
              )}
 
             {/* Footer - Sophisticated Finish */}
-            <footer className="py-32 relative overflow-hidden" style={{ backgroundColor: 'var(--footer-bg)', color: 'var(--footer-text)' }}>
+            <footer className="py-12 sm:py-20 md:py-32 relative overflow-hidden" style={{ backgroundColor: 'var(--footer-bg)', color: 'var(--footer-text)' }}>
                 <div className="absolute top-0 left-0 w-full h-px" style={{ background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent)' }} />
-                <div className="container mx-auto px-12 text-center">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-24 items-start">
+                <div className="container mx-auto px-6 sm:px-8 md:px-12 text-center">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 sm:gap-14 md:gap-24 items-start">
                         <div className="space-y-8">
                             <h4 className="font-serif font-black text-2xl tracking-tight">{siteName}</h4>
                             <p className="font-serif italic text-sm leading-relaxed max-w-xs mx-auto opacity-75">
@@ -445,7 +445,7 @@ export default function RestaurantTemplateClassic({ siteName, description, cover
                             </div>
                         </div>
                     </div>
-                    <div className="mt-32 pt-16 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-10 text-[9px] font-black uppercase tracking-[0.6em] opacity-40">
+                    <div className="mt-10 sm:mt-20 md:mt-32 pt-8 sm:pt-12 md:pt-16 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 md:gap-10 text-[9px] font-black uppercase tracking-[0.6em] opacity-40">
                         <p>© {new Date().getFullYear()} {siteName} / GRAND DINING GROUP</p>
                         <nav className="flex gap-10">
                             <a href="#" className="hover:text-white transition-colors">Legal</a>

@@ -71,7 +71,7 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
     } as React.CSSProperties
 
     return (
-        <div style={{ ...containerStyle, backgroundColor: 'var(--bg-main)', color: 'var(--text-main)' }} className="flex h-screen overflow-hidden font-jakarta selection:bg-[var(--primary)] selection:text-[var(--text-main)]">
+        <div style={{ ...containerStyle, backgroundColor: 'var(--bg-main)', color: 'var(--text-main)' }} className="flex flex-col min-h-screen lg:flex-row lg:h-screen lg:overflow-hidden font-jakarta selection:bg-[var(--primary)] selection:text-[var(--text-main)]">
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@400;600;700;800&display=swap');
                 .font-syne { font-family: 'Syne', sans-serif; }
@@ -79,8 +79,86 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                 .no-scrollbar::-webkit-scrollbar { display: none; }
                 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
             `}</style>
-            {/* Left Sidebar - Categories */}
-            <aside className="w-20 md:w-80 border-r border-white/5 flex flex-col shrink-0 relative z-30 shadow-[10px_0_50px_rgba(0,0,0,0.3)] backdrop-blur-xl"
+
+            {/* Mobile Top Header (hidden on lg+) */}
+            <header className="lg:hidden sticky top-0 z-30 flex items-center justify-between px-4 h-16 border-b border-white/5 backdrop-blur-xl"
+                    style={{ backgroundColor: 'rgba(5,5,5,0.85)', color: 'var(--header-text)' }}>
+                <div className="flex items-center gap-3">
+                    {logo ? (
+                        <img src={logo} alt={siteName} className="h-9 w-9 object-contain" />
+                    ) : (
+                        <div className="h-9 w-9 rounded-xl flex items-center justify-center font-black text-base shadow-lg"
+                             style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}>
+                            {siteName[0]}
+                        </div>
+                    )}
+                    <span className="font-syne font-bold text-base tracking-tight" style={{ color: 'var(--header-text)' }}>{siteName}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                    <button onClick={() => setShowScanner(true)} className="h-9 w-9 flex items-center justify-center rounded-xl border border-white/10" style={{ backgroundColor: 'rgba(255,255,255,0.05)' }}>
+                        <QrCode size={16} />
+                    </button>
+                    <button onClick={() => setShowCart(true)} className="relative h-9 px-3 rounded-xl flex items-center gap-2" style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}>
+                        <ShoppingCart size={16} />
+                        {totalItems > 0 && (
+                            <span className="text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 absolute -top-1.5 -right-1.5"
+                                  style={{ backgroundColor: 'var(--primary)', color: 'var(--button-text)', borderColor: 'var(--bg-main)' }}>{totalItems}</span>
+                        )}
+                    </button>
+                </div>
+            </header>
+
+            {/* Mobile Category Strip (hidden on lg+) */}
+            <div className="lg:hidden overflow-x-auto no-scrollbar border-b border-white/5 sticky top-16 z-20"
+                 style={{ backgroundColor: 'rgba(5,5,5,0.85)' }}>
+                <div className="flex gap-1 px-3 py-2 min-w-max">
+                    {categoryNames.map((cat) => (
+                        <button
+                            key={cat}
+                            onClick={() => setActiveCategory(cat)}
+                            className="px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest whitespace-nowrap transition-all"
+                            style={{
+                                backgroundColor: activeCategory === cat ? 'var(--category-highlight)' : 'rgba(255,255,255,0.05)',
+                                color: activeCategory === cat ? '#fff' : 'rgba(255,255,255,0.5)',
+                            }}
+                        >
+                            {cat}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            {/* Mobile Menu Grid (hidden on lg+) */}
+            <div className="lg:hidden flex-1 overflow-y-auto pb-32">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3">
+                    {filteredItems.length > 0 ? filteredItems.map((item: any) => (
+                        <div key={item.id} className="rounded-2xl overflow-hidden border border-white/5 flex flex-col" style={{ backgroundColor: 'var(--card-bg)' }}>
+                            <div className="relative aspect-[4/3] overflow-hidden">
+                                <img src={item.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800'} className="w-full h-full object-cover" alt={item.name} />
+                                <div className="absolute top-2 right-2 px-2.5 py-1 rounded-lg backdrop-blur-xl font-black text-sm border border-white/10"
+                                     style={{ backgroundColor: 'rgba(5,5,5,0.7)', color: 'var(--price-color)' }}>
+                                    {item.price} <span className="text-[10px]">{CURRENCY}</span>
+                                </div>
+                            </div>
+                            <div className="p-3 flex-1 flex flex-col">
+                                <h3 className="font-syne font-bold text-sm leading-tight mb-1" style={{ color: 'var(--text-main)' }}>{item.name}</h3>
+                                <p className="text-[11px] opacity-50 leading-relaxed flex-1 mb-2" style={{ color: 'var(--text-main)' }}>{item.description || ''}</p>
+                                <button onClick={() => addItem(item)} className="w-full h-10 rounded-xl text-[10px] font-black uppercase tracking-wider flex items-center justify-center"
+                                        style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}>
+                                    {t.add_to_order}
+                                </button>
+                            </div>
+                        </div>
+                    )) : (
+                        <div className="col-span-full py-20 text-center opacity-30">
+                            <p className="font-black uppercase tracking-widest">No items in this category</p>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* ── Desktop Sidebar (hidden on mobile) ── */}
+            <aside className="hidden lg:flex w-80 border-r border-white/5 flex-col shrink-0 relative z-30 shadow-[10px_0_50px_rgba(0,0,0,0.3)] backdrop-blur-xl"
                    style={{ backgroundColor: 'rgba(5, 5, 5, 0.45)', color: 'var(--header-text)' }}>
                 {/* Logo Section */}
                 <div className="p-6 md:p-10 border-b border-white/5">
@@ -151,8 +229,8 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                 </div>
             </aside>
 
-            {/* Main Content Area - Cinematic Showcase */}
-            <main className="flex-1 flex flex-col relative overflow-hidden">
+            {/* ── Desktop Main Content (hidden on mobile) ── */}
+            <main className="hidden lg:flex flex-1 flex-col relative overflow-hidden">
                 {/* Decorative Ambient Glows */}
                 <div className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full blur-[200px] pointer-events-none -translate-y-1/2 translate-x-1/3"
                      style={{ backgroundColor: 'rgba(var(--primary-rgb, 225, 29, 72), 0.1)' }} />
@@ -233,7 +311,7 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
                                         Signature Dish
                                     </span>
                                 </div>
-                                <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-syne font-black mb-10 leading-[0.8] tracking-tighter transition-all hover:tracking-[-0.05em] cursor-default">
+                                <h1 className="text-4xl md:text-6xl lg:text-8xl xl:text-[10rem] font-syne font-black mb-6 md:mb-10 leading-[0.85] tracking-tighter transition-all hover:tracking-[-0.05em] cursor-default">
                                     {currentItem.name}
                                 </h1>
                                 {/* Dietary tags */}
@@ -339,7 +417,7 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
             {showCart && (
                 <div className="fixed inset-0 z-50 flex">
                     <div className="flex-1 bg-black/60 backdrop-blur-sm" onClick={() => setShowCart(false)} />
-                    <div className="w-full max-w-md border-l border-white/10 flex flex-col animate-in slide-in-from-right"
+                    <div className="w-full sm:max-w-md border-l border-white/10 flex flex-col animate-in slide-in-from-right"
                          style={{ backgroundColor: 'var(--card-bg)' }}>
                         <div className="p-6 border-b border-white/10 flex items-center justify-between">
                             <h2 className="text-xl font-bold">Your Order</h2>
@@ -465,32 +543,32 @@ export default function RestaurantTemplateModern({ siteName, description, coverI
 
             {/* Call Waiter & Request Bill Logic */}
             {tableId && !isOwner && (
-                <div className="fixed bottom-6 left-24 z-50 flex flex-col gap-3">
+                <div className="fixed bottom-4 left-4 lg:bottom-6 lg:left-24 z-50 flex flex-col gap-2 lg:gap-3">
                     {activeOrderId && (
                         <button
                             onClick={handleOpenSplitBill}
-                            className="h-14 w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-white/10"
+                            className="h-11 w-11 lg:h-14 lg:w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-white/10"
                             style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                             title="Partager l'addition"
                         >
-                            <Split size={22} />
+                            <Split size={18} />
                         </button>
                     )}
                     <button
                         onClick={handleRequestBill}
-                        className="h-14 w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-white/10"
+                        className="h-11 w-11 lg:h-14 lg:w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-white/10"
                         style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         title="Request Bill"
                     >
-                        <Receipt size={22} />
+                        <Receipt size={18} />
                     </button>
                     <button
                         onClick={handleCallWaiter}
-                        className="h-14 w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-white/10"
+                        className="h-11 w-11 lg:h-14 lg:w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-white/10"
                         style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         title="Call Waiter"
                     >
-                        <Bell size={22} />
+                        <Bell size={18} />
                     </button>
                 </div>
             )}

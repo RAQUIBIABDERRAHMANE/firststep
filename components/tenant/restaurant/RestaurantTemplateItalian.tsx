@@ -143,39 +143,39 @@ export default function RestaurantTemplateItalian({
 
             {/* Call Waiter & Request Bill buttons for scanned tables */}
             {tableId && !isOwner && (
-                <div className="fixed bottom-24 left-6 z-50 flex flex-col gap-3">
+                <div className="fixed bottom-20 left-4 sm:bottom-24 sm:left-6 z-50 flex flex-col gap-2 sm:gap-3">
                     {activeOrderId && (
                         <button
                             onClick={handleOpenSplitBill}
-                            className="h-12 w-12 rounded-full shadow-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-[#FAF6F0]/25"
+                            className="h-10 w-10 sm:h-12 sm:w-12 rounded-full shadow-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-[#FAF6F0]/25"
                             style={{ backgroundColor: buttonBg, color: buttonText }}
                             title="Partager l'addition"
                         >
-                            <Split size={18} />
+                            <Split size={16} />
                         </button>
                     )}
                     <button
                         onClick={handleRequestBill}
-                        className="h-12 w-12 rounded-full shadow-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-[#FAF6F0]/25"
+                        className="h-10 w-10 sm:h-12 sm:w-12 rounded-full shadow-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-[#FAF6F0]/25"
                         style={{ backgroundColor: buttonBg, color: buttonText }}
                         title={lang === 'it' ? 'Richiedi il conto' : lang === 'fr' ? "Demander l'addition" : 'Request Bill'}
                     >
-                        <Receipt size={18} />
+                        <Receipt size={16} />
                     </button>
                     <button
                         onClick={handleCallWaiter}
-                        className="h-12 w-12 rounded-full shadow-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-[#FAF6F0]/25"
+                        className="h-10 w-10 sm:h-12 sm:w-12 rounded-full shadow-xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border border-[#FAF6F0]/25"
                         style={{ backgroundColor: buttonBg, color: buttonText }}
                         title={t.call_waiter}
                     >
-                        <Bell size={18} />
+                        <Bell size={16} />
                     </button>
                 </div>
             )}
 
             {/* ── HEADER ── */}
-            <header className="sticky top-0 z-40 w-full border-b py-4" style={{ backgroundColor: headerBg, borderColor: `${headerText}0d` }}>
-                <div className="container mx-auto px-6 flex items-center justify-between">
+            <header className="sticky top-0 z-40 w-full border-b py-2 sm:py-4" style={{ backgroundColor: headerBg, borderColor: `${headerText}0d` }}>
+                <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between">
                     {/* Left: MENU toggle */}
                     <button 
                         onClick={() => {
@@ -202,9 +202,9 @@ export default function RestaurantTemplateItalian({
                     </div>
 
                     {/* Right: Language Switcher, Cart & User icons */}
-                    <div className="flex items-center gap-4">
-                        {/* Language Selection Buttons */}
-                        <div className="flex gap-0.5 rounded-full p-0.5 border mr-1" style={{ backgroundColor: `${headerText}0d`, borderColor: `${headerText}1a` }}>
+                    <div className="flex items-center gap-2 sm:gap-4">
+                        {/* Language Selection Buttons - hidden on xs */}
+                        <div className="hidden sm:flex gap-0.5 rounded-full p-0.5 border mr-1" style={{ backgroundColor: `${headerText}0d`, borderColor: `${headerText}1a` }}>
                             {(['it', 'fr', 'en'] as Language[]).map((l) => (
                                 <button
                                     key={l}
@@ -251,7 +251,7 @@ export default function RestaurantTemplateItalian({
                 </div>
             </header>
 
-            <main className="flex-1 max-w-4xl mx-auto w-full px-6 pt-4">
+            <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 pt-4">
                 {/* ── CATEGORY HORIZONTAL SCROLL BAR ── */}
                 <div className="w-full border-t border-b py-3 overflow-x-auto no-scrollbar flex justify-start gap-6 md:gap-8 mt-2" style={{ borderColor: `${textColor}1a`, backgroundColor: categoryBg }}>
                     {categoryNames.map((cat) => (
@@ -451,12 +451,12 @@ export default function RestaurantTemplateItalian({
             {/* ── CART DRAWER ── */}
             {showCart && (
                 <div className="fixed inset-0 z-[60] backdrop-blur-sm transition-all duration-300" style={{ background: 'rgba(43,40,35,0.6)' }} onClick={() => setShowCart(false)}>
-                    <div className="absolute right-0 top-0 bottom-0 w-full max-w-md shadow-2xl animate-in slide-in-from-right duration-500 flex flex-col bg-[#f2efe9]"
+                    <div className="absolute right-0 top-0 bottom-0 w-full sm:max-w-md shadow-2xl animate-in slide-in-from-right duration-500 flex flex-col bg-[#f2efe9]"
                         onClick={e => e.stopPropagation()}>
                         <DoubleBorder />
 
                         {/* Cart Header */}
-                        <div className="p-8 flex items-center justify-between z-10" style={{ borderBottom: '1.5px solid rgba(43, 40, 35, 0.1)', background: '#182d42' }}>
+                        <div className="p-4 sm:p-8 flex items-center justify-between z-10" style={{ borderBottom: '1.5px solid rgba(43, 40, 35, 0.1)', background: '#182d42' }}>
                             <div>
                                 <h2 className="font-serif-italian text-2xl font-bold text-[#FAF6F0] tracking-wide uppercase">{t.my_order}</h2>
                                 <p className="text-[9px] font-bold uppercase tracking-widest text-[#FAF6F0]/60 mt-0.5">{totalItems} {t.items_count}</p>
@@ -526,7 +526,7 @@ export default function RestaurantTemplateItalian({
 
                         {/* Cart Footer Checkout section */}
                         {items.length > 0 && (
-                            <div className="p-8 space-y-6 z-10 border-t border-[#2b2823]/10 bg-white">
+                            <div className="p-4 sm:p-8 space-y-4 sm:space-y-6 z-10 border-t border-[#2b2823]/10 bg-white">
                                 <div className="flex justify-between items-center">
                                     <span className="text-[10px] font-bold uppercase tracking-widest text-[#5e5950]">{t.total_amount}</span>
                                     <span className="font-serif-italian text-2xl text-[#8f4a27] font-bold">

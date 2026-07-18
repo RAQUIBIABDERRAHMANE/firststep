@@ -120,32 +120,32 @@ export default function RestaurantTemplateMoroccan({
 
             {/* Call Waiter & Request Bill Logic */}
             {tableId && !isOwner && (
-                <div className="fixed bottom-6 left-6 z-50 flex flex-col gap-3">
+                <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-50 flex flex-col gap-2 sm:gap-3">
                     {activeOrderId && (
                         <button
                             onClick={handleOpenSplitBill}
-                            className="h-14 w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-[#b89047]"
+                            className="h-11 w-11 sm:h-14 sm:w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-[#b89047]"
                             style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                             title="Partager l'addition"
                         >
-                            <Split size={22} />
+                            <Split size={18} />
                         </button>
                     )}
                     <button
                         onClick={handleRequestBill}
-                        className="h-14 w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-[#b89047]"
+                        className="h-11 w-11 sm:h-14 sm:w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-[#b89047]"
                         style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         title="Request Bill"
                     >
-                        <Receipt size={22} />
+                        <Receipt size={18} />
                     </button>
                     <button
                         onClick={handleCallWaiter}
-                        className="h-14 w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-[#b89047]"
+                        className="h-11 w-11 sm:h-14 sm:w-14 rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-105 active:scale-95 border-2 border-[#b89047]"
                         style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         title="Call Waiter"
                     >
-                        <Bell size={22} />
+                        <Bell size={18} />
                     </button>
                 </div>
             )}
@@ -153,23 +153,23 @@ export default function RestaurantTemplateMoroccan({
             {/* ── HEADER ── */}
             <header className="sticky top-0 z-40 w-full" style={{ background: 'var(--header-bg)', borderBottom: '3px solid var(--header-text)' }}>
                 <GoldBorder />
-                <div className="container mx-auto flex h-20 items-center justify-between px-6 lg:px-12">
-                    <div className="flex items-center gap-4">
+                <div className="container mx-auto flex h-16 sm:h-20 items-center justify-between px-4 sm:px-6 lg:px-12">
+                    <div className="flex items-center gap-3 sm:gap-4">
                         {logo ? (
-                            <img src={logo} alt={siteName} className="h-12 w-12 object-contain rounded-full border-2 border-amber-400" />
+                            <img src={logo} alt={siteName} className="h-9 w-9 sm:h-12 sm:w-12 object-contain rounded-full border-2 border-amber-400" />
                         ) : (
-                            <div className="h-12 w-12 rounded-full border-2 flex items-center justify-center font-amiri font-bold text-xl"
+                            <div className="h-9 w-9 sm:h-12 sm:w-12 rounded-full border-2 flex items-center justify-center font-amiri font-bold text-lg sm:text-xl"
                                  style={{ background: 'rgba(212,160,23,0.15)', borderColor: 'var(--header-text)', color: 'var(--header-text)' }}>
                                 {siteName[0]}
                             </div>
                         )}
                         <div>
-                            <span className="font-amiri font-bold text-2xl block leading-none" style={{ color: 'var(--header-text)' }}>{siteName}</span>
-                            <span className="text-[10px] font-bold uppercase tracking-[0.3em] opacity-80" style={{ color: 'var(--header-text)' }}>مطعم مغربي أصيل</span>
+                            <span className="font-amiri font-bold text-lg sm:text-2xl block leading-none" style={{ color: 'var(--header-text)' }}>{siteName}</span>
+                            <span className="hidden sm:block text-[10px] font-bold uppercase tracking-[0.3em] opacity-80" style={{ color: 'var(--header-text)' }}>مطعم مغربي أصيل</span>
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
                         {isOwner && (
                             <Link href="/dashboard/restaurant">
                                 <Button variant="ghost" className="hidden md:flex gap-2 text-[10px] font-bold uppercase tracking-widest h-10 px-5 rounded-full border hover:bg-white/5"
@@ -178,23 +178,23 @@ export default function RestaurantTemplateMoroccan({
                                 </Button>
                             </Link>
                         )}
-                        <button onClick={() => setShowScanner(true)} className="h-10 w-10 flex items-center justify-center rounded-full border hover:bg-white/5 transition-all"
+                        <button onClick={() => setShowScanner(true)} className="h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center rounded-full border hover:bg-white/5 transition-all"
                                 style={{ color: 'var(--header-text)', borderColor: 'var(--header-text)' }}>
-                            <QrCode size={16} />
+                            <QrCode size={15} />
                         </button>
                         <button
                             onClick={() => setShowReservation(true)}
-                            className="px-5 h-10 rounded-full font-bold text-xs uppercase tracking-widest transition-all hover:brightness-110 active:scale-95 shadow-md"
+                            className="hidden sm:flex px-4 sm:px-5 h-9 sm:h-10 rounded-full font-bold text-xs uppercase tracking-widest transition-all hover:brightness-110 active:scale-95 shadow-md items-center"
                             style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         >
                             {t.reserve || 'Réserver'}
                         </button>
                         <button
                             onClick={() => setShowCart(true)}
-                            className="group relative h-10 px-5 rounded-full transition-all active:scale-95 flex items-center gap-2 shadow-lg"
+                            className="group relative h-9 sm:h-10 px-3 sm:px-5 rounded-full transition-all active:scale-95 flex items-center gap-2 shadow-lg"
                             style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         >
-                            <ShoppingCart size={16} className="transition-transform group-hover:-translate-y-0.5" />
+                            <ShoppingCart size={15} className="transition-transform group-hover:-translate-y-0.5" />
                             <span className="hidden md:inline text-[10px] font-bold uppercase tracking-widest">{t.place_order || 'Commander'}</span>
                             {totalItems > 0 && (
                                 <span className="absolute -top-1.5 -right-1.5 text-[9px] h-5 w-5 rounded-full flex items-center justify-center font-black border border-amber-900"
@@ -209,7 +209,7 @@ export default function RestaurantTemplateMoroccan({
 
             <main className="flex-1 pb-24">
                 {/* ── HERO ── */}
-                <section className="relative h-[45vh] flex items-center justify-center text-center overflow-hidden">
+                <section className="relative h-[40vh] sm:h-[45vh] flex items-center justify-center text-center overflow-hidden">
                     <img
                         src={coverImage || 'https://images.unsplash.com/photo-1539252554453-80ab65ce3586?auto=format&fit=crop&q=80&w=2000'}
                         className="absolute inset-0 w-full h-full object-cover scale-103 transition-transform duration-1000"
@@ -219,27 +219,27 @@ export default function RestaurantTemplateMoroccan({
                     <div className="absolute inset-0 pointer-events-none">
                         <ZelligePattern opacity={0.05} />
                     </div>
-                    <div className="container relative z-10 px-6 max-w-4xl">
-                        <StarOrnament size={36} />
-                        <h1 className="font-amiri text-5xl md:text-7xl font-bold text-amber-300 mt-6 mb-6 leading-tight">
+                    <div className="container relative z-10 px-4 sm:px-6 max-w-4xl">
+                        <StarOrnament size={28} />
+                        <h1 className="font-amiri text-3xl sm:text-5xl md:text-7xl font-bold text-amber-300 mt-4 sm:mt-6 mb-3 sm:mb-6 leading-tight">
                             {config.heroTitle || "Tradition & Hospitalité Marocaine"}
                         </h1>
-                        <div className="h-0.5 w-24 bg-amber-400 mx-auto mb-6" />
-                        <p className="text-lg md:text-xl text-amber-100/80 max-w-xl mx-auto font-amiri italic leading-relaxed">
+                        <div className="h-0.5 w-16 sm:w-24 bg-amber-400 mx-auto mb-3 sm:mb-6" />
+                        <p className="text-base sm:text-lg md:text-xl text-amber-100/80 max-w-xl mx-auto font-amiri italic leading-relaxed">
                             "{description || "Un voyage sensoriel inoubliable à travers les saveurs authentiques du Royaume."}"
                         </p>
                     </div>
                 </section>
 
                 {/* ── STICKY CATEGORIES BAR ── */}
-                <div className="sticky top-20 z-30 py-4 overflow-x-auto no-scrollbar border-b shadow-md"
+                <div className="sticky top-16 sm:top-20 z-30 py-2 sm:py-4 overflow-x-auto no-scrollbar border-b shadow-md"
                      style={{ backgroundColor: 'var(--category-bg)', borderColor: 'rgba(212,160,23,0.2)' }}>
-                    <div className="container mx-auto px-6 lg:px-12 flex gap-4 min-w-max justify-center">
+                    <div className="px-3 sm:px-6 lg:px-12 flex gap-2 sm:gap-4 min-w-max justify-center">
                         {categoryNames.map((cat) => (
                             <button
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
-                                className="px-6 py-2.5 rounded-full font-amiri text-base font-bold transition-all duration-300 border"
+                                className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-amiri text-sm sm:text-base font-bold transition-all duration-300 border whitespace-nowrap"
                                 style={{
                                     backgroundColor: activeCategory === cat ? 'var(--category-highlight)' : 'transparent',
                                     color: activeCategory === cat ? 'var(--button-text)' : 'var(--header-text)',
@@ -255,8 +255,8 @@ export default function RestaurantTemplateMoroccan({
                 </div>
 
                 {/* ── MENU DISHES ── */}
-                <section className="py-20 container mx-auto px-6 lg:px-12 relative">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <section className="py-8 sm:py-12 md:py-20 container mx-auto px-4 sm:px-6 lg:px-12 relative">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
                         {filteredItems.length > 0 ? filteredItems.map((item: any) => (
                             <div key={item.id} className="group rounded-[32px] border overflow-hidden hover:shadow-[0_20px_40px_rgba(193,68,14,0.06)] hover:-translate-y-1 transition-all duration-500 flex flex-col relative"
                                  style={{ backgroundColor: 'var(--card-bg)', borderColor: 'rgba(212,160,23,0.12)' }}>
@@ -327,10 +327,10 @@ export default function RestaurantTemplateMoroccan({
             {/* ── CART DRAWER ── */}
             {showCart && (
                 <div className="fixed inset-0 z-[60] backdrop-blur-sm animate-in fade-in duration-300" style={{ background: 'rgba(26,35,64,0.7)' }}>
-                    <div className="absolute right-0 top-0 bottom-0 w-full max-w-md shadow-2xl animate-in slide-in-from-right duration-500 flex flex-col"
+                    <div className="absolute right-0 top-0 bottom-0 w-full sm:max-w-md shadow-2xl animate-in slide-in-from-right duration-500 flex flex-col"
                         style={{ background: 'var(--bg-main)' }}>
                         {/* Cart header */}
-                        <div className="p-8 flex items-center justify-between" style={{ borderBottom: '2px solid var(--category-highlight)', background: 'var(--header-bg)' }}>
+                        <div className="p-4 sm:p-8 flex items-center justify-between" style={{ borderBottom: '2px solid var(--category-highlight)', background: 'var(--header-bg)' }}>
                             <div>
                                 <h2 className="font-amiri text-2xl font-bold" style={{ color: 'var(--header-text)' }}>سلة الطلبات</h2>
                                 <p className="text-[10px] font-bold uppercase tracking-widest opacity-80" style={{ color: 'var(--header-text)' }}>{totalItems} articles sélectionnés</p>
@@ -343,7 +343,7 @@ export default function RestaurantTemplateMoroccan({
                         <GoldBorder />
 
                         {/* Items */}
-                        <div className="flex-1 overflow-y-auto p-8 space-y-6 no-scrollbar">
+                        <div className="flex-1 overflow-y-auto p-4 sm:p-8 space-y-6 no-scrollbar">
                             {items.length === 0 ? (
                                 <div className="h-full flex flex-col items-center justify-center text-center space-y-4 py-20">
                                     <StarOrnament size={48} color="var(--category-highlight)" />
@@ -402,7 +402,7 @@ export default function RestaurantTemplateMoroccan({
 
                         {/* Cart footer */}
                         {items.length > 0 && (
-                            <div className="p-8 space-y-6" style={{ borderTop: '2px solid var(--category-highlight)', background: 'var(--card-bg)' }}>
+                            <div className="p-4 sm:p-8 space-y-4 sm:space-y-6" style={{ borderTop: '2px solid var(--category-highlight)', background: 'var(--card-bg)' }}>
                                 <div className="flex justify-between items-center">
                                     <span className="text-[10px] font-black uppercase tracking-widest opacity-60" style={{ color: 'var(--text-main)' }}>Total</span>
                                     <span className="font-amiri text-4xl font-bold" style={{ color: 'var(--text-main)' }}>

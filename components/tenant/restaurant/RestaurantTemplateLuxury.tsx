@@ -208,8 +208,8 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
                                     <div className="h-[1px] flex-1 bg-gradient-to-r from-[#e27355]/40 to-transparent" style={{ backgroundImage: `linear-gradient(to right, var(--primary)66, transparent)` }} />
                                 </div>
 
-                                {/* 2-column grid of elegant card components */}
-                                <div className="grid grid-cols-2 gap-4">
+                                {/* 2-column grid of elegant card components - 1 col on xs */}
+                                <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-4">
                                     {categoryItems.map((item: any) => {
                                         const cartItem = items.find((i: any) => i.id === item.id)
                                         const quantity = cartItem ? cartItem.quantity : 0
@@ -358,7 +358,7 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
             {showCart && (
                 <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm transition-all" onClick={() => setShowCart(false)}>
                     <div
-                        className="absolute right-0 top-0 bottom-0 w-full max-w-md shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col border-l border-[#2d1b15]/80"
+                        className="absolute right-0 top-0 bottom-0 w-full sm:max-w-md shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col border-l border-[#2d1b15]/80"
                         style={{ backgroundColor: 'var(--card-bg)' }}
                         onClick={e => e.stopPropagation()}
                     >
@@ -484,7 +484,7 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
             {showInfoDrawer && (
                 <div className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm transition-all" onClick={() => setShowInfoDrawer(false)}>
                     <div
-                        className="absolute right-0 top-0 bottom-0 w-full max-w-md shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col text-stone-200"
+                        className="absolute right-0 top-0 bottom-0 w-full sm:max-w-md shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col text-stone-200"
                         style={{ backgroundColor: 'var(--card-bg)', borderLeft: '1px solid rgba(255,255,255,0.05)' }}
                         onClick={e => e.stopPropagation()}
                     >

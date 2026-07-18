@@ -77,23 +77,23 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
             {/* Top Navigation Bar - Glassmorphism */}
             <nav className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl border-b border-slate-200/50 transition-all duration-500"
                  style={{ backgroundColor: 'var(--header-bg)', color: 'var(--header-text)' }}>
-                <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                    <div className="flex items-center gap-4 group cursor-pointer">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+                    <div className="flex items-center gap-3 sm:gap-4 group cursor-pointer">
                         {logo ? (
-                            <img src={logo} alt={siteName} className="h-12 w-12 object-contain transition-transform group-hover:scale-110" />
+                            <img src={logo} alt={siteName} className="h-9 w-9 sm:h-12 sm:w-12 object-contain transition-transform group-hover:scale-110" />
                         ) : (
-                            <div className="h-12 w-12 flex items-center justify-center font-serif text-2xl font-black rounded-xl shadow-lg shadow-black/10"
+                            <div className="h-9 w-9 sm:h-12 sm:w-12 flex items-center justify-center font-serif text-xl sm:text-2xl font-black rounded-xl shadow-lg shadow-black/10"
                                  style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}>
                                 {siteName[0]}
                             </div>
                         )}
                         <div className="flex flex-col">
-                            <span className="font-black text-xl tracking-tight leading-none" style={{ color: 'var(--header-text)' }}>{siteName}</span>
-                            <span className="text-[10px] font-bold uppercase tracking-[0.2em] mt-1 opacity-50" style={{ color: 'var(--header-text)' }}>Premium Dining</span>
+                            <span className="font-black text-base sm:text-xl tracking-tight leading-none" style={{ color: 'var(--header-text)' }}>{siteName}</span>
+                            <span className="hidden sm:block text-[10px] font-bold uppercase tracking-[0.2em] mt-1 opacity-50" style={{ color: 'var(--header-text)' }}>Premium Dining</span>
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-4 md:gap-8">
+                    <div className="flex items-center gap-2 sm:gap-4 md:gap-8">
                         {isOwner && (
                             <Link href="/dashboard/restaurant" className="text-xs font-black uppercase tracking-widest transition-colors hidden md:block"
                                   style={{ color: 'var(--header-text)', opacity: 0.6 }}>
@@ -101,18 +101,18 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                             </Link>
                         )}
                         <button onClick={() => setShowScanner(true)} className="p-2 transition-colors hover:opacity-75" style={{ color: 'var(--header-text)' }}>
-                            <QrCode size={22} strokeWidth={2.5} />
+                            <QrCode size={20} strokeWidth={2.5} />
                         </button>
                         <button
                             onClick={() => setLang(l => l === 'en' ? 'fr' : 'en')}
-                            className="text-[10px] font-black uppercase tracking-widest rounded-full px-4 py-1.5 transition-all active:scale-95 bg-black/5"
+                            className="hidden sm:block text-[10px] font-black uppercase tracking-widest rounded-full px-3 py-1.5 transition-all active:scale-95 bg-black/5"
                             style={{ color: 'var(--header-text)' }}
                         >
                             {lang === 'fr' ? 'FR' : 'EN'}
                         </button>
                         <button
                             onClick={() => setShowReservation(true)}
-                            className="text-[10px] font-black uppercase tracking-widest hover:brightness-110 rounded-full px-5 h-10 transition-all active:scale-95 shadow-lg shadow-black/5"
+                            className="hidden sm:block text-[10px] font-black uppercase tracking-widest hover:brightness-110 rounded-full px-4 sm:px-5 h-9 sm:h-10 transition-all active:scale-95 shadow-lg shadow-black/5"
                             style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         >
                             Reserve
@@ -122,12 +122,12 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                 setShowCart(true)
                                 setShowOrderTracking(false)
                             }}
-                            className="relative flex items-center justify-center h-12 w-12 rounded-2xl transition-all shadow-xl shadow-black/10 active:scale-95"
+                            className="relative flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-xl sm:rounded-2xl transition-all shadow-xl shadow-black/10 active:scale-95"
                             style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
                         >
-                            <ShoppingCart size={20} strokeWidth={2.5} />
+                            <ShoppingCart size={18} strokeWidth={2.5} />
                             {totalItems > 0 && (
-                                <div className="absolute -top-1.5 -right-1.5 text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center border-4 shadow-lg"
+                                <div className="absolute -top-1.5 -right-1.5 text-[10px] font-black w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center border-4 shadow-lg"
                                      style={{ backgroundColor: 'var(--primary)', color: 'var(--bg-main)', borderColor: 'var(--header-bg)' }}>
                                     {totalItems}
                                 </div>
@@ -138,26 +138,26 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
             </nav>
 
             {/* Hero Section - Impactful & Clean */}
-            <header className="relative pt-40 pb-20 md:pt-56 md:pb-40 px-6 overflow-hidden">
+            <header className="relative pt-24 pb-10 sm:pt-32 sm:pb-16 md:pt-56 md:pb-40 px-4 sm:px-6 overflow-hidden">
                 {/* Decorative Background Elements */}
                 <div className="absolute top-40 -left-20 w-80 h-80 rounded-full blur-[100px] pointer-events-none" style={{ backgroundColor: 'rgba(var(--primary-rgb, 15, 23, 42), 0.05)' }} />
                 <div className="absolute bottom-20 -right-20 w-96 h-96 rounded-full blur-[100px] pointer-events-none" style={{ backgroundColor: 'rgba(0,0,0,0.02)' }} />
 
-                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 items-center">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-16 lg:gap-24 items-center">
                     <div className="order-2 md:order-1 animate-in slide-in-from-bottom-10 duration-1000 fade-in">
-                        <div className="flex items-center gap-3 mb-8">
+                        <div className="flex items-center gap-3 mb-4 sm:mb-8">
                             <div className="h-px w-8 bg-slate-300" />
                             <span className="text-[11px] font-black uppercase tracking-[0.4em] text-slate-400">
                                 {config.subtitle || "The Art of Gastronomy"}
                             </span>
                         </div>
-                        <h1 className="font-cormorant text-6xl md:text-8xl lg:text-9xl font-medium text-[var(--text-main)] mb-10 leading-[0.95] tracking-tight">
+                        <h1 className="font-cormorant text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-medium text-[var(--text-main)] mb-6 sm:mb-10 leading-[0.95] tracking-tight">
                             {config.heroTitle || "Simple. Fresh. Elegant."}
                         </h1>
-                        <p className="text-xl text-slate-500 leading-relaxed mb-12 max-w-lg font-medium">
+                        <p className="text-base sm:text-xl text-slate-500 leading-relaxed mb-6 sm:mb-12 max-w-lg font-medium">
                             {description || "A curated dining experience celebrating the finest seasonal local produce and culinary traditions."}
                         </p>
-                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-8 text-[11px] font-black uppercase tracking-[0.2em] text-slate-400">
                             <div className="flex items-center gap-3">
                                 <div className="h-2 w-2 rounded-full border border-slate-300" />
                                 <span>{config.address || "123 Royale Avenue"}</span>
@@ -169,7 +169,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                         </div>
                     </div>
                     <div className="order-1 md:order-2 relative group">
-                        <div className="relative h-[450px] md:h-[650px] w-full rounded-[40px] overflow-hidden shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] animate-in fade-in zoom-in-95 duration-1000 delay-300">
+                        <div className="relative h-[220px] sm:h-[380px] md:h-[450px] lg:h-[650px] w-full rounded-2xl sm:rounded-[40px] overflow-hidden shadow-[0_20px_60px_-10px_rgba(0,0,0,0.2)] sm:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] animate-in fade-in zoom-in-95 duration-1000 delay-300">
                             <img
                                 src={coverImage || 'https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&q=80&w=2000'}
                                 alt="Restaurant Interior"
@@ -182,17 +182,17 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
             </header>
 
             {/* Sticky Category Selection Bar */}
-            <div className="sticky top-20 z-40 py-6 border-b transition-all"
+            <div className="sticky top-16 sm:top-20 z-40 py-3 sm:py-6 border-b transition-all"
                  style={{ backgroundColor: 'var(--header-bg)', borderColor: 'rgba(0,0,0,0.05)' }}>
-                <div className="max-w-7xl mx-auto px-6" style={{ backgroundColor: 'var(--category-bg)' }}>
-                    <div className="-mx-6 px-6 overflow-x-auto no-scrollbar flex gap-8">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6" style={{ backgroundColor: 'var(--category-bg)' }}>
+                    <div className="-mx-4 sm:-mx-6 px-4 sm:px-6 overflow-x-auto no-scrollbar flex gap-4 sm:gap-8">
                         {categoryNames.map((cat) => (
                             <button
                                 key={cat}
                                 onClick={() => scrollToCategory(cat)}
                                 className="relative py-2 shrink-0 transition-all duration-300"
                             >
-                                <span className="font-black text-xs uppercase tracking-widest block transition-colors"
+                                <span className="font-black text-xs uppercase tracking-widest block transition-colors whitespace-nowrap"
                                       style={{ color: activeSection === cat ? 'var(--category-highlight)' : 'var(--text-main)', opacity: activeSection === cat ? 1 : 0.4 }}>
                                     {cat}
                                 </span>
@@ -207,15 +207,15 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
             </div>
 
             {/* Menu Items Showcase */}
-            <div className="max-w-7xl mx-auto px-6 py-20 space-y-32">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-20 space-y-12 sm:space-y-20 md:space-y-32">
                 {categoryNames.map((cat) => {
                     const categoryItems = categories.find((c: any) => c.name === cat)?.dishes || []
                     if (categoryItems.length === 0) return null
 
                     return (
-                        <section id={`cat-${cat}`} key={cat} className="scroll-mt-36">
-                            <div className="flex items-center gap-6 mb-16">
-                                <h3 className="font-cormorant text-3xl md:text-4xl text-[var(--text-main)] font-medium">
+                        <section id={`cat-${cat}`} key={cat} className="scroll-mt-28 sm:scroll-mt-36">
+                            <div className="flex items-center gap-4 sm:gap-6 mb-6 sm:mb-10 md:mb-16">
+                                <h3 className="font-cormorant text-2xl sm:text-3xl md:text-4xl text-[var(--text-main)] font-medium">
                                     {cat}
                                 </h3>
                                 <div className="h-px flex-1 bg-slate-100" />
@@ -224,7 +224,7 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                 </span>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 lg:gap-12 xl:gap-16">
                                 {categoryItems.map((item: any) => {
                                     return (
                                         <div key={item.id} className="group flex flex-col justify-between p-6 rounded-3xl transition-all duration-500 hover:shadow-[0_30px_60px_rgba(0,0,0,0.02)] border border-slate-100 hover:border-slate-200"
