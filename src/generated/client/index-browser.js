@@ -620,6 +620,25 @@ exports.Prisma.FactureCounterScalarFieldEnum = {
   nextNumber: 'nextNumber'
 };
 
+exports.Prisma.CustomWebsiteRequestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  clientName: 'clientName',
+  companyName: 'companyName',
+  email: 'email',
+  phone: 'phone',
+  websiteType: 'websiteType',
+  stylePreferences: 'stylePreferences',
+  pages: 'pages',
+  specialFeatures: 'specialFeatures',
+  competitors: 'competitors',
+  additionalNotes: 'additionalNotes',
+  status: 'status',
+  adminNotes: 'adminNotes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -670,7 +689,8 @@ exports.Prisma.ModelName = {
   TablePrintRequest: 'TablePrintRequest',
   FactureTemplate: 'FactureTemplate',
   FactureRecord: 'FactureRecord',
-  FactureCounter: 'FactureCounter'
+  FactureCounter: 'FactureCounter',
+  CustomWebsiteRequest: 'CustomWebsiteRequest'
 };
 
 /**

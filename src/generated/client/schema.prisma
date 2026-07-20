@@ -9,21 +9,22 @@ datasource db {
 }
 
 model User {
-  id               String            @id @default(cuid())
-  email            String            @unique
+  id               String                 @id @default(cuid())
+  email            String                 @unique
   password         String
   companyName      String
-  role             String            @default("CLIENT")
-  createdAt        DateTime          @default(now())
+  role             String                 @default("CLIENT")
+  createdAt        DateTime               @default(now())
   chatSessions     ChatSession[]
   notifications    Notification[]
   paymentRequests  PaymentRequest[]
   emailListMembers EmailListMember[]
   websites         TenantWebsite[]
   services         UserService[]
-  unsubscribed     Boolean           @default(false)
+  customRequests   CustomWebsiteRequest[]
+  unsubscribed     Boolean                @default(false)
   recoveryEmail    String?
-  recoveryCodes    String            @default("[]")
+  recoveryCodes    String                 @default("[]")
 }
 
 model ChatSession {
@@ -684,4 +685,26 @@ model FactureCounter {
   id         String @id @default(cuid())
   year       Int    @unique
   nextNumber Int    @default(1)
+}
+
+model CustomWebsiteRequest {
+  id               String   @id @default(cuid())
+  userId           String?
+  clientName       String
+  companyName      String
+  email            String
+  phone            String?
+  websiteType      String
+  stylePreferences String
+  pages            String // JSON string of requested pages
+  specialFeatures  String // JSON string of requested features
+  competitors      String?
+  additionalNotes  String?
+  status           String   @default("PENDING") // PENDING, REVIEWING, IN_PROGRESS, COMPLETED
+  adminNotes       String   @default("[]") // JSON string of logs/notes
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  user             User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
 }

@@ -209,9 +209,9 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
                                                 <span className="font-figtree text-[12px] text-slate-600">Lancement imminent</span>
                                             )}
                                             {isAvailable && (
-                                                <Link href="#signup">
+                                                <Link href={service.slug === 'custom-website' ? '/services/custom-website/request' : '#signup'}>
                                                     <button className="inline-flex items-center gap-1.5 font-figtree text-[12px] font-semibold transition-all duration-200 hover:gap-2" style={{ color: '#0066FF' }}>
-                                                        Activer <ArrowRight className="h-3 w-3" />
+                                                        {service.slug === 'custom-website' ? 'Demander mon site' : 'Activer'} <ArrowRight className="h-3 w-3" />
                                                     </button>
                                                 </Link>
                                             )}

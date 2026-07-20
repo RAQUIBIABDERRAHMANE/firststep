@@ -33,6 +33,7 @@ export default function AdminSidebarNav() {
     { label: 'Manage Services', href: '/admin/services', icon: Layers },
     { label: 'User Directory', href: '/admin/users', icon: Users },
     { label: 'Websites', href: '/admin/websites', icon: Globe },
+    { label: 'Demandes Sur Mesure', href: '/admin/custom-requests', icon: FileText },
     { label: 'Client Access', href: '/admin/access', icon: ExternalLink },
     { label: 'Payments', href: '/admin/payments', icon: CreditCard },
     { label: 'Factures Émises', href: '/admin/factures', icon: Receipt },

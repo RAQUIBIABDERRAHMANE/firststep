@@ -134,11 +134,29 @@ export async function upsertWebsite(formData: FormData) {
 
     // Prepare config (merging with existing if possible)
     const existingConfig = existingSite?.config ? JSON.parse(existingSite.config) : {}
+    
+    // Custom website spec questionnaire inputs
+    const websiteType = formData.get('websiteType') as string
+    const stylePreferences = formData.get('stylePreferences') as string
+    const competitors = formData.get('competitors') as string
+    const additionalNotes = formData.get('additionalNotes') as string
+    const pages = formData.getAll('pages') as string[]
+    const specialFeatures = formData.getAll('specialFeatures') as string[]
+
     const newConfig = {
         ...existingConfig,
         address,
         phone,
         email: email || user.email,
+        // Custom website properties
+        websiteType: websiteType !== null ? websiteType : existingConfig.websiteType,
+        stylePreferences: stylePreferences !== null ? stylePreferences : existingConfig.stylePreferences,
+        competitors: competitors !== null ? competitors : existingConfig.competitors,
+        additionalNotes: additionalNotes !== null ? additionalNotes : existingConfig.additionalNotes,
+        pages: pages.length > 0 ? pages : (existingConfig.pages || []),
+        specialFeatures: specialFeatures.length > 0 ? specialFeatures : (existingConfig.specialFeatures || []),
+        requestStatus: existingConfig.requestStatus || 'REVIEW',
+        adminNotes: existingConfig.adminNotes || [],
         // Add defaults if missing
         hours: existingConfig.hours || "Mon-Fri: 9:00 AM - 10:00 PM\nSat-Sun: 10:00 AM - 11:00 PM",
         heroTitle: existingConfig.heroTitle || `Welcome to ${siteName}`,

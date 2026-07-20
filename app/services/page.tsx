@@ -407,7 +407,20 @@ export default async function ServicesPage() {
                                                     </Badge>
                                                 </div>
 
-                                                {user ? (
+                                                {service.slug === 'custom-website' ? (
+                                                    <Link href="/services/custom-website/request" className="block">
+                                                        <Button className="w-full h-14 font-syne font-bold text-base text-black border-0 gap-2 group/btn rounded-xl transition-all duration-300"
+                                                            style={{
+                                                                backgroundColor: '#0066FF',
+                                                                boxShadow: `0 0 30px rgba(${C},0.25)`,
+                                                            }}
+                                                        >
+                                                            <Sparkles className="h-5 w-5" />
+                                                            Demander mon site
+                                                            <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                                                        </Button>
+                                                    </Link>
+                                                ) : user ? (
                                                     <ServiceButton
                                                         service={service}
                                                         userHasService={userServices.some(us => us.serviceId === service.id)}

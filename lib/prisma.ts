@@ -99,7 +99,7 @@ if (process.env.NODE_ENV === 'production') {
     prisma = g[PRISMA_DEV_KEY]
 
     // Diagnostic check — if any key model is missing, re-initialize
-    if (!(prisma as any).chatSession || !(prisma as any).emailList || !(prisma as any).restaurantReport) {
+    if (!(prisma as any).chatSession || !(prisma as any).emailList || !(prisma as any).restaurantReport || !(prisma as any).customWebsiteRequest) {
         console.warn('[Prisma] Missing models in cached instance. Re-initializing...');
         g[PRISMA_DEV_KEY] = createPrismaClient();
         prisma = g[PRISMA_DEV_KEY];

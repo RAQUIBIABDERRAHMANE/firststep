@@ -47,6 +47,10 @@ export default async function TenantPage({ params }: Props) {
     // Route based on service type
     const serviceSlug = tenant.service?.slug || ''
 
+    if (serviceSlug === 'custom-website') {
+        notFound()
+    }
+
     if (serviceSlug.includes('cabinet') || serviceSlug.includes('professional-services')) {
         return (
             <CabinetTemplate

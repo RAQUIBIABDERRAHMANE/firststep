@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Layers, Bell, Settings, ChevronRight, Bot, Users, Briefcase, CreditCard } from 'lucide-react'
+import { LayoutDashboard, Layers, Bell, Settings, ChevronRight, Bot, Users, Briefcase, CreditCard, Globe } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface SidebarProps {
@@ -46,6 +46,12 @@ export default function Sidebar({ subscribedServiceSlugs, translations, websites
             ? `/dashboard/cabinet/${cabinetInstance.slug}`
             : '/dashboard/cabinet'
         serviceNavItems.push({ label, href, icon: Briefcase })
+    }
+
+    // Custom Website Logic
+    const hasCustomWebsiteService = subscribedServiceSlugs.includes('custom-website')
+    if (hasCustomWebsiteService) {
+        serviceNavItems.push({ label: 'Site Sur Mesure', href: '/dashboard/custom-website', icon: Globe })
     }
 
     // Common nav items

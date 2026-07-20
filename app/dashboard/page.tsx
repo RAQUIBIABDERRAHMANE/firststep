@@ -30,6 +30,11 @@ export default async function DashboardPage() {
         include: { service: true },
     })
 
+    const customRequest = await prisma.customWebsiteRequest.findFirst({
+        where: { userId: user.id },
+        orderBy: { createdAt: 'desc' }
+    })
+
     const totalPaid = paidPayments.reduce((sum, p) => sum + p.amount, 0)
 
     // --- Service-specific analytics ---
@@ -52,6 +57,7 @@ export default async function DashboardPage() {
 
     const hasRestaurant = userServices.some(us => us.service.slug.includes('restaurant'))
     const hasCabinet = userServices.some(us => us.service.slug.includes('cabinet') || us.service.slug.includes('professional'))
+    const hasCustomWebsite = userServices.some(us => us.service.slug === 'custom-website')
 
     const restaurantRevenue = restaurantOrders.reduce((sum, o) => sum + o.totalAmount, 0)
     const completedOrders = restaurantOrders.filter(o => o.status === 'COMPLETED' || o.status === 'PAID').length
@@ -305,6 +311,66 @@ export default async function DashboardPage() {
                 serviceDistribution={serviceDistribution}
             />
 
+            {/* Custom Website Tracking Widget */}
+            {hasCustomWebsite && (
+                <div className="space-y-4">
+                    <h2 className="text-sm font-semibold text-slate-900">Suivi du site web sur mesure</h2>
+                    <div className="bg-white border border-slate-200/60 rounded-2xl p-6 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                        <div className="space-y-2">
+                            <div className="flex items-center gap-2.5">
+                                <span className="p-2 rounded-lg bg-blue-50 text-blue-600">
+                                    <Globe className="h-5 w-5" />
+                                </span>
+                                <div>
+                                    <h3 className="text-base font-bold text-slate-950">Votre Site Web Sur Mesure de A à Z</h3>
+                                    <p className="text-xs text-slate-500">Création complète (logique, design, code) par notre équipe technique.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Status stepper minimal preview */}
+                        {customRequest ? (
+                            (() => {
+                                const requestStatus = customRequest.status || 'PENDING';
+                                return (
+                                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full md:w-auto">
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-xs text-slate-400">Statut du projet:</span>
+                                            <Badge className={`
+                                                px-2.5 py-1 border-0 rounded-full font-bold text-[10px]
+                                                ${requestStatus === 'PENDING' ? 'bg-amber-500/10 text-amber-600' :
+                                                  requestStatus === 'REVIEWING' ? 'bg-purple-500/10 text-purple-600' :
+                                                  requestStatus === 'IN_PROGRESS' ? 'bg-blue-500/10 text-blue-600' :
+                                                  'bg-emerald-500/10 text-emerald-600'}
+                                            `}>
+                                                {requestStatus === 'PENDING' ? 'Étude en cours' :
+                                                 requestStatus === 'REVIEWING' ? 'Maquettage UX/UI' :
+                                                 requestStatus === 'IN_PROGRESS' ? 'Développement actif' :
+                                                 'Site en ligne !'}
+                                            </Badge>
+                                        </div>
+                                        <Link href="/dashboard/custom-website">
+                                            <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold">
+                                                Tableau de bord projet
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                );
+                            })()
+                        ) : (
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-4 w-full md:w-auto">
+                                <p className="text-xs text-slate-500 italic">Le cahier des charges n&apos;a pas encore été rempli.</p>
+                                <Link href="/services/custom-website/request">
+                                    <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold">
+                                        Remplir le cahier des charges
+                                    </Button>
+                                </Link>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
+
             {/* Website Instances */}
             <div>
                 <div className="flex items-center justify-between mb-4">
@@ -353,6 +419,12 @@ export default async function DashboardPage() {
                                         <Link href={`/dashboard/cabinet/${site.slug}`} className="flex-1">
                                             <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold">
                                                 Cabinet Admin
+                                            </Button>
+                                        </Link>
+                                    ) : site.service.slug === 'custom-website' ? (
+                                        <Link href={`/dashboard/custom-website/${site.slug}`} className="flex-1">
+                                            <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold">
+                                                Suivi du projet
                                             </Button>
                                         </Link>
                                     ) : null}

@@ -284,3 +284,48 @@ export async function deleteUser(targetUserId: string) {
         return { error: 'Failed to delete user' }
     }
 }
+
+export async function updateCustomWebsiteRequestStatus(requestId: string, status: string, adminNote?: string) {
+    const admin = await getCurrentUser()
+
+    if (!admin || admin.role !== 'ADMIN') {
+        throw new Error('Unauthorized')
+    }
+
+    try {
+        const request = await prisma.customWebsiteRequest.findUnique({
+            where: { id: requestId }
+        })
+
+        if (!request) {
+            return { error: 'Request not found' }
+        }
+
+        const notes = JSON.parse(request.adminNotes || '[]')
+
+        if (adminNote && adminNote.trim()) {
+            notes.push({
+                note: adminNote,
+                createdAt: new Date().toISOString()
+            })
+        }
+
+        await prisma.customWebsiteRequest.update({
+            where: { id: requestId },
+            data: {
+                status,
+                adminNotes: JSON.stringify(notes)
+            }
+        })
+
+        revalidatePath('/admin/custom-requests')
+        if (request.userId) {
+            revalidatePath('/dashboard')
+            revalidatePath('/dashboard/custom-website')
+        }
+        return { success: true }
+    } catch (e) {
+        console.error('Failed to update custom website request status:', e)
+        return { error: 'Failed to update status' }
+    }
+}

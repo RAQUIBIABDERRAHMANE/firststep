@@ -208,6 +208,11 @@ export type FactureRecord = $Result.DefaultSelection<Prisma.$FactureRecordPayloa
  * 
  */
 export type FactureCounter = $Result.DefaultSelection<Prisma.$FactureCounterPayload>
+/**
+ * Model CustomWebsiteRequest
+ * 
+ */
+export type CustomWebsiteRequest = $Result.DefaultSelection<Prisma.$CustomWebsiteRequestPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -715,6 +720,16 @@ export class PrismaClient<
     * ```
     */
   get factureCounter(): Prisma.FactureCounterDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.customWebsiteRequest`: Exposes CRUD operations for the **CustomWebsiteRequest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CustomWebsiteRequests
+    * const customWebsiteRequests = await prisma.customWebsiteRequest.findMany()
+    * ```
+    */
+  get customWebsiteRequest(): Prisma.CustomWebsiteRequestDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1187,7 +1202,8 @@ export namespace Prisma {
     TablePrintRequest: 'TablePrintRequest',
     FactureTemplate: 'FactureTemplate',
     FactureRecord: 'FactureRecord',
-    FactureCounter: 'FactureCounter'
+    FactureCounter: 'FactureCounter',
+    CustomWebsiteRequest: 'CustomWebsiteRequest'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1203,7 +1219,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "chatSession" | "chatMessage" | "notification" | "service" | "userService" | "passwordReset" | "tenantWebsite" | "restaurantCategory" | "restaurantDish" | "restaurantTable" | "restaurantWaiter" | "restaurantOrder" | "restaurantOrderItem" | "billSplit" | "tableCartSession" | "waiterShift" | "ingredient" | "recipeItem" | "restaurantReport" | "restaurantReservation" | "cabinetService" | "cabinetClient" | "cabinetAppointment" | "paymentRequest" | "bankAccount" | "campaign" | "emailList" | "emailListMember" | "invoiceSettings" | "invoice" | "invoiceItem" | "medicalRecord" | "prescription" | "medicalHistory" | "tablePrintRequest" | "factureTemplate" | "factureRecord" | "factureCounter"
+      modelProps: "user" | "chatSession" | "chatMessage" | "notification" | "service" | "userService" | "passwordReset" | "tenantWebsite" | "restaurantCategory" | "restaurantDish" | "restaurantTable" | "restaurantWaiter" | "restaurantOrder" | "restaurantOrderItem" | "billSplit" | "tableCartSession" | "waiterShift" | "ingredient" | "recipeItem" | "restaurantReport" | "restaurantReservation" | "cabinetService" | "cabinetClient" | "cabinetAppointment" | "paymentRequest" | "bankAccount" | "campaign" | "emailList" | "emailListMember" | "invoiceSettings" | "invoice" | "invoiceItem" | "medicalRecord" | "prescription" | "medicalHistory" | "tablePrintRequest" | "factureTemplate" | "factureRecord" | "factureCounter" | "customWebsiteRequest"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -4093,6 +4109,80 @@ export namespace Prisma {
           }
         }
       }
+      CustomWebsiteRequest: {
+        payload: Prisma.$CustomWebsiteRequestPayload<ExtArgs>
+        fields: Prisma.CustomWebsiteRequestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CustomWebsiteRequestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomWebsiteRequestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CustomWebsiteRequestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomWebsiteRequestPayload>
+          }
+          findFirst: {
+            args: Prisma.CustomWebsiteRequestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomWebsiteRequestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CustomWebsiteRequestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomWebsiteRequestPayload>
+          }
+          findMany: {
+            args: Prisma.CustomWebsiteRequestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomWebsiteRequestPayload>[]
+          }
+          create: {
+            args: Prisma.CustomWebsiteRequestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomWebsiteRequestPayload>
+          }
+          createMany: {
+            args: Prisma.CustomWebsiteRequestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CustomWebsiteRequestCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomWebsiteRequestPayload>[]
+          }
+          delete: {
+            args: Prisma.CustomWebsiteRequestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomWebsiteRequestPayload>
+          }
+          update: {
+            args: Prisma.CustomWebsiteRequestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomWebsiteRequestPayload>
+          }
+          deleteMany: {
+            args: Prisma.CustomWebsiteRequestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CustomWebsiteRequestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CustomWebsiteRequestUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomWebsiteRequestPayload>[]
+          }
+          upsert: {
+            args: Prisma.CustomWebsiteRequestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CustomWebsiteRequestPayload>
+          }
+          aggregate: {
+            args: Prisma.CustomWebsiteRequestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCustomWebsiteRequest>
+          }
+          groupBy: {
+            args: Prisma.CustomWebsiteRequestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CustomWebsiteRequestGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CustomWebsiteRequestCountArgs<ExtArgs>
+            result: $Utils.Optional<CustomWebsiteRequestCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -4240,6 +4330,7 @@ export namespace Prisma {
     factureTemplate?: FactureTemplateOmit
     factureRecord?: FactureRecordOmit
     factureCounter?: FactureCounterOmit
+    customWebsiteRequest?: CustomWebsiteRequestOmit
   }
 
   /* Types for Logging */
@@ -4326,6 +4417,7 @@ export namespace Prisma {
     emailListMembers: number
     websites: number
     services: number
+    customRequests: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4335,6 +4427,7 @@ export namespace Prisma {
     emailListMembers?: boolean | UserCountOutputTypeCountEmailListMembersArgs
     websites?: boolean | UserCountOutputTypeCountWebsitesArgs
     services?: boolean | UserCountOutputTypeCountServicesArgs
+    customRequests?: boolean | UserCountOutputTypeCountCustomRequestsArgs
   }
 
   // Custom InputTypes
@@ -4388,6 +4481,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountServicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserServiceWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCustomRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CustomWebsiteRequestWhereInput
   }
 
 
@@ -5193,6 +5293,7 @@ export namespace Prisma {
     emailListMembers?: boolean | User$emailListMembersArgs<ExtArgs>
     websites?: boolean | User$websitesArgs<ExtArgs>
     services?: boolean | User$servicesArgs<ExtArgs>
+    customRequests?: boolean | User$customRequestsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -5240,6 +5341,7 @@ export namespace Prisma {
     emailListMembers?: boolean | User$emailListMembersArgs<ExtArgs>
     websites?: boolean | User$websitesArgs<ExtArgs>
     services?: boolean | User$servicesArgs<ExtArgs>
+    customRequests?: boolean | User$customRequestsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -5254,6 +5356,7 @@ export namespace Prisma {
       emailListMembers: Prisma.$EmailListMemberPayload<ExtArgs>[]
       websites: Prisma.$TenantWebsitePayload<ExtArgs>[]
       services: Prisma.$UserServicePayload<ExtArgs>[]
+      customRequests: Prisma.$CustomWebsiteRequestPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5665,6 +5768,7 @@ export namespace Prisma {
     emailListMembers<T extends User$emailListMembersArgs<ExtArgs> = {}>(args?: Subset<T, User$emailListMembersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailListMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     websites<T extends User$websitesArgs<ExtArgs> = {}>(args?: Subset<T, User$websitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantWebsitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     services<T extends User$servicesArgs<ExtArgs> = {}>(args?: Subset<T, User$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    customRequests<T extends User$customRequestsArgs<ExtArgs> = {}>(args?: Subset<T, User$customRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomWebsiteRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6230,6 +6334,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserServiceScalarFieldEnum | UserServiceScalarFieldEnum[]
+  }
+
+  /**
+   * User.customRequests
+   */
+  export type User$customRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomWebsiteRequest
+     */
+    select?: CustomWebsiteRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomWebsiteRequest
+     */
+    omit?: CustomWebsiteRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomWebsiteRequestInclude<ExtArgs> | null
+    where?: CustomWebsiteRequestWhereInput
+    orderBy?: CustomWebsiteRequestOrderByWithRelationInput | CustomWebsiteRequestOrderByWithRelationInput[]
+    cursor?: CustomWebsiteRequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CustomWebsiteRequestScalarFieldEnum | CustomWebsiteRequestScalarFieldEnum[]
   }
 
   /**
@@ -50459,6 +50587,1224 @@ export namespace Prisma {
 
 
   /**
+   * Model CustomWebsiteRequest
+   */
+
+  export type AggregateCustomWebsiteRequest = {
+    _count: CustomWebsiteRequestCountAggregateOutputType | null
+    _min: CustomWebsiteRequestMinAggregateOutputType | null
+    _max: CustomWebsiteRequestMaxAggregateOutputType | null
+  }
+
+  export type CustomWebsiteRequestMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    clientName: string | null
+    companyName: string | null
+    email: string | null
+    phone: string | null
+    websiteType: string | null
+    stylePreferences: string | null
+    pages: string | null
+    specialFeatures: string | null
+    competitors: string | null
+    additionalNotes: string | null
+    status: string | null
+    adminNotes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CustomWebsiteRequestMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    clientName: string | null
+    companyName: string | null
+    email: string | null
+    phone: string | null
+    websiteType: string | null
+    stylePreferences: string | null
+    pages: string | null
+    specialFeatures: string | null
+    competitors: string | null
+    additionalNotes: string | null
+    status: string | null
+    adminNotes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CustomWebsiteRequestCountAggregateOutputType = {
+    id: number
+    userId: number
+    clientName: number
+    companyName: number
+    email: number
+    phone: number
+    websiteType: number
+    stylePreferences: number
+    pages: number
+    specialFeatures: number
+    competitors: number
+    additionalNotes: number
+    status: number
+    adminNotes: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CustomWebsiteRequestMinAggregateInputType = {
+    id?: true
+    userId?: true
+    clientName?: true
+    companyName?: true
+    email?: true
+    phone?: true
+    websiteType?: true
+    stylePreferences?: true
+    pages?: true
+    specialFeatures?: true
+    competitors?: true
+    additionalNotes?: true
+    status?: true
+    adminNotes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CustomWebsiteRequestMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    clientName?: true
+    companyName?: true
+    email?: true
+    phone?: true
+    websiteType?: true
+    stylePreferences?: true
+    pages?: true
+    specialFeatures?: true
+    competitors?: true
+    additionalNotes?: true
+    status?: true
+    adminNotes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CustomWebsiteRequestCountAggregateInputType = {
+    id?: true
+    userId?: true
+    clientName?: true
+    companyName?: true
+    email?: true
+    phone?: true
+    websiteType?: true
+    stylePreferences?: true
+    pages?: true
+    specialFeatures?: true
+    competitors?: true
+    additionalNotes?: true
+    status?: true
+    adminNotes?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CustomWebsiteRequestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CustomWebsiteRequest to aggregate.
+     */
+    where?: CustomWebsiteRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomWebsiteRequests to fetch.
+     */
+    orderBy?: CustomWebsiteRequestOrderByWithRelationInput | CustomWebsiteRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CustomWebsiteRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomWebsiteRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomWebsiteRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CustomWebsiteRequests
+    **/
+    _count?: true | CustomWebsiteRequestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CustomWebsiteRequestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CustomWebsiteRequestMaxAggregateInputType
+  }
+
+  export type GetCustomWebsiteRequestAggregateType<T extends CustomWebsiteRequestAggregateArgs> = {
+        [P in keyof T & keyof AggregateCustomWebsiteRequest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCustomWebsiteRequest[P]>
+      : GetScalarType<T[P], AggregateCustomWebsiteRequest[P]>
+  }
+
+
+
+
+  export type CustomWebsiteRequestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CustomWebsiteRequestWhereInput
+    orderBy?: CustomWebsiteRequestOrderByWithAggregationInput | CustomWebsiteRequestOrderByWithAggregationInput[]
+    by: CustomWebsiteRequestScalarFieldEnum[] | CustomWebsiteRequestScalarFieldEnum
+    having?: CustomWebsiteRequestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CustomWebsiteRequestCountAggregateInputType | true
+    _min?: CustomWebsiteRequestMinAggregateInputType
+    _max?: CustomWebsiteRequestMaxAggregateInputType
+  }
+
+  export type CustomWebsiteRequestGroupByOutputType = {
+    id: string
+    userId: string | null
+    clientName: string
+    companyName: string
+    email: string
+    phone: string | null
+    websiteType: string
+    stylePreferences: string
+    pages: string
+    specialFeatures: string
+    competitors: string | null
+    additionalNotes: string | null
+    status: string
+    adminNotes: string
+    createdAt: Date
+    updatedAt: Date
+    _count: CustomWebsiteRequestCountAggregateOutputType | null
+    _min: CustomWebsiteRequestMinAggregateOutputType | null
+    _max: CustomWebsiteRequestMaxAggregateOutputType | null
+  }
+
+  type GetCustomWebsiteRequestGroupByPayload<T extends CustomWebsiteRequestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CustomWebsiteRequestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CustomWebsiteRequestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CustomWebsiteRequestGroupByOutputType[P]>
+            : GetScalarType<T[P], CustomWebsiteRequestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CustomWebsiteRequestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    clientName?: boolean
+    companyName?: boolean
+    email?: boolean
+    phone?: boolean
+    websiteType?: boolean
+    stylePreferences?: boolean
+    pages?: boolean
+    specialFeatures?: boolean
+    competitors?: boolean
+    additionalNotes?: boolean
+    status?: boolean
+    adminNotes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | CustomWebsiteRequest$userArgs<ExtArgs>
+  }, ExtArgs["result"]["customWebsiteRequest"]>
+
+  export type CustomWebsiteRequestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    clientName?: boolean
+    companyName?: boolean
+    email?: boolean
+    phone?: boolean
+    websiteType?: boolean
+    stylePreferences?: boolean
+    pages?: boolean
+    specialFeatures?: boolean
+    competitors?: boolean
+    additionalNotes?: boolean
+    status?: boolean
+    adminNotes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | CustomWebsiteRequest$userArgs<ExtArgs>
+  }, ExtArgs["result"]["customWebsiteRequest"]>
+
+  export type CustomWebsiteRequestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    clientName?: boolean
+    companyName?: boolean
+    email?: boolean
+    phone?: boolean
+    websiteType?: boolean
+    stylePreferences?: boolean
+    pages?: boolean
+    specialFeatures?: boolean
+    competitors?: boolean
+    additionalNotes?: boolean
+    status?: boolean
+    adminNotes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | CustomWebsiteRequest$userArgs<ExtArgs>
+  }, ExtArgs["result"]["customWebsiteRequest"]>
+
+  export type CustomWebsiteRequestSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    clientName?: boolean
+    companyName?: boolean
+    email?: boolean
+    phone?: boolean
+    websiteType?: boolean
+    stylePreferences?: boolean
+    pages?: boolean
+    specialFeatures?: boolean
+    competitors?: boolean
+    additionalNotes?: boolean
+    status?: boolean
+    adminNotes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type CustomWebsiteRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "clientName" | "companyName" | "email" | "phone" | "websiteType" | "stylePreferences" | "pages" | "specialFeatures" | "competitors" | "additionalNotes" | "status" | "adminNotes" | "createdAt" | "updatedAt", ExtArgs["result"]["customWebsiteRequest"]>
+  export type CustomWebsiteRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | CustomWebsiteRequest$userArgs<ExtArgs>
+  }
+  export type CustomWebsiteRequestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | CustomWebsiteRequest$userArgs<ExtArgs>
+  }
+  export type CustomWebsiteRequestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | CustomWebsiteRequest$userArgs<ExtArgs>
+  }
+
+  export type $CustomWebsiteRequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CustomWebsiteRequest"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string | null
+      clientName: string
+      companyName: string
+      email: string
+      phone: string | null
+      websiteType: string
+      stylePreferences: string
+      pages: string
+      specialFeatures: string
+      competitors: string | null
+      additionalNotes: string | null
+      status: string
+      adminNotes: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["customWebsiteRequest"]>
+    composites: {}
+  }
+
+  type CustomWebsiteRequestGetPayload<S extends boolean | null | undefined | CustomWebsiteRequestDefaultArgs> = $Result.GetResult<Prisma.$CustomWebsiteRequestPayload, S>
+
+  type CustomWebsiteRequestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CustomWebsiteRequestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CustomWebsiteRequestCountAggregateInputType | true
+    }
+
+  export interface CustomWebsiteRequestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CustomWebsiteRequest'], meta: { name: 'CustomWebsiteRequest' } }
+    /**
+     * Find zero or one CustomWebsiteRequest that matches the filter.
+     * @param {CustomWebsiteRequestFindUniqueArgs} args - Arguments to find a CustomWebsiteRequest
+     * @example
+     * // Get one CustomWebsiteRequest
+     * const customWebsiteRequest = await prisma.customWebsiteRequest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CustomWebsiteRequestFindUniqueArgs>(args: SelectSubset<T, CustomWebsiteRequestFindUniqueArgs<ExtArgs>>): Prisma__CustomWebsiteRequestClient<$Result.GetResult<Prisma.$CustomWebsiteRequestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CustomWebsiteRequest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CustomWebsiteRequestFindUniqueOrThrowArgs} args - Arguments to find a CustomWebsiteRequest
+     * @example
+     * // Get one CustomWebsiteRequest
+     * const customWebsiteRequest = await prisma.customWebsiteRequest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CustomWebsiteRequestFindUniqueOrThrowArgs>(args: SelectSubset<T, CustomWebsiteRequestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CustomWebsiteRequestClient<$Result.GetResult<Prisma.$CustomWebsiteRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CustomWebsiteRequest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomWebsiteRequestFindFirstArgs} args - Arguments to find a CustomWebsiteRequest
+     * @example
+     * // Get one CustomWebsiteRequest
+     * const customWebsiteRequest = await prisma.customWebsiteRequest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CustomWebsiteRequestFindFirstArgs>(args?: SelectSubset<T, CustomWebsiteRequestFindFirstArgs<ExtArgs>>): Prisma__CustomWebsiteRequestClient<$Result.GetResult<Prisma.$CustomWebsiteRequestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CustomWebsiteRequest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomWebsiteRequestFindFirstOrThrowArgs} args - Arguments to find a CustomWebsiteRequest
+     * @example
+     * // Get one CustomWebsiteRequest
+     * const customWebsiteRequest = await prisma.customWebsiteRequest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CustomWebsiteRequestFindFirstOrThrowArgs>(args?: SelectSubset<T, CustomWebsiteRequestFindFirstOrThrowArgs<ExtArgs>>): Prisma__CustomWebsiteRequestClient<$Result.GetResult<Prisma.$CustomWebsiteRequestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CustomWebsiteRequests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomWebsiteRequestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CustomWebsiteRequests
+     * const customWebsiteRequests = await prisma.customWebsiteRequest.findMany()
+     * 
+     * // Get first 10 CustomWebsiteRequests
+     * const customWebsiteRequests = await prisma.customWebsiteRequest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const customWebsiteRequestWithIdOnly = await prisma.customWebsiteRequest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CustomWebsiteRequestFindManyArgs>(args?: SelectSubset<T, CustomWebsiteRequestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomWebsiteRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CustomWebsiteRequest.
+     * @param {CustomWebsiteRequestCreateArgs} args - Arguments to create a CustomWebsiteRequest.
+     * @example
+     * // Create one CustomWebsiteRequest
+     * const CustomWebsiteRequest = await prisma.customWebsiteRequest.create({
+     *   data: {
+     *     // ... data to create a CustomWebsiteRequest
+     *   }
+     * })
+     * 
+     */
+    create<T extends CustomWebsiteRequestCreateArgs>(args: SelectSubset<T, CustomWebsiteRequestCreateArgs<ExtArgs>>): Prisma__CustomWebsiteRequestClient<$Result.GetResult<Prisma.$CustomWebsiteRequestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CustomWebsiteRequests.
+     * @param {CustomWebsiteRequestCreateManyArgs} args - Arguments to create many CustomWebsiteRequests.
+     * @example
+     * // Create many CustomWebsiteRequests
+     * const customWebsiteRequest = await prisma.customWebsiteRequest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CustomWebsiteRequestCreateManyArgs>(args?: SelectSubset<T, CustomWebsiteRequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CustomWebsiteRequests and returns the data saved in the database.
+     * @param {CustomWebsiteRequestCreateManyAndReturnArgs} args - Arguments to create many CustomWebsiteRequests.
+     * @example
+     * // Create many CustomWebsiteRequests
+     * const customWebsiteRequest = await prisma.customWebsiteRequest.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CustomWebsiteRequests and only return the `id`
+     * const customWebsiteRequestWithIdOnly = await prisma.customWebsiteRequest.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CustomWebsiteRequestCreateManyAndReturnArgs>(args?: SelectSubset<T, CustomWebsiteRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomWebsiteRequestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CustomWebsiteRequest.
+     * @param {CustomWebsiteRequestDeleteArgs} args - Arguments to delete one CustomWebsiteRequest.
+     * @example
+     * // Delete one CustomWebsiteRequest
+     * const CustomWebsiteRequest = await prisma.customWebsiteRequest.delete({
+     *   where: {
+     *     // ... filter to delete one CustomWebsiteRequest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CustomWebsiteRequestDeleteArgs>(args: SelectSubset<T, CustomWebsiteRequestDeleteArgs<ExtArgs>>): Prisma__CustomWebsiteRequestClient<$Result.GetResult<Prisma.$CustomWebsiteRequestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CustomWebsiteRequest.
+     * @param {CustomWebsiteRequestUpdateArgs} args - Arguments to update one CustomWebsiteRequest.
+     * @example
+     * // Update one CustomWebsiteRequest
+     * const customWebsiteRequest = await prisma.customWebsiteRequest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CustomWebsiteRequestUpdateArgs>(args: SelectSubset<T, CustomWebsiteRequestUpdateArgs<ExtArgs>>): Prisma__CustomWebsiteRequestClient<$Result.GetResult<Prisma.$CustomWebsiteRequestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CustomWebsiteRequests.
+     * @param {CustomWebsiteRequestDeleteManyArgs} args - Arguments to filter CustomWebsiteRequests to delete.
+     * @example
+     * // Delete a few CustomWebsiteRequests
+     * const { count } = await prisma.customWebsiteRequest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CustomWebsiteRequestDeleteManyArgs>(args?: SelectSubset<T, CustomWebsiteRequestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CustomWebsiteRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomWebsiteRequestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CustomWebsiteRequests
+     * const customWebsiteRequest = await prisma.customWebsiteRequest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CustomWebsiteRequestUpdateManyArgs>(args: SelectSubset<T, CustomWebsiteRequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CustomWebsiteRequests and returns the data updated in the database.
+     * @param {CustomWebsiteRequestUpdateManyAndReturnArgs} args - Arguments to update many CustomWebsiteRequests.
+     * @example
+     * // Update many CustomWebsiteRequests
+     * const customWebsiteRequest = await prisma.customWebsiteRequest.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CustomWebsiteRequests and only return the `id`
+     * const customWebsiteRequestWithIdOnly = await prisma.customWebsiteRequest.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CustomWebsiteRequestUpdateManyAndReturnArgs>(args: SelectSubset<T, CustomWebsiteRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomWebsiteRequestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CustomWebsiteRequest.
+     * @param {CustomWebsiteRequestUpsertArgs} args - Arguments to update or create a CustomWebsiteRequest.
+     * @example
+     * // Update or create a CustomWebsiteRequest
+     * const customWebsiteRequest = await prisma.customWebsiteRequest.upsert({
+     *   create: {
+     *     // ... data to create a CustomWebsiteRequest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CustomWebsiteRequest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CustomWebsiteRequestUpsertArgs>(args: SelectSubset<T, CustomWebsiteRequestUpsertArgs<ExtArgs>>): Prisma__CustomWebsiteRequestClient<$Result.GetResult<Prisma.$CustomWebsiteRequestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CustomWebsiteRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomWebsiteRequestCountArgs} args - Arguments to filter CustomWebsiteRequests to count.
+     * @example
+     * // Count the number of CustomWebsiteRequests
+     * const count = await prisma.customWebsiteRequest.count({
+     *   where: {
+     *     // ... the filter for the CustomWebsiteRequests we want to count
+     *   }
+     * })
+    **/
+    count<T extends CustomWebsiteRequestCountArgs>(
+      args?: Subset<T, CustomWebsiteRequestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CustomWebsiteRequestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CustomWebsiteRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomWebsiteRequestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CustomWebsiteRequestAggregateArgs>(args: Subset<T, CustomWebsiteRequestAggregateArgs>): Prisma.PrismaPromise<GetCustomWebsiteRequestAggregateType<T>>
+
+    /**
+     * Group by CustomWebsiteRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CustomWebsiteRequestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CustomWebsiteRequestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CustomWebsiteRequestGroupByArgs['orderBy'] }
+        : { orderBy?: CustomWebsiteRequestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CustomWebsiteRequestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCustomWebsiteRequestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CustomWebsiteRequest model
+   */
+  readonly fields: CustomWebsiteRequestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CustomWebsiteRequest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CustomWebsiteRequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends CustomWebsiteRequest$userArgs<ExtArgs> = {}>(args?: Subset<T, CustomWebsiteRequest$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CustomWebsiteRequest model
+   */
+  interface CustomWebsiteRequestFieldRefs {
+    readonly id: FieldRef<"CustomWebsiteRequest", 'String'>
+    readonly userId: FieldRef<"CustomWebsiteRequest", 'String'>
+    readonly clientName: FieldRef<"CustomWebsiteRequest", 'String'>
+    readonly companyName: FieldRef<"CustomWebsiteRequest", 'String'>
+    readonly email: FieldRef<"CustomWebsiteRequest", 'String'>
+    readonly phone: FieldRef<"CustomWebsiteRequest", 'String'>
+    readonly websiteType: FieldRef<"CustomWebsiteRequest", 'String'>
+    readonly stylePreferences: FieldRef<"CustomWebsiteRequest", 'String'>
+    readonly pages: FieldRef<"CustomWebsiteRequest", 'String'>
+    readonly specialFeatures: FieldRef<"CustomWebsiteRequest", 'String'>
+    readonly competitors: FieldRef<"CustomWebsiteRequest", 'String'>
+    readonly additionalNotes: FieldRef<"CustomWebsiteRequest", 'String'>
+    readonly status: FieldRef<"CustomWebsiteRequest", 'String'>
+    readonly adminNotes: FieldRef<"CustomWebsiteRequest", 'String'>
+    readonly createdAt: FieldRef<"CustomWebsiteRequest", 'DateTime'>
+    readonly updatedAt: FieldRef<"CustomWebsiteRequest", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CustomWebsiteRequest findUnique
+   */
+  export type CustomWebsiteRequestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomWebsiteRequest
+     */
+    select?: CustomWebsiteRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomWebsiteRequest
+     */
+    omit?: CustomWebsiteRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomWebsiteRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomWebsiteRequest to fetch.
+     */
+    where: CustomWebsiteRequestWhereUniqueInput
+  }
+
+  /**
+   * CustomWebsiteRequest findUniqueOrThrow
+   */
+  export type CustomWebsiteRequestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomWebsiteRequest
+     */
+    select?: CustomWebsiteRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomWebsiteRequest
+     */
+    omit?: CustomWebsiteRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomWebsiteRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomWebsiteRequest to fetch.
+     */
+    where: CustomWebsiteRequestWhereUniqueInput
+  }
+
+  /**
+   * CustomWebsiteRequest findFirst
+   */
+  export type CustomWebsiteRequestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomWebsiteRequest
+     */
+    select?: CustomWebsiteRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomWebsiteRequest
+     */
+    omit?: CustomWebsiteRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomWebsiteRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomWebsiteRequest to fetch.
+     */
+    where?: CustomWebsiteRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomWebsiteRequests to fetch.
+     */
+    orderBy?: CustomWebsiteRequestOrderByWithRelationInput | CustomWebsiteRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CustomWebsiteRequests.
+     */
+    cursor?: CustomWebsiteRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomWebsiteRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomWebsiteRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CustomWebsiteRequests.
+     */
+    distinct?: CustomWebsiteRequestScalarFieldEnum | CustomWebsiteRequestScalarFieldEnum[]
+  }
+
+  /**
+   * CustomWebsiteRequest findFirstOrThrow
+   */
+  export type CustomWebsiteRequestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomWebsiteRequest
+     */
+    select?: CustomWebsiteRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomWebsiteRequest
+     */
+    omit?: CustomWebsiteRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomWebsiteRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomWebsiteRequest to fetch.
+     */
+    where?: CustomWebsiteRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomWebsiteRequests to fetch.
+     */
+    orderBy?: CustomWebsiteRequestOrderByWithRelationInput | CustomWebsiteRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CustomWebsiteRequests.
+     */
+    cursor?: CustomWebsiteRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomWebsiteRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomWebsiteRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CustomWebsiteRequests.
+     */
+    distinct?: CustomWebsiteRequestScalarFieldEnum | CustomWebsiteRequestScalarFieldEnum[]
+  }
+
+  /**
+   * CustomWebsiteRequest findMany
+   */
+  export type CustomWebsiteRequestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomWebsiteRequest
+     */
+    select?: CustomWebsiteRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomWebsiteRequest
+     */
+    omit?: CustomWebsiteRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomWebsiteRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which CustomWebsiteRequests to fetch.
+     */
+    where?: CustomWebsiteRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CustomWebsiteRequests to fetch.
+     */
+    orderBy?: CustomWebsiteRequestOrderByWithRelationInput | CustomWebsiteRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CustomWebsiteRequests.
+     */
+    cursor?: CustomWebsiteRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CustomWebsiteRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CustomWebsiteRequests.
+     */
+    skip?: number
+    distinct?: CustomWebsiteRequestScalarFieldEnum | CustomWebsiteRequestScalarFieldEnum[]
+  }
+
+  /**
+   * CustomWebsiteRequest create
+   */
+  export type CustomWebsiteRequestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomWebsiteRequest
+     */
+    select?: CustomWebsiteRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomWebsiteRequest
+     */
+    omit?: CustomWebsiteRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomWebsiteRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CustomWebsiteRequest.
+     */
+    data: XOR<CustomWebsiteRequestCreateInput, CustomWebsiteRequestUncheckedCreateInput>
+  }
+
+  /**
+   * CustomWebsiteRequest createMany
+   */
+  export type CustomWebsiteRequestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CustomWebsiteRequests.
+     */
+    data: CustomWebsiteRequestCreateManyInput | CustomWebsiteRequestCreateManyInput[]
+  }
+
+  /**
+   * CustomWebsiteRequest createManyAndReturn
+   */
+  export type CustomWebsiteRequestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomWebsiteRequest
+     */
+    select?: CustomWebsiteRequestSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomWebsiteRequest
+     */
+    omit?: CustomWebsiteRequestOmit<ExtArgs> | null
+    /**
+     * The data used to create many CustomWebsiteRequests.
+     */
+    data: CustomWebsiteRequestCreateManyInput | CustomWebsiteRequestCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomWebsiteRequestIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CustomWebsiteRequest update
+   */
+  export type CustomWebsiteRequestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomWebsiteRequest
+     */
+    select?: CustomWebsiteRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomWebsiteRequest
+     */
+    omit?: CustomWebsiteRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomWebsiteRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CustomWebsiteRequest.
+     */
+    data: XOR<CustomWebsiteRequestUpdateInput, CustomWebsiteRequestUncheckedUpdateInput>
+    /**
+     * Choose, which CustomWebsiteRequest to update.
+     */
+    where: CustomWebsiteRequestWhereUniqueInput
+  }
+
+  /**
+   * CustomWebsiteRequest updateMany
+   */
+  export type CustomWebsiteRequestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CustomWebsiteRequests.
+     */
+    data: XOR<CustomWebsiteRequestUpdateManyMutationInput, CustomWebsiteRequestUncheckedUpdateManyInput>
+    /**
+     * Filter which CustomWebsiteRequests to update
+     */
+    where?: CustomWebsiteRequestWhereInput
+    /**
+     * Limit how many CustomWebsiteRequests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CustomWebsiteRequest updateManyAndReturn
+   */
+  export type CustomWebsiteRequestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomWebsiteRequest
+     */
+    select?: CustomWebsiteRequestSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomWebsiteRequest
+     */
+    omit?: CustomWebsiteRequestOmit<ExtArgs> | null
+    /**
+     * The data used to update CustomWebsiteRequests.
+     */
+    data: XOR<CustomWebsiteRequestUpdateManyMutationInput, CustomWebsiteRequestUncheckedUpdateManyInput>
+    /**
+     * Filter which CustomWebsiteRequests to update
+     */
+    where?: CustomWebsiteRequestWhereInput
+    /**
+     * Limit how many CustomWebsiteRequests to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomWebsiteRequestIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CustomWebsiteRequest upsert
+   */
+  export type CustomWebsiteRequestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomWebsiteRequest
+     */
+    select?: CustomWebsiteRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomWebsiteRequest
+     */
+    omit?: CustomWebsiteRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomWebsiteRequestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CustomWebsiteRequest to update in case it exists.
+     */
+    where: CustomWebsiteRequestWhereUniqueInput
+    /**
+     * In case the CustomWebsiteRequest found by the `where` argument doesn't exist, create a new CustomWebsiteRequest with this data.
+     */
+    create: XOR<CustomWebsiteRequestCreateInput, CustomWebsiteRequestUncheckedCreateInput>
+    /**
+     * In case the CustomWebsiteRequest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CustomWebsiteRequestUpdateInput, CustomWebsiteRequestUncheckedUpdateInput>
+  }
+
+  /**
+   * CustomWebsiteRequest delete
+   */
+  export type CustomWebsiteRequestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomWebsiteRequest
+     */
+    select?: CustomWebsiteRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomWebsiteRequest
+     */
+    omit?: CustomWebsiteRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomWebsiteRequestInclude<ExtArgs> | null
+    /**
+     * Filter which CustomWebsiteRequest to delete.
+     */
+    where: CustomWebsiteRequestWhereUniqueInput
+  }
+
+  /**
+   * CustomWebsiteRequest deleteMany
+   */
+  export type CustomWebsiteRequestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CustomWebsiteRequests to delete
+     */
+    where?: CustomWebsiteRequestWhereInput
+    /**
+     * Limit how many CustomWebsiteRequests to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CustomWebsiteRequest.user
+   */
+  export type CustomWebsiteRequest$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * CustomWebsiteRequest without action
+   */
+  export type CustomWebsiteRequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CustomWebsiteRequest
+     */
+    select?: CustomWebsiteRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CustomWebsiteRequest
+     */
+    omit?: CustomWebsiteRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomWebsiteRequestInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -51089,6 +52435,28 @@ export namespace Prisma {
   export type FactureCounterScalarFieldEnum = (typeof FactureCounterScalarFieldEnum)[keyof typeof FactureCounterScalarFieldEnum]
 
 
+  export const CustomWebsiteRequestScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    clientName: 'clientName',
+    companyName: 'companyName',
+    email: 'email',
+    phone: 'phone',
+    websiteType: 'websiteType',
+    stylePreferences: 'stylePreferences',
+    pages: 'pages',
+    specialFeatures: 'specialFeatures',
+    competitors: 'competitors',
+    additionalNotes: 'additionalNotes',
+    status: 'status',
+    adminNotes: 'adminNotes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CustomWebsiteRequestScalarFieldEnum = (typeof CustomWebsiteRequestScalarFieldEnum)[keyof typeof CustomWebsiteRequestScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -51167,6 +52535,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberListRelationFilter
     websites?: TenantWebsiteListRelationFilter
     services?: UserServiceListRelationFilter
+    customRequests?: CustomWebsiteRequestListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -51185,6 +52554,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberOrderByRelationAggregateInput
     websites?: TenantWebsiteOrderByRelationAggregateInput
     services?: UserServiceOrderByRelationAggregateInput
+    customRequests?: CustomWebsiteRequestOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -51206,6 +52576,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberListRelationFilter
     websites?: TenantWebsiteListRelationFilter
     services?: UserServiceListRelationFilter
+    customRequests?: CustomWebsiteRequestListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -54421,6 +55792,116 @@ export namespace Prisma {
     nextNumber?: IntWithAggregatesFilter<"FactureCounter"> | number
   }
 
+  export type CustomWebsiteRequestWhereInput = {
+    AND?: CustomWebsiteRequestWhereInput | CustomWebsiteRequestWhereInput[]
+    OR?: CustomWebsiteRequestWhereInput[]
+    NOT?: CustomWebsiteRequestWhereInput | CustomWebsiteRequestWhereInput[]
+    id?: StringFilter<"CustomWebsiteRequest"> | string
+    userId?: StringNullableFilter<"CustomWebsiteRequest"> | string | null
+    clientName?: StringFilter<"CustomWebsiteRequest"> | string
+    companyName?: StringFilter<"CustomWebsiteRequest"> | string
+    email?: StringFilter<"CustomWebsiteRequest"> | string
+    phone?: StringNullableFilter<"CustomWebsiteRequest"> | string | null
+    websiteType?: StringFilter<"CustomWebsiteRequest"> | string
+    stylePreferences?: StringFilter<"CustomWebsiteRequest"> | string
+    pages?: StringFilter<"CustomWebsiteRequest"> | string
+    specialFeatures?: StringFilter<"CustomWebsiteRequest"> | string
+    competitors?: StringNullableFilter<"CustomWebsiteRequest"> | string | null
+    additionalNotes?: StringNullableFilter<"CustomWebsiteRequest"> | string | null
+    status?: StringFilter<"CustomWebsiteRequest"> | string
+    adminNotes?: StringFilter<"CustomWebsiteRequest"> | string
+    createdAt?: DateTimeFilter<"CustomWebsiteRequest"> | Date | string
+    updatedAt?: DateTimeFilter<"CustomWebsiteRequest"> | Date | string
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type CustomWebsiteRequestOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    clientName?: SortOrder
+    companyName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    websiteType?: SortOrder
+    stylePreferences?: SortOrder
+    pages?: SortOrder
+    specialFeatures?: SortOrder
+    competitors?: SortOrderInput | SortOrder
+    additionalNotes?: SortOrderInput | SortOrder
+    status?: SortOrder
+    adminNotes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type CustomWebsiteRequestWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CustomWebsiteRequestWhereInput | CustomWebsiteRequestWhereInput[]
+    OR?: CustomWebsiteRequestWhereInput[]
+    NOT?: CustomWebsiteRequestWhereInput | CustomWebsiteRequestWhereInput[]
+    userId?: StringNullableFilter<"CustomWebsiteRequest"> | string | null
+    clientName?: StringFilter<"CustomWebsiteRequest"> | string
+    companyName?: StringFilter<"CustomWebsiteRequest"> | string
+    email?: StringFilter<"CustomWebsiteRequest"> | string
+    phone?: StringNullableFilter<"CustomWebsiteRequest"> | string | null
+    websiteType?: StringFilter<"CustomWebsiteRequest"> | string
+    stylePreferences?: StringFilter<"CustomWebsiteRequest"> | string
+    pages?: StringFilter<"CustomWebsiteRequest"> | string
+    specialFeatures?: StringFilter<"CustomWebsiteRequest"> | string
+    competitors?: StringNullableFilter<"CustomWebsiteRequest"> | string | null
+    additionalNotes?: StringNullableFilter<"CustomWebsiteRequest"> | string | null
+    status?: StringFilter<"CustomWebsiteRequest"> | string
+    adminNotes?: StringFilter<"CustomWebsiteRequest"> | string
+    createdAt?: DateTimeFilter<"CustomWebsiteRequest"> | Date | string
+    updatedAt?: DateTimeFilter<"CustomWebsiteRequest"> | Date | string
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type CustomWebsiteRequestOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    clientName?: SortOrder
+    companyName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrderInput | SortOrder
+    websiteType?: SortOrder
+    stylePreferences?: SortOrder
+    pages?: SortOrder
+    specialFeatures?: SortOrder
+    competitors?: SortOrderInput | SortOrder
+    additionalNotes?: SortOrderInput | SortOrder
+    status?: SortOrder
+    adminNotes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: CustomWebsiteRequestCountOrderByAggregateInput
+    _max?: CustomWebsiteRequestMaxOrderByAggregateInput
+    _min?: CustomWebsiteRequestMinOrderByAggregateInput
+  }
+
+  export type CustomWebsiteRequestScalarWhereWithAggregatesInput = {
+    AND?: CustomWebsiteRequestScalarWhereWithAggregatesInput | CustomWebsiteRequestScalarWhereWithAggregatesInput[]
+    OR?: CustomWebsiteRequestScalarWhereWithAggregatesInput[]
+    NOT?: CustomWebsiteRequestScalarWhereWithAggregatesInput | CustomWebsiteRequestScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"CustomWebsiteRequest"> | string
+    userId?: StringNullableWithAggregatesFilter<"CustomWebsiteRequest"> | string | null
+    clientName?: StringWithAggregatesFilter<"CustomWebsiteRequest"> | string
+    companyName?: StringWithAggregatesFilter<"CustomWebsiteRequest"> | string
+    email?: StringWithAggregatesFilter<"CustomWebsiteRequest"> | string
+    phone?: StringNullableWithAggregatesFilter<"CustomWebsiteRequest"> | string | null
+    websiteType?: StringWithAggregatesFilter<"CustomWebsiteRequest"> | string
+    stylePreferences?: StringWithAggregatesFilter<"CustomWebsiteRequest"> | string
+    pages?: StringWithAggregatesFilter<"CustomWebsiteRequest"> | string
+    specialFeatures?: StringWithAggregatesFilter<"CustomWebsiteRequest"> | string
+    competitors?: StringNullableWithAggregatesFilter<"CustomWebsiteRequest"> | string | null
+    additionalNotes?: StringNullableWithAggregatesFilter<"CustomWebsiteRequest"> | string | null
+    status?: StringWithAggregatesFilter<"CustomWebsiteRequest"> | string
+    adminNotes?: StringWithAggregatesFilter<"CustomWebsiteRequest"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"CustomWebsiteRequest"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"CustomWebsiteRequest"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -54437,6 +55918,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberCreateNestedManyWithoutUserInput
     websites?: TenantWebsiteCreateNestedManyWithoutUserInput
     services?: UserServiceCreateNestedManyWithoutUserInput
+    customRequests?: CustomWebsiteRequestCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -54455,6 +55937,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberUncheckedCreateNestedManyWithoutUserInput
     websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
     services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
+    customRequests?: CustomWebsiteRequestUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -54473,6 +55956,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberUpdateManyWithoutUserNestedInput
     websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
     services?: UserServiceUpdateManyWithoutUserNestedInput
+    customRequests?: CustomWebsiteRequestUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -54491,6 +55975,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberUncheckedUpdateManyWithoutUserNestedInput
     websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
     services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
+    customRequests?: CustomWebsiteRequestUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -58062,6 +59547,138 @@ export namespace Prisma {
     nextNumber?: IntFieldUpdateOperationsInput | number
   }
 
+  export type CustomWebsiteRequestCreateInput = {
+    id?: string
+    clientName: string
+    companyName: string
+    email: string
+    phone?: string | null
+    websiteType: string
+    stylePreferences: string
+    pages: string
+    specialFeatures: string
+    competitors?: string | null
+    additionalNotes?: string | null
+    status?: string
+    adminNotes?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutCustomRequestsInput
+  }
+
+  export type CustomWebsiteRequestUncheckedCreateInput = {
+    id?: string
+    userId?: string | null
+    clientName: string
+    companyName: string
+    email: string
+    phone?: string | null
+    websiteType: string
+    stylePreferences: string
+    pages: string
+    specialFeatures: string
+    competitors?: string | null
+    additionalNotes?: string | null
+    status?: string
+    adminNotes?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomWebsiteRequestUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteType?: StringFieldUpdateOperationsInput | string
+    stylePreferences?: StringFieldUpdateOperationsInput | string
+    pages?: StringFieldUpdateOperationsInput | string
+    specialFeatures?: StringFieldUpdateOperationsInput | string
+    competitors?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    adminNotes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutCustomRequestsNestedInput
+  }
+
+  export type CustomWebsiteRequestUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteType?: StringFieldUpdateOperationsInput | string
+    stylePreferences?: StringFieldUpdateOperationsInput | string
+    pages?: StringFieldUpdateOperationsInput | string
+    specialFeatures?: StringFieldUpdateOperationsInput | string
+    competitors?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    adminNotes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomWebsiteRequestCreateManyInput = {
+    id?: string
+    userId?: string | null
+    clientName: string
+    companyName: string
+    email: string
+    phone?: string | null
+    websiteType: string
+    stylePreferences: string
+    pages: string
+    specialFeatures: string
+    competitors?: string | null
+    additionalNotes?: string | null
+    status?: string
+    adminNotes?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomWebsiteRequestUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteType?: StringFieldUpdateOperationsInput | string
+    stylePreferences?: StringFieldUpdateOperationsInput | string
+    pages?: StringFieldUpdateOperationsInput | string
+    specialFeatures?: StringFieldUpdateOperationsInput | string
+    competitors?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    adminNotes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomWebsiteRequestUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    clientName?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteType?: StringFieldUpdateOperationsInput | string
+    stylePreferences?: StringFieldUpdateOperationsInput | string
+    pages?: StringFieldUpdateOperationsInput | string
+    specialFeatures?: StringFieldUpdateOperationsInput | string
+    competitors?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    adminNotes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -58142,6 +59759,12 @@ export namespace Prisma {
     none?: UserServiceWhereInput
   }
 
+  export type CustomWebsiteRequestListRelationFilter = {
+    every?: CustomWebsiteRequestWhereInput
+    some?: CustomWebsiteRequestWhereInput
+    none?: CustomWebsiteRequestWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -58168,6 +59791,10 @@ export namespace Prisma {
   }
 
   export type UserServiceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CustomWebsiteRequestOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -60495,6 +62122,63 @@ export namespace Prisma {
     nextNumber?: SortOrder
   }
 
+  export type CustomWebsiteRequestCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    clientName?: SortOrder
+    companyName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    websiteType?: SortOrder
+    stylePreferences?: SortOrder
+    pages?: SortOrder
+    specialFeatures?: SortOrder
+    competitors?: SortOrder
+    additionalNotes?: SortOrder
+    status?: SortOrder
+    adminNotes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CustomWebsiteRequestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    clientName?: SortOrder
+    companyName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    websiteType?: SortOrder
+    stylePreferences?: SortOrder
+    pages?: SortOrder
+    specialFeatures?: SortOrder
+    competitors?: SortOrder
+    additionalNotes?: SortOrder
+    status?: SortOrder
+    adminNotes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type CustomWebsiteRequestMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    clientName?: SortOrder
+    companyName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    websiteType?: SortOrder
+    stylePreferences?: SortOrder
+    pages?: SortOrder
+    specialFeatures?: SortOrder
+    competitors?: SortOrder
+    additionalNotes?: SortOrder
+    status?: SortOrder
+    adminNotes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type ChatSessionCreateNestedManyWithoutUserInput = {
     create?: XOR<ChatSessionCreateWithoutUserInput, ChatSessionUncheckedCreateWithoutUserInput> | ChatSessionCreateWithoutUserInput[] | ChatSessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChatSessionCreateOrConnectWithoutUserInput | ChatSessionCreateOrConnectWithoutUserInput[]
@@ -60537,6 +62221,13 @@ export namespace Prisma {
     connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
   }
 
+  export type CustomWebsiteRequestCreateNestedManyWithoutUserInput = {
+    create?: XOR<CustomWebsiteRequestCreateWithoutUserInput, CustomWebsiteRequestUncheckedCreateWithoutUserInput> | CustomWebsiteRequestCreateWithoutUserInput[] | CustomWebsiteRequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CustomWebsiteRequestCreateOrConnectWithoutUserInput | CustomWebsiteRequestCreateOrConnectWithoutUserInput[]
+    createMany?: CustomWebsiteRequestCreateManyUserInputEnvelope
+    connect?: CustomWebsiteRequestWhereUniqueInput | CustomWebsiteRequestWhereUniqueInput[]
+  }
+
   export type ChatSessionUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ChatSessionCreateWithoutUserInput, ChatSessionUncheckedCreateWithoutUserInput> | ChatSessionCreateWithoutUserInput[] | ChatSessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChatSessionCreateOrConnectWithoutUserInput | ChatSessionCreateOrConnectWithoutUserInput[]
@@ -60577,6 +62268,13 @@ export namespace Prisma {
     connectOrCreate?: UserServiceCreateOrConnectWithoutUserInput | UserServiceCreateOrConnectWithoutUserInput[]
     createMany?: UserServiceCreateManyUserInputEnvelope
     connect?: UserServiceWhereUniqueInput | UserServiceWhereUniqueInput[]
+  }
+
+  export type CustomWebsiteRequestUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CustomWebsiteRequestCreateWithoutUserInput, CustomWebsiteRequestUncheckedCreateWithoutUserInput> | CustomWebsiteRequestCreateWithoutUserInput[] | CustomWebsiteRequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CustomWebsiteRequestCreateOrConnectWithoutUserInput | CustomWebsiteRequestCreateOrConnectWithoutUserInput[]
+    createMany?: CustomWebsiteRequestCreateManyUserInputEnvelope
+    connect?: CustomWebsiteRequestWhereUniqueInput | CustomWebsiteRequestWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -60679,6 +62377,20 @@ export namespace Prisma {
     deleteMany?: UserServiceScalarWhereInput | UserServiceScalarWhereInput[]
   }
 
+  export type CustomWebsiteRequestUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CustomWebsiteRequestCreateWithoutUserInput, CustomWebsiteRequestUncheckedCreateWithoutUserInput> | CustomWebsiteRequestCreateWithoutUserInput[] | CustomWebsiteRequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CustomWebsiteRequestCreateOrConnectWithoutUserInput | CustomWebsiteRequestCreateOrConnectWithoutUserInput[]
+    upsert?: CustomWebsiteRequestUpsertWithWhereUniqueWithoutUserInput | CustomWebsiteRequestUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CustomWebsiteRequestCreateManyUserInputEnvelope
+    set?: CustomWebsiteRequestWhereUniqueInput | CustomWebsiteRequestWhereUniqueInput[]
+    disconnect?: CustomWebsiteRequestWhereUniqueInput | CustomWebsiteRequestWhereUniqueInput[]
+    delete?: CustomWebsiteRequestWhereUniqueInput | CustomWebsiteRequestWhereUniqueInput[]
+    connect?: CustomWebsiteRequestWhereUniqueInput | CustomWebsiteRequestWhereUniqueInput[]
+    update?: CustomWebsiteRequestUpdateWithWhereUniqueWithoutUserInput | CustomWebsiteRequestUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CustomWebsiteRequestUpdateManyWithWhereWithoutUserInput | CustomWebsiteRequestUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CustomWebsiteRequestScalarWhereInput | CustomWebsiteRequestScalarWhereInput[]
+  }
+
   export type ChatSessionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ChatSessionCreateWithoutUserInput, ChatSessionUncheckedCreateWithoutUserInput> | ChatSessionCreateWithoutUserInput[] | ChatSessionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ChatSessionCreateOrConnectWithoutUserInput | ChatSessionCreateOrConnectWithoutUserInput[]
@@ -60761,6 +62473,20 @@ export namespace Prisma {
     update?: UserServiceUpdateWithWhereUniqueWithoutUserInput | UserServiceUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: UserServiceUpdateManyWithWhereWithoutUserInput | UserServiceUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserServiceScalarWhereInput | UserServiceScalarWhereInput[]
+  }
+
+  export type CustomWebsiteRequestUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CustomWebsiteRequestCreateWithoutUserInput, CustomWebsiteRequestUncheckedCreateWithoutUserInput> | CustomWebsiteRequestCreateWithoutUserInput[] | CustomWebsiteRequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CustomWebsiteRequestCreateOrConnectWithoutUserInput | CustomWebsiteRequestCreateOrConnectWithoutUserInput[]
+    upsert?: CustomWebsiteRequestUpsertWithWhereUniqueWithoutUserInput | CustomWebsiteRequestUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CustomWebsiteRequestCreateManyUserInputEnvelope
+    set?: CustomWebsiteRequestWhereUniqueInput | CustomWebsiteRequestWhereUniqueInput[]
+    disconnect?: CustomWebsiteRequestWhereUniqueInput | CustomWebsiteRequestWhereUniqueInput[]
+    delete?: CustomWebsiteRequestWhereUniqueInput | CustomWebsiteRequestWhereUniqueInput[]
+    connect?: CustomWebsiteRequestWhereUniqueInput | CustomWebsiteRequestWhereUniqueInput[]
+    update?: CustomWebsiteRequestUpdateWithWhereUniqueWithoutUserInput | CustomWebsiteRequestUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CustomWebsiteRequestUpdateManyWithWhereWithoutUserInput | CustomWebsiteRequestUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CustomWebsiteRequestScalarWhereInput | CustomWebsiteRequestScalarWhereInput[]
   }
 
   export type ChatMessageCreateNestedManyWithoutSessionInput = {
@@ -62775,6 +64501,22 @@ export namespace Prisma {
     update?: XOR<XOR<TenantWebsiteUpdateToOneWithWhereWithoutPrintRequestsInput, TenantWebsiteUpdateWithoutPrintRequestsInput>, TenantWebsiteUncheckedUpdateWithoutPrintRequestsInput>
   }
 
+  export type UserCreateNestedOneWithoutCustomRequestsInput = {
+    create?: XOR<UserCreateWithoutCustomRequestsInput, UserUncheckedCreateWithoutCustomRequestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCustomRequestsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneWithoutCustomRequestsNestedInput = {
+    create?: XOR<UserCreateWithoutCustomRequestsInput, UserUncheckedCreateWithoutCustomRequestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCustomRequestsInput
+    upsert?: UserUpsertWithoutCustomRequestsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCustomRequestsInput, UserUpdateWithoutCustomRequestsInput>, UserUncheckedUpdateWithoutCustomRequestsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -63210,6 +64952,51 @@ export namespace Prisma {
     data: UserServiceCreateManyUserInput | UserServiceCreateManyUserInput[]
   }
 
+  export type CustomWebsiteRequestCreateWithoutUserInput = {
+    id?: string
+    clientName: string
+    companyName: string
+    email: string
+    phone?: string | null
+    websiteType: string
+    stylePreferences: string
+    pages: string
+    specialFeatures: string
+    competitors?: string | null
+    additionalNotes?: string | null
+    status?: string
+    adminNotes?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomWebsiteRequestUncheckedCreateWithoutUserInput = {
+    id?: string
+    clientName: string
+    companyName: string
+    email: string
+    phone?: string | null
+    websiteType: string
+    stylePreferences: string
+    pages: string
+    specialFeatures: string
+    competitors?: string | null
+    additionalNotes?: string | null
+    status?: string
+    adminNotes?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CustomWebsiteRequestCreateOrConnectWithoutUserInput = {
+    where: CustomWebsiteRequestWhereUniqueInput
+    create: XOR<CustomWebsiteRequestCreateWithoutUserInput, CustomWebsiteRequestUncheckedCreateWithoutUserInput>
+  }
+
+  export type CustomWebsiteRequestCreateManyUserInputEnvelope = {
+    data: CustomWebsiteRequestCreateManyUserInput | CustomWebsiteRequestCreateManyUserInput[]
+  }
+
   export type ChatSessionUpsertWithWhereUniqueWithoutUserInput = {
     where: ChatSessionWhereUniqueInput
     update: XOR<ChatSessionUpdateWithoutUserInput, ChatSessionUncheckedUpdateWithoutUserInput>
@@ -63391,6 +65178,44 @@ export namespace Prisma {
     isActive?: BoolFilter<"UserService"> | boolean
   }
 
+  export type CustomWebsiteRequestUpsertWithWhereUniqueWithoutUserInput = {
+    where: CustomWebsiteRequestWhereUniqueInput
+    update: XOR<CustomWebsiteRequestUpdateWithoutUserInput, CustomWebsiteRequestUncheckedUpdateWithoutUserInput>
+    create: XOR<CustomWebsiteRequestCreateWithoutUserInput, CustomWebsiteRequestUncheckedCreateWithoutUserInput>
+  }
+
+  export type CustomWebsiteRequestUpdateWithWhereUniqueWithoutUserInput = {
+    where: CustomWebsiteRequestWhereUniqueInput
+    data: XOR<CustomWebsiteRequestUpdateWithoutUserInput, CustomWebsiteRequestUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CustomWebsiteRequestUpdateManyWithWhereWithoutUserInput = {
+    where: CustomWebsiteRequestScalarWhereInput
+    data: XOR<CustomWebsiteRequestUpdateManyMutationInput, CustomWebsiteRequestUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CustomWebsiteRequestScalarWhereInput = {
+    AND?: CustomWebsiteRequestScalarWhereInput | CustomWebsiteRequestScalarWhereInput[]
+    OR?: CustomWebsiteRequestScalarWhereInput[]
+    NOT?: CustomWebsiteRequestScalarWhereInput | CustomWebsiteRequestScalarWhereInput[]
+    id?: StringFilter<"CustomWebsiteRequest"> | string
+    userId?: StringNullableFilter<"CustomWebsiteRequest"> | string | null
+    clientName?: StringFilter<"CustomWebsiteRequest"> | string
+    companyName?: StringFilter<"CustomWebsiteRequest"> | string
+    email?: StringFilter<"CustomWebsiteRequest"> | string
+    phone?: StringNullableFilter<"CustomWebsiteRequest"> | string | null
+    websiteType?: StringFilter<"CustomWebsiteRequest"> | string
+    stylePreferences?: StringFilter<"CustomWebsiteRequest"> | string
+    pages?: StringFilter<"CustomWebsiteRequest"> | string
+    specialFeatures?: StringFilter<"CustomWebsiteRequest"> | string
+    competitors?: StringNullableFilter<"CustomWebsiteRequest"> | string | null
+    additionalNotes?: StringNullableFilter<"CustomWebsiteRequest"> | string | null
+    status?: StringFilter<"CustomWebsiteRequest"> | string
+    adminNotes?: StringFilter<"CustomWebsiteRequest"> | string
+    createdAt?: DateTimeFilter<"CustomWebsiteRequest"> | Date | string
+    updatedAt?: DateTimeFilter<"CustomWebsiteRequest"> | Date | string
+  }
+
   export type ChatMessageCreateWithoutSessionInput = {
     id?: string
     role: string
@@ -63429,6 +65254,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberCreateNestedManyWithoutUserInput
     websites?: TenantWebsiteCreateNestedManyWithoutUserInput
     services?: UserServiceCreateNestedManyWithoutUserInput
+    customRequests?: CustomWebsiteRequestCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutChatSessionsInput = {
@@ -63446,6 +65272,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberUncheckedCreateNestedManyWithoutUserInput
     websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
     services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
+    customRequests?: CustomWebsiteRequestUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutChatSessionsInput = {
@@ -63506,6 +65333,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberUpdateManyWithoutUserNestedInput
     websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
     services?: UserServiceUpdateManyWithoutUserNestedInput
+    customRequests?: CustomWebsiteRequestUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutChatSessionsInput = {
@@ -63523,6 +65351,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberUncheckedUpdateManyWithoutUserNestedInput
     websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
     services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
+    customRequests?: CustomWebsiteRequestUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ChatSessionCreateWithoutMessagesInput = {
@@ -63588,6 +65417,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberCreateNestedManyWithoutUserInput
     websites?: TenantWebsiteCreateNestedManyWithoutUserInput
     services?: UserServiceCreateNestedManyWithoutUserInput
+    customRequests?: CustomWebsiteRequestCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -63605,6 +65435,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberUncheckedCreateNestedManyWithoutUserInput
     websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
     services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
+    customRequests?: CustomWebsiteRequestUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -63638,6 +65469,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberUpdateManyWithoutUserNestedInput
     websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
     services?: UserServiceUpdateManyWithoutUserNestedInput
+    customRequests?: CustomWebsiteRequestUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -63655,6 +65487,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberUncheckedUpdateManyWithoutUserNestedInput
     websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
     services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
+    customRequests?: CustomWebsiteRequestUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PaymentRequestCreateWithoutServiceInput = {
@@ -63878,6 +65711,7 @@ export namespace Prisma {
     paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
     emailListMembers?: EmailListMemberCreateNestedManyWithoutUserInput
     websites?: TenantWebsiteCreateNestedManyWithoutUserInput
+    customRequests?: CustomWebsiteRequestCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutServicesInput = {
@@ -63895,6 +65729,7 @@ export namespace Prisma {
     paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
     emailListMembers?: EmailListMemberUncheckedCreateNestedManyWithoutUserInput
     websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
+    customRequests?: CustomWebsiteRequestUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutServicesInput = {
@@ -63967,6 +65802,7 @@ export namespace Prisma {
     paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
     emailListMembers?: EmailListMemberUpdateManyWithoutUserNestedInput
     websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
+    customRequests?: CustomWebsiteRequestUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutServicesInput = {
@@ -63984,6 +65820,7 @@ export namespace Prisma {
     paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
     emailListMembers?: EmailListMemberUncheckedUpdateManyWithoutUserNestedInput
     websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
+    customRequests?: CustomWebsiteRequestUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CabinetAppointmentCreateWithoutTenantInput = {
@@ -64446,6 +66283,7 @@ export namespace Prisma {
     paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
     emailListMembers?: EmailListMemberCreateNestedManyWithoutUserInput
     services?: UserServiceCreateNestedManyWithoutUserInput
+    customRequests?: CustomWebsiteRequestCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWebsitesInput = {
@@ -64463,6 +66301,7 @@ export namespace Prisma {
     paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
     emailListMembers?: EmailListMemberUncheckedCreateNestedManyWithoutUserInput
     services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
+    customRequests?: CustomWebsiteRequestUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWebsitesInput = {
@@ -64924,6 +66763,7 @@ export namespace Prisma {
     paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
     emailListMembers?: EmailListMemberUpdateManyWithoutUserNestedInput
     services?: UserServiceUpdateManyWithoutUserNestedInput
+    customRequests?: CustomWebsiteRequestUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWebsitesInput = {
@@ -64941,6 +66781,7 @@ export namespace Prisma {
     paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
     emailListMembers?: EmailListMemberUncheckedUpdateManyWithoutUserNestedInput
     services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
+    customRequests?: CustomWebsiteRequestUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TenantWebsiteCreateWithoutCategoriesInput = {
@@ -67755,6 +69596,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberCreateNestedManyWithoutUserInput
     websites?: TenantWebsiteCreateNestedManyWithoutUserInput
     services?: UserServiceCreateNestedManyWithoutUserInput
+    customRequests?: CustomWebsiteRequestCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentRequestsInput = {
@@ -67772,6 +69614,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberUncheckedCreateNestedManyWithoutUserInput
     websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
     services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
+    customRequests?: CustomWebsiteRequestUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentRequestsInput = {
@@ -67844,6 +69687,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberUpdateManyWithoutUserNestedInput
     websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
     services?: UserServiceUpdateManyWithoutUserNestedInput
+    customRequests?: CustomWebsiteRequestUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentRequestsInput = {
@@ -67861,6 +69705,7 @@ export namespace Prisma {
     emailListMembers?: EmailListMemberUncheckedUpdateManyWithoutUserNestedInput
     websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
     services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
+    customRequests?: CustomWebsiteRequestUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type EmailListMemberCreateWithoutListInput = {
@@ -67942,6 +69787,7 @@ export namespace Prisma {
     paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
     websites?: TenantWebsiteCreateNestedManyWithoutUserInput
     services?: UserServiceCreateNestedManyWithoutUserInput
+    customRequests?: CustomWebsiteRequestCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutEmailListMembersInput = {
@@ -67959,6 +69805,7 @@ export namespace Prisma {
     paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
     websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
     services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
+    customRequests?: CustomWebsiteRequestUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutEmailListMembersInput = {
@@ -68019,6 +69866,7 @@ export namespace Prisma {
     paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
     websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
     services?: UserServiceUpdateManyWithoutUserNestedInput
+    customRequests?: CustomWebsiteRequestUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEmailListMembersInput = {
@@ -68036,6 +69884,7 @@ export namespace Prisma {
     paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
     websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
     services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
+    customRequests?: CustomWebsiteRequestUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TenantWebsiteCreateWithoutInvoiceSettingsInput = {
@@ -68966,6 +70815,94 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedUpdateManyWithoutTenantNestedInput
   }
 
+  export type UserCreateWithoutCustomRequestsInput = {
+    id?: string
+    email: string
+    password: string
+    companyName: string
+    role?: string
+    createdAt?: Date | string
+    unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
+    chatSessions?: ChatSessionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    paymentRequests?: PaymentRequestCreateNestedManyWithoutUserInput
+    emailListMembers?: EmailListMemberCreateNestedManyWithoutUserInput
+    websites?: TenantWebsiteCreateNestedManyWithoutUserInput
+    services?: UserServiceCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCustomRequestsInput = {
+    id?: string
+    email: string
+    password: string
+    companyName: string
+    role?: string
+    createdAt?: Date | string
+    unsubscribed?: boolean
+    recoveryEmail?: string | null
+    recoveryCodes?: string
+    chatSessions?: ChatSessionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    paymentRequests?: PaymentRequestUncheckedCreateNestedManyWithoutUserInput
+    emailListMembers?: EmailListMemberUncheckedCreateNestedManyWithoutUserInput
+    websites?: TenantWebsiteUncheckedCreateNestedManyWithoutUserInput
+    services?: UserServiceUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCustomRequestsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCustomRequestsInput, UserUncheckedCreateWithoutCustomRequestsInput>
+  }
+
+  export type UserUpsertWithoutCustomRequestsInput = {
+    update: XOR<UserUpdateWithoutCustomRequestsInput, UserUncheckedUpdateWithoutCustomRequestsInput>
+    create: XOR<UserCreateWithoutCustomRequestsInput, UserUncheckedCreateWithoutCustomRequestsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCustomRequestsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCustomRequestsInput, UserUncheckedUpdateWithoutCustomRequestsInput>
+  }
+
+  export type UserUpdateWithoutCustomRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
+    chatSessions?: ChatSessionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    paymentRequests?: PaymentRequestUpdateManyWithoutUserNestedInput
+    emailListMembers?: EmailListMemberUpdateManyWithoutUserNestedInput
+    websites?: TenantWebsiteUpdateManyWithoutUserNestedInput
+    services?: UserServiceUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCustomRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    unsubscribed?: BoolFieldUpdateOperationsInput | boolean
+    recoveryEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    recoveryCodes?: StringFieldUpdateOperationsInput | string
+    chatSessions?: ChatSessionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    paymentRequests?: PaymentRequestUncheckedUpdateManyWithoutUserNestedInput
+    emailListMembers?: EmailListMemberUncheckedUpdateManyWithoutUserNestedInput
+    websites?: TenantWebsiteUncheckedUpdateManyWithoutUserNestedInput
+    services?: UserServiceUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type ChatSessionCreateManyUserInput = {
     id?: string
     title?: string | null
@@ -69025,6 +70962,24 @@ export namespace Prisma {
     notify?: boolean
     selectedAt?: Date | string
     isActive?: boolean
+  }
+
+  export type CustomWebsiteRequestCreateManyUserInput = {
+    id?: string
+    clientName: string
+    companyName: string
+    email: string
+    phone?: string | null
+    websiteType: string
+    stylePreferences: string
+    pages: string
+    specialFeatures: string
+    competitors?: string | null
+    additionalNotes?: string | null
+    status?: string
+    adminNotes?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ChatSessionUpdateWithoutUserInput = {
@@ -69234,6 +71189,60 @@ export namespace Prisma {
     notify?: BoolFieldUpdateOperationsInput | boolean
     selectedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type CustomWebsiteRequestUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteType?: StringFieldUpdateOperationsInput | string
+    stylePreferences?: StringFieldUpdateOperationsInput | string
+    pages?: StringFieldUpdateOperationsInput | string
+    specialFeatures?: StringFieldUpdateOperationsInput | string
+    competitors?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    adminNotes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomWebsiteRequestUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteType?: StringFieldUpdateOperationsInput | string
+    stylePreferences?: StringFieldUpdateOperationsInput | string
+    pages?: StringFieldUpdateOperationsInput | string
+    specialFeatures?: StringFieldUpdateOperationsInput | string
+    competitors?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    adminNotes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CustomWebsiteRequestUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    clientName?: StringFieldUpdateOperationsInput | string
+    companyName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteType?: StringFieldUpdateOperationsInput | string
+    stylePreferences?: StringFieldUpdateOperationsInput | string
+    pages?: StringFieldUpdateOperationsInput | string
+    specialFeatures?: StringFieldUpdateOperationsInput | string
+    competitors?: NullableStringFieldUpdateOperationsInput | string | null
+    additionalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    adminNotes?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ChatMessageCreateManySessionInput = {

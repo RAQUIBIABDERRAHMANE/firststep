@@ -1,6 +1,7 @@
 import { getMyWebsite } from '@/app/actions/tenant'
 import { getCurrentUser } from '@/app/actions/auth'
 import WebsiteForm from '@/components/dashboard/WebsiteForm'
+import CustomWebsiteForm from '@/components/dashboard/CustomWebsiteForm'
 import prisma from '@/lib/prisma'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card'
 import { redirect } from 'next/navigation'
@@ -15,7 +16,13 @@ export default async function WebsiteManagementPage({
 
     const resolvedSearchParams = await searchParams
     const type = resolvedSearchParams.type || 'restaurant'
-    const serviceSlug = type === 'cabinet' ? 'cabinet-system' : 'restaurant-website'
+    
+    let serviceSlug = 'restaurant-website'
+    if (type === 'cabinet') {
+        serviceSlug = 'cabinet-system'
+    } else if (type === 'custom-website') {
+        serviceSlug = 'custom-website'
+    }
 
     // Get service ID for the requested type
     const service = await prisma.service.findUnique({
@@ -62,12 +69,18 @@ export default async function WebsiteManagementPage({
         <div className="space-y-8 max-w-4xl">
             <div>
                 <h1 className="text-3xl font-bold tracking-tight">
-                    {type === 'cabinet' ? 'Cabinet Setup' : 'Restaurant Website Setup'}
+                    {type === 'custom-website'
+                        ? 'Cahier des charges - Site Web Sur Mesure'
+                        : type === 'cabinet'
+                            ? 'Cabinet Setup'
+                            : 'Restaurant Website Setup'}
                 </h1>
                 <p className="text-slate-500 mt-1 text-lg">
-                    {type === 'cabinet'
-                        ? 'Configure your professional clinic presence.'
-                        : 'Configure your public restaurant website.'}
+                    {type === 'custom-website'
+                        ? 'Remplissez le formulaire ci-dessous pour nous transmettre vos exigences de développement de site web sur mesure.'
+                        : type === 'cabinet'
+                            ? 'Configure your professional clinic presence.'
+                            : 'Configure your public restaurant website.'}
                 </p>
             </div>
 
@@ -81,13 +94,23 @@ export default async function WebsiteManagementPage({
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <WebsiteForm
-                        key={`${website?.id || 'new'}-${website?.updatedAt || '0'}`}
-                        initialData={website}
-                        serviceId={service.id}
-                        serviceName={service.name}
-                        userEmail={user.email}
-                    />
+                    {type === 'custom-website' ? (
+                        <CustomWebsiteForm
+                            key={`${website?.id || 'new'}-${website?.updatedAt || '0'}`}
+                            initialData={website}
+                            serviceId={service.id}
+                            serviceName={service.name}
+                            userEmail={user.email}
+                        />
+                    ) : (
+                        <WebsiteForm
+                            key={`${website?.id || 'new'}-${website?.updatedAt || '0'}`}
+                            initialData={website}
+                            serviceId={service.id}
+                            serviceName={service.name}
+                            userEmail={user.email}
+                        />
+                    )}
                 </CardContent>
             </Card>
         </div>
