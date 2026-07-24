@@ -19,8 +19,8 @@ const ReservationModal = dynamic(() => import('./ReservationModal'), { ssr: fals
 
 import DishCustomizationModal from './DishCustomizationModal'
 
-export default function RestaurantTemplateClassic({ siteName, description, coverImage, logo, config, categories, isOwner, primaryColor }: RestaurantTemplateProps) {
-    const defaultData = useRestaurantLogic(categories, isOwner)
+export default function RestaurantTemplateClassic({ siteName, description, coverImage, logo, config, categories, isOwner, primaryColor, slug }: RestaurantTemplateProps) {
+    const defaultData = useRestaurantLogic(categories, isOwner, slug)
     const {
         showScanner, setShowScanner, showCart, setShowCart, activeCategory, setActiveCategory,
         isPlacingOrder, orderComplete, setOrderComplete, items, addItem, updateQuantity,

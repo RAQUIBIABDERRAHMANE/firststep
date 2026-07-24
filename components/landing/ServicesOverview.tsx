@@ -202,7 +202,14 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
                                         <div className="flex items-center justify-between pt-4" style={{ borderTop: `1px solid rgba(${C},0.06)` }}>
                                             {isAvailable ? (
                                                 <div className="flex items-baseline gap-1.5">
-                                                    <span className="font-syne text-2xl font-black text-white">{service.price?.toFixed(0) ?? '0'}</span>
+                                                    {service.slug === 'custom-website' ? (
+                                                        <>
+                                                            <span className="font-figtree text-[10px] text-slate-500 mr-0.5 font-bold uppercase tracking-wider">À partir de</span>
+                                                            <span className="font-syne text-2xl font-black text-white">1 500</span>
+                                                        </>
+                                                    ) : (
+                                                        <span className="font-syne text-2xl font-black text-white">{service.price?.toFixed(0) ?? '0'}</span>
+                                                    )}
                                                     <span className="font-figtree text-[12px] text-slate-500">MAD</span>
                                                 </div>
                                             ) : (

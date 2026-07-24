@@ -58,9 +58,9 @@ function DoubleBorder() {
 }
 
 export default function RestaurantTemplateItalian({
-    siteName, description, coverImage, logo, config, categories, isOwner, primaryColor
+    siteName, description, coverImage, logo, config, categories, isOwner, primaryColor, slug
 }: RestaurantTemplateProps) {
-    const logic = useRestaurantLogic(categories, isOwner)
+    const logic = useRestaurantLogic(categories, isOwner, slug)
     const {
         showScanner, setShowScanner, showCart, setShowCart, activeCategory, setActiveCategory,
         isPlacingOrder, orderComplete, setOrderComplete, items, addItem, updateQuantity,

@@ -125,6 +125,7 @@ model TenantWebsite {
   invoiceSettings     InvoiceSettings?
   printRequests       TablePrintRequest[]
   ingredients         Ingredient[]
+  spaces              RestaurantSpace[]
   service             Service                 @relation(fields: [serviceId], references: [id])
   user                User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -166,6 +167,7 @@ model RestaurantDish {
 model RestaurantTable {
   id           String                  @id @default(cuid())
   tenantId     String
+  spaceId      String?
   number       String
   capacity     Int?
   isActive     Boolean                 @default(true)
@@ -174,6 +176,7 @@ model RestaurantTable {
   yPos         Float                   @default(0.0)
   rotation     Float                   @default(0.0)
   shape        String                  @default("SQUARE") // "SQUARE" | "ROUND" | "RECTANGLE"
+  space        RestaurantSpace?        @relation(fields: [spaceId], references: [id], onDelete: SetNull)
   orders       RestaurantOrder[]
   waiter       RestaurantWaiter?       @relation(fields: [waiterId], references: [id])
   tenant       TenantWebsite           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
@@ -182,7 +185,20 @@ model RestaurantTable {
 
   @@unique([tenantId, number])
   @@index([tenantId])
+  @@index([spaceId])
   @@index([waiterId])
+}
+
+model RestaurantSpace {
+  id        String            @id @default(cuid())
+  tenantId  String
+  name      String // e.g. "Rez-de-chaussée", "Terrasse", "Rooftop"
+  order     Int               @default(0)
+  createdAt DateTime          @default(now())
+  tables    RestaurantTable[]
+  tenant    TenantWebsite     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
 }
 
 model RestaurantWaiter {

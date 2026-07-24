@@ -1,7 +1,7 @@
 'use server'
 
 import { getWaiters } from '@/app/actions/waiter'
-import { getTables } from '@/app/actions/restaurant'
+import { getTables, getSpaces } from '@/app/actions/restaurant'
 import WaitersClient from './WaitersClient'
 import { Plus, ChevronLeft } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
@@ -10,10 +10,13 @@ import Link from 'next/link'
 export default async function WaitersPage({ params }: { params: Promise<{ tenantSlug: string }> }) {
     const { tenantSlug } = await params
     // Fetch data in parallel
-    const [waiters, tables] = await Promise.all([
+    const [waiters, tables, spacesRes] = await Promise.all([
         getWaiters(tenantSlug),
-        getTables(tenantSlug)
+        getTables(tenantSlug),
+        getSpaces(tenantSlug)
     ])
+
+    const spaces = ('spaces' in spacesRes && Array.isArray(spacesRes.spaces)) ? spacesRes.spaces : []
 
     return (
         <div className="space-y-8 animate-fade-in max-w-6xl">
@@ -29,7 +32,7 @@ export default async function WaitersPage({ params }: { params: Promise<{ tenant
                 </div>
             </div>
 
-            <WaitersClient initialWaiters={waiters} initialTables={tables} tenantSlug={tenantSlug} />
+            <WaitersClient initialWaiters={waiters} initialTables={tables} initialSpaces={spaces} tenantSlug={tenantSlug} />
         </div>
     )
 }

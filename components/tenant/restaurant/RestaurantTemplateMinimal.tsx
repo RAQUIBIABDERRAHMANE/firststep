@@ -6,7 +6,8 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useRestaurantLogic } from './useRestaurantLogic'
 import { RestaurantTemplateProps } from './RestaurantTemplate'
-import { ArrowRight, Bell, ChevronLeft, Minus, Plus, QrCode, ShoppingCart, X, Check, Loader2, Sparkles, Trash2, Receipt } from 'lucide-react'
+import { ArrowRight, Bell, ChevronLeft, Minus, Plus, QrCode, ShoppingCart, X, Check, Loader2, Sparkles, Trash2, Receipt, Split } from 'lucide-react'
+import SplitBillModal from './SplitBillModal'
 
 const QRScanner = dynamic(() => import('./QRScanner'), { ssr: false })
 const ReservationModal = dynamic(() => import('./ReservationModal'), { ssr: false })
@@ -15,13 +16,14 @@ import { translations, Language, CURRENCY } from '@/lib/translations'
 
 import DishCustomizationModal from './DishCustomizationModal'
 
-export default function RestaurantTemplateMinimal({ siteName, description, coverImage, logo, config, categories, isOwner, primaryColor }: RestaurantTemplateProps) {
-    const defaultData = useRestaurantLogic(categories, isOwner)
+export default function RestaurantTemplateMinimal({ siteName, description, coverImage, logo, config, categories, isOwner, primaryColor, slug }: RestaurantTemplateProps) {
+    const defaultData = useRestaurantLogic(categories, isOwner, slug)
     const {
         showScanner, setShowScanner, showCart, setShowCart,
         isPlacingOrder, orderComplete, setOrderComplete, items, addItem, updateQuantity, removeItem,
         totalPrice, totalItems, tableId, filteredItems, categoryNames, handleScan, handlePlaceOrder, handleCallWaiter, handleRequestBill,
-        activeOrderId, orderStatus, customizingDish, setCustomizingDish, handleConfirmCustomization
+        activeOrderId, orderStatus, customizingDish, setCustomizingDish, handleConfirmCustomization,
+        showSplitBill, setShowSplitBill, activeOrderDetails, handleOpenSplitBill
     } = defaultData
 
     const [lang, setLang] = useState<Language>('fr')
@@ -454,20 +456,32 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                                     {orderStatus === 'SERVED' && 'Enjoy your meal!'}
                                     {!orderStatus && 'Your order has been received.'}
                                 </p>
-                                <div className="inline-block px-4 py-2 bg-slate-100 rounded-full text-xs font-bold uppercase tracking-widest text-slate-500 mb-8">
+                                <div className="inline-block px-4 py-2 bg-slate-100 rounded-full text-xs font-bold uppercase tracking-widest text-slate-500 mb-6">
                                     Status: {orderStatus || 'PENDING'}
                                 </div>
-                                <Button
-                                    onClick={() => {
-                                        setOrderComplete(false)
-                                        setShowOrderTracking(false)
-                                        setShowCart(false)
-                                    }}
-                                    variant="outline"
-                                    className="border-slate-200 text-[var(--text-main)]"
-                                >
-                                    Continue Browsing
-                                </Button>
+                                <div className="flex flex-col sm:flex-row gap-3 w-full max-w-xs">
+                                    {activeOrderId && (
+                                        <button
+                                            onClick={handleOpenSplitBill}
+                                            className="flex-1 border rounded-xl h-11 px-4 text-xs font-bold flex items-center justify-center gap-2 transition-all hover:brightness-110"
+                                            style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)' }}
+                                        >
+                                            <Split size={14} />
+                                            <span>Split Bill</span>
+                                        </button>
+                                    )}
+                                    <Button
+                                        onClick={() => {
+                                            setOrderComplete(false)
+                                            setShowOrderTracking(false)
+                                            setShowCart(false)
+                                        }}
+                                        variant="outline"
+                                        className="border-slate-200 text-[var(--text-main)] flex-1 h-11"
+                                    >
+                                        Continue
+                                    </Button>
+                                </div>
                             </div>
                         ) : null}
                     </div>
@@ -513,6 +527,15 @@ export default function RestaurantTemplateMinimal({ siteName, description, cover
                 buttonBgColor={config?.buttonBgColor}
                 buttonTextColor={config?.buttonTextColor}
             />
+
+            {showSplitBill && activeOrderId && activeOrderDetails && (
+                <SplitBillModal
+                    orderId={activeOrderId}
+                    items={activeOrderDetails.items}
+                    totalPrice={activeOrderDetails.totalPrice}
+                    onClose={() => setShowSplitBill(false)}
+                />
+            )}
         </div>
     )
 }

@@ -212,6 +212,7 @@ export async function getTables(slug?: string) {
 
     return await prisma.restaurantTable.findMany({
         where: { tenantId: tenant.id },
+        include: { space: true },
         orderBy: { number: 'asc' }
     })
 }
@@ -492,6 +493,10 @@ export async function updateOrderStatus(id: string, status: string, slug?: strin
             data: { status }
         })
         revalidatePath('/dashboard/restaurant')
+        if (slug) {
+            revalidatePath(`/dashboard/restaurant/${slug}/kds`)
+            revalidatePath(`/dashboard/restaurant/${slug}/orders`)
+        }
 
         // Phase I: Auto-decrement inventory when an order is completed
         if (status === 'SERVED' || status === 'PAID') {
@@ -916,9 +921,7 @@ export async function getOrdersForKDS(slug?: string, station?: string) {
         orderBy: { createdAt: 'asc' }
     })
 
-    if (!station || station === 'ALL') return orders
-
-    // Build a station map for all relevant dish IDs
+    // Fetch station map for all dish IDs in these orders
     const dishIds = [...new Set(orders.flatMap(o => o.items.map((i: any) => i.dishId)))]
     const dishes = await prisma.restaurantDish.findMany({
         where: { id: { in: dishIds } },
@@ -926,15 +929,22 @@ export async function getOrdersForKDS(slug?: string, station?: string) {
     })
     const stationMap = new Map(dishes.map(d => [d.id, d.prepStation]))
 
-    // Filter orders and their items synchronously
-    const filtered = orders
+    const enriched = orders.map(order => ({
+        ...order,
+        items: order.items.map((item: any) => ({
+            ...item,
+            prepStation: stationMap.get(item.dishId) || 'KITCHEN'
+        }))
+    }))
+
+    if (!station || station === 'ALL') return enriched
+
+    return enriched
         .map(order => ({
             ...order,
-            items: order.items.filter((item: any) => stationMap.get(item.dishId) === station)
+            items: order.items.filter((item: any) => item.prepStation === station)
         }))
         .filter(order => order.items.length > 0)
-
-    return filtered
 }
 
 // ─── Phase D: Waiter Shifts ───────────────────────────────────────────────────
@@ -1192,6 +1202,189 @@ async function decrementInventoryForOrder(orderId: string) {
         }
     } catch (e) {
         console.error('[Restaurant Action] decrementInventoryForOrder Error:', e)
+    }
+}
+
+// ─── Spaces & Multi-Floor Management ──────────────────────────────────────────
+
+export async function getSpaces(tenantSlug: string) {
+    try {
+        const website = await prisma.tenantWebsite.findUnique({
+            where: { slug: tenantSlug }
+        })
+        if (!website) return { error: 'Tenant not found' }
+
+        const spaces = await prisma.restaurantSpace.findMany({
+            where: { tenantId: website.id },
+            orderBy: { order: 'asc' },
+            include: {
+                tables: true
+            }
+        })
+        return { success: true, spaces }
+    } catch (e) {
+        console.error('[Restaurant Action] getSpaces Error:', e)
+        return { error: 'Failed to fetch spaces' }
+    }
+}
+
+export async function createSpace(tenantSlug: string, name: string) {
+    try {
+        const website = await prisma.tenantWebsite.findUnique({
+            where: { slug: tenantSlug }
+        })
+        if (!website) return { error: 'Tenant not found' }
+
+        const count = await prisma.restaurantSpace.count({
+            where: { tenantId: website.id }
+        })
+
+        const space = await prisma.restaurantSpace.create({
+            data: {
+                tenantId: website.id,
+                name: name.trim(),
+                order: count
+            }
+        })
+
+        revalidatePath(`/dashboard/restaurant/${tenantSlug}/tables`)
+        revalidatePath(`/dashboard/restaurant/${tenantSlug}/waiters`)
+        revalidatePath(`/${tenantSlug}/waiter/dashboard`)
+        return { success: true, space }
+    } catch (e) {
+        console.error('[Restaurant Action] createSpace Error:', e)
+        return { error: 'Failed to create space' }
+    }
+}
+
+export async function deleteSpace(spaceId: string, tenantSlug: string) {
+    try {
+        await prisma.restaurantSpace.delete({
+            where: { id: spaceId }
+        })
+        revalidatePath(`/dashboard/restaurant/${tenantSlug}/tables`)
+        revalidatePath(`/dashboard/restaurant/${tenantSlug}/waiters`)
+        revalidatePath(`/${tenantSlug}/waiter/dashboard`)
+        return { success: true }
+    } catch (e) {
+        console.error('[Restaurant Action] deleteSpace Error:', e)
+        return { error: 'Failed to delete space' }
+    }
+}
+
+export async function updateTableSpace(tableId: string, spaceId: string | null, tenantSlug: string) {
+    try {
+        const table = await prisma.restaurantTable.update({
+            where: { id: tableId },
+            data: { spaceId }
+        })
+        revalidatePath(`/dashboard/restaurant/${tenantSlug}/tables`)
+        revalidatePath(`/dashboard/restaurant/${tenantSlug}/waiters`)
+        revalidatePath(`/${tenantSlug}/waiter/dashboard`)
+        return { success: true, table }
+    } catch (e) {
+        console.error('[Restaurant Action] updateTableSpace Error:', e)
+        return { error: 'Failed to update table space' }
+    }
+}
+
+// ─── Multiplayer / Shared Cart Actions ──────────────────────────────────────
+
+export async function syncTableCart(tableId: string, cartData: any[]) {
+    try {
+        const cartSession = await prisma.tableCartSession.upsert({
+            where: { tableId },
+            update: {
+                cartData: JSON.stringify(cartData)
+            },
+            create: {
+                tableId,
+                cartData: JSON.stringify(cartData)
+            }
+        })
+        return { success: true, cartSession }
+    } catch (e) {
+        console.error('[Restaurant Action] syncTableCart Error:', e)
+        return { error: 'Failed to sync cart' }
+    }
+}
+
+export async function getTableCart(tableId: string) {
+    try {
+        const cartSession = await prisma.tableCartSession.findUnique({
+            where: { tableId }
+        })
+        if (!cartSession) return { success: true, items: [] }
+        
+        const items = JSON.parse(cartSession.cartData || '[]')
+        return { success: true, items }
+    } catch (e) {
+        console.error('[Restaurant Action] getTableCart Error:', e)
+        return { error: 'Failed to fetch table cart' }
+    }
+}
+
+// ─── Live Floor Plan Status Monitor ──────────────────────────────────────────
+
+export async function getLiveFloorStatus(tenantSlug: string) {
+    try {
+        const website = await prisma.tenantWebsite.findUnique({
+            where: { slug: tenantSlug }
+        })
+        if (!website) return { error: 'Tenant not found' }
+
+        const tables = await prisma.restaurantTable.findMany({
+            where: { tenantId: website.id },
+            include: {
+                space: true,
+                orders: {
+                    where: {
+                        status: { in: ['PENDING', 'PREPARING', 'COOKING', 'READY'] }
+                    },
+                    include: {
+                        items: true
+                    }
+                }
+            }
+        })
+
+        // Also check print/bill requests & waiter calls
+        const printRequests = await prisma.tablePrintRequest.findMany({
+            where: {
+                tenantId: website.id,
+                status: 'PENDING'
+            }
+        })
+
+        const activeTableIdsWithRequests = new Set(
+            printRequests.flatMap(r => r.tableIds.split(',').map(id => id.trim()))
+        )
+
+        const tableStatuses = tables.map(t => {
+            const activeOrder = t.orders[0] || null
+            const hasBillOrWaiterCall = activeTableIdsWithRequests.has(t.id)
+
+            return {
+                id: t.id,
+                number: t.number,
+                capacity: t.capacity,
+                xPos: t.xPos,
+                yPos: t.yPos,
+                rotation: t.rotation,
+                shape: t.shape,
+                spaceId: t.spaceId,
+                spaceName: t.space?.name || 'Main Room',
+                status: activeOrder ? activeOrder.status : 'FREE',
+                activeOrderAmount: activeOrder ? activeOrder.totalAmount : 0,
+                activeOrderId: activeOrder ? activeOrder.id : null,
+                hasRequestAlert: hasBillOrWaiterCall
+            }
+        })
+
+        return { success: true, tableStatuses }
+    } catch (e) {
+        console.error('[Restaurant Action] getLiveFloorStatus Error:', e)
+        return { error: 'Failed to fetch live floor status' }
     }
 }
 

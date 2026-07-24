@@ -31,6 +31,13 @@ import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { toast } from 'sonner'
 
+function formatTableLabel(num: string) {
+    if (!num) return ''
+    if (num.toLowerCase().startsWith('table ')) return num
+    const clean = num.replace(/^T-+/i, '').replace(/^T/i, '').trim()
+    return clean ? `T-${clean}` : num
+}
+
 const playNotificationSound = () => {
     try {
         const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
@@ -119,12 +126,14 @@ export default function OrdersClient({
     initialOrders, 
     tenantSlug, 
     initialConfig,
-    onOrderUpdate
+    onOrderUpdate,
+    allowedTableIds
 }: { 
     initialOrders: any[]
     tenantSlug: string
     initialConfig?: string 
     onOrderUpdate?: () => void | Promise<void>
+    allowedTableIds?: string[]
 }) {
     const router = useRouter()
     const [activeTab, setActiveTab] = useState<'list' | 'floorplan'>('list')
@@ -341,6 +350,14 @@ export default function OrdersClient({
         }
     }
 
+    const displayOrders = allowedTableIds 
+        ? initialOrders.filter(o => allowedTableIds.includes(o.tableId)) 
+        : initialOrders
+
+    const displayTables = allowedTableIds 
+        ? floorPlan.tables.filter(t => allowedTableIds.includes(t.id)) 
+        : floorPlan.tables
+
     return (
         <div className="space-y-8">
             {/* View Tab Toggle & Sound */}
@@ -402,7 +419,7 @@ export default function OrdersClient({
             {activeTab === 'list' ? (
                 /* Original List View */
                 <>
-                    {initialOrders.length === 0 ? (
+                    {displayOrders.length === 0 ? (
                         <div className="text-center py-32 bg-slate-50/50 rounded-[3rem] border-4 border-dashed border-slate-200 flex flex-col items-center animate-in fade-in duration-500">
                             <div className="h-24 w-24 bg-white rounded-full flex items-center justify-center text-slate-200 shadow-sm mb-8">
                                 <ClipboardList size={48} />
@@ -412,7 +429,7 @@ export default function OrdersClient({
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 animate-in fade-in duration-500">
-                            {initialOrders.map((order) => {
+                            {displayOrders.map((order) => {
                                 const isCallWaiter = order.items.some((i: any) => i.name === '🔔 CALL WAITER')
                                 const isRequestBill = order.items.some((i: any) => i.name === '🔔 REQUEST BILL')
 
@@ -609,13 +626,14 @@ export default function OrdersClient({
                             })}
 
                             {/* Render Interactive Tables with Real-time Status Colors */}
-                            {floorPlan.tables.map((table) => {
+                            {displayTables.map((table) => {
                                 // Find table name/info
-                                let displayName = `T-${table.id.substring(0, 3)}`
+                                let rawName = (table as any).number || table.id.substring(0, 3)
                                 const matchingOrder = initialOrders.find(o => o.tableId === table.id)
                                 if (matchingOrder) {
-                                    displayName = matchingOrder.table.number
+                                    rawName = matchingOrder.table.number
                                 }
+                                const label = formatTableLabel(rawName)
 
                                 const statusInfo = getTableStatus(table.id)
                                 const colorClass = getStatusColorClass(statusInfo.type)
@@ -637,7 +655,7 @@ export default function OrdersClient({
                                             transform: `rotate(${table.rotation}deg)`
                                         }}
                                     >
-                                        <span className="text-xl tracking-tight leading-none">T-{displayName}</span>
+                                        <span className="text-xl tracking-tight leading-none">{label}</span>
                                         
                                         {statusInfo.type === 'SERVICE' && (
                                             <Bell size={14} className="mt-1 animate-bounce text-white" />

@@ -150,11 +150,25 @@ export async function getWaiterOrders(waiterId: string) {
             orderBy: { startTime: 'desc' }
         })
 
+        // Fetch restaurant spaces (floors/zones)
+        // @ts-ignore
+        const spaces = await prisma.restaurantSpace.findMany({
+            where: { tenantId: waiter.tenantId },
+            orderBy: { order: 'asc' }
+        })
+
+        // Fetch all assigned tables with space
+        const allTablesWithSpace = await prisma.restaurantTable.findMany({
+            where: { id: { in: waiter.tables.map(t => t.id) } },
+            include: { space: true }
+        })
+
         if (!activeShift) {
             return { 
                 orders: [], 
                 tables: [], 
-                allTables: waiter.tables, 
+                allTables: allTablesWithSpace.length > 0 ? allTablesWithSpace : waiter.tables, 
+                spaces,
                 config: waiter.tenant?.config || null, 
                 noActiveShift: true,
                 tenantId: waiter.tenantId,
@@ -177,15 +191,17 @@ export async function getWaiterOrders(waiterId: string) {
             orderBy: { createdAt: 'desc' }
         })
 
-        // Find tables assigned for this shift
+        // Find tables assigned for this shift with space relation
         const tables = await prisma.restaurantTable.findMany({
-            where: { id: { in: shiftTableIds } }
+            where: { id: { in: shiftTableIds } },
+            include: { space: true }
         })
         
         return { 
             orders, 
             tables, 
-            allTables: waiter.tables, 
+            allTables: allTablesWithSpace.length > 0 ? allTablesWithSpace : waiter.tables, 
+            spaces,
             config: waiter.tenant?.config || null, 
             noActiveShift: false,
             activeShiftId: activeShift.id,
@@ -194,7 +210,7 @@ export async function getWaiterOrders(waiterId: string) {
         }
     } catch (e) {
         console.error('Error fetching waiter orders:', e)
-        return { orders: [], tables: [], allTables: [], config: null, noActiveShift: true, menu: [] }
+        return { orders: [], tables: [], allTables: [], spaces: [], config: null, noActiveShift: true, menu: [] }
     }
 }
 

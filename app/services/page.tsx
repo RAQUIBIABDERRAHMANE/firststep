@@ -398,7 +398,9 @@ export default async function ServicesPage() {
                                                                 {service.price?.toFixed(0) ?? '0'}
                                                             </span>
                                                             <span className="font-figtree text-lg text-slate-500">MAD</span>
-                                                            <span className="font-figtree text-xs text-slate-600 ml-1">/ mois</span>
+                                                            {service.slug !== 'custom-website' && (
+                                                                <span className="font-figtree text-xs text-slate-600 ml-1">/ mois</span>
+                                                            )}
                                                         </div>
                                                     </div>
                                                     <Badge className="bg-emerald-500/15 text-emerald-400 border-0 text-xs font-bold rounded-full">

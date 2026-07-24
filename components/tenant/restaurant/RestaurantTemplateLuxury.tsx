@@ -6,9 +6,10 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useRestaurantLogic } from './useRestaurantLogic'
 import { RestaurantTemplateProps } from './RestaurantTemplate'
+import SplitBillModal from './SplitBillModal'
 import {
     ShoppingCart, QrCode, MapPin, Plus, Minus, X, Trash2,
-    ChevronLeft, ChevronRight, LayoutDashboard, Bell, Check, Receipt,
+    ChevronLeft, ChevronRight, LayoutDashboard, Bell, Check, Receipt, Split,
     Loader2, Sparkles, Home, Search, Menu as MenuIcon
 } from 'lucide-react'
 
@@ -19,13 +20,14 @@ const ReservationModal = dynamic(() => import('./ReservationModal'), { ssr: fals
 
 import DishCustomizationModal from './DishCustomizationModal'
 
-export default function RestaurantTemplateLuxury({ siteName, description, coverImage, logo, config, categories, isOwner, primaryColor }: RestaurantTemplateProps) {
-    const defaultData = useRestaurantLogic(categories, isOwner)
+export default function RestaurantTemplateLuxury({ siteName, description, coverImage, logo, config, categories, isOwner, primaryColor, slug }: RestaurantTemplateProps) {
+    const defaultData = useRestaurantLogic(categories, isOwner, slug)
     const {
         showScanner, setShowScanner, showCart, setShowCart,
         isPlacingOrder, orderComplete, setOrderComplete, items, addItem, updateQuantity, removeItem,
         totalPrice, totalItems, tableId, filteredItems, categoryNames, handleScan, handlePlaceOrder, handleCallWaiter, handleRequestBill,
-        activeOrderId, orderStatus, customizingDish, setCustomizingDish, handleConfirmCustomization
+        activeOrderId, orderStatus, customizingDish, setCustomizingDish, handleConfirmCustomization,
+        showSplitBill, setShowSplitBill, activeOrderDetails, handleOpenSplitBill
     } = defaultData
 
     const [lang, setLang] = useState<Language>('fr')
@@ -458,22 +460,34 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
                                     {orderStatus === 'SERVED' && 'Profitez bien de votre expérience Chocolate Dip.'}
                                     {!orderStatus && 'Votre commande a bien été prise en compte.'}
                                 </p>
-                                <div className="inline-block px-4 py-1.5 border rounded-full text-[9px] font-bold uppercase tracking-wider mb-8"
+                                <div className="inline-block px-4 py-1.5 border rounded-full text-[9px] font-bold uppercase tracking-wider mb-6"
                                      style={{ backgroundColor: 'var(--header-bg)', color: 'var(--category-highlight)', borderColor: 'rgba(255,255,255,0.05)' }}>
                                     Statut: {orderStatus || 'PENDING'}
                                 </div>
-                                <Button
-                                    onClick={() => {
-                                        setOrderComplete(false)
-                                        setShowOrderTracking(false)
-                                        setShowCart(false)
-                                    }}
-                                    variant="outline"
-                                    className="border-stone-850 rounded-full h-10 px-6"
-                                    style={{ color: 'var(--text-main)', backgroundColor: 'var(--header-bg)' }}
-                                >
-                                    Continuer
-                                </Button>
+                                <div className="flex flex-col sm:flex-row gap-3 w-full max-w-xs">
+                                    {activeOrderId && (
+                                        <button
+                                            onClick={handleOpenSplitBill}
+                                            className="flex-1 border rounded-full h-10 px-4 text-xs font-bold flex items-center justify-center gap-2 transition-all hover:brightness-110"
+                                            style={{ backgroundColor: 'var(--button-bg)', color: 'var(--button-text)', borderColor: 'transparent' }}
+                                        >
+                                            <Split size={14} />
+                                            <span>Partager la note</span>
+                                        </button>
+                                    )}
+                                    <Button
+                                        onClick={() => {
+                                            setOrderComplete(false)
+                                            setShowOrderTracking(false)
+                                            setShowCart(false)
+                                        }}
+                                        variant="outline"
+                                        className="border-stone-850 rounded-full h-10 px-6 flex-1"
+                                        style={{ color: 'var(--text-main)', backgroundColor: 'var(--header-bg)' }}
+                                    >
+                                        Continuer
+                                    </Button>
+                                </div>
                             </div>
                         ) : null}
                     </div>
@@ -652,6 +666,15 @@ export default function RestaurantTemplateLuxury({ siteName, description, coverI
                 buttonBgColor={config?.buttonBgColor}
                 buttonTextColor={config?.buttonTextColor}
             />
+
+            {showSplitBill && activeOrderId && activeOrderDetails && (
+                <SplitBillModal
+                    orderId={activeOrderId}
+                    items={activeOrderDetails.items}
+                    totalPrice={activeOrderDetails.totalPrice}
+                    onClose={() => setShowSplitBill(false)}
+                />
+            )}
         </div>
     )
 }

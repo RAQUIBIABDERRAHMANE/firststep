@@ -226,6 +226,7 @@ exports.Prisma.RestaurantDishScalarFieldEnum = {
 exports.Prisma.RestaurantTableScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
+  spaceId: 'spaceId',
   number: 'number',
   capacity: 'capacity',
   isActive: 'isActive',
@@ -234,6 +235,14 @@ exports.Prisma.RestaurantTableScalarFieldEnum = {
   yPos: 'yPos',
   rotation: 'rotation',
   shape: 'shape'
+};
+
+exports.Prisma.RestaurantSpaceScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  order: 'order',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.RestaurantWaiterScalarFieldEnum = {
@@ -662,6 +671,7 @@ exports.Prisma.ModelName = {
   RestaurantCategory: 'RestaurantCategory',
   RestaurantDish: 'RestaurantDish',
   RestaurantTable: 'RestaurantTable',
+  RestaurantSpace: 'RestaurantSpace',
   RestaurantWaiter: 'RestaurantWaiter',
   RestaurantOrder: 'RestaurantOrder',
   RestaurantOrderItem: 'RestaurantOrderItem',
