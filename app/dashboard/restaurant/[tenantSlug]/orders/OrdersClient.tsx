@@ -127,13 +127,15 @@ export default function OrdersClient({
     tenantSlug, 
     initialConfig,
     onOrderUpdate,
-    allowedTableIds
+    allowedTableIds,
+    hideFloorPlanTab = false
 }: { 
     initialOrders: any[]
     tenantSlug: string
     initialConfig?: string 
     onOrderUpdate?: () => void | Promise<void>
     allowedTableIds?: string[]
+    hideFloorPlanTab?: boolean
 }) {
     const router = useRouter()
     const [activeTab, setActiveTab] = useState<'list' | 'floorplan'>('list')
@@ -362,26 +364,30 @@ export default function OrdersClient({
         <div className="space-y-8">
             {/* View Tab Toggle & Sound */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div className="flex justify-between items-center bg-slate-100 p-1.5 rounded-2xl w-fit">
-                    <button
-                        onClick={() => setActiveTab('list')}
-                        className={cn(
-                            "px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-2",
-                            activeTab === 'list' ? "bg-white text-emerald-600 shadow-sm" : "text-slate-500 hover:text-slate-900"
-                        )}
-                    >
-                        <LayoutGrid size={14} /> List Monitor
-                    </button>
-                    <button
-                        onClick={() => setActiveTab('floorplan')}
-                        className={cn(
-                            "px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-2",
-                            activeTab === 'floorplan' ? "bg-white text-emerald-600 shadow-sm" : "text-slate-500 hover:text-slate-900"
-                        )}
-                    >
-                        <MapPin size={14} /> Floor Plan Monitor
-                    </button>
-                </div>
+                {!hideFloorPlanTab ? (
+                    <div className="flex justify-between items-center bg-slate-100 p-1.5 rounded-2xl w-fit">
+                        <button
+                            onClick={() => setActiveTab('list')}
+                            className={cn(
+                                "px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-2",
+                                activeTab === 'list' ? "bg-white text-emerald-600 shadow-sm" : "text-slate-500 hover:text-slate-900"
+                            )}
+                        >
+                            <LayoutGrid size={14} /> List Monitor
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('floorplan')}
+                            className={cn(
+                                "px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all flex items-center gap-2",
+                                activeTab === 'floorplan' ? "bg-white text-emerald-600 shadow-sm" : "text-slate-500 hover:text-slate-900"
+                            )}
+                        >
+                            <MapPin size={14} /> Floor Plan Monitor
+                        </button>
+                    </div>
+                ) : (
+                    <div />
+                )}
 
                 <div className="flex items-center gap-4">
                     <div className="flex items-center gap-3 px-4 py-2 bg-slate-900 rounded-full w-fit">
@@ -416,7 +422,7 @@ export default function OrdersClient({
             </div>
 
             {/* View Layouts */}
-            {activeTab === 'list' ? (
+            {(activeTab === 'list' || hideFloorPlanTab) ? (
                 /* Original List View */
                 <>
                     {displayOrders.length === 0 ? (

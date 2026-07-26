@@ -112,13 +112,30 @@ export default function FloorPlanCanvas({
 
     const [showGrid, setShowGrid] = useState(true)
 
-    // Filter elements by active space
-    const currentSpaceTables = floorPlan.tables.filter(t => (t.spaceId || 'main') === activeSpaceId)
-    const currentSpaceObstacles = floorPlan.obstacles.filter(o => (o.spaceId || 'main') === activeSpaceId)
+    // Robust space matching (handles CUIDs, space names, and 'main' fallbacks)
+    const activeSpaceObj = spaces.find(s => s.id === activeSpaceId)
+    const activeSpaceName = activeSpaceObj?.name || 'Salle Principale'
+    const isFirstSpace = spaces[0]?.id === activeSpaceId || activeSpaceId === 'main'
 
-    // Unpositioned tables for current space
-    const positionedIds = new Set(floorPlan.tables.map(t => t.id))
-    const unpositionedTables = initialTables.filter(t => !positionedIds.has(t.id))
+    const isElementInSpace = (elementSpaceId?: string | null) => {
+        if (!elementSpaceId) return isFirstSpace
+        if (elementSpaceId === activeSpaceId) return true
+        if (elementSpaceId === activeSpaceName) return true
+        if (isFirstSpace && (elementSpaceId === 'main' || elementSpaceId === 'Salle Principale')) return true
+        if (activeSpaceObj && (elementSpaceId === activeSpaceObj.id || elementSpaceId === activeSpaceObj.name)) return true
+        return false
+    }
+
+    // Filter elements by active space
+    const currentSpaceTables = floorPlan.tables.filter(t => isElementInSpace(t.spaceId))
+    const currentSpaceObstacles = floorPlan.obstacles.filter(o => isElementInSpace(o.spaceId))
+
+    // Positioned table IDs across all space canvases
+    const allPositionedIds = new Set(floorPlan.tables.map(t => t.id))
+
+    // Unpositioned tables: any table from initialTables not currently placed on ANY floor canvas.
+    // Removing a table from one floor immediately makes it available under TABLES À PLACER for any floor!
+    const unpositionedTables = initialTables.filter((t: any) => !allPositionedIds.has(t.id))
 
     // Handle space creation
     const handleAddSpace = async () => {
@@ -198,7 +215,7 @@ export default function FloorPlanCanvas({
 
         setFloorPlan(prev => ({
             ...prev,
-            tables: [...prev.tables, newTable]
+            tables: [...prev.tables.filter(t => t.id !== tableId), newTable]
         }))
         setSelectedElement({ id: tableId, type: 'table' })
         toast.success(`Table ${tableDb.number} ajoutée sur le plan !`)

@@ -230,24 +230,63 @@ export default function WaitersClient({
                                     <label className="text-sm font-bold text-slate-900 flex items-center gap-2 uppercase tracking-wider">
                                         <Layers size={16} className="text-indigo-600" /> Affectation des Tables par Salle / Étage
                                     </label>
-                                    <span className="text-xs font-black text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full border border-indigo-100">
-                                        {selectedTables.length} table(s) sélectionnée(s)
-                                    </span>
+                                    <div className="flex items-center gap-2">
+                                        <Button
+                                            type="button"
+                                            variant="ghost"
+                                            size="sm"
+                                            onClick={() => {
+                                                const allTableIds = initialTables.map(t => t.id)
+                                                const allSelected = allTableIds.every(id => selectedTables.includes(id))
+                                                setSelectedTables(allSelected ? [] : allTableIds)
+                                            }}
+                                            className="h-7 text-xs font-bold text-indigo-600 hover:bg-indigo-50 hover:text-indigo-700"
+                                        >
+                                            {initialTables.length > 0 && initialTables.every(t => selectedTables.includes(t.id))
+                                                ? 'Tout désélectionner'
+                                                : 'Tout sélectionner'}
+                                        </Button>
+                                        <span className="text-xs font-black text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full border border-indigo-100">
+                                            {selectedTables.length}/{initialTables.length} table(s)
+                                        </span>
+                                    </div>
                                 </div>
 
                                 {spacesMap.map(({ space, tables }) => {
                                     if (tables.length === 0) return null
-                                    const allSpaceSelected = tables.every(t => selectedTables.includes(t.id))
-                                    const someSpaceSelected = tables.some(t => selectedTables.includes(t.id))
+                                    const selectedInSpace = tables.filter(t => selectedTables.includes(t.id)).length
+                                    const allSpaceSelected = selectedInSpace === tables.length
+                                    const someSpaceSelected = selectedInSpace > 0
 
                                     return (
-                                        <div key={space.id} className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-4 space-y-3">
+                                        <div key={space.id} className={cn(
+                                            "rounded-2xl p-4 space-y-3 transition-all border-2",
+                                            allSpaceSelected
+                                                ? "bg-emerald-50/60 border-emerald-300 ring-2 ring-emerald-200/50"
+                                                : someSpaceSelected
+                                                ? "bg-indigo-50/40 border-indigo-200/80"
+                                                : "bg-slate-50/70 border-slate-200/80"
+                                        )}>
                                             <div className="flex items-center justify-between">
                                                 <div className="flex items-center gap-2">
-                                                    <MapPin size={14} className="text-indigo-500" />
+                                                    <div className={cn(
+                                                        "h-6 w-6 rounded-lg flex items-center justify-center transition-colors",
+                                                        allSpaceSelected
+                                                            ? "bg-emerald-500 text-white"
+                                                            : someSpaceSelected
+                                                            ? "bg-indigo-500 text-white"
+                                                            : "bg-slate-200 text-slate-500"
+                                                    )}>
+                                                        {allSpaceSelected ? <Check size={14} /> : <MapPin size={14} />}
+                                                    </div>
                                                     <h4 className="font-black text-sm text-slate-800">{space.name}</h4>
-                                                    <Badge variant="outline" className="text-[10px] font-bold bg-white text-slate-500">
-                                                        {tables.length} table(s)
+                                                    <Badge variant="outline" className={cn(
+                                                        "text-[10px] font-bold",
+                                                        allSpaceSelected
+                                                            ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                                                            : "bg-white text-slate-500"
+                                                    )}>
+                                                        {selectedInSpace}/{tables.length} table(s)
                                                     </Badge>
                                                 </div>
                                                 <Button
@@ -255,9 +294,14 @@ export default function WaitersClient({
                                                     variant="ghost"
                                                     size="sm"
                                                     onClick={() => toggleSpaceTables(space.id, tables)}
-                                                    className="h-7 text-xs font-bold text-indigo-600 hover:bg-indigo-50 hover:text-indigo-700"
+                                                    className={cn(
+                                                        "h-7 text-xs font-bold",
+                                                        allSpaceSelected
+                                                            ? "text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700"
+                                                            : "text-indigo-600 hover:bg-indigo-50 hover:text-indigo-700"
+                                                    )}
                                                 >
-                                                    {allSpaceSelected ? 'Tout désélectionner' : 'Tout sélectionner dans cette salle'}
+                                                    {allSpaceSelected ? 'Désélectionner l\'étage' : 'Sélectionner tout l\'étage'}
                                                 </Button>
                                             </div>
 
@@ -337,17 +381,27 @@ export default function WaitersClient({
                             </CardHeader>
 
                             <CardContent className="pt-2 space-y-4">
-                                <div className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 border-b border-slate-100 pb-2">
-                                    <Layers size={13} className="text-indigo-500" /> Tables Affectées par Étage ({waiterAssignedTables.length})
+                                <div className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between border-b border-slate-100 pb-2">
+                                    <span className="flex items-center gap-1.5">
+                                        <Layers size={13} className="text-indigo-500" /> Tables par Étage
+                                    </span>
+                                    <span className="text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full border border-indigo-100 font-black text-[10px]">
+                                        {waiterAssignedTables.length} table(s)
+                                    </span>
                                 </div>
 
                                 {Object.keys(groupedAssignedTables).length > 0 ? (
-                                    <div className="space-y-3">
+                                    <div className="space-y-2.5">
                                         {Object.entries(groupedAssignedTables).map(([spaceName, spaceTables]) => (
                                             <div key={spaceName} className="bg-slate-50/80 p-2.5 rounded-xl border border-slate-100">
-                                                <span className="text-[10px] font-black uppercase text-indigo-600 tracking-wider block mb-1.5">
-                                                    {spaceName}
-                                                </span>
+                                                <div className="flex items-center justify-between mb-1.5">
+                                                    <span className="text-[10px] font-black uppercase text-indigo-600 tracking-wider flex items-center gap-1">
+                                                        <MapPin size={10} className="text-indigo-500" /> {spaceName}
+                                                    </span>
+                                                    <span className="text-[9px] font-bold text-slate-400">
+                                                        {spaceTables.length} table(s)
+                                                    </span>
+                                                </div>
                                                 <div className="flex flex-wrap gap-1.5">
                                                     {spaceTables.map((t: any) => (
                                                         <Badge key={t.id} variant="outline" className="bg-white border-slate-200 text-slate-700 font-bold text-xs">

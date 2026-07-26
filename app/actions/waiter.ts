@@ -14,7 +14,9 @@ export async function getWaiters(slug?: string) {
     return await prisma.restaurantWaiter.findMany({
         where: { tenantId: tenant.id },
         include: {
-            tables: true
+            tables: {
+                include: { space: true }
+            }
         },
         orderBy: { name: 'asc' }
     })
@@ -27,14 +29,21 @@ export async function createWaiter(name: string, pin: string, tableIds: string[]
     if (!name || !pin || pin.length !== 4) return { error: 'Invalid name or PIN' }
 
     try {
+        // Verify tables belong to tenant
+        const validTables = await prisma.restaurantTable.findMany({
+            where: { id: { in: tableIds }, tenantId: tenant.id },
+            select: { id: true }
+        })
+        const validTableIds = validTables.map(t => t.id)
+
         // @ts-ignore
         await prisma.restaurantWaiter.create({
             data: {
                 tenantId: tenant.id,
                 name,
-                pin, // In a real app, hash this!
+                pin,
                 tables: {
-                    connect: tableIds.map(id => ({ id }))
+                    connect: validTableIds.map(id => ({ id }))
                 }
             }
         })
@@ -54,10 +63,17 @@ export async function updateWaiter(id: string, name: string, pin: string, tableI
     if (!name || (pin !== '' && pin.length !== 4)) return { error: 'Invalid name or PIN' }
 
     try {
+        // Verify tables belong to tenant
+        const validTables = await prisma.restaurantTable.findMany({
+            where: { id: { in: tableIds }, tenantId: tenant.id },
+            select: { id: true }
+        })
+        const validTableIds = validTables.map(t => t.id)
+
         const updateData: any = {
             name,
             tables: {
-                set: tableIds.map(tableId => ({ id: tableId }))
+                set: validTableIds.map(tableId => ({ id: tableId }))
             }
         }
         

@@ -125,6 +125,11 @@ export async function createDish(
     if (!tenant) return { error: 'Not authenticated' }
 
     try {
+        const category = await prisma.restaurantCategory.findFirst({
+            where: { id: categoryId, tenantId: tenant.id }
+        })
+        if (!category) return { error: 'Unauthorized or invalid category' }
+
         const dish = await prisma.restaurantDish.create({
             data: {
                 categoryId,
@@ -488,6 +493,14 @@ export async function updateOrderStatus(id: string, status: string, slug?: strin
     if (!tenant) return { error: 'Not authenticated' }
 
     try {
+        const order = await prisma.restaurantOrder.findUnique({
+            where: { id },
+            include: { table: true }
+        })
+        if (!order || order.table.tenantId !== tenant.id) {
+            return { error: 'Order not found or unauthorized' }
+        }
+
         await prisma.restaurantOrder.update({
             where: { id },
             data: { status }
@@ -823,15 +836,60 @@ export async function requestBill(tableId: string) {
     }
 }
 
+export async function dismissWaiterRequest(orderId: string, slug?: string) {
+    try {
+        const order = await prisma.restaurantOrder.findUnique({
+            where: { id: orderId },
+            include: { table: true, items: true }
+        })
+
+        if (!order) {
+            return { error: 'Order not found' }
+        }
+
+        // Filter out call-waiter and request-bill items
+        const realItems = order.items.filter(i => i.dishId !== 'call-waiter' && i.dishId !== 'request-bill')
+
+        if (realItems.length === 0) {
+            // Only call or bill request items exist: mark order as PAID/SERVED to clear the table immediately!
+            await prisma.restaurantOrder.update({
+                where: { id: orderId },
+                data: { status: 'PAID' }
+            })
+        } else {
+            // Delete only the call-waiter and request-bill items from this order so alert clears
+            await prisma.restaurantOrderItem.deleteMany({
+                where: {
+                    orderId,
+                    dishId: { in: ['call-waiter', 'request-bill'] }
+                }
+            })
+        }
+
+        revalidatePath('/dashboard/restaurant')
+        if (slug) {
+            revalidatePath(`/${slug}`)
+            revalidatePath(`/dashboard/restaurant/${slug}/kds`)
+            revalidatePath(`/dashboard/restaurant/${slug}/orders`)
+        }
+
+        return { success: true }
+    } catch (e) {
+        console.error('[Restaurant Action] dismissWaiterRequest Error:', e)
+        return { error: 'Failed to dismiss request' }
+    }
+}
+
 export async function saveFloorPlanLayout(slug: string, layoutJson: string) {
     const tenant = await getTenant(slug)
     if (!tenant) return { error: 'Not authenticated' }
 
     try {
         const currentConfig = tenant.config ? JSON.parse(tenant.config) : {}
+        const parsedPlan = JSON.parse(layoutJson)
         const newConfig = {
             ...currentConfig,
-            floorPlan: JSON.parse(layoutJson)
+            floorPlan: parsedPlan
         }
 
         await prisma.tenantWebsite.update({
@@ -840,6 +898,23 @@ export async function saveFloorPlanLayout(slug: string, layoutJson: string) {
                 config: JSON.stringify(newConfig)
             }
         })
+
+        // Also sync DB spaceId for each table placed on floor plan
+        if (parsedPlan?.tables && Array.isArray(parsedPlan.tables)) {
+            for (const t of parsedPlan.tables) {
+                if (t.id && t.spaceId && t.spaceId !== 'main') {
+                    const spaceExists = await prisma.restaurantSpace.findFirst({
+                        where: { id: t.spaceId, tenantId: tenant.id }
+                    })
+                    if (spaceExists) {
+                        await prisma.restaurantTable.update({
+                            where: { id: t.id, tenantId: tenant.id },
+                            data: { spaceId: t.spaceId }
+                        })
+                    }
+                }
+            }
+        }
 
         revalidatePath(`/${tenant.slug}`)
         revalidatePath(`/dashboard/restaurant/${tenant.slug}/tables`)
