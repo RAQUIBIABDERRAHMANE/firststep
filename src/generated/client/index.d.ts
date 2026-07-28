@@ -218,6 +218,16 @@ export type FactureCounter = $Result.DefaultSelection<Prisma.$FactureCounterPayl
  * 
  */
 export type CustomWebsiteRequest = $Result.DefaultSelection<Prisma.$CustomWebsiteRequestPayload>
+/**
+ * Model EmploymentApplication
+ * 
+ */
+export type EmploymentApplication = $Result.DefaultSelection<Prisma.$EmploymentApplicationPayload>
+/**
+ * Model EmploymentAgreementTemplate
+ * 
+ */
+export type EmploymentAgreementTemplate = $Result.DefaultSelection<Prisma.$EmploymentAgreementTemplatePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -745,6 +755,26 @@ export class PrismaClient<
     * ```
     */
   get customWebsiteRequest(): Prisma.CustomWebsiteRequestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.employmentApplication`: Exposes CRUD operations for the **EmploymentApplication** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmploymentApplications
+    * const employmentApplications = await prisma.employmentApplication.findMany()
+    * ```
+    */
+  get employmentApplication(): Prisma.EmploymentApplicationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.employmentAgreementTemplate`: Exposes CRUD operations for the **EmploymentAgreementTemplate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EmploymentAgreementTemplates
+    * const employmentAgreementTemplates = await prisma.employmentAgreementTemplate.findMany()
+    * ```
+    */
+  get employmentAgreementTemplate(): Prisma.EmploymentAgreementTemplateDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1219,7 +1249,9 @@ export namespace Prisma {
     FactureTemplate: 'FactureTemplate',
     FactureRecord: 'FactureRecord',
     FactureCounter: 'FactureCounter',
-    CustomWebsiteRequest: 'CustomWebsiteRequest'
+    CustomWebsiteRequest: 'CustomWebsiteRequest',
+    EmploymentApplication: 'EmploymentApplication',
+    EmploymentAgreementTemplate: 'EmploymentAgreementTemplate'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1235,7 +1267,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "chatSession" | "chatMessage" | "notification" | "service" | "userService" | "passwordReset" | "tenantWebsite" | "restaurantCategory" | "restaurantDish" | "restaurantTable" | "restaurantSpace" | "restaurantWaiter" | "restaurantOrder" | "restaurantOrderItem" | "billSplit" | "tableCartSession" | "waiterShift" | "ingredient" | "recipeItem" | "restaurantReport" | "restaurantReservation" | "cabinetService" | "cabinetClient" | "cabinetAppointment" | "paymentRequest" | "bankAccount" | "campaign" | "emailList" | "emailListMember" | "invoiceSettings" | "invoice" | "invoiceItem" | "medicalRecord" | "prescription" | "medicalHistory" | "tablePrintRequest" | "factureTemplate" | "factureRecord" | "factureCounter" | "customWebsiteRequest"
+      modelProps: "user" | "chatSession" | "chatMessage" | "notification" | "service" | "userService" | "passwordReset" | "tenantWebsite" | "restaurantCategory" | "restaurantDish" | "restaurantTable" | "restaurantSpace" | "restaurantWaiter" | "restaurantOrder" | "restaurantOrderItem" | "billSplit" | "tableCartSession" | "waiterShift" | "ingredient" | "recipeItem" | "restaurantReport" | "restaurantReservation" | "cabinetService" | "cabinetClient" | "cabinetAppointment" | "paymentRequest" | "bankAccount" | "campaign" | "emailList" | "emailListMember" | "invoiceSettings" | "invoice" | "invoiceItem" | "medicalRecord" | "prescription" | "medicalHistory" | "tablePrintRequest" | "factureTemplate" | "factureRecord" | "factureCounter" | "customWebsiteRequest" | "employmentApplication" | "employmentAgreementTemplate"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -4273,6 +4305,154 @@ export namespace Prisma {
           }
         }
       }
+      EmploymentApplication: {
+        payload: Prisma.$EmploymentApplicationPayload<ExtArgs>
+        fields: Prisma.EmploymentApplicationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmploymentApplicationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentApplicationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmploymentApplicationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentApplicationPayload>
+          }
+          findFirst: {
+            args: Prisma.EmploymentApplicationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentApplicationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmploymentApplicationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentApplicationPayload>
+          }
+          findMany: {
+            args: Prisma.EmploymentApplicationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentApplicationPayload>[]
+          }
+          create: {
+            args: Prisma.EmploymentApplicationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentApplicationPayload>
+          }
+          createMany: {
+            args: Prisma.EmploymentApplicationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmploymentApplicationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentApplicationPayload>[]
+          }
+          delete: {
+            args: Prisma.EmploymentApplicationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentApplicationPayload>
+          }
+          update: {
+            args: Prisma.EmploymentApplicationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentApplicationPayload>
+          }
+          deleteMany: {
+            args: Prisma.EmploymentApplicationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmploymentApplicationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmploymentApplicationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentApplicationPayload>[]
+          }
+          upsert: {
+            args: Prisma.EmploymentApplicationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentApplicationPayload>
+          }
+          aggregate: {
+            args: Prisma.EmploymentApplicationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmploymentApplication>
+          }
+          groupBy: {
+            args: Prisma.EmploymentApplicationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmploymentApplicationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmploymentApplicationCountArgs<ExtArgs>
+            result: $Utils.Optional<EmploymentApplicationCountAggregateOutputType> | number
+          }
+        }
+      }
+      EmploymentAgreementTemplate: {
+        payload: Prisma.$EmploymentAgreementTemplatePayload<ExtArgs>
+        fields: Prisma.EmploymentAgreementTemplateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EmploymentAgreementTemplateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentAgreementTemplatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EmploymentAgreementTemplateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentAgreementTemplatePayload>
+          }
+          findFirst: {
+            args: Prisma.EmploymentAgreementTemplateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentAgreementTemplatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EmploymentAgreementTemplateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentAgreementTemplatePayload>
+          }
+          findMany: {
+            args: Prisma.EmploymentAgreementTemplateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentAgreementTemplatePayload>[]
+          }
+          create: {
+            args: Prisma.EmploymentAgreementTemplateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentAgreementTemplatePayload>
+          }
+          createMany: {
+            args: Prisma.EmploymentAgreementTemplateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EmploymentAgreementTemplateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentAgreementTemplatePayload>[]
+          }
+          delete: {
+            args: Prisma.EmploymentAgreementTemplateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentAgreementTemplatePayload>
+          }
+          update: {
+            args: Prisma.EmploymentAgreementTemplateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentAgreementTemplatePayload>
+          }
+          deleteMany: {
+            args: Prisma.EmploymentAgreementTemplateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EmploymentAgreementTemplateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EmploymentAgreementTemplateUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentAgreementTemplatePayload>[]
+          }
+          upsert: {
+            args: Prisma.EmploymentAgreementTemplateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmploymentAgreementTemplatePayload>
+          }
+          aggregate: {
+            args: Prisma.EmploymentAgreementTemplateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmploymentAgreementTemplate>
+          }
+          groupBy: {
+            args: Prisma.EmploymentAgreementTemplateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmploymentAgreementTemplateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EmploymentAgreementTemplateCountArgs<ExtArgs>
+            result: $Utils.Optional<EmploymentAgreementTemplateCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -4422,6 +4602,8 @@ export namespace Prisma {
     factureRecord?: FactureRecordOmit
     factureCounter?: FactureCounterOmit
     customWebsiteRequest?: CustomWebsiteRequestOmit
+    employmentApplication?: EmploymentApplicationOmit
+    employmentAgreementTemplate?: EmploymentAgreementTemplateOmit
   }
 
   /* Types for Logging */
@@ -53124,6 +53306,3028 @@ export namespace Prisma {
 
 
   /**
+   * Model EmploymentApplication
+   */
+
+  export type AggregateEmploymentApplication = {
+    _count: EmploymentApplicationCountAggregateOutputType | null
+    _avg: EmploymentApplicationAvgAggregateOutputType | null
+    _sum: EmploymentApplicationSumAggregateOutputType | null
+    _min: EmploymentApplicationMinAggregateOutputType | null
+    _max: EmploymentApplicationMaxAggregateOutputType | null
+  }
+
+  export type EmploymentApplicationAvgAggregateOutputType = {
+    revenueShare: number | null
+  }
+
+  export type EmploymentApplicationSumAggregateOutputType = {
+    revenueShare: number | null
+  }
+
+  export type EmploymentApplicationMinAggregateOutputType = {
+    id: string | null
+    fullName: string | null
+    email: string | null
+    phone: string | null
+    cin: string | null
+    cvUrl: string | null
+    photoUrl: string | null
+    githubUrl: string | null
+    portfolioUrl: string | null
+    linkedinUrl: string | null
+    skills: string | null
+    revenueShare: number | null
+    status: string | null
+    agreementPdfUrl: string | null
+    adminNotes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmploymentApplicationMaxAggregateOutputType = {
+    id: string | null
+    fullName: string | null
+    email: string | null
+    phone: string | null
+    cin: string | null
+    cvUrl: string | null
+    photoUrl: string | null
+    githubUrl: string | null
+    portfolioUrl: string | null
+    linkedinUrl: string | null
+    skills: string | null
+    revenueShare: number | null
+    status: string | null
+    agreementPdfUrl: string | null
+    adminNotes: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmploymentApplicationCountAggregateOutputType = {
+    id: number
+    fullName: number
+    email: number
+    phone: number
+    cin: number
+    cvUrl: number
+    photoUrl: number
+    githubUrl: number
+    portfolioUrl: number
+    linkedinUrl: number
+    skills: number
+    revenueShare: number
+    status: number
+    agreementPdfUrl: number
+    adminNotes: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EmploymentApplicationAvgAggregateInputType = {
+    revenueShare?: true
+  }
+
+  export type EmploymentApplicationSumAggregateInputType = {
+    revenueShare?: true
+  }
+
+  export type EmploymentApplicationMinAggregateInputType = {
+    id?: true
+    fullName?: true
+    email?: true
+    phone?: true
+    cin?: true
+    cvUrl?: true
+    photoUrl?: true
+    githubUrl?: true
+    portfolioUrl?: true
+    linkedinUrl?: true
+    skills?: true
+    revenueShare?: true
+    status?: true
+    agreementPdfUrl?: true
+    adminNotes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmploymentApplicationMaxAggregateInputType = {
+    id?: true
+    fullName?: true
+    email?: true
+    phone?: true
+    cin?: true
+    cvUrl?: true
+    photoUrl?: true
+    githubUrl?: true
+    portfolioUrl?: true
+    linkedinUrl?: true
+    skills?: true
+    revenueShare?: true
+    status?: true
+    agreementPdfUrl?: true
+    adminNotes?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmploymentApplicationCountAggregateInputType = {
+    id?: true
+    fullName?: true
+    email?: true
+    phone?: true
+    cin?: true
+    cvUrl?: true
+    photoUrl?: true
+    githubUrl?: true
+    portfolioUrl?: true
+    linkedinUrl?: true
+    skills?: true
+    revenueShare?: true
+    status?: true
+    agreementPdfUrl?: true
+    adminNotes?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EmploymentApplicationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmploymentApplication to aggregate.
+     */
+    where?: EmploymentApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmploymentApplications to fetch.
+     */
+    orderBy?: EmploymentApplicationOrderByWithRelationInput | EmploymentApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmploymentApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmploymentApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmploymentApplications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EmploymentApplications
+    **/
+    _count?: true | EmploymentApplicationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EmploymentApplicationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EmploymentApplicationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmploymentApplicationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmploymentApplicationMaxAggregateInputType
+  }
+
+  export type GetEmploymentApplicationAggregateType<T extends EmploymentApplicationAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmploymentApplication]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmploymentApplication[P]>
+      : GetScalarType<T[P], AggregateEmploymentApplication[P]>
+  }
+
+
+
+
+  export type EmploymentApplicationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmploymentApplicationWhereInput
+    orderBy?: EmploymentApplicationOrderByWithAggregationInput | EmploymentApplicationOrderByWithAggregationInput[]
+    by: EmploymentApplicationScalarFieldEnum[] | EmploymentApplicationScalarFieldEnum
+    having?: EmploymentApplicationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmploymentApplicationCountAggregateInputType | true
+    _avg?: EmploymentApplicationAvgAggregateInputType
+    _sum?: EmploymentApplicationSumAggregateInputType
+    _min?: EmploymentApplicationMinAggregateInputType
+    _max?: EmploymentApplicationMaxAggregateInputType
+  }
+
+  export type EmploymentApplicationGroupByOutputType = {
+    id: string
+    fullName: string
+    email: string
+    phone: string
+    cin: string
+    cvUrl: string
+    photoUrl: string
+    githubUrl: string
+    portfolioUrl: string | null
+    linkedinUrl: string
+    skills: string
+    revenueShare: number
+    status: string
+    agreementPdfUrl: string | null
+    adminNotes: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: EmploymentApplicationCountAggregateOutputType | null
+    _avg: EmploymentApplicationAvgAggregateOutputType | null
+    _sum: EmploymentApplicationSumAggregateOutputType | null
+    _min: EmploymentApplicationMinAggregateOutputType | null
+    _max: EmploymentApplicationMaxAggregateOutputType | null
+  }
+
+  type GetEmploymentApplicationGroupByPayload<T extends EmploymentApplicationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmploymentApplicationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmploymentApplicationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmploymentApplicationGroupByOutputType[P]>
+            : GetScalarType<T[P], EmploymentApplicationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmploymentApplicationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fullName?: boolean
+    email?: boolean
+    phone?: boolean
+    cin?: boolean
+    cvUrl?: boolean
+    photoUrl?: boolean
+    githubUrl?: boolean
+    portfolioUrl?: boolean
+    linkedinUrl?: boolean
+    skills?: boolean
+    revenueShare?: boolean
+    status?: boolean
+    agreementPdfUrl?: boolean
+    adminNotes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["employmentApplication"]>
+
+  export type EmploymentApplicationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fullName?: boolean
+    email?: boolean
+    phone?: boolean
+    cin?: boolean
+    cvUrl?: boolean
+    photoUrl?: boolean
+    githubUrl?: boolean
+    portfolioUrl?: boolean
+    linkedinUrl?: boolean
+    skills?: boolean
+    revenueShare?: boolean
+    status?: boolean
+    agreementPdfUrl?: boolean
+    adminNotes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["employmentApplication"]>
+
+  export type EmploymentApplicationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    fullName?: boolean
+    email?: boolean
+    phone?: boolean
+    cin?: boolean
+    cvUrl?: boolean
+    photoUrl?: boolean
+    githubUrl?: boolean
+    portfolioUrl?: boolean
+    linkedinUrl?: boolean
+    skills?: boolean
+    revenueShare?: boolean
+    status?: boolean
+    agreementPdfUrl?: boolean
+    adminNotes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["employmentApplication"]>
+
+  export type EmploymentApplicationSelectScalar = {
+    id?: boolean
+    fullName?: boolean
+    email?: boolean
+    phone?: boolean
+    cin?: boolean
+    cvUrl?: boolean
+    photoUrl?: boolean
+    githubUrl?: boolean
+    portfolioUrl?: boolean
+    linkedinUrl?: boolean
+    skills?: boolean
+    revenueShare?: boolean
+    status?: boolean
+    agreementPdfUrl?: boolean
+    adminNotes?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EmploymentApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "email" | "phone" | "cin" | "cvUrl" | "photoUrl" | "githubUrl" | "portfolioUrl" | "linkedinUrl" | "skills" | "revenueShare" | "status" | "agreementPdfUrl" | "adminNotes" | "createdAt" | "updatedAt", ExtArgs["result"]["employmentApplication"]>
+
+  export type $EmploymentApplicationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmploymentApplication"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      fullName: string
+      email: string
+      phone: string
+      cin: string
+      cvUrl: string
+      photoUrl: string
+      githubUrl: string
+      portfolioUrl: string | null
+      linkedinUrl: string
+      skills: string
+      revenueShare: number
+      status: string
+      agreementPdfUrl: string | null
+      adminNotes: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["employmentApplication"]>
+    composites: {}
+  }
+
+  type EmploymentApplicationGetPayload<S extends boolean | null | undefined | EmploymentApplicationDefaultArgs> = $Result.GetResult<Prisma.$EmploymentApplicationPayload, S>
+
+  type EmploymentApplicationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmploymentApplicationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmploymentApplicationCountAggregateInputType | true
+    }
+
+  export interface EmploymentApplicationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmploymentApplication'], meta: { name: 'EmploymentApplication' } }
+    /**
+     * Find zero or one EmploymentApplication that matches the filter.
+     * @param {EmploymentApplicationFindUniqueArgs} args - Arguments to find a EmploymentApplication
+     * @example
+     * // Get one EmploymentApplication
+     * const employmentApplication = await prisma.employmentApplication.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmploymentApplicationFindUniqueArgs>(args: SelectSubset<T, EmploymentApplicationFindUniqueArgs<ExtArgs>>): Prisma__EmploymentApplicationClient<$Result.GetResult<Prisma.$EmploymentApplicationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmploymentApplication that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmploymentApplicationFindUniqueOrThrowArgs} args - Arguments to find a EmploymentApplication
+     * @example
+     * // Get one EmploymentApplication
+     * const employmentApplication = await prisma.employmentApplication.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmploymentApplicationFindUniqueOrThrowArgs>(args: SelectSubset<T, EmploymentApplicationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmploymentApplicationClient<$Result.GetResult<Prisma.$EmploymentApplicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmploymentApplication that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploymentApplicationFindFirstArgs} args - Arguments to find a EmploymentApplication
+     * @example
+     * // Get one EmploymentApplication
+     * const employmentApplication = await prisma.employmentApplication.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmploymentApplicationFindFirstArgs>(args?: SelectSubset<T, EmploymentApplicationFindFirstArgs<ExtArgs>>): Prisma__EmploymentApplicationClient<$Result.GetResult<Prisma.$EmploymentApplicationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmploymentApplication that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploymentApplicationFindFirstOrThrowArgs} args - Arguments to find a EmploymentApplication
+     * @example
+     * // Get one EmploymentApplication
+     * const employmentApplication = await prisma.employmentApplication.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmploymentApplicationFindFirstOrThrowArgs>(args?: SelectSubset<T, EmploymentApplicationFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmploymentApplicationClient<$Result.GetResult<Prisma.$EmploymentApplicationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmploymentApplications that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploymentApplicationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmploymentApplications
+     * const employmentApplications = await prisma.employmentApplication.findMany()
+     * 
+     * // Get first 10 EmploymentApplications
+     * const employmentApplications = await prisma.employmentApplication.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const employmentApplicationWithIdOnly = await prisma.employmentApplication.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmploymentApplicationFindManyArgs>(args?: SelectSubset<T, EmploymentApplicationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmploymentApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmploymentApplication.
+     * @param {EmploymentApplicationCreateArgs} args - Arguments to create a EmploymentApplication.
+     * @example
+     * // Create one EmploymentApplication
+     * const EmploymentApplication = await prisma.employmentApplication.create({
+     *   data: {
+     *     // ... data to create a EmploymentApplication
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmploymentApplicationCreateArgs>(args: SelectSubset<T, EmploymentApplicationCreateArgs<ExtArgs>>): Prisma__EmploymentApplicationClient<$Result.GetResult<Prisma.$EmploymentApplicationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmploymentApplications.
+     * @param {EmploymentApplicationCreateManyArgs} args - Arguments to create many EmploymentApplications.
+     * @example
+     * // Create many EmploymentApplications
+     * const employmentApplication = await prisma.employmentApplication.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmploymentApplicationCreateManyArgs>(args?: SelectSubset<T, EmploymentApplicationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EmploymentApplications and returns the data saved in the database.
+     * @param {EmploymentApplicationCreateManyAndReturnArgs} args - Arguments to create many EmploymentApplications.
+     * @example
+     * // Create many EmploymentApplications
+     * const employmentApplication = await prisma.employmentApplication.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EmploymentApplications and only return the `id`
+     * const employmentApplicationWithIdOnly = await prisma.employmentApplication.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmploymentApplicationCreateManyAndReturnArgs>(args?: SelectSubset<T, EmploymentApplicationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmploymentApplicationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EmploymentApplication.
+     * @param {EmploymentApplicationDeleteArgs} args - Arguments to delete one EmploymentApplication.
+     * @example
+     * // Delete one EmploymentApplication
+     * const EmploymentApplication = await prisma.employmentApplication.delete({
+     *   where: {
+     *     // ... filter to delete one EmploymentApplication
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmploymentApplicationDeleteArgs>(args: SelectSubset<T, EmploymentApplicationDeleteArgs<ExtArgs>>): Prisma__EmploymentApplicationClient<$Result.GetResult<Prisma.$EmploymentApplicationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmploymentApplication.
+     * @param {EmploymentApplicationUpdateArgs} args - Arguments to update one EmploymentApplication.
+     * @example
+     * // Update one EmploymentApplication
+     * const employmentApplication = await prisma.employmentApplication.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmploymentApplicationUpdateArgs>(args: SelectSubset<T, EmploymentApplicationUpdateArgs<ExtArgs>>): Prisma__EmploymentApplicationClient<$Result.GetResult<Prisma.$EmploymentApplicationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmploymentApplications.
+     * @param {EmploymentApplicationDeleteManyArgs} args - Arguments to filter EmploymentApplications to delete.
+     * @example
+     * // Delete a few EmploymentApplications
+     * const { count } = await prisma.employmentApplication.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmploymentApplicationDeleteManyArgs>(args?: SelectSubset<T, EmploymentApplicationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmploymentApplications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploymentApplicationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmploymentApplications
+     * const employmentApplication = await prisma.employmentApplication.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmploymentApplicationUpdateManyArgs>(args: SelectSubset<T, EmploymentApplicationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmploymentApplications and returns the data updated in the database.
+     * @param {EmploymentApplicationUpdateManyAndReturnArgs} args - Arguments to update many EmploymentApplications.
+     * @example
+     * // Update many EmploymentApplications
+     * const employmentApplication = await prisma.employmentApplication.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EmploymentApplications and only return the `id`
+     * const employmentApplicationWithIdOnly = await prisma.employmentApplication.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmploymentApplicationUpdateManyAndReturnArgs>(args: SelectSubset<T, EmploymentApplicationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmploymentApplicationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EmploymentApplication.
+     * @param {EmploymentApplicationUpsertArgs} args - Arguments to update or create a EmploymentApplication.
+     * @example
+     * // Update or create a EmploymentApplication
+     * const employmentApplication = await prisma.employmentApplication.upsert({
+     *   create: {
+     *     // ... data to create a EmploymentApplication
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmploymentApplication we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmploymentApplicationUpsertArgs>(args: SelectSubset<T, EmploymentApplicationUpsertArgs<ExtArgs>>): Prisma__EmploymentApplicationClient<$Result.GetResult<Prisma.$EmploymentApplicationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmploymentApplications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploymentApplicationCountArgs} args - Arguments to filter EmploymentApplications to count.
+     * @example
+     * // Count the number of EmploymentApplications
+     * const count = await prisma.employmentApplication.count({
+     *   where: {
+     *     // ... the filter for the EmploymentApplications we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmploymentApplicationCountArgs>(
+      args?: Subset<T, EmploymentApplicationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmploymentApplicationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmploymentApplication.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploymentApplicationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmploymentApplicationAggregateArgs>(args: Subset<T, EmploymentApplicationAggregateArgs>): Prisma.PrismaPromise<GetEmploymentApplicationAggregateType<T>>
+
+    /**
+     * Group by EmploymentApplication.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploymentApplicationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmploymentApplicationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmploymentApplicationGroupByArgs['orderBy'] }
+        : { orderBy?: EmploymentApplicationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmploymentApplicationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmploymentApplicationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EmploymentApplication model
+   */
+  readonly fields: EmploymentApplicationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EmploymentApplication.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmploymentApplicationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EmploymentApplication model
+   */
+  interface EmploymentApplicationFieldRefs {
+    readonly id: FieldRef<"EmploymentApplication", 'String'>
+    readonly fullName: FieldRef<"EmploymentApplication", 'String'>
+    readonly email: FieldRef<"EmploymentApplication", 'String'>
+    readonly phone: FieldRef<"EmploymentApplication", 'String'>
+    readonly cin: FieldRef<"EmploymentApplication", 'String'>
+    readonly cvUrl: FieldRef<"EmploymentApplication", 'String'>
+    readonly photoUrl: FieldRef<"EmploymentApplication", 'String'>
+    readonly githubUrl: FieldRef<"EmploymentApplication", 'String'>
+    readonly portfolioUrl: FieldRef<"EmploymentApplication", 'String'>
+    readonly linkedinUrl: FieldRef<"EmploymentApplication", 'String'>
+    readonly skills: FieldRef<"EmploymentApplication", 'String'>
+    readonly revenueShare: FieldRef<"EmploymentApplication", 'Float'>
+    readonly status: FieldRef<"EmploymentApplication", 'String'>
+    readonly agreementPdfUrl: FieldRef<"EmploymentApplication", 'String'>
+    readonly adminNotes: FieldRef<"EmploymentApplication", 'String'>
+    readonly createdAt: FieldRef<"EmploymentApplication", 'DateTime'>
+    readonly updatedAt: FieldRef<"EmploymentApplication", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EmploymentApplication findUnique
+   */
+  export type EmploymentApplicationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentApplication
+     */
+    select?: EmploymentApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentApplication
+     */
+    omit?: EmploymentApplicationOmit<ExtArgs> | null
+    /**
+     * Filter, which EmploymentApplication to fetch.
+     */
+    where: EmploymentApplicationWhereUniqueInput
+  }
+
+  /**
+   * EmploymentApplication findUniqueOrThrow
+   */
+  export type EmploymentApplicationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentApplication
+     */
+    select?: EmploymentApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentApplication
+     */
+    omit?: EmploymentApplicationOmit<ExtArgs> | null
+    /**
+     * Filter, which EmploymentApplication to fetch.
+     */
+    where: EmploymentApplicationWhereUniqueInput
+  }
+
+  /**
+   * EmploymentApplication findFirst
+   */
+  export type EmploymentApplicationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentApplication
+     */
+    select?: EmploymentApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentApplication
+     */
+    omit?: EmploymentApplicationOmit<ExtArgs> | null
+    /**
+     * Filter, which EmploymentApplication to fetch.
+     */
+    where?: EmploymentApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmploymentApplications to fetch.
+     */
+    orderBy?: EmploymentApplicationOrderByWithRelationInput | EmploymentApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmploymentApplications.
+     */
+    cursor?: EmploymentApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmploymentApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmploymentApplications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmploymentApplications.
+     */
+    distinct?: EmploymentApplicationScalarFieldEnum | EmploymentApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * EmploymentApplication findFirstOrThrow
+   */
+  export type EmploymentApplicationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentApplication
+     */
+    select?: EmploymentApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentApplication
+     */
+    omit?: EmploymentApplicationOmit<ExtArgs> | null
+    /**
+     * Filter, which EmploymentApplication to fetch.
+     */
+    where?: EmploymentApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmploymentApplications to fetch.
+     */
+    orderBy?: EmploymentApplicationOrderByWithRelationInput | EmploymentApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmploymentApplications.
+     */
+    cursor?: EmploymentApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmploymentApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmploymentApplications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmploymentApplications.
+     */
+    distinct?: EmploymentApplicationScalarFieldEnum | EmploymentApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * EmploymentApplication findMany
+   */
+  export type EmploymentApplicationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentApplication
+     */
+    select?: EmploymentApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentApplication
+     */
+    omit?: EmploymentApplicationOmit<ExtArgs> | null
+    /**
+     * Filter, which EmploymentApplications to fetch.
+     */
+    where?: EmploymentApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmploymentApplications to fetch.
+     */
+    orderBy?: EmploymentApplicationOrderByWithRelationInput | EmploymentApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EmploymentApplications.
+     */
+    cursor?: EmploymentApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmploymentApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmploymentApplications.
+     */
+    skip?: number
+    distinct?: EmploymentApplicationScalarFieldEnum | EmploymentApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * EmploymentApplication create
+   */
+  export type EmploymentApplicationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentApplication
+     */
+    select?: EmploymentApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentApplication
+     */
+    omit?: EmploymentApplicationOmit<ExtArgs> | null
+    /**
+     * The data needed to create a EmploymentApplication.
+     */
+    data: XOR<EmploymentApplicationCreateInput, EmploymentApplicationUncheckedCreateInput>
+  }
+
+  /**
+   * EmploymentApplication createMany
+   */
+  export type EmploymentApplicationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EmploymentApplications.
+     */
+    data: EmploymentApplicationCreateManyInput | EmploymentApplicationCreateManyInput[]
+  }
+
+  /**
+   * EmploymentApplication createManyAndReturn
+   */
+  export type EmploymentApplicationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentApplication
+     */
+    select?: EmploymentApplicationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentApplication
+     */
+    omit?: EmploymentApplicationOmit<ExtArgs> | null
+    /**
+     * The data used to create many EmploymentApplications.
+     */
+    data: EmploymentApplicationCreateManyInput | EmploymentApplicationCreateManyInput[]
+  }
+
+  /**
+   * EmploymentApplication update
+   */
+  export type EmploymentApplicationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentApplication
+     */
+    select?: EmploymentApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentApplication
+     */
+    omit?: EmploymentApplicationOmit<ExtArgs> | null
+    /**
+     * The data needed to update a EmploymentApplication.
+     */
+    data: XOR<EmploymentApplicationUpdateInput, EmploymentApplicationUncheckedUpdateInput>
+    /**
+     * Choose, which EmploymentApplication to update.
+     */
+    where: EmploymentApplicationWhereUniqueInput
+  }
+
+  /**
+   * EmploymentApplication updateMany
+   */
+  export type EmploymentApplicationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EmploymentApplications.
+     */
+    data: XOR<EmploymentApplicationUpdateManyMutationInput, EmploymentApplicationUncheckedUpdateManyInput>
+    /**
+     * Filter which EmploymentApplications to update
+     */
+    where?: EmploymentApplicationWhereInput
+    /**
+     * Limit how many EmploymentApplications to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmploymentApplication updateManyAndReturn
+   */
+  export type EmploymentApplicationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentApplication
+     */
+    select?: EmploymentApplicationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentApplication
+     */
+    omit?: EmploymentApplicationOmit<ExtArgs> | null
+    /**
+     * The data used to update EmploymentApplications.
+     */
+    data: XOR<EmploymentApplicationUpdateManyMutationInput, EmploymentApplicationUncheckedUpdateManyInput>
+    /**
+     * Filter which EmploymentApplications to update
+     */
+    where?: EmploymentApplicationWhereInput
+    /**
+     * Limit how many EmploymentApplications to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmploymentApplication upsert
+   */
+  export type EmploymentApplicationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentApplication
+     */
+    select?: EmploymentApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentApplication
+     */
+    omit?: EmploymentApplicationOmit<ExtArgs> | null
+    /**
+     * The filter to search for the EmploymentApplication to update in case it exists.
+     */
+    where: EmploymentApplicationWhereUniqueInput
+    /**
+     * In case the EmploymentApplication found by the `where` argument doesn't exist, create a new EmploymentApplication with this data.
+     */
+    create: XOR<EmploymentApplicationCreateInput, EmploymentApplicationUncheckedCreateInput>
+    /**
+     * In case the EmploymentApplication was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmploymentApplicationUpdateInput, EmploymentApplicationUncheckedUpdateInput>
+  }
+
+  /**
+   * EmploymentApplication delete
+   */
+  export type EmploymentApplicationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentApplication
+     */
+    select?: EmploymentApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentApplication
+     */
+    omit?: EmploymentApplicationOmit<ExtArgs> | null
+    /**
+     * Filter which EmploymentApplication to delete.
+     */
+    where: EmploymentApplicationWhereUniqueInput
+  }
+
+  /**
+   * EmploymentApplication deleteMany
+   */
+  export type EmploymentApplicationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmploymentApplications to delete
+     */
+    where?: EmploymentApplicationWhereInput
+    /**
+     * Limit how many EmploymentApplications to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmploymentApplication without action
+   */
+  export type EmploymentApplicationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentApplication
+     */
+    select?: EmploymentApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentApplication
+     */
+    omit?: EmploymentApplicationOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EmploymentAgreementTemplate
+   */
+
+  export type AggregateEmploymentAgreementTemplate = {
+    _count: EmploymentAgreementTemplateCountAggregateOutputType | null
+    _avg: EmploymentAgreementTemplateAvgAggregateOutputType | null
+    _sum: EmploymentAgreementTemplateSumAggregateOutputType | null
+    _min: EmploymentAgreementTemplateMinAggregateOutputType | null
+    _max: EmploymentAgreementTemplateMaxAggregateOutputType | null
+  }
+
+  export type EmploymentAgreementTemplateAvgAggregateOutputType = {
+    dateX: number | null
+    dateY: number | null
+    employeeNameX: number | null
+    employeeNameY: number | null
+    employeeCinX: number | null
+    employeeCinY: number | null
+    startDateX: number | null
+    startDateY: number | null
+    revenueShareX: number | null
+    revenueShareY: number | null
+    employeeSignNameX: number | null
+    employeeSignNameY: number | null
+    employeeSignDateX: number | null
+    employeeSignDateY: number | null
+    fontSize: number | null
+    dateFontSize: number | null
+    employeeNameFontSize: number | null
+    employeeCinFontSize: number | null
+    startDateFontSize: number | null
+    revenueShareFontSize: number | null
+    employeeSignNameFontSize: number | null
+    employeeSignDateFontSize: number | null
+  }
+
+  export type EmploymentAgreementTemplateSumAggregateOutputType = {
+    dateX: number | null
+    dateY: number | null
+    employeeNameX: number | null
+    employeeNameY: number | null
+    employeeCinX: number | null
+    employeeCinY: number | null
+    startDateX: number | null
+    startDateY: number | null
+    revenueShareX: number | null
+    revenueShareY: number | null
+    employeeSignNameX: number | null
+    employeeSignNameY: number | null
+    employeeSignDateX: number | null
+    employeeSignDateY: number | null
+    fontSize: number | null
+    dateFontSize: number | null
+    employeeNameFontSize: number | null
+    employeeCinFontSize: number | null
+    startDateFontSize: number | null
+    revenueShareFontSize: number | null
+    employeeSignNameFontSize: number | null
+    employeeSignDateFontSize: number | null
+  }
+
+  export type EmploymentAgreementTemplateMinAggregateOutputType = {
+    id: string | null
+    dateX: number | null
+    dateY: number | null
+    employeeNameX: number | null
+    employeeNameY: number | null
+    employeeCinX: number | null
+    employeeCinY: number | null
+    startDateX: number | null
+    startDateY: number | null
+    revenueShareX: number | null
+    revenueShareY: number | null
+    employeeSignNameX: number | null
+    employeeSignNameY: number | null
+    employeeSignDateX: number | null
+    employeeSignDateY: number | null
+    dateEnabled: boolean | null
+    employeeNameEnabled: boolean | null
+    employeeCinEnabled: boolean | null
+    startDateEnabled: boolean | null
+    revenueShareEnabled: boolean | null
+    employeeSignNameEnabled: boolean | null
+    employeeSignDateEnabled: boolean | null
+    fontSize: number | null
+    fontColor: string | null
+    dateFontSize: number | null
+    dateFontColor: string | null
+    dateIsBold: boolean | null
+    dateIsItalic: boolean | null
+    dateFontFamily: string | null
+    employeeNameFontSize: number | null
+    employeeNameFontColor: string | null
+    employeeNameIsBold: boolean | null
+    employeeNameIsItalic: boolean | null
+    employeeNameFontFamily: string | null
+    employeeCinFontSize: number | null
+    employeeCinFontColor: string | null
+    employeeCinIsBold: boolean | null
+    employeeCinIsItalic: boolean | null
+    employeeCinFontFamily: string | null
+    startDateFontSize: number | null
+    startDateFontColor: string | null
+    startDateIsBold: boolean | null
+    startDateIsItalic: boolean | null
+    startDateFontFamily: string | null
+    revenueShareFontSize: number | null
+    revenueShareFontColor: string | null
+    revenueShareIsBold: boolean | null
+    revenueShareIsItalic: boolean | null
+    revenueShareFontFamily: string | null
+    employeeSignNameFontSize: number | null
+    employeeSignNameFontColor: string | null
+    employeeSignNameIsBold: boolean | null
+    employeeSignNameIsItalic: boolean | null
+    employeeSignNameFontFamily: string | null
+    employeeSignDateFontSize: number | null
+    employeeSignDateFontColor: string | null
+    employeeSignDateIsBold: boolean | null
+    employeeSignDateIsItalic: boolean | null
+    employeeSignDateFontFamily: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmploymentAgreementTemplateMaxAggregateOutputType = {
+    id: string | null
+    dateX: number | null
+    dateY: number | null
+    employeeNameX: number | null
+    employeeNameY: number | null
+    employeeCinX: number | null
+    employeeCinY: number | null
+    startDateX: number | null
+    startDateY: number | null
+    revenueShareX: number | null
+    revenueShareY: number | null
+    employeeSignNameX: number | null
+    employeeSignNameY: number | null
+    employeeSignDateX: number | null
+    employeeSignDateY: number | null
+    dateEnabled: boolean | null
+    employeeNameEnabled: boolean | null
+    employeeCinEnabled: boolean | null
+    startDateEnabled: boolean | null
+    revenueShareEnabled: boolean | null
+    employeeSignNameEnabled: boolean | null
+    employeeSignDateEnabled: boolean | null
+    fontSize: number | null
+    fontColor: string | null
+    dateFontSize: number | null
+    dateFontColor: string | null
+    dateIsBold: boolean | null
+    dateIsItalic: boolean | null
+    dateFontFamily: string | null
+    employeeNameFontSize: number | null
+    employeeNameFontColor: string | null
+    employeeNameIsBold: boolean | null
+    employeeNameIsItalic: boolean | null
+    employeeNameFontFamily: string | null
+    employeeCinFontSize: number | null
+    employeeCinFontColor: string | null
+    employeeCinIsBold: boolean | null
+    employeeCinIsItalic: boolean | null
+    employeeCinFontFamily: string | null
+    startDateFontSize: number | null
+    startDateFontColor: string | null
+    startDateIsBold: boolean | null
+    startDateIsItalic: boolean | null
+    startDateFontFamily: string | null
+    revenueShareFontSize: number | null
+    revenueShareFontColor: string | null
+    revenueShareIsBold: boolean | null
+    revenueShareIsItalic: boolean | null
+    revenueShareFontFamily: string | null
+    employeeSignNameFontSize: number | null
+    employeeSignNameFontColor: string | null
+    employeeSignNameIsBold: boolean | null
+    employeeSignNameIsItalic: boolean | null
+    employeeSignNameFontFamily: string | null
+    employeeSignDateFontSize: number | null
+    employeeSignDateFontColor: string | null
+    employeeSignDateIsBold: boolean | null
+    employeeSignDateIsItalic: boolean | null
+    employeeSignDateFontFamily: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EmploymentAgreementTemplateCountAggregateOutputType = {
+    id: number
+    dateX: number
+    dateY: number
+    employeeNameX: number
+    employeeNameY: number
+    employeeCinX: number
+    employeeCinY: number
+    startDateX: number
+    startDateY: number
+    revenueShareX: number
+    revenueShareY: number
+    employeeSignNameX: number
+    employeeSignNameY: number
+    employeeSignDateX: number
+    employeeSignDateY: number
+    dateEnabled: number
+    employeeNameEnabled: number
+    employeeCinEnabled: number
+    startDateEnabled: number
+    revenueShareEnabled: number
+    employeeSignNameEnabled: number
+    employeeSignDateEnabled: number
+    fontSize: number
+    fontColor: number
+    dateFontSize: number
+    dateFontColor: number
+    dateIsBold: number
+    dateIsItalic: number
+    dateFontFamily: number
+    employeeNameFontSize: number
+    employeeNameFontColor: number
+    employeeNameIsBold: number
+    employeeNameIsItalic: number
+    employeeNameFontFamily: number
+    employeeCinFontSize: number
+    employeeCinFontColor: number
+    employeeCinIsBold: number
+    employeeCinIsItalic: number
+    employeeCinFontFamily: number
+    startDateFontSize: number
+    startDateFontColor: number
+    startDateIsBold: number
+    startDateIsItalic: number
+    startDateFontFamily: number
+    revenueShareFontSize: number
+    revenueShareFontColor: number
+    revenueShareIsBold: number
+    revenueShareIsItalic: number
+    revenueShareFontFamily: number
+    employeeSignNameFontSize: number
+    employeeSignNameFontColor: number
+    employeeSignNameIsBold: number
+    employeeSignNameIsItalic: number
+    employeeSignNameFontFamily: number
+    employeeSignDateFontSize: number
+    employeeSignDateFontColor: number
+    employeeSignDateIsBold: number
+    employeeSignDateIsItalic: number
+    employeeSignDateFontFamily: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EmploymentAgreementTemplateAvgAggregateInputType = {
+    dateX?: true
+    dateY?: true
+    employeeNameX?: true
+    employeeNameY?: true
+    employeeCinX?: true
+    employeeCinY?: true
+    startDateX?: true
+    startDateY?: true
+    revenueShareX?: true
+    revenueShareY?: true
+    employeeSignNameX?: true
+    employeeSignNameY?: true
+    employeeSignDateX?: true
+    employeeSignDateY?: true
+    fontSize?: true
+    dateFontSize?: true
+    employeeNameFontSize?: true
+    employeeCinFontSize?: true
+    startDateFontSize?: true
+    revenueShareFontSize?: true
+    employeeSignNameFontSize?: true
+    employeeSignDateFontSize?: true
+  }
+
+  export type EmploymentAgreementTemplateSumAggregateInputType = {
+    dateX?: true
+    dateY?: true
+    employeeNameX?: true
+    employeeNameY?: true
+    employeeCinX?: true
+    employeeCinY?: true
+    startDateX?: true
+    startDateY?: true
+    revenueShareX?: true
+    revenueShareY?: true
+    employeeSignNameX?: true
+    employeeSignNameY?: true
+    employeeSignDateX?: true
+    employeeSignDateY?: true
+    fontSize?: true
+    dateFontSize?: true
+    employeeNameFontSize?: true
+    employeeCinFontSize?: true
+    startDateFontSize?: true
+    revenueShareFontSize?: true
+    employeeSignNameFontSize?: true
+    employeeSignDateFontSize?: true
+  }
+
+  export type EmploymentAgreementTemplateMinAggregateInputType = {
+    id?: true
+    dateX?: true
+    dateY?: true
+    employeeNameX?: true
+    employeeNameY?: true
+    employeeCinX?: true
+    employeeCinY?: true
+    startDateX?: true
+    startDateY?: true
+    revenueShareX?: true
+    revenueShareY?: true
+    employeeSignNameX?: true
+    employeeSignNameY?: true
+    employeeSignDateX?: true
+    employeeSignDateY?: true
+    dateEnabled?: true
+    employeeNameEnabled?: true
+    employeeCinEnabled?: true
+    startDateEnabled?: true
+    revenueShareEnabled?: true
+    employeeSignNameEnabled?: true
+    employeeSignDateEnabled?: true
+    fontSize?: true
+    fontColor?: true
+    dateFontSize?: true
+    dateFontColor?: true
+    dateIsBold?: true
+    dateIsItalic?: true
+    dateFontFamily?: true
+    employeeNameFontSize?: true
+    employeeNameFontColor?: true
+    employeeNameIsBold?: true
+    employeeNameIsItalic?: true
+    employeeNameFontFamily?: true
+    employeeCinFontSize?: true
+    employeeCinFontColor?: true
+    employeeCinIsBold?: true
+    employeeCinIsItalic?: true
+    employeeCinFontFamily?: true
+    startDateFontSize?: true
+    startDateFontColor?: true
+    startDateIsBold?: true
+    startDateIsItalic?: true
+    startDateFontFamily?: true
+    revenueShareFontSize?: true
+    revenueShareFontColor?: true
+    revenueShareIsBold?: true
+    revenueShareIsItalic?: true
+    revenueShareFontFamily?: true
+    employeeSignNameFontSize?: true
+    employeeSignNameFontColor?: true
+    employeeSignNameIsBold?: true
+    employeeSignNameIsItalic?: true
+    employeeSignNameFontFamily?: true
+    employeeSignDateFontSize?: true
+    employeeSignDateFontColor?: true
+    employeeSignDateIsBold?: true
+    employeeSignDateIsItalic?: true
+    employeeSignDateFontFamily?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmploymentAgreementTemplateMaxAggregateInputType = {
+    id?: true
+    dateX?: true
+    dateY?: true
+    employeeNameX?: true
+    employeeNameY?: true
+    employeeCinX?: true
+    employeeCinY?: true
+    startDateX?: true
+    startDateY?: true
+    revenueShareX?: true
+    revenueShareY?: true
+    employeeSignNameX?: true
+    employeeSignNameY?: true
+    employeeSignDateX?: true
+    employeeSignDateY?: true
+    dateEnabled?: true
+    employeeNameEnabled?: true
+    employeeCinEnabled?: true
+    startDateEnabled?: true
+    revenueShareEnabled?: true
+    employeeSignNameEnabled?: true
+    employeeSignDateEnabled?: true
+    fontSize?: true
+    fontColor?: true
+    dateFontSize?: true
+    dateFontColor?: true
+    dateIsBold?: true
+    dateIsItalic?: true
+    dateFontFamily?: true
+    employeeNameFontSize?: true
+    employeeNameFontColor?: true
+    employeeNameIsBold?: true
+    employeeNameIsItalic?: true
+    employeeNameFontFamily?: true
+    employeeCinFontSize?: true
+    employeeCinFontColor?: true
+    employeeCinIsBold?: true
+    employeeCinIsItalic?: true
+    employeeCinFontFamily?: true
+    startDateFontSize?: true
+    startDateFontColor?: true
+    startDateIsBold?: true
+    startDateIsItalic?: true
+    startDateFontFamily?: true
+    revenueShareFontSize?: true
+    revenueShareFontColor?: true
+    revenueShareIsBold?: true
+    revenueShareIsItalic?: true
+    revenueShareFontFamily?: true
+    employeeSignNameFontSize?: true
+    employeeSignNameFontColor?: true
+    employeeSignNameIsBold?: true
+    employeeSignNameIsItalic?: true
+    employeeSignNameFontFamily?: true
+    employeeSignDateFontSize?: true
+    employeeSignDateFontColor?: true
+    employeeSignDateIsBold?: true
+    employeeSignDateIsItalic?: true
+    employeeSignDateFontFamily?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EmploymentAgreementTemplateCountAggregateInputType = {
+    id?: true
+    dateX?: true
+    dateY?: true
+    employeeNameX?: true
+    employeeNameY?: true
+    employeeCinX?: true
+    employeeCinY?: true
+    startDateX?: true
+    startDateY?: true
+    revenueShareX?: true
+    revenueShareY?: true
+    employeeSignNameX?: true
+    employeeSignNameY?: true
+    employeeSignDateX?: true
+    employeeSignDateY?: true
+    dateEnabled?: true
+    employeeNameEnabled?: true
+    employeeCinEnabled?: true
+    startDateEnabled?: true
+    revenueShareEnabled?: true
+    employeeSignNameEnabled?: true
+    employeeSignDateEnabled?: true
+    fontSize?: true
+    fontColor?: true
+    dateFontSize?: true
+    dateFontColor?: true
+    dateIsBold?: true
+    dateIsItalic?: true
+    dateFontFamily?: true
+    employeeNameFontSize?: true
+    employeeNameFontColor?: true
+    employeeNameIsBold?: true
+    employeeNameIsItalic?: true
+    employeeNameFontFamily?: true
+    employeeCinFontSize?: true
+    employeeCinFontColor?: true
+    employeeCinIsBold?: true
+    employeeCinIsItalic?: true
+    employeeCinFontFamily?: true
+    startDateFontSize?: true
+    startDateFontColor?: true
+    startDateIsBold?: true
+    startDateIsItalic?: true
+    startDateFontFamily?: true
+    revenueShareFontSize?: true
+    revenueShareFontColor?: true
+    revenueShareIsBold?: true
+    revenueShareIsItalic?: true
+    revenueShareFontFamily?: true
+    employeeSignNameFontSize?: true
+    employeeSignNameFontColor?: true
+    employeeSignNameIsBold?: true
+    employeeSignNameIsItalic?: true
+    employeeSignNameFontFamily?: true
+    employeeSignDateFontSize?: true
+    employeeSignDateFontColor?: true
+    employeeSignDateIsBold?: true
+    employeeSignDateIsItalic?: true
+    employeeSignDateFontFamily?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EmploymentAgreementTemplateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmploymentAgreementTemplate to aggregate.
+     */
+    where?: EmploymentAgreementTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmploymentAgreementTemplates to fetch.
+     */
+    orderBy?: EmploymentAgreementTemplateOrderByWithRelationInput | EmploymentAgreementTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EmploymentAgreementTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmploymentAgreementTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmploymentAgreementTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EmploymentAgreementTemplates
+    **/
+    _count?: true | EmploymentAgreementTemplateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EmploymentAgreementTemplateAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EmploymentAgreementTemplateSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EmploymentAgreementTemplateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EmploymentAgreementTemplateMaxAggregateInputType
+  }
+
+  export type GetEmploymentAgreementTemplateAggregateType<T extends EmploymentAgreementTemplateAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmploymentAgreementTemplate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEmploymentAgreementTemplate[P]>
+      : GetScalarType<T[P], AggregateEmploymentAgreementTemplate[P]>
+  }
+
+
+
+
+  export type EmploymentAgreementTemplateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmploymentAgreementTemplateWhereInput
+    orderBy?: EmploymentAgreementTemplateOrderByWithAggregationInput | EmploymentAgreementTemplateOrderByWithAggregationInput[]
+    by: EmploymentAgreementTemplateScalarFieldEnum[] | EmploymentAgreementTemplateScalarFieldEnum
+    having?: EmploymentAgreementTemplateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EmploymentAgreementTemplateCountAggregateInputType | true
+    _avg?: EmploymentAgreementTemplateAvgAggregateInputType
+    _sum?: EmploymentAgreementTemplateSumAggregateInputType
+    _min?: EmploymentAgreementTemplateMinAggregateInputType
+    _max?: EmploymentAgreementTemplateMaxAggregateInputType
+  }
+
+  export type EmploymentAgreementTemplateGroupByOutputType = {
+    id: string
+    dateX: number
+    dateY: number
+    employeeNameX: number
+    employeeNameY: number
+    employeeCinX: number
+    employeeCinY: number
+    startDateX: number
+    startDateY: number
+    revenueShareX: number
+    revenueShareY: number
+    employeeSignNameX: number
+    employeeSignNameY: number
+    employeeSignDateX: number
+    employeeSignDateY: number
+    dateEnabled: boolean
+    employeeNameEnabled: boolean
+    employeeCinEnabled: boolean
+    startDateEnabled: boolean
+    revenueShareEnabled: boolean
+    employeeSignNameEnabled: boolean
+    employeeSignDateEnabled: boolean
+    fontSize: number
+    fontColor: string
+    dateFontSize: number
+    dateFontColor: string
+    dateIsBold: boolean
+    dateIsItalic: boolean
+    dateFontFamily: string
+    employeeNameFontSize: number
+    employeeNameFontColor: string
+    employeeNameIsBold: boolean
+    employeeNameIsItalic: boolean
+    employeeNameFontFamily: string
+    employeeCinFontSize: number
+    employeeCinFontColor: string
+    employeeCinIsBold: boolean
+    employeeCinIsItalic: boolean
+    employeeCinFontFamily: string
+    startDateFontSize: number
+    startDateFontColor: string
+    startDateIsBold: boolean
+    startDateIsItalic: boolean
+    startDateFontFamily: string
+    revenueShareFontSize: number
+    revenueShareFontColor: string
+    revenueShareIsBold: boolean
+    revenueShareIsItalic: boolean
+    revenueShareFontFamily: string
+    employeeSignNameFontSize: number
+    employeeSignNameFontColor: string
+    employeeSignNameIsBold: boolean
+    employeeSignNameIsItalic: boolean
+    employeeSignNameFontFamily: string
+    employeeSignDateFontSize: number
+    employeeSignDateFontColor: string
+    employeeSignDateIsBold: boolean
+    employeeSignDateIsItalic: boolean
+    employeeSignDateFontFamily: string
+    createdAt: Date
+    updatedAt: Date
+    _count: EmploymentAgreementTemplateCountAggregateOutputType | null
+    _avg: EmploymentAgreementTemplateAvgAggregateOutputType | null
+    _sum: EmploymentAgreementTemplateSumAggregateOutputType | null
+    _min: EmploymentAgreementTemplateMinAggregateOutputType | null
+    _max: EmploymentAgreementTemplateMaxAggregateOutputType | null
+  }
+
+  type GetEmploymentAgreementTemplateGroupByPayload<T extends EmploymentAgreementTemplateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EmploymentAgreementTemplateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EmploymentAgreementTemplateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EmploymentAgreementTemplateGroupByOutputType[P]>
+            : GetScalarType<T[P], EmploymentAgreementTemplateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EmploymentAgreementTemplateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dateX?: boolean
+    dateY?: boolean
+    employeeNameX?: boolean
+    employeeNameY?: boolean
+    employeeCinX?: boolean
+    employeeCinY?: boolean
+    startDateX?: boolean
+    startDateY?: boolean
+    revenueShareX?: boolean
+    revenueShareY?: boolean
+    employeeSignNameX?: boolean
+    employeeSignNameY?: boolean
+    employeeSignDateX?: boolean
+    employeeSignDateY?: boolean
+    dateEnabled?: boolean
+    employeeNameEnabled?: boolean
+    employeeCinEnabled?: boolean
+    startDateEnabled?: boolean
+    revenueShareEnabled?: boolean
+    employeeSignNameEnabled?: boolean
+    employeeSignDateEnabled?: boolean
+    fontSize?: boolean
+    fontColor?: boolean
+    dateFontSize?: boolean
+    dateFontColor?: boolean
+    dateIsBold?: boolean
+    dateIsItalic?: boolean
+    dateFontFamily?: boolean
+    employeeNameFontSize?: boolean
+    employeeNameFontColor?: boolean
+    employeeNameIsBold?: boolean
+    employeeNameIsItalic?: boolean
+    employeeNameFontFamily?: boolean
+    employeeCinFontSize?: boolean
+    employeeCinFontColor?: boolean
+    employeeCinIsBold?: boolean
+    employeeCinIsItalic?: boolean
+    employeeCinFontFamily?: boolean
+    startDateFontSize?: boolean
+    startDateFontColor?: boolean
+    startDateIsBold?: boolean
+    startDateIsItalic?: boolean
+    startDateFontFamily?: boolean
+    revenueShareFontSize?: boolean
+    revenueShareFontColor?: boolean
+    revenueShareIsBold?: boolean
+    revenueShareIsItalic?: boolean
+    revenueShareFontFamily?: boolean
+    employeeSignNameFontSize?: boolean
+    employeeSignNameFontColor?: boolean
+    employeeSignNameIsBold?: boolean
+    employeeSignNameIsItalic?: boolean
+    employeeSignNameFontFamily?: boolean
+    employeeSignDateFontSize?: boolean
+    employeeSignDateFontColor?: boolean
+    employeeSignDateIsBold?: boolean
+    employeeSignDateIsItalic?: boolean
+    employeeSignDateFontFamily?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["employmentAgreementTemplate"]>
+
+  export type EmploymentAgreementTemplateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dateX?: boolean
+    dateY?: boolean
+    employeeNameX?: boolean
+    employeeNameY?: boolean
+    employeeCinX?: boolean
+    employeeCinY?: boolean
+    startDateX?: boolean
+    startDateY?: boolean
+    revenueShareX?: boolean
+    revenueShareY?: boolean
+    employeeSignNameX?: boolean
+    employeeSignNameY?: boolean
+    employeeSignDateX?: boolean
+    employeeSignDateY?: boolean
+    dateEnabled?: boolean
+    employeeNameEnabled?: boolean
+    employeeCinEnabled?: boolean
+    startDateEnabled?: boolean
+    revenueShareEnabled?: boolean
+    employeeSignNameEnabled?: boolean
+    employeeSignDateEnabled?: boolean
+    fontSize?: boolean
+    fontColor?: boolean
+    dateFontSize?: boolean
+    dateFontColor?: boolean
+    dateIsBold?: boolean
+    dateIsItalic?: boolean
+    dateFontFamily?: boolean
+    employeeNameFontSize?: boolean
+    employeeNameFontColor?: boolean
+    employeeNameIsBold?: boolean
+    employeeNameIsItalic?: boolean
+    employeeNameFontFamily?: boolean
+    employeeCinFontSize?: boolean
+    employeeCinFontColor?: boolean
+    employeeCinIsBold?: boolean
+    employeeCinIsItalic?: boolean
+    employeeCinFontFamily?: boolean
+    startDateFontSize?: boolean
+    startDateFontColor?: boolean
+    startDateIsBold?: boolean
+    startDateIsItalic?: boolean
+    startDateFontFamily?: boolean
+    revenueShareFontSize?: boolean
+    revenueShareFontColor?: boolean
+    revenueShareIsBold?: boolean
+    revenueShareIsItalic?: boolean
+    revenueShareFontFamily?: boolean
+    employeeSignNameFontSize?: boolean
+    employeeSignNameFontColor?: boolean
+    employeeSignNameIsBold?: boolean
+    employeeSignNameIsItalic?: boolean
+    employeeSignNameFontFamily?: boolean
+    employeeSignDateFontSize?: boolean
+    employeeSignDateFontColor?: boolean
+    employeeSignDateIsBold?: boolean
+    employeeSignDateIsItalic?: boolean
+    employeeSignDateFontFamily?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["employmentAgreementTemplate"]>
+
+  export type EmploymentAgreementTemplateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    dateX?: boolean
+    dateY?: boolean
+    employeeNameX?: boolean
+    employeeNameY?: boolean
+    employeeCinX?: boolean
+    employeeCinY?: boolean
+    startDateX?: boolean
+    startDateY?: boolean
+    revenueShareX?: boolean
+    revenueShareY?: boolean
+    employeeSignNameX?: boolean
+    employeeSignNameY?: boolean
+    employeeSignDateX?: boolean
+    employeeSignDateY?: boolean
+    dateEnabled?: boolean
+    employeeNameEnabled?: boolean
+    employeeCinEnabled?: boolean
+    startDateEnabled?: boolean
+    revenueShareEnabled?: boolean
+    employeeSignNameEnabled?: boolean
+    employeeSignDateEnabled?: boolean
+    fontSize?: boolean
+    fontColor?: boolean
+    dateFontSize?: boolean
+    dateFontColor?: boolean
+    dateIsBold?: boolean
+    dateIsItalic?: boolean
+    dateFontFamily?: boolean
+    employeeNameFontSize?: boolean
+    employeeNameFontColor?: boolean
+    employeeNameIsBold?: boolean
+    employeeNameIsItalic?: boolean
+    employeeNameFontFamily?: boolean
+    employeeCinFontSize?: boolean
+    employeeCinFontColor?: boolean
+    employeeCinIsBold?: boolean
+    employeeCinIsItalic?: boolean
+    employeeCinFontFamily?: boolean
+    startDateFontSize?: boolean
+    startDateFontColor?: boolean
+    startDateIsBold?: boolean
+    startDateIsItalic?: boolean
+    startDateFontFamily?: boolean
+    revenueShareFontSize?: boolean
+    revenueShareFontColor?: boolean
+    revenueShareIsBold?: boolean
+    revenueShareIsItalic?: boolean
+    revenueShareFontFamily?: boolean
+    employeeSignNameFontSize?: boolean
+    employeeSignNameFontColor?: boolean
+    employeeSignNameIsBold?: boolean
+    employeeSignNameIsItalic?: boolean
+    employeeSignNameFontFamily?: boolean
+    employeeSignDateFontSize?: boolean
+    employeeSignDateFontColor?: boolean
+    employeeSignDateIsBold?: boolean
+    employeeSignDateIsItalic?: boolean
+    employeeSignDateFontFamily?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["employmentAgreementTemplate"]>
+
+  export type EmploymentAgreementTemplateSelectScalar = {
+    id?: boolean
+    dateX?: boolean
+    dateY?: boolean
+    employeeNameX?: boolean
+    employeeNameY?: boolean
+    employeeCinX?: boolean
+    employeeCinY?: boolean
+    startDateX?: boolean
+    startDateY?: boolean
+    revenueShareX?: boolean
+    revenueShareY?: boolean
+    employeeSignNameX?: boolean
+    employeeSignNameY?: boolean
+    employeeSignDateX?: boolean
+    employeeSignDateY?: boolean
+    dateEnabled?: boolean
+    employeeNameEnabled?: boolean
+    employeeCinEnabled?: boolean
+    startDateEnabled?: boolean
+    revenueShareEnabled?: boolean
+    employeeSignNameEnabled?: boolean
+    employeeSignDateEnabled?: boolean
+    fontSize?: boolean
+    fontColor?: boolean
+    dateFontSize?: boolean
+    dateFontColor?: boolean
+    dateIsBold?: boolean
+    dateIsItalic?: boolean
+    dateFontFamily?: boolean
+    employeeNameFontSize?: boolean
+    employeeNameFontColor?: boolean
+    employeeNameIsBold?: boolean
+    employeeNameIsItalic?: boolean
+    employeeNameFontFamily?: boolean
+    employeeCinFontSize?: boolean
+    employeeCinFontColor?: boolean
+    employeeCinIsBold?: boolean
+    employeeCinIsItalic?: boolean
+    employeeCinFontFamily?: boolean
+    startDateFontSize?: boolean
+    startDateFontColor?: boolean
+    startDateIsBold?: boolean
+    startDateIsItalic?: boolean
+    startDateFontFamily?: boolean
+    revenueShareFontSize?: boolean
+    revenueShareFontColor?: boolean
+    revenueShareIsBold?: boolean
+    revenueShareIsItalic?: boolean
+    revenueShareFontFamily?: boolean
+    employeeSignNameFontSize?: boolean
+    employeeSignNameFontColor?: boolean
+    employeeSignNameIsBold?: boolean
+    employeeSignNameIsItalic?: boolean
+    employeeSignNameFontFamily?: boolean
+    employeeSignDateFontSize?: boolean
+    employeeSignDateFontColor?: boolean
+    employeeSignDateIsBold?: boolean
+    employeeSignDateIsItalic?: boolean
+    employeeSignDateFontFamily?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EmploymentAgreementTemplateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "dateX" | "dateY" | "employeeNameX" | "employeeNameY" | "employeeCinX" | "employeeCinY" | "startDateX" | "startDateY" | "revenueShareX" | "revenueShareY" | "employeeSignNameX" | "employeeSignNameY" | "employeeSignDateX" | "employeeSignDateY" | "dateEnabled" | "employeeNameEnabled" | "employeeCinEnabled" | "startDateEnabled" | "revenueShareEnabled" | "employeeSignNameEnabled" | "employeeSignDateEnabled" | "fontSize" | "fontColor" | "dateFontSize" | "dateFontColor" | "dateIsBold" | "dateIsItalic" | "dateFontFamily" | "employeeNameFontSize" | "employeeNameFontColor" | "employeeNameIsBold" | "employeeNameIsItalic" | "employeeNameFontFamily" | "employeeCinFontSize" | "employeeCinFontColor" | "employeeCinIsBold" | "employeeCinIsItalic" | "employeeCinFontFamily" | "startDateFontSize" | "startDateFontColor" | "startDateIsBold" | "startDateIsItalic" | "startDateFontFamily" | "revenueShareFontSize" | "revenueShareFontColor" | "revenueShareIsBold" | "revenueShareIsItalic" | "revenueShareFontFamily" | "employeeSignNameFontSize" | "employeeSignNameFontColor" | "employeeSignNameIsBold" | "employeeSignNameIsItalic" | "employeeSignNameFontFamily" | "employeeSignDateFontSize" | "employeeSignDateFontColor" | "employeeSignDateIsBold" | "employeeSignDateIsItalic" | "employeeSignDateFontFamily" | "createdAt" | "updatedAt", ExtArgs["result"]["employmentAgreementTemplate"]>
+
+  export type $EmploymentAgreementTemplatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmploymentAgreementTemplate"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      dateX: number
+      dateY: number
+      employeeNameX: number
+      employeeNameY: number
+      employeeCinX: number
+      employeeCinY: number
+      startDateX: number
+      startDateY: number
+      revenueShareX: number
+      revenueShareY: number
+      employeeSignNameX: number
+      employeeSignNameY: number
+      employeeSignDateX: number
+      employeeSignDateY: number
+      dateEnabled: boolean
+      employeeNameEnabled: boolean
+      employeeCinEnabled: boolean
+      startDateEnabled: boolean
+      revenueShareEnabled: boolean
+      employeeSignNameEnabled: boolean
+      employeeSignDateEnabled: boolean
+      fontSize: number
+      fontColor: string
+      dateFontSize: number
+      dateFontColor: string
+      dateIsBold: boolean
+      dateIsItalic: boolean
+      dateFontFamily: string
+      employeeNameFontSize: number
+      employeeNameFontColor: string
+      employeeNameIsBold: boolean
+      employeeNameIsItalic: boolean
+      employeeNameFontFamily: string
+      employeeCinFontSize: number
+      employeeCinFontColor: string
+      employeeCinIsBold: boolean
+      employeeCinIsItalic: boolean
+      employeeCinFontFamily: string
+      startDateFontSize: number
+      startDateFontColor: string
+      startDateIsBold: boolean
+      startDateIsItalic: boolean
+      startDateFontFamily: string
+      revenueShareFontSize: number
+      revenueShareFontColor: string
+      revenueShareIsBold: boolean
+      revenueShareIsItalic: boolean
+      revenueShareFontFamily: string
+      employeeSignNameFontSize: number
+      employeeSignNameFontColor: string
+      employeeSignNameIsBold: boolean
+      employeeSignNameIsItalic: boolean
+      employeeSignNameFontFamily: string
+      employeeSignDateFontSize: number
+      employeeSignDateFontColor: string
+      employeeSignDateIsBold: boolean
+      employeeSignDateIsItalic: boolean
+      employeeSignDateFontFamily: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["employmentAgreementTemplate"]>
+    composites: {}
+  }
+
+  type EmploymentAgreementTemplateGetPayload<S extends boolean | null | undefined | EmploymentAgreementTemplateDefaultArgs> = $Result.GetResult<Prisma.$EmploymentAgreementTemplatePayload, S>
+
+  type EmploymentAgreementTemplateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmploymentAgreementTemplateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmploymentAgreementTemplateCountAggregateInputType | true
+    }
+
+  export interface EmploymentAgreementTemplateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmploymentAgreementTemplate'], meta: { name: 'EmploymentAgreementTemplate' } }
+    /**
+     * Find zero or one EmploymentAgreementTemplate that matches the filter.
+     * @param {EmploymentAgreementTemplateFindUniqueArgs} args - Arguments to find a EmploymentAgreementTemplate
+     * @example
+     * // Get one EmploymentAgreementTemplate
+     * const employmentAgreementTemplate = await prisma.employmentAgreementTemplate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EmploymentAgreementTemplateFindUniqueArgs>(args: SelectSubset<T, EmploymentAgreementTemplateFindUniqueArgs<ExtArgs>>): Prisma__EmploymentAgreementTemplateClient<$Result.GetResult<Prisma.$EmploymentAgreementTemplatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EmploymentAgreementTemplate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EmploymentAgreementTemplateFindUniqueOrThrowArgs} args - Arguments to find a EmploymentAgreementTemplate
+     * @example
+     * // Get one EmploymentAgreementTemplate
+     * const employmentAgreementTemplate = await prisma.employmentAgreementTemplate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EmploymentAgreementTemplateFindUniqueOrThrowArgs>(args: SelectSubset<T, EmploymentAgreementTemplateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmploymentAgreementTemplateClient<$Result.GetResult<Prisma.$EmploymentAgreementTemplatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmploymentAgreementTemplate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploymentAgreementTemplateFindFirstArgs} args - Arguments to find a EmploymentAgreementTemplate
+     * @example
+     * // Get one EmploymentAgreementTemplate
+     * const employmentAgreementTemplate = await prisma.employmentAgreementTemplate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EmploymentAgreementTemplateFindFirstArgs>(args?: SelectSubset<T, EmploymentAgreementTemplateFindFirstArgs<ExtArgs>>): Prisma__EmploymentAgreementTemplateClient<$Result.GetResult<Prisma.$EmploymentAgreementTemplatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EmploymentAgreementTemplate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploymentAgreementTemplateFindFirstOrThrowArgs} args - Arguments to find a EmploymentAgreementTemplate
+     * @example
+     * // Get one EmploymentAgreementTemplate
+     * const employmentAgreementTemplate = await prisma.employmentAgreementTemplate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EmploymentAgreementTemplateFindFirstOrThrowArgs>(args?: SelectSubset<T, EmploymentAgreementTemplateFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmploymentAgreementTemplateClient<$Result.GetResult<Prisma.$EmploymentAgreementTemplatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EmploymentAgreementTemplates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploymentAgreementTemplateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EmploymentAgreementTemplates
+     * const employmentAgreementTemplates = await prisma.employmentAgreementTemplate.findMany()
+     * 
+     * // Get first 10 EmploymentAgreementTemplates
+     * const employmentAgreementTemplates = await prisma.employmentAgreementTemplate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const employmentAgreementTemplateWithIdOnly = await prisma.employmentAgreementTemplate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EmploymentAgreementTemplateFindManyArgs>(args?: SelectSubset<T, EmploymentAgreementTemplateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmploymentAgreementTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EmploymentAgreementTemplate.
+     * @param {EmploymentAgreementTemplateCreateArgs} args - Arguments to create a EmploymentAgreementTemplate.
+     * @example
+     * // Create one EmploymentAgreementTemplate
+     * const EmploymentAgreementTemplate = await prisma.employmentAgreementTemplate.create({
+     *   data: {
+     *     // ... data to create a EmploymentAgreementTemplate
+     *   }
+     * })
+     * 
+     */
+    create<T extends EmploymentAgreementTemplateCreateArgs>(args: SelectSubset<T, EmploymentAgreementTemplateCreateArgs<ExtArgs>>): Prisma__EmploymentAgreementTemplateClient<$Result.GetResult<Prisma.$EmploymentAgreementTemplatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EmploymentAgreementTemplates.
+     * @param {EmploymentAgreementTemplateCreateManyArgs} args - Arguments to create many EmploymentAgreementTemplates.
+     * @example
+     * // Create many EmploymentAgreementTemplates
+     * const employmentAgreementTemplate = await prisma.employmentAgreementTemplate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EmploymentAgreementTemplateCreateManyArgs>(args?: SelectSubset<T, EmploymentAgreementTemplateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EmploymentAgreementTemplates and returns the data saved in the database.
+     * @param {EmploymentAgreementTemplateCreateManyAndReturnArgs} args - Arguments to create many EmploymentAgreementTemplates.
+     * @example
+     * // Create many EmploymentAgreementTemplates
+     * const employmentAgreementTemplate = await prisma.employmentAgreementTemplate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EmploymentAgreementTemplates and only return the `id`
+     * const employmentAgreementTemplateWithIdOnly = await prisma.employmentAgreementTemplate.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EmploymentAgreementTemplateCreateManyAndReturnArgs>(args?: SelectSubset<T, EmploymentAgreementTemplateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmploymentAgreementTemplatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EmploymentAgreementTemplate.
+     * @param {EmploymentAgreementTemplateDeleteArgs} args - Arguments to delete one EmploymentAgreementTemplate.
+     * @example
+     * // Delete one EmploymentAgreementTemplate
+     * const EmploymentAgreementTemplate = await prisma.employmentAgreementTemplate.delete({
+     *   where: {
+     *     // ... filter to delete one EmploymentAgreementTemplate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EmploymentAgreementTemplateDeleteArgs>(args: SelectSubset<T, EmploymentAgreementTemplateDeleteArgs<ExtArgs>>): Prisma__EmploymentAgreementTemplateClient<$Result.GetResult<Prisma.$EmploymentAgreementTemplatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EmploymentAgreementTemplate.
+     * @param {EmploymentAgreementTemplateUpdateArgs} args - Arguments to update one EmploymentAgreementTemplate.
+     * @example
+     * // Update one EmploymentAgreementTemplate
+     * const employmentAgreementTemplate = await prisma.employmentAgreementTemplate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EmploymentAgreementTemplateUpdateArgs>(args: SelectSubset<T, EmploymentAgreementTemplateUpdateArgs<ExtArgs>>): Prisma__EmploymentAgreementTemplateClient<$Result.GetResult<Prisma.$EmploymentAgreementTemplatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EmploymentAgreementTemplates.
+     * @param {EmploymentAgreementTemplateDeleteManyArgs} args - Arguments to filter EmploymentAgreementTemplates to delete.
+     * @example
+     * // Delete a few EmploymentAgreementTemplates
+     * const { count } = await prisma.employmentAgreementTemplate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EmploymentAgreementTemplateDeleteManyArgs>(args?: SelectSubset<T, EmploymentAgreementTemplateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmploymentAgreementTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploymentAgreementTemplateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EmploymentAgreementTemplates
+     * const employmentAgreementTemplate = await prisma.employmentAgreementTemplate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EmploymentAgreementTemplateUpdateManyArgs>(args: SelectSubset<T, EmploymentAgreementTemplateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EmploymentAgreementTemplates and returns the data updated in the database.
+     * @param {EmploymentAgreementTemplateUpdateManyAndReturnArgs} args - Arguments to update many EmploymentAgreementTemplates.
+     * @example
+     * // Update many EmploymentAgreementTemplates
+     * const employmentAgreementTemplate = await prisma.employmentAgreementTemplate.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EmploymentAgreementTemplates and only return the `id`
+     * const employmentAgreementTemplateWithIdOnly = await prisma.employmentAgreementTemplate.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EmploymentAgreementTemplateUpdateManyAndReturnArgs>(args: SelectSubset<T, EmploymentAgreementTemplateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmploymentAgreementTemplatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EmploymentAgreementTemplate.
+     * @param {EmploymentAgreementTemplateUpsertArgs} args - Arguments to update or create a EmploymentAgreementTemplate.
+     * @example
+     * // Update or create a EmploymentAgreementTemplate
+     * const employmentAgreementTemplate = await prisma.employmentAgreementTemplate.upsert({
+     *   create: {
+     *     // ... data to create a EmploymentAgreementTemplate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EmploymentAgreementTemplate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EmploymentAgreementTemplateUpsertArgs>(args: SelectSubset<T, EmploymentAgreementTemplateUpsertArgs<ExtArgs>>): Prisma__EmploymentAgreementTemplateClient<$Result.GetResult<Prisma.$EmploymentAgreementTemplatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EmploymentAgreementTemplates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploymentAgreementTemplateCountArgs} args - Arguments to filter EmploymentAgreementTemplates to count.
+     * @example
+     * // Count the number of EmploymentAgreementTemplates
+     * const count = await prisma.employmentAgreementTemplate.count({
+     *   where: {
+     *     // ... the filter for the EmploymentAgreementTemplates we want to count
+     *   }
+     * })
+    **/
+    count<T extends EmploymentAgreementTemplateCountArgs>(
+      args?: Subset<T, EmploymentAgreementTemplateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EmploymentAgreementTemplateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EmploymentAgreementTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploymentAgreementTemplateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EmploymentAgreementTemplateAggregateArgs>(args: Subset<T, EmploymentAgreementTemplateAggregateArgs>): Prisma.PrismaPromise<GetEmploymentAgreementTemplateAggregateType<T>>
+
+    /**
+     * Group by EmploymentAgreementTemplate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EmploymentAgreementTemplateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EmploymentAgreementTemplateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EmploymentAgreementTemplateGroupByArgs['orderBy'] }
+        : { orderBy?: EmploymentAgreementTemplateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EmploymentAgreementTemplateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmploymentAgreementTemplateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EmploymentAgreementTemplate model
+   */
+  readonly fields: EmploymentAgreementTemplateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EmploymentAgreementTemplate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EmploymentAgreementTemplateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EmploymentAgreementTemplate model
+   */
+  interface EmploymentAgreementTemplateFieldRefs {
+    readonly id: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly dateX: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly dateY: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly employeeNameX: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly employeeNameY: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly employeeCinX: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly employeeCinY: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly startDateX: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly startDateY: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly revenueShareX: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly revenueShareY: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly employeeSignNameX: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly employeeSignNameY: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly employeeSignDateX: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly employeeSignDateY: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly dateEnabled: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly employeeNameEnabled: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly employeeCinEnabled: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly startDateEnabled: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly revenueShareEnabled: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly employeeSignNameEnabled: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly employeeSignDateEnabled: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly fontSize: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly fontColor: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly dateFontSize: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly dateFontColor: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly dateIsBold: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly dateIsItalic: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly dateFontFamily: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly employeeNameFontSize: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly employeeNameFontColor: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly employeeNameIsBold: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly employeeNameIsItalic: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly employeeNameFontFamily: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly employeeCinFontSize: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly employeeCinFontColor: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly employeeCinIsBold: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly employeeCinIsItalic: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly employeeCinFontFamily: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly startDateFontSize: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly startDateFontColor: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly startDateIsBold: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly startDateIsItalic: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly startDateFontFamily: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly revenueShareFontSize: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly revenueShareFontColor: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly revenueShareIsBold: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly revenueShareIsItalic: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly revenueShareFontFamily: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly employeeSignNameFontSize: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly employeeSignNameFontColor: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly employeeSignNameIsBold: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly employeeSignNameIsItalic: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly employeeSignNameFontFamily: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly employeeSignDateFontSize: FieldRef<"EmploymentAgreementTemplate", 'Float'>
+    readonly employeeSignDateFontColor: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly employeeSignDateIsBold: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly employeeSignDateIsItalic: FieldRef<"EmploymentAgreementTemplate", 'Boolean'>
+    readonly employeeSignDateFontFamily: FieldRef<"EmploymentAgreementTemplate", 'String'>
+    readonly createdAt: FieldRef<"EmploymentAgreementTemplate", 'DateTime'>
+    readonly updatedAt: FieldRef<"EmploymentAgreementTemplate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EmploymentAgreementTemplate findUnique
+   */
+  export type EmploymentAgreementTemplateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentAgreementTemplate
+     */
+    select?: EmploymentAgreementTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentAgreementTemplate
+     */
+    omit?: EmploymentAgreementTemplateOmit<ExtArgs> | null
+    /**
+     * Filter, which EmploymentAgreementTemplate to fetch.
+     */
+    where: EmploymentAgreementTemplateWhereUniqueInput
+  }
+
+  /**
+   * EmploymentAgreementTemplate findUniqueOrThrow
+   */
+  export type EmploymentAgreementTemplateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentAgreementTemplate
+     */
+    select?: EmploymentAgreementTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentAgreementTemplate
+     */
+    omit?: EmploymentAgreementTemplateOmit<ExtArgs> | null
+    /**
+     * Filter, which EmploymentAgreementTemplate to fetch.
+     */
+    where: EmploymentAgreementTemplateWhereUniqueInput
+  }
+
+  /**
+   * EmploymentAgreementTemplate findFirst
+   */
+  export type EmploymentAgreementTemplateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentAgreementTemplate
+     */
+    select?: EmploymentAgreementTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentAgreementTemplate
+     */
+    omit?: EmploymentAgreementTemplateOmit<ExtArgs> | null
+    /**
+     * Filter, which EmploymentAgreementTemplate to fetch.
+     */
+    where?: EmploymentAgreementTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmploymentAgreementTemplates to fetch.
+     */
+    orderBy?: EmploymentAgreementTemplateOrderByWithRelationInput | EmploymentAgreementTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmploymentAgreementTemplates.
+     */
+    cursor?: EmploymentAgreementTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmploymentAgreementTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmploymentAgreementTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmploymentAgreementTemplates.
+     */
+    distinct?: EmploymentAgreementTemplateScalarFieldEnum | EmploymentAgreementTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * EmploymentAgreementTemplate findFirstOrThrow
+   */
+  export type EmploymentAgreementTemplateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentAgreementTemplate
+     */
+    select?: EmploymentAgreementTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentAgreementTemplate
+     */
+    omit?: EmploymentAgreementTemplateOmit<ExtArgs> | null
+    /**
+     * Filter, which EmploymentAgreementTemplate to fetch.
+     */
+    where?: EmploymentAgreementTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmploymentAgreementTemplates to fetch.
+     */
+    orderBy?: EmploymentAgreementTemplateOrderByWithRelationInput | EmploymentAgreementTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EmploymentAgreementTemplates.
+     */
+    cursor?: EmploymentAgreementTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmploymentAgreementTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmploymentAgreementTemplates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EmploymentAgreementTemplates.
+     */
+    distinct?: EmploymentAgreementTemplateScalarFieldEnum | EmploymentAgreementTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * EmploymentAgreementTemplate findMany
+   */
+  export type EmploymentAgreementTemplateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentAgreementTemplate
+     */
+    select?: EmploymentAgreementTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentAgreementTemplate
+     */
+    omit?: EmploymentAgreementTemplateOmit<ExtArgs> | null
+    /**
+     * Filter, which EmploymentAgreementTemplates to fetch.
+     */
+    where?: EmploymentAgreementTemplateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EmploymentAgreementTemplates to fetch.
+     */
+    orderBy?: EmploymentAgreementTemplateOrderByWithRelationInput | EmploymentAgreementTemplateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EmploymentAgreementTemplates.
+     */
+    cursor?: EmploymentAgreementTemplateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EmploymentAgreementTemplates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EmploymentAgreementTemplates.
+     */
+    skip?: number
+    distinct?: EmploymentAgreementTemplateScalarFieldEnum | EmploymentAgreementTemplateScalarFieldEnum[]
+  }
+
+  /**
+   * EmploymentAgreementTemplate create
+   */
+  export type EmploymentAgreementTemplateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentAgreementTemplate
+     */
+    select?: EmploymentAgreementTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentAgreementTemplate
+     */
+    omit?: EmploymentAgreementTemplateOmit<ExtArgs> | null
+    /**
+     * The data needed to create a EmploymentAgreementTemplate.
+     */
+    data: XOR<EmploymentAgreementTemplateCreateInput, EmploymentAgreementTemplateUncheckedCreateInput>
+  }
+
+  /**
+   * EmploymentAgreementTemplate createMany
+   */
+  export type EmploymentAgreementTemplateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EmploymentAgreementTemplates.
+     */
+    data: EmploymentAgreementTemplateCreateManyInput | EmploymentAgreementTemplateCreateManyInput[]
+  }
+
+  /**
+   * EmploymentAgreementTemplate createManyAndReturn
+   */
+  export type EmploymentAgreementTemplateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentAgreementTemplate
+     */
+    select?: EmploymentAgreementTemplateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentAgreementTemplate
+     */
+    omit?: EmploymentAgreementTemplateOmit<ExtArgs> | null
+    /**
+     * The data used to create many EmploymentAgreementTemplates.
+     */
+    data: EmploymentAgreementTemplateCreateManyInput | EmploymentAgreementTemplateCreateManyInput[]
+  }
+
+  /**
+   * EmploymentAgreementTemplate update
+   */
+  export type EmploymentAgreementTemplateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentAgreementTemplate
+     */
+    select?: EmploymentAgreementTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentAgreementTemplate
+     */
+    omit?: EmploymentAgreementTemplateOmit<ExtArgs> | null
+    /**
+     * The data needed to update a EmploymentAgreementTemplate.
+     */
+    data: XOR<EmploymentAgreementTemplateUpdateInput, EmploymentAgreementTemplateUncheckedUpdateInput>
+    /**
+     * Choose, which EmploymentAgreementTemplate to update.
+     */
+    where: EmploymentAgreementTemplateWhereUniqueInput
+  }
+
+  /**
+   * EmploymentAgreementTemplate updateMany
+   */
+  export type EmploymentAgreementTemplateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EmploymentAgreementTemplates.
+     */
+    data: XOR<EmploymentAgreementTemplateUpdateManyMutationInput, EmploymentAgreementTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which EmploymentAgreementTemplates to update
+     */
+    where?: EmploymentAgreementTemplateWhereInput
+    /**
+     * Limit how many EmploymentAgreementTemplates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmploymentAgreementTemplate updateManyAndReturn
+   */
+  export type EmploymentAgreementTemplateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentAgreementTemplate
+     */
+    select?: EmploymentAgreementTemplateSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentAgreementTemplate
+     */
+    omit?: EmploymentAgreementTemplateOmit<ExtArgs> | null
+    /**
+     * The data used to update EmploymentAgreementTemplates.
+     */
+    data: XOR<EmploymentAgreementTemplateUpdateManyMutationInput, EmploymentAgreementTemplateUncheckedUpdateManyInput>
+    /**
+     * Filter which EmploymentAgreementTemplates to update
+     */
+    where?: EmploymentAgreementTemplateWhereInput
+    /**
+     * Limit how many EmploymentAgreementTemplates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmploymentAgreementTemplate upsert
+   */
+  export type EmploymentAgreementTemplateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentAgreementTemplate
+     */
+    select?: EmploymentAgreementTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentAgreementTemplate
+     */
+    omit?: EmploymentAgreementTemplateOmit<ExtArgs> | null
+    /**
+     * The filter to search for the EmploymentAgreementTemplate to update in case it exists.
+     */
+    where: EmploymentAgreementTemplateWhereUniqueInput
+    /**
+     * In case the EmploymentAgreementTemplate found by the `where` argument doesn't exist, create a new EmploymentAgreementTemplate with this data.
+     */
+    create: XOR<EmploymentAgreementTemplateCreateInput, EmploymentAgreementTemplateUncheckedCreateInput>
+    /**
+     * In case the EmploymentAgreementTemplate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmploymentAgreementTemplateUpdateInput, EmploymentAgreementTemplateUncheckedUpdateInput>
+  }
+
+  /**
+   * EmploymentAgreementTemplate delete
+   */
+  export type EmploymentAgreementTemplateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentAgreementTemplate
+     */
+    select?: EmploymentAgreementTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentAgreementTemplate
+     */
+    omit?: EmploymentAgreementTemplateOmit<ExtArgs> | null
+    /**
+     * Filter which EmploymentAgreementTemplate to delete.
+     */
+    where: EmploymentAgreementTemplateWhereUniqueInput
+  }
+
+  /**
+   * EmploymentAgreementTemplate deleteMany
+   */
+  export type EmploymentAgreementTemplateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmploymentAgreementTemplates to delete
+     */
+    where?: EmploymentAgreementTemplateWhereInput
+    /**
+     * Limit how many EmploymentAgreementTemplates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmploymentAgreementTemplate without action
+   */
+  export type EmploymentAgreementTemplateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmploymentAgreementTemplate
+     */
+    select?: EmploymentAgreementTemplateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmploymentAgreementTemplate
+     */
+    omit?: EmploymentAgreementTemplateOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -53786,6 +56990,96 @@ export namespace Prisma {
   };
 
   export type CustomWebsiteRequestScalarFieldEnum = (typeof CustomWebsiteRequestScalarFieldEnum)[keyof typeof CustomWebsiteRequestScalarFieldEnum]
+
+
+  export const EmploymentApplicationScalarFieldEnum: {
+    id: 'id',
+    fullName: 'fullName',
+    email: 'email',
+    phone: 'phone',
+    cin: 'cin',
+    cvUrl: 'cvUrl',
+    photoUrl: 'photoUrl',
+    githubUrl: 'githubUrl',
+    portfolioUrl: 'portfolioUrl',
+    linkedinUrl: 'linkedinUrl',
+    skills: 'skills',
+    revenueShare: 'revenueShare',
+    status: 'status',
+    agreementPdfUrl: 'agreementPdfUrl',
+    adminNotes: 'adminNotes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EmploymentApplicationScalarFieldEnum = (typeof EmploymentApplicationScalarFieldEnum)[keyof typeof EmploymentApplicationScalarFieldEnum]
+
+
+  export const EmploymentAgreementTemplateScalarFieldEnum: {
+    id: 'id',
+    dateX: 'dateX',
+    dateY: 'dateY',
+    employeeNameX: 'employeeNameX',
+    employeeNameY: 'employeeNameY',
+    employeeCinX: 'employeeCinX',
+    employeeCinY: 'employeeCinY',
+    startDateX: 'startDateX',
+    startDateY: 'startDateY',
+    revenueShareX: 'revenueShareX',
+    revenueShareY: 'revenueShareY',
+    employeeSignNameX: 'employeeSignNameX',
+    employeeSignNameY: 'employeeSignNameY',
+    employeeSignDateX: 'employeeSignDateX',
+    employeeSignDateY: 'employeeSignDateY',
+    dateEnabled: 'dateEnabled',
+    employeeNameEnabled: 'employeeNameEnabled',
+    employeeCinEnabled: 'employeeCinEnabled',
+    startDateEnabled: 'startDateEnabled',
+    revenueShareEnabled: 'revenueShareEnabled',
+    employeeSignNameEnabled: 'employeeSignNameEnabled',
+    employeeSignDateEnabled: 'employeeSignDateEnabled',
+    fontSize: 'fontSize',
+    fontColor: 'fontColor',
+    dateFontSize: 'dateFontSize',
+    dateFontColor: 'dateFontColor',
+    dateIsBold: 'dateIsBold',
+    dateIsItalic: 'dateIsItalic',
+    dateFontFamily: 'dateFontFamily',
+    employeeNameFontSize: 'employeeNameFontSize',
+    employeeNameFontColor: 'employeeNameFontColor',
+    employeeNameIsBold: 'employeeNameIsBold',
+    employeeNameIsItalic: 'employeeNameIsItalic',
+    employeeNameFontFamily: 'employeeNameFontFamily',
+    employeeCinFontSize: 'employeeCinFontSize',
+    employeeCinFontColor: 'employeeCinFontColor',
+    employeeCinIsBold: 'employeeCinIsBold',
+    employeeCinIsItalic: 'employeeCinIsItalic',
+    employeeCinFontFamily: 'employeeCinFontFamily',
+    startDateFontSize: 'startDateFontSize',
+    startDateFontColor: 'startDateFontColor',
+    startDateIsBold: 'startDateIsBold',
+    startDateIsItalic: 'startDateIsItalic',
+    startDateFontFamily: 'startDateFontFamily',
+    revenueShareFontSize: 'revenueShareFontSize',
+    revenueShareFontColor: 'revenueShareFontColor',
+    revenueShareIsBold: 'revenueShareIsBold',
+    revenueShareIsItalic: 'revenueShareIsItalic',
+    revenueShareFontFamily: 'revenueShareFontFamily',
+    employeeSignNameFontSize: 'employeeSignNameFontSize',
+    employeeSignNameFontColor: 'employeeSignNameFontColor',
+    employeeSignNameIsBold: 'employeeSignNameIsBold',
+    employeeSignNameIsItalic: 'employeeSignNameIsItalic',
+    employeeSignNameFontFamily: 'employeeSignNameFontFamily',
+    employeeSignDateFontSize: 'employeeSignDateFontSize',
+    employeeSignDateFontColor: 'employeeSignDateFontColor',
+    employeeSignDateIsBold: 'employeeSignDateIsBold',
+    employeeSignDateIsItalic: 'employeeSignDateIsItalic',
+    employeeSignDateFontFamily: 'employeeSignDateFontFamily',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EmploymentAgreementTemplateScalarFieldEnum = (typeof EmploymentAgreementTemplateScalarFieldEnum)[keyof typeof EmploymentAgreementTemplateScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -57302,6 +60596,454 @@ export namespace Prisma {
     adminNotes?: StringWithAggregatesFilter<"CustomWebsiteRequest"> | string
     createdAt?: DateTimeWithAggregatesFilter<"CustomWebsiteRequest"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"CustomWebsiteRequest"> | Date | string
+  }
+
+  export type EmploymentApplicationWhereInput = {
+    AND?: EmploymentApplicationWhereInput | EmploymentApplicationWhereInput[]
+    OR?: EmploymentApplicationWhereInput[]
+    NOT?: EmploymentApplicationWhereInput | EmploymentApplicationWhereInput[]
+    id?: StringFilter<"EmploymentApplication"> | string
+    fullName?: StringFilter<"EmploymentApplication"> | string
+    email?: StringFilter<"EmploymentApplication"> | string
+    phone?: StringFilter<"EmploymentApplication"> | string
+    cin?: StringFilter<"EmploymentApplication"> | string
+    cvUrl?: StringFilter<"EmploymentApplication"> | string
+    photoUrl?: StringFilter<"EmploymentApplication"> | string
+    githubUrl?: StringFilter<"EmploymentApplication"> | string
+    portfolioUrl?: StringNullableFilter<"EmploymentApplication"> | string | null
+    linkedinUrl?: StringFilter<"EmploymentApplication"> | string
+    skills?: StringFilter<"EmploymentApplication"> | string
+    revenueShare?: FloatFilter<"EmploymentApplication"> | number
+    status?: StringFilter<"EmploymentApplication"> | string
+    agreementPdfUrl?: StringNullableFilter<"EmploymentApplication"> | string | null
+    adminNotes?: StringNullableFilter<"EmploymentApplication"> | string | null
+    createdAt?: DateTimeFilter<"EmploymentApplication"> | Date | string
+    updatedAt?: DateTimeFilter<"EmploymentApplication"> | Date | string
+  }
+
+  export type EmploymentApplicationOrderByWithRelationInput = {
+    id?: SortOrder
+    fullName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    cin?: SortOrder
+    cvUrl?: SortOrder
+    photoUrl?: SortOrder
+    githubUrl?: SortOrder
+    portfolioUrl?: SortOrderInput | SortOrder
+    linkedinUrl?: SortOrder
+    skills?: SortOrder
+    revenueShare?: SortOrder
+    status?: SortOrder
+    agreementPdfUrl?: SortOrderInput | SortOrder
+    adminNotes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmploymentApplicationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EmploymentApplicationWhereInput | EmploymentApplicationWhereInput[]
+    OR?: EmploymentApplicationWhereInput[]
+    NOT?: EmploymentApplicationWhereInput | EmploymentApplicationWhereInput[]
+    fullName?: StringFilter<"EmploymentApplication"> | string
+    email?: StringFilter<"EmploymentApplication"> | string
+    phone?: StringFilter<"EmploymentApplication"> | string
+    cin?: StringFilter<"EmploymentApplication"> | string
+    cvUrl?: StringFilter<"EmploymentApplication"> | string
+    photoUrl?: StringFilter<"EmploymentApplication"> | string
+    githubUrl?: StringFilter<"EmploymentApplication"> | string
+    portfolioUrl?: StringNullableFilter<"EmploymentApplication"> | string | null
+    linkedinUrl?: StringFilter<"EmploymentApplication"> | string
+    skills?: StringFilter<"EmploymentApplication"> | string
+    revenueShare?: FloatFilter<"EmploymentApplication"> | number
+    status?: StringFilter<"EmploymentApplication"> | string
+    agreementPdfUrl?: StringNullableFilter<"EmploymentApplication"> | string | null
+    adminNotes?: StringNullableFilter<"EmploymentApplication"> | string | null
+    createdAt?: DateTimeFilter<"EmploymentApplication"> | Date | string
+    updatedAt?: DateTimeFilter<"EmploymentApplication"> | Date | string
+  }, "id">
+
+  export type EmploymentApplicationOrderByWithAggregationInput = {
+    id?: SortOrder
+    fullName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    cin?: SortOrder
+    cvUrl?: SortOrder
+    photoUrl?: SortOrder
+    githubUrl?: SortOrder
+    portfolioUrl?: SortOrderInput | SortOrder
+    linkedinUrl?: SortOrder
+    skills?: SortOrder
+    revenueShare?: SortOrder
+    status?: SortOrder
+    agreementPdfUrl?: SortOrderInput | SortOrder
+    adminNotes?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EmploymentApplicationCountOrderByAggregateInput
+    _avg?: EmploymentApplicationAvgOrderByAggregateInput
+    _max?: EmploymentApplicationMaxOrderByAggregateInput
+    _min?: EmploymentApplicationMinOrderByAggregateInput
+    _sum?: EmploymentApplicationSumOrderByAggregateInput
+  }
+
+  export type EmploymentApplicationScalarWhereWithAggregatesInput = {
+    AND?: EmploymentApplicationScalarWhereWithAggregatesInput | EmploymentApplicationScalarWhereWithAggregatesInput[]
+    OR?: EmploymentApplicationScalarWhereWithAggregatesInput[]
+    NOT?: EmploymentApplicationScalarWhereWithAggregatesInput | EmploymentApplicationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmploymentApplication"> | string
+    fullName?: StringWithAggregatesFilter<"EmploymentApplication"> | string
+    email?: StringWithAggregatesFilter<"EmploymentApplication"> | string
+    phone?: StringWithAggregatesFilter<"EmploymentApplication"> | string
+    cin?: StringWithAggregatesFilter<"EmploymentApplication"> | string
+    cvUrl?: StringWithAggregatesFilter<"EmploymentApplication"> | string
+    photoUrl?: StringWithAggregatesFilter<"EmploymentApplication"> | string
+    githubUrl?: StringWithAggregatesFilter<"EmploymentApplication"> | string
+    portfolioUrl?: StringNullableWithAggregatesFilter<"EmploymentApplication"> | string | null
+    linkedinUrl?: StringWithAggregatesFilter<"EmploymentApplication"> | string
+    skills?: StringWithAggregatesFilter<"EmploymentApplication"> | string
+    revenueShare?: FloatWithAggregatesFilter<"EmploymentApplication"> | number
+    status?: StringWithAggregatesFilter<"EmploymentApplication"> | string
+    agreementPdfUrl?: StringNullableWithAggregatesFilter<"EmploymentApplication"> | string | null
+    adminNotes?: StringNullableWithAggregatesFilter<"EmploymentApplication"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"EmploymentApplication"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EmploymentApplication"> | Date | string
+  }
+
+  export type EmploymentAgreementTemplateWhereInput = {
+    AND?: EmploymentAgreementTemplateWhereInput | EmploymentAgreementTemplateWhereInput[]
+    OR?: EmploymentAgreementTemplateWhereInput[]
+    NOT?: EmploymentAgreementTemplateWhereInput | EmploymentAgreementTemplateWhereInput[]
+    id?: StringFilter<"EmploymentAgreementTemplate"> | string
+    dateX?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    dateY?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeNameX?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeNameY?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeCinX?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeCinY?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    startDateX?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    startDateY?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    revenueShareX?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    revenueShareY?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignNameX?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignNameY?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignDateX?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignDateY?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    dateEnabled?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeNameEnabled?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeCinEnabled?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    startDateEnabled?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    revenueShareEnabled?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignNameEnabled?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignDateEnabled?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    fontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    fontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    dateFontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    dateFontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    dateIsBold?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    dateIsItalic?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    dateFontFamily?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeNameFontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeNameFontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeNameIsBold?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeNameIsItalic?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeNameFontFamily?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeCinFontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeCinFontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeCinIsBold?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeCinIsItalic?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeCinFontFamily?: StringFilter<"EmploymentAgreementTemplate"> | string
+    startDateFontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    startDateFontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    startDateIsBold?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    startDateIsItalic?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    startDateFontFamily?: StringFilter<"EmploymentAgreementTemplate"> | string
+    revenueShareFontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    revenueShareFontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    revenueShareIsBold?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    revenueShareIsItalic?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    revenueShareFontFamily?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeSignNameFontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignNameFontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeSignNameIsBold?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignNameIsItalic?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignNameFontFamily?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeSignDateFontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignDateFontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeSignDateIsBold?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignDateIsItalic?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignDateFontFamily?: StringFilter<"EmploymentAgreementTemplate"> | string
+    createdAt?: DateTimeFilter<"EmploymentAgreementTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"EmploymentAgreementTemplate"> | Date | string
+  }
+
+  export type EmploymentAgreementTemplateOrderByWithRelationInput = {
+    id?: SortOrder
+    dateX?: SortOrder
+    dateY?: SortOrder
+    employeeNameX?: SortOrder
+    employeeNameY?: SortOrder
+    employeeCinX?: SortOrder
+    employeeCinY?: SortOrder
+    startDateX?: SortOrder
+    startDateY?: SortOrder
+    revenueShareX?: SortOrder
+    revenueShareY?: SortOrder
+    employeeSignNameX?: SortOrder
+    employeeSignNameY?: SortOrder
+    employeeSignDateX?: SortOrder
+    employeeSignDateY?: SortOrder
+    dateEnabled?: SortOrder
+    employeeNameEnabled?: SortOrder
+    employeeCinEnabled?: SortOrder
+    startDateEnabled?: SortOrder
+    revenueShareEnabled?: SortOrder
+    employeeSignNameEnabled?: SortOrder
+    employeeSignDateEnabled?: SortOrder
+    fontSize?: SortOrder
+    fontColor?: SortOrder
+    dateFontSize?: SortOrder
+    dateFontColor?: SortOrder
+    dateIsBold?: SortOrder
+    dateIsItalic?: SortOrder
+    dateFontFamily?: SortOrder
+    employeeNameFontSize?: SortOrder
+    employeeNameFontColor?: SortOrder
+    employeeNameIsBold?: SortOrder
+    employeeNameIsItalic?: SortOrder
+    employeeNameFontFamily?: SortOrder
+    employeeCinFontSize?: SortOrder
+    employeeCinFontColor?: SortOrder
+    employeeCinIsBold?: SortOrder
+    employeeCinIsItalic?: SortOrder
+    employeeCinFontFamily?: SortOrder
+    startDateFontSize?: SortOrder
+    startDateFontColor?: SortOrder
+    startDateIsBold?: SortOrder
+    startDateIsItalic?: SortOrder
+    startDateFontFamily?: SortOrder
+    revenueShareFontSize?: SortOrder
+    revenueShareFontColor?: SortOrder
+    revenueShareIsBold?: SortOrder
+    revenueShareIsItalic?: SortOrder
+    revenueShareFontFamily?: SortOrder
+    employeeSignNameFontSize?: SortOrder
+    employeeSignNameFontColor?: SortOrder
+    employeeSignNameIsBold?: SortOrder
+    employeeSignNameIsItalic?: SortOrder
+    employeeSignNameFontFamily?: SortOrder
+    employeeSignDateFontSize?: SortOrder
+    employeeSignDateFontColor?: SortOrder
+    employeeSignDateIsBold?: SortOrder
+    employeeSignDateIsItalic?: SortOrder
+    employeeSignDateFontFamily?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmploymentAgreementTemplateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EmploymentAgreementTemplateWhereInput | EmploymentAgreementTemplateWhereInput[]
+    OR?: EmploymentAgreementTemplateWhereInput[]
+    NOT?: EmploymentAgreementTemplateWhereInput | EmploymentAgreementTemplateWhereInput[]
+    dateX?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    dateY?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeNameX?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeNameY?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeCinX?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeCinY?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    startDateX?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    startDateY?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    revenueShareX?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    revenueShareY?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignNameX?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignNameY?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignDateX?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignDateY?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    dateEnabled?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeNameEnabled?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeCinEnabled?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    startDateEnabled?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    revenueShareEnabled?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignNameEnabled?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignDateEnabled?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    fontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    fontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    dateFontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    dateFontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    dateIsBold?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    dateIsItalic?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    dateFontFamily?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeNameFontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeNameFontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeNameIsBold?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeNameIsItalic?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeNameFontFamily?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeCinFontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeCinFontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeCinIsBold?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeCinIsItalic?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeCinFontFamily?: StringFilter<"EmploymentAgreementTemplate"> | string
+    startDateFontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    startDateFontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    startDateIsBold?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    startDateIsItalic?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    startDateFontFamily?: StringFilter<"EmploymentAgreementTemplate"> | string
+    revenueShareFontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    revenueShareFontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    revenueShareIsBold?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    revenueShareIsItalic?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    revenueShareFontFamily?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeSignNameFontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignNameFontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeSignNameIsBold?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignNameIsItalic?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignNameFontFamily?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeSignDateFontSize?: FloatFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignDateFontColor?: StringFilter<"EmploymentAgreementTemplate"> | string
+    employeeSignDateIsBold?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignDateIsItalic?: BoolFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignDateFontFamily?: StringFilter<"EmploymentAgreementTemplate"> | string
+    createdAt?: DateTimeFilter<"EmploymentAgreementTemplate"> | Date | string
+    updatedAt?: DateTimeFilter<"EmploymentAgreementTemplate"> | Date | string
+  }, "id">
+
+  export type EmploymentAgreementTemplateOrderByWithAggregationInput = {
+    id?: SortOrder
+    dateX?: SortOrder
+    dateY?: SortOrder
+    employeeNameX?: SortOrder
+    employeeNameY?: SortOrder
+    employeeCinX?: SortOrder
+    employeeCinY?: SortOrder
+    startDateX?: SortOrder
+    startDateY?: SortOrder
+    revenueShareX?: SortOrder
+    revenueShareY?: SortOrder
+    employeeSignNameX?: SortOrder
+    employeeSignNameY?: SortOrder
+    employeeSignDateX?: SortOrder
+    employeeSignDateY?: SortOrder
+    dateEnabled?: SortOrder
+    employeeNameEnabled?: SortOrder
+    employeeCinEnabled?: SortOrder
+    startDateEnabled?: SortOrder
+    revenueShareEnabled?: SortOrder
+    employeeSignNameEnabled?: SortOrder
+    employeeSignDateEnabled?: SortOrder
+    fontSize?: SortOrder
+    fontColor?: SortOrder
+    dateFontSize?: SortOrder
+    dateFontColor?: SortOrder
+    dateIsBold?: SortOrder
+    dateIsItalic?: SortOrder
+    dateFontFamily?: SortOrder
+    employeeNameFontSize?: SortOrder
+    employeeNameFontColor?: SortOrder
+    employeeNameIsBold?: SortOrder
+    employeeNameIsItalic?: SortOrder
+    employeeNameFontFamily?: SortOrder
+    employeeCinFontSize?: SortOrder
+    employeeCinFontColor?: SortOrder
+    employeeCinIsBold?: SortOrder
+    employeeCinIsItalic?: SortOrder
+    employeeCinFontFamily?: SortOrder
+    startDateFontSize?: SortOrder
+    startDateFontColor?: SortOrder
+    startDateIsBold?: SortOrder
+    startDateIsItalic?: SortOrder
+    startDateFontFamily?: SortOrder
+    revenueShareFontSize?: SortOrder
+    revenueShareFontColor?: SortOrder
+    revenueShareIsBold?: SortOrder
+    revenueShareIsItalic?: SortOrder
+    revenueShareFontFamily?: SortOrder
+    employeeSignNameFontSize?: SortOrder
+    employeeSignNameFontColor?: SortOrder
+    employeeSignNameIsBold?: SortOrder
+    employeeSignNameIsItalic?: SortOrder
+    employeeSignNameFontFamily?: SortOrder
+    employeeSignDateFontSize?: SortOrder
+    employeeSignDateFontColor?: SortOrder
+    employeeSignDateIsBold?: SortOrder
+    employeeSignDateIsItalic?: SortOrder
+    employeeSignDateFontFamily?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EmploymentAgreementTemplateCountOrderByAggregateInput
+    _avg?: EmploymentAgreementTemplateAvgOrderByAggregateInput
+    _max?: EmploymentAgreementTemplateMaxOrderByAggregateInput
+    _min?: EmploymentAgreementTemplateMinOrderByAggregateInput
+    _sum?: EmploymentAgreementTemplateSumOrderByAggregateInput
+  }
+
+  export type EmploymentAgreementTemplateScalarWhereWithAggregatesInput = {
+    AND?: EmploymentAgreementTemplateScalarWhereWithAggregatesInput | EmploymentAgreementTemplateScalarWhereWithAggregatesInput[]
+    OR?: EmploymentAgreementTemplateScalarWhereWithAggregatesInput[]
+    NOT?: EmploymentAgreementTemplateScalarWhereWithAggregatesInput | EmploymentAgreementTemplateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    dateX?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    dateY?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    employeeNameX?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    employeeNameY?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    employeeCinX?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    employeeCinY?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    startDateX?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    startDateY?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    revenueShareX?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    revenueShareY?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignNameX?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignNameY?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignDateX?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignDateY?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    dateEnabled?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeNameEnabled?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeCinEnabled?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    startDateEnabled?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    revenueShareEnabled?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignNameEnabled?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignDateEnabled?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    fontSize?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    fontColor?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    dateFontSize?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    dateFontColor?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    dateIsBold?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    dateIsItalic?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    dateFontFamily?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    employeeNameFontSize?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    employeeNameFontColor?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    employeeNameIsBold?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeNameIsItalic?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeNameFontFamily?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    employeeCinFontSize?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    employeeCinFontColor?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    employeeCinIsBold?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeCinIsItalic?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeCinFontFamily?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    startDateFontSize?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    startDateFontColor?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    startDateIsBold?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    startDateIsItalic?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    startDateFontFamily?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    revenueShareFontSize?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    revenueShareFontColor?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    revenueShareIsBold?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    revenueShareIsItalic?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    revenueShareFontFamily?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    employeeSignNameFontSize?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignNameFontColor?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    employeeSignNameIsBold?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignNameIsItalic?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignNameFontFamily?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    employeeSignDateFontSize?: FloatWithAggregatesFilter<"EmploymentAgreementTemplate"> | number
+    employeeSignDateFontColor?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    employeeSignDateIsBold?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignDateIsItalic?: BoolWithAggregatesFilter<"EmploymentAgreementTemplate"> | boolean
+    employeeSignDateFontFamily?: StringWithAggregatesFilter<"EmploymentAgreementTemplate"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"EmploymentAgreementTemplate"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EmploymentAgreementTemplate"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -61150,6 +64892,594 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EmploymentApplicationCreateInput = {
+    id?: string
+    fullName: string
+    email: string
+    phone: string
+    cin: string
+    cvUrl: string
+    photoUrl: string
+    githubUrl: string
+    portfolioUrl?: string | null
+    linkedinUrl: string
+    skills?: string
+    revenueShare?: number
+    status?: string
+    agreementPdfUrl?: string | null
+    adminNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmploymentApplicationUncheckedCreateInput = {
+    id?: string
+    fullName: string
+    email: string
+    phone: string
+    cin: string
+    cvUrl: string
+    photoUrl: string
+    githubUrl: string
+    portfolioUrl?: string | null
+    linkedinUrl: string
+    skills?: string
+    revenueShare?: number
+    status?: string
+    agreementPdfUrl?: string | null
+    adminNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmploymentApplicationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    cin?: StringFieldUpdateOperationsInput | string
+    cvUrl?: StringFieldUpdateOperationsInput | string
+    photoUrl?: StringFieldUpdateOperationsInput | string
+    githubUrl?: StringFieldUpdateOperationsInput | string
+    portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: StringFieldUpdateOperationsInput | string
+    skills?: StringFieldUpdateOperationsInput | string
+    revenueShare?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    agreementPdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmploymentApplicationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    cin?: StringFieldUpdateOperationsInput | string
+    cvUrl?: StringFieldUpdateOperationsInput | string
+    photoUrl?: StringFieldUpdateOperationsInput | string
+    githubUrl?: StringFieldUpdateOperationsInput | string
+    portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: StringFieldUpdateOperationsInput | string
+    skills?: StringFieldUpdateOperationsInput | string
+    revenueShare?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    agreementPdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmploymentApplicationCreateManyInput = {
+    id?: string
+    fullName: string
+    email: string
+    phone: string
+    cin: string
+    cvUrl: string
+    photoUrl: string
+    githubUrl: string
+    portfolioUrl?: string | null
+    linkedinUrl: string
+    skills?: string
+    revenueShare?: number
+    status?: string
+    agreementPdfUrl?: string | null
+    adminNotes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmploymentApplicationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    cin?: StringFieldUpdateOperationsInput | string
+    cvUrl?: StringFieldUpdateOperationsInput | string
+    photoUrl?: StringFieldUpdateOperationsInput | string
+    githubUrl?: StringFieldUpdateOperationsInput | string
+    portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: StringFieldUpdateOperationsInput | string
+    skills?: StringFieldUpdateOperationsInput | string
+    revenueShare?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    agreementPdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmploymentApplicationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fullName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    cin?: StringFieldUpdateOperationsInput | string
+    cvUrl?: StringFieldUpdateOperationsInput | string
+    photoUrl?: StringFieldUpdateOperationsInput | string
+    githubUrl?: StringFieldUpdateOperationsInput | string
+    portfolioUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedinUrl?: StringFieldUpdateOperationsInput | string
+    skills?: StringFieldUpdateOperationsInput | string
+    revenueShare?: FloatFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    agreementPdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmploymentAgreementTemplateCreateInput = {
+    id?: string
+    dateX?: number
+    dateY?: number
+    employeeNameX?: number
+    employeeNameY?: number
+    employeeCinX?: number
+    employeeCinY?: number
+    startDateX?: number
+    startDateY?: number
+    revenueShareX?: number
+    revenueShareY?: number
+    employeeSignNameX?: number
+    employeeSignNameY?: number
+    employeeSignDateX?: number
+    employeeSignDateY?: number
+    dateEnabled?: boolean
+    employeeNameEnabled?: boolean
+    employeeCinEnabled?: boolean
+    startDateEnabled?: boolean
+    revenueShareEnabled?: boolean
+    employeeSignNameEnabled?: boolean
+    employeeSignDateEnabled?: boolean
+    fontSize?: number
+    fontColor?: string
+    dateFontSize?: number
+    dateFontColor?: string
+    dateIsBold?: boolean
+    dateIsItalic?: boolean
+    dateFontFamily?: string
+    employeeNameFontSize?: number
+    employeeNameFontColor?: string
+    employeeNameIsBold?: boolean
+    employeeNameIsItalic?: boolean
+    employeeNameFontFamily?: string
+    employeeCinFontSize?: number
+    employeeCinFontColor?: string
+    employeeCinIsBold?: boolean
+    employeeCinIsItalic?: boolean
+    employeeCinFontFamily?: string
+    startDateFontSize?: number
+    startDateFontColor?: string
+    startDateIsBold?: boolean
+    startDateIsItalic?: boolean
+    startDateFontFamily?: string
+    revenueShareFontSize?: number
+    revenueShareFontColor?: string
+    revenueShareIsBold?: boolean
+    revenueShareIsItalic?: boolean
+    revenueShareFontFamily?: string
+    employeeSignNameFontSize?: number
+    employeeSignNameFontColor?: string
+    employeeSignNameIsBold?: boolean
+    employeeSignNameIsItalic?: boolean
+    employeeSignNameFontFamily?: string
+    employeeSignDateFontSize?: number
+    employeeSignDateFontColor?: string
+    employeeSignDateIsBold?: boolean
+    employeeSignDateIsItalic?: boolean
+    employeeSignDateFontFamily?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmploymentAgreementTemplateUncheckedCreateInput = {
+    id?: string
+    dateX?: number
+    dateY?: number
+    employeeNameX?: number
+    employeeNameY?: number
+    employeeCinX?: number
+    employeeCinY?: number
+    startDateX?: number
+    startDateY?: number
+    revenueShareX?: number
+    revenueShareY?: number
+    employeeSignNameX?: number
+    employeeSignNameY?: number
+    employeeSignDateX?: number
+    employeeSignDateY?: number
+    dateEnabled?: boolean
+    employeeNameEnabled?: boolean
+    employeeCinEnabled?: boolean
+    startDateEnabled?: boolean
+    revenueShareEnabled?: boolean
+    employeeSignNameEnabled?: boolean
+    employeeSignDateEnabled?: boolean
+    fontSize?: number
+    fontColor?: string
+    dateFontSize?: number
+    dateFontColor?: string
+    dateIsBold?: boolean
+    dateIsItalic?: boolean
+    dateFontFamily?: string
+    employeeNameFontSize?: number
+    employeeNameFontColor?: string
+    employeeNameIsBold?: boolean
+    employeeNameIsItalic?: boolean
+    employeeNameFontFamily?: string
+    employeeCinFontSize?: number
+    employeeCinFontColor?: string
+    employeeCinIsBold?: boolean
+    employeeCinIsItalic?: boolean
+    employeeCinFontFamily?: string
+    startDateFontSize?: number
+    startDateFontColor?: string
+    startDateIsBold?: boolean
+    startDateIsItalic?: boolean
+    startDateFontFamily?: string
+    revenueShareFontSize?: number
+    revenueShareFontColor?: string
+    revenueShareIsBold?: boolean
+    revenueShareIsItalic?: boolean
+    revenueShareFontFamily?: string
+    employeeSignNameFontSize?: number
+    employeeSignNameFontColor?: string
+    employeeSignNameIsBold?: boolean
+    employeeSignNameIsItalic?: boolean
+    employeeSignNameFontFamily?: string
+    employeeSignDateFontSize?: number
+    employeeSignDateFontColor?: string
+    employeeSignDateIsBold?: boolean
+    employeeSignDateIsItalic?: boolean
+    employeeSignDateFontFamily?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmploymentAgreementTemplateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dateX?: FloatFieldUpdateOperationsInput | number
+    dateY?: FloatFieldUpdateOperationsInput | number
+    employeeNameX?: FloatFieldUpdateOperationsInput | number
+    employeeNameY?: FloatFieldUpdateOperationsInput | number
+    employeeCinX?: FloatFieldUpdateOperationsInput | number
+    employeeCinY?: FloatFieldUpdateOperationsInput | number
+    startDateX?: FloatFieldUpdateOperationsInput | number
+    startDateY?: FloatFieldUpdateOperationsInput | number
+    revenueShareX?: FloatFieldUpdateOperationsInput | number
+    revenueShareY?: FloatFieldUpdateOperationsInput | number
+    employeeSignNameX?: FloatFieldUpdateOperationsInput | number
+    employeeSignNameY?: FloatFieldUpdateOperationsInput | number
+    employeeSignDateX?: FloatFieldUpdateOperationsInput | number
+    employeeSignDateY?: FloatFieldUpdateOperationsInput | number
+    dateEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeNameEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeCinEnabled?: BoolFieldUpdateOperationsInput | boolean
+    startDateEnabled?: BoolFieldUpdateOperationsInput | boolean
+    revenueShareEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignNameEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignDateEnabled?: BoolFieldUpdateOperationsInput | boolean
+    fontSize?: FloatFieldUpdateOperationsInput | number
+    fontColor?: StringFieldUpdateOperationsInput | string
+    dateFontSize?: FloatFieldUpdateOperationsInput | number
+    dateFontColor?: StringFieldUpdateOperationsInput | string
+    dateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    dateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    dateFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeNameFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeNameFontColor?: StringFieldUpdateOperationsInput | string
+    employeeNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeNameFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeCinFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeCinFontColor?: StringFieldUpdateOperationsInput | string
+    employeeCinIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeCinIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeCinFontFamily?: StringFieldUpdateOperationsInput | string
+    startDateFontSize?: FloatFieldUpdateOperationsInput | number
+    startDateFontColor?: StringFieldUpdateOperationsInput | string
+    startDateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    startDateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    startDateFontFamily?: StringFieldUpdateOperationsInput | string
+    revenueShareFontSize?: FloatFieldUpdateOperationsInput | number
+    revenueShareFontColor?: StringFieldUpdateOperationsInput | string
+    revenueShareIsBold?: BoolFieldUpdateOperationsInput | boolean
+    revenueShareIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    revenueShareFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeSignNameFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeSignNameFontColor?: StringFieldUpdateOperationsInput | string
+    employeeSignNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignNameFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeSignDateFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeSignDateFontColor?: StringFieldUpdateOperationsInput | string
+    employeeSignDateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignDateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignDateFontFamily?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmploymentAgreementTemplateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dateX?: FloatFieldUpdateOperationsInput | number
+    dateY?: FloatFieldUpdateOperationsInput | number
+    employeeNameX?: FloatFieldUpdateOperationsInput | number
+    employeeNameY?: FloatFieldUpdateOperationsInput | number
+    employeeCinX?: FloatFieldUpdateOperationsInput | number
+    employeeCinY?: FloatFieldUpdateOperationsInput | number
+    startDateX?: FloatFieldUpdateOperationsInput | number
+    startDateY?: FloatFieldUpdateOperationsInput | number
+    revenueShareX?: FloatFieldUpdateOperationsInput | number
+    revenueShareY?: FloatFieldUpdateOperationsInput | number
+    employeeSignNameX?: FloatFieldUpdateOperationsInput | number
+    employeeSignNameY?: FloatFieldUpdateOperationsInput | number
+    employeeSignDateX?: FloatFieldUpdateOperationsInput | number
+    employeeSignDateY?: FloatFieldUpdateOperationsInput | number
+    dateEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeNameEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeCinEnabled?: BoolFieldUpdateOperationsInput | boolean
+    startDateEnabled?: BoolFieldUpdateOperationsInput | boolean
+    revenueShareEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignNameEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignDateEnabled?: BoolFieldUpdateOperationsInput | boolean
+    fontSize?: FloatFieldUpdateOperationsInput | number
+    fontColor?: StringFieldUpdateOperationsInput | string
+    dateFontSize?: FloatFieldUpdateOperationsInput | number
+    dateFontColor?: StringFieldUpdateOperationsInput | string
+    dateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    dateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    dateFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeNameFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeNameFontColor?: StringFieldUpdateOperationsInput | string
+    employeeNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeNameFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeCinFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeCinFontColor?: StringFieldUpdateOperationsInput | string
+    employeeCinIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeCinIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeCinFontFamily?: StringFieldUpdateOperationsInput | string
+    startDateFontSize?: FloatFieldUpdateOperationsInput | number
+    startDateFontColor?: StringFieldUpdateOperationsInput | string
+    startDateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    startDateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    startDateFontFamily?: StringFieldUpdateOperationsInput | string
+    revenueShareFontSize?: FloatFieldUpdateOperationsInput | number
+    revenueShareFontColor?: StringFieldUpdateOperationsInput | string
+    revenueShareIsBold?: BoolFieldUpdateOperationsInput | boolean
+    revenueShareIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    revenueShareFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeSignNameFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeSignNameFontColor?: StringFieldUpdateOperationsInput | string
+    employeeSignNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignNameFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeSignDateFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeSignDateFontColor?: StringFieldUpdateOperationsInput | string
+    employeeSignDateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignDateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignDateFontFamily?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmploymentAgreementTemplateCreateManyInput = {
+    id?: string
+    dateX?: number
+    dateY?: number
+    employeeNameX?: number
+    employeeNameY?: number
+    employeeCinX?: number
+    employeeCinY?: number
+    startDateX?: number
+    startDateY?: number
+    revenueShareX?: number
+    revenueShareY?: number
+    employeeSignNameX?: number
+    employeeSignNameY?: number
+    employeeSignDateX?: number
+    employeeSignDateY?: number
+    dateEnabled?: boolean
+    employeeNameEnabled?: boolean
+    employeeCinEnabled?: boolean
+    startDateEnabled?: boolean
+    revenueShareEnabled?: boolean
+    employeeSignNameEnabled?: boolean
+    employeeSignDateEnabled?: boolean
+    fontSize?: number
+    fontColor?: string
+    dateFontSize?: number
+    dateFontColor?: string
+    dateIsBold?: boolean
+    dateIsItalic?: boolean
+    dateFontFamily?: string
+    employeeNameFontSize?: number
+    employeeNameFontColor?: string
+    employeeNameIsBold?: boolean
+    employeeNameIsItalic?: boolean
+    employeeNameFontFamily?: string
+    employeeCinFontSize?: number
+    employeeCinFontColor?: string
+    employeeCinIsBold?: boolean
+    employeeCinIsItalic?: boolean
+    employeeCinFontFamily?: string
+    startDateFontSize?: number
+    startDateFontColor?: string
+    startDateIsBold?: boolean
+    startDateIsItalic?: boolean
+    startDateFontFamily?: string
+    revenueShareFontSize?: number
+    revenueShareFontColor?: string
+    revenueShareIsBold?: boolean
+    revenueShareIsItalic?: boolean
+    revenueShareFontFamily?: string
+    employeeSignNameFontSize?: number
+    employeeSignNameFontColor?: string
+    employeeSignNameIsBold?: boolean
+    employeeSignNameIsItalic?: boolean
+    employeeSignNameFontFamily?: string
+    employeeSignDateFontSize?: number
+    employeeSignDateFontColor?: string
+    employeeSignDateIsBold?: boolean
+    employeeSignDateIsItalic?: boolean
+    employeeSignDateFontFamily?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EmploymentAgreementTemplateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dateX?: FloatFieldUpdateOperationsInput | number
+    dateY?: FloatFieldUpdateOperationsInput | number
+    employeeNameX?: FloatFieldUpdateOperationsInput | number
+    employeeNameY?: FloatFieldUpdateOperationsInput | number
+    employeeCinX?: FloatFieldUpdateOperationsInput | number
+    employeeCinY?: FloatFieldUpdateOperationsInput | number
+    startDateX?: FloatFieldUpdateOperationsInput | number
+    startDateY?: FloatFieldUpdateOperationsInput | number
+    revenueShareX?: FloatFieldUpdateOperationsInput | number
+    revenueShareY?: FloatFieldUpdateOperationsInput | number
+    employeeSignNameX?: FloatFieldUpdateOperationsInput | number
+    employeeSignNameY?: FloatFieldUpdateOperationsInput | number
+    employeeSignDateX?: FloatFieldUpdateOperationsInput | number
+    employeeSignDateY?: FloatFieldUpdateOperationsInput | number
+    dateEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeNameEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeCinEnabled?: BoolFieldUpdateOperationsInput | boolean
+    startDateEnabled?: BoolFieldUpdateOperationsInput | boolean
+    revenueShareEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignNameEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignDateEnabled?: BoolFieldUpdateOperationsInput | boolean
+    fontSize?: FloatFieldUpdateOperationsInput | number
+    fontColor?: StringFieldUpdateOperationsInput | string
+    dateFontSize?: FloatFieldUpdateOperationsInput | number
+    dateFontColor?: StringFieldUpdateOperationsInput | string
+    dateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    dateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    dateFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeNameFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeNameFontColor?: StringFieldUpdateOperationsInput | string
+    employeeNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeNameFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeCinFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeCinFontColor?: StringFieldUpdateOperationsInput | string
+    employeeCinIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeCinIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeCinFontFamily?: StringFieldUpdateOperationsInput | string
+    startDateFontSize?: FloatFieldUpdateOperationsInput | number
+    startDateFontColor?: StringFieldUpdateOperationsInput | string
+    startDateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    startDateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    startDateFontFamily?: StringFieldUpdateOperationsInput | string
+    revenueShareFontSize?: FloatFieldUpdateOperationsInput | number
+    revenueShareFontColor?: StringFieldUpdateOperationsInput | string
+    revenueShareIsBold?: BoolFieldUpdateOperationsInput | boolean
+    revenueShareIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    revenueShareFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeSignNameFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeSignNameFontColor?: StringFieldUpdateOperationsInput | string
+    employeeSignNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignNameFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeSignDateFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeSignDateFontColor?: StringFieldUpdateOperationsInput | string
+    employeeSignDateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignDateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignDateFontFamily?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EmploymentAgreementTemplateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    dateX?: FloatFieldUpdateOperationsInput | number
+    dateY?: FloatFieldUpdateOperationsInput | number
+    employeeNameX?: FloatFieldUpdateOperationsInput | number
+    employeeNameY?: FloatFieldUpdateOperationsInput | number
+    employeeCinX?: FloatFieldUpdateOperationsInput | number
+    employeeCinY?: FloatFieldUpdateOperationsInput | number
+    startDateX?: FloatFieldUpdateOperationsInput | number
+    startDateY?: FloatFieldUpdateOperationsInput | number
+    revenueShareX?: FloatFieldUpdateOperationsInput | number
+    revenueShareY?: FloatFieldUpdateOperationsInput | number
+    employeeSignNameX?: FloatFieldUpdateOperationsInput | number
+    employeeSignNameY?: FloatFieldUpdateOperationsInput | number
+    employeeSignDateX?: FloatFieldUpdateOperationsInput | number
+    employeeSignDateY?: FloatFieldUpdateOperationsInput | number
+    dateEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeNameEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeCinEnabled?: BoolFieldUpdateOperationsInput | boolean
+    startDateEnabled?: BoolFieldUpdateOperationsInput | boolean
+    revenueShareEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignNameEnabled?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignDateEnabled?: BoolFieldUpdateOperationsInput | boolean
+    fontSize?: FloatFieldUpdateOperationsInput | number
+    fontColor?: StringFieldUpdateOperationsInput | string
+    dateFontSize?: FloatFieldUpdateOperationsInput | number
+    dateFontColor?: StringFieldUpdateOperationsInput | string
+    dateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    dateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    dateFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeNameFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeNameFontColor?: StringFieldUpdateOperationsInput | string
+    employeeNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeNameFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeCinFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeCinFontColor?: StringFieldUpdateOperationsInput | string
+    employeeCinIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeCinIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeCinFontFamily?: StringFieldUpdateOperationsInput | string
+    startDateFontSize?: FloatFieldUpdateOperationsInput | number
+    startDateFontColor?: StringFieldUpdateOperationsInput | string
+    startDateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    startDateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    startDateFontFamily?: StringFieldUpdateOperationsInput | string
+    revenueShareFontSize?: FloatFieldUpdateOperationsInput | number
+    revenueShareFontColor?: StringFieldUpdateOperationsInput | string
+    revenueShareIsBold?: BoolFieldUpdateOperationsInput | boolean
+    revenueShareIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    revenueShareFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeSignNameFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeSignNameFontColor?: StringFieldUpdateOperationsInput | string
+    employeeSignNameIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignNameIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignNameFontFamily?: StringFieldUpdateOperationsInput | string
+    employeeSignDateFontSize?: FloatFieldUpdateOperationsInput | number
+    employeeSignDateFontColor?: StringFieldUpdateOperationsInput | string
+    employeeSignDateIsBold?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignDateIsItalic?: BoolFieldUpdateOperationsInput | boolean
+    employeeSignDateFontFamily?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -63698,6 +68028,316 @@ export namespace Prisma {
     adminNotes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type EmploymentApplicationCountOrderByAggregateInput = {
+    id?: SortOrder
+    fullName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    cin?: SortOrder
+    cvUrl?: SortOrder
+    photoUrl?: SortOrder
+    githubUrl?: SortOrder
+    portfolioUrl?: SortOrder
+    linkedinUrl?: SortOrder
+    skills?: SortOrder
+    revenueShare?: SortOrder
+    status?: SortOrder
+    agreementPdfUrl?: SortOrder
+    adminNotes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmploymentApplicationAvgOrderByAggregateInput = {
+    revenueShare?: SortOrder
+  }
+
+  export type EmploymentApplicationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    fullName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    cin?: SortOrder
+    cvUrl?: SortOrder
+    photoUrl?: SortOrder
+    githubUrl?: SortOrder
+    portfolioUrl?: SortOrder
+    linkedinUrl?: SortOrder
+    skills?: SortOrder
+    revenueShare?: SortOrder
+    status?: SortOrder
+    agreementPdfUrl?: SortOrder
+    adminNotes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmploymentApplicationMinOrderByAggregateInput = {
+    id?: SortOrder
+    fullName?: SortOrder
+    email?: SortOrder
+    phone?: SortOrder
+    cin?: SortOrder
+    cvUrl?: SortOrder
+    photoUrl?: SortOrder
+    githubUrl?: SortOrder
+    portfolioUrl?: SortOrder
+    linkedinUrl?: SortOrder
+    skills?: SortOrder
+    revenueShare?: SortOrder
+    status?: SortOrder
+    agreementPdfUrl?: SortOrder
+    adminNotes?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmploymentApplicationSumOrderByAggregateInput = {
+    revenueShare?: SortOrder
+  }
+
+  export type EmploymentAgreementTemplateCountOrderByAggregateInput = {
+    id?: SortOrder
+    dateX?: SortOrder
+    dateY?: SortOrder
+    employeeNameX?: SortOrder
+    employeeNameY?: SortOrder
+    employeeCinX?: SortOrder
+    employeeCinY?: SortOrder
+    startDateX?: SortOrder
+    startDateY?: SortOrder
+    revenueShareX?: SortOrder
+    revenueShareY?: SortOrder
+    employeeSignNameX?: SortOrder
+    employeeSignNameY?: SortOrder
+    employeeSignDateX?: SortOrder
+    employeeSignDateY?: SortOrder
+    dateEnabled?: SortOrder
+    employeeNameEnabled?: SortOrder
+    employeeCinEnabled?: SortOrder
+    startDateEnabled?: SortOrder
+    revenueShareEnabled?: SortOrder
+    employeeSignNameEnabled?: SortOrder
+    employeeSignDateEnabled?: SortOrder
+    fontSize?: SortOrder
+    fontColor?: SortOrder
+    dateFontSize?: SortOrder
+    dateFontColor?: SortOrder
+    dateIsBold?: SortOrder
+    dateIsItalic?: SortOrder
+    dateFontFamily?: SortOrder
+    employeeNameFontSize?: SortOrder
+    employeeNameFontColor?: SortOrder
+    employeeNameIsBold?: SortOrder
+    employeeNameIsItalic?: SortOrder
+    employeeNameFontFamily?: SortOrder
+    employeeCinFontSize?: SortOrder
+    employeeCinFontColor?: SortOrder
+    employeeCinIsBold?: SortOrder
+    employeeCinIsItalic?: SortOrder
+    employeeCinFontFamily?: SortOrder
+    startDateFontSize?: SortOrder
+    startDateFontColor?: SortOrder
+    startDateIsBold?: SortOrder
+    startDateIsItalic?: SortOrder
+    startDateFontFamily?: SortOrder
+    revenueShareFontSize?: SortOrder
+    revenueShareFontColor?: SortOrder
+    revenueShareIsBold?: SortOrder
+    revenueShareIsItalic?: SortOrder
+    revenueShareFontFamily?: SortOrder
+    employeeSignNameFontSize?: SortOrder
+    employeeSignNameFontColor?: SortOrder
+    employeeSignNameIsBold?: SortOrder
+    employeeSignNameIsItalic?: SortOrder
+    employeeSignNameFontFamily?: SortOrder
+    employeeSignDateFontSize?: SortOrder
+    employeeSignDateFontColor?: SortOrder
+    employeeSignDateIsBold?: SortOrder
+    employeeSignDateIsItalic?: SortOrder
+    employeeSignDateFontFamily?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmploymentAgreementTemplateAvgOrderByAggregateInput = {
+    dateX?: SortOrder
+    dateY?: SortOrder
+    employeeNameX?: SortOrder
+    employeeNameY?: SortOrder
+    employeeCinX?: SortOrder
+    employeeCinY?: SortOrder
+    startDateX?: SortOrder
+    startDateY?: SortOrder
+    revenueShareX?: SortOrder
+    revenueShareY?: SortOrder
+    employeeSignNameX?: SortOrder
+    employeeSignNameY?: SortOrder
+    employeeSignDateX?: SortOrder
+    employeeSignDateY?: SortOrder
+    fontSize?: SortOrder
+    dateFontSize?: SortOrder
+    employeeNameFontSize?: SortOrder
+    employeeCinFontSize?: SortOrder
+    startDateFontSize?: SortOrder
+    revenueShareFontSize?: SortOrder
+    employeeSignNameFontSize?: SortOrder
+    employeeSignDateFontSize?: SortOrder
+  }
+
+  export type EmploymentAgreementTemplateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    dateX?: SortOrder
+    dateY?: SortOrder
+    employeeNameX?: SortOrder
+    employeeNameY?: SortOrder
+    employeeCinX?: SortOrder
+    employeeCinY?: SortOrder
+    startDateX?: SortOrder
+    startDateY?: SortOrder
+    revenueShareX?: SortOrder
+    revenueShareY?: SortOrder
+    employeeSignNameX?: SortOrder
+    employeeSignNameY?: SortOrder
+    employeeSignDateX?: SortOrder
+    employeeSignDateY?: SortOrder
+    dateEnabled?: SortOrder
+    employeeNameEnabled?: SortOrder
+    employeeCinEnabled?: SortOrder
+    startDateEnabled?: SortOrder
+    revenueShareEnabled?: SortOrder
+    employeeSignNameEnabled?: SortOrder
+    employeeSignDateEnabled?: SortOrder
+    fontSize?: SortOrder
+    fontColor?: SortOrder
+    dateFontSize?: SortOrder
+    dateFontColor?: SortOrder
+    dateIsBold?: SortOrder
+    dateIsItalic?: SortOrder
+    dateFontFamily?: SortOrder
+    employeeNameFontSize?: SortOrder
+    employeeNameFontColor?: SortOrder
+    employeeNameIsBold?: SortOrder
+    employeeNameIsItalic?: SortOrder
+    employeeNameFontFamily?: SortOrder
+    employeeCinFontSize?: SortOrder
+    employeeCinFontColor?: SortOrder
+    employeeCinIsBold?: SortOrder
+    employeeCinIsItalic?: SortOrder
+    employeeCinFontFamily?: SortOrder
+    startDateFontSize?: SortOrder
+    startDateFontColor?: SortOrder
+    startDateIsBold?: SortOrder
+    startDateIsItalic?: SortOrder
+    startDateFontFamily?: SortOrder
+    revenueShareFontSize?: SortOrder
+    revenueShareFontColor?: SortOrder
+    revenueShareIsBold?: SortOrder
+    revenueShareIsItalic?: SortOrder
+    revenueShareFontFamily?: SortOrder
+    employeeSignNameFontSize?: SortOrder
+    employeeSignNameFontColor?: SortOrder
+    employeeSignNameIsBold?: SortOrder
+    employeeSignNameIsItalic?: SortOrder
+    employeeSignNameFontFamily?: SortOrder
+    employeeSignDateFontSize?: SortOrder
+    employeeSignDateFontColor?: SortOrder
+    employeeSignDateIsBold?: SortOrder
+    employeeSignDateIsItalic?: SortOrder
+    employeeSignDateFontFamily?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmploymentAgreementTemplateMinOrderByAggregateInput = {
+    id?: SortOrder
+    dateX?: SortOrder
+    dateY?: SortOrder
+    employeeNameX?: SortOrder
+    employeeNameY?: SortOrder
+    employeeCinX?: SortOrder
+    employeeCinY?: SortOrder
+    startDateX?: SortOrder
+    startDateY?: SortOrder
+    revenueShareX?: SortOrder
+    revenueShareY?: SortOrder
+    employeeSignNameX?: SortOrder
+    employeeSignNameY?: SortOrder
+    employeeSignDateX?: SortOrder
+    employeeSignDateY?: SortOrder
+    dateEnabled?: SortOrder
+    employeeNameEnabled?: SortOrder
+    employeeCinEnabled?: SortOrder
+    startDateEnabled?: SortOrder
+    revenueShareEnabled?: SortOrder
+    employeeSignNameEnabled?: SortOrder
+    employeeSignDateEnabled?: SortOrder
+    fontSize?: SortOrder
+    fontColor?: SortOrder
+    dateFontSize?: SortOrder
+    dateFontColor?: SortOrder
+    dateIsBold?: SortOrder
+    dateIsItalic?: SortOrder
+    dateFontFamily?: SortOrder
+    employeeNameFontSize?: SortOrder
+    employeeNameFontColor?: SortOrder
+    employeeNameIsBold?: SortOrder
+    employeeNameIsItalic?: SortOrder
+    employeeNameFontFamily?: SortOrder
+    employeeCinFontSize?: SortOrder
+    employeeCinFontColor?: SortOrder
+    employeeCinIsBold?: SortOrder
+    employeeCinIsItalic?: SortOrder
+    employeeCinFontFamily?: SortOrder
+    startDateFontSize?: SortOrder
+    startDateFontColor?: SortOrder
+    startDateIsBold?: SortOrder
+    startDateIsItalic?: SortOrder
+    startDateFontFamily?: SortOrder
+    revenueShareFontSize?: SortOrder
+    revenueShareFontColor?: SortOrder
+    revenueShareIsBold?: SortOrder
+    revenueShareIsItalic?: SortOrder
+    revenueShareFontFamily?: SortOrder
+    employeeSignNameFontSize?: SortOrder
+    employeeSignNameFontColor?: SortOrder
+    employeeSignNameIsBold?: SortOrder
+    employeeSignNameIsItalic?: SortOrder
+    employeeSignNameFontFamily?: SortOrder
+    employeeSignDateFontSize?: SortOrder
+    employeeSignDateFontColor?: SortOrder
+    employeeSignDateIsBold?: SortOrder
+    employeeSignDateIsItalic?: SortOrder
+    employeeSignDateFontFamily?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EmploymentAgreementTemplateSumOrderByAggregateInput = {
+    dateX?: SortOrder
+    dateY?: SortOrder
+    employeeNameX?: SortOrder
+    employeeNameY?: SortOrder
+    employeeCinX?: SortOrder
+    employeeCinY?: SortOrder
+    startDateX?: SortOrder
+    startDateY?: SortOrder
+    revenueShareX?: SortOrder
+    revenueShareY?: SortOrder
+    employeeSignNameX?: SortOrder
+    employeeSignNameY?: SortOrder
+    employeeSignDateX?: SortOrder
+    employeeSignDateY?: SortOrder
+    fontSize?: SortOrder
+    dateFontSize?: SortOrder
+    employeeNameFontSize?: SortOrder
+    employeeCinFontSize?: SortOrder
+    startDateFontSize?: SortOrder
+    revenueShareFontSize?: SortOrder
+    employeeSignNameFontSize?: SortOrder
+    employeeSignDateFontSize?: SortOrder
   }
 
   export type ChatSessionCreateNestedManyWithoutUserInput = {

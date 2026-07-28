@@ -648,6 +648,90 @@ exports.Prisma.CustomWebsiteRequestScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.EmploymentApplicationScalarFieldEnum = {
+  id: 'id',
+  fullName: 'fullName',
+  email: 'email',
+  phone: 'phone',
+  cin: 'cin',
+  cvUrl: 'cvUrl',
+  photoUrl: 'photoUrl',
+  githubUrl: 'githubUrl',
+  portfolioUrl: 'portfolioUrl',
+  linkedinUrl: 'linkedinUrl',
+  skills: 'skills',
+  revenueShare: 'revenueShare',
+  status: 'status',
+  agreementPdfUrl: 'agreementPdfUrl',
+  adminNotes: 'adminNotes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EmploymentAgreementTemplateScalarFieldEnum = {
+  id: 'id',
+  dateX: 'dateX',
+  dateY: 'dateY',
+  employeeNameX: 'employeeNameX',
+  employeeNameY: 'employeeNameY',
+  employeeCinX: 'employeeCinX',
+  employeeCinY: 'employeeCinY',
+  startDateX: 'startDateX',
+  startDateY: 'startDateY',
+  revenueShareX: 'revenueShareX',
+  revenueShareY: 'revenueShareY',
+  employeeSignNameX: 'employeeSignNameX',
+  employeeSignNameY: 'employeeSignNameY',
+  employeeSignDateX: 'employeeSignDateX',
+  employeeSignDateY: 'employeeSignDateY',
+  dateEnabled: 'dateEnabled',
+  employeeNameEnabled: 'employeeNameEnabled',
+  employeeCinEnabled: 'employeeCinEnabled',
+  startDateEnabled: 'startDateEnabled',
+  revenueShareEnabled: 'revenueShareEnabled',
+  employeeSignNameEnabled: 'employeeSignNameEnabled',
+  employeeSignDateEnabled: 'employeeSignDateEnabled',
+  fontSize: 'fontSize',
+  fontColor: 'fontColor',
+  dateFontSize: 'dateFontSize',
+  dateFontColor: 'dateFontColor',
+  dateIsBold: 'dateIsBold',
+  dateIsItalic: 'dateIsItalic',
+  dateFontFamily: 'dateFontFamily',
+  employeeNameFontSize: 'employeeNameFontSize',
+  employeeNameFontColor: 'employeeNameFontColor',
+  employeeNameIsBold: 'employeeNameIsBold',
+  employeeNameIsItalic: 'employeeNameIsItalic',
+  employeeNameFontFamily: 'employeeNameFontFamily',
+  employeeCinFontSize: 'employeeCinFontSize',
+  employeeCinFontColor: 'employeeCinFontColor',
+  employeeCinIsBold: 'employeeCinIsBold',
+  employeeCinIsItalic: 'employeeCinIsItalic',
+  employeeCinFontFamily: 'employeeCinFontFamily',
+  startDateFontSize: 'startDateFontSize',
+  startDateFontColor: 'startDateFontColor',
+  startDateIsBold: 'startDateIsBold',
+  startDateIsItalic: 'startDateIsItalic',
+  startDateFontFamily: 'startDateFontFamily',
+  revenueShareFontSize: 'revenueShareFontSize',
+  revenueShareFontColor: 'revenueShareFontColor',
+  revenueShareIsBold: 'revenueShareIsBold',
+  revenueShareIsItalic: 'revenueShareIsItalic',
+  revenueShareFontFamily: 'revenueShareFontFamily',
+  employeeSignNameFontSize: 'employeeSignNameFontSize',
+  employeeSignNameFontColor: 'employeeSignNameFontColor',
+  employeeSignNameIsBold: 'employeeSignNameIsBold',
+  employeeSignNameIsItalic: 'employeeSignNameIsItalic',
+  employeeSignNameFontFamily: 'employeeSignNameFontFamily',
+  employeeSignDateFontSize: 'employeeSignDateFontSize',
+  employeeSignDateFontColor: 'employeeSignDateFontColor',
+  employeeSignDateIsBold: 'employeeSignDateIsBold',
+  employeeSignDateIsItalic: 'employeeSignDateIsItalic',
+  employeeSignDateFontFamily: 'employeeSignDateFontFamily',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -700,7 +784,9 @@ exports.Prisma.ModelName = {
   FactureTemplate: 'FactureTemplate',
   FactureRecord: 'FactureRecord',
   FactureCounter: 'FactureCounter',
-  CustomWebsiteRequest: 'CustomWebsiteRequest'
+  CustomWebsiteRequest: 'CustomWebsiteRequest',
+  EmploymentApplication: 'EmploymentApplication',
+  EmploymentAgreementTemplate: 'EmploymentAgreementTemplate'
 };
 
 /**

@@ -724,3 +724,100 @@ model CustomWebsiteRequest {
 
   @@index([userId])
 }
+
+model EmploymentApplication {
+  id              String   @id @default(cuid())
+  fullName        String
+  email           String
+  phone           String
+  cin             String
+  cvUrl           String
+  photoUrl        String
+  githubUrl       String
+  portfolioUrl    String?
+  linkedinUrl     String
+  skills          String   @default("[]") // JSON array of string skill tags
+  revenueShare    Float    @default(0) // Revenue share percentage expected per project
+  status          String   @default("PENDING") // PENDING, ACCEPTED, REJECTED
+  agreementPdfUrl String?
+  adminNotes      String?  @default("[]") // JSON string of logs/notes
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([email])
+  @@index([status])
+}
+
+model EmploymentAgreementTemplate {
+  id                String @id @default(cuid())
+  dateX             Float  @default(420)
+  dateY             Float  @default(705)
+  employeeNameX     Float  @default(120)
+  employeeNameY     Float  @default(670)
+  employeeCinX      Float  @default(120)
+  employeeCinY      Float  @default(650)
+  startDateX        Float  @default(120)
+  startDateY        Float  @default(630)
+  revenueShareX     Float  @default(220)
+  revenueShareY     Float  @default(485)
+  employeeSignNameX Float  @default(150)
+  employeeSignNameY Float  @default(100)
+  employeeSignDateX Float  @default(150)
+  employeeSignDateY Float  @default(80)
+
+  dateEnabled             Boolean @default(true)
+  employeeNameEnabled     Boolean @default(true)
+  employeeCinEnabled      Boolean @default(true)
+  startDateEnabled        Boolean @default(true)
+  revenueShareEnabled     Boolean @default(true)
+  employeeSignNameEnabled Boolean @default(true)
+  employeeSignDateEnabled Boolean @default(true)
+
+  fontSize  Float  @default(11)
+  fontColor String @default("#000000")
+
+  dateFontSize   Float   @default(12)
+  dateFontColor  String  @default("#000000")
+  dateIsBold     Boolean @default(false)
+  dateIsItalic   Boolean @default(false)
+  dateFontFamily String  @default("Helvetica")
+
+  employeeNameFontSize   Float   @default(12)
+  employeeNameFontColor  String  @default("#000000")
+  employeeNameIsBold     Boolean @default(true)
+  employeeNameIsItalic   Boolean @default(false)
+  employeeNameFontFamily String  @default("Helvetica")
+
+  employeeCinFontSize   Float   @default(12)
+  employeeCinFontColor  String  @default("#000000")
+  employeeCinIsBold     Boolean @default(false)
+  employeeCinIsItalic   Boolean @default(false)
+  employeeCinFontFamily String  @default("Helvetica")
+
+  startDateFontSize   Float   @default(12)
+  startDateFontColor  String  @default("#000000")
+  startDateIsBold     Boolean @default(false)
+  startDateIsItalic   Boolean @default(false)
+  startDateFontFamily String  @default("Helvetica")
+
+  revenueShareFontSize   Float   @default(12)
+  revenueShareFontColor  String  @default("#000000")
+  revenueShareIsBold     Boolean @default(true)
+  revenueShareIsItalic   Boolean @default(false)
+  revenueShareFontFamily String  @default("Helvetica")
+
+  employeeSignNameFontSize   Float   @default(12)
+  employeeSignNameFontColor  String  @default("#000000")
+  employeeSignNameIsBold     Boolean @default(false)
+  employeeSignNameIsItalic   Boolean @default(false)
+  employeeSignNameFontFamily String  @default("Helvetica")
+
+  employeeSignDateFontSize   Float   @default(12)
+  employeeSignDateFontColor  String  @default("#000000")
+  employeeSignDateIsBold     Boolean @default(false)
+  employeeSignDateIsItalic   Boolean @default(false)
+  employeeSignDateFontFamily String  @default("Helvetica")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

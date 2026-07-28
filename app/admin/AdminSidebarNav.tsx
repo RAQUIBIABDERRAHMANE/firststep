@@ -15,7 +15,8 @@ import {
   QrCode, 
   FileText, 
   Receipt, 
-  Sparkles 
+  Sparkles,
+  Briefcase
 } from 'lucide-react'
 
 interface NavItem {
@@ -30,6 +31,8 @@ export default function AdminSidebarNav() {
 
   const navItems: NavItem[] = [
     { label: 'Vue d\'ensemble', href: '/admin', icon: LayoutDashboard },
+    { label: 'Candidatures Dev', href: '/admin/employment', icon: Briefcase },
+    { label: 'Modèle Contrat Dev', href: '/admin/employment-template', icon: FileText },
     { label: 'Manage Services', href: '/admin/services', icon: Layers },
     { label: 'User Directory', href: '/admin/users', icon: Users },
     { label: 'Websites', href: '/admin/websites', icon: Globe },
@@ -42,6 +45,7 @@ export default function AdminSidebarNav() {
     { label: 'Campaigns', href: '/admin/campaigns', icon: Mail },
     { label: 'Print Requests', href: '/admin/print-requests', icon: QrCode },
   ]
+
 
   return (
     <nav className="grid items-start px-3 gap-1">

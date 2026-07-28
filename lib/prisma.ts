@@ -86,7 +86,7 @@ function createPrismaClient() {
     return new PrismaClient();
 }
 
-const PRISMA_DEV_KEY = 'prisma_v21_restaurant_reports'
+const PRISMA_DEV_KEY = 'prisma_v22_employment_templates'
 const g = globalThis as any
 let prisma: PrismaClient;
 
@@ -99,12 +99,13 @@ if (process.env.NODE_ENV === 'production') {
     prisma = g[PRISMA_DEV_KEY]
 
     // Diagnostic check — if any key model is missing, re-initialize
-    if (!(prisma as any).chatSession || !(prisma as any).emailList || !(prisma as any).restaurantReport || !(prisma as any).customWebsiteRequest) {
+    if (!(prisma as any).chatSession || !(prisma as any).emailList || !(prisma as any).restaurantReport || !(prisma as any).customWebsiteRequest || !(prisma as any).employmentAgreementTemplate) {
         console.warn('[Prisma] Missing models in cached instance. Re-initializing...');
         g[PRISMA_DEV_KEY] = createPrismaClient();
         prisma = g[PRISMA_DEV_KEY];
     }
 }
+
 
 console.log('[Prisma Debug] Keys on prisma instance:', Object.keys(prisma || {}));
 if (!(prisma as any).emailList) {

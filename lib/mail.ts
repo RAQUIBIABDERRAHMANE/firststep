@@ -415,3 +415,71 @@ export async function sendMonthlyReportEmail(
         return { success: false, error }
     }
 }
+
+export async function sendEmploymentApplicationReceivedEmail(email: string, candidateName: string) {
+    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
+        console.log('--------------------------------------------------');
+        console.log(`[MAILER] CANDIDATURE RECEIVED EMAIL (no config)`);
+        console.log(`[MAILER] TO: ${email} | Candidate: ${candidateName}`);
+        console.log('--------------------------------------------------');
+        return { success: true, logged: true };
+    }
+
+    try {
+        const { getEmploymentApplicationReceivedTemplate } = await import('./email/templates');
+        const html = getEmploymentApplicationReceivedTemplate(candidateName);
+
+        await transporter.sendMail({
+            from: `"FirstStep Recruitment" <${process.env.EMAIL_USER}>`,
+            to: email,
+            subject: 'Confirmation de réception de votre candidature - FirstStep',
+            html: html,
+        });
+
+        return { success: true };
+    } catch (error) {
+        console.error('[MAILER] Error sending recruitment received email:', error);
+        return { success: false, error };
+    }
+}
+
+export async function sendEmploymentApplicationAcceptedEmail(
+    email: string,
+    candidateName: string,
+    pdfBuffer?: Buffer,
+    pdfFilename: string = 'Developer_Employment_Agreement.pdf',
+    pdfUrl?: string
+) {
+    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
+        console.log('--------------------------------------------------');
+        console.log(`[MAILER] CANDIDATURE ACCEPTED EMAIL (no config)`);
+        console.log(`[MAILER] TO: ${email} | Candidate: ${candidateName}`);
+        console.log('--------------------------------------------------');
+        return { success: true, logged: true };
+    }
+
+    try {
+        const { getEmploymentApplicationAcceptedTemplate } = await import('./email/templates');
+        const html = getEmploymentApplicationAcceptedTemplate(candidateName, pdfUrl);
+
+        const attachments = pdfBuffer ? [{
+            filename: pdfFilename,
+            content: pdfBuffer,
+            contentType: 'application/pdf'
+        }] : [];
+
+        await transporter.sendMail({
+            from: `"FirstStep Founder" <${process.env.EMAIL_USER}>`,
+            to: email,
+            subject: 'Félicitations ! Votre candidature Software Developer chez FirstStep a été acceptée',
+            html: html,
+            attachments: attachments
+        });
+
+        return { success: true };
+    } catch (error) {
+        console.error('[MAILER] Error sending recruitment accepted email:', error);
+        return { success: false, error };
+    }
+}
+
