@@ -1,20 +1,208 @@
+version: '3.8'
+
 services:
-  web:
+  # 0. API Gateway Container
+  gateway-service:
     build:
-      context: .
+      context: ./gateway
       dockerfile: Dockerfile
-    container_name: firststep-web
+    container_name: firststep-gateway
+    restart: always
     ports:
-      - "3000:3000"
-    env_file:
-      - .env
+      - "8000:80"
     environment:
-      - NODE_ENV=production
-      - PORT=3000
-      # If your Prisma schema requires DATABASE_URL, you can set it here or in .env
-      - DATABASE_URL=file:./dev.db
+      - APP_ENV=production
+    networks:
+      - firststep-network
+
+  # 1. Identity & Auth Service Container
+  identity-service:
+    build:
+      context: ./services/identity
+      dockerfile: Dockerfile
+    container_name: firststep-identity
+    restart: always
+    environment:
+      - APP_ENV=production
+      - DB_CONNECTION=pgsql
+      - DB_HOST=db-identity
+      - DB_PORT=5432
+      - DB_DATABASE=firststep_identity
+      - DB_USERNAME=fs_admin
+      - DB_PASSWORD_FILE=/run/secrets/db_password
+    secrets:
+      - db_password
+    depends_on:
+      - db-identity
+    networks:
+      - firststep-network
+
+  # 2. Tenant Service Container
+  tenant-service:
+    build:
+      context: ./services/tenant
+      dockerfile: Dockerfile
+    container_name: firststep-tenant
+    restart: always
+    environment:
+      - APP_ENV=production
+      - DB_CONNECTION=pgsql
+      - DB_HOST=db-tenant
+      - DB_PORT=5432
+      - DB_DATABASE=firststep_tenant
+      - DB_USERNAME=fs_admin
+      - DB_PASSWORD_FILE=/run/secrets/db_password
+    secrets:
+      - db_password
+    depends_on:
+      - db-tenant
+    networks:
+      - firststep-network
+
+  # 2.5. Restaurant Service Container
+  restaurant-service:
+    build:
+      context: ./services/restaurant
+      dockerfile: Dockerfile
+    container_name: firststep-restaurant
+    restart: always
+    environment:
+      - APP_ENV=production
+      - DB_CONNECTION=pgsql
+      - DB_HOST=db-restaurant
+      - DB_PORT=5432
+      - DB_DATABASE=firststep_restaurant
+      - DB_USERNAME=fs_admin
+      - DB_PASSWORD_FILE=/run/secrets/db_password
+    secrets:
+      - db_password
+    depends_on:
+      - db-restaurant
+    networks:
+      - firststep-network
+
+  # 4.5. Database: Restaurant Service PostgreSQL
+  db-restaurant:
+    image: postgres:15-alpine
+    container_name: db-restaurant
+    restart: always
     volumes:
-      # Mount the local SQLite database if using Prisma with SQLite in Docker
-      # You can comment this out if you're using LibSQL/Turso remote database
-      - ./prisma/dev.db:/app/prisma/dev.db
-    restart: unless-stopped
+      - pgdata-restaurant:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=firststep_restaurant
+      - POSTGRES_USER=fs_admin
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db_password
+    secrets:
+      - db_password
+    networks:
+      - firststep-network
+
+  # 2.7. POS Service Container
+  pos-service:
+    build:
+      context: ./services/pos
+      dockerfile: Dockerfile
+    container_name: firststep-pos
+    restart: always
+    environment:
+      - APP_ENV=production
+      - DB_CONNECTION=pgsql
+      - DB_HOST=db-pos
+      - DB_PORT=5432
+      - DB_DATABASE=firststep_pos
+      - DB_USERNAME=fs_admin
+      - DB_PASSWORD_FILE=/run/secrets/db_password
+    secrets:
+      - db_password
+    depends_on:
+      - db-pos
+    networks:
+      - firststep-network
+
+  # 4.7. Database: POS Service PostgreSQL
+  db-pos:
+    image: postgres:15-alpine
+    container_name: db-pos
+    restart: always
+    volumes:
+      - pgdata-pos:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=firststep_pos
+      - POSTGRES_USER=fs_admin
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db_password
+    secrets:
+      - db_password
+    networks:
+      - firststep-network
+
+  # 3. Database: Identity & Security DB
+  db-identity:
+    image: postgres:15-alpine
+    container_name: db-identity
+    restart: always
+    volumes:
+      - pgdata-identity:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=firststep_identity
+      - POSTGRES_USER=fs_admin
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db_password
+    secrets:
+      - db_password
+    networks:
+      - firststep-network
+
+  # 4. Database: Tenant & Organization DB
+  db-tenant:
+    image: postgres:15-alpine
+    container_name: db-tenant
+    restart: always
+    volumes:
+      - pgdata-tenant:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=firststep_tenant
+      - POSTGRES_USER=fs_admin
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db_password
+    secrets:
+      - db_password
+    networks:
+      - firststep-network
+
+  # 5. Shared Caching & Session Engine
+  redis:
+    image: redis:7-alpine
+    container_name: redis-platform
+    restart: always
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redisdata:/data
+    networks:
+      - firststep-network
+
+  # 6. Shared Asynchronous Message Broker
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq-platform
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitdata:/var/lib/rabbitmq
+    networks:
+      - firststep-network
+
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt
+
+networks:
+  firststep-network:
+    driver: bridge
+
+volumes:
+  pgdata-identity:
+  pgdata-tenant:
+  pgdata-restaurant:
+  pgdata-pos:
+  redisdata:
+  rabbitdata:
