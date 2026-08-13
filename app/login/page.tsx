@@ -3,14 +3,13 @@
 import { Suspense, useState, useTransition, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
-import { Card, CardContent } from '@/components/ui/Card'
 import {
     signIn, verify2FA, resend2FACode,
     verifyWithRecoveryCode, sendRecoveryEmailCode, verifyWithRecoveryEmail,
 } from '@/app/actions/auth'
-import { Loader2, Mail, Lock, ArrowLeft, Sparkles, ShieldCheck, RotateCcw, ChevronLeft, KeyRound, MailCheck } from 'lucide-react'
+import { Loader2, Mail, Lock, ArrowLeft, Sparkles, ShieldCheck, RotateCcw, ChevronLeft, KeyRound, MailCheck, Eye, EyeOff, CheckCircle2, ArrowRight, TrendingUp, Star, Activity, BarChart3, Check } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 // ─── OTP Input Row ────────────────────────────────────────────────────────────
 
@@ -62,17 +61,17 @@ function OTPInput({ onComplete, numeric = true }: { onComplete: (code: string) =
                     onChange={e => handleChange(i, e.target.value)}
                     onKeyDown={e => handleKeyDown(i, e)}
                     autoFocus={i === 0}
-                    className={`w-12 h-14 text-center text-2xl font-black rounded-xl border-2 outline-none transition-all
-                        ${d ? 'border-primary bg-primary/5 text-foreground shadow-sm shadow-primary/20'
-                            : 'border-border bg-background text-foreground'}
-                        focus:border-primary focus:ring-2 focus:ring-primary/20 focus:scale-110`}
+                    className={`w-11 h-13 text-center text-xl font-syne font-black rounded-xl border-2 outline-none transition-all
+                        ${d ? 'border-[#0066FF] bg-blue-50/50 text-[#0066FF] shadow-sm'
+                            : 'border-slate-200 bg-slate-50/80 text-slate-900'}
+                        focus:border-[#0066FF] focus:ring-2 focus:ring-[#0066FF]/20 focus:bg-white`}
                 />
             ))}
         </div>
     )
 }
 
-// ─── Recovery Code Input (XXXX-XXXX format) ──────────────────────────────────
+// ─── Recovery Code Input ──────────────────────────────────────────────────────
 
 function RecoveryCodeInput({ onChange }: { onChange: (val: string) => void }) {
     return (
@@ -86,12 +85,12 @@ function RecoveryCodeInput({ onChange }: { onChange: (val: string) => void }) {
                 e.target.value = v
                 onChange(v)
             }}
-            className="w-full text-center text-xl font-mono font-bold tracking-widest h-14 border-2 border-border rounded-xl bg-background text-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+            className="w-full text-center text-lg font-mono font-bold tracking-widest h-12 border-2 border-slate-200 rounded-xl bg-slate-50/80 text-slate-900 focus:border-[#0066FF] focus:ring-2 focus:ring-[#0066FF]/20 focus:bg-white outline-none transition-all"
         />
     )
 }
 
-// ─── Resend Timer ─────────────────────────────────────────────────────────────
+// ─── Resend Button ────────────────────────────────────────────────────────────
 
 function ResendButton({ email, onResent }: { email: string; onResent: () => void }) {
     const [seconds, setSeconds] = useState(60)
@@ -119,14 +118,14 @@ function ResendButton({ email, onResent }: { email: string; onResent: () => void
 
     return (
         <div className="text-center space-y-1">
-            {resendError && <p className="text-xs text-destructive">{resendError}</p>}
+            {resendError && <p className="text-xs text-red-600 font-medium">{resendError}</p>}
             {seconds > 0 ? (
-                <p className="text-sm text-muted-foreground">
-                    Renvoyer dans <span className="font-bold text-foreground tabular-nums">{seconds}s</span>
+                <p className="text-xs font-figtree text-slate-500">
+                    Renvoyer dans <span className="font-bold text-slate-900 tabular-nums">{seconds}s</span>
                 </p>
             ) : (
                 <button onClick={handleResend} disabled={isPending}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-accent transition-colors disabled:opacity-50">
+                    className="inline-flex items-center gap-1.5 text-xs font-figtree font-bold text-[#0066FF] hover:text-blue-700 transition-colors disabled:opacity-50">
                     {isPending ? <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Envoi…</> : <><RotateCcw className="h-3.5 w-3.5" /> Renvoyer le code</>}
                 </button>
             )}
@@ -149,6 +148,7 @@ function LoginForm() {
     const [recoveryCode, setRecoveryCode] = useState('')
     const [recoveryEmailOtp, setRecoveryEmailOtp] = useState('')
     const [maskedRecoveryEmail, setMaskedRecoveryEmail] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
     const [resentNotice, setResentNotice] = useState(false)
 
     const searchParams = useSearchParams()
@@ -169,7 +169,7 @@ function LoginForm() {
         })
     }
 
-    // ── Step 2a: Standard OTP ─────────────────────────────────────────────────
+    // ── Step 2a: OTP ──────────────────────────────────────────────────────────
     async function handleOTP(code?: string) {
         const finalCode = code || otpCode
         if (finalCode.length !== 6) return
@@ -184,7 +184,7 @@ function LoginForm() {
         })
     }
 
-    // ── Step 2b: Recovery code (XXXX-XXXX) ───────────────────────────────────
+    // ── Step 2b: Recovery code ────────────────────────────────────────────────
     async function handleRecoveryCode() {
         if (recoveryCode.length < 9) return
         setError(null)
@@ -198,7 +198,7 @@ function LoginForm() {
         })
     }
 
-    // ── Step 2c: Recovery email OTP ───────────────────────────────────────────
+    // ── Step 2c: Recovery email ───────────────────────────────────────────────
     async function switchToRecoveryEmail() {
         setError(null)
         startTransition(async () => {
@@ -225,203 +225,397 @@ function LoginForm() {
 
     const resetRecovery = () => { setRecoveryMode('none'); setError(null); setRecoveryCode(''); setRecoveryEmailOtp('') }
 
-    // ── Render ────────────────────────────────────────────────────────────────
     return (
-        <div className="relative flex min-h-screen items-center justify-center px-4 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-accent/5 to-background" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(139,92,246,0.15),transparent_40%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(139,92,246,0.1),transparent_40%)]" />
-            <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-float" />
-            <div className="absolute bottom-20 right-10 w-80 h-80 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }} />
+        <div className="min-h-screen grid grid-cols-1 lg:grid-cols-12 bg-[#FAFBFD] text-slate-900 overflow-hidden font-figtree">
 
-            <div className="w-full max-w-md animate-scale-in relative z-10">
-                {/* Logo */}
-                <Link href="/" className="flex items-center justify-center gap-3 mb-8 group">
-                    <img src="/og-image.png" alt="FirstStep Logo"
-                        className="h-16 w-16 rounded-2xl shadow-xl group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300" />
-                    <span className="text-3xl font-black gradient-text">FirstStep</span>
-                </Link>
+            {/* ── LEFT SHOWCASE COLUMN (Visible on lg screens) ── */}
+            <div className="hidden lg:flex lg:col-span-7 relative p-12 flex-col justify-between overflow-hidden bg-gradient-to-br from-blue-50/60 via-slate-50 to-blue-100/40 border-r border-slate-200/80">
+                
+                {/* Ambient Radial Blur Orbs */}
+                <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-blue-400/20 via-sky-300/10 to-transparent blur-3xl pointer-events-none" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[550px] h-[550px] rounded-full bg-gradient-to-tr from-emerald-300/15 via-blue-300/10 to-transparent blur-3xl pointer-events-none" />
 
-                {/* ── STEP 1 ── */}
-                {step === 'credentials' && (
-                    <>
-                        <div className="text-center mb-10">
-                            <h1 className="text-4xl font-black text-foreground mb-3 tracking-tight">Welcome Back</h1>
-                            <p className="text-muted-foreground font-medium">Sign in to access your dashboard</p>
+                {/* Top Logo */}
+                <div className="relative z-10">
+                    <Link href="/" className="inline-flex items-center gap-3 group">
+                        <div className="h-11 w-11 rounded-2xl bg-white border border-slate-200/90 shadow-md flex items-center justify-center p-1.5 group-hover:scale-105 transition-transform duration-300">
+                            <img src="/Untitled design (13).png" alt="FirstStep Logo" className="h-full w-full object-contain" />
                         </div>
-                        <Card className="glass-card shadow-2xl border-border/50 backdrop-blur-2xl">
-                            <CardContent className="pt-8 pb-8 px-8">
-                                <form action={handleCredentials} className="space-y-6">
-                                    <input type="hidden" name="redirectTo" value={redirectTo} />
-                                    <div className="space-y-2">
-                                        <label htmlFor="email" className="text-sm font-bold leading-none text-foreground flex items-center gap-2">
-                                            <Mail className="h-4 w-4 text-primary" />Email Address
-                                        </label>
-                                        <Input id="email" name="email" type="email" placeholder="name@company.com" required className="h-14 text-base" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <div className="flex items-center justify-between">
-                                            <label htmlFor="password" className="text-sm font-bold leading-none text-foreground flex items-center gap-2">
-                                                <Lock className="h-4 w-4 text-primary" />Password
-                                            </label>
-                                            <Link href="/forgot-password" className="text-xs font-semibold text-primary hover:text-accent transition-colors">
-                                                Forgot password?
-                                            </Link>
-                                        </div>
-                                        <Input id="password" name="password" type="password" placeholder="••••••••" required className="h-14 text-base" />
-                                    </div>
-                                    {error && (
-                                        <div className="text-sm font-bold text-destructive bg-destructive/10 p-4 rounded-xl border-2 border-destructive/30 animate-shake">
-                                            {error}
-                                        </div>
-                                    )}
-                                    <Button type="submit" className="w-full h-14 text-base font-black" disabled={isPending}>
-                                        {isPending ? <><Loader2 className="mr-2 h-5 w-5 animate-spin" />Vérification…</> : <><Sparkles className="mr-2 h-5 w-5" />Sign In</>}
-                                    </Button>
-                                </form>
-                            </CardContent>
-                        </Card>
-                        <div className="mt-8 text-center">
-                            <Link href="/" className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-primary transition-all duration-300 hover:gap-3">
-                                <ArrowLeft className="h-4 w-4" />Back to home
-                            </Link>
-                        </div>
-                        <p className="mt-6 text-center text-sm text-muted-foreground font-medium">
-                            Don&apos;t have an account?{' '}
-                            <Link href="/#signup" className="text-primary font-bold hover:text-accent transition-colors">Get Started</Link>
-                        </p>
-                    </>
-                )}
+                        <span className="font-syne font-black text-2xl tracking-tight text-slate-900">FirstStep</span>
+                    </Link>
+                </div>
 
-                {/* ── STEP 2: OTP + recovery options ── */}
-                {step === 'otp' && (
-                    <>
-                        {/* Standard OTP */}
-                        {recoveryMode === 'none' && (
-                            <>
-                                <div className="text-center mb-8">
-                                    <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 border-2 border-primary/20 mb-4">
-                                        <ShieldCheck className="h-8 w-8 text-primary" />
+                {/* Center Floating 3D Product Dashboard Visual */}
+                <div className="relative z-10 my-auto py-8">
+                    <div className="max-w-xl mx-auto space-y-6">
+                        
+                        {/* Eyebrow Badge */}
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-blue-200/80 shadow-sm backdrop-blur-md">
+                            <Sparkles className="h-4 w-4 text-[#0066FF]" />
+                            <span className="font-figtree text-[11px] font-bold uppercase tracking-[0.2em] text-[#0066FF]">
+                                Business OS · Maroc
+                            </span>
+                        </div>
+
+                        {/* Display Title */}
+                        <h2 className="font-syne font-black text-4xl xl:text-5xl leading-[1.05] text-slate-900">
+                            Pilotez votre entreprise avec <span className="text-[#0066FF]">précision.</span>
+                        </h2>
+
+                        {/* Interactive 3D Mockup Card */}
+                        <motion.div
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.8, ease: 'easeOut' }}
+                            className="bg-white/90 backdrop-blur-2xl border border-slate-200/90 rounded-3xl p-6 shadow-2xl shadow-slate-900/10 relative overflow-hidden"
+                        >
+                            <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
+                                <div className="flex items-center gap-3">
+                                    <div className="h-10 w-10 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#0066FF]">
+                                        <BarChart3 className="h-5 w-5" />
                                     </div>
-                                    <h1 className="text-3xl font-black text-foreground mb-2 tracking-tight">Vérification 2FA</h1>
-                                    <p className="text-muted-foreground text-sm leading-relaxed">
-                                        Code envoyé à<br /><span className="font-bold text-foreground">{pendingEmail}</span>
-                                    </p>
+                                    <div>
+                                        <div className="font-syne text-base font-bold text-slate-900">Tableau de Bord Live</div>
+                                        <div className="font-figtree text-[11px] text-slate-500">Mise à jour instantanée</div>
+                                    </div>
                                 </div>
-                                <Card className="glass-card shadow-2xl border-border/50 backdrop-blur-2xl">
-                                    <CardContent className="pt-8 pb-8 px-8 space-y-6">
-                                        <div className="space-y-3">
-                                            <label className="block text-sm font-bold text-foreground text-center">Code de vérification</label>
+                                <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[11px] font-bold flex items-center gap-1.5">
+                                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                    +32.8% Croissance
+                                </span>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-4 mb-4">
+                                <div className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-100">
+                                    <div className="text-[11px] text-slate-500 font-medium">Revenu du Mois</div>
+                                    <div className="font-syne text-xl font-black text-slate-900">485 200 MAD</div>
+                                </div>
+                                <div className="p-3.5 rounded-2xl bg-slate-50/80 border border-slate-100">
+                                    <div className="text-[11px] text-slate-500 font-medium">Commandes Valides</div>
+                                    <div className="font-syne text-xl font-black text-[#0066FF]">1 420 MAD avg</div>
+                                </div>
+                            </div>
+
+                            {/* Mini SVG Curve */}
+                            <div className="h-16 w-full pt-1">
+                                <svg className="w-full h-full overflow-visible" viewBox="0 0 300 50" preserveAspectRatio="none">
+                                    <path
+                                        d="M 0,40 Q 50,10 100,30 T 200,10 T 300,20 L 300,50 L 0,50 Z"
+                                        fill="#0066FF"
+                                        fillOpacity="0.1"
+                                    />
+                                    <path
+                                        d="M 0,40 Q 50,10 100,30 T 200,10 T 300,20"
+                                        fill="none"
+                                        stroke="#0066FF"
+                                        strokeWidth="3"
+                                        strokeLinecap="round"
+                                    />
+                                </svg>
+                            </div>
+                        </motion.div>
+
+                        {/* Glowing Testimonial Glass Card */}
+                        <div className="bg-white/80 backdrop-blur-md border border-slate-200/80 rounded-2xl p-4 flex items-center gap-4 shadow-sm">
+                            <div className="h-11 w-11 rounded-full bg-gradient-to-tr from-[#0066FF] to-sky-400 text-white font-syne font-black text-sm flex items-center justify-center shrink-0 shadow-md">
+                                LD
+                            </div>
+                            <div>
+                                <div className="flex items-center gap-1 mb-0.5 text-amber-400">
+                                    {[...Array(5)].map((_, i) => (
+                                        <Star key={i} className="h-3 w-3 fill-amber-400 text-amber-400" />
+                                    ))}
+                                </div>
+                                <p className="font-figtree text-[12.5px] text-slate-700 font-medium italic">
+                                    &ldquo;FirstStep a automatisé la gestion de nos 3 établissements à Casablanca.&rdquo;
+                                </p>
+                                <span className="font-figtree text-[10.5px] text-slate-400 font-bold uppercase tracking-wider">
+                                    Léa Dubois · Fondatrice Retail
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                {/* Bottom Trust Strip */}
+                <div className="relative z-10 flex items-center justify-between text-[11.5px] text-slate-500 font-medium pt-4 border-t border-slate-200/60">
+                    <span className="flex items-center gap-1.5">
+                        <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                        500+ Entreprises au Maroc
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                        <ShieldCheck className="h-3.5 w-3.5 text-[#0066FF]" />
+                        Conforme CNDP & SSL
+                    </span>
+                </div>
+            </div>
+
+            {/* ── RIGHT AUTHENTICATION COLUMN (Login Form) ── */}
+            <div className="col-span-12 lg:col-span-5 flex flex-col items-center justify-center p-6 md:p-12 relative z-10">
+                
+                {/* Mobile Top Brand Logo */}
+                <div className="lg:hidden flex flex-col items-center mb-6">
+                    <Link href="/" className="inline-flex items-center gap-2.5 mb-2">
+                        <div className="h-10 w-10 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-center p-1">
+                            <img src="/Untitled design (13).png" alt="FirstStep" className="h-full w-full object-contain" />
+                        </div>
+                        <span className="font-syne font-black text-xl text-slate-900">FirstStep</span>
+                    </Link>
+                </div>
+
+                <div className="w-full max-w-md">
+
+                    {/* ── STEP 1: Credentials ── */}
+                    {step === 'credentials' && (
+                        <div className="bg-white/95 backdrop-blur-2xl border border-slate-200/90 rounded-3xl p-7 md:p-9 shadow-2xl shadow-slate-900/8 relative overflow-hidden">
+                            <div className="h-1.5 -mx-9 -mt-9 mb-8" style={{ background: 'linear-gradient(90deg, #0066FF, #10B981, #0066FF)' }} />
+
+                            {/* Header Badge */}
+                            <div className="rotating-border-wrapper mb-4 shadow-sm shadow-blue-500/10 inline-flex">
+                                <div className="rotating-border-inner inline-flex items-center gap-2 px-3.5 py-1">
+                                    <ShieldCheck className="h-3.5 w-3.5 text-[#0066FF]" />
+                                    <span className="font-figtree text-[10.5px] font-bold uppercase tracking-[0.15em] text-[#0066FF]">
+                                        Espace Client FirstStep
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className="mb-7">
+                                <h1 className="font-syne font-black text-3xl text-slate-900 tracking-tight mb-1.5">
+                                    Bienvenue à bord 👋
+                                </h1>
+                                <p className="font-figtree text-[14px] text-slate-500 font-medium">
+                                    Accédez à l&apos;OS complet de votre entreprise
+                                </p>
+                            </div>
+
+                            <form action={handleCredentials} className="space-y-4">
+                                <input type="hidden" name="redirectTo" value={redirectTo} />
+
+                                <div>
+                                    <label htmlFor="email" className="block font-figtree text-[10.5px] font-bold text-slate-500 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                                        <Mail className="h-3.5 w-3.5 text-[#0066FF]" />
+                                        Adresse Email Professionnelle
+                                    </label>
+                                    <Input
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        placeholder="nom@entreprise.ma"
+                                        required
+                                        className="h-11.5 bg-slate-50/80 border-slate-200 text-slate-900 placeholder:text-slate-400 rounded-xl font-figtree text-[14px] focus:bg-white focus:ring-2 focus:ring-[#0066FF]/20"
+                                    />
+                                </div>
+
+                                <div>
+                                    <div className="flex items-center justify-between mb-1">
+                                        <label htmlFor="password" className="block font-figtree text-[10.5px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                                            <Lock className="h-3.5 w-3.5 text-[#0066FF]" />
+                                            Mot de passe
+                                        </label>
+                                        <Link href="/forgot-password" className="font-figtree text-[11.5px] font-bold text-[#0066FF] hover:underline transition-all">
+                                            Mot de passe oublié ?
+                                        </Link>
+                                    </div>
+                                    <div className="relative">
+                                        <Input
+                                            id="password"
+                                            name="password"
+                                            type={showPassword ? 'text' : 'password'}
+                                            placeholder="••••••••"
+                                            required
+                                            className="h-11.5 bg-slate-50/80 border-slate-200 text-slate-900 placeholder:text-slate-400 rounded-xl pr-10 font-figtree text-[14px] focus:bg-white focus:ring-2 focus:ring-[#0066FF]/20"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowPassword(prev => !prev)}
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors"
+                                            aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                                        >
+                                            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {error && (
+                                    <div className="px-4 py-3 rounded-xl bg-red-50 border border-red-200 text-red-600 font-figtree text-[13px] font-medium">
+                                        {error}
+                                    </div>
+                                )}
+
+                                <button
+                                    type="submit"
+                                    disabled={isPending}
+                                    className="w-full h-12 inline-flex items-center justify-center gap-2 font-syne font-bold text-[14px] text-white rounded-xl transition-all duration-200 hover:brightness-110 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60 shadow-lg shadow-blue-500/25 mt-3"
+                                    style={{ backgroundColor: '#0066FF' }}
+                                >
+                                    {isPending ? (
+                                        <><Loader2 className="h-4 w-4 animate-spin" />Connexion en cours...</>
+                                    ) : (
+                                        <>Se Connecter <ArrowRight className="h-4 w-4" /></>
+                                    )}
+                                </button>
+                            </form>
+
+                            {/* Divider & Signup Link */}
+                            <div className="mt-7 pt-6 border-t border-slate-100 text-center font-figtree text-[13px] text-slate-500">
+                                Pas encore de compte ?{' '}
+                                <Link href="/#signup" className="font-bold text-[#0066FF] hover:underline">
+                                    Essai gratuit (5 min)
+                                </Link>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* ── STEP 2: OTP / 2FA ── */}
+                    {step === 'otp' && (
+                        <div className="bg-white/95 backdrop-blur-2xl border border-slate-200/90 rounded-3xl p-7 md:p-9 shadow-2xl shadow-slate-900/8 relative overflow-hidden">
+                            <div className="h-1.5 -mx-9 -mt-9 mb-8" style={{ background: 'linear-gradient(90deg, #0066FF, #10B981, #0066FF)' }} />
+
+                            {/* Standard OTP */}
+                            {recoveryMode === 'none' && (
+                                <>
+                                    <div className="text-center mb-6">
+                                        <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 border border-blue-100 text-[#0066FF] mb-3">
+                                            <ShieldCheck className="h-6 w-6" />
+                                        </div>
+                                        <h1 className="font-syne font-black text-2xl text-slate-900 mb-1">Double Authentification</h1>
+                                        <p className="font-figtree text-[13px] text-slate-500">
+                                            Code envoyé à <span className="font-bold text-slate-900">{pendingEmail}</span>
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-5">
+                                        <div>
+                                            <label className="block font-figtree text-[10.5px] font-bold text-slate-500 uppercase tracking-wider text-center mb-3">
+                                                Entrez le code à 6 chiffres
+                                            </label>
                                             <OTPInput onComplete={(code) => { setOtpCode(code); handleOTP(code) }} />
                                         </div>
+
                                         {error && (
-                                            <div className="text-sm font-bold text-destructive bg-destructive/10 p-4 rounded-xl border-2 border-destructive/30 text-center">{error}</div>
+                                            <div className="px-3.5 py-2.5 rounded-xl bg-red-50 border border-red-200 text-red-600 font-figtree text-[12.5px] font-medium text-center">
+                                                {error}
+                                            </div>
                                         )}
+
                                         {resentNotice && (
-                                            <div className="text-sm text-emerald-600 bg-emerald-50 border border-emerald-200 p-3 rounded-xl text-center font-medium">✅ Nouveau code envoyé !</div>
+                                            <div className="px-3.5 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 font-figtree text-[12px] font-medium text-center">
+                                                ✅ Nouveau code envoyé !
+                                            </div>
                                         )}
-                                        <Button onClick={() => handleOTP()} disabled={otpCode.length !== 6 || isPending} className="w-full h-14 text-base font-black">
-                                            {isPending ? <><Loader2 className="mr-2 h-5 w-5 animate-spin" />Vérification…</> : <><ShieldCheck className="mr-2 h-5 w-5" />Confirmer</>}
-                                        </Button>
+
+                                        <button
+                                            onClick={() => handleOTP()}
+                                            disabled={otpCode.length !== 6 || isPending}
+                                            className="w-full h-12 inline-flex items-center justify-center gap-2 font-syne font-bold text-[14px] text-white rounded-xl transition-all duration-200 hover:brightness-110 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60 shadow-lg shadow-blue-500/25"
+                                            style={{ backgroundColor: '#0066FF' }}
+                                        >
+                                            {isPending ? <><Loader2 className="h-4 w-4 animate-spin" />Vérification...</> : <><ShieldCheck className="h-4 w-4" />Confirmer</>}
+                                        </button>
+
                                         <ResendButton email={pendingEmail} onResent={() => { setResentNotice(true); setTimeout(() => setResentNotice(false), 3000) }} />
 
                                         {/* Recovery options */}
-                                        <div className="border-t border-border pt-4 space-y-2">
-                                            <p className="text-xs text-center text-muted-foreground font-medium">Vous n&apos;avez pas reçu le code ?</p>
+                                        <div className="border-t border-slate-100 pt-4 space-y-2">
+                                            <p className="text-[11px] text-center font-figtree text-slate-500">Un problème pour recevoir le code ?</p>
                                             <div className="flex flex-col gap-2">
                                                 <button onClick={() => { setRecoveryMode('recovery-code'); setError(null) }}
-                                                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-border text-sm font-semibold text-muted-foreground hover:text-foreground hover:border-slate-400 transition-all">
-                                                    <KeyRound className="h-4 w-4" /> Utiliser un code de récupération
+                                                    className="flex items-center justify-center gap-2 w-full py-2 rounded-xl border border-slate-200 font-figtree text-[12px] font-bold text-slate-700 hover:text-[#0066FF] hover:border-blue-200 transition-all">
+                                                    <KeyRound className="h-3.5 w-3.5 text-[#0066FF]" /> Code de récupération
                                                 </button>
                                                 <button onClick={switchToRecoveryEmail} disabled={isPending}
-                                                    className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-border text-sm font-semibold text-muted-foreground hover:text-foreground hover:border-slate-400 transition-all disabled:opacity-50">
-                                                    {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <MailCheck className="h-4 w-4" />}
-                                                    Utiliser mon email de secours
+                                                    className="flex items-center justify-center gap-2 w-full py-2 rounded-xl border border-slate-200 font-figtree text-[12px] font-bold text-slate-700 hover:text-[#0066FF] hover:border-blue-200 transition-all disabled:opacity-50">
+                                                    {isPending ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <MailCheck className="h-3.5 w-3.5 text-[#0066FF]" />}
+                                                    Email de secours
                                                 </button>
                                             </div>
                                         </div>
-                                    </CardContent>
-                                </Card>
-                            </>
-                        )}
-
-                        {/* Recovery Code mode */}
-                        {recoveryMode === 'recovery-code' && (
-                            <>
-                                <div className="text-center mb-8">
-                                    <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-100 border-2 border-amber-200 mb-4">
-                                        <KeyRound className="h-8 w-8 text-amber-600" />
                                     </div>
-                                    <h1 className="text-2xl font-black text-foreground mb-2">Code de récupération</h1>
-                                    <p className="text-muted-foreground text-sm">Saisissez l&apos;un de vos 8 codes de récupération.</p>
-                                </div>
-                                <Card className="glass-card shadow-2xl border-border/50 backdrop-blur-2xl">
-                                    <CardContent className="pt-8 pb-8 px-8 space-y-5">
-                                        <div className="space-y-2">
-                                            <label className="block text-sm font-bold text-foreground text-center">Code (format XXXX-XXXX)</label>
-                                            <RecoveryCodeInput onChange={setRecoveryCode} />
+                                </>
+                            )}
+
+                            {/* Recovery Code mode */}
+                            {recoveryMode === 'recovery-code' && (
+                                <>
+                                    <div className="text-center mb-6">
+                                        <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 mb-3">
+                                            <KeyRound className="h-6 w-6" />
                                         </div>
+                                        <h1 className="font-syne font-black text-2xl text-slate-900 mb-1">Code de secours</h1>
+                                        <p className="font-figtree text-[13px] text-slate-500">Saisissez l&apos;un de vos codes de secours (XXXX-XXXX).</p>
+                                    </div>
+
+                                    <div className="space-y-4">
+                                        <RecoveryCodeInput onChange={setRecoveryCode} />
                                         {error && (
-                                            <div className="text-sm font-bold text-destructive bg-destructive/10 p-3 rounded-xl border-2 border-destructive/30 text-center">{error}</div>
+                                            <div className="px-3.5 py-2.5 rounded-xl bg-red-50 border border-red-200 text-red-600 font-figtree text-[12.5px] font-medium text-center">{error}</div>
                                         )}
-                                        <Button onClick={handleRecoveryCode} disabled={recoveryCode.length < 9 || isPending} className="w-full h-14 text-base font-black">
-                                            {isPending ? <><Loader2 className="mr-2 h-5 w-5 animate-spin" />Vérification…</> : <>Valider le code</>}
-                                        </Button>
-                                        <p className="text-xs text-center text-amber-700 bg-amber-50 border border-amber-100 rounded-xl px-3 py-2">
-                                            ⚠️ Chaque code ne peut être utilisé qu&apos;une seule fois.
+                                        <button onClick={handleRecoveryCode} disabled={recoveryCode.length < 9 || isPending}
+                                            className="w-full h-12 inline-flex items-center justify-center gap-2 font-syne font-bold text-[14px] text-white rounded-xl transition-all duration-200 hover:brightness-110 disabled:opacity-60 shadow-lg shadow-blue-500/25"
+                                            style={{ backgroundColor: '#0066FF' }}>
+                                            {isPending ? <><Loader2 className="h-4 w-4 animate-spin" />Vérification...</> : <>Valider le code</>}
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+
+                            {/* Recovery Email OTP mode */}
+                            {recoveryMode === 'recovery-email' && (
+                                <>
+                                    <div className="text-center mb-6">
+                                        <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-600 mb-3">
+                                            <MailCheck className="h-6 w-6" />
+                                        </div>
+                                        <h1 className="font-syne font-black text-2xl text-slate-900 mb-1">Email de secours</h1>
+                                        <p className="font-figtree text-[13px] text-slate-500">
+                                            Code envoyé à <span className="font-bold text-slate-900">{maskedRecoveryEmail}</span>
                                         </p>
-                                    </CardContent>
-                                </Card>
-                            </>
-                        )}
-
-                        {/* Recovery Email OTP mode */}
-                        {recoveryMode === 'recovery-email' && (
-                            <>
-                                <div className="text-center mb-8">
-                                    <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-100 border-2 border-emerald-200 mb-4">
-                                        <MailCheck className="h-8 w-8 text-emerald-600" />
                                     </div>
-                                    <h1 className="text-2xl font-black text-foreground mb-2">Email de secours</h1>
-                                    <p className="text-muted-foreground text-sm leading-relaxed">
-                                        Code envoyé à<br /><span className="font-bold text-foreground">{maskedRecoveryEmail}</span>
-                                    </p>
-                                </div>
-                                <Card className="glass-card shadow-2xl border-border/50 backdrop-blur-2xl">
-                                    <CardContent className="pt-8 pb-8 px-8 space-y-5">
-                                        <div className="space-y-3">
-                                            <label className="block text-sm font-bold text-foreground text-center">Code de vérification (6 chiffres)</label>
-                                            <OTPInput onComplete={(code) => { setRecoveryEmailOtp(code); handleRecoveryEmailOTP(code) }} />
-                                        </div>
-                                        {error && (
-                                            <div className="text-sm font-bold text-destructive bg-destructive/10 p-3 rounded-xl border-2 border-destructive/30 text-center">{error}</div>
-                                        )}
-                                        <Button onClick={() => handleRecoveryEmailOTP()} disabled={recoveryEmailOtp.length !== 6 || isPending} className="w-full h-14 text-base font-black">
-                                            {isPending ? <><Loader2 className="mr-2 h-5 w-5 animate-spin" />Vérification…</> : <><ShieldCheck className="mr-2 h-5 w-5" />Confirmer</>}
-                                        </Button>
-                                    </CardContent>
-                                </Card>
-                            </>
-                        )}
 
-                        {/* Back / change email */}
-                        <div className="mt-6 flex items-center justify-center gap-4">
-                            {recoveryMode !== 'none' && (
-                                <button onClick={resetRecovery}
-                                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-all">
-                                    <ChevronLeft className="h-4 w-4" /> Retour au code email
-                                </button>
+                                    <div className="space-y-4">
+                                        <OTPInput onComplete={(code) => { setRecoveryEmailOtp(code); handleRecoveryEmailOTP(code) }} />
+                                        {error && (
+                                            <div className="px-3.5 py-2.5 rounded-xl bg-red-50 border border-red-200 text-red-600 font-figtree text-[12.5px] font-medium text-center">{error}</div>
+                                        )}
+                                        <button onClick={() => handleRecoveryEmailOTP()} disabled={recoveryEmailOtp.length !== 6 || isPending}
+                                            className="w-full h-12 inline-flex items-center justify-center gap-2 font-syne font-bold text-[14px] text-white rounded-xl transition-all duration-200 hover:brightness-110 disabled:opacity-60 shadow-lg shadow-blue-500/25"
+                                            style={{ backgroundColor: '#0066FF' }}>
+                                            {isPending ? <><Loader2 className="h-4 w-4 animate-spin" />Vérification...</> : <><ShieldCheck className="h-4 w-4" />Confirmer</>}
+                                        </button>
+                                    </div>
+                                </>
                             )}
-                            {recoveryMode === 'none' && (
-                                <button onClick={() => { setStep('credentials'); setError(null); setOtpCode('') }}
-                                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-all">
-                                    <ChevronLeft className="h-4 w-4" /> Changer d&apos;adresse email
-                                </button>
-                            )}
+
+                            {/* Back navigation */}
+                            <div className="mt-6 flex items-center justify-center gap-4">
+                                {recoveryMode !== 'none' && (
+                                    <button onClick={resetRecovery}
+                                        className="inline-flex items-center gap-1 font-figtree text-[12px] font-bold text-slate-500 hover:text-[#0066FF] transition-colors">
+                                        <ChevronLeft className="h-4 w-4" /> Retour au code email
+                                    </button>
+                                )}
+                                {recoveryMode === 'none' && (
+                                    <button onClick={() => { setStep('credentials'); setError(null); setOtpCode('') }}
+                                        className="inline-flex items-center gap-1 font-figtree text-[12px] font-bold text-slate-500 hover:text-[#0066FF] transition-colors">
+                                        <ChevronLeft className="h-4 w-4" /> Changer d&apos;adresse email
+                                    </button>
+                                )}
+                            </div>
                         </div>
-                    </>
-                )}
+                    )}
+
+                    {/* Bottom Home Link */}
+                    <div className="mt-6 text-center">
+                        <Link href="/" className="inline-flex items-center gap-1.5 font-figtree text-[12.5px] font-bold text-slate-500 hover:text-[#0066FF] transition-colors">
+                            <ArrowLeft className="h-3.5 w-3.5" /> Retour au site principal
+                        </Link>
+                    </div>
+
+                </div>
             </div>
+
         </div>
     )
 }
@@ -430,7 +624,7 @@ function LoginForm() {
 
 export default function LoginPage() {
     return (
-        <Suspense fallback={<div className="flex min-h-screen items-center justify-center"><Loader2 className="h-10 w-10 animate-spin text-primary" /></div>}>
+        <Suspense fallback={<div className="flex min-h-screen items-center justify-center bg-[#FAFBFD]"><Loader2 className="h-8 w-8 animate-spin text-[#0066FF]" /></div>}>
             <LoginForm />
         </Suspense>
     )

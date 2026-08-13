@@ -79,7 +79,7 @@ export default function RootLayout({
           figtree.variable,
           playfair.variable,
           jakarta.variable,
-          "min-h-screen bg-[#030712] font-figtree antialiased"
+          "min-h-screen bg-[#FAFBFD] text-slate-900 font-figtree antialiased"
         )}
         suppressHydrationWarning
       >

@@ -5,41 +5,8 @@ import { useRouter } from 'next/navigation'
 import { Input } from '@/components/ui/Input'
 import { signUp } from '@/app/actions/auth'
 import Link from 'next/link'
-import { Loader2, ArrowRight, Shield, Zap, HeartHandshake, Star, Eye, EyeOff } from 'lucide-react'
-
-const C = '0, 102, 255'
-
-const styles = `
-    .signup-glass {
-        background: rgba(6,12,24,0.75);
-        backdrop-filter: blur(40px);
-        -webkit-backdrop-filter: blur(40px);
-        position: relative;
-        overflow: hidden;
-    }
-    .signup-glass::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        padding: 1px;
-        border-radius: inherit;
-        background: linear-gradient(135deg, rgba(${C},0.45) 0%, rgba(${C},0.12) 30%, transparent 55%, rgba(${C},0.1) 80%, rgba(${C},0.3) 100%);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        pointer-events: none;
-    }
-
-    .benefit-item { transition: transform 0.2s ease; }
-    .benefit-item:hover { transform: translateX(4px); }
-
-    @keyframes su-up {
-        from { opacity: 0; transform: translateY(24px); }
-        to   { opacity: 1; transform: translateY(0); }
-    }
-    .su-r { animation: su-up 0.8s cubic-bezier(.22,1,.36,1) both; }
-`
+import { Loader2, ArrowRight, Shield, Zap, HeartHandshake, Star, Eye, EyeOff, Sparkles } from 'lucide-react'
+import { ScrollReveal } from '@/components/ui/scroll-reveal'
 
 export default function SignupSection() {
     const [isPending, startTransition] = useTransition()
@@ -64,186 +31,153 @@ export default function SignupSection() {
     ]
 
     return (
-        <>
-            <style>{styles}</style>
+        <section id="signup" className="relative py-28 md:py-36 bg-[#F8FAFC] text-slate-900 overflow-hidden">
+            {/* Top divider */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
 
-            <section id="signup" className="relative py-32 bg-[#030712] overflow-hidden">
+            {/* Ambient background glows */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-blue-400/5 blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-cyan-400/5 blur-3xl pointer-events-none" />
 
-                {/* Top separator */}
-                <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, rgba(${C},0.3), transparent)` }} />
+            <div className="relative max-w-7xl mx-auto px-6">
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-                {/* Orbs */}
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[150px] pointer-events-none" style={{ backgroundColor: `rgba(${C},0.04)` }} />
-                <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-[130px] pointer-events-none" style={{ backgroundColor: `rgba(${C},0.03)` }} />
+                    {/* Left — Benefits */}
+                    <ScrollReveal direction="right">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 mb-6">
+                            <Sparkles className="h-3.5 w-3.5 text-[#0066FF]" />
+                            <span className="font-figtree text-[11px] font-bold uppercase tracking-[0.2em] text-[#0066FF]">
+                                Inscription gratuite
+                            </span>
+                        </div>
 
-                {/* Dot grid */}
-                <div className="absolute inset-0 opacity-[0.025]"
-                    style={{ backgroundImage: `radial-gradient(rgba(${C},0.5) 1px, transparent 1px)`, backgroundSize: '48px 48px' }}
-                />
+                        <h2 className="font-syne font-black text-slate-900 leading-tight mb-6">
+                            <span className="block text-3xl md:text-5xl">Rejoignez les</span>
+                            <span className="block text-3xl md:text-5xl text-[#0066FF]">entreprises qui</span>
+                            <span className="block text-3xl md:text-5xl text-[#0066FF]">avancent</span>
+                        </h2>
 
-                <div className="relative max-w-7xl mx-auto px-6">
-                    <div className="grid lg:grid-cols-2 gap-16 items-center">
+                        <p className="font-figtree text-[15px] text-slate-600 leading-relaxed mb-10 max-w-md">
+                            Créez votre compte en quelques secondes et gérez votre business de manière professionnelle dès aujourd&apos;hui.
+                        </p>
 
-                        {/* Left — Benefits */}
-                        <div className="su-r">
-                            <div className="flex items-center gap-3 mb-8">
-                                <div className="h-px w-10" style={{ background: `linear-gradient(90deg, #0066FF, transparent)` }} />
-                                <span className="font-figtree text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: '#0066FF' }}>
-                                    Inscription gratuite
-                                </span>
-                            </div>
-
-                            <h2 className="font-syne font-black text-white leading-tight mb-6">
-                                <span className="block text-4xl md:text-5xl">Rejoignez les</span>
-                                <span className="block text-4xl md:text-5xl" style={{ color: '#0066FF' }}>entreprises qui</span>
-                                <span className="block text-4xl md:text-5xl" style={{ color: '#0066FF' }}>avancent</span>
-                            </h2>
-
-                            <p className="font-figtree text-[15px] text-slate-400 leading-relaxed mb-10 max-w-md">
-                                Créez votre compte en quelques secondes et gérez votre business de manière professionnelle dès aujourd&apos;hui.
-                            </p>
-
-                            <div className="space-y-4">
-                                {benefits.map((b, i) => {
-                                    const Icon = b.icon
-                                    return (
-                                        <div key={i} className="benefit-item flex items-center gap-4">
-                                            <div className="h-10 w-10 rounded-xl flex items-center justify-center shrink-0"
-                                                style={{
-                                                    backgroundColor: `rgba(${C},0.06)`,
-                                                    color: '#0066FF',
-                                                    boxShadow: `inset 0 1px 1px rgba(${C},0.1)`,
-                                                }}
-                                            >
-                                                <Icon className="h-4 w-4" />
-                                            </div>
-                                            <span className="font-figtree text-[14px] text-slate-300 font-medium">{b.label}</span>
+                        <div className="space-y-4 mb-10">
+                            {benefits.map((b, i) => {
+                                const Icon = b.icon
+                                return (
+                                    <div key={i} className="flex items-center gap-4 group">
+                                        <div className="h-11 w-11 rounded-2xl bg-blue-50 border border-blue-100 text-[#0066FF] flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform duration-200">
+                                            <Icon className="h-5 w-5" />
                                         </div>
-                                    )
-                                })}
-                            </div>
+                                        <span className="font-figtree text-[14.5px] text-slate-700 font-semibold">{b.label}</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
 
-                            {/* Social proof */}
-                            <div className="mt-12 pt-8 flex items-center gap-4" style={{ borderTop: `1px solid rgba(${C},0.08)` }}>
-                                <div className="flex -space-x-2">
-                                    {['#0066FF', '#0891b2', '#0284c7', '#7c3aed'].map((c, i) => (
-                                        <div key={i} className="h-8 w-8 rounded-full border-2 border-[#030712] flex items-center justify-center" style={{ backgroundColor: c }}>
-                                            <span className="font-syne text-[10px] font-bold text-white">
-                                                {['A', 'K', 'M', 'Y'][i]}
-                                            </span>
-                                        </div>
-                                    ))}
+                        {/* Social proof */}
+                        <div className="pt-8 flex items-center gap-4 border-t border-slate-200/80">
+                            <div className="flex -space-x-2">
+                                {['#0066FF', '#0891b2', '#0284c7', '#7c3aed'].map((c, i) => (
+                                    <div key={i} className="h-9 w-9 rounded-full border-2 border-white flex items-center justify-center text-white shadow-sm font-syne text-[11px] font-bold" style={{ backgroundColor: c }}>
+                                        {['A', 'K', 'M', 'Y'][i]}
+                                    </div>
+                                ))}
+                            </div>
+                            <div>
+                                <div className="font-syne text-sm font-extrabold text-slate-900">500+ entreprises</div>
+                                <div className="font-figtree text-[11.5px] text-slate-500 font-medium">nous font déjà confiance au Maroc</div>
+                            </div>
+                        </div>
+                    </ScrollReveal>
+
+                    {/* Right — Signup Form Card */}
+                    <ScrollReveal direction="left" delay={150}>
+                        <div className="relative rounded-3xl p-8 bg-white/95 backdrop-blur-2xl border border-slate-200/90 shadow-2xl shadow-slate-900/5">
+                            <div className="h-1 rounded-t-3xl absolute top-0 left-0 right-0" style={{ background: 'linear-gradient(90deg, #0066FF, #0284C7, #0066FF)' }} />
+
+                            <h3 className="font-syne font-bold text-2xl text-slate-900 mb-1 pt-2">Créer un compte</h3>
+                            <p className="font-figtree text-[13.5px] text-slate-500 mb-8">Configuration en quelques minutes. Aucun engagement.</p>
+
+                            <form action={handleSubmit} className="space-y-5">
+                                <div>
+                                    <label htmlFor="companyNameSignup" className="block font-figtree text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
+                                        Nom de l&apos;entreprise
+                                    </label>
+                                    <Input
+                                        id="companyNameSignup"
+                                        name="companyName"
+                                        placeholder="Mon Entreprise SARL"
+                                        required
+                                        className="h-11 bg-slate-50/80 border-slate-200 text-slate-900 placeholder:text-slate-400 rounded-xl font-figtree text-[14px] focus:bg-white focus:ring-2 focus:ring-[#0066FF]/20"
+                                    />
                                 </div>
                                 <div>
-                                    <div className="font-syne text-sm font-bold text-white">500+ entreprises</div>
-                                    <div className="font-figtree text-[11px] text-slate-500">nous font déjà confiance</div>
+                                    <label htmlFor="emailSignup" className="block font-figtree text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
+                                        Email professionnel
+                                    </label>
+                                    <Input
+                                        id="emailSignup"
+                                        name="email"
+                                        type="email"
+                                        placeholder="nom@entreprise.com"
+                                        required
+                                        className="h-11 bg-slate-50/80 border-slate-200 text-slate-900 placeholder:text-slate-400 rounded-xl font-figtree text-[14px] focus:bg-white focus:ring-2 focus:ring-[#0066FF]/20"
+                                    />
                                 </div>
-                            </div>
-                        </div>
-
-                        {/* Right — Form */}
-                        <div className="su-r relative" style={{ animationDelay: '150ms' }}>
-
-                            {/* Outer glow */}
-                            <div className="absolute -inset-[1px] rounded-3xl blur-sm opacity-50"
-                                style={{ background: `linear-gradient(135deg, rgba(${C},0.2), transparent, rgba(${C},0.12))` }}
-                            />
-
-                            <div className="signup-glass relative rounded-3xl overflow-hidden">
-                                {/* Top accent bar */}
-                                <div className="h-0.5" style={{ background: `linear-gradient(90deg, #0066FF, rgba(${C},0.3), #0066FF)` }} />
-
-                                <div className="p-8">
-                                    <h3 className="font-syne font-bold text-xl text-white mb-1">Créer un compte</h3>
-                                    <p className="font-figtree text-[13px] text-slate-500 mb-7">Configuration en quelques minutes. Aucun engagement.</p>
-
-                                    <form action={handleSubmit} className="space-y-5">
-                                        <div>
-                                            <label htmlFor="companyName" className="block font-figtree text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">
-                                                Nom de l&apos;entreprise
-                                            </label>
-                                            <Input
-                                                id="companyName"
-                                                name="companyName"
-                                                placeholder="Mon Entreprise SARL"
-                                                required
-                                                className="h-11 bg-white/4 border-white/8 text-white focus:text-black placeholder:text-slate-600 rounded-xl font-figtree text-[14px]"
-                                                style={{ borderColor: 'rgba(255,255,255,0.08)' }}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label htmlFor="email" className="block font-figtree text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">
-                                                Email professionnel
-                                            </label>
-                                            <Input
-                                                id="email"
-                                                name="email"
-                                                type="email"
-                                                placeholder="nom@entreprise.com"
-                                                required
-                                                className="h-11 bg-white/4 border-white/8 text-white focus:text-black placeholder:text-slate-600 rounded-xl font-figtree text-[14px]"
-                                                style={{ borderColor: 'rgba(255,255,255,0.08)' }}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label htmlFor="password" className="block font-figtree text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">
-                                                Mot de passe
-                                            </label>
-                                            <div className="relative">
-                                                <Input
-                                                    id="password"
-                                                    name="password"
-                                                    type={showPassword ? 'text' : 'password'}
-                                                    placeholder="••••••••"
-                                                    required
-                                                    className="h-11 bg-white/4 border-white/8 text-white focus:text-black placeholder:text-slate-600 rounded-xl pr-11 font-figtree text-[14px]"
-                                                    style={{ borderColor: 'rgba(255,255,255,0.08)' }}
-                                                />
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setShowPassword(v => !v)}
-                                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors"
-                                                >
-                                                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        {error && (
-                                            <div className="px-4 py-3 rounded-xl bg-red-500/8 border border-red-800/50">
-                                                <p className="font-figtree text-[13px] text-red-400">{error}</p>
-                                            </div>
-                                        )}
-
+                                <div>
+                                    <label htmlFor="passwordSignup" className="block font-figtree text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">
+                                        Mot de passe
+                                    </label>
+                                    <div className="relative">
+                                        <Input
+                                            id="passwordSignup"
+                                            name="password"
+                                            type={showPassword ? 'text' : 'password'}
+                                            placeholder="••••••••"
+                                            required
+                                            className="h-11 bg-slate-50/80 border-slate-200 text-slate-900 placeholder:text-slate-400 rounded-xl pr-11 font-figtree text-[14px] focus:bg-white focus:ring-2 focus:ring-[#0066FF]/20"
+                                        />
                                         <button
-                                            type="submit"
-                                            disabled={isPending}
-                                            className="w-full h-12 inline-flex items-center justify-center gap-2 font-syne font-bold text-[14px] text-black rounded-xl transition-all duration-200 disabled:opacity-60 hover:brightness-110"
-                                            style={{
-                                                backgroundColor: '#0066FF',
-                                                boxShadow: `0 0 30px rgba(${C},0.25)`,
-                                            }}
+                                            type="button"
+                                            onClick={() => setShowPassword(v => !v)}
+                                            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors"
                                         >
-                                            {isPending ? (
-                                                <><Loader2 className="h-4 w-4 animate-spin" />Création en cours...</>
-                                            ) : (
-                                                <>Démarrer gratuitement <ArrowRight className="h-4 w-4" /></>
-                                            )}
+                                            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                                         </button>
-
-                                        <p className="text-center font-figtree text-[11px] text-slate-600">
-                                            En vous inscrivant, vous acceptez nos{' '}
-                                            <Link href="/terms" className="text-slate-400 underline underline-offset-2 hover:text-white transition-colors">
-                                                conditions d&apos;utilisation
-                                            </Link>
-                                        </p>
-                                    </form>
+                                    </div>
                                 </div>
-                            </div>
+
+                                {error && (
+                                    <div className="px-4 py-3 rounded-xl bg-red-50 border border-red-200">
+                                        <p className="font-figtree text-[13px] text-red-600 font-medium">{error}</p>
+                                    </div>
+                                )}
+
+                                <button
+                                    type="submit"
+                                    disabled={isPending}
+                                    className="w-full h-12 inline-flex items-center justify-center gap-2 font-syne font-bold text-[14px] text-white rounded-xl transition-all duration-200 hover:brightness-110 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-60 shadow-lg shadow-blue-500/25"
+                                    style={{ backgroundColor: '#0066FF' }}
+                                >
+                                    {isPending ? (
+                                        <><Loader2 className="h-4 w-4 animate-spin" />Création en cours...</>
+                                    ) : (
+                                        <>Démarrer gratuitement <ArrowRight className="h-4 w-4" /></>
+                                    )}
+                                </button>
+
+                                <p className="text-center font-figtree text-[11.5px] text-slate-500 pt-1">
+                                    En vous inscrivant, vous acceptez nos{' '}
+                                    <Link href="/terms" className="text-[#0066FF] font-semibold underline underline-offset-2 hover:text-blue-700 transition-colors">
+                                        conditions d&apos;utilisation
+                                    </Link>
+                                </p>
+                            </form>
                         </div>
-                    </div>
+                    </ScrollReveal>
                 </div>
-            </section>
-        </>
+            </div>
+        </section>
     )
 }

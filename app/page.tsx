@@ -13,8 +13,7 @@ export default async function Home() {
   const user = await getCurrentUser()
 
   return (
-    <main className="flex min-h-screen flex-col bg-[#030712]">
-      {/* Navbar is hidden on hero — shown on scroll for sub-sections */}
+    <main className="flex min-h-screen flex-col bg-[#FAFBFD] text-slate-900">
       <Navbar user={user} />
       <HeroSection />
       <ServicesOverview services={services} />
@@ -22,22 +21,21 @@ export default async function Home() {
       <SignupSection />
 
       {/* Footer */}
-      <footer className="relative bg-[#030712] overflow-hidden">
+      <footer className="relative bg-white border-t border-slate-200/80 overflow-hidden text-slate-900">
 
-        {/* Top border glow */}
-        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(0, 102, 255,0.3), transparent)' }} />
-        {/* Atmospheric glow */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[250px] rounded-full blur-[100px] pointer-events-none" style={{ backgroundColor: 'rgba(0, 102, 255,0.03)' }} />
+        {/* Top border accent line */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#0066FF]/30 to-transparent" />
+        
+        {/* Soft background glow */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[250px] rounded-full bg-blue-500/5 blur-[120px] pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-6 py-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-14">
 
-            {/* Brand */}
+            {/* Brand column */}
             <div className="md:col-span-2 space-y-5">
               <div className="flex items-center gap-3">
-                <div className="relative h-9 w-9 shrink-0 rounded-lg overflow-hidden"
-                  style={{ boxShadow: '0 0 0 1px rgba(0, 102, 255,0.2), 0 0 12px rgba(0, 102, 255,0.08)' }}
-                >
+                <div className="relative h-9 w-9 shrink-0 rounded-xl overflow-hidden ring-1 ring-slate-200 shadow-sm">
                   <Image
                     src="/Untitled design (13).png"
                     alt="FirstStep Logo"
@@ -45,22 +43,22 @@ export default async function Home() {
                     className="object-cover"
                   />
                 </div>
-                <span className="font-syne font-black text-[18px] tracking-tight text-white">
-                  First<span style={{ color: '#0066FF' }}>Step</span>
+                <span className="font-syne font-black text-[20px] tracking-tight text-slate-900">
+                  First<span className="text-[#0066FF]">Step</span>
                 </span>
               </div>
-              <p className="font-figtree text-[13px] text-slate-500 leading-relaxed max-w-xs">
+              <p className="font-figtree text-[13.5px] text-slate-500 leading-relaxed max-w-xs">
                 La plateforme SaaS B2B qui centralise la gestion de votre entreprise au Maroc.
               </p>
-              <div className="flex items-center gap-2 text-[12px] font-figtree text-slate-600">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(52,211,153,0.6)]" />
+              <div className="flex items-center gap-2 text-[12px] font-figtree text-slate-600 font-medium">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                 Tous les systèmes opérationnels
               </div>
             </div>
 
-            {/* Product */}
+            {/* Product links */}
             <div className="space-y-4">
-              <h4 className="font-syne text-[11px] font-bold uppercase tracking-widest" style={{ color: 'rgba(0, 102, 255,0.5)' }}>Produit</h4>
+              <h4 className="font-syne text-[11px] font-bold uppercase tracking-widest text-[#0066FF]">Produit</h4>
               <ul className="space-y-3">
                 {[
                   { href: '#services', label: 'Solutions' },
@@ -69,7 +67,7 @@ export default async function Home() {
                   { href: '#signup', label: 'Tarifs' },
                 ].map((l) => (
                   <li key={l.href}>
-                    <Link href={l.href} className="font-figtree text-[13px] text-slate-500 hover:text-white transition-colors duration-200">
+                    <Link href={l.href} className="font-figtree text-[13.5px] text-slate-600 hover:text-[#0066FF] transition-colors duration-200">
                       {l.label}
                     </Link>
                   </li>
@@ -77,9 +75,9 @@ export default async function Home() {
               </ul>
             </div>
 
-            {/* Legal */}
+            {/* Legal links */}
             <div className="space-y-4">
-              <h4 className="font-syne text-[11px] font-bold uppercase tracking-widest" style={{ color: 'rgba(0, 102, 255,0.5)' }}>Légal</h4>
+              <h4 className="font-syne text-[11px] font-bold uppercase tracking-widest text-[#0066FF]">Légal</h4>
               <ul className="space-y-3">
                 {[
                   { href: '/about', label: 'À propos' },
@@ -89,7 +87,7 @@ export default async function Home() {
                   { href: 'mailto:contact@firststepco.com', label: 'Contact' },
                 ].map((l) => (
                   <li key={l.href}>
-                    <Link href={l.href} className="font-figtree text-[13px] text-slate-500 hover:text-white transition-colors duration-200">
+                    <Link href={l.href} className="font-figtree text-[13.5px] text-slate-600 hover:text-[#0066FF] transition-colors duration-200">
                       {l.label}
                     </Link>
                   </li>
@@ -99,11 +97,11 @@ export default async function Home() {
           </div>
 
           {/* Bottom bar */}
-          <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4" style={{ borderTop: '1px solid rgba(0, 102, 255,0.1)' }}>
-            <p className="font-figtree text-[12px] text-slate-600">
+          <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-slate-100">
+            <p className="font-figtree text-[12.5px] text-slate-500">
               &copy; 2026 FirstStep Platform. Tous droits réservés.
             </p>
-            <p className="font-figtree text-[12px] text-slate-700">
+            <p className="font-figtree text-[12.5px] text-slate-500 font-medium">
               Conçu et développé au Maroc 🇲🇦
             </p>
           </div>

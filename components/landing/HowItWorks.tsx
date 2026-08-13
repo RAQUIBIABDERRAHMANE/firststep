@@ -1,9 +1,8 @@
 'use client'
 
-import { Settings, Rocket, TrendingUp } from 'lucide-react'
+import { Settings, Rocket, TrendingUp, Sparkles, Check } from 'lucide-react'
 import SpotlightBackground from '@/components/ui/spotlight-background'
-
-const C = '0, 102, 255'
+import { ScrollReveal } from '@/components/ui/scroll-reveal'
 
 const steps = [
     {
@@ -26,140 +25,85 @@ const steps = [
     },
 ]
 
-const styles = `
-    .how-glass {
-        background: rgba(6,12,24,0.65);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        position: relative;
-        overflow: hidden;
-        transition: transform 0.35s ease, box-shadow 0.35s ease;
-    }
-    .how-glass::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        padding: 1px;
-        border-radius: inherit;
-        background: linear-gradient(180deg, rgba(${C},0.4) 0%, rgba(${C},0.1) 25%, transparent 50%, rgba(${C},0.05) 100%);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        pointer-events: none;
-        transition: background 0.35s ease;
-    }
-    .how-glass:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 0 60px rgba(${C},0.1), 0 24px 48px rgba(0,0,0,0.35);
-    }
-    .how-glass:hover::before {
-        background: linear-gradient(180deg, rgba(${C},0.6) 0%, rgba(${C},0.2) 25%, transparent 55%, rgba(${C},0.1) 100%);
-    }
-
-    @keyframes how-up {
-        from { opacity: 0; transform: translateY(28px); }
-        to   { opacity: 1; transform: translateY(0); }
-    }
-    .how-r { animation: how-up 0.8s cubic-bezier(.22,1,.36,1) both; }
-    .how-d1 { animation-delay: 100ms; }
-    .how-d2 { animation-delay: 220ms; }
-    .how-d3 { animation-delay: 340ms; }
-
-    @keyframes travel {
-        0%   { left: 0%; opacity: 0; }
-        10%  { opacity: 1; }
-        90%  { opacity: 1; }
-        100% { left: 100%; opacity: 0; }
-    }
-`
-
 export default function HowItWorks() {
     return (
-        <>
-            <style>{styles}</style>
+        <section id="how-it-works" className="relative bg-[#FAFBFD] text-slate-900 overflow-hidden">
+            <SpotlightBackground>
+                {/* Top border */}
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
 
-            <section id="how-it-works" className="relative bg-[#030712] overflow-hidden">
-                <SpotlightBackground>
-                    {/* Top separator */}
-                    <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, rgba(${C},0.3), transparent)` }} />
+                <div className="relative max-w-7xl mx-auto px-6 py-24 md:py-36">
 
-                    <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-32">
-
-                        {/* Header */}
-                        <div className="how-r text-center max-w-2xl mx-auto mb-12 md:mb-20">
-                            <div className="flex items-center justify-center gap-3 mb-5">
-                                <div className="h-px w-10" style={{ background: `linear-gradient(90deg, transparent, #0066FF)` }} />
-                                <span className="font-figtree text-[11px] font-semibold uppercase tracking-[0.25em]" style={{ color: '#0066FF' }}>Comment ça marche</span>
-                                <div className="h-px w-10" style={{ background: `linear-gradient(90deg, #0066FF, transparent)` }} />
-                            </div>
-                            <h2 className="font-syne font-black text-white leading-tight mb-4">
-                                <span className="block text-3xl md:text-5xl">Opérationnel en</span>
-                                <span className="block text-3xl md:text-5xl" style={{ color: '#0066FF' }}>quelques minutes</span>
-                            </h2>
-                            <p className="font-figtree text-[14px] md:text-[15px] text-slate-400 leading-relaxed">
-                                Pas de formation longue, pas de DSI nécessaire.
-                                <br />Démarrez aujourd&apos;hui et gérez tout depuis un tableau de bord unifié.
-                            </p>
+                    {/* Header */}
+                    <ScrollReveal direction="up" className="text-center max-w-2xl mx-auto mb-16 md:mb-24">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 mb-4">
+                            <Sparkles className="h-3.5 w-3.5 text-[#0066FF]" />
+                            <span className="font-figtree text-[11px] font-bold uppercase tracking-[0.2em] text-[#0066FF]">
+                                Comment ça marche
+                            </span>
                         </div>
+                        <h2 className="font-syne font-black text-slate-900 leading-tight mb-4">
+                            <span className="block text-3xl md:text-5xl">Opérationnel en</span>
+                            <span className="block text-3xl md:text-5xl text-[#0066FF]">quelques minutes</span>
+                        </h2>
+                        <p className="font-figtree text-[15px] text-slate-600 leading-relaxed">
+                            Pas de formation longue, pas de DSI nécessaire.
+                            <br />Démarrez aujourd&apos;hui et gérez tout depuis un tableau de bord unifié.
+                        </p>
+                    </ScrollReveal>
 
-                        {/* Steps */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 relative">
+                    {/* Timeline Steps Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
 
-                            {/* Connector line (desktop) */}
-                            <div className="hidden md:block absolute top-[52px] left-[calc(16.67%+32px)] right-[calc(16.67%+32px)] h-px">
-                                <div className="absolute inset-0" style={{ background: `linear-gradient(90deg, rgba(${C},0.35), rgba(${C},0.15), rgba(${C},0.35))` }} />
-                                <div
-                                    className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full"
-                                    style={{
-                                        backgroundColor: '#0066FF',
-                                        boxShadow: `0 0 8px rgba(${C},0.8)`,
-                                        animation: 'travel 3s ease-in-out infinite',
-                                    }}
-                                />
-                            </div>
+                        {/* Connector timeline line (desktop) */}
+                        <div className="hidden md:block absolute top-[60px] left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-blue-200 via-[#0066FF] to-blue-200 z-0" />
 
-                            {steps.map((step, i) => {
-                                const Icon = step.icon
-                                const delays = ['how-d1', 'how-d2', 'how-d3']
-                                return (
-                                    <div key={i} className={`how-r ${delays[i]}`}>
-                                        <div className="how-glass rounded-2xl p-6 md:p-8 h-full">
+                        {steps.map((step, i) => {
+                            const Icon = step.icon
+                            return (
+                                <ScrollReveal
+                                    key={i}
+                                    delay={i * 120}
+                                    direction="up"
+                                    className="relative z-10"
+                                >
+                                    <div className="group relative rounded-3xl p-8 bg-white/90 backdrop-blur-xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:shadow-blue-500/5 hover:-translate-y-1.5 transition-all duration-300 h-full flex flex-col justify-between overflow-hidden">
+                                        
+                                        {/* Big watermark background number */}
+                                        <div className="absolute -bottom-4 -right-2 font-syne font-black text-[100px] leading-none text-slate-100 select-none pointer-events-none group-hover:text-blue-50 transition-colors">
+                                            {step.number}
+                                        </div>
 
-                                            {/* Big background number */}
-                                            <div className="absolute -bottom-2 right-3 font-syne font-black text-[80px] md:text-[110px] leading-none select-none pointer-events-none" style={{ color: `rgba(${C},0.04)` }}>
-                                                {step.number}
+                                        <div>
+                                            {/* Step header: icon + badge */}
+                                            <div className="flex items-center justify-between mb-8">
+                                                <div className="h-14 w-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#0066FF] shadow-sm group-hover:scale-110 transition-transform duration-300">
+                                                    <Icon className="h-6 w-6" />
+                                                </div>
+                                                <span className="font-syne text-[11px] font-extrabold uppercase tracking-widest text-[#0066FF] bg-blue-50/80 px-3 py-1 rounded-full border border-blue-100">
+                                                    Étape {step.number}
+                                                </span>
                                             </div>
 
-                                            {/* Icon */}
-                                            <div className="relative z-10 inline-flex items-center justify-center h-12 w-12 rounded-xl mb-6"
-                                                style={{
-                                                    backgroundColor: `rgba(${C},0.07)`,
-                                                    boxShadow: `0 0 20px rgba(${C},0.08), inset 0 1px 1px rgba(${C},0.12)`,
-                                                }}
-                                            >
-                                                <Icon className="h-5 w-5" style={{ color: '#0066FF' }} />
-                                            </div>
-
-                                            {/* Step label */}
-                                            <div className="font-syne text-[11px] font-black tracking-wider mb-3" style={{ color: `rgba(${C},0.5)` }}>
-                                                STEP {step.number}
-                                            </div>
-
-                                            <h3 className="font-syne font-bold text-[19px] text-white mb-3 relative z-10">
+                                            <h3 className="font-syne font-bold text-xl text-slate-900 mb-3 relative z-10 group-hover:text-[#0066FF] transition-colors">
                                                 {step.title}
                                             </h3>
-                                            <p className="font-figtree text-[13px] text-slate-500 leading-relaxed relative z-10">
+                                            <p className="font-figtree text-[13.5px] text-slate-600 leading-relaxed relative z-10 mb-6">
                                                 {step.description}
                                             </p>
                                         </div>
+
+                                        <div className="flex items-center gap-1.5 font-figtree text-[12px] font-semibold text-emerald-600 pt-4 border-t border-slate-100">
+                                            <Check className="h-4 w-4" />
+                                            Garantie 0 effort
+                                        </div>
                                     </div>
-                                )
-                            })}
-                        </div>
+                                </ScrollReveal>
+                            )
+                        })}
                     </div>
-                </SpotlightBackground>
-            </section>
-        </>
+                </div>
+            </SpotlightBackground>
+        </section>
     )
 }

@@ -3,19 +3,16 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-    'inline-flex items-center justify-center rounded-xl text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden group',
+    'inline-flex items-center justify-center rounded-xl text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden group',
     {
         variants: {
             variant: {
-                default: "bg-gradient-to-r from-primary via-primary to-accent text-white shadow-lg shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 hover:scale-105 active:scale-100 before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700",
-                destructive:
-                    "bg-gradient-to-r from-destructive to-red-600 text-white shadow-lg shadow-destructive/30 hover:shadow-xl hover:shadow-destructive/40 hover:scale-105 active:scale-100",
-                outline:
-                    "border border-slate-300 bg-white hover:bg-slate-50 hover:border-slate-400 hover:scale-105 active:scale-100 text-slate-700 font-medium",
-                secondary:
-                    "bg-blue-50 text-blue-700 font-medium shadow-sm hover:bg-blue-100 hover:shadow-md hover:scale-105 active:scale-100",
-                ghost: "text-slate-600 hover:bg-slate-100 hover:text-slate-900 hover:scale-105 active:scale-100",
-                link: "text-primary underline-offset-4 hover:underline",
+                default: "bg-[#0066FF] text-white shadow-md shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 hover:-translate-y-0.5 active:translate-y-0 font-syne font-bold",
+                destructive: "bg-red-600 text-white shadow-md hover:bg-red-700 hover:-translate-y-0.5 active:translate-y-0 font-syne font-bold",
+                outline: "border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 text-slate-800 font-medium hover:-translate-y-0.5 active:translate-y-0 shadow-sm",
+                secondary: "bg-blue-50 text-[#0066FF] font-semibold shadow-sm hover:bg-blue-100 hover:-translate-y-0.5 active:translate-y-0",
+                ghost: "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
+                link: "text-[#0066FF] underline-offset-4 hover:underline",
             },
             size: {
                 default: 'h-11 px-6 py-2',
