@@ -63,8 +63,8 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
                         </div>
 
                         <h2 className="font-syne font-black text-slate-900 leading-tight">
-                            <span className="block text-3xl md:text-5xl">Des outils taillés</span>
-                            <span className="block text-3xl md:text-5xl text-[#0066FF]">pour votre métier</span>
+                            <span className="block text-3xl md:text-5xl tracking-tight">Des outils taillés</span>
+                            <span className="block text-3xl md:text-5xl tracking-tight text-[#0066FF]">pour votre métier</span>
                         </h2>
                     </div>
                     <p className="font-figtree text-slate-600 text-[15.5px] leading-relaxed max-w-sm md:text-right font-medium">
@@ -86,8 +86,8 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
                                 direction="up"
                                 className={`group relative rounded-3xl p-7 transition-all duration-300 ${
                                     isFeatured
-                                        ? 'bg-gradient-to-b from-white via-blue-50/50 to-white border-2 border-[#0066FF]/40 shadow-xl shadow-blue-500/10 md:col-span-2 lg:col-span-1'
-                                        : 'bg-gradient-to-b from-white/95 via-white/90 to-slate-50/60 backdrop-blur-xl border border-slate-200/90 shadow-md shadow-slate-900/5 hover:shadow-2xl hover:shadow-blue-500/10 hover:border-blue-400/50 hover:-translate-y-2'
+                                        ? 'bg-gradient-to-b from-white via-blue-50/40 to-white border-2 border-[#0066FF]/40 shadow-xl shadow-blue-500/10 md:col-span-2 lg:col-span-1 hover:-translate-y-1.5'
+                                        : 'bg-white/95 backdrop-blur-xl border border-slate-200/80 border-t-white shadow-xs hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-400/40 hover:-translate-y-1.5'
                                 }`}
                             >
                                 {/* Watermark number */}
@@ -109,7 +109,7 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
                                                 {getServiceIcon(service.category)}
                                             </div>
                                             <span
-                                                className={`font-figtree text-[11px] font-bold px-3 py-1 rounded-full shadow-sm ${
+                                                className={`font-figtree text-[11px] font-bold px-3 py-1 rounded-full shadow-2xs ${
                                                     isAvailable
                                                         ? 'bg-emerald-50 text-emerald-700 border border-emerald-200/80'
                                                         : 'bg-slate-100 text-slate-500 border border-slate-200'
@@ -131,7 +131,7 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
 
                                         {/* Title & Description */}
                                         <h3
-                                            className={`font-syne font-extrabold text-xl mb-2 transition-colors duration-200 ${
+                                            className={`font-syne font-extrabold text-xl mb-2 tracking-tight transition-colors duration-200 ${
                                                 isAvailable ? 'text-slate-900 group-hover:text-[#0066FF]' : 'text-slate-500'
                                             }`}
                                         >
@@ -145,7 +145,7 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
                                     {/* Footer: Price & High-End Action Button */}
                                     <div className="flex items-center justify-between pt-5 border-t border-slate-100">
                                         {isAvailable ? (
-                                            <div className="flex items-baseline gap-1.5">
+                                            <div className="flex items-baseline gap-1.5 tabular-nums">
                                                 {service.slug === 'custom-website' ? (
                                                     <>
                                                         <span className="font-figtree text-[10px] text-slate-400 font-bold uppercase tracking-wider">Dès</span>
@@ -163,7 +163,7 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
                                         {isAvailable && (
                                             <Link href={service.slug === 'custom-website' ? '/services/custom-website/request' : '#signup'}>
                                                 <button
-                                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-white font-syne font-bold text-[12.5px] transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/40"
+                                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-white font-syne font-bold text-[12.5px] transition-all duration-200 hover:-translate-y-0.5 active:scale-95 shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/35 cursor-pointer"
                                                     style={{ backgroundColor: '#0066FF' }}
                                                 >
                                                     {service.slug === 'custom-website' ? 'Demander' : 'Découvrir'}
@@ -181,7 +181,7 @@ export default function ServicesOverview({ services }: ServicesOverviewProps) {
                 {/* Bottom CTA Pill */}
                 <div className="mt-16 flex justify-center">
                     <Link href="/services">
-                        <button className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-white border border-slate-200/90 shadow-md shadow-slate-900/5 font-figtree font-bold text-[13px] text-slate-800 hover:text-[#0066FF] hover:border-blue-200 hover:-translate-y-0.5 transition-all">
+                        <button className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-white border border-slate-200/90 shadow-sm hover:shadow-md font-figtree font-bold text-[13px] text-slate-800 hover:text-[#0066FF] hover:border-blue-200 hover:-translate-y-0.5 active:scale-97 transition-all cursor-pointer">
                             Toutes les solutions
                             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-200 text-[#0066FF]" />
                         </button>

@@ -972,7 +972,11 @@ export const getMonthlyReportEmailTemplate = (
 </html>`
 }
 
-export const getEmploymentApplicationReceivedTemplate = (candidateName: string) => {
+export const getEmploymentApplicationReceivedTemplate = (candidateName: string, roleType: string = 'DEVELOPER') => {
+    const isVideo = roleType === 'VIDEO_EDITOR';
+    const roleTitle = isVideo ? 'Monteur Vidéo & Motion Designer' : 'Software Developer';
+    const headerGradient = isVideo ? 'linear-gradient(135deg, #7c3aed, #db2777)' : 'linear-gradient(135deg, #0284c7, #2563eb)';
+
     return `
     <!DOCTYPE html>
     <html lang="fr">
@@ -982,28 +986,28 @@ export const getEmploymentApplicationReceivedTemplate = (candidateName: string) 
     </head>
     <body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background-color:#0f172a;color:#f8fafc;margin:0;padding:40px 20px;">
         <div style="max-width:600px;margin:0 auto;background:#1e293b;border:1px solid #334155;border-radius:16px;overflow:hidden;">
-            <div style="background:linear-gradient(135deg, #0284c7, #2563eb);padding:32px;text-align:center;">
+            <div style="background:${headerGradient};padding:32px;text-align:center;">
                 <h1 style="color:#ffffff;margin:0;font-size:24px;font-weight:800;">FirstStep Recruitment</h1>
-                <p style="color:#e0f2fe;margin:8px 0 0 0;font-size:14px;">Software Developer Position</p>
+                <p style="color:#e0f2fe;margin:8px 0 0 0;font-size:14px;">Poste : ${roleTitle}</p>
             </div>
             <div style="padding:32px;">
                 <h2 style="color:#f8fafc;font-size:20px;margin-top:0;">Bonjour ${candidateName},</h2>
                 <p style="color:#94a3b8;line-height:1.6;font-size:15px;">
-                    Nous avons bien reçu votre candidature pour le poste de <strong>Software Developer</strong> chez FirstStep.
+                    Nous avons bien reçu votre candidature pour le poste de <strong>${roleTitle}</strong> chez FirstStep.
                 </p>
                 <p style="color:#94a3b8;line-height:1.6;font-size:15px;">
                     Notre équipe étudie actuellement votre profil ainsi que vos compétences. Nous reviendrons vers vous très prochainement par email avec les suites de votre demande.
                 </p>
-                <div style="background:#0f172a;border-left:4px solid #0284c7;padding:16px;border-radius:6px;margin:24px 0;">
+                <div style="background:#0f172a;border-left:4px solid ${isVideo ? '#a855f7' : '#0284c7'};padding:16px;border-radius:6px;margin:24px 0;">
                     <p style="color:#e2e8f0;margin:0;font-size:14px;font-weight:600;">Récapitulatif des étapes :</p>
                     <ul style="color:#94a3b8;margin:8px 0 0 0;padding-left:20px;font-size:13px;">
-                        <li>Reception et évaluation de votre profil (En cours)</li>
-                        <li>Notification d'acceptation et transmission du contrat d'engagement</li>
+                        <li>Réception et évaluation de votre profil (En cours)</li>
+                        <li>Notification d'acceptation et transmission de votre contrat d'engagement</li>
                     </ul>
                 </div>
                 <p style="color:#64748b;font-size:13px;margin-bottom:0;">
                     Merci pour votre intérêt pour FirstStep !<br>
-                    L'équipe FirstStep
+                    <strong>Abderrahmane Raquibi</strong> - Fondateur FirstStep
                 </p>
             </div>
         </div>
@@ -1011,7 +1015,11 @@ export const getEmploymentApplicationReceivedTemplate = (candidateName: string) 
     </html>`
 }
 
-export const getEmploymentApplicationAcceptedTemplate = (candidateName: string, agreementPdfUrl?: string) => {
+export const getEmploymentApplicationAcceptedTemplate = (candidateName: string, agreementPdfUrl?: string, roleType: string = 'DEVELOPER') => {
+    const isVideo = roleType === 'VIDEO_EDITOR';
+    const roleTitle = isVideo ? 'Monteur Vidéo & Motion Designer' : 'Software Developer';
+    const contractTitle = isVideo ? 'Video Editor Employment Agreement' : 'Developer Employment Agreement';
+
     return `
     <!DOCTYPE html>
     <html lang="fr">
@@ -1027,10 +1035,10 @@ export const getEmploymentApplicationAcceptedTemplate = (candidateName: string, 
             </div>
             <div style="padding:32px;">
                 <p style="color:#94a3b8;line-height:1.6;font-size:15px;">
-                    Nous avons le plaisir de vous informer que votre candidature pour le poste de <strong>Software Developer</strong> a été retenue !
+                    Nous avons le plaisir de vous informer que votre candidature pour le poste de <strong>${roleTitle}</strong> a été retenue !
                 </p>
                 <p style="color:#94a3b8;line-height:1.6;font-size:15px;">
-                    Vous trouverez ci-joint votre <strong>Developer Employment Agreement</strong> dûment établi avec les termes convenus (Revenue Share per project).
+                    Vous trouverez ci-joint votre <strong>${contractTitle}</strong> dûment établi avec les termes convenus (Revenue Share per project).
                 </p>
                 ${agreementPdfUrl ? `
                 <div style="text-align:center;margin:30px 0;">
@@ -1040,7 +1048,7 @@ export const getEmploymentApplicationAcceptedTemplate = (candidateName: string, 
                 <div style="background:#0f172a;border:1px solid #334155;padding:20px;border-radius:12px;margin:24px 0;">
                     <h3 style="color:#10b981;margin:0 0 8px 0;font-size:15px;">Prochaines étapes :</h3>
                     <p style="color:#cbd5e1;margin:0;font-size:14px;line-height:1.5;">
-                        Notre équipe prendra contact avec vous rapidement pour lancer votre premier projet et vous intégrer à nos flux de développement.
+                        Notre équipe prendra contact avec vous rapidement pour lancer votre premier projet et vous intégrer à notre flux de travail.
                     </p>
                 </div>
                 <p style="color:#64748b;font-size:13px;margin-bottom:0;">

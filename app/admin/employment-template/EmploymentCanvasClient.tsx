@@ -1,10 +1,30 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Save, Eye, CheckCircle2, Loader2, Trash2, PlusCircle, Type, Move, Upload } from 'lucide-react'
+import {
+  Save,
+  Eye,
+  CheckCircle2,
+  Loader2,
+  Trash2,
+  PlusCircle,
+  Type,
+  Move,
+  Upload,
+  RotateCcw,
+  Maximize2,
+  Download,
+  X,
+  RefreshCw,
+  ArrowUp,
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  Sparkles,
+  ExternalLink,
+} from 'lucide-react'
 
 interface FieldConfig {
-
   key: string
   label: string
   color: string
@@ -55,8 +75,6 @@ const DEFAULT_POSITIONS_MAP: Positions = {
   employeeSignDate: { x: 125, y: 120 },
 }
 
-
-
 const DEFAULT_ENABLED_MAP: EnabledMap = {
   date: true,
   employeeName: true,
@@ -91,6 +109,11 @@ export default function EmploymentCanvasClient() {
   const [selectedField, setSelectedField] = useState<string | null>('date')
   const [backgroundImage, setBackgroundImage] = useState<string | null>(null)
   const [pdfLoading, setPdfLoading] = useState(true)
+
+  // Live preview modal states
+  const [previewModalOpen, setPreviewModalOpen] = useState(false)
+  const [previewLoading, setPreviewLoading] = useState(false)
+  const [previewBlobUrl, setPreviewBlobUrl] = useState<string | null>(null)
 
   // Convert PDF coordinates (origin bottom-left) to canvas coordinates (origin top-left)
   const pdfToCanvas = useCallback(
@@ -236,7 +259,7 @@ export default function EmploymentCanvasClient() {
     }
   }, [loading, pdfLoading])
 
-  // Mouse drag handlers (matched with baseline pdfToCanvas math)
+  // Mouse drag handlers
   const handleMouseDown = (fieldKey: string, e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
@@ -289,27 +312,66 @@ export default function EmploymentCanvasClient() {
     }
   }, [dragging, handleMouseMove, handleMouseUp])
 
+  // Keyboard navigation & fine nudge adjustments for selected field
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!selectedField) return
+      const target = e.target as HTMLElement
+      if (target && (target.tagName === 'INPUT' || target.tagName === 'SELECT' || target.tagName === 'TEXTAREA')) {
+        return
+      }
+
+      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+        e.preventDefault()
+        const step = e.shiftKey ? 10 : 1
+        setPositions((prev) => {
+          const cur = prev[selectedField] || { x: 100, y: 500 }
+          let newX = cur.x
+          let newY = cur.y
+
+          if (e.key === 'ArrowLeft') newX = Math.max(0, cur.x - step)
+          if (e.key === 'ArrowRight') newX = Math.min(PDF_WIDTH, cur.x + step)
+          if (e.key === 'ArrowUp') newY = Math.min(PDF_HEIGHT, cur.y + step) // PDF Y origin is bottom
+          if (e.key === 'ArrowDown') newY = Math.max(0, cur.y - step)
+
+          return {
+            ...prev,
+            [selectedField]: { x: newX, y: newY },
+          }
+        })
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [selectedField])
+
+  // Build payload helper
+  const getPayload = useCallback(() => {
+    const payload: any = {}
+    for (const field of FIELDS) {
+      payload[`${field.key}X`] = positions[field.key]?.x ?? 100
+      payload[`${field.key}Y`] = positions[field.key]?.y ?? 100
+      payload[`${field.key}Enabled`] = enabledMap[field.key] ?? true
+
+      const st = fieldStyles[field.key]
+      if (st) {
+        payload[`${field.key}FontSize`] = st.fontSize
+        payload[`${field.key}FontColor`] = st.fontColor
+        payload[`${field.key}IsBold`] = st.isBold
+        payload[`${field.key}IsItalic`] = st.isItalic
+        payload[`${field.key}FontFamily`] = st.fontFamily
+      }
+    }
+    return payload
+  }, [positions, enabledMap, fieldStyles])
+
   // Save template settings
   const handleSave = async () => {
     setSaving(true)
     setSaved(false)
     try {
-      const payload: any = {}
-      for (const field of FIELDS) {
-        payload[`${field.key}X`] = positions[field.key]?.x ?? 100
-        payload[`${field.key}Y`] = positions[field.key]?.y ?? 100
-        payload[`${field.key}Enabled`] = enabledMap[field.key] ?? true
-
-        const st = fieldStyles[field.key]
-        if (st) {
-          payload[`${field.key}FontSize`] = st.fontSize
-          payload[`${field.key}FontColor`] = st.fontColor
-          payload[`${field.key}IsBold`] = st.isBold
-          payload[`${field.key}IsItalic`] = st.isItalic
-          payload[`${field.key}FontFamily`] = st.fontFamily
-        }
-      }
-
+      const payload = getPayload()
       const res = await fetch('/api/admin/employment-template', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -333,6 +395,45 @@ export default function EmploymentCanvasClient() {
     }
   }
 
+  // Real-time In-App Live Preview
+  const handleLivePreview = async () => {
+    setPreviewLoading(true)
+    setPreviewModalOpen(true)
+    try {
+      const payload = getPayload()
+      const res = await fetch('/api/admin/employment-template/preview', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ positions: payload }),
+      })
+
+      if (!res.ok) {
+        throw new Error('Échec de la génération du PDF')
+      }
+
+      const blob = await res.blob()
+      if (previewBlobUrl) {
+        URL.revokeObjectURL(previewBlobUrl)
+      }
+      const url = URL.createObjectURL(blob)
+      setPreviewBlobUrl(url)
+    } catch (err: any) {
+      console.error('Preview error:', err)
+      alert('Erreur lors de la prévisualisation en direct: ' + (err.message || 'Erreur inconnue'))
+    } finally {
+      setPreviewLoading(false)
+    }
+  }
+
+  // Reset to default positions
+  const handleResetDefaults = () => {
+    if (confirm('Voulez-vous restaurer les positions et styles par défaut recommandés pour le contrat ?')) {
+      setPositions(DEFAULT_POSITIONS_MAP)
+      setEnabledMap(DEFAULT_ENABLED_MAP)
+      setFieldStyles(DEFAULT_STYLES_MAP)
+    }
+  }
+
   const toggleFieldEnabled = (key: string) => {
     setEnabledMap((prev) => ({
       ...prev,
@@ -345,6 +446,19 @@ export default function EmploymentCanvasClient() {
       ...prev,
       [key]: { ...prev[key], ...updates },
     }))
+  }
+
+  const nudgePosition = (key: string, dx: number, dy: number) => {
+    setPositions((prev) => {
+      const cur = prev[key] || { x: 100, y: 500 }
+      return {
+        ...prev,
+        [key]: {
+          x: Math.max(0, Math.min(PDF_WIDTH, cur.x + dx)),
+          y: Math.max(0, Math.min(PDF_HEIGHT, cur.y + dy)),
+        },
+      }
+    })
   }
 
   const sampleValues: { [key: string]: string } = {
@@ -419,11 +533,21 @@ export default function EmploymentCanvasClient() {
             Éditeur Visuel de Contrat d'Emploi
           </h1>
           <p className="text-sm text-slate-400 mt-1">
-            Faites glisser les champs sur le document pour ajuster leur emplacement exact. Vous pouvez aussi charger votre propre document PDF de contrat.
+            Positionnez les champs de contrat par glisser-déposer ou au clavier. Prévisualisez en direct le rendu final avant acceptation des candidats.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            onClick={handleResetDefaults}
+            className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition-all border border-slate-700 cursor-pointer"
+            title="Restaurer les positions par défaut recommandées"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            Réinitialiser
+          </button>
+
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
@@ -431,19 +555,16 @@ export default function EmploymentCanvasClient() {
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-purple-950/60 hover:bg-purple-900 text-purple-200 font-semibold text-sm transition-all border border-purple-800/80 cursor-pointer disabled:opacity-50"
           >
             {uploadingPdf ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4 text-purple-400" />}
-            {uploadingPdf ? 'Importation...' : 'Charger mon propre PDF'}
+            {uploadingPdf ? 'Importation...' : 'Charger mon PDF'}
           </button>
 
           <button
-            onClick={() => {
-              handleSave().then((ok) => {
-                if (ok) window.open('/api/admin/employment-template/preview', '_blank')
-              })
-            }}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm transition-all border border-slate-700 cursor-pointer"
+            type="button"
+            onClick={handleLivePreview}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600/90 hover:bg-indigo-500 text-white font-semibold text-sm transition-all shadow-lg shadow-indigo-950/40 border border-indigo-500/50 cursor-pointer"
           >
-            <Eye className="w-4 h-4 text-cyan-400" />
-            Sauvegarder & Aperçu PDF
+            <Sparkles className="w-4 h-4 text-indigo-200" />
+            Aperçu en Direct
           </button>
 
           <button
@@ -452,11 +573,21 @@ export default function EmploymentCanvasClient() {
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-sm shadow-lg shadow-cyan-950/40 transition-all cursor-pointer disabled:opacity-50"
           >
             {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : saved ? <CheckCircle2 className="w-4 h-4" /> : <Save className="w-4 h-4" />}
-            {saved ? 'Enregistré !' : 'Enregistrer le Modèle'}
+            {saved ? 'Enregistré !' : 'Enregistrer'}
           </button>
         </div>
       </div>
 
+      {/* Keyboard shortcut hint banner */}
+      <div className="bg-slate-900/40 border border-slate-800/80 px-4 py-2.5 rounded-2xl flex items-center justify-between text-xs text-slate-400">
+        <div className="flex items-center gap-2">
+          <span className="text-cyan-400">💡</span>
+          <span>
+            <strong className="text-slate-300">Raccourcis Clavier :</strong> Cliquez sur un champ pour le sélectionner, puis utilisez les flèches <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono text-[10px]">←</kbd> <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono text-[10px]">→</kbd> <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono text-[10px]">↑</kbd> <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono text-[10px]">↓</kbd> (ou <kbd className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono text-[10px]">Maj + Flèche</kbd> pour 10pt) pour ajuster au pixel près.
+          </span>
+        </div>
+        <span className="text-[11px] font-mono text-slate-500 hidden md:inline">Format: A4 (595.5 × 842.25 pt)</span>
+      </div>
 
       {/* Editor Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -464,8 +595,8 @@ export default function EmploymentCanvasClient() {
         <div className="lg:col-span-8 space-y-4">
           <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl">
             <div className="flex items-center justify-between text-xs text-slate-400 mb-3 px-2">
-              <span className="font-mono">Document: DEVELOPER EMPLOYMENT Agreement</span>
-              <span className="font-mono">Format: US Letter (612 x 792 pt)</span>
+              <span className="font-mono">Document: DEVELOPER EMPLOYMENT AGREEMENT</span>
+              <span className="font-mono text-cyan-400">A4 • 72 DPI (595.5 × 842.25 pt)</span>
             </div>
 
             {/* Canvas Container */}
@@ -512,7 +643,7 @@ export default function EmploymentCanvasClient() {
                     style={{
                       left: `${canvasPos.x}px`,
                       top: `${canvasPos.y}px`,
-                      transform: 'translateY(-78%)', // Baseline offset to align text baseline with PDF y coordinate
+                      transform: 'translateY(-78%)', // Baseline offset
                       zIndex: isDraggingThis ? 50 : isSelected ? 40 : 10,
                       cursor: isDraggingThis ? 'grabbing' : 'grab',
                     }}
@@ -654,35 +785,76 @@ export default function EmploymentCanvasClient() {
                 </h4>
               </div>
 
-              {/* Coordinates Manual Inputs */}
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[11px] font-mono text-slate-400 mb-1">Position X (pt)</label>
-                  <input
-                    type="number"
-                    value={Math.round(positions[selectedField]?.x || 0)}
-                    onChange={(e) =>
-                      setPositions((prev) => ({
-                        ...prev,
-                        [selectedField]: { ...prev[selectedField], x: Number(e.target.value) },
-                      }))
-                    }
-                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-white outline-none focus:border-cyan-500"
-                  />
+              {/* Coordinates Manual Inputs & Nudge Controls */}
+              <div className="space-y-2">
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[11px] font-mono text-slate-400 mb-1">Position X (pt)</label>
+                    <input
+                      type="number"
+                      value={Math.round(positions[selectedField]?.x || 0)}
+                      onChange={(e) =>
+                        setPositions((prev) => ({
+                          ...prev,
+                          [selectedField]: { ...prev[selectedField], x: Number(e.target.value) },
+                        }))
+                      }
+                      className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-white outline-none focus:border-cyan-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-mono text-slate-400 mb-1">Position Y (pt)</label>
+                    <input
+                      type="number"
+                      value={Math.round(positions[selectedField]?.y || 0)}
+                      onChange={(e) =>
+                        setPositions((prev) => ({
+                          ...prev,
+                          [selectedField]: { ...prev[selectedField], y: Number(e.target.value) },
+                        }))
+                      }
+                      className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-white outline-none focus:border-cyan-500"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-[11px] font-mono text-slate-400 mb-1">Position Y (pt)</label>
-                  <input
-                    type="number"
-                    value={Math.round(positions[selectedField]?.y || 0)}
-                    onChange={(e) =>
-                      setPositions((prev) => ({
-                        ...prev,
-                        [selectedField]: { ...prev[selectedField], y: Number(e.target.value) },
-                      }))
-                    }
-                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs font-mono text-white outline-none focus:border-cyan-500"
-                  />
+
+                {/* Quick Nudge Buttons */}
+                <div className="flex items-center justify-between pt-1 text-[11px] text-slate-400">
+                  <span>Ajustement fin :</span>
+                  <div className="flex items-center gap-1">
+                    <button
+                      type="button"
+                      onClick={() => nudgePosition(selectedField, -1, 0)}
+                      className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 cursor-pointer"
+                      title="Déplacer vers la gauche (1pt)"
+                    >
+                      <ArrowLeft className="w-3 h-3" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => nudgePosition(selectedField, 1, 0)}
+                      className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 cursor-pointer"
+                      title="Déplacer vers la droite (1pt)"
+                    >
+                      <ArrowRight className="w-3 h-3" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => nudgePosition(selectedField, 0, 1)}
+                      className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 cursor-pointer"
+                      title="Monter (1pt)"
+                    >
+                      <ArrowUp className="w-3 h-3" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => nudgePosition(selectedField, 0, -1)}
+                      className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 cursor-pointer"
+                      title="Descendre (1pt)"
+                    >
+                      <ArrowDown className="w-3 h-3" />
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -774,6 +946,86 @@ export default function EmploymentCanvasClient() {
           )}
         </div>
       </div>
+
+      {/* In-App Live PDF Preview Modal */}
+      {previewModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="bg-slate-900 border border-slate-700 rounded-3xl w-full max-w-5xl h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+            {/* Modal Header */}
+            <div className="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
+              <div className="flex items-center gap-3">
+                <span className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                  <Eye className="w-5 h-5" />
+                </span>
+                <div>
+                  <h3 className="text-base font-bold text-white">Aperçu en Direct du Contrat PDF</h3>
+                  <p className="text-xs text-slate-400">Rendu fidèle généré par le moteur pdf-lib</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleLivePreview}
+                  disabled={previewLoading}
+                  className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 cursor-pointer"
+                  title="Rafraîchir l'aperçu"
+                >
+                  <RefreshCw className={`w-4 h-4 ${previewLoading ? 'animate-spin text-cyan-400' : ''}`} />
+                </button>
+
+                {previewBlobUrl && (
+                  <>
+                    <a
+                      href={previewBlobUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700"
+                      title="Ouvrir dans un nouvel onglet"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                    <a
+                      href={previewBlobUrl}
+                      download="employment-agreement-preview.pdf"
+                      className="p-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white shadow-md shadow-cyan-950/40"
+                      title="Télécharger le fichier PDF"
+                    >
+                      <Download className="w-4 h-4" />
+                    </a>
+                  </>
+                )}
+
+                <button
+                  type="button"
+                  onClick={() => setPreviewModalOpen(false)}
+                  className="p-2 rounded-xl bg-slate-800 hover:bg-rose-950 hover:text-rose-400 text-slate-400 border border-slate-700 cursor-pointer ml-2"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Body: PDF Viewer */}
+            <div className="flex-1 bg-slate-950 relative overflow-hidden flex items-center justify-center">
+              {previewLoading ? (
+                <div className="flex flex-col items-center gap-3 text-slate-400 text-sm">
+                  <Loader2 className="w-8 h-8 animate-spin text-cyan-400" />
+                  Génération de l'aperçu PDF en cours...
+                </div>
+              ) : previewBlobUrl ? (
+                <iframe
+                  src={previewBlobUrl}
+                  className="w-full h-full border-0 bg-white"
+                  title="Contrat PDF Aperçu"
+                />
+              ) : (
+                <div className="text-slate-400 text-sm">Aucun aperçu disponible</div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

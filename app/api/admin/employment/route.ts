@@ -11,10 +11,14 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const status = searchParams.get('status')
+    const role = searchParams.get('role')
 
     const where: any = {}
     if (status && status !== 'ALL') {
       where.status = status
+    }
+    if (role && role !== 'ALL') {
+      where.roleType = role
     }
 
     const applications = await prisma.employmentApplication.findMany({

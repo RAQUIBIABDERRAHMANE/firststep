@@ -650,6 +650,7 @@ exports.Prisma.CustomWebsiteRequestScalarFieldEnum = {
 
 exports.Prisma.EmploymentApplicationScalarFieldEnum = {
   id: 'id',
+  roleType: 'roleType',
   fullName: 'fullName',
   email: 'email',
   phone: 'phone',
@@ -732,6 +733,21 @@ exports.Prisma.EmploymentAgreementTemplateScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AnnouncementScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  badge: 'badge',
+  badgeColor: 'badgeColor',
+  linkUrl: 'linkUrl',
+  linkLabel: 'linkLabel',
+  isPublished: 'isPublished',
+  isPinned: 'isPinned',
+  publishedAt: 'publishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -786,7 +802,8 @@ exports.Prisma.ModelName = {
   FactureCounter: 'FactureCounter',
   CustomWebsiteRequest: 'CustomWebsiteRequest',
   EmploymentApplication: 'EmploymentApplication',
-  EmploymentAgreementTemplate: 'EmploymentAgreementTemplate'
+  EmploymentAgreementTemplate: 'EmploymentAgreementTemplate',
+  Announcement: 'Announcement'
 };
 
 /**

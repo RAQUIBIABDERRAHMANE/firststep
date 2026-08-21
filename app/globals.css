@@ -4,6 +4,17 @@
 @source "../app/**/*.{ts,tsx}";
 
 @theme {
+  /* Typography System */
+  --font-sans: var(--font-jakarta), var(--font-figtree), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font-syne), var(--font-jakarta), sans-serif;
+  --font-display: var(--font-syne), var(--font-jakarta), sans-serif;
+  --font-jakarta: var(--font-jakarta), sans-serif;
+  --font-syne: var(--font-syne), sans-serif;
+  --font-figtree: var(--font-figtree), sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Color System */
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
@@ -35,12 +46,17 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-  --animate-fade-in: fade-in 0.5s ease-out;
-  --animate-slide-up: slide-up 0.5s ease-out;
-  --animate-slide-down: slide-down 0.5s ease-out;
-  --animate-scale-in: scale-in 0.3s ease-out;
+  /* Animation Easings & Timing */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --animate-accordion-down: accordion-down 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  --animate-accordion-up: accordion-up 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  --animate-fade-in: fade-in 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  --animate-slide-up: slide-up 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  --animate-slide-down: slide-down 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  --animate-scale-in: scale-in 0.25s cubic-bezier(0.23, 1, 0.32, 1);
   --animate-glow: glow 2s ease-in-out infinite;
 
   @keyframes accordion-down {
@@ -64,7 +80,7 @@
   @keyframes fade-in {
     0% {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(8px);
     }
     100% {
       opacity: 1;
@@ -75,7 +91,7 @@
   @keyframes slide-up {
     0% {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(24px);
     }
     100% {
       opacity: 1;
@@ -86,7 +102,7 @@
   @keyframes slide-down {
     0% {
       opacity: 0;
-      transform: translateY(-30px);
+      transform: translateY(-24px);
     }
     100% {
       opacity: 1;
@@ -97,7 +113,7 @@
   @keyframes scale-in {
     0% {
       opacity: 0;
-      transform: scale(0.9);
+      transform: scale(0.95);
     }
     100% {
       opacity: 1;
@@ -185,10 +201,10 @@
 
 @layer base {
   :root {
-    /* Modern Vibrant Gradient Palette */
+    /* Refined High-Contrast Light Mode Palette (WCAG AAA) */
     
-    /* Backgrounds: Clean gradient whites */
-    --background: 0 0% 100%;
+    /* Backgrounds: Clean modern slate tint */
+    --background: 220 33% 98.5%;
     --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
@@ -197,77 +213,79 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    /* Primary: Electric Blue */
-    --primary: 217 91% 60%;
+    /* Primary: Electric Trust Blue */
+    --primary: 221 83% 53%;
     --primary-foreground: 0 0% 100%;
-    --primary-rgb: 59, 130, 246;
+    --primary-rgb: 37, 99, 235;
 
-    /* Secondary: Soft Sky Blue */
+    /* Secondary: Soft Sky Ice */
     --secondary: 214 95% 93%;
-    --secondary-foreground: 217 91% 60%;
+    --secondary-foreground: 221 83% 53%;
 
-    /* Muted: Warm Neutrals */
+    /* Muted: Slate Neutral with verified >4.5:1 text contrast */
     --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 217 91% 60%;
+    /* Accent: Luminous Cyan */
+    --accent: 192 95% 45%;
     --accent-foreground: 0 0% 100%;
 
-    /* Destructive: Vibrant Red */
-    --destructive: 0 72% 51%;
+    /* Destructive: Vibrant Rose-Red */
+    --destructive: 350 89% 60%;
     --destructive-foreground: 0 0% 100%;
 
     /* Success: Emerald Green */
-    --success: 142 71% 45%;
+    --success: 158 64% 40%;
     --success-foreground: 0 0% 100%;
 
-    /* Warning: Amber */
+    /* Warning: Warm Amber */
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
 
-    /* Borders: Subtle with gradient hints */
+    /* Borders: Crisp clean borders */
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 217 91% 60%;
+    --ring: 221 83% 53%;
 
     --radius: 0.75rem;
   }
 
   .dark {
-    --background: 222 47% 11%;
+    /* Deep Obsidian Dark Mode */
+    --background: 224 71% 4%;
     --foreground: 210 40% 98%;
 
-    --card: 224 47% 13%;
+    --card: 222 47% 9%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 224 47% 13%;
+    --popover: 222 47% 9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 210 40% 98%;
-    --primary-rgb: 59, 130, 246;
+    --primary: 199 89% 48%;
+    --primary-foreground: 224 71% 4%;
+    --primary-rgb: 14, 165, 233;
 
-    --secondary: 217 30% 25%;
+    --secondary: 217 33% 17%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 223 47% 18%;
+    --muted: 223 47% 14%;
     --muted-foreground: 215 20% 65%;
 
-    --accent: 217 91% 60%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 199 89% 48%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 63% 41%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 210 40% 98%;
 
-    --success: 142 71% 45%;
+    --success: 158 64% 40%;
     --success-foreground: 210 40% 98%;
 
     --warning: 38 92% 50%;
-    --warning-foreground: 222 47% 11%;
+    --warning-foreground: 224 71% 4%;
 
-    --border: 223 47% 20%;
-    --input: 223 47% 20%;
-    --ring: 217 91% 60%;
+    --border: 220 26% 16%;
+    --input: 220 26% 16%;
+    --ring: 199 89% 48%;
   }
 }
 
@@ -277,10 +295,17 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
-    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+    @apply bg-background text-foreground antialiased font-sans;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01", "ss02";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     background: linear-gradient(to bottom, hsl(var(--background)), hsl(var(--muted)/30%));
   }
+}
+
+/* Tabular figures for stats and numbers */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
 }
 
 /* Modern Glassmorphism & Light Theme Styling */

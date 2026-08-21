@@ -55,13 +55,16 @@ export async function POST(
     })
 
     // Send Acceptance email with PDF attachment
+    const isVideo = application.roleType === 'VIDEO_EDITOR'
+    const agreementDocName = isVideo ? 'Video_Editor_Employment_Agreement' : 'Developer_Employment_Agreement'
     try {
       await sendEmploymentApplicationAcceptedEmail(
         application.email,
         application.fullName,
         pdfBuffer,
-        `Developer_Employment_Agreement_${application.fullName.replace(/\s+/g, '_')}.pdf`,
-        agreementPdfUrl
+        `${agreementDocName}_${application.fullName.replace(/\s+/g, '_')}.pdf`,
+        agreementPdfUrl,
+        application.roleType
       )
     } catch (mailErr) {
       console.error('[ACCEPT CANDIDATE] Failed to send acceptance email:', mailErr)

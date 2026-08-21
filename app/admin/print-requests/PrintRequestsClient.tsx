@@ -191,18 +191,28 @@ export default function PrintRequestsClient({ initialRequests }: { initialReques
     }
 
     return (
-        <div className="space-y-6">
-            <div>
-                <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
-                    <Printer className="text-indigo-600 h-7 w-7" />
-                    Demandes d'impression QR
-                </h1>
-                <p className="text-sm text-slate-500 mt-1">
-                    Gérez et imprimez les codes QR des tables soumis par les gérants de restaurant.
-                </p>
+        <div className="space-y-8 max-w-6xl mx-auto animate-in fade-in duration-300">
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="space-y-1.5">
+                    <div className="flex items-center gap-2">
+                        <span className="px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-700 text-xs font-bold">
+                            Supports Physiques & QR Codes
+                        </span>
+                        <span className="text-xs text-slate-400 font-mono">
+                            {requests.length} demande{requests.length > 1 ? 's' : ''}
+                        </span>
+                    </div>
+                    <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 font-sans">
+                        Demandes d&apos;Impression QR Code
+                    </h1>
+                    <p className="text-sm text-slate-500 max-w-xl">
+                        Générez et imprimez les chevalets et QR codes de table pour les restaurants clients.
+                    </p>
+                </div>
             </div>
 
-            <div className="bg-white rounded-2xl border border-slate-200/60 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                         <thead>

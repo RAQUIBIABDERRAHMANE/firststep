@@ -1,16 +1,16 @@
-# Graph Report - firststep old  (2026-08-14)
+# Graph Report - firststep old  (2026-08-20)
 
 ## Corpus Check
-- 1114 files · ~1,904,453 words
+- 1132 files · ~1,993,049 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 11232 nodes · 14709 edges · 675 communities (498 shown, 177 thin omitted)
+- 11371 nodes · 14867 edges · 686 communities (504 shown, 182 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 343 edges (avg confidence: 0.72)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `52fde686`
+- Built from commit: `d12e0b76`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -254,6 +254,7 @@
 - text-animations-word-highlight.tsx
 - waiter/page.tsx
 - terms/page.tsx
+- CrystalScene.tsx
 - images.md
 - text-animations.md
 - Rendering Transparent Videos
@@ -358,21 +359,20 @@
 - BillSplitDelegate
 - autoload-dev
 - post-autoload-dump
-- extra
+- Moving Map Render Stability
 - Prisma__EmailListClient
-- fast-check
 - @prisma/client
-- @react-three/postprocessing
-- @tiptap/extension-underline
+- Moving Map Render Stability
+- Moving Map Render Stability
 - Prisma__FactureCounterClient
 - @react-three/postprocessing
-- recharts
+- Moving Map Render Stability
 - remotion
 - fast-check
 - tailwind-merge
 - tailwindcss-animate
 - @tiptap/extension-underline
-- @tiptap/react
+- post-create-project-cmd
 - MapTiler maps in Remotion
 - MapTiler maps in Remotion
 - CabinetAppointmentDelegate
@@ -409,15 +409,14 @@
 - Map Explainer — basemap & geo prep
 - Using Three.js and React Three Fiber in Remotion
 - Measuring text in Remotion
-- CesiumJS — 3D flyovers in Remotion
+- Moving Map Render Stability
 - remotion-best-practices/remotion-markup/sequencing.md
 - remotion-best-practices/remotion-markup/timing.md
 - Using Three.js and React Three Fiber in Remotion
 - Measuring text in Remotion
-- CesiumJS — 3D flyovers in Remotion
 - skills/remotion-markup/sequencing.md
 - skills/remotion-markup/timing.md
-- F
+- remotion-best-practices/remotion-markup/effects.md
 - #r
 - Map element data sources
 - Moving Map Render Stability
@@ -427,8 +426,8 @@
 - Moving Map Render Stability
 - Map element data sources
 - Moving Map Render Stability
-- Moving Map Render Stability
-- Moving Map Render Stability
+- remotion-best-practices/remotion-markup/images.md
+- next
 - Map element data sources
 - Moving Map Render Stability
 - Flyover data sources
@@ -451,30 +450,39 @@
 - 3D Flyover — troubleshooting
 - skills/remotion-markup/remotion-maps/techniques/maptiler/assets/MapTilerVectorElement.ts
 - Delaying, trimming
-- ./index-browser
-- remotion-best-practices/remotion-markup/effects.md
+- keywords
+- prisma
 - skills/remotion-markup/effects.md
 - skills/remotion-markup/images.md
-- post-create-project-cmd
+- react-dom
 - extra
-- better-sqlite3
+- @react-three/fiber
 - remotion-studio/SKILL.md
 - remotion-upgrade/SKILL.md
 - effect
 - fast-check
 - gsap
-- next-themes
-- react-dom
 - react-markdown
-- @react-three/fiber
 - @remotion/captions
-- @remotion/paths
+- better-sqlite3
 - @remotion/player
 - @remotion/shapes
 - three
 - @tiptap/extension-image
 - zustand
-- zod
+- effect
+- gsap
+- html5-qrcode
+- prisma
+- react-dom
+- @react-three/fiber
+- remeda
+- @remotion/captions
+- keywords
+- @remotion/effects
+- @remotion/paths
+- @tiptap/extension-image
+- @tiptap/starter-kit
 - CabinetClientDelegate
 - CabinetServiceDelegate
 - CampaignDelegate
@@ -518,16 +526,16 @@
 - WaiterShiftDelegate
 
 ## God Nodes (most connected - your core abstractions)
-1. `getCurrentUser()` - 178 edges
+1. `getCurrentUser()` - 189 edges
 2. `r()` - 92 edges
-3. `Button` - 83 edges
+3. `Button` - 82 edges
 4. `t()` - 69 edges
-5. `Card` - 53 edges
-6. `PrismaClient` - 53 edges
-7. `CardContent` - 47 edges
-8. `PrismaPromise` - 44 edges
-9. `CardHeader` - 41 edges
-10. `CardTitle` - 41 edges
+5. `PrismaClient` - 54 edges
+6. `Card` - 50 edges
+7. `PrismaPromise` - 45 edges
+8. `CardContent` - 44 edges
+9. `cn()` - 42 edges
+10. `getWebsiteBySlug()` - 40 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `ElapsedTimer()` --indirect_call--> `t()`  [INFERRED]
@@ -544,11 +552,11 @@
 ## Import Cycles
 - None detected.
 
-## Communities (675 total, 177 thin omitted)
+## Communities (686 total, 182 thin omitted)
 
 ### Community 0 - "PrismaPromise"
-Cohesion: 0.11
-Nodes (5): Prisma__EmploymentAgreementTemplateClient, Prisma__EmploymentApplicationClient, Prisma__FactureTemplateClient, Prisma__TableCartSessionClient, PrismaPromise
+Cohesion: 0.09
+Nodes (6): Prisma__AnnouncementClient, Prisma__CustomWebsiteRequestClient, Prisma__EmploymentAgreementTemplateClient, Prisma__FactureTemplateClient, Prisma__PasswordResetClient, PrismaPromise
 
 ### Community 1 - "DesignSystemGenerator"
 Cohesion: 0.06
@@ -556,35 +564,35 @@ Nodes (32): BM25, detect_domain(), _load_csv(), BM25 ranking algorithm for text 
 
 ### Community 2 - "Button.tsx"
 Cohesion: 0.06
-Nodes (54): updateCampaignEmailLists(), updateCampaignRecipients(), EmailList, EmailListSelector(), RecipientSelector(), RecipientSelectorProps, User, RecipientSelectorWrapper() (+46 more)
+Nodes (60): getBankAccount(), getPaymentRequest(), addUserService(), removeUserService(), EmailList, EmailListSelector(), RecipientSelectorProps, User (+52 more)
 
 ### Community 4 - "admin.ts"
-Cohesion: 0.09
-Nodes (28): bi(), cancelAllTransactions(), gc(), middlewareArgsToRequestArgs(), yo(), ac(), Br(), cc() (+20 more)
+Cohesion: 0.07
+Nodes (33): generateCode(), generateRecoveryCodes(), getRecoverySettings(), getSession(), maskEmail(), resend2FACode(), resetPassword(), saveRecoveryEmail() (+25 more)
 
 ### Community 5 - "runtime/client.d.ts"
 Cohesion: 0.01
 Nodes (307): AccelerateExtensionFetch, AccelerateExtensionFetchDecorator, Action, ActiveConnectorType, Aggregate, AllModelsToStringIndex, ApplyOmit, Args (+299 more)
 
 ### Community 6 - "wasm-compiler-edge.js"
-Cohesion: 0.03
-Nodes (54): Ka(), ai(), ba(), Bi(), clone(), _cloneInto(), Cn(), De() (+46 more)
+Cohesion: 0.02
+Nodes (65): ai(), alloc(), allocUnsafe(), am(), as(), ba(), Ca(), clone() (+57 more)
 
 ### Community 7 - "runtime/client.js"
 Cohesion: 0.02
-Nodes (86): An(), ao(), as(), au(), ba(), bo(), Br(), ca() (+78 more)
+Nodes (82): al(), An(), ao(), as(), ba(), bi(), Br(), ca() (+74 more)
 
 ### Community 8 - "r"
-Cohesion: 0.05
-Nodes (34): generateEmailContent(), generateWebsiteSuggestions(), getAIComboRecommendations(), groq, improveEmailPrompt(), signUp(), createCustomWebsiteRequest(), upsertWebsite() (+26 more)
+Cohesion: 0.13
+Nodes (5): App\Domains\POS\Contracts\RegisterRepositoryInterface, Controller, ManageSessionAction, RegisterController, SessionController
 
 ### Community 9 - "cc"
 Cohesion: 0.11
-Nodes (52): Ac(), addErrorMessage(), addField(), addSuggestion(), asObject(), bc(), cc(), dc() (+44 more)
+Nodes (52): Ac(), addErrorMessage(), addSuggestion(), asObject(), bc(), cc(), dc(), ec() (+44 more)
 
 ### Community 10 - "L"
-Cohesion: 0.09
-Nodes (32): requestPasswordReset(), POST(), GET(), POST(), POST(), POST(), getEmploymentApplicationAcceptedTemplate(), getEmploymentApplicationReceivedTemplate() (+24 more)
+Cohesion: 0.06
+Nodes (47): requestPasswordReset(), confirmPayment(), createPaymentRequest(), getAllPendingPayments(), getUserPaymentRequests(), rejectPayment(), updateTransferReference(), PendingPaymentsPage() (+39 more)
 
 ### Community 11 - "addErrorMessage"
 Cohesion: 0.12
@@ -595,30 +603,20 @@ Cohesion: 0.06
 Nodes (30): Accordion / collapse, Animation Recipes, Button press, Drag to dismiss, Drawer / sheet, Dropdown, popover, menu, select, Hold to confirm, Masking a crossfade that won't settle (+22 more)
 
 ### Community 13 - "slice"
-Cohesion: 0.07
-Nodes (41): {
-  Decimal,
-  DbNull,
-  JsonNull,
-  AnyNull,
-  NullTypes,
-  makeStrictEnum,
-  Public,
-  getRuntime,
-  skip
-}, Prisma, PrismaClient, a(), C(), R(), se(), k() (+33 more)
+Cohesion: 0.05
+Nodes (70): a(), P(), fa(), #d(), middlewareArgsToRequestArgs(), oa(), qe(), $s() (+62 more)
 
 ### Community 14 - "ts"
-Cohesion: 0.10
-Nodes (40): bc(), be(), concat(), dc(), fc(), findField(), ft(), gc() (+32 more)
+Cohesion: 0.08
+Nodes (21): Delaying, Importing Audio, Looping, Muting, Pitch, Prerequisites, Speed, Trimming (+13 more)
 
 ### Community 15 - "remotion-best-practices/SKILL.md"
 Cohesion: 0.04
-Nodes (45): FFmpeg in Remotion, Trimming videos, Dynamic image paths, Getting image dimensions, Sizing and positioning, Measuring DOM nodes in Remotion, Measuring element dimensions, Color picker (+37 more)
+Nodes (43): Available effects, Custom effects, Usage, Measuring DOM nodes in Remotion, Measuring element dimensions, Color picker, 3D content, Advanced compositions (+35 more)
 
 ### Community 16 - "prisma.ts"
-Cohesion: 0.38
-Nodes (3): getRestaurantAnalytics(), AnalyticsClient(), Period
+Cohesion: 0.23
+Nodes (11): bearing(), CesiumFlythrough(), CesiumFlythroughProps, clamp(), FlyoverMode, havKm(), lerp(), loadCesium() (+3 more)
 
 ### Community 17 - "actions/auth.ts"
 Cohesion: 0.07
@@ -626,19 +624,19 @@ Nodes (25): Aggressive Escalation Triggers, Guidelines, Operating Posture, Part 
 
 ### Community 18 - "getCurrentUser"
 Cohesion: 0.04
-Nodes (71): AboutPage(), metadata, generateCode(), generateRecoveryCodes(), getCurrentUser(), getRecoverySettings(), getSession(), maskEmail() (+63 more)
+Nodes (59): AboutPage(), metadata, createAnnouncement(), deleteAnnouncement(), generateAnnouncementWithAI(), getAnnouncements(), toggleAnnouncementPin(), toggleAnnouncementPublish() (+51 more)
 
 ### Community 19 - "query_compiler_bg.js"
-Cohesion: 0.06
-Nodes (22): RestaurantTemplateItalian(), F, g, ge(), I(), J(), k(), l() (+14 more)
+Cohesion: 0.07
+Nodes (17): F, g, ge(), I(), J(), k(), l(), le() (+9 more)
 
 ### Community 20 - "3D Web Experience"
 Cohesion: 0.05
 Nodes (40): 3D Model Pipeline, 3D Model Pipeline, 3D Performance, 3D Stack Selection, 3D Stack Selection, 3D Web Experience, Capabilities, Collaboration (+32 more)
 
 ### Community 21 - "mail.ts"
-Cohesion: 0.12
-Nodes (27): getAllUsersWithServices(), confirmPayment(), createPaymentRequest(), getAllPendingPayments(), getBankAccount(), getPaymentRequest(), rejectPayment(), updateTransferReference() (+19 more)
+Cohesion: 0.33
+Nodes (6): [CesiumJS](techniques/cesium/TECHNIQUE.md), [Mapbox](techniques/mapbox/TECHNIQUE.md), [MapLibre](techniques/maplibre/TECHNIQUE.md), [MapTiler](techniques/maptiler/TECHNIQUE.md), Remotion Maps, [Static map](techniques/static-map/TECHNIQUE.md)
 
 ### Community 22 - "🚀 FirstStep - Business Management Platform"
 Cohesion: 0.05
@@ -653,20 +651,20 @@ Cohesion: 0.05
 Nodes (39): 1. Accessibility (CRITICAL), 2. Touch & Interaction (CRITICAL), 3. Performance (HIGH), 4. Layout & Responsive (HIGH), 5. Typography & Color (MEDIUM), 6. Animation (MEDIUM), 7. Style Selection (MEDIUM), 8. Charts & Data (LOW) (+31 more)
 
 ### Community 25 - "Wt"
-Cohesion: 0.11
-Nodes (25): aa(), Bp(), ci(), fn(), Gp(), highlight(), hn(), Ho() (+17 more)
+Cohesion: 0.23
+Nodes (11): bearing(), CesiumFlythrough(), CesiumFlythroughProps, clamp(), FlyoverMode, havKm(), lerp(), loadCesium() (+3 more)
 
 ### Community 26 - "write"
-Cohesion: 0.08
-Nodes (44): at(), addMarginSymbol(), afterNextNewline(), compare(), copy(), equals(), getCurrentLineLength(), getPrintWidth() (+36 more)
+Cohesion: 0.09
+Nodes (44): allocUnsafeSlow(), bc(), be(), Bi(), concat(), construct(), dc(), fc() (+36 more)
 
 ### Community 27 - "devDependencies"
 Cohesion: 0.06
 Nodes (35): babel-plugin-react-compiler, dotenv, eslint, eslint-config-next, devDependencies, babel-plugin-react-compiler, dotenv, eslint (+27 more)
 
 ### Community 28 - "cn"
-Cohesion: 0.06
-Nodes (37): assignTableToReservation(), autoAssignTable(), deleteReservation(), updateReservationStatus(), createWaiter(), deleteWaiter(), loginWaiter(), updateWaiter() (+29 more)
+Cohesion: 0.07
+Nodes (28): signOut(), clearChatHistory(), AdminMobileNav(), NAV_GROUPS, NavGroup, AdminSidebarNav(), NAV_GROUPS, NavGroup (+20 more)
 
 ### Community 29 - "Illuminate\Database\Console\Seeds\WithoutModelEvents"
 Cohesion: 0.12
@@ -681,28 +679,28 @@ Cohesion: 0.06
 Nodes (32): 10. API Specifications, 11. Infrastructure & Deployment (Dedicated Server Architecture), 12. Observability & Monitoring, 13. Security Architecture, 14. Scalability, Disaster Recovery, and Expansion, 1. Executive Summary, 2. Architecture Vision, 3. Current vs. Target Architecture (+24 more)
 
 ### Community 32 - "Illuminate\Http\Request"
-Cohesion: 0.09
-Nodes (7): Controller, Illuminate\Http\Request, AuthController, RegisterController, SessionController, MenuController, WaiterController
+Cohesion: 0.14
+Nodes (4): Illuminate\Http\Request, AuthController, MenuController, WaiterController
 
 ### Community 33 - "File Organization"
 Cohesion: 0.06
 Nodes (32): Add to Existing Feature When:, api/ Directory, API Services, Available Aliases, Complete Feature Example, Components, components/ Directory, components/ Directory (+24 more)
 
 ### Community 34 - "restaurant.ts"
-Cohesion: 0.05
-Nodes (71): createCabinetAppointment(), deleteCabinetService(), saveCabinetClient(), saveCabinetService(), updateCabinetAppointmentStatus(), chat(), clearChatHistory(), getCabinetContext() (+63 more)
+Cohesion: 0.08
+Nodes (34): createCabinetAppointment(), deleteCabinetService(), saveCabinetClient(), saveCabinetService(), chat(), getCabinetContext(), getRestaurantContext(), groq (+26 more)
 
 ### Community 35 - "toString"
-Cohesion: 0.10
-Nodes (24): cu(), dn(), Do(), eu(), fe(), G(), getAllBatchQueryCallbacks(), getAllClientExtensions() (+16 more)
+Cohesion: 0.23
+Nodes (11): bearing(), CesiumFlythrough(), CesiumFlythroughProps, clamp(), FlyoverMode, havKm(), lerp(), loadCesium() (+3 more)
 
 ### Community 36 - "getWebsiteBySlug"
-Cohesion: 0.06
-Nodes (45): getCabinetAppointments(), getCabinetClients(), getCabinetServices(), deleteMedicalHistory(), deleteMedicalRecord(), getClientMedicalProfile(), getMedicalRecords(), saveMedicalHistory() (+37 more)
+Cohesion: 0.05
+Nodes (45): getCabinetAppointments(), getCabinetClients(), getCabinetServices(), updateCabinetAppointmentStatus(), deleteMedicalHistory(), deleteMedicalRecord(), getClientMedicalProfile(), getMedicalRecords() (+37 more)
 
 ### Community 37 - "dependencies"
 Cohesion: 0.06
-Nodes (33): bcryptjs, better-sqlite3, effect, gsap, html5-qrcode, dependencies, bcryptjs, better-sqlite3 (+25 more)
+Nodes (35): groq-sdk, @libsql/client, lucide-react, next-themes, dependencies, groq-sdk, @libsql/client, lucide-react (+27 more)
 
 ### Community 38 - "index.js"
 Cohesion: 0.08
@@ -721,12 +719,12 @@ Cohesion: 0.07
 Nodes (28): Basic Usage, Complete Examples, ⚠️ CRITICAL RULE: Never Use Early Returns, Error Boundaries, Error Handling, Example 1: Modern Component with Suspense, Example 2: Legacy Pattern with LoadingOverlay, Example 3: Error Handling with Snackbar (+20 more)
 
 ### Community 42 - "campaigns.ts"
-Cohesion: 0.15
-Nodes (17): createCampaign(), deleteCampaign(), getCampaign(), getCampaigns(), sendCampaign(), updateCampaign(), EditCampaignPage(), PageProps (+9 more)
+Cohesion: 0.12
+Nodes (22): createCampaign(), deleteCampaign(), getCampaign(), sendCampaign(), updateCampaign(), updateCampaignEmailLists(), updateCampaignRecipients(), EditCampaignPage() (+14 more)
 
 ### Community 43 - "wc"
-Cohesion: 0.17
-Nodes (25): Bt(), findField(), fo(), getAllComputedFields(), getArgumentName(), getArgumentPath(), getComputedFields(), getOrCreate() (+17 more)
+Cohesion: 0.08
+Nodes (25): getPublishedAnnouncements(), getServices(), getUserServices(), ServicesPage(), EndpointKey, Home(), getServiceFeatures(), getServiceIcon() (+17 more)
 
 ### Community 44 - "Routing Guide"
 Cohesion: 0.07
@@ -750,19 +748,19 @@ Nodes (25): Abort Controllers for Fetch, Basic Usage, Cleanup Event Listeners, C
 
 ### Community 49 - "e"
 Cohesion: 0.10
-Nodes (27): ar(), Bs(), digest(), dp(), e(), fa(), ga(), get() (+19 more)
+Nodes (37): at(), addMarginSymbol(), afterNextNewline(), compare(), copy(), equals(), getCurrentLineLength(), getPrintWidth() (+29 more)
 
 ### Community 50 - "Using audio in Remotion"
-Cohesion: 0.05
-Nodes (40): Measuring DOM nodes in Remotion, Measuring element dimensions, Color picker, 3D content, Advanced compositions, Advanced Images, Advanced sequencing, Assets (+32 more)
+Cohesion: 0.04
+Nodes (42): FFmpeg in Remotion, Trimming videos, Measuring DOM nodes in Remotion, Measuring element dimensions, Color picker, 3D content, Advanced compositions, Advanced Images (+34 more)
 
 ### Community 51 - "🚀 Deployment Guide - Vercel"
 Cohesion: 0.08
 Nodes (23): 1. Push Code to GitHub, 2. Connect to Vercel, 3. Create Postgres Database, 4. Configure Environment Variables, 500 Errors, 5. Initialize Database, 6. Deploy, Build Fails (+15 more)
 
 ### Community 52 - "vo"
-Cohesion: 0.29
-Nodes (7): Build the flight, Camera behavior, CesiumJS — 3D flyovers in Remotion, Credentials, Files, Mechanics, Modes
+Cohesion: 0.09
+Nodes (29): commitTransaction(), da(), dd(), ga(), getTransaction(), H(), He(), interpretNode() (+21 more)
 
 ### Community 53 - "📂 Topic Guides"
 Cohesion: 0.09
@@ -797,8 +795,8 @@ Cohesion: 0.11
 Nodes (17): devDependencies, concurrently, laravel-vite-plugin, tailwindcss, @tailwindcss/vite, vite, concurrently, laravel-vite-plugin (+9 more)
 
 ### Community 62 - "InvoicesClient.tsx"
-Cohesion: 0.09
-Nodes (32): deleteReport(), downloadReportPdf(), generateMonthlyReport(), resendReportEmail(), GET(), getMonthLabel(), getStatusBadge(), MONTHS_EN (+24 more)
+Cohesion: 0.24
+Nodes (10): GET(), GET(), DEFAULT_POSITIONS, FactureData, FieldPositions, generateFacturePdf(), getFieldPositions(), getSampleFactureData() (+2 more)
 
 ### Community 63 - "devDependencies"
 Cohesion: 0.11
@@ -821,8 +819,8 @@ Cohesion: 0.12
 Nodes (16): 1.1 Real-time Order Status Tracking (SSE / Polling), 1.2 Split Bill & Payment System ("Partager l'Addition"), 1.3 Table Session Shared Carts (Multiplayer Cart), 1. Client Experience & QR Code Ordering, 2.1 Sound Notifications & Push Alerts, 2.2 Shift & Dynamic Table Assignment, 2.3 Offline Order Taking (PWA), 2. Waiter & Floor Staff Portal (`/waiter`) (+8 more)
 
 ### Community 68 - "write"
-Cohesion: 0.22
-Nodes (17): addMarginSymbol(), afterNextNewline(), getCurrentLineLength(), getPrintWidth(), indent(), newLine(), setColor(), underline() (+9 more)
+Cohesion: 0.07
+Nodes (45): Ka(), #a(), Ae(), apiKey(), cancelAllTransactions(), Ci(), cl(), commitTransaction() (+37 more)
 
 ### Community 69 - "SqlDriverAdapter"
 Cohesion: 0.12
@@ -844,17 +842,13 @@ Nodes (6): ExampleTest, PHPUnit\Framework\TestCase, ExampleTest, ExampleTest, Ex
 Cohesion: 0.13
 Nodes (14): 1. BM25 Search Engine, 2. Knowledge Domains, 3. Tech Stack Support, 📂 Directory Structure, Example 1: E-commerce Landing Page, Example 2: Healthcare Dashboard, Example 3: UX Review, 📝 Examples (+6 more)
 
-### Community 74 - "Register"
-Cohesion: 0.19
-Nodes (4): App\Domains\POS\Contracts\RegisterRepositoryInterface, ManageSessionAction, Register, RegisterRepository
-
 ### Community 75 - "3. Les Modules d'Administration Spécifiques"
 Cohesion: 0.13
 Nodes (14): 1. Site Web & Expérience Client Public, 2. Tableau de Bord d'Administration (Restaurant Admin Hub), 3. Les Modules d'Administration Spécifiques, 4. Architecture de Données (Résumé Technique), 📈 Analytiques Live (`/analytics`), Documentation des Fonctionnalités — Service de Restauration (FirstStep), 👥 Gestion des Serveurs (`/waiters`), 📍 Gestion des Tables & Plan de Salle (`/tables`) (+6 more)
 
 ### Community 76 - "subtitles.md"
-Cohesion: 0.05
-Nodes (36): Matching dimensions of a video, Return value, Setting a default outName, Setting duration based on a video, Setting duration based on multiple videos, Transforming props, Using calculateMetadata, Default Props and scaffold metadata (+28 more)
+Cohesion: 0.07
+Nodes (25): Matching dimensions of a video, Return value, Setting a default outName, Setting duration based on a video, Setting duration based on multiple videos, Transforming props, Using calculateMetadata, Default Props and scaffold metadata (+17 more)
 
 ### Community 77 - "transitions.md"
 Cohesion: 0.08
@@ -865,8 +859,8 @@ Cohesion: 0.14
 Nodes (14): Composer\\Config::disableProcessTimeout, Illuminate\\Foundation\\ComposerScripts::postAutoloadDump, Illuminate\\Foundation\\ComposerScripts::prePackageUninstall, npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others, @php artisan config:clear --ansi @no_additional_args, @php artisan package:discover --ansi, @php artisan test, @php artisan vendor:publish --tag=laravel-assets --ansi --force (+6 more)
 
 ### Community 79 - "lc"
-Cohesion: 0.19
-Nodes (14): addItem(), bs(), _c(), eo(), fs(), getAllClientExtensions(), je(), Jn() (+6 more)
+Cohesion: 0.17
+Nodes (13): Bp(), Bs(), Do(), get(), getAllQueryCallbacks(), Hp(), isEmpty(), pr() (+5 more)
 
 ### Community 80 - "MenuController.php"
 Cohesion: 0.24
@@ -902,7 +896,7 @@ Nodes (14): Composer\\Config::disableProcessTimeout, Illuminate\\Foundation\\Com
 
 ### Community 88 - "react"
 Cohesion: 0.29
-Nodes (7): createReservation(), DishCustomizationModal(), ReservationModal(), ReservationModalProps, RestaurantTemplateModern(), react, react
+Nodes (7): Build the flight, Camera behavior, CesiumJS — 3D flyovers in Remotion, Credentials, Files, Mechanics, Modes
 
 ### Community 89 - "scripts"
 Cohesion: 0.14
@@ -913,8 +907,8 @@ Cohesion: 0.14
 Nodes (14): Composer\\Config::disableProcessTimeout, Illuminate\\Foundation\\ComposerScripts::postAutoloadDump, Illuminate\\Foundation\\ComposerScripts::prePackageUninstall, npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others, @php artisan config:clear --ansi @no_additional_args, @php artisan package:discover --ansi, @php artisan test, @php artisan vendor:publish --tag=laravel-assets --ansi --force (+6 more)
 
 ### Community 92 - "useRestaurantLogic"
-Cohesion: 0.24
-Nodes (11): callWaiter(), getOrderDetails(), getOrderStatus(), requestBill(), QRScanner, ReservationModal, RestaurantTemplateMinimal(), useRestaurantLogic() (+3 more)
+Cohesion: 0.10
+Nodes (16): [CesiumJS](techniques/cesium/TECHNIQUE.md), [Mapbox](techniques/mapbox/TECHNIQUE.md), [MapLibre](techniques/maplibre/TECHNIQUE.md), [MapTiler](techniques/maptiler/TECHNIQUE.md), Remotion Maps, [Static map](techniques/static-map/TECHNIQUE.md), Build the flight, Camera behavior (+8 more)
 
 ### Community 93 - "Frontend Expert"
 Cohesion: 0.18
@@ -933,12 +927,12 @@ Cohesion: 0.10
 Nodes (20): 10. Gesture design details (the "feel" checklist), 11. Frame-level smoothness, 12. Materials & depth — translucency conveys hierarchy, 13. Multimodal feedback — motion + sound + haptics, 14. Reduced motion & accessibility, 15. Typography — optical sizing, tracking, leading, 16. Design foundations — the eight principles, 17. Process (+12 more)
 
 ### Community 98 - "waiter/dashboard/page.tsx"
-Cohesion: 0.19
-Nodes (20): createOrder(), dismissWaiterRequest(), endWaiterShift(), startWaiterShift(), getWaiterOrders(), formatTableLabel(), playChime(), showBrowserNotification() (+12 more)
+Cohesion: 0.17
+Nodes (22): createOrder(), decrementInventoryForOrder(), dismissWaiterRequest(), endWaiterShift(), startWaiterShift(), updateOrderStatus(), getWaiterOrders(), formatTableLabel() (+14 more)
 
 ### Community 99 - "identity/composer.json"
 Cohesion: 0.18
-Nodes (10): autoload-dev, psr-4, description, license, minimum-stability, name, prefer-stable, Tests\\ (+2 more)
+Nodes (10): description, extra, laravel, dont-discover, license, minimum-stability, name, prefer-stable (+2 more)
 
 ### Community 100 - "FloorPlanCanvas.tsx"
 Cohesion: 0.10
@@ -946,27 +940,27 @@ Nodes (18): Behavior contract, Markup, Reference wiring, Rules, Styles, The Pick
 
 ### Community 101 - "pos/composer.json"
 Cohesion: 0.18
-Nodes (10): description, framework, laravel, keywords, license, minimum-stability, name, prefer-stable (+2 more)
+Nodes (10): autoload-dev, psr-4, description, license, minimum-stability, name, prefer-stable, Tests\\ (+2 more)
 
 ### Community 102 - "restaurant/composer.json"
 Cohesion: 0.18
-Nodes (10): autoload-dev, psr-4, description, license, minimum-stability, name, prefer-stable, Tests\\ (+2 more)
+Nodes (10): description, framework, laravel, keywords, license, minimum-stability, name, prefer-stable (+2 more)
 
 ### Community 103 - "tenant/composer.json"
 Cohesion: 0.18
 Nodes (10): autoload-dev, psr-4, description, license, minimum-stability, name, prefer-stable, Tests\\ (+2 more)
 
 ### Community 105 - "restaurant-report.ts"
-Cohesion: 0.05
-Nodes (80): P(), Iu(), d(), #a(), Ae(), al(), apiKey(), as() (+72 more)
+Cohesion: 0.29
+Nodes (11): byteLength(), digest(), e(), hp(), pp(), Tp(), update(), vp() (+3 more)
 
 ### Community 106 - "exports"
-Cohesion: 0.18
-Nodes (11): default, exports, ./client, ./index-browser, ./package.json, ./sql, default, import (+3 more)
+Cohesion: 0.09
+Nodes (33): C(), R(), se(), uc(), k(), Ct(), enabled(), ge() (+25 more)
 
 ### Community 108 - "App\Domains\POS\Contracts\OrderRepositoryInterface"
-Cohesion: 0.29
-Nodes (3): App\Domains\POS\Contracts\OrderRepositoryInterface, SyncOfflineOrderAction, OrderController
+Cohesion: 0.33
+Nodes (6): [CesiumJS](techniques/cesium/TECHNIQUE.md), [Mapbox](techniques/mapbox/TECHNIQUE.md), [MapLibre](techniques/maplibre/TECHNIQUE.md), [MapTiler](techniques/maptiler/TECHNIQUE.md), Remotion Maps, [Static map](techniques/static-map/TECHNIQUE.md)
 
 ### Community 110 - "Adaptive Silence Detection"
 Cohesion: 0.10
@@ -985,24 +979,20 @@ Cohesion: 0.20
 Nodes (9): @prisma/client-runtime-utils, browser, dependencies, @prisma/client-runtime-utils, main, name, sideEffects, types (+1 more)
 
 ### Community 114 - "CartContext.tsx"
-Cohesion: 0.22
-Nodes (10): getCartFromServer(), syncCartToServer(), metadata, DishCustomizationModalProps, CartContext, CartContextType, CartItem, CartProvider() (+2 more)
+Cohesion: 0.29
+Nodes (3): App\Domains\POS\Contracts\OrderRepositoryInterface, SyncOfflineOrderAction, OrderController
 
 ### Community 115 - "manifest.json"
 Cohesion: 0.20
 Nodes (9): background_color, description, display, icons, name, orientation, short_name, start_url (+1 more)
 
 ### Community 117 - "LiveFloorMonitor.tsx"
-Cohesion: 0.50
-Nodes (4): getLiveFloorStatus(), LiveFloorMonitor(), LiveFloorMonitorProps, TableStatusItem
+Cohesion: 0.29
+Nodes (7): Build the flight, Camera behavior, CesiumJS — 3D flyovers in Remotion, Credentials, Files, Mechanics, Modes
 
 ### Community 118 - "import"
 Cohesion: 0.33
-Nodes (10): import, browser, default, edge-light, node, types, worker, workerd (+2 more)
-
-### Community 119 - "require"
-Cohesion: 0.33
-Nodes (10): require, require, browser, default, edge-light, node, types, worker (+2 more)
+Nodes (5): Moving Map Render Stability, Plate sizing and sharpness, Required pattern: fixed map plate, Symptom and cause, Verification
 
 ### Community 120 - "KDSBoard.tsx"
 Cohesion: 0.12
@@ -1017,12 +1007,12 @@ Cohesion: 0.10
 Nodes (21): CountryLabel(), clamp01(), Country, countryPolygons, DRAW, EMPTY, END, lerp() (+13 more)
 
 ### Community 123 - "waiter.ts"
-Cohesion: 0.12
-Nodes (17): adminCancelPaymentRequest(), adminToggleUserService(), deleteUser(), getPrintRequests(), toggleServiceStatus(), updateCustomWebsiteRequestStatus(), updatePrintRequestStatus(), PrintRequestsPage() (+9 more)
+Cohesion: 0.09
+Nodes (20): adminCancelPaymentRequest(), adminToggleUserService(), deleteUser(), getAllUsersWithServices(), getPrintRequests(), toggleServiceStatus(), updateCustomWebsiteRequestStatus(), updatePrintRequestStatus() (+12 more)
 
 ### Community 124 - "Displaying captions in Remotion"
-Cohesion: 0.11
-Nodes (20): Ce(), De(), du(), er(), getGlobalOmit(), id(), ie(), mu() (+12 more)
+Cohesion: 0.12
+Nodes (23): assignTableToReservation(), autoAssignTable(), deleteReservation(), getReservations(), updateReservationStatus(), getSpaces(), getTables(), createWaiter() (+15 more)
 
 ### Community 125 - "Using Animated images in Remotion"
 Cohesion: 0.08
@@ -1117,12 +1107,12 @@ Cohesion: 0.25
 Nodes (7): About Laravel, Agentic Development, Code of Conduct, Contributing, Learning Laravel, License, Security Vulnerabilities
 
 ### Community 150 - "./runtime/client"
-Cohesion: 0.25
-Nodes (8): ./runtime/client, default, require, default, import, node, require, types
+Cohesion: 0.33
+Nodes (5): Moving Map Render Stability, Plate sizing and sharpness, Required pattern: fixed map plate, Symptom and cause, Verification
 
 ### Community 151 - "#wasm-compiler-loader"
-Cohesion: 0.25
-Nodes (8): imports, #main-entry-point, #wasm-compiler-loader, default, default, edge-light, worker, workerd
+Cohesion: 0.11
+Nodes (24): createBulkTables(), createIngredient(), createPrintRequest(), createTable(), deleteIngredient(), deleteTable(), getCategories(), getInventory() (+16 more)
 
 ### Community 154 - "index-browser.d.ts"
 Cohesion: 0.25
@@ -1137,16 +1127,16 @@ Cohesion: 0.29
 Nodes (5): FieldConfig, FIELDS, FieldStyle, FieldStyles, Positions
 
 ### Community 157 - "Using Three.js and React Three Fiber in Remotion"
-Cohesion: 0.05
-Nodes (56): SignupSection(), #a(), addItem(), $c(), cl(), commitTransaction(), constructor(), da() (+48 more)
+Cohesion: 0.18
+Nodes (11): default, exports, ./client, ./index-browser, ./package.json, ./sql, default, import (+3 more)
 
 ### Community 158 - "light-leaks.md"
-Cohesion: 0.20
-Nodes (10): Delaying, Importing Audio, Looping, Muting, Pitch, Prerequisites, Speed, Trimming (+2 more)
+Cohesion: 0.10
+Nodes (28): deleteReport(), downloadReportPdf(), generateMonthlyReport(), resendReportEmail(), GET(), getMonthLabel(), getStatusBadge(), ReportsClient() (+20 more)
 
 ### Community 159 - "Measuring text in Remotion"
-Cohesion: 0.06
-Nodes (29): Default Props and scaffold metadata, Dynamic duration, width, and height, Folders, Nesting compositions within another, Stills, Adding AI voiceover to a Remotion composition, Delaying audio start, Dynamic composition duration with calculateMetadata (+21 more)
+Cohesion: 0.50
+Nodes (4): @php artisan key:generate --ansi, @php artisan migrate --graceful --ansi, @php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\, post-create-project-cmd
 
 ### Community 160 - "sequencing.md"
 Cohesion: 0.09
@@ -1180,21 +1170,17 @@ Nodes (7): pestphp/pest-plugin, php-http/discovery, config, allow-plugins, optim
 Cohesion: 0.29
 Nodes (7): pestphp/pest-plugin, php-http/discovery, config, allow-plugins, optimize-autoloader, preferred-install, sort-packages
 
-### Community 175 - "al"
-Cohesion: 0.10
-Nodes (22): ul(), Yr(), alloc(), allocUnsafe(), allocUnsafeSlow(), am(), construct(), Et() (+14 more)
-
 ### Community 176 - "TenantResolver.php"
 Cohesion: 0.47
 Nodes (3): Closure, TenantResolver, Symfony\Component\HttpFoundation\Response
 
 ### Community 177 - "employment-pdf.ts"
-Cohesion: 0.50
-Nodes (4): @php artisan key:generate --ansi, @php artisan migrate --graceful --ansi, @php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\, post-create-project-cmd
+Cohesion: 0.09
+Nodes (26): #a(), addField(), addItem(), $c(), Ce(), De(), dr(), du() (+18 more)
 
 ### Community 178 - "compositions.md"
-Cohesion: 0.08
-Nodes (18): ANCHOR_BBOX, biggestPoly(), borders, COUNTRIES, countryMeta, __dir, flowKm, FRAME_BBOX (+10 more)
+Cohesion: 0.09
+Nodes (16): ANCHOR_BBOX, borders, COUNTRIES, countryMeta, __dir, flowKm, FRAME_BBOX, geo (+8 more)
 
 ### Community 179 - "timing.md"
 Cohesion: 0.09
@@ -1210,52 +1196,41 @@ Nodes (15): 1. Frequency — how often will a user see this?, 2. Purpose — why
 
 ### Community 182 - "edge.js"
 Cohesion: 0.33
-Nodes (5): config, Prisma, PrismaClient, {
-  PrismaClientKnownRequestError,
-  PrismaClientUnknownRequestError,
-  PrismaClientRustPanicError,
-  PrismaClientInitializationError,
-  PrismaClientValidationError,
-  getPrismaClient,
-  sqltag,
-  empty,
-  join,
-  raw,
-  skip,
-  Decimal,
-  Debug,
-  DbNull,
-  JsonNull,
-  AnyNull,
-  NullTypes,
-  makeStrictEnum,
-  Extensions,
-  warnOnce,
-  defineDmmfProperty,
-  Public,
-  getRuntime,
-  createParam,
-}, empty()
+Nodes (10): import, browser, default, edge-light, node, types, worker, workerd (+2 more)
 
 ### Community 189 - "Prisma__RecipeItemClient"
-Cohesion: 0.14
-Nodes (13): RestaurantTemplateProps, QRScanner, ReservationModal, RestaurantTemplateClassic(), QRScanner, ReservationModal, QRScanner, ReservationModal (+5 more)
+Cohesion: 0.07
+Nodes (35): callWaiter(), createBillSplit(), getOrderDetails(), getOrderStatus(), requestBill(), DishCustomizationModalProps, RestaurantTemplateProps, QRScanner (+27 more)
+
+### Community 190 - "Prisma__RestaurantCategoryClient"
+Cohesion: 0.50
+Nodes (4): @php artisan key:generate --ansi, @php artisan migrate --graceful --ansi, @php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\, post-create-project-cmd
 
 ### Community 199 - "OrderStatusTimeline.tsx"
 Cohesion: 0.40
 Nodes (3): OrderStatusTimelineProps, STATUS_INDEX, STEPS
 
 ### Community 200 - "Using fonts in Remotion"
-Cohesion: 0.10
-Nodes (16): [CesiumJS](techniques/cesium/TECHNIQUE.md), [Mapbox](techniques/mapbox/TECHNIQUE.md), [MapLibre](techniques/maplibre/TECHNIQUE.md), [MapTiler](techniques/maptiler/TECHNIQUE.md), Remotion Maps, [Static map](techniques/static-map/TECHNIQUE.md), Build the flight, Camera behavior (+8 more)
+Cohesion: 0.18
+Nodes (11): Choose the source for each map element, Drawing rivers, Files, Hybrid, Keep it minmal, MapTiler maps in Remotion, MapTiler SDK (`@maptiler/sdk`), MapTiler vector (+3 more)
 
 ### Community 201 - "local-fonts.md"
-Cohesion: 0.29
-Nodes (3): Build, Overlays and Interactivity, Static map
+Cohesion: 0.06
+Nodes (40): biggestPoly(), largestPolygon(), SignupSection(), {
+  Decimal,
+  DbNull,
+  JsonNull,
+  AnyNull,
+  NullTypes,
+  makeStrictEnum,
+  Public,
+  getRuntime,
+  skip
+}, Prisma, PrismaClient, y, aa() (+32 more)
 
 ### Community 202 - "Using Lottie Animations in Remotion"
-Cohesion: 0.29
-Nodes (7): Matching dimensions of a video, Return value, Setting a default outName, Setting duration based on a video, Setting duration based on multiple videos, Transforming props, Using calculateMetadata
+Cohesion: 0.33
+Nodes (10): require, require, browser, default, edge-light, node, types, worker (+2 more)
 
 ### Community 203 - "psr-4"
 Cohesion: 0.40
@@ -1286,44 +1261,73 @@ Cohesion: 0.40
 Nodes (5): autoload, psr-4, App\\, Database\\Factories\\, Database\\Seeders\\
 
 ### Community 212 - "client/index-browser.js"
+Cohesion: 0.12
+Nodes (22): createInvoice(), deleteInvoice(), generateInvoiceNumber(), getInvoice(), getInvoices(), getInvoiceSettings(), saveInvoiceSettings(), updateInvoiceStatus() (+14 more)
+
+### Community 215 - "Prisma__CustomWebsiteRequestClient"
 Cohesion: 0.25
-Nodes (3): QRScanner, ReservationModal, RestaurantTemplateMoroccan()
+Nodes (8): ./runtime/client, default, require, default, import, node, require, types
 
 ### Community 216 - "Prisma__EmailListClient"
-Cohesion: 0.31
-Nodes (3): App\Domains\POS\Contracts\SessionRepositoryInterface, Session, SessionRepository
+Cohesion: 0.67
+Nodes (3): framework, laravel, keywords
 
 ### Community 226 - "admin/calendar/page.tsx"
-Cohesion: 0.50
-Nodes (4): @php artisan key:generate --ansi, @php artisan migrate --graceful --ansi, @php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\, post-create-project-cmd
+Cohesion: 0.67
+Nodes (3): extra, laravel, dont-discover
 
 ### Community 229 - "./edge"
-Cohesion: 0.40
-Nodes (5): default, import, require, types, ./edge
+Cohesion: 0.13
+Nodes (20): au(), bo(), cu(), dn(), eu(), fe(), G(), getAllClientExtensions() (+12 more)
 
 ### Community 230 - "./extension"
-Cohesion: 0.40
-Nodes (5): ./extension, default, import, require, types
+Cohesion: 0.25
+Nodes (8): imports, #main-entry-point, #wasm-compiler-loader, default, default, edge-light, worker, workerd
 
 ### Community 231 - "admin/menu/page.tsx"
 Cohesion: 0.17
 Nodes (10): Functions, Sonner API Reference, `toast()` options, `<Toaster />`, Picking the right call, Recipes, Setup, Styling — the escalation ladder (+2 more)
 
 ### Community 233 - "admin/tables/page.tsx"
-Cohesion: 0.18
-Nodes (17): Ca(), destroy(), digest(), digestInto(), e(), finish(), hp(), keccak() (+9 more)
+Cohesion: 0.17
+Nodes (25): Bt(), findField(), fo(), getAllComputedFields(), getArgumentName(), getArgumentPath(), getComputedFields(), getOrCreate() (+17 more)
 
 ### Community 234 - "admin/waiters/page.tsx"
-Cohesion: 0.40
-Nodes (5): createBillSplit(), CartItem, SplitBillModal(), SplitBillModalProps, SplitMode
+Cohesion: 0.33
+Nodes (5): config, Prisma, PrismaClient, {
+  PrismaClientKnownRequestError,
+  PrismaClientUnknownRequestError,
+  PrismaClientRustPanicError,
+  PrismaClientInitializationError,
+  PrismaClientValidationError,
+  getPrismaClient,
+  sqltag,
+  empty,
+  join,
+  raw,
+  skip,
+  Decimal,
+  Debug,
+  DbNull,
+  JsonNull,
+  AnyNull,
+  NullTypes,
+  makeStrictEnum,
+  Extensions,
+  warnOnce,
+  defineDmmfProperty,
+  Public,
+  getRuntime,
+  createParam,
+}, empty()
 
 ### Community 235 - "./index"
-Cohesion: 0.33
-Nodes (6): [CesiumJS](techniques/cesium/TECHNIQUE.md), [Mapbox](techniques/mapbox/TECHNIQUE.md), [MapLibre](techniques/maplibre/TECHNIQUE.md), [MapTiler](techniques/maptiler/TECHNIQUE.md), Remotion Maps, [Static map](techniques/static-map/TECHNIQUE.md)
+Cohesion: 0.29
+Nodes (3): Build, Overlays and Interactivity, Static map
 
 ### Community 236 - "./runtime/index-browser"
-Cohesion: 0.40
-Nodes (5): ./runtime/index-browser, default, import, require, types
+Cohesion: 0.29
+Nodes (7): createReservation(), DishCustomizationModal(), ReservationModal(), ReservationModalProps, RestaurantTemplateModern(), react, react
 
 ### Community 238 - "app/layout.tsx"
 Cohesion: 0.22
@@ -1331,11 +1335,11 @@ Nodes (8): figtree, jakarta, metadata, playfair, RootLayout(), syne, Providers()
 
 ### Community 239 - "./runtime/wasm-compiler-edge"
 Cohesion: 0.40
-Nodes (5): ./runtime/wasm-compiler-edge, default, import, require, types
+Nodes (5): default, import, require, types, ./edge
 
 ### Community 241 - "app/[tenantSlug]/page.tsx"
-Cohesion: 0.14
-Nodes (13): metadata, BookingPage(), Props, generateMetadata(), Props, TenantLayout(), Props, TenantPage() (+5 more)
+Cohesion: 0.15
+Nodes (12): metadata, BookingPage(), Props, generateMetadata(), Props, TenantLayout(), Props, TenantPage() (+4 more)
 
 ### Community 242 - "text-animations-typewriter.tsx"
 Cohesion: 0.11
@@ -1344,6 +1348,10 @@ Nodes (13): Designing a video, Follow-up, Interactivity Best Practices, Is this 
 ### Community 243 - "text-animations-word-highlight.tsx"
 Cohesion: 0.13
 Nodes (12): Animate using `interpolate()`, Effects should be inline too, Give interactive elements a descriptive name, Keep all CSS styles inline, Keep composition metadata inline, Make an HTML element interactive using `Interactive`, Making your own component interactive, Prefer inline text (+4 more)
+
+### Community 248 - "CrystalScene.tsx"
+Cohesion: 0.40
+Nodes (5): ./extension, default, import, require, types
 
 ### Community 250 - "images.md"
 Cohesion: 0.11
@@ -1398,28 +1406,32 @@ Cohesion: 0.13
 Nodes (5): AnimationController, SpiralAnimation(), Star, Vector2D, Vector3D
 
 ### Community 274 - "Prisma__FactureCounterClient"
-Cohesion: 0.67
-Nodes (3): extra, laravel, dont-discover
+Cohesion: 0.40
+Nodes (5): ./index, default, import, require, types
+
+### Community 276 - "Prisma__FactureRecordClient"
+Cohesion: 0.24
+Nodes (8): getCartFromServer(), syncCartToServer(), metadata, RestaurantTemplate(), CartContext, CartContextType, CartItem, CartProvider()
+
+### Community 277 - "Prisma__PasswordResetClient"
+Cohesion: 0.40
+Nodes (5): ./runtime/index-browser, default, import, require, types
 
 ### Community 278 - "./generator-build"
-Cohesion: 0.50
-Nodes (4): ./generator-build, default, import, require
+Cohesion: 0.40
+Nodes (5): ./runtime/wasm-compiler-edge, default, import, require, types
 
 ### Community 285 - "measuring-dom-nodes.md"
 Cohesion: 0.12
 Nodes (13): A, AB, B, clip, __dir, even, havKm(), hs (+5 more)
 
-### Community 287 - "extra"
-Cohesion: 0.13
-Nodes (20): createInvoice(), deleteInvoice(), generateInvoiceNumber(), getInvoice(), getInvoices(), getInvoiceSettings(), saveInvoiceSettings(), updateInvoiceStatus() (+12 more)
-
 ### Community 288 - "keywords"
-Cohesion: 0.67
-Nodes (3): extra, laravel, dont-discover
+Cohesion: 0.29
+Nodes (3): Build, Overlays and Interactivity, Static map
 
 ### Community 297 - "extra"
 Cohesion: 0.50
-Nodes (4): @php artisan key:generate --ansi, @php artisan migrate --graceful --ansi, @php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\, post-create-project-cmd
+Nodes (4): ./generator-build, default, import, require
 
 ### Community 298 - "dev"
 Cohesion: 0.20
@@ -1454,12 +1466,12 @@ Cohesion: 0.33
 Nodes (6): CSS animations beat JS under load, CSS variables are inheritable, Framer Motion hardware acceleration caveat, Only animate transform and opacity, Performance Rules, Use WAAPI for programmatic CSS animations
 
 ### Community 314 - "dev"
-Cohesion: 0.67
-Nodes (3): framework, laravel, keywords
+Cohesion: 0.31
+Nodes (3): App\Domains\POS\Contracts\SessionRepositoryInterface, Session, SessionRepository
 
 ### Community 315 - "keywords"
 Cohesion: 0.04
-Nodes (23): resetPassword(), GET(), GET(), ResetPasswordForm(), hashPassword(), DEFAULT_POSITIONS, FactureData, FieldPositions (+15 more)
+Nodes (8): getRestaurantAnalytics(), AnalyticsClient(), Period, createPrismaClient(), g, withRetry(), imagesMap, servicePrices
 
 ### Community 316 - "post-autoload-dump"
 Cohesion: 0.12
@@ -1495,91 +1507,103 @@ Nodes (4): Beauty is leverage, Core Philosophy, Taste is trained, not innate, Un
 
 ### Community 335 - "index.d.ts"
 Cohesion: 0.00
-Nodes (3942): AggregateBankAccount, AggregateBillSplit, AggregateCabinetAppointment, AggregateCabinetClient, AggregateCabinetService, AggregateCampaign, AggregateChatMessage, AggregateChatSession (+3934 more)
+Nodes (3995): AggregateAnnouncement, AggregateBankAccount, AggregateBillSplit, AggregateCabinetAppointment, AggregateCabinetClient, AggregateCabinetService, AggregateCampaign, AggregateChatMessage (+3987 more)
 
 ### Community 340 - "groq-sdk"
 Cohesion: 0.50
 Nodes (4): Debugging Animations, Frame-by-frame inspection, Slow motion testing, Test on real devices
 
 ### Community 341 - "gsap"
-Cohesion: 0.67
-Nodes (3): extra, laravel, dont-discover
+Cohesion: 0.13
+Nodes (22): ar(), destroy(), digest(), digestInto(), dp(), e(), finish(), Is() (+14 more)
 
 ### Community 342 - "html5-qrcode"
 Cohesion: 0.12
 Nodes (15): Available transition types, Calculating total composition duration, Duration calculation, Getting the duration of a transition, Mixing transitions and overlays, Overlay example, Overlay props, Prerequisites (+7 more)
 
+### Community 343 - "@libsql/client"
+Cohesion: 0.07
+Nodes (25): Matching dimensions of a video, Return value, Setting a default outName, Setting duration based on a video, Setting duration based on multiple videos, Transforming props, Using calculateMetadata, Default Props and scaffold metadata (+17 more)
+
+### Community 344 - "lucide-react"
+Cohesion: 0.16
+Nodes (12): generateEmailContent(), generateWebsiteSuggestions(), getAIComboRecommendations(), groq, improveEmailPrompt(), Combo, CombosClient(), CombosClientProps (+4 more)
+
+### Community 345 - "next"
+Cohesion: 0.22
+Nodes (17): addMarginSymbol(), afterNextNewline(), getCurrentLineLength(), getPrintWidth(), indent(), newLine(), setColor(), underline() (+9 more)
+
 ### Community 348 - "nodemailer"
-Cohesion: 0.12
-Nodes (14): Moving Map Render Stability, Plate sizing and sharpness, Required pattern: fixed map plate, Symptom and cause, Verification, Animated flight route example, Basic map example, Camera guidance (+6 more)
+Cohesion: 0.20
+Nodes (9): Animated flight route example, Basic map example, Camera guidance, Core rules, Lines, Markers and labels, Prerequisites, Rendering (+1 more)
+
+### Community 352 - "react-dom"
+Cohesion: 0.15
+Nodes (14): De(), em(), Gn(), Ha(), jc(), mapQueryEngineResult(), nm(), Qc() (+6 more)
 
 ### Community 353 - "react-markdown"
-Cohesion: 0.12
-Nodes (14): Moving Map Render Stability, Plate sizing and sharpness, Required pattern: fixed map plate, Symptom and cause, Verification, Animated flight route example, Basic map example, Camera guidance (+6 more)
+Cohesion: 0.20
+Nodes (9): Animated flight route example, Basic map example, Camera guidance, Core rules, Lines, Markers and labels, Prerequisites, Rendering (+1 more)
 
 ### Community 354 - "@react-three/fiber"
 Cohesion: 0.20
 Nodes (9): Animated flight route example, Basic map example, Camera guidance, Core rules, Lines, Markers and labels, Prerequisites, Rendering (+1 more)
 
 ### Community 355 - "@react-three/postprocessing"
-Cohesion: 0.29
-Nodes (7): al(), kd(), Nt(), Od(), T(), il(), rl()
+Cohesion: 0.50
+Nodes (4): getLiveFloorStatus(), LiveFloorMonitor(), LiveFloorMonitorProps, TableStatusItem
 
 ### Community 356 - "recharts"
-Cohesion: 0.33
-Nodes (5): Moving Map Render Stability, Plate sizing and sharpness, Required pattern: fixed map plate, Symptom and cause, Verification
+Cohesion: 0.17
+Nodes (15): addItem(), bs(), _c(), eo(), fs(), getAllClientExtensions(), getAllModelExtensions(), je() (+7 more)
 
 ### Community 357 - "remeda"
-Cohesion: 0.33
-Nodes (5): Moving Map Render Stability, Plate sizing and sharpness, Required pattern: fixed map plate, Symptom and cause, Verification
+Cohesion: 0.12
+Nodes (19): constructor(), dispatchBatches(), el(), Es(), execute(), getConnectionInfo(), handleAndLogRequestError(), #m() (+11 more)
 
 ### Community 358 - "sonner"
 Cohesion: 0.20
 Nodes (9): Animated flight route example, Basic map example, Camera guidance, Core rules, Lines, Markers and labels, Prerequisites, Rendering (+1 more)
 
 ### Community 359 - "post-autoload-dump"
-Cohesion: 0.67
-Nodes (3): framework, laravel, keywords
+Cohesion: 0.27
+Nodes (9): createSpace(), deleteSpace(), saveFloorPlanLayout(), FloorPlanCanvas(), FloorPlanCanvasProps, FloorPlanObstacle, FloorPlanTable, Space (+1 more)
 
 ### Community 360 - "@tiptap/extension-link"
 Cohesion: 0.23
 Nodes (11): bearing(), CesiumFlythrough(), CesiumFlythroughProps, clamp(), FlyoverMode, havKm(), lerp(), loadCesium() (+3 more)
 
-### Community 361 - "@tiptap/starter-kit"
-Cohesion: 0.23
-Nodes (11): bearing(), CesiumFlythrough(), CesiumFlythroughProps, clamp(), FlyoverMode, havKm(), lerp(), loadCesium() (+3 more)
-
 ### Community 362 - "@types/qrcode"
-Cohesion: 0.23
-Nodes (11): bearing(), CesiumFlythrough(), CesiumFlythroughProps, clamp(), FlyoverMode, havKm(), lerp(), loadCesium() (+3 more)
+Cohesion: 0.50
+Nodes (3): Dynamic image paths, Getting image dimensions, Sizing and positioning
 
-### Community 516 - "post-autoload-dump"
-Cohesion: 0.23
-Nodes (11): bearing(), CesiumFlythrough(), CesiumFlythroughProps, clamp(), FlyoverMode, havKm(), lerp(), loadCesium() (+3 more)
+### Community 517 - "Moving Map Render Stability"
+Cohesion: 0.33
+Nodes (6): Iu(), handleAndLogRequestError(), handleRequestError(), nt(), sanitizeMessage(), vr()
 
-### Community 517 - "extra"
+### Community 521 - "Moving Map Render Stability"
+Cohesion: 0.33
+Nodes (5): Moving Map Render Stability, Plate sizing and sharpness, Required pattern: fixed map plate, Symptom and cause, Verification
+
+### Community 522 - "Moving Map Render Stability"
+Cohesion: 0.33
+Nodes (5): Moving Map Render Stability, Plate sizing and sharpness, Required pattern: fixed map plate, Symptom and cause, Verification
+
+### Community 525 - "Moving Map Render Stability"
 Cohesion: 0.67
-Nodes (3): extra, laravel, dont-discover
+Nodes (3): autoload-dev, psr-4, Tests\\
 
-### Community 519 - "fast-check"
-Cohesion: 0.67
-Nodes (3): framework, laravel, keywords
-
-### Community 521 - "@react-three/postprocessing"
-Cohesion: 0.18
-Nodes (11): Choose the source for each map element, Drawing rivers, Files, Hybrid, Keep it minmal, MapTiler maps in Remotion, MapTiler SDK (`@maptiler/sdk`), MapTiler vector (+3 more)
-
-### Community 522 - "@tiptap/extension-underline"
+### Community 526 - "remotion"
 Cohesion: 0.50
 Nodes (4): @php artisan key:generate --ansi, @php artisan migrate --graceful --ansi, @php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\, post-create-project-cmd
 
-### Community 525 - "recharts"
-Cohesion: 0.18
-Nodes (11): Choose the source for each map element, Drawing rivers, Files, Hybrid, Keep it minmal, MapTiler maps in Remotion, MapTiler SDK (`@maptiler/sdk`), MapTiler vector (+3 more)
-
 ### Community 530 - "@tiptap/extension-underline"
-Cohesion: 0.40
-Nodes (5): ./index, default, import, require, types
+Cohesion: 0.50
+Nodes (4): @php artisan key:generate --ansi, @php artisan migrate --graceful --ansi, @php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\, post-create-project-cmd
+
+### Community 531 - "post-create-project-cmd"
+Cohesion: 0.50
+Nodes (4): @php artisan key:generate --ansi, @php artisan migrate --graceful --ansi, @php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\, post-create-project-cmd
 
 ### Community 532 - "MapTiler maps in Remotion"
 Cohesion: 0.18
@@ -1598,8 +1622,8 @@ Cohesion: 0.20
 Nodes (9): Delaying, Looping, Pitch, Prerequisites, Sizing and Position, Speed, Trimming, Using videos in Remotion (+1 more)
 
 ### Community 537 - "Adaptive Silence Detection"
-Cohesion: 0.33
-Nodes (6): Adaptive Silence Detection, Identifying leading and trailing silence, Interpreting the output, Step 1: Measure loudness with `loudnorm`, Step 2: Detect silences using adaptive threshold, Using with Remotion's `<Video>` component
+Cohesion: 0.20
+Nodes (8): FFmpeg in Remotion, Trimming videos, Adaptive Silence Detection, Identifying leading and trailing silence, Interpreting the output, Step 1: Measure loudness with `loudnorm`, Step 2: Detect silences using adaptive threshold, Using with Remotion's `<Video>` component
 
 ### Community 538 - "3D Flyover — architecture reference"
 Cohesion: 0.20
@@ -1618,28 +1642,28 @@ Cohesion: 0.20
 Nodes (9): 1. Provider initialization, 2. The camera path — structure & generation, 3. Camera animation per frame (position, heading, pitch, bank), 3D Flyover — architecture reference, 4. The feel — proven water-wars values, 5. The complete component, 6. Render, City (+1 more)
 
 ### Community 542 - "Using audio in Remotion"
-Cohesion: 0.20
-Nodes (10): Delaying, Importing Audio, Looping, Muting, Pitch, Prerequisites, Speed, Trimming (+2 more)
+Cohesion: 0.08
+Nodes (21): Delaying, Importing Audio, Looping, Muting, Pitch, Prerequisites, Speed, Trimming (+13 more)
 
 ### Community 543 - "Using videos in Remotion"
 Cohesion: 0.20
 Nodes (9): Delaying, Looping, Pitch, Prerequisites, Sizing and Position, Speed, Trimming, Using videos in Remotion (+1 more)
 
 ### Community 544 - "Adaptive Silence Detection"
-Cohesion: 0.20
-Nodes (8): FFmpeg in Remotion, Trimming videos, Adaptive Silence Detection, Identifying leading and trailing silence, Interpreting the output, Step 1: Measure loudness with `loudnorm`, Step 2: Detect silences using adaptive threshold, Using with Remotion's `<Video>` component
+Cohesion: 0.33
+Nodes (6): Adaptive Silence Detection, Identifying leading and trailing silence, Interpreting the output, Step 1: Measure loudness with `loudnorm`, Step 2: Detect silences using adaptive threshold, Using with Remotion's `<Video>` component
 
 ### Community 545 - "3D Flyover — architecture reference"
 Cohesion: 0.20
 Nodes (9): 1. Provider initialization, 2. The camera path — structure & generation, 3. Camera animation per frame (position, heading, pitch, bank), 3D Flyover — architecture reference, 4. The feel — proven water-wars values, 5. The complete component, 6. Render, City (+1 more)
 
 ### Community 546 - "skills/remotion-markup/remotion-maps/techniques/mapbox/TECHNIQUE.md"
-Cohesion: 0.20
-Nodes (9): Animated flight route example, Basic map example, Camera guidance, Core rules, Lines, Markers and labels, Prerequisites, Rendering (+1 more)
+Cohesion: 0.12
+Nodes (14): Moving Map Render Stability, Plate sizing and sharpness, Required pattern: fixed map plate, Symptom and cause, Verification, Animated flight route example, Basic map example, Camera guidance (+6 more)
 
 ### Community 547 - "skills/remotion-markup/remotion-maps/techniques/maplibre/TECHNIQUE.md"
-Cohesion: 0.20
-Nodes (9): Animated flight route example, Basic map example, Camera guidance, Core rules, Lines, Markers and labels, Prerequisites, Rendering (+1 more)
+Cohesion: 0.12
+Nodes (14): Moving Map Render Stability, Plate sizing and sharpness, Required pattern: fixed map plate, Symptom and cause, Verification, Animated flight route example, Basic map example, Camera guidance (+6 more)
 
 ### Community 548 - "Map Explainer — architecture reference"
 Cohesion: 0.22
@@ -1654,8 +1678,8 @@ Cohesion: 0.22
 Nodes (8): Alternative, Basic usage, Getting GIF duration, Looping behavior, Playback speed, Sizing and fit, Styling, Using Animated images in Remotion
 
 ### Community 551 - "remotion-best-practices/remotion-markup/remotion-maps/REFERENCE.md"
-Cohesion: 0.10
-Nodes (16): [CesiumJS](techniques/cesium/TECHNIQUE.md), [Mapbox](techniques/mapbox/TECHNIQUE.md), [MapLibre](techniques/maplibre/TECHNIQUE.md), [MapTiler](techniques/maptiler/TECHNIQUE.md), Remotion Maps, [Static map](techniques/static-map/TECHNIQUE.md), Build the flight, Camera behavior (+8 more)
+Cohesion: 0.18
+Nodes (11): Choose the source for each map element, Drawing rivers, Files, Hybrid, Keep it minmal, MapTiler maps in Remotion, MapTiler SDK (`@maptiler/sdk`), MapTiler vector (+3 more)
 
 ### Community 552 - "Map Explainer — architecture reference"
 Cohesion: 0.22
@@ -1674,8 +1698,8 @@ Cohesion: 0.22
 Nodes (8): Alternative, Basic usage, Getting GIF duration, Looping behavior, Playback speed, Sizing and fit, Styling, Using Animated images in Remotion
 
 ### Community 556 - "skills/remotion-markup/remotion-maps/REFERENCE.md"
-Cohesion: 0.22
-Nodes (6): [CesiumJS](techniques/cesium/TECHNIQUE.md), [Mapbox](techniques/mapbox/TECHNIQUE.md), [MapLibre](techniques/maplibre/TECHNIQUE.md), [MapTiler](techniques/maptiler/TECHNIQUE.md), Remotion Maps, [Static map](techniques/static-map/TECHNIQUE.md)
+Cohesion: 0.12
+Nodes (13): [CesiumJS](techniques/cesium/TECHNIQUE.md), [Mapbox](techniques/mapbox/TECHNIQUE.md), [MapLibre](techniques/maplibre/TECHNIQUE.md), [MapTiler](techniques/maptiler/TECHNIQUE.md), Remotion Maps, [Static map](techniques/static-map/TECHNIQUE.md), Build the flight, Camera behavior (+5 more)
 
 ### Community 557 - "Map Explainer — architecture reference"
 Cohesion: 0.22
@@ -1721,7 +1745,7 @@ Nodes (6): Animate using `useCurrentFrame()`, No animations not driven by `useCu
 Cohesion: 0.29
 Nodes (6): Best practices, Checking text overflow, Fitting text to a width, Measuring text dimensions, Measuring text in Remotion, Prerequisites
 
-### Community 568 - "CesiumJS — 3D flyovers in Remotion"
+### Community 568 - "Moving Map Render Stability"
 Cohesion: 0.67
 Nodes (3): autoload-dev, psr-4, Tests\\
 
@@ -1740,10 +1764,6 @@ Nodes (6): Animate using `useCurrentFrame()`, No animations not driven by `useCu
 ### Community 572 - "Measuring text in Remotion"
 Cohesion: 0.29
 Nodes (6): Best practices, Checking text overflow, Fitting text to a width, Measuring text dimensions, Measuring text in Remotion, Prerequisites
-
-### Community 573 - "CesiumJS — 3D flyovers in Remotion"
-Cohesion: 0.29
-Nodes (7): Build the flight, Camera behavior, CesiumJS — 3D flyovers in Remotion, Credentials, Files, Mechanics, Modes
 
 ### Community 574 - "skills/remotion-markup/sequencing.md"
 Cohesion: 0.29
@@ -1774,14 +1794,6 @@ Cohesion: 0.33
 Nodes (5): Custom geodata mode, Decision rule, Hybrid mode, Map element data sources, MapTiler vector mode
 
 ### Community 585 - "Moving Map Render Stability"
-Cohesion: 0.33
-Nodes (5): Moving Map Render Stability, Plate sizing and sharpness, Required pattern: fixed map plate, Symptom and cause, Verification
-
-### Community 586 - "Moving Map Render Stability"
-Cohesion: 0.33
-Nodes (5): Moving Map Render Stability, Plate sizing and sharpness, Required pattern: fixed map plate, Symptom and cause, Verification
-
-### Community 587 - "Moving Map Render Stability"
 Cohesion: 0.33
 Nodes (5): Moving Map Render Stability, Plate sizing and sharpness, Required pattern: fixed map plate, Symptom and cause, Verification
 
@@ -1857,9 +1869,13 @@ Nodes (4): 3D Flyover — troubleshooting, Gotchas checklist, Symptom → fix, T
 Cohesion: 0.40
 Nodes (5): Delaying, trimming, durationInFrames, Fallback, from, `trimBefore`
 
-### Community 611 - "remotion-best-practices/remotion-markup/effects.md"
-Cohesion: 0.50
-Nodes (3): Available effects, Custom effects, Usage
+### Community 610 - "keywords"
+Cohesion: 0.67
+Nodes (3): framework, laravel, keywords
+
+### Community 611 - "prisma"
+Cohesion: 0.67
+Nodes (3): extra, laravel, dont-discover
 
 ### Community 612 - "skills/remotion-markup/effects.md"
 Cohesion: 0.50
@@ -1869,33 +1885,37 @@ Nodes (3): Available effects, Custom effects, Usage
 Cohesion: 0.50
 Nodes (3): Dynamic image paths, Getting image dimensions, Sizing and positioning
 
-### Community 614 - "post-create-project-cmd"
-Cohesion: 0.50
-Nodes (4): @php artisan key:generate --ansi, @php artisan migrate --graceful --ansi, @php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\, post-create-project-cmd
+### Community 614 - "react-dom"
+Cohesion: 0.67
+Nodes (3): extra, laravel, dont-discover
 
 ### Community 615 - "extra"
 Cohesion: 0.67
 Nodes (3): extra, laravel, dont-discover
 
+### Community 641 - "keywords"
+Cohesion: 0.67
+Nodes (3): framework, laravel, keywords
+
 ## Knowledge Gaps
-- **6642 isolated node(s):** `FlyoverMode`, `__dir`, `START`, `clip`, `even` (+6637 more)
+- **6711 isolated node(s):** `FlyoverMode`, `__dir`, `START`, `clip`, `even` (+6706 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **177 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **182 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `WaiterDashboard()` connect `waiter/dashboard/page.tsx` to `admin.ts`?**
+- **Why does `WaiterDashboard()` connect `waiter/dashboard/page.tsx` to `slice`?**
   _High betweenness centrality (0.045) - this node is a cross-community bridge._
 - **Why does `Notification` connect `waiter/dashboard/page.tsx` to `index.d.ts`?**
-  _High betweenness centrality (0.043) - this node is a cross-community bridge._
-- **Why does `RichTextEditor()` connect `RichTextEditor` to `Button.tsx`?**
+  _High betweenness centrality (0.042) - this node is a cross-community bridge._
+- **Why does `t()` connect `slice` to `admin.ts`, `wasm-compiler-edge.js`, `runtime/client.js`, `cc`, `addErrorMessage`, `query_compiler_bg.js`, `write`, `employment-pdf.ts`, `e`, `vo`, `write`, `local-fonts.md`, `lc`, `react-dom`, `waiter/dashboard/page.tsx`, `@react-three/postprocessing`, `remeda`, `restaurant-report.ts`, `exports`, `Adaptive Silence Detection`, `maplibre.md`, `Using videos in Remotion`, `KDSBoard.tsx`, `Audio Visualization in Remotion`, `Displaying captions in Remotion`?**
   _High betweenness centrality (0.032) - this node is a cross-community bridge._
 - **Are the 76 inferred relationships involving `r()` (e.g. with `k()` and `l()`) actually correct?**
   _`r()` has 76 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 56 inferred relationships involving `t()` (e.g. with `LiveFloorMonitor()` and `WaitersClient()`) actually correct?**
   _`t()` has 56 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `FlyoverMode`, `__dir`, `START` to the rest of the system?**
-  _6642 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _6711 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `PrismaPromise` be split into smaller, more focused modules?**
-  _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._

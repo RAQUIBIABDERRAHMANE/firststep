@@ -86,7 +86,7 @@ function createPrismaClient() {
     return new PrismaClient();
 }
 
-const PRISMA_DEV_KEY = 'prisma_v22_employment_templates'
+const PRISMA_DEV_KEY = 'prisma_v24_employment_role'
 const g = globalThis as any
 let prisma: PrismaClient;
 
@@ -99,8 +99,15 @@ if (process.env.NODE_ENV === 'production') {
     prisma = g[PRISMA_DEV_KEY]
 
     // Diagnostic check — if any key model is missing, re-initialize
-    if (!(prisma as any).chatSession || !(prisma as any).emailList || !(prisma as any).restaurantReport || !(prisma as any).customWebsiteRequest || !(prisma as any).employmentAgreementTemplate) {
-        console.warn('[Prisma] Missing models in cached instance. Re-initializing...');
+    if (
+        !(prisma as any).chatSession ||
+        !(prisma as any).emailList ||
+        !(prisma as any).restaurantReport ||
+        !(prisma as any).customWebsiteRequest ||
+        !(prisma as any).employmentAgreementTemplate ||
+        !(prisma as any).announcement
+    ) {
+        console.warn('[Prisma] Missing models (including announcement) in cached instance. Re-initializing...');
         g[PRISMA_DEV_KEY] = createPrismaClient();
         prisma = g[PRISMA_DEV_KEY];
     }
@@ -108,10 +115,10 @@ if (process.env.NODE_ENV === 'production') {
 
 
 console.log('[Prisma Debug] Keys on prisma instance:', Object.keys(prisma || {}));
-if (!(prisma as any).emailList) {
-    console.error('[Prisma CRITICAL] emailList is MISSING on prisma instance!');
+if (!(prisma as any).announcement) {
+    console.error('[Prisma CRITICAL] announcement is MISSING on prisma instance!');
 } else {
-    console.log('[Prisma Debug] emailList exists on prisma instance.');
+    console.log('[Prisma Debug] announcement exists on prisma instance.');
 }
 
 export default prisma

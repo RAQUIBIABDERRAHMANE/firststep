@@ -248,14 +248,28 @@ export async function getEmploymentTemplatePositions(): Promise<EmploymentTempla
 }
 
 export async function generateEmploymentAgreementPdf(
-  data: EmploymentAgreementData
+  data: EmploymentAgreementData,
+  overridePositions?: Partial<EmploymentTemplatePositions>
 ): Promise<Uint8Array> {
   const templatePath = path.join(process.cwd(), 'public', 'developer-employment-agreement.pdf')
-  if (!fs.existsSync(templatePath)) {
-    throw new Error('Agreement PDF template missing. Run template script first.')
+  let pdfDoc: PDFDocument
+
+  if (fs.existsSync(templatePath)) {
+    const templateBytes = fs.readFileSync(templatePath)
+    pdfDoc = await PDFDocument.load(templateBytes)
+  } else {
+    // Graceful fallback: create clean A4 document
+    pdfDoc = await PDFDocument.create()
+    const page = pdfDoc.addPage([595.5, 842.25])
+    const helv = await pdfDoc.embedFont(StandardFonts.HelveticaBold)
+    page.drawText('CONTRAT DE DEVELOPPEUR INDEPENDANT', {
+      x: 50,
+      y: 780,
+      size: 16,
+      font: helv,
+      color: rgb(0.1, 0.2, 0.4),
+    })
   }
-  const templateBytes = fs.readFileSync(templatePath)
-  const pdfDoc = await PDFDocument.load(templateBytes)
 
   const pages = pdfDoc.getPages()
   const firstPage = pages[0]
@@ -295,7 +309,10 @@ export async function generateEmploymentAgreementPdf(
     }
   }
 
-  const positions = await getEmploymentTemplatePositions()
+  const basePositions = await getEmploymentTemplatePositions()
+  const positions: EmploymentTemplatePositions = overridePositions
+    ? { ...basePositions, ...overridePositions }
+    : basePositions
 
   // Agreement Date
   if (data.date && positions.dateEnabled !== false) {
@@ -320,6 +337,21 @@ export async function generateEmploymentAgreementPdf(
         positions.employeeNameIsItalic
       ),
       color: hexToRgb(positions.employeeNameFontColor),
+    })
+  }
+
+  // Employee CIN
+  if (data.employeeCin && positions.employeeCinEnabled !== false) {
+    firstPage.drawText(sanitizeText(data.employeeCin), {
+      x: positions.employeeCinX,
+      y: positions.employeeCinY,
+      size: positions.employeeCinFontSize,
+      font: getFont(
+        positions.employeeCinFontFamily,
+        positions.employeeCinIsBold,
+        positions.employeeCinIsItalic
+      ),
+      color: hexToRgb(positions.employeeCinFontColor),
     })
   }
 

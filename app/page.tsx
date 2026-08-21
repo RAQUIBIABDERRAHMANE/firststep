@@ -1,21 +1,29 @@
 import Navbar from '@/components/landing/Navbar'
 import Image from 'next/image'
 import HeroSection from '@/components/landing/HeroSection'
+import AnnouncementsSection from '@/components/landing/AnnouncementsSection'
 import ServicesOverview from '@/components/landing/ServicesOverview'
 import HowItWorks from '@/components/landing/HowItWorks'
 import SignupSection from '@/components/landing/SignupSection'
 import { getServices } from '@/app/actions/services'
 import { getCurrentUser } from '@/app/actions/auth'
+import { getPublishedAnnouncements } from '@/app/actions/announcements'
 import Link from 'next/link'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
-  const services = await getServices()
-  const user = await getCurrentUser()
+  const [services, user, announcements] = await Promise.all([
+    getServices(),
+    getCurrentUser(),
+    getPublishedAnnouncements()
+  ])
 
   return (
-    <main className="flex min-h-screen flex-col bg-[#FAFBFD] text-slate-900">
-      <Navbar user={user} />
+    <main className="flex min-h-screen flex-col bg-[#FAFBFD] text-slate-900 selection:bg-blue-500/15 selection:text-[#0066FF]">
+      <Navbar user={user} announcements={announcements} />
       <HeroSection />
+      <AnnouncementsSection announcements={announcements} />
       <ServicesOverview services={services} />
       <HowItWorks />
       <SignupSection />
@@ -35,7 +43,7 @@ export default async function Home() {
             {/* Brand column */}
             <div className="md:col-span-2 space-y-5">
               <div className="flex items-center gap-3">
-                <div className="relative h-9 w-9 shrink-0 rounded-xl overflow-hidden ring-1 ring-slate-200 shadow-sm">
+                <div className="relative h-9 w-9 shrink-0 rounded-xl overflow-hidden ring-1 ring-slate-200 shadow-2xs">
                   <Image
                     src="/Untitled design (13).png"
                     alt="FirstStep Logo"
@@ -67,7 +75,7 @@ export default async function Home() {
                   { href: '#signup', label: 'Tarifs' },
                 ].map((l) => (
                   <li key={l.href}>
-                    <Link href={l.href} className="font-figtree text-[13.5px] text-slate-600 hover:text-[#0066FF] transition-colors duration-200">
+                    <Link href={l.href} className="font-figtree text-[13.5px] text-slate-600 hover:text-[#0066FF] transition-colors duration-200 active:scale-95 inline-block">
                       {l.label}
                     </Link>
                   </li>
@@ -87,7 +95,7 @@ export default async function Home() {
                   { href: 'mailto:contact@firststepco.com', label: 'Contact' },
                 ].map((l) => (
                   <li key={l.href}>
-                    <Link href={l.href} className="font-figtree text-[13.5px] text-slate-600 hover:text-[#0066FF] transition-colors duration-200">
+                    <Link href={l.href} className="font-figtree text-[13.5px] text-slate-600 hover:text-[#0066FF] transition-colors duration-200 active:scale-95 inline-block">
                       {l.label}
                     </Link>
                   </li>

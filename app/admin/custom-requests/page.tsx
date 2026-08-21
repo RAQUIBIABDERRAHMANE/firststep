@@ -1,8 +1,8 @@
 import prisma from '@/lib/prisma'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card'
-import { Badge } from '@/components/ui/Badge'
-import { Globe, User, Calendar, Mail, Phone, ExternalLink, ShieldCheck, ClipboardList, Clock } from 'lucide-react'
+import { Globe, User, Calendar, Mail, Phone, ExternalLink, ShieldCheck, ClipboardList, Clock, Sparkles } from 'lucide-react'
 import CustomWebsiteRequestAdminControls from '@/components/admin/CustomWebsiteRequestAdminControls'
+
+export const dynamic = 'force-dynamic'
 
 export default async function AdminCustomRequestsPage() {
     const requests = await prisma.customWebsiteRequest.findMany({
@@ -11,22 +11,37 @@ export default async function AdminCustomRequestsPage() {
     })
 
     return (
-        <div className="space-y-6 max-w-6xl">
-            <div>
-                <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 font-syne">Demandes de Site Web Sur Mesure</h1>
-                <p className="text-sm text-slate-500 mt-1">Gérez les demandes de développement personnalisées reçues via le formulaire public.</p>
+        <div className="space-y-8 max-w-6xl mx-auto animate-in fade-in duration-300">
+            {/* Header */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div className="space-y-1.5">
+                    <div className="flex items-center gap-2">
+                        <span className="px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-700 text-xs font-bold">
+                            Développement Web Sur Mesure
+                        </span>
+                        <span className="text-xs text-slate-400 font-mono">
+                            {requests.length} demande{requests.length > 1 ? 's' : ''} reçue{requests.length > 1 ? 's' : ''}
+                        </span>
+                    </div>
+                    <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 font-sans">
+                        Demandes de Sites Web Sur Mesure
+                    </h1>
+                    <p className="text-sm text-slate-500 max-w-xl">
+                        Gérez les cahiers des charges et les demandes de conception personnalisées transmises par les prospects et clients.
+                    </p>
+                </div>
             </div>
 
             {requests.length === 0 ? (
-                <Card className="border-slate-200/60 shadow-sm p-10 text-center">
-                    <div className="rounded-full bg-slate-100 h-12 w-12 flex items-center justify-center mx-auto mb-4">
-                        <Clock className="h-5 w-5 text-slate-400" />
+                <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xs p-12 text-center space-y-3">
+                    <div className="h-14 w-14 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
+                        <Clock className="h-7 w-7" />
                     </div>
-                    <h3 className="text-sm font-bold text-slate-900 mb-1">Aucune demande reçue</h3>
+                    <h3 className="text-base font-bold text-slate-900">Aucune demande reçue</h3>
                     <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                        Les demandes de site sur mesure soumises par vos clients apparaîtront ici.
+                        Les demandes de sites sur mesure soumises via le formulaire public apparaîtront ici.
                     </p>
-                </Card>
+                </div>
             ) : (
                 <div className="grid gap-6">
                     {requests.map((request) => {
@@ -35,153 +50,132 @@ export default async function AdminCustomRequestsPage() {
                         const adminNotes = JSON.parse(request.adminNotes || '[]')
 
                         return (
-                            <Card key={request.id} className="border-slate-200/60 shadow-sm hover:border-slate-300 transition-all">
-                                <CardHeader className="bg-slate-50/50 border-b border-slate-100/60 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                            <div
+                                key={request.id}
+                                className="bg-white rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-md transition-all duration-200 overflow-hidden"
+                            >
+                                <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                                     <div className="space-y-1">
-                                        <div className="flex items-center gap-2">
-                                            <CardTitle className="text-base font-bold text-slate-900">
+                                        <div className="flex items-center gap-2.5">
+                                            <h3 className="text-base font-bold text-slate-900">
                                                 {request.companyName}
-                                            </CardTitle>
+                                            </h3>
                                             {request.userId && (
-                                                <Badge variant="outline" className="text-[9px] px-2 py-0.5 rounded-full border-blue-100 bg-blue-50 text-blue-600 font-semibold flex items-center gap-1">
+                                                <span className="text-[10px] px-2 py-0.5 rounded-full border border-blue-200/60 bg-blue-50 text-blue-700 font-bold flex items-center gap-1">
                                                     <User className="h-2.5 w-2.5" />
                                                     Client Enregistré
-                                                </Badge>
+                                                </span>
                                             )}
                                         </div>
-                                        <CardDescription className="text-xs">
-                                            Demande soumise le {new Date(request.createdAt).toLocaleDateString('fr-FR', {
+                                        <p className="text-xs text-slate-400">
+                                            Soumis le {new Date(request.createdAt).toLocaleDateString('fr-FR', {
                                                 year: 'numeric',
                                                 month: 'long',
                                                 day: 'numeric',
                                                 hour: '2-digit',
                                                 minute: '2-digit'
                                             })}
-                                        </CardDescription>
+                                        </p>
                                     </div>
-                                    <div className="flex items-center gap-2">
-                                        <Badge className={`
-                                            px-2.5 py-1 border-0 rounded-full font-bold text-[10px]
-                                            ${request.status === 'PENDING' ? 'bg-amber-500/10 text-amber-600' :
-                                              request.status === 'REVIEWING' ? 'bg-purple-500/10 text-purple-600' :
-                                              request.status === 'IN_PROGRESS' ? 'bg-blue-500/10 text-blue-600' :
-                                              'bg-emerald-500/10 text-emerald-600'}
-                                        `}>
-                                            {request.status === 'PENDING' ? 'Étude en cours' :
-                                             request.status === 'REVIEWING' ? 'Maquette UX/UI' :
-                                             request.status === 'IN_PROGRESS' ? 'Développement actif' :
-                                             'Livré / En ligne'}
-                                        </Badge>
-                                    </div>
-                                </CardHeader>
-                                <CardContent className="p-5 space-y-4">
+                                    <span className={`
+                                        px-3 py-1 rounded-full font-bold text-xs border
+                                        ${request.status === 'PENDING' ? 'bg-amber-50 text-amber-700 border-amber-200/60' :
+                                          request.status === 'REVIEWING' ? 'bg-purple-50 text-purple-700 border-purple-200/60' :
+                                          request.status === 'IN_PROGRESS' ? 'bg-cyan-50 text-cyan-700 border-cyan-200/60' :
+                                          'bg-emerald-50 text-emerald-700 border-emerald-200/60'}
+                                    `}>
+                                        {request.status === 'PENDING' ? 'Étude en cours' :
+                                         request.status === 'REVIEWING' ? 'Maquette UX/UI' :
+                                         request.status === 'IN_PROGRESS' ? 'Développement actif' :
+                                         'Livré / En ligne'}
+                                    </span>
+                                </div>
+
+                                <div className="p-6 space-y-5">
                                     {/* Info Grid */}
                                     <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 text-xs">
                                         <div className="space-y-1">
-                                            <span className="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Client</span>
-                                            <span className="font-bold text-slate-700 block">{request.clientName}</span>
+                                            <span className="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Contact</span>
+                                            <span className="font-bold text-slate-800 block">{request.clientName}</span>
                                             {request.user && (
-                                                <span className="text-[10px] text-slate-400 block truncate">Entreprise: {request.user.companyName}</span>
+                                                <span className="text-[11px] text-slate-400 block truncate">Entreprise: {request.user.companyName}</span>
                                             )}
                                         </div>
                                         <div className="space-y-1">
-                                            <span className="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Contact</span>
-                                            <a href={`mailto:${request.email}`} className="text-blue-600 hover:underline block font-semibold truncate">
+                                            <span className="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Coordonnées</span>
+                                            <a href={`mailto:${request.email}`} className="text-cyan-600 hover:underline block font-bold truncate">
                                                 {request.email}
                                             </a>
                                             {request.phone && (
-                                                <a href={`tel:${request.phone}`} className="text-slate-500 hover:underline block font-medium">
+                                                <a href={`tel:${request.phone}`} className="text-slate-500 hover:underline block font-mono">
                                                     {request.phone}
                                                 </a>
                                             )}
                                         </div>
                                         <div className="space-y-1">
-                                            <span className="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Type de site</span>
-                                            <span className="font-bold text-slate-700 block capitalize">
-                                                {request.websiteType === 'showcase' ? 'Site Vitrine' : 
-                                                 request.websiteType === 'ecommerce' ? 'E-commerce' : 
-                                                 request.websiteType === 'portfolio' ? 'Portfolio' : 
-                                                 request.websiteType === 'landing' ? 'Landing Page' : request.websiteType}
+                                            <span className="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Type de Projet</span>
+                                            <span className="font-bold text-slate-800 block capitalize">
+                                                {request.websiteType || 'Site Web'}
                                             </span>
+                                            {request.stylePreferences && (
+                                                <span className="text-[11px] text-slate-400 block truncate">Style: {request.stylePreferences}</span>
+                                            )}
                                         </div>
                                         <div className="space-y-1">
-                                            <span className="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Ambiance visuelle</span>
-                                            <span className="font-bold text-slate-700 block capitalize">
-                                                {request.stylePreferences === 'modern' ? 'Moderne & Dynamique' : 
-                                                 request.stylePreferences === 'minimalist' ? 'Minimaliste épuré' : 
-                                                 request.stylePreferences === 'luxury' ? 'Sombre & Luxueux' : 
-                                                 request.stylePreferences === 'creative' ? 'Créatif & Artistique' : request.stylePreferences}
+                                            <span className="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Concurrents / Références</span>
+                                            <span className="text-slate-700 block truncate">
+                                                {request.competitors || 'Aucune référence'}
                                             </span>
                                         </div>
                                     </div>
 
-                                    {/* Pages & Features Tags */}
-                                    <div className="grid gap-4 sm:grid-cols-2 text-xs border-t border-slate-100 pt-3">
-                                        <div className="space-y-1.5">
-                                            <span className="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Pages ({pages.length})</span>
-                                            <div className="flex flex-wrap gap-1">
-                                                {pages.map((p: string) => (
-                                                    <Badge key={p} variant="outline" className="text-[9px] px-1.5 py-0">
-                                                        {p === 'home' ? 'Accueil' : 
-                                                         p === 'about' ? 'À propos' : 
-                                                         p === 'services' ? 'Services' : 
-                                                         p === 'contact' ? 'Contact' : 
-                                                         p === 'faq' ? 'FAQ' : 
-                                                         p === 'portfolio' ? 'Portfolio' : 
-                                                         p === 'blog' ? 'Blog' : 
-                                                         p === 'testimonials' ? 'Témoignages' : 
-                                                         p === 'team' ? 'Équipe' : p}
-                                                    </Badge>
-                                                ))}
-                                            </div>
-                                        </div>
-                                        <div className="space-y-1.5">
-                                            <span className="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Fonctionnalités ({specialFeatures.length})</span>
-                                            <div className="flex flex-wrap gap-1">
-                                                {specialFeatures.map((f: string) => (
-                                                    <Badge key={f} variant="outline" className="text-[9px] px-1.5 py-0 bg-blue-50/50 text-blue-700 border-blue-100">
-                                                        {f === 'contact-form' ? 'Formulaire contact' : 
-                                                         f === 'booking-system' ? 'Réservations RDV' : 
-                                                         f === 'payment-gateway' ? 'Paiement en ligne' : 
-                                                         f === 'chat-bot' ? 'Whatsapp Live Chat' : 
-                                                         f === 'newsletter' ? 'Newsletter' : 
-                                                         f === 'multilingual' ? 'Multi-langue' : 
-                                                         f === 'custom-auth' ? 'Portail Client' : 
-                                                         f === 'advanced-seo' ? 'Optimisation SEO' : f}
-                                                    </Badge>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* Inspirations & Notes */}
-                                    {(request.competitors || request.additionalNotes) && (
-                                        <div className="border-t border-slate-100 pt-3 text-xs space-y-2.5">
-                                            {request.competitors && (
-                                                <div>
-                                                    <span className="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Inspirations / Concurrents</span>
-                                                    <span className="text-slate-600 block mt-0.5 italic">{request.competitors}</span>
-                                                </div>
-                                            )}
-                                            {request.additionalNotes && (
-                                                <div>
-                                                    <span className="font-bold text-slate-400 uppercase tracking-wider block text-[10px]">Instructions client</span>
-                                                    <p className="whitespace-pre-wrap text-[11px] text-slate-600 bg-slate-50 border border-slate-100 p-3 rounded-xl mt-1 leading-normal">
-                                                        {request.additionalNotes}
-                                                    </p>
-                                                </div>
-                                            )}
+                                    {/* Project Additional Notes */}
+                                    {request.additionalNotes && (
+                                        <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-1">
+                                            <span className="font-bold text-slate-400 uppercase tracking-wider text-[10px] block">Notes & Demandes Complémentaires</span>
+                                            <p className="text-xs text-slate-700 leading-relaxed whitespace-pre-wrap">{request.additionalNotes}</p>
                                         </div>
                                     )}
 
-                                    {/* Interactive Admin Controls */}
-                                    <CustomWebsiteRequestAdminControls 
-                                        requestId={request.id}
-                                        currentStatus={request.status}
-                                        adminNotes={adminNotes}
-                                    />
-                                </CardContent>
-                            </Card>
+                                    {/* Pages & Features Tags */}
+                                    <div className="grid gap-4 sm:grid-cols-2 text-xs">
+                                        {pages.length > 0 && (
+                                            <div className="space-y-2">
+                                                <span className="font-bold text-slate-400 uppercase tracking-wider text-[10px] block">Pages Souhaitées ({pages.length})</span>
+                                                <div className="flex flex-wrap gap-1.5">
+                                                    {pages.map((page: string, i: number) => (
+                                                        <span key={i} className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-lg text-[10px] font-semibold">
+                                                            {page}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {specialFeatures.length > 0 && (
+                                            <div className="space-y-2">
+                                                <span className="font-bold text-slate-400 uppercase tracking-wider text-[10px] block">Fonctionnalités Spécifiques ({specialFeatures.length})</span>
+                                                <div className="flex flex-wrap gap-1.5">
+                                                    {specialFeatures.map((feature: string, i: number) => (
+                                                        <span key={i} className="px-2 py-0.5 bg-cyan-50 text-cyan-700 border border-cyan-200/60 rounded-lg text-[10px] font-semibold">
+                                                            {feature}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Admin Action Controls */}
+                                    <div className="pt-4 border-t border-slate-100">
+                                        <CustomWebsiteRequestAdminControls
+                                            requestId={request.id}
+                                            currentStatus={request.status}
+                                            adminNotes={adminNotes}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                         )
                     })}
                 </div>

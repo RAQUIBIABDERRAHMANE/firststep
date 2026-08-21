@@ -1,12 +1,13 @@
 import { getCurrentUser } from '@/app/actions/auth'
-import { getEmailLists } from '@/app/actions/email-lists'
+import { getEmailLists, deleteEmailList } from '@/app/actions/email-lists'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Plus, Mail, Users, Trash2, Edit, ChevronRight, Zap } from 'lucide-react'
-import { deleteEmailList } from '@/app/actions/email-lists'
 import SyncButton from './SyncButton'
+
+export const dynamic = 'force-dynamic'
 
 export default async function EmailListsPage() {
     const user = await getCurrentUser()
@@ -20,125 +21,135 @@ export default async function EmailListsPage() {
     if ('error' in result) {
         return (
             <div className="p-8">
-                <p className="text-red-600">Error: {result.error}</p>
+                <p className="text-rose-600 font-bold">Erreur: {result.error}</p>
             </div>
         )
     }
 
     const lists = result.lists || []
 
+    const handleDelete = async (listId: string) => {
+        'use server'
+        await deleteEmailList(listId)
+    }
+
     return (
-        <div className="space-y-8 animate-fade-in max-w-6xl mx-auto p-8">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div>
-                    <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                        Email Lists
+        <div className="space-y-8 max-w-6xl mx-auto animate-in fade-in duration-300">
+            {/* Header */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div className="space-y-1.5">
+                    <div className="flex items-center gap-2">
+                        <span className="px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-700 text-xs font-bold">
+                            Destinataires & Segments
+                        </span>
+                        <span className="text-xs text-slate-400 font-mono">
+                            {lists.length} liste{lists.length > 1 ? 's' : ''} configurée{lists.length > 1 ? 's' : ''}
+                        </span>
+                    </div>
+                    <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 font-sans">
+                        Listes de Diffusion Emails
                     </h1>
-                    <p className="text-gray-600 mt-2">
-                        Create and manage reusable email lists for your campaigns
+                    <p className="text-sm text-slate-500 max-w-xl">
+                        Créez et organisez des segments d&apos;utilisateurs réutilisables pour vos campagnes d&apos;annonces et de prospection.
                     </p>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                     <SyncButton />
                     <Link href="/admin/email-lists/new">
-                        <Button className="w-full md:w-auto">
-                            <Plus className="mr-2 h-4 w-4" />
-                            Create New List
+                        <Button className="rounded-2xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-4 py-2.5 shadow-xs hover:shadow-md cursor-pointer transition-all">
+                            <Plus className="mr-1.5 h-3.5 w-3.5" />
+                            Créer une Liste
                         </Button>
                     </Link>
                 </div>
             </div>
 
             {lists.length === 0 ? (
-                <Card className="text-center p-12">
-                    <CardContent>
-                        <Mail className="h-16 w-16 mx-auto text-gray-400 mb-4" />
-                        <h2 className="text-xl font-semibold mb-2">No email lists yet</h2>
-                        <p className="text-gray-600 mb-6">
-                            Create your first email list to organize recipients for your campaigns
+                <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xs p-12 text-center space-y-4">
+                    <div className="h-14 w-14 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
+                        <Mail className="h-7 w-7" />
+                    </div>
+                    <div className="space-y-1">
+                        <h2 className="text-base font-bold text-slate-900">Aucune liste d&apos;emails pour le moment</h2>
+                        <p className="text-xs text-slate-500 max-w-sm mx-auto">
+                            Créez votre première liste de diffusion pour regrouper les destinataires de vos futures campagnes.
                         </p>
-                        <Link href="/admin/email-lists/new">
-                            <Button>
-                                <Plus className="mr-2 h-4 w-4" />
-                                Create Your First List
-                            </Button>
-                        </Link>
-                    </CardContent>
-                </Card>
+                    </div>
+                    <Link href="/admin/email-lists/new">
+                        <Button className="rounded-2xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-5 py-2.5">
+                            <Plus className="mr-1.5 h-3.5 w-3.5" />
+                            Créer ma première liste
+                        </Button>
+                    </Link>
+                </div>
             ) : (
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {lists.map((list) => {
                         const isAuto = list.name.startsWith('[AUTO]')
                         const displayName = isAuto ? list.name.replace(/^\[AUTO\]\s*/, '') : list.name
+                        const count = list._count?.members ?? 0
                         return (
-                        <Card key={list.id} className="shadow-sm hover:shadow-md transition-shadow">
-                            <CardHeader>
-                                <div className="flex items-start justify-between">
-                                    <div className="flex-1">
-                                        <div className="flex items-center gap-2 flex-wrap">
-                                            <CardTitle className="text-lg">{displayName}</CardTitle>
-                                            {isAuto && (
-                                                <span className="inline-flex items-center gap-1 text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full font-medium">
-                                                    <Zap className="h-3 w-3" />
-                                                    Auto
-                                                </span>
+                            <div
+                                key={list.id}
+                                className="bg-white rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-md transition-all duration-200 p-6 flex flex-col justify-between space-y-5"
+                            >
+                                <div className="space-y-3">
+                                    <div className="flex items-start justify-between gap-3">
+                                        <div className="space-y-1">
+                                            <div className="flex items-center gap-1.5 flex-wrap">
+                                                <h3 className="text-base font-bold text-slate-900">{displayName}</h3>
+                                                {isAuto && (
+                                                    <span className="px-2 py-0.5 rounded-md bg-purple-50 text-purple-700 border border-purple-200/60 text-[10px] font-bold flex items-center gap-1">
+                                                        <Zap className="w-2.5 h-2.5" /> Auto
+                                                    </span>
+                                                )}
+                                            </div>
+                                            {list.description && (
+                                                <p className="text-xs text-slate-500 line-clamp-2">
+                                                    {list.description}
+                                                </p>
                                             )}
                                         </div>
-                                        {list.description && (
-                                            <CardDescription className="mt-1">
-                                                {list.description}
-                                            </CardDescription>
-                                        )}
-                                    </div>
-                                </div>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="flex items-center justify-between">
-                                    <div className="flex items-center text-sm text-gray-600">
-                                        <Users className="h-4 w-4 mr-1" />
-                                        <span>{list._count.members} membres</span>
                                     </div>
 
-                                    <div className="flex gap-2">
-                                        <Link href={`/admin/email-lists/${list.id}`}>
-                                            <Button variant="ghost" size="sm">
-                                                <Edit className="h-4 w-4" />
-                                            </Button>
-                                        </Link>
-                                        {!isAuto && (
-                                        <form action={async () => {
-                                            'use server'
-                                            await deleteEmailList(list.id)
-                                        }}>
-                                            <Button variant="ghost" size="sm" type="submit">
-                                                <Trash2 className="h-4 w-4 text-red-600" />
-                                            </Button>
+                                    <div className="flex items-center gap-2 pt-1">
+                                        <span className="px-2.5 py-1 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold flex items-center gap-1.5">
+                                            <Users className="w-3.5 h-3.5 text-slate-500" />
+                                            {count} contact{count > 1 ? 's' : ''}
+                                        </span>
+                                        <span className="text-[11px] text-slate-400">
+                                            Créé le {new Date(list.createdAt).toLocaleDateString('fr-FR')}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                                    <Link
+                                        href={`/admin/email-lists/${list.id}`}
+                                        className="inline-flex items-center gap-1 text-xs font-bold text-cyan-600 hover:text-cyan-700 hover:underline"
+                                    >
+                                        <span>Gérer les contacts</span>
+                                        <ChevronRight className="w-3.5 h-3.5" />
+                                    </Link>
+
+                                    {!isAuto && (
+                                        <form action={handleDelete.bind(null, list.id)}>
+                                            <button
+                                                type="submit"
+                                                title="Supprimer cette liste"
+                                                className="p-1.5 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                                            >
+                                                <Trash2 className="w-3.5 h-3.5" />
+                                            </button>
                                         </form>
-                                        )}
-                                    </div>
+                                    )}
                                 </div>
-
-                                <Link href={`/admin/email-lists/${list.id}`} className="block mt-4">
-                                    <Button variant="outline" className="w-full" size="sm">
-                                        Voir les détails
-                                        <ChevronRight className="ml-2 h-4 w-4" />
-                                    </Button>
-                                </Link>
-                            </CardContent>
-                        </Card>
+                            </div>
                         )
                     })}
                 </div>
             )}
-
-            <div className="flex justify-center pt-4">
-                <Link href="/admin/campaigns">
-                    <Button variant="outline">
-                        Back to Campaigns
-                    </Button>
-                </Link>
-            </div>
         </div>
     )
 }

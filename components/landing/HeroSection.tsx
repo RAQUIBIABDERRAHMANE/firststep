@@ -224,7 +224,7 @@ export default function HeroSection() {
         <>
             <style>{heroStyles}</style>
 
-            <section className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[#FAFBFD] text-slate-900 pt-24">
+            <section className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[#FAFBFD] text-slate-900 pt-32 sm:pt-36">
 
                 {/* ── Background Gradients & Ambient Effects ── */}
                 <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
@@ -338,7 +338,7 @@ export default function HeroSection() {
                                                     type={showPassword ? 'text' : 'password'}
                                                     placeholder="••••••••"
                                                     required
-                                                    className="h-9.5 bg-slate-50/80 border-slate-200 text-[#0066FF] placeholder:text-slate-400 rounded-xl pr-10 font-figtree text-[13px] focus:bg-white focus:ring-2 focus:ring-[#0066FF]/20"
+                                                    className="h-9.5 bg-slate-50/80 border-slate-200 text-slate-900 placeholder:text-slate-400 rounded-xl pr-10 font-figtree text-[13px] focus:bg-white focus:ring-2 focus:ring-[#0066FF]/20 focus:border-[#0066FF] transition-all"
                                                 />
                                                 <button
                                                     type="button"

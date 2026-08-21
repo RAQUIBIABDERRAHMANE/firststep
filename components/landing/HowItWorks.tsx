@@ -36,17 +36,17 @@ export default function HowItWorks() {
 
                     {/* Header */}
                     <ScrollReveal direction="up" className="text-center max-w-2xl mx-auto mb-16 md:mb-24">
-                        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 mb-4">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-100 mb-4 shadow-2xs">
                             <Sparkles className="h-3.5 w-3.5 text-[#0066FF]" />
                             <span className="font-figtree text-[11px] font-bold uppercase tracking-[0.2em] text-[#0066FF]">
                                 Comment ça marche
                             </span>
                         </div>
                         <h2 className="font-syne font-black text-slate-900 leading-tight mb-4">
-                            <span className="block text-3xl md:text-5xl">Opérationnel en</span>
-                            <span className="block text-3xl md:text-5xl text-[#0066FF]">quelques minutes</span>
+                            <span className="block text-3xl md:text-5xl tracking-tight">Opérationnel en</span>
+                            <span className="block text-3xl md:text-5xl tracking-tight text-[#0066FF]">quelques minutes</span>
                         </h2>
-                        <p className="font-figtree text-[15px] text-slate-600 leading-relaxed">
+                        <p className="font-figtree text-[15px] text-slate-600 leading-relaxed font-medium">
                             Pas de formation longue, pas de DSI nécessaire.
                             <br />Démarrez aujourd&apos;hui et gérez tout depuis un tableau de bord unifié.
                         </p>
@@ -67,17 +67,17 @@ export default function HowItWorks() {
                                     direction="up"
                                     className="relative z-10"
                                 >
-                                    <div className="group relative rounded-3xl p-8 bg-white/90 backdrop-blur-xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:shadow-blue-500/5 hover:-translate-y-1.5 transition-all duration-300 h-full flex flex-col justify-between overflow-hidden">
+                                    <div className="group relative rounded-3xl p-8 bg-white/95 backdrop-blur-xl border border-slate-200/80 border-t-white shadow-xs hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-300/50 hover:-translate-y-1.5 transition-all duration-300 h-full flex flex-col justify-between overflow-hidden">
                                         
                                         {/* Big watermark background number */}
-                                        <div className="absolute -bottom-4 -right-2 font-syne font-black text-[100px] leading-none text-slate-100 select-none pointer-events-none group-hover:text-blue-50 transition-colors">
+                                        <div className="absolute -bottom-4 -right-2 font-syne font-black text-[100px] leading-none text-slate-100/80 select-none pointer-events-none group-hover:text-blue-50/80 transition-colors">
                                             {step.number}
                                         </div>
 
                                         <div>
                                             {/* Step header: icon + badge */}
                                             <div className="flex items-center justify-between mb-8">
-                                                <div className="h-14 w-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#0066FF] shadow-sm group-hover:scale-110 transition-transform duration-300">
+                                                <div className="h-14 w-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#0066FF] shadow-xs group-hover:scale-110 group-hover:shadow-md group-hover:shadow-blue-500/15 transition-all duration-300">
                                                     <Icon className="h-6 w-6" />
                                                 </div>
                                                 <span className="font-syne text-[11px] font-extrabold uppercase tracking-widest text-[#0066FF] bg-blue-50/80 px-3 py-1 rounded-full border border-blue-100">
@@ -85,7 +85,7 @@ export default function HowItWorks() {
                                                 </span>
                                             </div>
 
-                                            <h3 className="font-syne font-bold text-xl text-slate-900 mb-3 relative z-10 group-hover:text-[#0066FF] transition-colors">
+                                            <h3 className="font-syne font-bold text-xl text-slate-900 mb-3 tracking-tight relative z-10 group-hover:text-[#0066FF] transition-colors">
                                                 {step.title}
                                             </h3>
                                             <p className="font-figtree text-[13.5px] text-slate-600 leading-relaxed relative z-10 mb-6">

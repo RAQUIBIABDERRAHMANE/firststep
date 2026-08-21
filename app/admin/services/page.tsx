@@ -4,6 +4,9 @@ import { getServices } from '@/app/actions/services'
 import { redirect } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card'
 import AdminServiceControl from '@/components/admin/AdminServiceControl'
+import { Layers, Users, CreditCard, Sparkles, CheckCircle2, Shield } from 'lucide-react'
+
+export const dynamic = 'force-dynamic'
 
 export default async function AdminServicesPage() {
     const user = await getCurrentUser()
@@ -15,99 +18,127 @@ export default async function AdminServicesPage() {
     const users = await getAllUsersWithServices()
     const allServices = await getServices()
 
+    const totalActiveServices = users.reduce((acc, u) => acc + u.services.length, 0)
+    const totalPendingPayments = users.reduce((acc, u) => acc + u.paymentRequests.filter(p => p.status === 'PENDING').length, 0)
+    const availableServicesCount = allServices.filter(s => s.status === 'AVAILABLE').length
+
     return (
-        <div className="space-y-8 animate-fade-in">
-            <div className="flex flex-col gap-2">
-                <h1 className="text-3xl font-bold tracking-tight md:text-4xl text-foreground">
-                    Service <span className="text-primary">Management</span>
-                </h1>
-                <p className="text-muted-foreground text-lg">
-                    Manage all user services and subscriptions
-                </p>
+        <div className="space-y-8 max-w-6xl mx-auto animate-in fade-in duration-300">
+            {/* Header */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div className="space-y-1.5">
+                    <div className="flex items-center gap-2">
+                        <span className="px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-700 text-xs font-bold">
+                            Catalogue & Souscriptions
+                        </span>
+                        <span className="text-xs text-slate-400 font-mono">
+                            {allServices.length} modules disponibles
+                        </span>
+                    </div>
+                    <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 font-sans">
+                        Gestion des Services & Accès
+                    </h1>
+                    <p className="text-sm text-slate-500 max-w-xl">
+                        Activez, désactivez ou configurez les abonnements aux modules FirstStep pour chacun de vos clients.
+                    </p>
+                </div>
             </div>
 
             {/* Statistics */}
-            <div className="grid gap-6 md:grid-cols-4">
-                <Card className="shadow-sm">
-                    <CardHeader className="pb-2">
-                        <CardTitle className="text-sm font-medium text-muted-foreground">Total Clients</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-3xl font-bold">{users.length}</div>
-                    </CardContent>
-                </Card>
-                <Card className="shadow-sm">
-                    <CardHeader className="pb-2">
-                        <CardTitle className="text-sm font-medium text-muted-foreground">Active Services</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-3xl font-bold">
-                            {users.reduce((acc, u) => acc + u.services.length, 0)}
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xs p-5 space-y-3 hover:shadow-md transition-all duration-200">
+                    <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Clients Inscrits</span>
+                        <div className="h-9 w-9 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                            <Users className="w-4.5 h-4.5" />
                         </div>
-                    </CardContent>
-                </Card>
-                <Card className="shadow-sm">
-                    <CardHeader className="pb-2">
-                        <CardTitle className="text-sm font-medium text-muted-foreground">Pending Payments</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-3xl font-bold text-orange-500">
-                            {users.reduce((acc, u) => acc + u.paymentRequests.filter(p => p.status === 'PENDING').length, 0)}
+                    </div>
+                    <div className="text-3xl font-extrabold text-slate-900 font-sans tabular-nums">{users.length}</div>
+                    <p className="text-xs text-slate-400">Total comptes entreprises</p>
+                </div>
+
+                <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xs p-5 space-y-3 hover:shadow-md transition-all duration-200">
+                    <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Services Actifs</span>
+                        <div className="h-9 w-9 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                            <CheckCircle2 className="w-4.5 h-4.5" />
                         </div>
-                    </CardContent>
-                </Card>
-                <Card className="shadow-sm">
-                    <CardHeader className="pb-2">
-                        <CardTitle className="text-sm font-medium text-muted-foreground">Available Services</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-3xl font-bold text-green-500">
-                            {allServices.filter(s => s.status === 'AVAILABLE').length}
+                    </div>
+                    <div className="text-3xl font-extrabold text-slate-900 font-sans tabular-nums text-emerald-600">{totalActiveServices}</div>
+                    <p className="text-xs text-slate-400">Modules déployés en production</p>
+                </div>
+
+                <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xs p-5 space-y-3 hover:shadow-md transition-all duration-200">
+                    <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Paiements en Attente</span>
+                        <div className="h-9 w-9 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center">
+                            <CreditCard className="w-4.5 h-4.5" />
                         </div>
-                    </CardContent>
-                </Card>
+                    </div>
+                    <div className="text-3xl font-extrabold text-slate-900 font-sans tabular-nums text-amber-600">{totalPendingPayments}</div>
+                    <p className="text-xs text-slate-400">Demandes de virement</p>
+                </div>
+
+                <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xs p-5 space-y-3 hover:shadow-md transition-all duration-200">
+                    <div className="flex items-center justify-between">
+                        <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Modules Catalogue</span>
+                        <div className="h-9 w-9 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center">
+                            <Layers className="w-4.5 h-4.5" />
+                        </div>
+                    </div>
+                    <div className="text-3xl font-extrabold text-slate-900 font-sans tabular-nums text-cyan-600">{availableServicesCount}</div>
+                    <p className="text-xs text-slate-400">Solutions prêtes à l&apos;emploi</p>
+                </div>
             </div>
 
             {/* User Services List */}
             <div className="space-y-6">
                 {users.length === 0 ? (
-                    <Card>
-                        <CardContent className="py-8 text-center text-muted-foreground">
-                            No clients found
-                        </CardContent>
-                    </Card>
+                    <div className="bg-white rounded-3xl border border-slate-200/80 p-12 text-center space-y-3">
+                        <Users className="w-10 h-10 text-slate-300 mx-auto" />
+                        <h3 className="text-base font-bold text-slate-900">Aucun client trouvé</h3>
+                        <p className="text-xs text-slate-500">Les entreprises inscrites apparaîtront ici.</p>
+                    </div>
                 ) : (
                     users.map((client) => (
-                        <Card key={client.id} className="shadow-sm hover:shadow-md transition-shadow">
-                            <CardHeader>
-                                <div className="flex items-start justify-between">
-                                    <div>
-                                        <CardTitle className="text-xl">{client.companyName}</CardTitle>
-                                        <CardDescription className="mt-1">
-                                            {client.email} • Joined {new Date(client.createdAt).toLocaleDateString()}
-                                        </CardDescription>
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
-                                            {client.services.length} Services
-                                        </span>
-                                        {client.paymentRequests.filter(p => p.status === 'PENDING').length > 0 && (
-                                            <span className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
-                                                {client.paymentRequests.filter(p => p.status === 'PENDING').length} Pending
-                                            </span>
-                                        )}
+                        <div
+                            key={client.id}
+                            className="bg-white rounded-3xl border border-slate-200/80 shadow-xs hover:shadow-md transition-all duration-200 overflow-hidden"
+                        >
+                            <div className="p-6 border-b border-slate-100 bg-slate-50/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                <div className="space-y-1">
+                                    <div className="flex items-center gap-3">
+                                        <div className="h-9 w-9 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-200/80 flex items-center justify-center text-xs font-bold text-slate-700">
+                                            {client.companyName?.[0]?.toUpperCase() || '?'}
+                                        </div>
+                                        <div>
+                                            <h3 className="text-base font-bold text-slate-900">{client.companyName}</h3>
+                                            <p className="text-xs text-slate-400 font-mono">
+                                                {client.email} • Inscrit le {new Date(client.createdAt).toLocaleDateString('fr-FR')}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </CardHeader>
-                            <CardContent>
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <span className="px-3 py-1 bg-cyan-50 text-cyan-700 border border-cyan-200/60 rounded-full text-xs font-bold">
+                                        {client.services.length} Service{client.services.length > 1 ? 's' : ''} actif{client.services.length > 1 ? 's' : ''}
+                                    </span>
+                                    {client.paymentRequests.filter(p => p.status === 'PENDING').length > 0 && (
+                                        <span className="px-3 py-1 bg-amber-50 text-amber-700 border border-amber-200/60 rounded-full text-xs font-bold">
+                                            {client.paymentRequests.filter(p => p.status === 'PENDING').length} Paiement en attente
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="p-6">
                                 <AdminServiceControl
                                     userId={client.id}
                                     userServices={client.services}
                                     paymentRequests={client.paymentRequests}
                                     allServices={allServices}
                                 />
-                            </CardContent>
-                        </Card>
+                            </div>
+                        </div>
                     ))
                 )}
             </div>

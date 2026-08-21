@@ -728,15 +728,16 @@ model CustomWebsiteRequest {
 
 model EmploymentApplication {
   id              String   @id @default(cuid())
+  roleType        String   @default("DEVELOPER") // DEVELOPER, VIDEO_EDITOR
   fullName        String
   email           String
   phone           String
   cin             String
   cvUrl           String
   photoUrl        String
-  githubUrl       String
+  githubUrl       String?
   portfolioUrl    String?
-  linkedinUrl     String
+  linkedinUrl     String?
   skills          String   @default("[]") // JSON array of string skill tags
   revenueShare    Float    @default(0)    // Revenue share percentage expected per project
   status          String   @default("PENDING") // PENDING, ACCEPTED, REJECTED
@@ -747,6 +748,7 @@ model EmploymentApplication {
 
   @@index([email])
   @@index([status])
+  @@index([roleType])
 }
 
 model EmploymentAgreementTemplate {
@@ -823,4 +825,20 @@ model EmploymentAgreementTemplate {
   createdAt               DateTime @default(now())
   updatedAt               DateTime @updatedAt
 }
+
+model Announcement {
+  id          String    @id @default(cuid())
+  title       String
+  content     String
+  badge       String?   @default("Nouveau")
+  badgeColor  String?   @default("blue")
+  linkUrl     String?
+  linkLabel   String?
+  isPublished Boolean   @default(true)
+  isPinned    Boolean   @default(false)
+  publishedAt DateTime  @default(now())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
 
