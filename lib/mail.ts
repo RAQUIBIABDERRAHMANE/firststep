@@ -1,5 +1,31 @@
 import nodemailer from 'nodemailer';
-import { getWelcomeEmailTemplate, getPaymentRequestTemplate, getPaymentApprovedTemplate, getPaymentDeclinedTemplate, getInvoiceEmailTemplate, getMonthlyReportEmailTemplate } from './email/templates';
+import { Resend } from 'resend';
+import {
+    getWelcomeEmailTemplate,
+    getPaymentRequestTemplate,
+    getPaymentApprovedTemplate,
+    getPaymentDeclinedTemplate,
+    getInvoiceEmailTemplate,
+    getMonthlyReportEmailTemplate,
+    getEmploymentApplicationReceivedTemplate,
+    getEmploymentApplicationAcceptedTemplate
+} from './email/templates';
+
+// Domain-specific sender addresses
+export const EMAIL_SENDERS = {
+    HR: process.env.EMAIL_FROM_HR || 'hr@firststepco.com',
+    NOREPLY: process.env.EMAIL_FROM_NOREPLY || 'no-reply@firststepco.com',
+    ANALYTICS: process.env.EMAIL_FROM_ANALYTICS || 'analytics@firststepco.com',
+    CONTACT: process.env.EMAIL_FROM_CONTACT || process.env.EMAIL_USER || 'contact@firststepco.com',
+};
+
+export function getResendClient(): Resend | null {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (apiKey && apiKey.trim().length > 0) {
+        return new Resend(apiKey.trim());
+    }
+    return null;
+}
 
 export function getTransporter() {
     return nodemailer.createTransport({
@@ -11,103 +37,195 @@ export function getTransporter() {
             pass: process.env.EMAIL_PASSWORD || process.env.EMAIL_PASS,
         },
         tls: {
-            // Do not fail on invalid certs
             rejectUnauthorized: false
         }
     });
 }
 
-export async function sendWelcomeEmail(email: string, companyName: string) {
-    // Basic verification of environment setup
-    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
-        console.warn('[MAILER] WARNING: Email credentials missing in environment variables.');
-        return { success: false, error: 'Configuration missing' };
+export function getFromEmail(customName: string = 'FirstStep', category?: 'HR' | 'NOREPLY' | 'ANALYTICS' | 'CONTACT'): string {
+    if (process.env.RESEND_FROM) {
+        return process.env.RESEND_FROM;
+    }
+    if (process.env.EMAIL_FROM) {
+        return process.env.EMAIL_FROM;
     }
 
-    try {
-        const html = getWelcomeEmailTemplate(companyName);
-
-        await getTransporter().sendMail({
-            from: `"FirstStep" <${process.env.EMAIL_USER}>`,
-            to: email,
-            subject: 'Welcome to FirstStep - Your Authority System is Ready',
-            html: html,
-        });
-
-        return { success: true };
-    } catch (error) {
-        console.error('[MAILER] Error sending email:', error);
-        return { success: false, error };
+    if (category === 'HR') {
+        return `"${customName || 'FirstStep HR'}" <${EMAIL_SENDERS.HR}>`;
     }
+    if (category === 'NOREPLY') {
+        return `"${customName || 'FirstStep Security'}" <${EMAIL_SENDERS.NOREPLY}>`;
+    }
+    if (category === 'ANALYTICS') {
+        return `"${customName || 'FirstStep Analytics'}" <${EMAIL_SENDERS.ANALYTICS}>`;
+    }
+
+    return `"${customName || 'FirstStep'}" <${EMAIL_SENDERS.CONTACT}>`;
 }
 
-export async function sendHtmlEmail(to: string, subject: string, html: string, attachments?: nodemailer.SendMailOptions['attachments']) {
-    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
-        console.warn('[MAILER] WARNING: Email credentials missing in environment variables.');
-        return { success: false, error: 'Configuration missing' };
-    }
-
-    try {
-        await getTransporter().sendMail({
-            from: `"FirstStep" <${process.env.EMAIL_USER}>`,
-            to,
-            subject,
-            html,
-            attachments,
-        });
-        return { success: true };
-    } catch (error) {
-        console.error('[MAILER] Error sending HTML email:', error);
-        return { success: false, error };
-    }
+interface SendMailParams {
+    to: string | string[];
+    subject: string;
+    html: string;
+    text?: string;
+    fromName?: string;
+    category?: 'HR' | 'NOREPLY' | 'ANALYTICS' | 'CONTACT';
+    from?: string;
+    replyTo?: string;
+    attachments?: Array<{
+        filename: string;
+        content: Buffer | Uint8Array | string;
+        contentType?: string;
+    }>;
+    headers?: Record<string, string>;
 }
 
-export async function sendResetCodeEmail(email: string, code: string) {
-    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
+export async function sendMailUnified({
+    to,
+    subject,
+    html,
+    text,
+    fromName = 'FirstStep',
+    category = 'CONTACT',
+    from,
+    replyTo,
+    attachments,
+    headers
+}: SendMailParams): Promise<{ success: boolean; id?: string; error?: any; logged?: boolean }> {
+    const resend = getResendClient();
+    const toList = Array.isArray(to) ? to : [to];
+    const fromAddress = from || getFromEmail(fromName, category);
+    const replyToAddress = replyTo || EMAIL_SENDERS.CONTACT;
+
+    // 1. Prioritize Resend API if API Key is configured
+    if (resend) {
+        try {
+            console.log(`🚀 [MAILER - RESEND] [${fromAddress}] -> [${toList.join(', ')}] | Subject: ${subject}`);
+
+            const resendAttachments = attachments?.map(att => ({
+                filename: att.filename,
+                content: Buffer.isBuffer(att.content) ? att.content : (typeof att.content === 'string' ? Buffer.from(att.content) : Buffer.from(att.content as any)),
+                contentType: att.contentType,
+            }));
+
+            const { data, error } = await resend.emails.send({
+                from: fromAddress,
+                to: toList,
+                subject,
+                html,
+                text,
+                replyTo: replyToAddress,
+                attachments: resendAttachments,
+                headers,
+            });
+
+            if (error) {
+                console.error('❌ [MAILER - RESEND] Resend API error:', error);
+                return { success: false, error };
+            }
+
+            console.log(`✅ [MAILER - RESEND] Email sent successfully! ID: ${data?.id}`);
+            return { success: true, id: data?.id };
+        } catch (err: any) {
+            console.error('❌ [MAILER - RESEND] Exception during send:', err);
+            return { success: false, error: err };
+        }
+    }
+
+    // 2. Fallback to Hostinger / Standard SMTP
+    const hasSmtpConfig = !!(process.env.EMAIL_USER && (process.env.EMAIL_PASSWORD || process.env.EMAIL_PASS));
+    if (!hasSmtpConfig) {
         console.log('--------------------------------------------------');
-        console.log(`[MAILER] PASSWORD RESET CODE: ${code}`);
-        console.log(`[MAILER] TO: ${email}`);
+        console.log(`[MAILER] SIMULATION (No RESEND_API_KEY or SMTP Config)`);
+        console.log(`[MAILER] FROM: ${fromAddress} | TO: ${toList.join(', ')} | Subject: ${subject}`);
         console.log('--------------------------------------------------');
         return { success: true, logged: true };
     }
 
     try {
-        const { getResetCodeTemplate } = await import('./email/templates');
-        const html = getResetCodeTemplate(code);
+        console.log(`🌐 [MAILER - SMTP] [${fromAddress}] -> [${toList.join(', ')}] | Subject: ${subject}`);
 
-        await getTransporter().sendMail({
-            from: `"FirstStep" <${process.env.EMAIL_USER}>`,
-            to: email,
-            subject: 'Your Password Verification Code',
-            html: html,
-        });
+        const mailOptions: nodemailer.SendMailOptions = {
+            from: fromAddress,
+            to: toList,
+            replyTo: replyToAddress,
+            subject,
+            html,
+            text,
+            attachments: attachments?.map(att => ({
+                filename: att.filename,
+                content: Buffer.isBuffer(att.content) ? att.content : (typeof att.content === 'string' ? att.content : Buffer.from(att.content as any)),
+                contentType: att.contentType,
+            })),
+            headers,
+        };
 
-        return { success: true };
-    } catch (error) {
-        console.error('[MAILER] Error sending reset email:', error);
-        return { success: false, error };
+        const info = await getTransporter().sendMail(mailOptions);
+        console.log(`✅ [MAILER - SMTP] Email sent successfully! ID: ${info.messageId}`);
+        return { success: true, id: info.messageId };
+    } catch (err: any) {
+        console.error('❌ [MAILER - SMTP] SMTP send error:', err);
+        return { success: false, error: err };
     }
+}
+
+// ----------------------------------------------------
+// 1. GENERAL & ACCOUNT (contact@firststepco.com)
+// ----------------------------------------------------
+export async function sendWelcomeEmail(email: string, companyName: string) {
+    const html = getWelcomeEmailTemplate(companyName);
+    return sendMailUnified({
+        to: email,
+        category: 'CONTACT',
+        fromName: 'FirstStep',
+        subject: 'Welcome to FirstStep - Your Authority System is Ready',
+        html,
+        text: `Welcome to FirstStep, ${companyName}! Your system is ready.`,
+    });
+}
+
+export async function sendHtmlEmail(
+    to: string,
+    subject: string,
+    html: string,
+    attachments?: Array<{ filename: string; content: Buffer | Uint8Array | string; contentType?: string }>
+) {
+    return sendMailUnified({
+        to,
+        category: 'CONTACT',
+        fromName: 'FirstStep',
+        subject,
+        html,
+        attachments,
+    });
+}
+
+// ----------------------------------------------------
+// 2. SECURITY & AUTH (no-reply@firststepco.com)
+// ----------------------------------------------------
+export async function sendResetCodeEmail(email: string, code: string) {
+    const { getResetCodeTemplate } = await import('./email/templates');
+    const html = getResetCodeTemplate(code);
+    return sendMailUnified({
+        to: email,
+        category: 'NOREPLY',
+        fromName: 'FirstStep Security',
+        subject: 'FirstStep — Votre code de vérification',
+        html,
+        text: `Votre code de vérification FirstStep est : ${code} (valable 10 minutes).`,
+    });
 }
 
 export async function send2FACodeEmail(email: string, companyName: string, code: string) {
-    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
-        console.log('--------------------------------------------------');
-        console.log(`[MAILER] 2FA CODE: ${code}`);
-        console.log(`[MAILER] TO: ${email}`);
-        console.log('--------------------------------------------------');
-        return { success: true, logged: true };
-    }
-
     const digits = code.split('').map(d =>
         `<span style="display:inline-block;width:44px;height:52px;line-height:52px;text-align:center;font-size:28px;font-weight:800;color:#1e293b;background:#f1f5f9;border:2px solid #e2e8f0;border-radius:10px;margin:0 4px;font-family:monospace;">${d}</span>`
-    ).join('')
+    ).join('');
 
     const html = `<!DOCTYPE html>
 <html lang="fr">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
 <body style="margin:0;padding:0;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
   <div style="max-width:520px;margin:40px auto;background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
-    <!-- Header -->
     <div style="background:linear-gradient(135deg,#6366f1 0%,#8b5cf6 100%);padding:32px 40px;text-align:center;">
       <div style="display:inline-flex;align-items:center;gap:10px;">
         <div style="width:36px;height:36px;background:rgba(255,255,255,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;">
@@ -117,51 +235,42 @@ export async function send2FACodeEmail(email: string, companyName: string, code:
       </div>
       <p style="color:rgba(255,255,255,0.85);margin:10px 0 0;font-size:14px;">Vérification en deux étapes</p>
     </div>
-
-    <!-- Body -->
     <div style="padding:40px;">
       <h2 style="margin:0 0 8px;font-size:22px;font-weight:700;color:#1e293b;">Bonjour, ${companyName} 👋</h2>
       <p style="margin:0 0 28px;color:#64748b;font-size:15px;line-height:1.6;">
         Utilisez le code ci-dessous pour compléter votre connexion à FirstStep.
         Ce code est valable <strong>10 minutes</strong>.
       </p>
-
-      <!-- OTP Code -->
       <div style="text-align:center;margin:0 0 32px;">
         <div style="margin-bottom:8px;">${digits}</div>
         <p style="margin:12px 0 0;color:#94a3b8;font-size:12px;">Expire dans 10 minutes</p>
       </div>
-
-      <!-- Warning -->
       <div style="background:#fef9ec;border:1px solid #fde68a;border-radius:12px;padding:16px 20px;margin-bottom:28px;">
         <p style="margin:0;font-size:13px;color:#92400e;line-height:1.5;">
           ⚠️ <strong>Ne partagez jamais ce code.</strong> L'équipe FirstStep ne vous demandera jamais votre code de vérification.
-          Si vous n'avez pas tenté de vous connecter, ignorez cet email.
         </p>
       </div>
-
       <p style="margin:0;color:#94a3b8;font-size:12px;text-align:center;">
         FirstStep — Plateforme de digitalisation professionnelle
       </p>
     </div>
   </div>
 </body>
-</html>`
+</html>`;
 
-    try {
-        await getTransporter().sendMail({
-            from: `"FirstStep Security" <${process.env.EMAIL_USER}>`,
-            to: email,
-            subject: `🔐 ${code} — Votre code de connexion FirstStep`,
-            html,
-        });
-        return { success: true };
-    } catch (error) {
-        console.error('[MAILER] Error sending 2FA email:', error);
-        return { success: false, error };
-    }
+    return sendMailUnified({
+        to: email,
+        category: 'NOREPLY',
+        fromName: 'FirstStep Security',
+        subject: `🔐 ${code} — Votre code de connexion FirstStep`,
+        text: `Bonjour ${companyName},\n\nVotre code de connexion FirstStep est : ${code}\nCe code est valable 10 minutes.\n\nNe partagez jamais ce code.`,
+        html,
+    });
 }
 
+// ----------------------------------------------------
+// 3. BILLING & PAYMENTS (contact@firststepco.com)
+// ----------------------------------------------------
 export async function sendPaymentRequestEmail(
     email: string,
     companyName: string,
@@ -174,45 +283,15 @@ export async function sendPaymentRequestEmail(
         bankName: string;
     }
 ) {
-    console.log('🔍 [MAILER DEBUG] sendPaymentRequestEmail called');
-    console.log('   EMAIL_HOST:', process.env.EMAIL_HOST);
-    console.log('   EMAIL_USER:', process.env.EMAIL_USER);
-    console.log('   EMAIL_PASS exists:', !!process.env.EMAIL_PASS);
-
-    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
-        console.log('⚠️  [MAILER] Email configuration missing:');
-        console.log(`   EMAIL_USER: ${process.env.EMAIL_USER ? '✓' : '✗'}`);
-        console.log(`   EMAIL_PASS: ${process.env.EMAIL_PASS ? '✓' : '✗'}`);
-        console.log(`   EMAIL_PASSWORD: ${process.env.EMAIL_PASSWORD ? '✓' : '✗'}`);
-        console.log('--------------------------------------------------');
-        console.log(`[MAILER] PAYMENT REQUEST EMAIL`);
-        console.log(`[MAILER] TO: ${email}`);
-        console.log(`[MAILER] Service: ${serviceName} - ${amount} MAD`);
-        console.log('--------------------------------------------------');
-        return { success: true, logged: true };
-    }
-
-    console.log('📧 [MAILER] Sending payment request email...');
-    console.log(`   To: ${email}`);
-    console.log(`   Service: ${serviceName}`);
-    console.log(`   Amount: ${amount} MAD`);
-
-    try {
-        const html = getPaymentRequestTemplate(companyName, serviceName, amount, bankDetails);
-
-        await getTransporter().sendMail({
-            from: `"FirstStep" <${process.env.EMAIL_USER}>`,
-            to: email,
-            subject: `Demande de Paiement - ${serviceName}`,
-            html: html,
-        });
-
-        console.log('✅ [MAILER] Payment request email sent successfully!');
-        return { success: true };
-    } catch (error) {
-        console.error('❌ [MAILER] Error sending payment request email:', error);
-        return { success: false, error };
-    }
+    const html = getPaymentRequestTemplate(companyName, serviceName, amount, bankDetails);
+    return sendMailUnified({
+        to: email,
+        category: 'CONTACT',
+        fromName: 'FirstStep Billing',
+        subject: `Demande de Paiement - ${serviceName}`,
+        html,
+        text: `Bonjour ${companyName},\n\nDemande de paiement pour le service : ${serviceName} (${amount} MAD).\n\nFirstStep`,
+    });
 }
 
 export async function sendPaymentApprovedEmail(
@@ -223,47 +302,22 @@ export async function sendPaymentApprovedEmail(
     facturePdf?: Uint8Array,
     factureNumber?: string
 ) {
-    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
-        console.log('⚠️  [MAILER] Email configuration missing (Approved)');
-        console.log('--------------------------------------------------');
-        console.log(`[MAILER] PAYMENT APPROVED EMAIL`);
-        console.log(`[MAILER] TO: ${email}`);
-        console.log(`[MAILER] Service: ${serviceName} - ${amount} MAD`);
-        console.log(`[MAILER] Facture attached: ${facturePdf ? 'Yes' : 'No'}`);
-        console.log('--------------------------------------------------');
-        return { success: true, logged: true };
-    }
+    const html = getPaymentApprovedTemplate(companyName, serviceName, amount);
+    const attachments = facturePdf ? [{
+        filename: `facture-${factureNumber || 'invoice'}.pdf`,
+        content: Buffer.from(facturePdf),
+        contentType: 'application/pdf',
+    }] : [];
 
-    console.log('📧 [MAILER] Sending payment approved email...');
-    console.log(`   To: ${email}`);
-    if (facturePdf) console.log(`   With facture PDF: ${factureNumber}`);
-
-    try {
-        const html = getPaymentApprovedTemplate(companyName, serviceName, amount);
-
-        const attachments: nodemailer.SendMailOptions['attachments'] = []
-        if (facturePdf) {
-            attachments.push({
-                filename: `facture-${factureNumber || 'invoice'}.pdf`,
-                content: Buffer.from(facturePdf),
-                contentType: 'application/pdf',
-            })
-        }
-
-        await getTransporter().sendMail({
-            from: `"FirstStep" <${process.env.EMAIL_USER}>`,
-            to: email,
-            subject: `✓ Paiement Approuvé - ${serviceName}${factureNumber ? ` | Facture ${factureNumber}` : ''}`,
-            html: html,
-            attachments,
-        });
-
-        console.log('✅ [MAILER] Payment approved email sent successfully!');
-        return { success: true };
-    } catch (error) {
-        console.error('❌ [MAILER] Error sending payment approved email:', error);
-        return { success: false, error };
-    }
+    return sendMailUnified({
+        to: email,
+        category: 'CONTACT',
+        fromName: 'FirstStep Billing',
+        subject: `✓ Paiement Approuvé - ${serviceName}${factureNumber ? ` | Facture ${factureNumber}` : ''}`,
+        html,
+        text: `Bonjour ${companyName},\n\nVotre paiement pour ${serviceName} (${amount} MAD) a été approuvé.\n\nFacture ci-jointe.\n\nFirstStep`,
+        attachments,
+    });
 }
 
 export async function sendPaymentDeclinedEmail(
@@ -272,94 +326,57 @@ export async function sendPaymentDeclinedEmail(
     serviceName: string,
     amount: number
 ) {
-    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
-        console.log('⚠️  [MAILER] Email configuration missing (Declined)');
-        console.log('--------------------------------------------------');
-        console.log(`[MAILER] PAYMENT DECLINED EMAIL`);
-        console.log(`[MAILER] TO: ${email}`);
-        console.log(`[MAILER] Service: ${serviceName} - ${amount} MAD`);
-        console.log('--------------------------------------------------');
-        return { success: true, logged: true };
-    }
-
-    console.log('📧 [MAILER] Sending payment declined email...');
-    console.log(`   To: ${email}`);
-
-    try {
-        const html = getPaymentDeclinedTemplate(companyName, serviceName, amount);
-
-        await getTransporter().sendMail({
-            from: `"FirstStep" <${process.env.EMAIL_USER}>`,
-            to: email,
-            subject: `Demande de Paiement - ${serviceName}`,
-            html: html,
-        });
-
-        console.log('✅ [MAILER] Payment declined email sent successfully!');
-        return { success: true };
-    } catch (error) {
-        console.error('❌ [MAILER] Error sending payment declined email:', error);
-        return { success: false, error };
-    }
+    const html = getPaymentDeclinedTemplate(companyName, serviceName, amount);
+    return sendMailUnified({
+        to: email,
+        category: 'CONTACT',
+        fromName: 'FirstStep Billing',
+        subject: `Demande de Paiement - ${serviceName}`,
+        html,
+        text: `Bonjour ${companyName},\n\nVotre paiement pour ${serviceName} (${amount} MAD) a été refusé.\n\nFirstStep`,
+    });
 }
 
 export async function sendInvoiceEmail(
     invoice: {
-        number: string
-        issueDate: Date | string
-        dueDate?: Date | string | null
-        clientName: string
-        clientEmail: string
-        subtotal: number
-        taxRate: number
-        taxAmount: number
-        total: number
-        notes?: string | null
-        items: { description: string; quantity: number; unitPrice: number; total: number }[]
+        number: string;
+        issueDate: Date | string;
+        dueDate?: Date | string | null;
+        clientName: string;
+        clientEmail: string;
+        subtotal: number;
+        taxRate: number;
+        taxAmount: number;
+        total: number;
+        notes?: string | null;
+        items: { description: string; quantity: number; unitPrice: number; total: number }[];
     },
     settings: {
-        companyName?: string | null
-        companyAddress?: string | null
-        companyPhone?: string | null
-        companyEmail?: string | null
-        currency?: string | null
-        footerNote?: string | null
-        bankDetails?: string | null
+        companyName?: string | null;
+        companyAddress?: string | null;
+        companyPhone?: string | null;
+        companyEmail?: string | null;
+        currency?: string | null;
+        footerNote?: string | null;
+        bankDetails?: string | null;
     } | null
 ) {
     const companyName = settings?.companyName ?? 'Votre prestataire';
+    const html = getInvoiceEmailTemplate(invoice, settings);
 
-    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
-        console.log('⚠️  [MAILER] Email configuration missing (Invoice)');
-        console.log('--------------------------------------------------');
-        console.log(`[MAILER] INVOICE EMAIL`);
-        console.log(`[MAILER] TO: ${invoice.clientEmail}`);
-        console.log(`[MAILER] Facture: ${invoice.number} - ${invoice.total} MAD`);
-        console.log('--------------------------------------------------');
-        return { success: true, logged: true };
-    }
-
-    console.log('📧 [MAILER] Sending invoice email...');
-    console.log(`   To: ${invoice.clientEmail} — Facture ${invoice.number}`);
-
-    try {
-        const html = getInvoiceEmailTemplate(invoice, settings);
-
-        await getTransporter().sendMail({
-            from: `"${companyName}" <${process.env.EMAIL_USER}>`,
-            to: invoice.clientEmail,
-            subject: `Facture ${invoice.number} - ${companyName}`,
-            html,
-        });
-
-        console.log('✅ [MAILER] Invoice email sent successfully!');
-        return { success: true };
-    } catch (error) {
-        console.error('❌ [MAILER] Error sending invoice email:', error);
-        return { success: false, error };
-    }
+    return sendMailUnified({
+        to: invoice.clientEmail,
+        category: 'CONTACT',
+        fromName: companyName,
+        subject: `Facture ${invoice.number} - ${companyName}`,
+        html,
+        text: `Facture ${invoice.number} pour ${invoice.clientName} - Total: ${invoice.total} MAD.`,
+    });
 }
 
+// ----------------------------------------------------
+// 4. REPORTS & ANALYTICS (analytics@firststepco.com)
+// ----------------------------------------------------
 export async function sendMonthlyReportEmail(
     to: string,
     restaurantName: string,
@@ -367,89 +384,78 @@ export async function sendMonthlyReportEmail(
     year: number,
     language: 'fr' | 'en',
     data: {
-        totalRevenue: number
-        totalOrders: number
-        averageOrderValue: number
-        paidOrders: number
-        topDishes: { name: string; count: number; revenue: number }[]
+        totalRevenue: number;
+        totalOrders: number;
+        averageOrderValue: number;
+        paidOrders: number;
+        topDishes: { name: string; count: number; revenue: number }[];
     },
     pdfBytes: Uint8Array
 ) {
-    const months_fr = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre']
-    const months_en = ['January','February','March','April','May','June','July','August','September','October','November','December']
-    const monthName = (language === 'fr' ? months_fr : months_en)[month - 1]
+    const months_fr = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+    const months_en = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const monthName = (language === 'fr' ? months_fr : months_en)[month - 1];
     const subject = language === 'fr'
         ? `📊 Rapport Mensuel — ${monthName} ${year} | ${restaurantName}`
-        : `📊 Monthly Report — ${monthName} ${year} | ${restaurantName}`
+        : `📊 Monthly Report — ${monthName} ${year} | ${restaurantName}`;
 
-    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
-        console.log('--------------------------------------------------');
-        console.log(`[MAILER] MONTHLY REPORT EMAIL (no email config — logging only)`);
-        console.log(`[MAILER] TO: ${to}`);
-        console.log(`[MAILER] Restaurant: ${restaurantName} — ${monthName} ${year}`);
-        console.log(`[MAILER] Stats: ${data.totalOrders} orders, ${data.totalRevenue.toFixed(0)} MAD`);
-        console.log('--------------------------------------------------');
-        return { success: true, logged: true };
-    }
+    const html = getMonthlyReportEmailTemplate(restaurantName, month, year, language, data);
+    const filename = `rapport-${year}-${String(month).padStart(2, '0')}-${restaurantName.toLowerCase().replace(/\s+/g, '-')}.pdf`;
 
-    try {
-        const html = getMonthlyReportEmailTemplate(restaurantName, month, year, language, data)
-        const filename = `rapport-${year}-${String(month).padStart(2, '0')}-${restaurantName.toLowerCase().replace(/\s+/g, '-')}.pdf`
-
-        await getTransporter().sendMail({
-            from: `"FirstStep Analytics" <${process.env.EMAIL_USER}>`,
-            to,
-            subject,
-            html,
-            attachments: [
-                {
-                    filename,
-                    content: Buffer.from(pdfBytes),
-                    contentType: 'application/pdf',
-                },
-            ],
-        })
-
-        console.log(`✅ [MAILER] Monthly report sent to ${to} for ${restaurantName} — ${monthName} ${year}`)
-        return { success: true }
-    } catch (error) {
-        console.error('❌ [MAILER] Error sending monthly report email:', error)
-        return { success: false, error }
-    }
+    return sendMailUnified({
+        to,
+        category: 'ANALYTICS',
+        fromName: 'FirstStep Analytics',
+        subject,
+        html,
+        text: `Rapport mensuel pour ${restaurantName} (${monthName} ${year}) - Total Commandes: ${data.totalOrders}, Total CA: ${data.totalRevenue} MAD.`,
+        attachments: [{
+            filename,
+            content: Buffer.from(pdfBytes),
+            contentType: 'application/pdf',
+        }],
+    });
 }
 
+// ----------------------------------------------------
+// 5. RECRUITMENT & EMPLOYMENT (hr@firststepco.com)
+// ----------------------------------------------------
 export async function sendEmploymentApplicationReceivedEmail(
     email: string,
     candidateName: string,
     roleType: string = 'DEVELOPER'
 ) {
-    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
-        console.log('--------------------------------------------------');
-        console.log(`[MAILER] CANDIDATURE RECEIVED EMAIL (no config)`);
-        console.log(`[MAILER] TO: ${email} | Candidate: ${candidateName} | Role: ${roleType}`);
-        console.log('--------------------------------------------------');
-        return { success: true, logged: true };
-    }
+    const html = getEmploymentApplicationReceivedTemplate(candidateName, roleType);
+    const isVideo = roleType === 'VIDEO_EDITOR';
+    const roleSubject = isVideo ? 'Monteur Vidéo & Motion Designer' : 'Software Developer';
 
-    try {
-        const { getEmploymentApplicationReceivedTemplate } = await import('./email/templates');
-        const html = getEmploymentApplicationReceivedTemplate(candidateName, roleType);
-        const isVideo = roleType === 'VIDEO_EDITOR';
-        const roleSubject = isVideo ? 'Monteur Vidéo & Motion Designer' : 'Software Developer';
+    const plainText = `Bonjour ${candidateName},
 
-        await getTransporter().sendMail({
-            from: `"FirstStep Recruitment" <${process.env.EMAIL_USER}>`,
-            to: email,
-            subject: `Confirmation de réception de votre candidature (${roleSubject}) - FirstStep`,
-            html: html,
-        });
+Nous avons bien reçu votre candidature pour le poste de ${roleSubject} chez FirstStep.
 
-        console.log(`✅ [MAILER] Application received confirmation sent to ${email}`);
-        return { success: true };
-    } catch (error) {
-        console.error('[MAILER] Error sending recruitment received email:', error);
-        return { success: false, error };
-    }
+Notre équipe étudie actuellement votre profil ainsi que vos compétences. Nous reviendrons vers vous très prochainement par email avec les suites de votre demande.
+
+Récapitulatif :
+- Réception et évaluation de votre dossier (En cours)
+- Notification et transmission de votre contrat d'engagement
+
+Merci pour votre intérêt pour FirstStep !
+
+Cordialement,
+Équipe Recrutement FirstStep
+https://firststepco.com`;
+
+    return sendMailUnified({
+        to: email,
+        category: 'HR',
+        fromName: 'FirstStep HR',
+        subject: `FirstStep — Réception de votre dossier de candidature (${roleSubject})`,
+        text: plainText,
+        html,
+        headers: {
+            'X-Entity-Ref-ID': `application-received-${Date.now()}`,
+        },
+    });
 }
 
 export async function sendEmploymentApplicationAcceptedEmail(
@@ -460,41 +466,42 @@ export async function sendEmploymentApplicationAcceptedEmail(
     pdfUrl?: string,
     roleType: string = 'DEVELOPER'
 ) {
-    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
-        console.log('--------------------------------------------------');
-        console.log(`[MAILER] CANDIDATURE ACCEPTED EMAIL (no config)`);
-        console.log(`[MAILER] TO: ${email} | Candidate: ${candidateName} | Role: ${roleType}`);
-        console.log('--------------------------------------------------');
-        return { success: true, logged: true };
-    }
+    const html = getEmploymentApplicationAcceptedTemplate(candidateName, pdfUrl, roleType);
+    const attachments = pdfBuffer ? [{
+        filename: pdfFilename,
+        content: pdfBuffer,
+        contentType: 'application/pdf',
+    }] : [];
 
-    try {
-        const { getEmploymentApplicationAcceptedTemplate } = await import('./email/templates');
-        const html = getEmploymentApplicationAcceptedTemplate(candidateName, pdfUrl, roleType);
+    const isVideo = roleType === 'VIDEO_EDITOR';
+    const roleSubject = isVideo ? 'Monteur Vidéo & Motion Designer' : 'Software Developer';
+    const contractTitle = isVideo ? 'Video Editor Employment Agreement' : 'Developer Employment Agreement';
 
-        const attachments = pdfBuffer ? [{
-            filename: pdfFilename,
-            content: pdfBuffer,
-            contentType: 'application/pdf'
-        }] : [];
+    const plainText = `Bonjour ${candidateName},
 
-        const isVideo = roleType === 'VIDEO_EDITOR';
-        const roleSubject = isVideo ? 'Monteur Vidéo & Motion Designer' : 'Software Developer';
+Nous avons le plaisir de vous informer que votre candidature pour le poste de ${roleSubject} chez FirstStep a été retenue.
 
-        await getTransporter().sendMail({
-            from: `"FirstStep Founder" <${process.env.EMAIL_USER}>`,
-            to: email,
-            subject: `Félicitations ! Votre candidature ${roleSubject} chez FirstStep a été acceptée`,
-            html: html,
-            attachments: attachments
-        });
+Vous trouverez ci-joint votre ${contractTitle} dûment établi avec les termes convenus (Revenue Share).
+${pdfUrl ? `Lien de consultation en ligne : ${pdfUrl}\n` : ''}
+Notre équipe prendra contact avec vous rapidement pour lancer votre premier projet.
 
-        console.log(`✅ [MAILER] Acceptance agreement email sent to ${email}`);
-        return { success: true };
-    } catch (error) {
-        console.error('[MAILER] Error sending recruitment accepted email:', error);
-        return { success: false, error };
-    }
+Bienvenue dans l'équipe FirstStep !
+
+Abderrahmane Raquibi - Équipe RH FirstStep
+https://firststepco.com`;
+
+    return sendMailUnified({
+        to: email,
+        category: 'HR',
+        fromName: 'FirstStep HR',
+        subject: `FirstStep — Contrat d'engagement et validation de candidature (${roleSubject})`,
+        text: plainText,
+        html,
+        attachments,
+        headers: {
+            'X-Entity-Ref-ID': `application-accepted-${Date.now()}`,
+        },
+    });
 }
 
 export async function sendAdminNewEmploymentAlert({
@@ -511,33 +518,24 @@ export async function sendAdminNewEmploymentAlert({
     cvUrl,
     photoUrl,
 }: {
-    adminEmails: string[]
-    candidateName: string
-    roleType: string
-    email: string
-    phone: string
-    cin: string
-    skills: string[]
-    revenueShare: number
-    showreelOrGithubUrl?: string | null
-    portfolioUrl?: string | null
-    cvUrl: string
-    photoUrl: string
+    adminEmails: string[];
+    candidateName: string;
+    roleType: string;
+    email: string;
+    phone: string;
+    cin: string;
+    skills: string[];
+    revenueShare: number;
+    showreelOrGithubUrl?: string | null;
+    portfolioUrl?: string | null;
+    cvUrl: string;
+    photoUrl: string;
 }) {
-    const isVideo = roleType === 'VIDEO_EDITOR'
-    const roleLabel = isVideo ? '🎬 Monteur Vidéo & Motion Designer' : '💻 Software Developer'
-    const primaryLinkName = isVideo ? 'Showreel Vidéo' : 'Profil GitHub'
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://firststepco.com'
-    const adminPanelUrl = `${appUrl}/admin/employment`
-
-    if (!process.env.EMAIL_USER || (!process.env.EMAIL_PASSWORD && !process.env.EMAIL_PASS)) {
-        console.log('--------------------------------------------------')
-        console.log(`[MAILER] NEW CANDIDATURE ALERT TO ADMIN(S) (no config)`)
-        console.log(`[MAILER] TO: ${adminEmails.join(', ')}`)
-        console.log(`[MAILER] Candidate: ${candidateName} | Role: ${roleLabel}`)
-        console.log('--------------------------------------------------')
-        return { success: true, logged: true }
-    }
+    const isVideo = roleType === 'VIDEO_EDITOR';
+    const roleLabel = isVideo ? '🎬 Monteur Vidéo & Motion Designer' : '💻 Software Developer';
+    const primaryLinkName = isVideo ? 'Showreel Vidéo' : 'Profil GitHub';
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://firststepco.com';
+    const adminPanelUrl = `${appUrl}/admin/employment`;
 
     const html = `
     <!DOCTYPE html>
@@ -576,7 +574,6 @@ export async function sendAdminNewEmploymentAlert({
                 <p style="font-size: 14px; color: #CBD5E1; margin: 0 0 16px 0;">
                     Un nouveau candidat vient de postuler au programme de partenariat <strong>FirstStep</strong>.
                 </p>
-
                 <div class="info-grid">
                     <div class="info-row">
                         <span class="label">Candidat :</span>
@@ -599,7 +596,6 @@ export async function sendAdminNewEmploymentAlert({
                         <span class="value" style="color:#10B981;">${revenueShare}% par projet</span>
                     </div>
                 </div>
-
                 ${skills && skills.length > 0 ? `
                 <div class="skills-wrap">
                     <div style="font-size: 12px; font-weight: 700; color: #94A3B8; margin-bottom: 6px;">Compétences Déclarées :</div>
@@ -608,14 +604,12 @@ export async function sendAdminNewEmploymentAlert({
                     </div>
                 </div>
                 ` : ''}
-
                 <div class="links-row">
                     ${showreelOrGithubUrl ? `<a href="${showreelOrGithubUrl}" target="_blank">🔗 ${primaryLinkName}</a>` : ''}
                     ${portfolioUrl ? `<a href="${portfolioUrl}" target="_blank">🌐 Portfolio / Behance</a>` : ''}
                     <a href="${cvUrl}" target="_blank">📄 Télécharger CV</a>
                     <a href="${photoUrl}" target="_blank">👤 Photo Identité</a>
                 </div>
-
                 <a href="${adminPanelUrl}" class="btn">
                     Accéder à la Console Admin & Examiner
                 </a>
@@ -625,27 +619,35 @@ export async function sendAdminNewEmploymentAlert({
             </div>
         </div>
     </body>
-    </html>
-    `
+    </html>`;
 
-    try {
-        const recipients = Array.from(new Set(adminEmails.filter(Boolean)))
-        if (recipients.length === 0) {
-            recipients.push(process.env.EMAIL_USER as string)
-        }
-
-        await getTransporter().sendMail({
-            from: `"FirstStep Recruitment Alert" <${process.env.EMAIL_USER}>`,
-            to: recipients,
-            subject: `🚨 [Recrutement FirstStep] Nouvelle Candidature : ${candidateName} (${isVideo ? 'Monteur Vidéo' : 'Développeur'})`,
-            html,
-        })
-
-        console.log(`✅ [MAILER] Admin recruitment alert sent to: ${recipients.join(', ')}`)
-        return { success: true }
-    } catch (err) {
-        console.error('[MAILER] Failed to send admin recruitment alert:', err)
-        return { success: false, error: err }
+    const recipients = Array.from(new Set(adminEmails.filter(Boolean)));
+    if (recipients.length === 0) {
+        recipients.push(EMAIL_SENDERS.CONTACT);
     }
-}
 
+    const plainText = `Nouvelle Candidature Reçue (${roleLabel})
+Candidat : ${candidateName}
+Email : ${email}
+Téléphone / WhatsApp : ${phone}
+CIN : ${cin}
+Revenue Share demandé : ${revenueShare}%
+
+Compétences : ${skills ? skills.join(', ') : 'Non spécifié'}
+${showreelOrGithubUrl ? `${primaryLinkName} : ${showreelOrGithubUrl}\n` : ''}${portfolioUrl ? `Portfolio : ${portfolioUrl}\n` : ''}CV : ${cvUrl}
+
+Accéder à la console Admin : ${adminPanelUrl}`;
+
+    return sendMailUnified({
+        to: recipients,
+        category: 'HR',
+        fromName: 'FirstStep HR',
+        replyTo: email || EMAIL_SENDERS.HR,
+        subject: `FirstStep Admin — Nouvelle Candidature : ${candidateName} (${isVideo ? 'Monteur Vidéo' : 'Développeur'})`,
+        text: plainText,
+        html,
+        headers: {
+            'X-Entity-Ref-ID': `admin-alert-${Date.now()}`,
+        },
+    });
+}
